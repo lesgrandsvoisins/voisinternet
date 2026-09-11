@@ -331,7 +331,8 @@ a {
 }
 
 .account-shortcuts .gear {
-  margin-inline-end: .35rem
+  margin-inline-end: .35rem;
+  display: inline;
 }
 
 .account-empty {

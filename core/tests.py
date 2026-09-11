@@ -139,6 +139,18 @@ class AnonymousAccountTests(Base):
         self.assertEqual(Account.objects.count(), 1)
         self.assertEqual(Shortcut.objects.count(), 0)
 
+    def test_htmx_toggle_refreshes_all_je_vois_lists(self):
+        response = self.client.post(
+            reverse("core:toggle_shortcut", args=["courriel"]),
+            {"next": reverse("core:je_vois")},
+            HTTP_HX_REQUEST="true",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'id="shortcuts-list"')
+        self.assertContains(response, 'id="available-services"')
+        self.assertContains(response, 'hx-swap-oob="true"')
+
 
 class LinkingTests(Base):
     def test_anonymous_shortcuts_join_the_named_account(self):

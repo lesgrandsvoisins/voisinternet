@@ -168,12 +168,19 @@ def toggle_shortcut(request, slug):
         new_number = request.session.pop(NEW_NUMBER_KEY, None)
 
     if _is_htmx(request):
+        account = current_account(request)
+        shortcut_ids = set(account.shortcut_set.values_list("service_id", flat=True)) if account else set()
+        shortcuts = account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name") if account else []
+        available_services = Service.objects.filter(active=True).exclude(pk__in=shortcut_ids).order_by("order", "name")
         return render(request, "core/partials/shortcut_response.html", {
             "service": service,
             "added": added,
             "toast": text,
             "new_number": format_number(new_number) if new_number else None,
             "next": request.POST.get("next", ""),
+            "shortcuts": shortcuts,
+            "available_services": available_services,
+            "shortcut_ids": shortcut_ids,
         })
 
     if new_number:

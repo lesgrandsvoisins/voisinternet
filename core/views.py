@@ -153,7 +153,7 @@ def toggle_shortcut(request, slug):
         added = False
         text = f"« {service.name} » retiré de vos raccourcis."
     else:
-        Shortcut.objects.create(account=account, service=service)
+        Shortcut.objects.create(account=account, service=service, position=account.shortcut_set.count())
         added = True
         text = f"« {service.name} » ajouté à vos raccourcis."
 
@@ -177,3 +177,36 @@ def toggle_shortcut(request, slug):
         return redirect("core:je_vois")
     messages.success(request, text)
     return redirect(_safe_next(request, reverse("core:vous_voyez")))
+
+
+@require_POST
+def reorder_shortcut(request, slug, direction):
+    account = current_account(request)
+    if account is None:
+        return redirect("core:je_vois")
+
+    service = get_object_or_404(Service, slug=slug, active=True)
+    shortcut = account.shortcut_set.filter(service=service).first()
+    if shortcut is None:
+        return redirect("core:je_vois")
+
+    direction = direction.lower()
+    if direction not in {"up", "down"}:
+        return redirect("core:je_vois")
+
+    shortcuts = list(account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name"))
+    index = next((i for i, item in enumerate(shortcuts) if item.pk == shortcut.pk), None)
+    if index is None:
+        return redirect("core:je_vois")
+
+    target_index = index - 1 if direction == "up" else index + 1
+    if 0 <= target_index < len(shortcuts):
+        target = shortcuts[target_index]
+        current_position = shortcut.position or index
+        target_position = target.position or target_index
+        shortcut.position = target_position
+        target.position = current_position
+        shortcut.save(update_fields=["position"])
+        target.save(update_fields=["position"])
+
+    return redirect("core:je_vois")

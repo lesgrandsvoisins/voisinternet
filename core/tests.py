@@ -87,6 +87,25 @@ class AnonymousAccountTests(Base):
         self.assertEqual(first.service.name, "Courriel")
         self.assertEqual(second.service.name, "Agenda")
 
+    def test_shortcuts_reorder_via_personal_action(self):
+        from django.contrib.auth import get_user_model
+
+        user = get_user_model().objects.create_user("user")
+        account = Account.objects.create(user=user)
+        service_two = Service.objects.create(name="Agenda", slug="agenda", summary="Agenda personnel.")
+        first = Shortcut.objects.create(account=account, service=self.service, position=10)
+        second = Shortcut.objects.create(account=account, service=service_two, position=20)
+
+        self.client.force_login(user)
+        response = self.client.post(reverse("core:reorder_shortcut", args=[self.service.slug, "down"]))
+        self.assertRedirects(response, reverse("core:je_vois"), fetch_redirect_response=False)
+        ordered = list(account.shortcut_set.order_by("position").values_list("service__slug", flat=True))
+        self.assertEqual(ordered, ["agenda", "courriel"])
+        first.refresh_from_db()
+        second.refresh_from_db()
+        self.assertEqual(first.position, 20)
+        self.assertEqual(second.position, 10)
+
     def test_htmx_toggle_returns_partial_with_out_of_band_updates(self):
         response = self.client.post(reverse("core:toggle_shortcut", args=["courriel"]), HTTP_HX_REQUEST="true")
         self.assertEqual(response.status_code, 200)

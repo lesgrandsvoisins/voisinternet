@@ -19,5 +19,6 @@ urlpatterns = [
     path("vous-voyez/", views.vous_voyez, name="vous_voyez"),
     path("vous-voyez/pour/<slug:audience>/", views.vous_voyez, name="vous_voyez_pour"),
     path("vous-voyez/<slug:slug>/raccourci/", views.toggle_shortcut, name="toggle_shortcut"),
+    path("je-vois/<slug:slug>/raccourci/<str:direction>/", views.reorder_shortcut, name="reorder_shortcut"),
     path("ils-et-elles-voient/", views.ils_et_elles_voient, name="ils_et_elles_voient"),
 ]

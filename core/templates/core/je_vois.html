@@ -32,7 +32,11 @@
       <li>
         <span class="led" aria-hidden="true"></span>
         <div><h3>{% if service.url %}<a href="{{ service.url }}">{{ service.name }}</a>{% else %}<a href="{% url 'core:vous_voyez' %}">{{ service.name }}</a>{% endif %}</h3><p>{{ service.summary }}</p></div>
-        {% include "core/partials/shortcut_button.html" with added=True %}
+        <div class="shortcut-tools">
+          <form method="post" action="{% url 'core:reorder_shortcut' service.slug 'up' %}">{% csrf_token %}<button class="move-btn" type="submit" aria-label="Monter {{ service.name }}" {% if forloop.first %}disabled{% endif %}>↑</button></form>
+          <form method="post" action="{% url 'core:reorder_shortcut' service.slug 'down' %}">{% csrf_token %}<button class="move-btn" type="submit" aria-label="Descendre {{ service.name }}" {% if forloop.last %}disabled{% endif %}>↓</button></form>
+          {% include "core/partials/shortcut_button.html" with added=True %}
+        </div>
       </li>
       {% endwith %}{% endfor %}
     </ul>

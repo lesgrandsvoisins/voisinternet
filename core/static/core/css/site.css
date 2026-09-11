@@ -91,6 +91,20 @@ section.block{padding:3.5rem 0;border-top:1px solid var(--line)}
 .intro{color:var(--ink-soft);max-width:38em;margin:0 0 2rem}
 .kicker{font-family:var(--sans)!important;font-size:1rem!important;font-weight:400;color:var(--ink-soft);margin:0 0 .8rem!important}
 
+/* Publics : « Vous êtes… » */
+.publics{background:var(--paper)}
+.publics h2{margin-bottom:1.5rem}
+.aud{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:0 2rem}
+.aud a{display:block;text-decoration:none;border-top:1px solid var(--line);padding:1rem .25rem 1.1rem}
+.aud a:hover strong{text-decoration:underline;text-decoration-color:var(--sun);text-decoration-thickness:2px}
+.aud strong{display:block;font-family:var(--serif);font-size:1.2rem;margin-bottom:.15rem}
+.aud span{color:var(--ink-soft);font-size:.95rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chips a{text-decoration:none;font-size:.92rem;border:1px solid var(--line);border-radius:999px;padding:.35rem .85rem;background:var(--paper)}
+.chips a:hover{background:var(--hover)}
+.chips a[aria-current="page"]{background:var(--ink);border-color:var(--ink);color:var(--sky)}
+.aud-intro h2{margin-bottom:.2rem}
+
 /* Tableau de conjugaison */
 .conj{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:1.75rem 1.75rem 1.25rem}
 .conj-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:2.5rem}
@@ -144,6 +158,7 @@ blockquote p{margin:0}
 
 /* Blog, guide */
 .two{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem}
+.two-even{grid-template-columns:1fr 1fr}
 .two h2 .form{font-size:inherit}
 .posts,.books,.docs,.donors{list-style:none;margin:0;padding:0}
 .posts li{border-bottom:1px solid var(--line)}
@@ -211,6 +226,7 @@ blockquote p{margin:0}
   .hero .wrap,.quote .wrap,.two,.foot,.choices{grid-template-columns:1fr}
   .hero .wrap{padding-top:2.25rem}
   .steps{grid-template-columns:1fr}
+  .aud{grid-template-columns:1fr 1fr}
   .panel .wrap{grid-template-columns:1fr 1fr}
 }
 @media (max-width:680px){
@@ -220,6 +236,7 @@ blockquote p{margin:0}
   .row{grid-template-columns:1fr;gap:.15rem}
   .panel .wrap{grid-template-columns:1fr;max-height:calc(100vh - 5rem);overflow-y:auto}
   .foot-nav{grid-template-columns:1fr 1fr}
+  .aud{grid-template-columns:1fr}
   .menu-btn .label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
   .svc li{grid-template-columns:auto 1fr}
   .svc .shortcut{grid-column:2;justify-self:start}

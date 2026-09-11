@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
@@ -9,7 +10,7 @@ from django.views.decorators.http import require_POST
 
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
 from .ghost import latest_posts
-from .models import Account, Donor, GuideBook, Service, Shortcut, format_number
+from .models import Account, Audience, Donor, GuideBook, Service, Shortcut, format_number
 
 
 def _is_htmx(request):
@@ -56,6 +57,7 @@ def home(request):
         "shortcut_ids": _shortcut_ids(request),
         "books": GuideBook.objects.all()[:4],
         "posts": latest_posts(3),
+        "audiences": Audience.objects.all(),
     })
 
 
@@ -71,10 +73,18 @@ def je_vois(request):
     })
 
 
-def vous_voyez(request):
+def vous_voyez(request, audience=None):
+    services = Service.objects.filter(active=True)
+    current = None
+    if audience:
+        current = get_object_or_404(Audience, slug=audience)
+        # Un service sans public désigné s'adresse à tout le monde.
+        services = services.filter(Q(audiences=current) | Q(audiences__isnull=True)).distinct()
     return render(request, "core/vous_voyez.html", {
-        "services": Service.objects.filter(active=True),
+        "services": services,
         "shortcut_ids": _shortcut_ids(request),
+        "audiences": Audience.objects.all(),
+        "audience": current,
     })
 
 

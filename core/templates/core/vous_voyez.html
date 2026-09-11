@@ -1,8 +1,31 @@
 {% extends "core/base.html" %}
-{% block title %}vous Voyez : les services — Voisinternet{% endblock %}
+{% block title %}vous Voyez : les services{% if audience %} — {{ audience.name }}{% endif %} — Voisinternet{% endblock %}
 {% block content %}
 {% include "core/partials/page_head.html" with item=conj.vous lead="Ajoutez ceux qui vous intéressent à vos raccourcis, même sans compte nominatif. Chaque service indique ce qui reste anonyme et ce que l'association doit conserver en tant qu'hébergeur." %}
 <div class="wrap page">
+  {% if audiences %}
+  <nav class="chips" aria-label="Vous êtes…">
+    <a href="{% url 'core:vous_voyez' %}"{% if not audience %} aria-current="page"{% endif %}>Tout le monde</a>
+    {% for a in audiences %}<a href="{% url 'core:vous_voyez_pour' a.slug %}"{% if audience == a %} aria-current="page"{% endif %}>{{ a.name }}</a>{% endfor %}
+  </nav>
+  {% endif %}
+
+  {% if audience %}
+  <section class="card aud-intro" aria-labelledby="aud-title">
+    <h2 id="aud-title">{{ audience.name }}</h2>
+    {% if audience.who %}<p class="muted">{{ audience.who }}</p>{% endif %}
+    <p>{{ audience.pitch }}</p>
+    {% if audience.note %}<p>{{ audience.note|linebreaksbr }}</p>{% endif %}
+    {% if audience.partnership %}
+    <p><a class="btn btn-sun" href="mailto:{{ CONTACT_EMAIL }}?subject={{ 'Partenariat Voisinternet'|urlencode }}">Proposer un partenariat</a></p>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  {% if audience.partnership %}
+  <p class="note"><a href="{% url 'core:vous_voyez' %}">Voir les services proposés aux habitants</a></p>
+  {% else %}
   {% include "core/partials/service_list.html" with details=True %}
+  {% endif %}
 </div>
 {% endblock %}

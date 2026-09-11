@@ -1,15 +1,23 @@
 from django.contrib import admin
 
-from .models import Account, Donor, GuideBook, Service, Shortcut
+from .models import Account, Audience, Donor, GuideBook, Service, Shortcut
 
 admin.site.site_header = "Voisinternet"
 admin.site.site_title = "Voisinternet"
 admin.site.index_title = "Administration"
 
 
+@admin.register(Audience)
+class AudienceAdmin(admin.ModelAdmin):
+    list_display = ["name", "who", "partnership", "order"]
+    list_editable = ["order"]
+    prepopulated_fields = {"slug": ["name"]}
+
+
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ["name", "summary", "featured", "active", "order"]
+    filter_horizontal = ["audiences"]
     list_editable = ["featured", "active", "order"]
     prepopulated_fields = {"slug": ["name"]}
     search_fields = ["name", "summary"]

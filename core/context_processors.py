@@ -16,7 +16,7 @@ def site(request):
     current = match.view_name if match else None
     entries = [
         {"entry": e, "href": _href(e), "external": e.target.startswith("setting:"),
-         "current": e.target == current}
+         "current": current in {e.target, f"{e.target}_pour"}}
         for e in ENTRIES
     ]
     groups = [

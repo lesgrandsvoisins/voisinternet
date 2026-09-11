@@ -25,6 +25,31 @@ def number_digest(digits):
     return hmac.new(key, digits.encode(), hashlib.sha256).hexdigest()
 
 
+class Audience(models.Model):
+    """
+    À qui s'adresse-t-on. Des mots de tous les jours, pas des catégories juridiques :
+    le statut (personne physique ou morale) se précise au moment du compte ou du contrat.
+    """
+    name = models.CharField("vous êtes…", max_length=80, help_text="Par exemple : « Une association ».")
+    slug = models.SlugField(unique=True)
+    who = models.CharField("qui est concerné", max_length=200, blank=True)
+    pitch = models.CharField("en une phrase", max_length=240)
+    note = models.TextField("texte de la page", blank=True)
+    partnership = models.BooleanField(
+        "partenariat plutôt que services", default=False,
+        help_text="Pour les acteurs publics et sociaux : la page propose un partenariat, sans bouton « Ajouter ».",
+    )
+    order = models.PositiveSmallIntegerField("ordre", default=0)
+
+    class Meta:
+        ordering = ["order", "name"]
+        verbose_name = "public"
+        verbose_name_plural = "publics"
+
+    def __str__(self):
+        return self.name
+
+
 class Service(models.Model):
     name = models.CharField("nom", max_length=80)
     slug = models.SlugField(unique=True)
@@ -36,6 +61,10 @@ class Service(models.Model):
         help_text="Ce qui reste anonyme, et ce que l'association doit conserver en tant qu'hébergeur.",
     )
     url = models.URLField("adresse du service", blank=True)
+    audiences = models.ManyToManyField(
+        Audience, blank=True, related_name="services", verbose_name="publics",
+        help_text="Laisser vide si le service s'adresse à tout le monde.",
+    )
     featured = models.BooleanField("mis en avant", default=False)
     active = models.BooleanField("proposé", default=True)
     order = models.PositiveSmallIntegerField("ordre", default=0)

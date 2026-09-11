@@ -17,6 +17,7 @@ urlpatterns = [
          name="il_ou_elle_voit"),
     path("nous-voyons/", TemplateView.as_view(template_name="core/nous_voyons.html"), name="nous_voyons"),
     path("vous-voyez/", views.vous_voyez, name="vous_voyez"),
+    path("vous-voyez/pour/<slug:audience>/", views.vous_voyez, name="vous_voyez_pour"),
     path("vous-voyez/<slug:slug>/raccourci/", views.toggle_shortcut, name="toggle_shortcut"),
     path("ils-et-elles-voient/", views.ils_et_elles_voient, name="ils_et_elles_voient"),
 ]

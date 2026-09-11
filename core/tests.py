@@ -3,7 +3,7 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from .accounts import SESSION_KEY
-from .models import Account, Donor, Service, Shortcut, format_number
+from .models import Account, Audience, Donor, Service, Shortcut, format_number
 
 
 @override_settings(CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}})
@@ -102,3 +102,29 @@ class DonorPrivacyTests(TestCase):
         response = self.client.get(reverse("core:ils_et_elles_voient"))
         self.assertContains(response, "Voisine généreuse")
         self.assertNotContains(response, "Donateur discret")
+
+
+class AudienceTests(Base):
+    def test_home_asks_who_you_are(self):
+        response = self.client.get(reverse("core:home"))
+        self.assertContains(response, "Vous êtes…")
+        self.assertContains(response, reverse("core:vous_voyez_pour", args=["associations"]))
+
+    def test_audience_page_filters_services(self):
+        pros = Audience.objects.get(slug="artistes-et-artisans")
+        vitrine = Service.objects.create(name="Vitrine pro", slug="vitrine-pro", summary="Pour les pros.")
+        vitrine.audiences.add(pros)
+        mine = self.client.get(reverse("core:vous_voyez_pour", args=["artistes-et-artisans"]))
+        self.assertContains(mine, "Vitrine pro")
+        self.assertContains(mine, "Courriel")  # sans public désigné : pour tout le monde
+        other = self.client.get(reverse("core:vous_voyez_pour", args=["associations"]))
+        self.assertNotContains(other, "Vitrine pro")
+        self.assertContains(mine, 'aria-current="page"')
+
+    def test_partnership_audience_has_no_add_buttons(self):
+        response = self.client.get(reverse("core:vous_voyez_pour", args=["mairies-et-institutions"]))
+        self.assertContains(response, "Proposer un partenariat")
+        self.assertNotContains(response, 'class="add"')
+
+    def test_unknown_audience_is_404(self):
+        self.assertEqual(self.client.get(reverse("core:vous_voyez_pour", args=["inconnu"])).status_code, 404)

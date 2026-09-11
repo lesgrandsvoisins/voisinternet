@@ -16,6 +16,19 @@
   </div>
 </section>
 
+{% if audiences %}
+<section class="block publics" aria-labelledby="pub-title">
+  <div class="wrap">
+    <h2 id="pub-title">Vous êtes…</h2>
+    <ul class="aud">
+      {% for a in audiences %}
+      <li><a href="{% url 'core:vous_voyez_pour' a.slug %}"><strong>{{ a.name }}</strong><span>{{ a.pitch }}</span></a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
 <section class="block" aria-labelledby="conj-title">
   <div class="wrap">
     <h2 id="conj-title">Voir, au présent</h2>
@@ -30,8 +43,8 @@
         {% endif %}{% endfor %}
       </div>
       <div class="nouns">
+        {% include "core/partials/conj_link.html" with item=conj.voie %}
         {% include "core/partials/conj_link.html" with item=conj.voix %}
-        {% include "core/partials/conj_link.html" with item=conj.voies %}
       </div>
     </div>
   </div>
@@ -55,7 +68,7 @@
         <p>Des voisins bénévoles vous accompagnent, en atelier ou chez vous. Et un jour, peut-être, ce sera votre tour.</p>
         <div class="pair">
           <a href="{% url 'core:tu_vois' %}">Se faire accompagner</a>
-          <a href="{% url 'core:il_ou_elle_voit' %}">Accompagner l'autre</a>
+          <a href="{% url 'core:il_ou_elle_voit' %}">Devenir bénévole</a>
         </div>
       </li>
     </ol>
@@ -82,8 +95,19 @@
   </div>
 </section>
 
-<section class="block" aria-label="Le blog et le guide">
-  <div class="wrap two">
+<section class="block" aria-label="Le guide et le blog">
+  <div class="wrap two two-even">
+    <div>
+      <h2><span class="form">notre <span class="V">V</span>oie</span></h2>
+      {% if books %}
+      <ul class="books">
+        {% for book in books %}<li><a href="{{ book.url }}"><strong>{{ book.title }}</strong>{% if book.summary %}<span>{{ book.summary }}</span>{% endif %}</a></li>{% endfor %}
+      </ul>
+      {% else %}
+      <p class="intro">Les livres du guide s'afficheront ici.</p>
+      {% endif %}
+      <a class="more" href="{{ GUIDE_URL }}">Tout le guide</a>
+    </div>
     <div>
       <h2><span class="form">nos <span class="V">V</span>oix</span></h2>
       {% if posts %}
@@ -96,17 +120,6 @@
       <p class="intro">Les derniers articles s'afficheront ici.</p>
       {% endif %}
       <a class="more" href="{{ BLOG_URL }}">Tous les articles</a>
-    </div>
-    <div>
-      <h2><span class="form">des <span class="V">V</span>oies</span></h2>
-      {% if books %}
-      <ul class="books">
-        {% for book in books %}<li><a href="{{ book.url }}"><strong>{{ book.title }}</strong>{% if book.summary %}<span>{{ book.summary }}</span>{% endif %}</a></li>{% endfor %}
-      </ul>
-      {% else %}
-      <p class="intro">Les livres du guide s'afficheront ici.</p>
-      {% endif %}
-      <a class="more" href="{{ GUIDE_URL }}">Tout le guide</a>
     </div>
   </div>
 </section>

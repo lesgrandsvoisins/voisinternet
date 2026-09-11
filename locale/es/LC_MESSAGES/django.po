@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 23:12+0200\n"
+"POT-Creation-Date: 2026-09-11 23:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,99 +46,169 @@ msgstr "en plural, juntos"
 msgid "à lire"
 msgstr "para leer"
 
-#: core/menu.py:36
+#: core/menu.py:33
 msgid "mon Compte"
 msgstr "mi Cuenta"
 
-#: core/menu.py:36
+#: core/menu.py:33
+#, fuzzy
+#| msgid "compte"
+msgid "Compte"
+msgstr "cuenta"
+
+#: core/menu.py:33
 msgid "un individu, un compte, ce que je choisis de partager"
 msgstr "un individuo, una cuenta, lo que decido compartir"
 
-#: core/menu.py:37
+#: core/menu.py:34
 msgid "se connecter, créer un compte, retrouver mes raccourcis"
 msgstr "iniciar sesión, crear una cuenta, recuperar mis accesos directos"
 
-#: core/menu.py:38
+#: core/menu.py:35
 msgid "Agenda"
 msgstr "Agenda"
 
-#: core/menu.py:38
+#: core/menu.py:35
+msgid "programmé"
+msgstr ""
+
+#: core/menu.py:35
 msgid "un individu qui reçoit de l'aide, entre voisins"
 msgstr "un individuo que recibe ayuda, entre vecinos"
 
-#: core/menu.py:39
+#: core/menu.py:36
 msgid "poser une question, se faire accompagner"
 msgstr "hacer una pregunta, recibir acompañamiento"
 
-#: core/menu.py:40
+#: core/menu.py:37
+#, fuzzy
+#| msgid "Bénévolat et dons"
+msgid "Bénévolat"
+msgstr "Voluntariado y donaciones"
+
+#: core/menu.py:37
+msgid "et dons"
+msgstr ""
+
+#: core/menu.py:37
 msgid "Bénévolat et dons"
 msgstr "Voluntariado y donaciones"
 
-#: core/menu.py:40
+#: core/menu.py:37
 msgid "un individu qui donne, sans rien attendre en retour"
 msgstr "un individuo que da, sin esperar nada a cambio"
 
-#: core/menu.py:41
+#: core/menu.py:38
 msgid "accompagner l'autre, donner du matériel"
 msgstr "acompañar a otros, donar equipos"
 
-#: core/menu.py:42
+#: core/menu.py:39
+#, fuzzy
+#| msgid "Grands Voisins"
+msgid "Grands"
+msgstr "Grands Voisins"
+
+#: core/menu.py:39
+#, fuzzy
+#| msgid "Grands Voisins"
+msgid "Voisins"
+msgstr "Grands Voisins"
+
+#: core/menu.py:39
 msgid "Grands Voisins"
 msgstr "Grands Voisins"
 
-#: core/menu.py:42
+#: core/menu.py:39
 msgid "une conscience collective, l'association coopérative"
 msgstr "una conciencia colectiva, la asociación cooperativa"
 
-#: core/menu.py:43
+#: core/menu.py:40
 msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "estatutos, gobernanza, cuentas: todo es público"
 
-#: core/menu.py:44
+#: core/menu.py:41
+msgid "Annuaire"
+msgstr ""
+
+#: core/menu.py:41
+#, fuzzy
+#| msgid "Grands Voisins"
+msgid "des Voisins"
+msgstr "Grands Voisins"
+
+#: core/menu.py:41
 msgid "Pages"
 msgstr "Páginas"
 
-#: core/menu.py:44
+#: core/menu.py:41
 msgid "qui fait partie de la communauté, et comment les joindre"
 msgstr "quién forma parte de la comunidad, y cómo contactarlo"
 
-#: core/menu.py:45
+#: core/menu.py:42
 msgid "un particulier, une association, une entreprise…"
 msgstr "un particular, una asociación, una empresa…"
 
-#: core/menu.py:46
-msgid "Activités"
+#: core/menu.py:43
+msgid "Pôles"
+msgstr ""
+
+#: core/menu.py:43
+#, fuzzy
+#| msgid "Activités"
+msgid "d'activités"
 msgstr "Actividades"
 
-#: core/menu.py:46
-msgid "dons et partenaires qui nous ont aidés à naître"
-msgstr "donaciones y socios que nos ayudaron a nacer"
+#: core/menu.py:43
+msgid "Civisme, arts plastique et numérique"
+msgstr ""
 
-#: core/menu.py:47
+#: core/menu.py:44
 msgid "qui nous soutient — dons et partenaires — et comment nous soutenir"
 msgstr "quién nos apoya — donaciones y socios — y cómo apoyarnos"
 
-#: core/menu.py:48
-msgid "Blog"
-msgstr "Blog"
+#: core/menu.py:45
+#, fuzzy
+#| msgid "le blog"
+msgid "blog"
+msgstr "el blog"
 
-#: core/menu.py:48
+#: core/menu.py:45
+#, fuzzy
+#| msgid "Grands Voisins"
+msgid "GrandZine"
+msgstr "Grands Voisins"
+
+#: core/menu.py:45
+msgid "Blog GrandZine"
+msgstr ""
+
+#: core/menu.py:45
 msgid "le blog"
 msgstr "el blog"
 
-#: core/menu.py:49
+#: core/menu.py:46
 msgid "les nouvelles et les tribunes des adhérents"
 msgstr "noticias y tribunas de los socios"
 
-#: core/menu.py:50
-msgid "Guide"
-msgstr "Guía"
+#: core/menu.py:47
+msgid "Wiki"
+msgstr ""
 
-#: core/menu.py:50
+#: core/menu.py:47
+#, fuzzy
+#| msgid "le guide"
+msgid "/ guide"
+msgstr "la guía"
+
+#: core/menu.py:47
+msgid "Wiki / Guide"
+msgstr ""
+
+#: core/menu.py:47
 msgid "le guide"
 msgstr "la guía"
 
-#: core/menu.py:51
+#: core/menu.py:48
 msgid "pas à pas, du premier serveur aux sauvegardes"
 msgstr "paso a paso, desde tu primer servidor hasta las copias de seguridad"
 
@@ -494,8 +564,8 @@ msgstr "Sal de su nube."
 
 #: core/templates/core/home.html:11
 msgid ""
-"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un"
-" voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
+"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un "
+"voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
 "accompagnent."
 msgstr ""
 "Tus correos, fotos y calendarios pueden vivir en tu casa, o en la de un "
@@ -626,8 +696,8 @@ msgid ""
 "nuage</strong>, et gardez votre part de soleil."
 msgstr ""
 "El filósofo no le pedía nada al más poderoso, salvo que dejara de hacerle "
-"sombra. Lo hemos puesto en plural: <strong>sal de su nube</strong>, y guarda"
-" tu parte de sol."
+"sombra. Lo hemos puesto en plural: <strong>sal de su nube</strong>, y guarda "
+"tu parte de sol."
 
 #: core/templates/core/home.html:122
 msgid "Le guide et le blog"
@@ -657,8 +727,8 @@ msgstr "il ou elle Voit: acompañar a otros — Voisinternet"
 msgid ""
 "Un rapport désintéressé : vous participez à quelque chose de plus grand que "
 "vous, au bénéfice d'une personne que vous ne connaissez pas encore. Vous "
-"savez installer un serveur, ou vous avez un vieil ordinateur au placard ? Un"
-" voisin en a besoin."
+"savez installer un serveur, ou vous avez un vieil ordinateur au placard ? Un "
+"voisin en a besoin."
 msgstr ""
 "Una relación desinteresada: participas en algo más grande que tú, en "
 "beneficio de una persona que aún no conoces. ¿Sabes instalar un servidor, o "
@@ -668,12 +738,12 @@ msgstr ""
 #, python-format
 msgid ""
 "Animer un atelier, relire le guide, dépanner un voisin : chacun donne le "
-"temps qu'il veut. Écrivez-nous à <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+"temps qu'il veut. Écrivez-nous à <a href=\"mailto:"
+"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 msgstr ""
 "Dirigir un taller, revisar la guía, ayudar a un vecino: cada uno da el "
-"tiempo que quiere. Escríbenos a <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+"tiempo que quiere. Escríbenos a <a href=\"mailto:"
+"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 
 #: core/templates/core/il_ou_elle_voit.html:9
 msgid "Donner du matériel"
@@ -691,8 +761,9 @@ msgstr "ils et elles Voient: donaciones y socios — Voisinternet"
 
 #: core/templates/core/ils_et_elles_voient.html:5
 msgid ""
-"Prendre conscience de ce qu'il a fallu pour que Les Grands Voisins existent "
-": des dons, et des partenaires. Leur nom n'apparaît ici qu'avec leur accord."
+"Prendre conscience de ce qu'il a fallu pour que Les Grands Voisins "
+"existent : des dons, et des partenaires. Leur nom n'apparaît ici qu'avec "
+"leur accord."
 msgstr ""
 "Tomar conciencia de lo que hizo falta para que Les Grands Voisins exista: "
 "donaciones, y socios. Su nombre solo aparece aquí con su consentimiento."
@@ -766,8 +837,8 @@ msgstr "Hay una cuenta anónima abierta en este dispositivo"
 
 #: core/templates/core/je_vois.html:19
 msgid ""
-"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
-" ensuite supprimé."
+"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera "
+"ensuite supprimé."
 msgstr ""
 "¿Quieres vincular sus accesos directos a tu cuenta? La cuenta anónima se "
 "eliminará después."
@@ -854,8 +925,8 @@ msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
 "pour retrouver vos raccourcis."
 msgstr ""
-"Un número de 16 cifras, sin nombre ni correo electrónico. Lo anotas, y basta"
-" para recuperar tus accesos directos."
+"Un número de 16 cifras, sin nombre ni correo electrónico. Lo anotas, y basta "
+"para recuperar tus accesos directos."
 
 #: core/templates/core/je_vois.html:83
 msgid "Créer un compte anonyme"
@@ -875,8 +946,8 @@ msgstr "nous Voyons: la asociación — Voisinternet"
 
 #: core/templates/core/nous_voyons.html:5
 msgid ""
-"Voisinternet est un programme porté par l'association coopérative Les Grands"
-" Voisins : une conscience collective à laquelle chacun contribue. Nous "
+"Voisinternet est un programme porté par l'association coopérative Les Grands "
+"Voisins : une conscience collective à laquelle chacun contribue. Nous "
 "demandons votre confiance : voici de quoi la vérifier."
 msgstr ""
 "Voisinternet es un programa impulsado por la asociación cooperativa Les "
@@ -1001,8 +1072,8 @@ msgid ""
 "restaurant, salon de thé, centre social, atelier d'art et hôpital, reliés "
 "entre eux ; un nuage s'éloigne."
 msgstr ""
-"Una calle de barrio bajo el sol: café, galería, teatro y sala de conciertos,"
-" restaurante, salón de té, centro social, taller de arte y hospital, todos "
+"Una calle de barrio bajo el sol: café, galería, teatro y sala de conciertos, "
+"restaurante, salón de té, centro social, taller de arte y hospital, todos "
 "conectados entre sí; una nube se aleja."
 
 #: core/templates/core/partials/scene.html:13
@@ -1170,8 +1241,8 @@ msgstr "Cuenta anónima creada."
 #: core/views.py:128
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr ""
-"Demasiados intentos desde este dispositivo. Vuelve a intentarlo en un cuarto"
-" de hora."
+"Demasiados intentos desde este dispositivo. Vuelve a intentarlo en un cuarto "
+"de hora."
 
 #: core/views.py:132
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."

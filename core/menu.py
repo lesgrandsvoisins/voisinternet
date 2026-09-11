@@ -29,11 +29,8 @@ GROUPS = [
     ("lire", _("à lire")),
 ]
 
-# Le pronom et la forme conjuguée (« je » / « Vois »…) restent en français dans toutes
-# les langues : c'est la signature du site, comme son nom. Seuls le titre, l'accroche
-# courte et le détail sont traduits.
 ENTRIES = [
-    Entry("je", _("mon"), _("Compte"), _("mon Compte"), _("un individu, un compte, ce que je choisis de partager"),
+    Entry("je", _("mon Compte"), _("Compte"), _("mon Compte"), _("un individu, un compte, ce que je choisis de partager"),
           _("se connecter, créer un compte, retrouver mes raccourcis"), "core:je_vois", "singulier"),
     Entry("tu", _("Agenda"), _("programmé"), _("Agenda"), _("un individu qui reçoit de l'aide, entre voisins"),
           _("poser une question, se faire accompagner"), "core:tu_vois", "singulier"),

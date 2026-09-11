@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 23:12+0200\n"
+"POT-Creation-Date: 2026-09-11 23:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,99 +46,169 @@ msgstr "복수형, 함께"
 msgid "à lire"
 msgstr "읽을거리"
 
-#: core/menu.py:36
+#: core/menu.py:33
 msgid "mon Compte"
 msgstr "내 계정"
 
-#: core/menu.py:36
+#: core/menu.py:33
+#, fuzzy
+#| msgid "compte"
+msgid "Compte"
+msgstr "계정"
+
+#: core/menu.py:33
 msgid "un individu, un compte, ce que je choisis de partager"
 msgstr "한 개인, 하나의 계정, 내가 공유하기로 선택한 것"
 
-#: core/menu.py:37
+#: core/menu.py:34
 msgid "se connecter, créer un compte, retrouver mes raccourcis"
 msgstr "로그인, 계정 만들기, 바로가기 복구하기"
 
-#: core/menu.py:38
+#: core/menu.py:35
 msgid "Agenda"
 msgstr "일정"
 
-#: core/menu.py:38
+#: core/menu.py:35
+msgid "programmé"
+msgstr ""
+
+#: core/menu.py:35
 msgid "un individu qui reçoit de l'aide, entre voisins"
 msgstr "이웃 사이에서 도움을 받는 개인"
 
-#: core/menu.py:39
+#: core/menu.py:36
 msgid "poser une question, se faire accompagner"
 msgstr "질문하기, 도움 받기"
 
-#: core/menu.py:40
+#: core/menu.py:37
+#, fuzzy
+#| msgid "Bénévolat et dons"
+msgid "Bénévolat"
+msgstr "자원봉사 및 후원"
+
+#: core/menu.py:37
+msgid "et dons"
+msgstr ""
+
+#: core/menu.py:37
 msgid "Bénévolat et dons"
 msgstr "자원봉사 및 후원"
 
-#: core/menu.py:40
+#: core/menu.py:37
 msgid "un individu qui donne, sans rien attendre en retour"
 msgstr "대가를 바라지 않고 베푸는 개인"
 
-#: core/menu.py:41
+#: core/menu.py:38
 msgid "accompagner l'autre, donner du matériel"
 msgstr "이웃 돕기, 장비 기부하기"
 
-#: core/menu.py:42
+#: core/menu.py:39
+#, fuzzy
+#| msgid "Grands Voisins"
+msgid "Grands"
+msgstr "Grands Voisins"
+
+#: core/menu.py:39
+#, fuzzy
+#| msgid "Grands Voisins"
+msgid "Voisins"
+msgstr "Grands Voisins"
+
+#: core/menu.py:39
 msgid "Grands Voisins"
 msgstr "Grands Voisins"
 
-#: core/menu.py:42
+#: core/menu.py:39
 msgid "une conscience collective, l'association coopérative"
 msgstr "집단 의식, 협동조합 협회"
 
-#: core/menu.py:43
+#: core/menu.py:40
 msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "정관, 운영, 회계: 모두 공개됩니다"
 
-#: core/menu.py:44
+#: core/menu.py:41
+msgid "Annuaire"
+msgstr ""
+
+#: core/menu.py:41
+#, fuzzy
+#| msgid "Grands Voisins"
+msgid "des Voisins"
+msgstr "Grands Voisins"
+
+#: core/menu.py:41
 msgid "Pages"
 msgstr "페이지"
 
-#: core/menu.py:44
+#: core/menu.py:41
 msgid "qui fait partie de la communauté, et comment les joindre"
 msgstr "커뮤니티 구성원과 연락 방법"
 
-#: core/menu.py:45
+#: core/menu.py:42
 msgid "un particulier, une association, une entreprise…"
 msgstr "개인, 협회, 기업…"
 
-#: core/menu.py:46
-msgid "Activités"
+#: core/menu.py:43
+msgid "Pôles"
+msgstr ""
+
+#: core/menu.py:43
+#, fuzzy
+#| msgid "Activités"
+msgid "d'activités"
 msgstr "활동"
 
-#: core/menu.py:46
-msgid "dons et partenaires qui nous ont aidés à naître"
-msgstr "우리가 탄생하는 데 도움을 준 후원과 파트너"
+#: core/menu.py:43
+msgid "Civisme, arts plastique et numérique"
+msgstr ""
 
-#: core/menu.py:47
+#: core/menu.py:44
 msgid "qui nous soutient — dons et partenaires — et comment nous soutenir"
 msgstr "누가 우리를 후원하는지 — 후원과 파트너 — 그리고 후원 방법"
 
-#: core/menu.py:48
-msgid "Blog"
+#: core/menu.py:45
+#, fuzzy
+#| msgid "le blog"
+msgid "blog"
 msgstr "블로그"
 
-#: core/menu.py:48
+#: core/menu.py:45
+#, fuzzy
+#| msgid "Grands Voisins"
+msgid "GrandZine"
+msgstr "Grands Voisins"
+
+#: core/menu.py:45
+msgid "Blog GrandZine"
+msgstr ""
+
+#: core/menu.py:45
 msgid "le blog"
 msgstr "블로그"
 
-#: core/menu.py:49
+#: core/menu.py:46
 msgid "les nouvelles et les tribunes des adhérents"
 msgstr "회원 소식 및 기고문"
 
-#: core/menu.py:50
-msgid "Guide"
+#: core/menu.py:47
+msgid "Wiki"
+msgstr ""
+
+#: core/menu.py:47
+#, fuzzy
+#| msgid "le guide"
+msgid "/ guide"
 msgstr "가이드"
 
-#: core/menu.py:50
+#: core/menu.py:47
+msgid "Wiki / Guide"
+msgstr ""
+
+#: core/menu.py:47
 msgid "le guide"
 msgstr "가이드"
 
-#: core/menu.py:51
+#: core/menu.py:48
 msgid "pas à pas, du premier serveur aux sauvegardes"
 msgstr "첫 서버 구축부터 백업까지, 단계별로"
 
@@ -170,7 +240,8 @@ msgstr "서비스 대신 파트너십"
 msgid ""
 "Pour les acteurs publics et sociaux : la page propose un partenariat, sans "
 "bouton « Ajouter »."
-msgstr "공공 및 사회 기관용: 이 페이지는 “추가” 버튼 없이 파트너십을 제안합니다."
+msgstr ""
+"공공 및 사회 기관용: 이 페이지는 “추가” 버튼 없이 파트너십을 제안합니다."
 
 #: core/models.py:43 core/models.py:58 core/models.py:91 core/models.py:187
 #: core/models.py:247
@@ -205,7 +276,9 @@ msgstr "협회가 보관하는 정보"
 msgid ""
 "Ce qui reste anonyme, et ce que l'association doit conserver en tant "
 "qu'hébergeur."
-msgstr "무엇이 익명으로 유지되는지, 그리고 협회가 호스팅 제공자로서 보관해야 하는 정보."
+msgstr ""
+"무엇이 익명으로 유지되는지, 그리고 협회가 호스팅 제공자로서 보관해야 하는 정"
+"보."
 
 #: core/models.py:79
 msgid "adresse du service"
@@ -321,7 +394,8 @@ msgstr "홍보 영상"
 msgid ""
 "Lien vers une vidéo (YouTube, PeerTube…) : affiché en lien, jamais intégré "
 "en cadre."
-msgstr "영상 링크(YouTube, PeerTube 등): 프레임에 삽입되지 않고 링크로만 표시됩니다."
+msgstr ""
+"영상 링크(YouTube, PeerTube 등): 프레임에 삽입되지 않고 링크로만 표시됩니다."
 
 #: core/models.py:229
 msgid "courriel"
@@ -430,8 +504,8 @@ msgid ""
 "Voisinternet, porté par Les Grands Voisins : héberger ses courriels, "
 "fichiers et agendas chez soi ou chez un voisin de confiance."
 msgstr ""
-"Voisinternet는 Les Grands Voisins가 운영합니다: 이메일, 파일, 일정을 집에서 또는 신뢰할 수 있는 이웃 집에서"
-" 호스팅하세요."
+"Voisinternet는 Les Grands Voisins가 운영합니다: 이메일, 파일, 일정을 집에서 "
+"또는 신뢰할 수 있는 이웃 집에서 호스팅하세요."
 
 #: core/templates/core/base.html:16
 msgid "Aller au contenu"
@@ -457,13 +531,17 @@ msgstr "기본 메뉴"
 msgid ""
 "Porté par Les Grands Voisins, à Fontenay-aux-Roses et dans le 14ᵉ "
 "arrondissement de Paris."
-msgstr "Les Grands Voisins가 퐁트네오로즈(Fontenay-aux-Roses)와 파리 14구에서 운영합니다."
+msgstr ""
+"Les Grands Voisins가 퐁트네오로즈(Fontenay-aux-Roses)와 파리 14구에서 운영합"
+"니다."
 
 #: core/templates/core/base.html:58
 msgid ""
 "Seulement deux cookies techniques : votre session et la protection des "
 "formulaires. Aucun traceur, rien n'est chargé depuis un tiers."
-msgstr "기술적으로 꼭 필요한 쿠키 두 가지만 사용합니다: 세션 및 양식 보호. 추적기는 없으며, 외부에서 불러오는 것도 없습니다."
+msgstr ""
+"기술적으로 꼭 필요한 쿠키 두 가지만 사용합니다: 세션 및 양식 보호. 추적기는 "
+"없으며, 외부에서 불러오는 것도 없습니다."
 
 #: core/templates/core/base.html:60
 msgid "Plan du site"
@@ -483,12 +561,12 @@ msgstr "그들의 클라우드에서 벗어나세요."
 
 #: core/templates/core/home.html:11
 msgid ""
-"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un"
-" voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
+"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un "
+"voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
 "accompagnent."
 msgstr ""
-"이메일, 사진, 일정을 집에서, 또는 신뢰할 수 있는 이웃 집에서 관리할 수 있습니다. Voisinternet가 방법을 알려드리고, "
-"이웃들이 함께합니다."
+"이메일, 사진, 일정을 집에서, 또는 신뢰할 수 있는 이웃 집에서 관리할 수 있습니"
+"다. Voisinternet가 방법을 알려드리고, 이웃들이 함께합니다."
 
 #: core/templates/core/home.html:14
 msgid "Voir les services"
@@ -514,7 +592,9 @@ msgstr "‘보다’, 현재형으로"
 msgid ""
 "Tout le site se conjugue. Choisissez votre personne, elle vous mène au bon "
 "endroit."
-msgstr "이 사이트는 동사 활용으로 구성되어 있습니다. 인칭을 선택하면 알맞은 곳으로 안내합니다."
+msgstr ""
+"이 사이트는 동사 활용으로 구성되어 있습니다. 인칭을 선택하면 알맞은 곳으로 안"
+"내합니다."
 
 #: core/templates/core/home.html:57
 msgid "Vous êtes…"
@@ -528,7 +608,8 @@ msgstr "작동 방식"
 msgid ""
 "Pas besoin d'être informaticien. Il suffit d'un peu de curiosité et d'un "
 "voisin."
-msgstr "컴퓨터 전문가일 필요는 없습니다. 약간의 호기심과 이웃 한 명이면 충분합니다."
+msgstr ""
+"컴퓨터 전문가일 필요는 없습니다. 약간의 호기심과 이웃 한 명이면 충분합니다."
 
 #: core/templates/core/home.html:74
 #: core/templates/core/partials/shortcut_list.html:16
@@ -537,7 +618,8 @@ msgstr "서비스 선택하기"
 
 #: core/templates/core/home.html:75
 msgid "Ajoutez-les à votre compte. Un numéro suffit : ni nom, ni courriel."
-msgstr "계정에 추가하세요. 번호 하나면 충분합니다: 이름도, 이메일도 필요 없습니다."
+msgstr ""
+"계정에 추가하세요. 번호 하나면 충분합니다: 이름도, 이메일도 필요 없습니다."
 
 #: core/templates/core/home.html:78
 msgid "Installez chez vous, ou chez un voisin"
@@ -547,7 +629,9 @@ msgstr "집에서, 또는 이웃 집에서 설치하기"
 msgid ""
 "Un petit serveur consomme à peu près comme une box internet. Pas de place ? "
 "Un voisin de confiance l'héberge."
-msgstr "작은 서버는 인터넷 공유기 정도의 전력만 사용합니다. 공간이 없다면? 신뢰할 수 있는 이웃이 대신 호스팅해 줄 수 있습니다."
+msgstr ""
+"작은 서버는 인터넷 공유기 정도의 전력만 사용합니다. 공간이 없다면? 신뢰할 수 "
+"있는 이웃이 대신 호스팅해 줄 수 있습니다."
 
 #: core/templates/core/home.html:82
 msgid "Ne restez pas seul devant l'écran"
@@ -557,7 +641,9 @@ msgstr "화면 앞에 혼자 남겨두지 마세요"
 msgid ""
 "Des voisins bénévoles vous accompagnent, en atelier ou chez vous. Et un "
 "jour, peut-être, ce sera votre tour."
-msgstr "자원봉사 이웃들이 워크숍이나 집에서 도와드립니다. 그리고 언젠가는 당신도 도움을 줄 차례가 될 수 있습니다."
+msgstr ""
+"자원봉사 이웃들이 워크숍이나 집에서 도와드립니다. 그리고 언젠가는 당신도 도움"
+"을 줄 차례가 될 수 있습니다."
 
 #: core/templates/core/home.html:85
 msgid "Se faire accompagner"
@@ -575,7 +661,9 @@ msgstr "서비스"
 msgid ""
 "Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « je "
 "Vois », même sans compte nominatif."
-msgstr "관심 있는 서비스를 추가하세요. 이름을 밝히지 않아도 “je Vois”의 바로가기에 추가됩니다."
+msgstr ""
+"관심 있는 서비스를 추가하세요. 이름을 밝히지 않아도 “je Vois”의 바로가기에 추"
+"가됩니다."
 
 #: core/templates/core/home.html:102
 msgid "Tous les services, avec ce que chacun conserve"
@@ -594,8 +682,8 @@ msgid ""
 "Diogène à Alexandre le Grand, qui lui offrait ce qu'il voulait. D'après "
 "Plutarque, <cite>Vie d'Alexandre</cite>, 14."
 msgstr ""
-"무엇이든 원하는 것을 주겠다고 한 알렉산드로스 대왕에게 디오게네스가 한 말. 플루타르코스, <cite>알렉산드로스전</cite>, "
-"14장에서."
+"무엇이든 원하는 것을 주겠다고 한 알렉산드로스 대왕에게 디오게네스가 한 말. 플"
+"루타르코스, <cite>알렉산드로스전</cite>, 14장에서."
 
 #: core/templates/core/home.html:118
 msgid ""
@@ -603,8 +691,9 @@ msgid ""
 "faire de l'ombre. Nous l'avons mis au pluriel : <strong>ôtez-vous de leur "
 "nuage</strong>, et gardez votre part de soleil."
 msgstr ""
-"그 철학자는 가장 강한 자에게 아무것도 요구하지 않았습니다, 다만 자신의 빛을 가리지 말라는 것 외에는. 우리는 이를 복수형으로 "
-"바꾸었습니다: <strong>그들의 클라우드에서 벗어나</strong>, 여러분의 햇빛을 지키세요."
+"그 철학자는 가장 강한 자에게 아무것도 요구하지 않았습니다, 다만 자신의 빛을 "
+"가리지 말라는 것 외에는. 우리는 이를 복수형으로 바꾸었습니다: <strong>그들의 "
+"클라우드에서 벗어나</strong>, 여러분의 햇빛을 지키세요."
 
 #: core/templates/core/home.html:122
 msgid "Le guide et le blog"
@@ -634,21 +723,23 @@ msgstr "il ou elle Voit: 이웃 돕기 — Voisinternet"
 msgid ""
 "Un rapport désintéressé : vous participez à quelque chose de plus grand que "
 "vous, au bénéfice d'une personne que vous ne connaissez pas encore. Vous "
-"savez installer un serveur, ou vous avez un vieil ordinateur au placard ? Un"
-" voisin en a besoin."
+"savez installer un serveur, ou vous avez un vieil ordinateur au placard ? Un "
+"voisin en a besoin."
 msgstr ""
-"사심 없는 관계: 아직 알지 못하는 누군가를 위해, 나보다 더 큰 무언가에 참여하는 것입니다. 서버 설치법을 알거나, 창고에 오래된 "
-"컴퓨터가 있으신가요? 이웃이 필요로 하고 있습니다."
+"사심 없는 관계: 아직 알지 못하는 누군가를 위해, 나보다 더 큰 무언가에 참여하"
+"는 것입니다. 서버 설치법을 알거나, 창고에 오래된 컴퓨터가 있으신가요? 이웃이 "
+"필요로 하고 있습니다."
 
 #: core/templates/core/il_ou_elle_voit.html:8
 #, python-format
 msgid ""
 "Animer un atelier, relire le guide, dépanner un voisin : chacun donne le "
-"temps qu'il veut. Écrivez-nous à <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+"temps qu'il veut. Écrivez-nous à <a href=\"mailto:"
+"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 msgstr ""
-"워크숍 진행, 가이드 교정, 이웃의 문제 해결 돕기: 각자 원하는 만큼 시간을 냅니다. <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>로 문의해 주세요."
+"워크숍 진행, 가이드 교정, 이웃의 문제 해결 돕기: 각자 원하는 만큼 시간을 냅니"
+"다. <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>로 문의해 주세"
+"요."
 
 #: core/templates/core/il_ou_elle_voit.html:9
 msgid "Donner du matériel"
@@ -665,11 +756,12 @@ msgstr "ils et elles Voient: 후원 및 파트너 — Voisinternet"
 
 #: core/templates/core/ils_et_elles_voient.html:5
 msgid ""
-"Prendre conscience de ce qu'il a fallu pour que Les Grands Voisins existent "
-": des dons, et des partenaires. Leur nom n'apparaît ici qu'avec leur accord."
+"Prendre conscience de ce qu'il a fallu pour que Les Grands Voisins "
+"existent : des dons, et des partenaires. Leur nom n'apparaît ici qu'avec "
+"leur accord."
 msgstr ""
-"Les Grands Voisins가 존재하기까지 무엇이 필요했는지 되새기며: 후원과 파트너들. 이름은 본인의 동의가 있을 때만 "
-"표시됩니다."
+"Les Grands Voisins가 존재하기까지 무엇이 필요했는지 되새기며: 후원과 파트너"
+"들. 이름은 본인의 동의가 있을 때만 표시됩니다."
 
 #: core/templates/core/ils_et_elles_voient.html:9
 msgid "Nos soutiens"
@@ -692,7 +784,9 @@ msgstr "파트너"
 msgid ""
 "Ceux qui nous ont aidés autrement que par un don : matériel, temps, "
 "expertise. [À compléter.]"
-msgstr "후원이 아닌 다른 방식으로 도움을 준 분들: 장비, 시간, 전문성. [추후 작성 예정.]"
+msgstr ""
+"후원이 아닌 다른 방식으로 도움을 준 분들: 장비, 시간, 전문성. [추후 작성 예"
+"정.]"
 
 #: core/templates/core/ils_et_elles_voient.html:21
 msgid "Nous soutenir"
@@ -702,13 +796,17 @@ msgstr "후원하기"
 msgid ""
 "[À compléter : moyens de don, et possibilité de reçu fiscal selon "
 "l'éligibilité de l'association.]"
-msgstr "[추후 작성 예정: 후원 방법 및 협회의 자격 요건에 따른 세금 영수증 발급 가능 여부.]"
+msgstr ""
+"[추후 작성 예정: 후원 방법 및 협회의 자격 요건에 따른 세금 영수증 발급 가능 "
+"여부.]"
 
 #: core/templates/core/ils_et_elles_voient.html:23
 msgid ""
 "Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous "
 "est nécessaire, mais elle n'est jamais publiée sans votre accord."
-msgstr "기부는 익명으로 할 수 있습니다. 영수증을 원하시면 신원 정보가 필요하지만, 동의 없이는 절대 공개되지 않습니다."
+msgstr ""
+"기부는 익명으로 할 수 있습니다. 영수증을 원하시면 신원 정보가 필요하지만, 동"
+"의 없이는 절대 공개되지 않습니다."
 
 #: core/templates/core/je_vois.html:3
 msgid "je Vois — Voisinternet"
@@ -724,8 +822,8 @@ msgid ""
 "jamais vous le redonner. Il suffit, seul, pour retrouver vos raccourcis sur "
 "un autre appareil."
 msgstr ""
-"지금 바로 적어두세요. 저희는 이 번호의 해시값만 보관하므로 다시 알려드릴 수 없습니다. 다른 기기에서 바로가기를 되찾으려면 이 번호만 "
-"있으면 됩니다."
+"지금 바로 적어두세요. 저희는 이 번호의 해시값만 보관하므로 다시 알려드릴 수 "
+"없습니다. 다른 기기에서 바로가기를 되찾으려면 이 번호만 있으면 됩니다."
 
 #: core/templates/core/je_vois.html:18
 msgid "Un compte anonyme est ouvert sur cet appareil"
@@ -733,9 +831,11 @@ msgstr "이 기기에 익명 계정이 열려 있습니다"
 
 #: core/templates/core/je_vois.html:19
 msgid ""
-"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
-" ensuite supprimé."
-msgstr "이 계정의 바로가기를 회원님 계정에 연결하시겠습니까? 연결 후 익명 계정은 삭제됩니다."
+"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera "
+"ensuite supprimé."
+msgstr ""
+"이 계정의 바로가기를 회원님 계정에 연결하시겠습니까? 연결 후 익명 계정은 삭제"
+"됩니다."
 
 #: core/templates/core/je_vois.html:20
 msgid "Rattacher mes raccourcis"
@@ -813,7 +913,9 @@ msgstr "익명으로 유지하기"
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
 "pour retrouver vos raccourcis."
-msgstr "이름이나 이메일 없이 16자리 번호만 사용합니다. 번호를 적어두면 바로가기를 되찾을 수 있습니다."
+msgstr ""
+"이름이나 이메일 없이 16자리 번호만 사용합니다. 번호를 적어두면 바로가기를 되"
+"찾을 수 있습니다."
 
 #: core/templates/core/je_vois.html:83
 msgid "Créer un compte anonyme"
@@ -833,12 +935,13 @@ msgstr "nous Voyons: 협회 소개 — Voisinternet"
 
 #: core/templates/core/nous_voyons.html:5
 msgid ""
-"Voisinternet est un programme porté par l'association coopérative Les Grands"
-" Voisins : une conscience collective à laquelle chacun contribue. Nous "
+"Voisinternet est un programme porté par l'association coopérative Les Grands "
+"Voisins : une conscience collective à laquelle chacun contribue. Nous "
 "demandons votre confiance : voici de quoi la vérifier."
 msgstr ""
-"Voisinternet는 협동조합 협회인 Les Grands Voisins가 운영하는 프로그램입니다: 모두가 함께 만들어가는 집단 "
-"의식입니다. 여러분의 신뢰를 부탁드리며, 이를 확인할 수 있는 자료를 아래에 공개합니다."
+"Voisinternet는 협동조합 협회인 Les Grands Voisins가 운영하는 프로그램입니다: "
+"모두가 함께 만들어가는 집단 의식입니다. 여러분의 신뢰를 부탁드리며, 이를 확인"
+"할 수 있는 자료를 아래에 공개합니다."
 
 #: core/templates/core/nous_voyons.html:9
 msgid "Statuts de l'association"
@@ -958,8 +1061,8 @@ msgid ""
 "restaurant, salon de thé, centre social, atelier d'art et hôpital, reliés "
 "entre eux ; un nuage s'éloigne."
 msgstr ""
-"햇살 가득한 동네 거리: 카페, 갤러리, 극장과 공연장, 레스토랑, 찻집, 사회복지센터, 예술 공방, 병원이 서로 연결되어 있고, 구름 "
-"한 조각이 멀어져 갑니다."
+"햇살 가득한 동네 거리: 카페, 갤러리, 극장과 공연장, 레스토랑, 찻집, 사회복지"
+"센터, 예술 공방, 병원이 서로 연결되어 있고, 구름 한 조각이 멀어져 갑니다."
 
 #: core/templates/core/partials/scene.html:13
 msgid "Café"
@@ -1046,8 +1149,9 @@ msgid ""
 "vos questions, venez aux ateliers, ou demandez qu'un bénévole passe vous "
 "voir."
 msgstr ""
-"상호부조의 원리로 맺어진 두 개인 간의 관계: 필요한 도움을 받습니다. 누구도 처음부터 서버 관리자로 태어나지 않습니다. 궁금한 점을 "
-"물어보거나, 워크숍에 참여하거나, 자원봉사자의 방문을 요청해 보세요."
+"상호부조의 원리로 맺어진 두 개인 간의 관계: 필요한 도움을 받습니다. 누구도 처"
+"음부터 서버 관리자로 태어나지 않습니다. 궁금한 점을 물어보거나, 워크숍에 참여"
+"하거나, 자원봉사자의 방문을 요청해 보세요."
 
 #: core/templates/core/tu_vois.html:8
 msgid "Poser une question"
@@ -1059,8 +1163,8 @@ msgid ""
 "Écrivez-nous à <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. "
 "Un voisin vous répond, pas un robot."
 msgstr ""
-"<a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>로 문의해 주세요. 로봇이 아닌 "
-"이웃이 직접 답해드립니다."
+"<a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>로 문의해 주세요. "
+"로봇이 아닌 이웃이 직접 답해드립니다."
 
 #: core/templates/core/tu_vois.html:9
 msgid "Venir aux ateliers"
@@ -1136,7 +1240,9 @@ msgstr "계정을 찾았습니다. 바로가기가 복구되었습니다."
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
-msgstr "이 기기에서는 더 이상 계정이 열려 있지 않습니다. 번호를 이용해 다시 찾을 수 있습니다."
+msgstr ""
+"이 기기에서는 더 이상 계정이 열려 있지 않습니다. 번호를 이용해 다시 찾을 수 "
+"있습니다."
 
 #: core/views.py:153
 msgid "Vos raccourcis anonymes ont rejoint votre compte."

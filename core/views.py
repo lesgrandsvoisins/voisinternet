@@ -67,11 +67,16 @@ def je_vois(request):
     account = current_account(request)
     if account:
         shortcuts = account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name")
+        shortcut_ids = set(shortcuts.values_list("service_id", flat=True))
     else:
         shortcuts = []
+        shortcut_ids = set()
+    available_services = Service.objects.filter(active=True).exclude(pk__in=shortcut_ids).order_by("order", "name")
     return render(request, "core/je_vois.html", {
         "account": account,
         "shortcuts": shortcuts,
+        "shortcut_ids": shortcut_ids,
+        "available_services": available_services,
         "new_number": format_number(new_number) if new_number else None,
         "pending": pending_anonymous_account(request),
     })

@@ -40,6 +40,14 @@
     </div>
   </section>
 
+  <section aria-labelledby="add-title">
+    <div class="split">
+      <h2 id="add-title">Services disponibles</h2>
+      <p class="muted">Ajoutez ceux qui vous intéressent à votre liste.</p>
+    </div>
+    {% include "core/partials/service_list.html" with services=available_services details=True %}
+  </section>
+
   {% else %}
   <div class="choices">
     <section class="card" aria-labelledby="login-title">

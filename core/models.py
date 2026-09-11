@@ -89,6 +89,7 @@ class Account(models.Model):
     )
     number_digest = models.CharField(max_length=64, unique=True, null=True, blank=True, editable=False)
     services = models.ManyToManyField(Service, through="Shortcut", related_name="accounts")
+    groups = models.ManyToManyField(Audience, through="Membership", related_name="accounts")
     created = models.DateTimeField(default=timezone.now, editable=False)
     last_seen = models.DateTimeField(auto_now=True)
 
@@ -121,9 +122,11 @@ class Account(models.Model):
         return cls.objects.filter(number_digest=number_digest(digits), user__isnull=True).first()
 
     def absorb(self, other):
-        """Rattache les raccourcis d'un compte anonyme à ce compte, puis supprime l'anonyme."""
+        """Rattache les raccourcis et appartenances d'un compte anonyme à ce compte, puis supprime l'anonyme."""
         for shortcut in other.shortcut_set.all():
             Shortcut.objects.get_or_create(account=self, service_id=shortcut.service_id)
+        for membership in other.membership_set.all():
+            Membership.objects.get_or_create(account=self, audience_id=membership.audience_id)
         other.delete()
 
 
@@ -140,6 +143,21 @@ class Shortcut(models.Model):
 
     def __str__(self):
         return f"{self.service} ({self.account})"
+
+
+class Membership(models.Model):
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    audience = models.ForeignKey(Audience, on_delete=models.CASCADE)
+    position = models.PositiveIntegerField(_("ordre personnel"), default=0)
+    created = models.DateTimeField(default=timezone.now, editable=False)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=["account", "audience"], name="unique_membership")]
+        ordering = ["account", "position", "audience__name"]
+        verbose_name = _("appartenance")
+
+    def __str__(self):
+        return f"{self.audience} ({self.account})"
 
 
 class GuideBook(models.Model):

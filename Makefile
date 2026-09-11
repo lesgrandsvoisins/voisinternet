@@ -13,6 +13,16 @@ LOADENV = export $$(grep -v '^\#' .env 2>/dev/null | xargs -d '\n');
 help: ## Affiche cette aide
 	@grep -E '^[a-zA-Z_-]+:.*## ' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'
 
+rollout:
+	git pull
+	make install
+	make setup
+	make makemigrations
+	make migrate
+	make fixtures
+	make collectstatic
+	rsync -a ./staticiles/ /var/www/voisinger-django/static
+
 venv: ## Crée l'environnement virtuel .venv
 	python3 -m venv .venv
 

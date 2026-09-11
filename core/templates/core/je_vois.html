@@ -49,6 +49,23 @@
     {% include "core/partials/service_list.html" with services=available_services details=True %}
   </section>
 
+  <section aria-labelledby="mb-title">
+    <div class="split">
+      <h2 id="mb-title">{% trans "Mes groupes" %}</h2>
+    </div>
+    <div id="memberships-list">
+      {% include "core/partials/membership_list.html" %}
+    </div>
+  </section>
+
+  <section id="available-groups" aria-labelledby="add-groups-title">
+    <div class="split">
+      <h2 id="add-groups-title">{% trans "Groupes disponibles" %}</h2>
+      <p class="muted">{% trans "Un particulier, une association, une entreprise… Adhérez à ceux qui vous concernent." %}</p>
+    </div>
+    {% include "core/partials/group_list.html" with audiences=available_audiences details=True %}
+  </section>
+
   {% else %}
   <div class="choices">
     <section class="card" aria-labelledby="login-title">

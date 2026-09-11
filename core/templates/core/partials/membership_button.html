@@ -1,0 +1,4 @@
+{% load i18n %}<form class="shortcut" method="post" action="{% url 'core:toggle_membership' audience.slug %}" hx-post="{% url 'core:toggle_membership' audience.slug %}" hx-target="{{ target_id|default:'this' }}" hx-swap="{{ swap|default:'outerHTML' }}">
+  {% csrf_token %}<input type="hidden" name="next" value="{{ next|default:request.get_full_path }}">
+  <button class="add" type="submit" aria-pressed="{{ added|yesno:'true,false' }}" aria-label="{% if added %}{% blocktrans with name=audience.name %}Quitter {{ name }}{% endblocktrans %}{% else %}{% blocktrans with name=audience.name %}Adhérer à {{ name }}{% endblocktrans %}{% endif %}">{% if added %}{% trans "Membre" %}{% else %}{% trans "Adhérer" %}{% endif %}</button>
+</form>

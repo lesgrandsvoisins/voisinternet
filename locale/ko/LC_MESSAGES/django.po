@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 22:27+0200\n"
+"POT-Creation-Date: 2026-09-11 22:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,7 +82,7 @@ msgstr "대가를 바라지 않고 베푸는 개인"
 msgid "accompagner l'autre, donner du matériel"
 msgstr "이웃 돕기, 장비 기부하기"
 
-#: core/menu.py:42 core/models.py:167
+#: core/menu.py:42 core/models.py:185
 msgid "Association"
 msgstr "협회"
 
@@ -218,65 +218,69 @@ msgstr "제공됨"
 msgid "service"
 msgstr "서비스"
 
-#: core/models.py:96
+#: core/models.py:97
 msgid "compte"
 msgstr "계정"
 
-#: core/models.py:100
+#: core/models.py:101
 #, python-format
 msgid "Compte de %(user)s"
 msgstr "%(user)s의 계정"
 
-#: core/models.py:101
+#: core/models.py:102
 #, python-format
 msgid "Compte anonyme n° %(pk)s"
 msgstr "익명 계정 #%(pk)s"
 
-#: core/models.py:133
+#: core/models.py:136 core/models.py:151
 msgid "ordre personnel"
 msgstr "개인 순서"
 
-#: core/models.py:139
+#: core/models.py:142
 msgid "raccourci"
 msgstr "바로가기"
 
-#: core/models.py:163
+#: core/models.py:157
+msgid "appartenance"
+msgstr "소속"
+
+#: core/models.py:181
 msgid "Particulier"
 msgstr "개인"
 
-#: core/models.py:164
+#: core/models.py:182
 msgid "Entreprise"
 msgstr "기업"
 
-#: core/models.py:165
+#: core/models.py:183
 msgid "Fondation"
 msgstr "재단"
 
-#: core/models.py:166
+#: core/models.py:184
 msgid "Collectivité"
 msgstr "지자체"
 
-#: core/models.py:169
+#: core/models.py:187
 msgid "nom affiché"
 msgstr "표시 이름"
 
-#: core/models.py:170
+#: core/models.py:188
 msgid "type"
 msgstr "유형"
 
-#: core/models.py:172
+#: core/models.py:190
 msgid "apparaît publiquement"
 msgstr "공개적으로 표시됨"
 
-#: core/models.py:173
+#: core/models.py:191
 msgid "Uniquement avec le consentement explicite du donateur (RGPD)."
 msgstr "기부자의 명시적 동의가 있는 경우에만(GDPR)."
 
-#: core/models.py:175
+#: core/models.py:193
 msgid "soutien depuis"
 msgstr "후원 시작일"
 
-#: core/models.py:179
+#: core/models.py:197
 msgid "donateur"
 msgstr "후원자"
 
@@ -371,7 +375,7 @@ msgid ""
 "endroit."
 msgstr "이 사이트는 동사 활용으로 구성되어 있습니다. 인칭을 선택하면 알맞은 곳으로 안내합니다."
 
-#: core/templates/core/home.html:57 core/templates/core/vous_voyez.html:9
+#: core/templates/core/home.html:57
 msgid "Vous êtes…"
 msgstr "당신은…"
 
@@ -629,42 +633,56 @@ msgstr "이용 가능한 서비스"
 msgid "Ajoutez ceux qui vous intéressent à votre liste."
 msgstr "관심 있는 서비스를 목록에 추가하세요."
 
-#: core/templates/core/je_vois.html:55 core/templates/core/je_vois.html:58
+#: core/templates/core/je_vois.html:54
+msgid "Mes groupes"
+msgstr "내 그룹"
+
+#: core/templates/core/je_vois.html:63
+msgid "Groupes disponibles"
+msgstr "가입 가능한 그룹"
+
+#: core/templates/core/je_vois.html:64
+msgid ""
+"Un particulier, une association, une entreprise… Adhérez à ceux qui vous "
+"concernent."
+msgstr "개인, 협회, 기업… 나와 관련된 그룹에 가입하세요."
+
+#: core/templates/core/je_vois.html:72 core/templates/core/je_vois.html:75
 #: core/templates/core/partials/account_widget.html:8
 msgid "Se connecter"
 msgstr "로그인"
 
-#: core/templates/core/je_vois.html:56
+#: core/templates/core/je_vois.html:73
 msgid ""
 "Avec votre compte unique des Grands Voisins, le même que pour les autres "
 "outils de l'association."
 msgstr "협회의 다른 도구들과 동일한 Grands Voisins 통합 계정으로 로그인하세요."
 
-#: core/templates/core/je_vois.html:60
+#: core/templates/core/je_vois.html:77
 msgid ""
 "La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
 "serveur."
 msgstr "이 서버에는 아직 Grands Voisins 계정 로그인이 설정되어 있지 않습니다."
 
-#: core/templates/core/je_vois.html:64
+#: core/templates/core/je_vois.html:81
 msgid "Rester anonyme"
 msgstr "익명으로 유지하기"
 
-#: core/templates/core/je_vois.html:65
+#: core/templates/core/je_vois.html:82
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
 "pour retrouver vos raccourcis."
 msgstr "이름이나 이메일 없이 16자리 번호만 사용합니다. 번호를 적어두면 바로가기를 되찾을 수 있습니다."
 
-#: core/templates/core/je_vois.html:66
+#: core/templates/core/je_vois.html:83
 msgid "Créer un compte anonyme"
 msgstr "익명 계정 만들기"
 
-#: core/templates/core/je_vois.html:68
+#: core/templates/core/je_vois.html:85
 msgid "J'ai déjà un numéro"
 msgstr "이미 번호가 있어요"
 
-#: core/templates/core/je_vois.html:71
+#: core/templates/core/je_vois.html:88
 msgid "Retrouver"
 msgstr "복구하기"
 
@@ -730,6 +748,18 @@ msgstr "설정"
 msgid "Aucun service ajouté pour l'instant."
 msgstr "아직 추가된 서비스가 없습니다."
 
+#: core/templates/core/partials/group_list.html:13
+msgid "Partenariat Voisinternet"
+msgstr "Voisinternet 파트너십"
+
+#: core/templates/core/partials/group_list.html:14
+msgid "Proposer un partenariat"
+msgstr "파트너십 제안하기"
+
+#: core/templates/core/partials/group_list.html:20
+msgid "Aucun groupe pour l'instant"
+msgstr "아직 그룹이 없습니다"
+
 #: core/templates/core/partials/lang_switcher.html:5
 msgid "Langue"
 msgstr "언어"
@@ -737,6 +767,49 @@ msgstr "언어"
 #: core/templates/core/partials/lang_switcher.html:13
 msgid "Changer"
 msgstr "변경"
+
+#: core/templates/core/partials/membership_button.html:3
+#, python-format
+msgid "Quitter %(name)s"
+msgstr "%(name)s 탈퇴"
+
+#: core/templates/core/partials/membership_button.html:3
+#, python-format
+msgid "Adhérer à %(name)s"
+msgstr "%(name)s 가입"
+
+#: core/templates/core/partials/membership_button.html:3
+msgid "Membre"
+msgstr "가입됨"
+
+#: core/templates/core/partials/membership_button.html:3
+msgid "Adhérer"
+msgstr "가입"
+
+#: core/templates/core/partials/membership_list.html:8
+#: core/templates/core/partials/shortcut_list.html:8
+#, python-format
+msgid "Monter %(name)s"
+msgstr "%(name)s 위로 이동"
+
+#: core/templates/core/partials/membership_list.html:9
+#: core/templates/core/partials/shortcut_list.html:9
+#, python-format
+msgid "Descendre %(name)s"
+msgstr "%(name)s 아래로 이동"
+
+#: core/templates/core/partials/membership_list.html:16
+msgid "Aucune appartenance pour l'instant."
+msgstr "아직 소속된 그룹이 없습니다."
+
+#: core/templates/core/partials/membership_list.html:16
+msgid "Choisissez vos groupes"
+msgstr "그룹 선택하기"
+
+#: core/templates/core/partials/membership_list.html:16
+#: core/templates/core/partials/shortcut_list.html:16
+msgid "ils apparaîtront ici."
+msgstr "여기에 표시됩니다."
 
 #: core/templates/core/partials/scene.html:1
 msgid ""
@@ -805,23 +878,9 @@ msgstr "추가됨"
 msgid "Ajouter"
 msgstr "추가"
 
-#: core/templates/core/partials/shortcut_list.html:8
-#, python-format
-msgid "Monter %(name)s"
-msgstr "%(name)s 위로 이동"
-
-#: core/templates/core/partials/shortcut_list.html:9
-#, python-format
-msgid "Descendre %(name)s"
-msgstr "%(name)s 아래로 이동"
-
 #: core/templates/core/partials/shortcut_list.html:16
 msgid "Aucun raccourci pour l'instant."
 msgstr "아직 바로가기가 없습니다."
-
-#: core/templates/core/partials/shortcut_list.html:16
-msgid "ils apparaîtront ici."
-msgstr "여기에 표시됩니다."
 
 #: core/templates/core/partials/toasts.html:4
 msgid "Compte anonyme créé. Notez votre numéro :"
@@ -879,8 +938,8 @@ msgid "[À compléter : comment demander une visite d'un bénévole.]"
 msgstr "[추후 작성 예정: 자원봉사자 방문 요청 방법.]"
 
 #: core/templates/core/vous_voyez.html:3
-msgid "vous Voyez : les groupes"
-msgstr "vous Voyez: 그룹"
+msgid "vous Voyez — Voisinternet"
+msgstr "vous Voyez — Voisinternet"
 
 #: core/templates/core/vous_voyez.html:5
 msgid ""
@@ -889,50 +948,59 @@ msgid ""
 "la concerne."
 msgstr "당신이 속한 개인 또는 집단 정체성: 개인, 협회, 기업… 각 정체성은 그에 해당하는 정보로 안내합니다."
 
-#: core/templates/core/vous_voyez.html:10
-msgid "Tout le monde"
-msgstr "전체"
+#: core/templates/core/vous_voyez.html:8
+msgid ""
+"Cette page reste à construire : elle décrira ce que signifie appartenir à "
+"chaque groupe. En attendant, gérez vos groupes depuis"
+msgstr ""
+"이 페이지는 아직 준비 중입니다: 각 그룹에 속한다는 것이 무엇을 의미하는지 설명할 예정입니다. 그동안은 다음에서 그룹을 관리하세요:"
 
-#: core/templates/core/vous_voyez.html:22
-msgid "Partenariat Voisinternet"
-msgstr "Voisinternet 파트너십"
+#: core/templates/core/vous_voyez.html:8
+msgid "je Vois"
+msgstr "je Vois"
 
-#: core/templates/core/vous_voyez.html:23
-msgid "Proposer un partenariat"
-msgstr "파트너십 제안하기"
-
-#: core/views.py:107
+#: core/views.py:115
 msgid "Compte anonyme créé."
 msgstr "익명 계정이 생성되었습니다."
 
-#: core/views.py:114
+#: core/views.py:122
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "이 기기에서 시도 횟수가 너무 많습니다. 15분 후 다시 시도해 주세요."
 
-#: core/views.py:118
+#: core/views.py:126
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "이 번호와 일치하는 계정이 없습니다. 16자리 숫자를 확인해 주세요."
 
-#: core/views.py:121
+#: core/views.py:129
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "계정을 찾았습니다. 바로가기가 복구되었습니다."
 
-#: core/views.py:128
+#: core/views.py:136
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
 msgstr "이 기기에서는 더 이상 계정이 열려 있지 않습니다. 번호를 이용해 다시 찾을 수 있습니다."
 
-#: core/views.py:139
+#: core/views.py:147
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "익명 바로가기가 계정에 연결되었습니다."
 
-#: core/views.py:155
+#: core/views.py:163
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "“%(name)s”이(가) 바로가기에서 제거되었습니다."
 
-#: core/views.py:159
+#: core/views.py:167
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "“%(name)s”이(가) 바로가기에 추가되었습니다."
+
+#: core/views.py:256
+#, python-format
+msgid "« %(name)s » retiré de vos groupes."
+msgstr "“%(name)s”이(가) 그룹에서 제거되었습니다."
+
+#: core/views.py:260
+#, python-format
+msgid "« %(name)s » ajouté à vos groupes."
+msgstr "“%(name)s”이(가) 그룹에 추가되었습니다."

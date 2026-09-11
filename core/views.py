@@ -11,7 +11,7 @@ from django.views.decorators.http import require_POST
 
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
 from .ghost import latest_posts
-from .models import Account, Audience, Donor, GuideBook, Service, Shortcut, format_number
+from .models import Account, Audience, Donor, GuideBook, Membership, Service, Shortcut, format_number
 
 
 def _is_htmx(request):
@@ -68,15 +68,23 @@ def je_vois(request):
     if account:
         shortcuts = account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name")
         shortcut_ids = set(shortcuts.values_list("service_id", flat=True))
+        memberships = account.membership_set.select_related("audience").order_by("position", "audience__order", "audience__name")
+        membership_ids = set(memberships.values_list("audience_id", flat=True))
     else:
         shortcuts = []
         shortcut_ids = set()
+        memberships = []
+        membership_ids = set()
     available_services = Service.objects.filter(active=True).exclude(pk__in=shortcut_ids).order_by("order", "name")
+    available_audiences = Audience.objects.exclude(pk__in=membership_ids).order_by("order", "name")
     return render(request, "core/je_vois.html", {
         "account": account,
         "shortcuts": shortcuts,
         "shortcut_ids": shortcut_ids,
         "available_services": available_services,
+        "memberships": memberships,
+        "membership_ids": membership_ids,
+        "available_audiences": available_audiences,
         "new_number": format_number(new_number) if new_number else None,
         "pending": pending_anonymous_account(request),
     })
@@ -184,7 +192,7 @@ def toggle_shortcut(request, slug):
         messages.success(request, text)
         return redirect("core:je_vois")
     messages.success(request, text)
-    return redirect(_safe_next(request, reverse("core:vous_voyez")))
+    return redirect(_safe_next(request, reverse("core:je_vois")))
 
 
 @require_POST
@@ -228,6 +236,98 @@ def reorder_shortcut(request, slug, direction):
     if _is_htmx(request):
         return render(request, "core/partials/shortcut_list.html", {
             "shortcuts": account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name"),
+        })
+
+    return redirect("core:je_vois")
+
+
+# --- Appartenances
+
+@require_POST
+def toggle_membership(request, slug):
+    audience = get_object_or_404(Audience, slug=slug)
+    had_account = current_account(request) is not None
+    account = current_account(request, create=True)
+
+    membership = Membership.objects.filter(account=account, audience=audience).first()
+    if membership:
+        membership.delete()
+        added = False
+        text = _("« %(name)s » retiré de vos groupes.") % {"name": audience.name}
+    else:
+        Membership.objects.create(account=account, audience=audience, position=account.membership_set.count())
+        added = True
+        text = _("« %(name)s » ajouté à vos groupes.") % {"name": audience.name}
+
+    new_number = None
+    if not had_account and account.is_anonymous_only:
+        new_number = request.session.pop(NEW_NUMBER_KEY, None)
+
+    if _is_htmx(request):
+        account = current_account(request)
+        membership_ids = set(account.membership_set.values_list("audience_id", flat=True)) if account else set()
+        memberships = account.membership_set.select_related("audience").order_by("position", "audience__order", "audience__name") if account else []
+        available_audiences = Audience.objects.exclude(pk__in=membership_ids).order_by("order", "name")
+        return render(request, "core/partials/membership_response.html", {
+            "audience": audience,
+            "added": added,
+            "toast": text,
+            "new_number": format_number(new_number) if new_number else None,
+            "next": request.POST.get("next", ""),
+            "memberships": memberships,
+            "available_audiences": available_audiences,
+            "membership_ids": membership_ids,
+        })
+
+    if new_number:
+        request.session[NEW_NUMBER_KEY] = new_number
+        messages.success(request, text)
+        return redirect("core:je_vois")
+    messages.success(request, text)
+    return redirect(_safe_next(request, reverse("core:je_vois")))
+
+
+@require_POST
+def reorder_membership(request, slug, direction):
+    account = current_account(request)
+    if account is None:
+        if _is_htmx(request):
+            return HttpResponse(status=403)
+        return redirect("core:je_vois")
+
+    audience = get_object_or_404(Audience, slug=slug)
+    membership = account.membership_set.filter(audience=audience).first()
+    if membership is None:
+        if _is_htmx(request):
+            return HttpResponse(status=404)
+        return redirect("core:je_vois")
+
+    direction = direction.lower()
+    if direction not in {"up", "down"}:
+        if _is_htmx(request):
+            return HttpResponse(status=400)
+        return redirect("core:je_vois")
+
+    memberships = list(account.membership_set.select_related("audience").order_by("position", "audience__order", "audience__name"))
+    index = next((i for i, item in enumerate(memberships) if item.pk == membership.pk), None)
+    if index is None:
+        if _is_htmx(request):
+            return HttpResponse(status=404)
+        return redirect("core:je_vois")
+
+    target_index = index - 1 if direction == "up" else index + 1
+    if 0 <= target_index < len(memberships):
+        target = memberships[target_index]
+        current_position = membership.position or index
+        target_position = target.position or target_index
+        membership.position = target_position
+        target.position = current_position
+        membership.save(update_fields=["position"])
+        target.save(update_fields=["position"])
+
+    if _is_htmx(request):
+        return render(request, "core/partials/membership_list.html", {
+            "memberships": account.membership_set.select_related("audience").order_by("position", "audience__order", "audience__name"),
         })
 
     return redirect("core:je_vois")

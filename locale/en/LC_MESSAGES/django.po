@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 22:27+0200\n"
+"POT-Creation-Date: 2026-09-11 22:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,7 +82,7 @@ msgstr "an individual who gives, expecting nothing in return"
 msgid "accompagner l'autre, donner du matériel"
 msgstr "supporting others, donating equipment"
 
-#: core/menu.py:42 core/models.py:167
+#: core/menu.py:42 core/models.py:185
 msgid "Association"
 msgstr "Association"
 
@@ -220,65 +220,69 @@ msgstr "offered"
 msgid "service"
 msgstr "service"
 
-#: core/models.py:96
+#: core/models.py:97
 msgid "compte"
 msgstr "account"
 
-#: core/models.py:100
+#: core/models.py:101
 #, python-format
 msgid "Compte de %(user)s"
 msgstr "Account of %(user)s"
 
-#: core/models.py:101
+#: core/models.py:102
 #, python-format
 msgid "Compte anonyme n° %(pk)s"
 msgstr "Anonymous account no. %(pk)s"
 
-#: core/models.py:133
+#: core/models.py:136 core/models.py:151
 msgid "ordre personnel"
 msgstr "personal order"
 
-#: core/models.py:139
+#: core/models.py:142
 msgid "raccourci"
 msgstr "shortcut"
 
-#: core/models.py:163
+#: core/models.py:157
+msgid "appartenance"
+msgstr "membership"
+
+#: core/models.py:181
 msgid "Particulier"
 msgstr "Individual"
 
-#: core/models.py:164
+#: core/models.py:182
 msgid "Entreprise"
 msgstr "Company"
 
-#: core/models.py:165
+#: core/models.py:183
 msgid "Fondation"
 msgstr "Foundation"
 
-#: core/models.py:166
+#: core/models.py:184
 msgid "Collectivité"
 msgstr "Local authority"
 
-#: core/models.py:169
+#: core/models.py:187
 msgid "nom affiché"
 msgstr "displayed name"
 
-#: core/models.py:170
+#: core/models.py:188
 msgid "type"
 msgstr "type"
 
-#: core/models.py:172
+#: core/models.py:190
 msgid "apparaît publiquement"
 msgstr "appears publicly"
 
-#: core/models.py:173
+#: core/models.py:191
 msgid "Uniquement avec le consentement explicite du donateur (RGPD)."
 msgstr "Only with the donor's explicit consent (GDPR)."
 
-#: core/models.py:175
+#: core/models.py:193
 msgid "soutien depuis"
 msgstr "supporting since"
 
-#: core/models.py:179
+#: core/models.py:197
 msgid "donateur"
 msgstr "donor"
 
@@ -379,7 +383,7 @@ msgstr ""
 "The whole site is conjugated. Pick your person, it takes you to the right "
 "place."
 
-#: core/templates/core/home.html:57 core/templates/core/vous_voyez.html:9
+#: core/templates/core/home.html:57
 msgid "Vous êtes…"
 msgstr "You are…"
 
@@ -657,12 +661,27 @@ msgstr "Available services"
 msgid "Ajoutez ceux qui vous intéressent à votre liste."
 msgstr "Add the ones you're interested in to your list."
 
-#: core/templates/core/je_vois.html:55 core/templates/core/je_vois.html:58
+#: core/templates/core/je_vois.html:54
+msgid "Mes groupes"
+msgstr "My groups"
+
+#: core/templates/core/je_vois.html:63
+msgid "Groupes disponibles"
+msgstr "Available groups"
+
+#: core/templates/core/je_vois.html:64
+msgid ""
+"Un particulier, une association, une entreprise… Adhérez à ceux qui vous "
+"concernent."
+msgstr ""
+"An individual, an association, a business… Join the ones that concern you."
+
+#: core/templates/core/je_vois.html:72 core/templates/core/je_vois.html:75
 #: core/templates/core/partials/account_widget.html:8
 msgid "Se connecter"
 msgstr "Log in"
 
-#: core/templates/core/je_vois.html:56
+#: core/templates/core/je_vois.html:73
 msgid ""
 "Avec votre compte unique des Grands Voisins, le même que pour les autres "
 "outils de l'association."
@@ -670,18 +689,18 @@ msgstr ""
 "With your single Grands Voisins account, the same one used for the "
 "association's other tools."
 
-#: core/templates/core/je_vois.html:60
+#: core/templates/core/je_vois.html:77
 msgid ""
 "La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
 "serveur."
 msgstr ""
 "Login with a Grands Voisins account is not yet configured on this server."
 
-#: core/templates/core/je_vois.html:64
+#: core/templates/core/je_vois.html:81
 msgid "Rester anonyme"
 msgstr "Stay anonymous"
 
-#: core/templates/core/je_vois.html:65
+#: core/templates/core/je_vois.html:82
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
 "pour retrouver vos raccourcis."
@@ -689,15 +708,15 @@ msgstr ""
 "A 16-digit number, with no name or email. You write it down, and it's enough"
 " to recover your shortcuts."
 
-#: core/templates/core/je_vois.html:66
+#: core/templates/core/je_vois.html:83
 msgid "Créer un compte anonyme"
 msgstr "Create an anonymous account"
 
-#: core/templates/core/je_vois.html:68
+#: core/templates/core/je_vois.html:85
 msgid "J'ai déjà un numéro"
 msgstr "I already have a number"
 
-#: core/templates/core/je_vois.html:71
+#: core/templates/core/je_vois.html:88
 msgid "Retrouver"
 msgstr "Recover"
 
@@ -764,6 +783,18 @@ msgstr "Settings"
 msgid "Aucun service ajouté pour l'instant."
 msgstr "No service added yet."
 
+#: core/templates/core/partials/group_list.html:13
+msgid "Partenariat Voisinternet"
+msgstr "Voisinternet partnership"
+
+#: core/templates/core/partials/group_list.html:14
+msgid "Proposer un partenariat"
+msgstr "Propose a partnership"
+
+#: core/templates/core/partials/group_list.html:20
+msgid "Aucun groupe pour l'instant"
+msgstr "No group yet"
+
 #: core/templates/core/partials/lang_switcher.html:5
 msgid "Langue"
 msgstr "Language"
@@ -771,6 +802,49 @@ msgstr "Language"
 #: core/templates/core/partials/lang_switcher.html:13
 msgid "Changer"
 msgstr "Change"
+
+#: core/templates/core/partials/membership_button.html:3
+#, python-format
+msgid "Quitter %(name)s"
+msgstr "Leave %(name)s"
+
+#: core/templates/core/partials/membership_button.html:3
+#, python-format
+msgid "Adhérer à %(name)s"
+msgstr "Join %(name)s"
+
+#: core/templates/core/partials/membership_button.html:3
+msgid "Membre"
+msgstr "Member"
+
+#: core/templates/core/partials/membership_button.html:3
+msgid "Adhérer"
+msgstr "Join"
+
+#: core/templates/core/partials/membership_list.html:8
+#: core/templates/core/partials/shortcut_list.html:8
+#, python-format
+msgid "Monter %(name)s"
+msgstr "Move %(name)s up"
+
+#: core/templates/core/partials/membership_list.html:9
+#: core/templates/core/partials/shortcut_list.html:9
+#, python-format
+msgid "Descendre %(name)s"
+msgstr "Move %(name)s down"
+
+#: core/templates/core/partials/membership_list.html:16
+msgid "Aucune appartenance pour l'instant."
+msgstr "No membership yet."
+
+#: core/templates/core/partials/membership_list.html:16
+msgid "Choisissez vos groupes"
+msgstr "Choose your groups"
+
+#: core/templates/core/partials/membership_list.html:16
+#: core/templates/core/partials/shortcut_list.html:16
+msgid "ils apparaîtront ici."
+msgstr "they will appear here."
 
 #: core/templates/core/partials/scene.html:1
 msgid ""
@@ -840,23 +914,9 @@ msgstr "Added"
 msgid "Ajouter"
 msgstr "Add"
 
-#: core/templates/core/partials/shortcut_list.html:8
-#, python-format
-msgid "Monter %(name)s"
-msgstr "Move %(name)s up"
-
-#: core/templates/core/partials/shortcut_list.html:9
-#, python-format
-msgid "Descendre %(name)s"
-msgstr "Move %(name)s down"
-
 #: core/templates/core/partials/shortcut_list.html:16
 msgid "Aucun raccourci pour l'instant."
 msgstr "No shortcut yet."
-
-#: core/templates/core/partials/shortcut_list.html:16
-msgid "ils apparaîtront ici."
-msgstr "they will appear here."
 
 #: core/templates/core/partials/toasts.html:4
 msgid "Compte anonyme créé. Notez votre numéro :"
@@ -915,8 +975,8 @@ msgid "[À compléter : comment demander une visite d'un bénévole.]"
 msgstr "[To be completed: how to request a volunteer visit.]"
 
 #: core/templates/core/vous_voyez.html:3
-msgid "vous Voyez : les groupes"
-msgstr "vous Voyez: the groups"
+msgid "vous Voyez — Voisinternet"
+msgstr "vous Voyez — Voisinternet"
 
 #: core/templates/core/vous_voyez.html:5
 msgid ""
@@ -927,35 +987,35 @@ msgstr ""
 "The identities, individual or collective, that you belong to: an individual,"
 " an association, a business… Each one gives access to what concerns it."
 
-#: core/templates/core/vous_voyez.html:10
-msgid "Tout le monde"
-msgstr "Everyone"
+#: core/templates/core/vous_voyez.html:8
+msgid ""
+"Cette page reste à construire : elle décrira ce que signifie appartenir à "
+"chaque groupe. En attendant, gérez vos groupes depuis"
+msgstr ""
+"This page is still being built: it will describe what belonging to each "
+"group means. In the meantime, manage your groups from"
 
-#: core/templates/core/vous_voyez.html:22
-msgid "Partenariat Voisinternet"
-msgstr "Voisinternet partnership"
+#: core/templates/core/vous_voyez.html:8
+msgid "je Vois"
+msgstr "je Vois"
 
-#: core/templates/core/vous_voyez.html:23
-msgid "Proposer un partenariat"
-msgstr "Propose a partnership"
-
-#: core/views.py:107
+#: core/views.py:115
 msgid "Compte anonyme créé."
 msgstr "Anonymous account created."
 
-#: core/views.py:114
+#: core/views.py:122
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "Too many attempts from this device. Try again in fifteen minutes."
 
-#: core/views.py:118
+#: core/views.py:126
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "No account matches this number. Check the 16 digits."
 
-#: core/views.py:121
+#: core/views.py:129
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "Account found. Your shortcuts are back."
 
-#: core/views.py:128
+#: core/views.py:136
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
@@ -963,16 +1023,26 @@ msgstr ""
 "This account is no longer open on this device. Your number lets you find it "
 "again."
 
-#: core/views.py:139
+#: core/views.py:147
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "Your anonymous shortcuts have joined your account."
 
-#: core/views.py:155
+#: core/views.py:163
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "“%(name)s” removed from your shortcuts."
 
-#: core/views.py:159
+#: core/views.py:167
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "“%(name)s” added to your shortcuts."
+
+#: core/views.py:256
+#, python-format
+msgid "« %(name)s » retiré de vos groupes."
+msgstr "“%(name)s” removed from your groups."
+
+#: core/views.py:260
+#, python-format
+msgid "« %(name)s » ajouté à vos groupes."
+msgstr "“%(name)s” added to your groups."

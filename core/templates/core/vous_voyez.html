@@ -1,36 +1,10 @@
 {% extends "core/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "vous Voyez : les groupes" %}{% if audience %} — {{ audience.name }}{% endif %} — Voisinternet{% endblock %}
+{% block title %}{% trans "vous Voyez — Voisinternet" %}{% endblock %}
 {% block content %}
 {% trans "Les identités, individuelles ou collectives, auxquelles vous adhérez : un particulier, une association, une entreprise… Chacune donne accès à ce qui la concerne." as page_lead %}
 {% include "core/partials/page_head.html" with item=conj.vous lead=page_lead %}
 <div class="wrap page">
-  {% if audiences %}
-  <nav class="chips" aria-label="{% trans 'Vous êtes…' %}">
-    <a href="{% url 'core:vous_voyez' %}"{% if not audience %} aria-current="page"{% endif %}>{% trans "Tout le monde" %}</a>
-    {% for a in audiences %}<a href="{% url 'core:vous_voyez_pour' a.slug %}"{% if audience == a %} aria-current="page"{% endif %}>{{ a.name }}</a>{% endfor %}
-  </nav>
-  {% endif %}
-
-  {% if audience %}
-  <section class="card aud-intro" aria-labelledby="aud-title">
-    <h2 id="aud-title">{{ audience.name }}</h2>
-    {% if audience.who %}<p class="muted">{{ audience.who }}</p>{% endif %}
-    <p>{{ audience.pitch }}</p>
-    {% if audience.note %}<p>{{ audience.note|linebreaksbr }}</p>{% endif %}
-    {% if audience.partnership %}
-    {% trans "Partenariat Voisinternet" as partnership_subject %}
-    <p><a class="btn btn-sun" href="mailto:{{ CONTACT_EMAIL }}?subject={{ partnership_subject|urlencode }}">{% trans "Proposer un partenariat" %}</a></p>
-    {% endif %}
-  </section>
-  {% else %}
-  <ul class="aud">
-    {% for a in audiences %}
-      <li>
-        <a href="{% url 'core:vous_voyez_pour' a.slug %}"><strong>{{ a.name }}</strong><span>{{ a.pitch }}</span></a>
-      </li>
-    {% endfor %}
-  </ul>
-  {% endif %}
+  <p class="intro">{% trans "Cette page reste à construire : elle décrira ce que signifie appartenir à chaque groupe. En attendant, gérez vos groupes depuis" %} <a href="{% url 'core:je_vois' %}#available-groups">{% trans "je Vois" %}</a>.</p>
 </div>
 {% endblock %}

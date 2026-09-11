@@ -1,0 +1,22 @@
+{% load i18n %}<ul class="svc">
+  {% for audience in audiences %}
+  <li>
+    <span class="led" aria-hidden="true"></span>
+    <div>
+      <h3>{{ audience.name }}</h3>
+      <p>{{ audience.pitch }}</p>
+      {% if details and audience.who %}
+      <p class="muted">{{ audience.who }}</p>
+      {% endif %}
+    </div>
+    {% if audience.partnership %}
+    {% trans "Partenariat Voisinternet" as partnership_subject %}
+    <a class="btn btn-line" href="mailto:{{ CONTACT_EMAIL }}?subject={{ partnership_subject|urlencode }}">{% trans "Proposer un partenariat" %}</a>
+    {% else %}
+    {% if audience.pk in membership_ids %}{% include "core/partials/membership_button.html" with added=True target_id="#available-groups" swap="innerHTML" %}{% else %}{% include "core/partials/membership_button.html" with added=False target_id="#available-groups" swap="innerHTML" %}{% endif %}
+    {% endif %}
+  </li>
+  {% empty %}
+  <li class="empty"><div><h3>{% trans "Aucun groupe pour l'instant" %}</h3></div></li>
+  {% endfor %}
+</ul>

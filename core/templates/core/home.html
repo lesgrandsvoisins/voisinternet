@@ -58,7 +58,7 @@
         <ul class="aud">
           {% for a in audiences %}
             <li>
-              <a href="{% url 'core:vous_voyez_pour' a.slug %}"><strong>{{ a.name }}</strong><span>{{ a.pitch }}</span></a>
+              <a href="{% url 'core:je_vois' %}#available-groups"><strong>{{ a.name }}</strong><span>{{ a.pitch }}</span></a>
             </li>
           {% endfor %}
         </ul>

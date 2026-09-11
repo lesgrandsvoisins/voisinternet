@@ -1,0 +1,17 @@
+{% load i18n %}{% if memberships %}
+<ul class="svc">
+  {% for membership in memberships %}{% with audience=membership.audience %}
+  <li>
+    <span class="led" aria-hidden="true"></span>
+    <div><h3>{{ audience.name }}</h3><p>{{ audience.pitch }}</p></div>
+    <div class="shortcut-tools">
+      <form method="post" action="{% url 'core:reorder_membership' audience.slug 'up' %}" hx-post="{% url 'core:reorder_membership' audience.slug 'up' %}" hx-target="#memberships-list" hx-swap="innerHTML">{% csrf_token %}<button class="move-btn" type="submit" aria-label="{% blocktrans with name=audience.name %}Monter {{ name }}{% endblocktrans %}" {% if forloop.first %}disabled{% endif %}>↑</button></form>
+      <form method="post" action="{% url 'core:reorder_membership' audience.slug 'down' %}" hx-post="{% url 'core:reorder_membership' audience.slug 'down' %}" hx-target="#memberships-list" hx-swap="innerHTML">{% csrf_token %}<button class="move-btn" type="submit" aria-label="{% blocktrans with name=audience.name %}Descendre {{ name }}{% endblocktrans %}" {% if forloop.last %}disabled{% endif %}>↓</button></form>
+      {% include "core/partials/membership_button.html" with added=True target_id="#memberships-list" swap="innerHTML" %}
+    </div>
+  </li>
+  {% endwith %}{% endfor %}
+</ul>
+{% else %}
+<p class="intro">{% trans "Aucune appartenance pour l'instant." %} <a href="{% url 'core:je_vois' %}#available-groups">{% trans "Choisissez vos groupes" %}</a>, {% trans "ils apparaîtront ici." %}</p>
+{% endif %}

@@ -1,0 +1,9 @@
+{% include "core/partials/membership_button.html" %}
+<div id="memberships-list" hx-swap-oob="true">
+  {% include "core/partials/membership_list.html" %}
+</div>
+<div id="available-groups" hx-swap-oob="true">
+  {% include "core/partials/group_list.html" with audiences=available_audiences details=True %}
+</div>
+{% include "core/partials/account_widget.html" with oob=True %}
+{% include "core/partials/toasts.html" with oob=True %}

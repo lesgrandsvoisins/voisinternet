@@ -1,7 +1,7 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
-from .models import Account, Audience, Donor, GuideBook, Service, Shortcut
+from .models import Account, Audience, Donor, GuideBook, Membership, Service, Shortcut
 
 admin.site.site_header = "Voisinternet"
 admin.site.site_title = "Voisinternet"
@@ -13,6 +13,7 @@ class AudienceAdmin(TranslationAdmin):
     list_display = ["name", "who", "partnership", "order"]
     list_editable = ["order"]
     prepopulated_fields = {"slug": ["name"]}
+    search_fields = ["name"]
 
 
 @admin.register(Service)
@@ -30,16 +31,26 @@ class ShortcutInline(admin.TabularInline):
     autocomplete_fields = ["service"]
 
 
+class MembershipInline(admin.TabularInline):
+    model = Membership
+    extra = 0
+    autocomplete_fields = ["audience"]
+
+
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ["__str__", "user", "created", "last_seen", "shortcut_count"]
+    list_display = ["__str__", "user", "created", "last_seen", "shortcut_count", "membership_count"]
     list_filter = [("user", admin.EmptyFieldListFilter)]
     readonly_fields = ["created", "last_seen"]
-    inlines = [ShortcutInline]
+    inlines = [ShortcutInline, MembershipInline]
 
     @admin.display(description="raccourcis")
     def shortcut_count(self, obj):
         return obj.shortcut_set.count()
+
+    @admin.display(description="appartenances")
+    def membership_count(self, obj):
+        return obj.membership_set.count()
 
 
 @admin.register(GuideBook)

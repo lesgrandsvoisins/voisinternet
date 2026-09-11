@@ -153,6 +153,21 @@
   }
  },
  {
+  "model": "core.service",
+  "pk": 6,
+  "fields": {
+   "name": "www.gv.je",
+   "slug": "www-gv-je",
+   "summary": "Un site public et un portail simple, à votre nom de domaine.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://www.gv.je",
+   "featured": false,
+   "active": true,
+   "order": 60
+  }
+ },
+ {
   "model": "core.guidebook",
   "pk": 1,
   "fields": {

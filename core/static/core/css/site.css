@@ -49,9 +49,22 @@ a{color:inherit}
 .menu-btn,.account{font:inherit;color:var(--ink);background:none;border:1px solid var(--line);border-radius:8px;cursor:pointer;padding:.45rem .8rem;display:flex;align-items:center;gap:.5rem;text-decoration:none}
 .menu-btn:hover,.account:hover{background:var(--hover)}
 .menu[open] > .menu-btn{background:var(--hover)}
-.account{flex-direction:column;align-items:flex-start;gap:0;line-height:1.2;padding:.35rem .85rem;position:relative}
+.account{flex-direction:column;align-items:flex-start;gap:0;line-height:1.2;padding:.35rem .85rem;position:relative;list-style:none;cursor:pointer}
 .account b{font-family:var(--serif);font-size:1rem}
 .account small{color:var(--ink-soft);font-size:.8rem}
+.account-panel{position:relative}
+.account-panel > summary::-webkit-details-marker{display:none}
+.account-menu{position:absolute;top:100%;right:0;min-width:17rem;background:var(--paper);border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 30px rgba(0,0,0,.12);padding:1rem;margin-top:.55rem;z-index:30}
+.account-actions{display:grid;gap:.55rem;margin-bottom:1rem}
+.account-action{display:block;text-decoration:none;padding:.6rem .8rem;border-radius:8px;background:var(--sun);border:1px solid var(--sun);color:var(--ink);font-weight:600;text-align:center}
+.account-action:hover{filter:brightness(1.05)}
+.account-action-secondary{background:var(--paper);border-color:var(--line)}
+.account-shortcuts{border-top:1px solid var(--line);padding-top:.8rem}
+.account-subhead{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 .5rem}
+.account-shortcuts ul{list-style:none;margin:0;padding:0;display:grid;gap:.35rem}
+.account-shortcuts a,.account-shortcuts span{display:block;text-decoration:none;padding:.42rem .5rem;border-radius:6px;color:var(--ink)}
+.account-shortcuts a:hover{background:var(--hover)}
+.account-empty{margin:0;color:var(--ink-soft)}
 .badge{position:absolute;top:-.45rem;right:-.45rem;background:var(--led);color:#fff;font-size:.72rem;font-weight:700;border-radius:999px;min-width:1.35rem;height:1.35rem;display:flex;align-items:center;justify-content:center;padding:0 .3rem}
 .bars{width:18px;height:12px;position:relative}
 .bars::before,.bars::after,.bars i{content:"";position:absolute;left:0;right:0;height:2px;background:currentColor;border-radius:2px}

@@ -28,6 +28,13 @@ class PagesTests(Base):
         response = self.client.get(reverse("core:home"))
         self.assertContains(response, "Je vois : se connecter")
 
+    def test_header_widget_lists_keycloak_actions_and_shortcuts(self):
+        self.client.post(reverse("core:toggle_shortcut", args=["courriel"]))
+        response = self.client.get(reverse("core:home"))
+        self.assertContains(response, "Se connecter")
+        self.assertContains(response, "Créer un compte")
+        self.assertContains(response, self.service.name)
+
     def test_current_page_is_marked(self):
         response = self.client.get(reverse("core:vous_voyez"))
         self.assertContains(response, 'aria-current="page"')

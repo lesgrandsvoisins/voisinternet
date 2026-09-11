@@ -1,3 +1,28 @@
-<a class="account" id="account" href="{% url 'core:je_vois' %}" aria-label="Je vois : {{ account_sub }}"{% if oob %} hx-swap-oob="true"{% endif %}>
-  <b>je <span class="V">V</span>ois</b><small>{{ account_sub }}</small>{% if account_count %}<span class="badge" aria-hidden="true">{{ account_count }}</span>{% endif %}
-</a>
+<details class="account-panel"{% if oob %} hx-swap-oob="true"{% endif %}>
+  <summary class="account" id="account" aria-label="Je vois : {{ account_sub }}">
+    <b>je <span class="V">V</span>ois</b><small>{{ account_sub }}</small>{% if account_count %}<span class="badge" aria-hidden="true">{{ account_count }}</span>{% endif %}
+  </summary>
+  <div class="account-menu" role="menu" aria-label="Options de je Vois">
+    {% if not user.is_authenticated and keycloak_login_url %}
+    <div class="account-actions">
+      <a class="account-action" href="{{ keycloak_login_url }}">Se connecter</a>
+      {% if keycloak_register_url %}<a class="account-action account-action-secondary" href="{{ keycloak_register_url }}">Créer un compte</a>{% endif %}
+    </div>
+    {% endif %}
+
+    {% if account_shortcuts %}
+    <div class="account-shortcuts">
+      <p class="account-subhead">Mes raccourcis</p>
+      <ul>
+        {% for shortcut in account_shortcuts %}{% with service=shortcut.service %}
+        <li>
+          {% if service.url %}<a href="{{ service.url }}">{{ service.name }}</a>{% else %}<span>{{ service.name }}</span>{% endif %}
+        </li>
+        {% endwith %}{% endfor %}
+      </ul>
+    </div>
+    {% elif account and not user.is_authenticated %}
+    <p class="account-empty">Aucun service ajouté pour l'instant.</p>
+    {% endif %}
+  </div>
+</details>

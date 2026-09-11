@@ -247,8 +247,8 @@ a {
   position: absolute;
   top: 100%;
   inset-inline-end: 0;
-  min-width: 17rem;
-  max-width: min(50rem, calc(100vw - 2.5rem));
+  min-width: 34rem;
+  max-width: min(34rem, calc(100vw - 2.5rem));
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -304,8 +304,7 @@ a {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-  max-width: 48rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: .35rem;
   max-height: 14rem;
   overflow-y: auto

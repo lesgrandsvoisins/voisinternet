@@ -45,8 +45,8 @@ ENTRIES = [
           _("un particulier, une association, une entreprise…"), "core:vous_voyez", "pluriel"),
     Entry("ils", "Pôles", "Pôles d'Activités", _("Activités"), _("dons et partenaires qui nous ont aidés à naître"),
           _("qui nous soutient — dons et partenaires — et comment nous soutenir"), "core:ils_et_elles_voient", "pluriel"),
-    Entry("grandzine", "GrandZine", "Notre blog GrandZine", _("Blog"), _("le blog"),
+    Entry("grandzine", "Notre blog GrandZine", "GrandZine", _("Blog"), _("le blog"),
           _("les nouvelles et les tribunes des adhérents"), "setting:BLOG_URL", "lire"),
-    Entry("wiki", "Wiki", "Notre wiki avec des guides d'usages", _("Guide"), _("le guide"),
+    Entry("wiki", "Notre wiki avec des guides d'usages", "Wiki", _("Guide"), _("le guide"),
           _("pas à pas, du premier serveur aux sauvegardes"), "setting:GUIDE_URL", "lire"),
 ]

@@ -106,6 +106,27 @@ class AnonymousAccountTests(Base):
         self.assertEqual(first.position, 20)
         self.assertEqual(second.position, 10)
 
+    def test_htmx_reorder_returns_partial_without_full_reload(self):
+        from django.contrib.auth import get_user_model
+
+        user = get_user_model().objects.create_user("user")
+        account = Account.objects.create(user=user)
+        service_two = Service.objects.create(name="Agenda", slug="agenda", summary="Agenda personnel.")
+        Shortcut.objects.create(account=account, service=self.service, position=10)
+        Shortcut.objects.create(account=account, service=service_two, position=20)
+
+        self.client.force_login(user)
+        response = self.client.post(
+            reverse("core:reorder_shortcut", args=[self.service.slug, "down"]),
+            HTTP_HX_REQUEST="true",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'hx-target="#shortcuts-list"')
+        self.assertContains(response, "Monter")
+        self.assertContains(response, "Descendre")
+        self.assertNotContains(response, "302")
+
     def test_htmx_toggle_returns_partial_with_out_of_band_updates(self):
         response = self.client.post(reverse("core:toggle_shortcut", args=["courriel"]), HTTP_HX_REQUEST="true")
         self.assertEqual(response.status_code, 200)

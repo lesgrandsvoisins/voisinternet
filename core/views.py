@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.db.models import Q
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
@@ -183,20 +184,28 @@ def toggle_shortcut(request, slug):
 def reorder_shortcut(request, slug, direction):
     account = current_account(request)
     if account is None:
+        if _is_htmx(request):
+            return HttpResponse(status=403)
         return redirect("core:je_vois")
 
     service = get_object_or_404(Service, slug=slug, active=True)
     shortcut = account.shortcut_set.filter(service=service).first()
     if shortcut is None:
+        if _is_htmx(request):
+            return HttpResponse(status=404)
         return redirect("core:je_vois")
 
     direction = direction.lower()
     if direction not in {"up", "down"}:
+        if _is_htmx(request):
+            return HttpResponse(status=400)
         return redirect("core:je_vois")
 
     shortcuts = list(account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name"))
     index = next((i for i, item in enumerate(shortcuts) if item.pk == shortcut.pk), None)
     if index is None:
+        if _is_htmx(request):
+            return HttpResponse(status=404)
         return redirect("core:je_vois")
 
     target_index = index - 1 if direction == "up" else index + 1
@@ -208,5 +217,10 @@ def reorder_shortcut(request, slug, direction):
         target.position = current_position
         shortcut.save(update_fields=["position"])
         target.save(update_fields=["position"])
+
+    if _is_htmx(request):
+        return render(request, "core/partials/shortcut_list.html", {
+            "shortcuts": account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name"),
+        })
 
     return redirect("core:je_vois")

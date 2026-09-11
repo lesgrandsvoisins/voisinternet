@@ -21,7 +21,7 @@ rollout:
 	make migrate
 	make fixtures
 	make collectstatic
-	rsync -a ./staticiles/ /var/www/voisinger-django/static
+	rsync -a staticfiles/ /var/www/voisinter-django/static
 
 venv: ## Crée l'environnement virtuel .venv
 	python3 -m venv .venv
@@ -44,7 +44,7 @@ superuser: ## Crée un compte administrateur
 	$(LOADENV) $(PYTHON) manage.py createsuperuser
 
 run: ## Lance le serveur de développement
-	$(LOADENV) $(PYTHON) manage.py runserver
+	$(LOADENV) $(PYTHON) manage.py runserver 192.168.123.2:8091
 
 test: ## Lance les tests
 	$(LOADENV) $(PYTHON) manage.py test core

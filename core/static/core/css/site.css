@@ -130,7 +130,7 @@ a {
   color: var(--ink-soft)
 }
 
-/* Logotype : Vois · inter · net */
+/* Logotype : VoisInternet */
 .word {
   font-family: var(--serif);
   font-size: 1.45rem;
@@ -139,13 +139,8 @@ a {
   white-space: nowrap
 }
 
-.w-inter {
-  color: var(--wm-inter);
-  font-weight: 400
-}
-
-.w-dot {
-  color: var(--sun)
+.w-vois {
+  font-style: italic
 }
 
 /* En-tête */
@@ -825,6 +820,14 @@ section.block {
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--led) 20%, transparent)
 }
 
+.svc-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--paper)
+}
+
 .svc h3 {
   font-size: 1.05rem;
   margin: 0
@@ -1279,10 +1282,6 @@ blockquote p {
   gap: 2.5rem
 }
 
-.foot .w-inter {
-  color: var(--sun)
-}
-
 .foot p {
   color: color-mix(in srgb, var(--sky) 75%, transparent);
   margin: .5rem 0
@@ -1435,6 +1434,15 @@ blockquote p {
   .svc .shortcut {
     grid-column: 2;
     justify-self: start
+  }
+
+  .account-menu {
+    min-width: 0;
+    max-width: 90vw
+  }
+
+  .account-shortcuts ul {
+    grid-template-columns: 1fr
   }
 
   .word {

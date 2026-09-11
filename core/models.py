@@ -51,6 +51,21 @@ class Audience(models.Model):
         return self.name
 
 
+class ServiceCategory(models.Model):
+    """Regroupement des services par nature (compte, communication, fichiers…), à la manière de www.gv.je."""
+    name = models.CharField(_("nom"), max_length=80)
+    slug = models.SlugField(unique=True)
+    order = models.PositiveSmallIntegerField(_("ordre"), default=0)
+
+    class Meta:
+        ordering = ["order", "name"]
+        verbose_name = _("catégorie de service")
+        verbose_name_plural = _("catégories de service")
+
+    def __str__(self):
+        return self.name
+
+
 class Service(models.Model):
     name = models.CharField(_("nom"), max_length=80)
     slug = models.SlugField(unique=True)
@@ -62,6 +77,11 @@ class Service(models.Model):
         help_text=_("Ce qui reste anonyme, et ce que l'association doit conserver en tant qu'hébergeur."),
     )
     url = models.URLField(_("adresse du service"), blank=True)
+    icon = models.ImageField(_("icône"), upload_to="services/icones/", blank=True)
+    category = models.ForeignKey(
+        ServiceCategory, null=True, blank=True, on_delete=models.SET_NULL,
+        related_name="services", verbose_name=_("catégorie"),
+    )
     audiences = models.ManyToManyField(
         Audience, blank=True, related_name="services", verbose_name=_("publics"),
         help_text=_("Laisser vide si le service s'adresse à tout le monde."),

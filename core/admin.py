@@ -1,7 +1,7 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
-from .models import Account, Audience, Donor, GuideBook, Membership, Service, Shortcut
+from .models import Account, Audience, Donor, GuideBook, Membership, Service, ServiceCategory, Shortcut
 
 admin.site.site_header = "Voisinternet"
 admin.site.site_title = "Voisinternet"
@@ -16,13 +16,23 @@ class AudienceAdmin(TranslationAdmin):
     search_fields = ["name"]
 
 
+@admin.register(ServiceCategory)
+class ServiceCategoryAdmin(admin.ModelAdmin):
+    list_display = ["name", "order"]
+    list_editable = ["order"]
+    prepopulated_fields = {"slug": ["name"]}
+    search_fields = ["name"]
+
+
 @admin.register(Service)
 class ServiceAdmin(TranslationAdmin):
-    list_display = ["name", "summary", "featured", "active", "order"]
+    list_display = ["name", "summary", "category", "featured", "active", "order"]
+    list_filter = ["category"]
     filter_horizontal = ["audiences"]
     list_editable = ["featured", "active", "order"]
     prepopulated_fields = {"slug": ["name"]}
     search_fields = ["name", "summary"]
+    autocomplete_fields = ["category"]
 
 
 class ShortcutInline(admin.TabularInline):

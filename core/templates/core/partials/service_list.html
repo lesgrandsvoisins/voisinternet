@@ -1,7 +1,7 @@
 {% load i18n %}<ul class="svc">
   {% for service in services %}
   <li{% if service.featured %} class="feat"{% endif %}>
-    <span class="led" aria-hidden="true"></span>
+    {% if service.icon %}<img class="svc-icon" src="{{ service.icon.url }}" alt="">{% else %}<span class="led" aria-hidden="true"></span>{% endif %}
     <div>
       <h3>{{ service.name }}</h3>
       <p>{{ service.summary }}</p>

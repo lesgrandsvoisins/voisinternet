@@ -160,6 +160,10 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATIC_ROOT = env("DJANGO_STATIC_ROOT", str(BASE_DIR / "staticfiles"))
 
+# --- Fichiers envoyés depuis l'administration (icônes de service).
+MEDIA_URL = "media/"
+MEDIA_ROOT = env("DJANGO_MEDIA_ROOT", str(BASE_DIR / "var" / "media"))
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # --- Cookies : la session (compte, raccourcis) et le jeton CSRF, tous deux strictement nécessaires.

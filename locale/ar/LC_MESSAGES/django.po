@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 00:17+0200\n"
+"POT-Creation-Date: 2026-09-12 00:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,117 +66,101 @@ msgstr "فرد واحد، حساب واحد، وما أختار مشاركته"
 msgid "se connecter, créer un compte, retrouver mes raccourcis"
 msgstr "تسجيل الدخول، إنشاء حساب، استعادة اختصاراتي"
 
-#: core/menu.py:46
-msgid "programme"
-msgstr "الجدول"
-
-#: core/menu.py:47
-msgid "& Agenda"
-msgstr "و الأجندة"
-
-#: core/menu.py:48
-msgid "Agenda"
-msgstr "الأجندة"
-
-#: core/menu.py:49
-msgid "un individu qui reçoit de l'aide, entre voisins"
-msgstr "فرد يتلقى المساعدة، بين الجيران"
-
-#: core/menu.py:50
-msgid "poser une question, se faire accompagner"
-msgstr "طرح سؤال، الحصول على مرافقة"
-
-#: core/menu.py:56
-msgid "dons"
-msgstr "التبرعات"
-
-#: core/menu.py:57
-msgid "& Bénévolat"
-msgstr "والتطوع"
-
-#: core/menu.py:58
-msgid "Bénévolat et dons"
-msgstr "التطوع والتبرعات"
-
-#: core/menu.py:59
-msgid "un individu qui donne, sans rien attendre en retour"
-msgstr "فرد يعطي، دون انتظار مقابل"
-
-#: core/menu.py:60
-msgid "accompagner l'autre, donner du matériel"
-msgstr "مرافقة الآخرين، التبرع بالمعدات"
-
-#: core/menu.py:66
-msgid "Grands"
-msgstr "Grands"
-
-#: core/menu.py:67
-msgid "Voisins"
-msgstr "Voisins"
-
-#: core/menu.py:68
-msgid "Grands Voisins"
-msgstr "Grands Voisins"
-
-#: core/menu.py:69
-msgid "une conscience collective, l'association coopérative"
-msgstr "وعي جماعي، الجمعية التعاونية"
-
-#: core/menu.py:70
-msgid "statuts, gouvernance, comptes : tout est public"
-msgstr "النظام الأساسي، الحوكمة، الحسابات: كل شيء علني"
-
-#: core/menu.py:76 core/menu.py:78
+#: core/menu.py:46 core/menu.py:48
 msgid "Annuaire"
 msgstr "دليل"
 
-#: core/menu.py:77
+#: core/menu.py:47
 msgid "des Voisins"
 msgstr "من الجيران"
 
-#: core/menu.py:79
+#: core/menu.py:49
 msgid "qui fait partie de la communauté, et comment les joindre"
 msgstr "من ينتمي إلى المجتمع، وكيفية التواصل معه"
 
-#: core/menu.py:80
+#: core/menu.py:50
 msgid "un particulier, une association, une entreprise…"
 msgstr "فرد، جمعية، شركة…"
 
-#: core/menu.py:86
-msgid "Civ"
-msgstr "الالتزام"
+#: core/menu.py:56
+msgid "programme"
+msgstr "الجدول"
 
-#: core/menu.py:87
-msgid "isme"
-msgstr "المدني"
+#: core/menu.py:57
+msgid "& Agenda"
+msgstr "و الأجندة"
 
-#: core/menu.py:88 core/menu.py:89
+#: core/menu.py:58
+msgid "Agenda"
+msgstr "الأجندة"
+
+#: core/menu.py:59
+msgid "un individu qui reçoit de l'aide, entre voisins"
+msgstr "فرد يتلقى المساعدة، بين الجيران"
+
+#: core/menu.py:60
+msgid "poser une question, se faire accompagner"
+msgstr "طرح سؤال، الحصول على مرافقة"
+
+#: core/menu.py:66 core/menu.py:76 core/menu.py:86
+msgid "pôle"
+msgstr "محور"
+
+#: core/menu.py:67 core/menu.py:68 core/menu.py:69
 msgid "Civisme"
 msgstr "الالتزام المدني"
 
-#: core/menu.py:90 core/menu.py:100 core/menu.py:110
+#: core/menu.py:70 core/menu.py:80 core/menu.py:90
 msgid "qui nous soutient — dons et partenaires — et comment nous soutenir"
 msgstr "من يدعمنا — تبرعات وشركاء — وكيف يمكنك دعمنا"
 
-#: core/menu.py:96 core/menu.py:98 core/menu.py:99
-msgid "Arts"
-msgstr "الفنون"
+#: core/menu.py:77 core/menu.py:78 core/menu.py:79
+msgid "Arts Plastiques"
+msgstr "الفنون التشكيلية"
 
-#: core/menu.py:97
-msgid "Plastiques"
-msgstr "التشكيلية"
-
-#: core/menu.py:106
-msgid "Num"
-msgstr "المهارات"
-
-#: core/menu.py:107
-msgid "érique"
-msgstr "الرقمية"
-
-#: core/menu.py:108 core/menu.py:109
+#: core/menu.py:87 core/menu.py:88 core/menu.py:89
 msgid "Numérique"
 msgstr "الرقمي"
+
+#: core/menu.py:96
+msgid "dons"
+msgstr "التبرعات"
+
+#: core/menu.py:97
+msgid "& Bénévolat"
+msgstr "والتطوع"
+
+#: core/menu.py:98
+msgid "Bénévolat et dons"
+msgstr "التطوع والتبرعات"
+
+#: core/menu.py:99
+msgid "un individu qui donne, sans rien attendre en retour"
+msgstr "فرد يعطي، دون انتظار مقابل"
+
+#: core/menu.py:100
+msgid "accompagner l'autre, donner du matériel"
+msgstr "مرافقة الآخرين، التبرع بالمعدات"
+
+#: core/menu.py:106
+msgid "Grands"
+msgstr "Grands"
+
+#: core/menu.py:107
+msgid "Voisins"
+msgstr "Voisins"
+
+#: core/menu.py:108
+msgid "Grands Voisins"
+msgstr "Grands Voisins"
+
+#: core/menu.py:109
+msgid "une conscience collective, l'association coopérative"
+msgstr "وعي جماعي، الجمعية التعاونية"
+
+#: core/menu.py:110
+msgid "statuts, gouvernance, comptes : tout est public"
+msgstr "النظام الأساسي، الحوكمة، الحسابات: كل شيء علني"
 
 #: core/menu.py:116
 msgid "blog"
@@ -500,25 +484,169 @@ msgstr "يدعم منذ"
 msgid "donateur"
 msgstr "متبرع"
 
+#: core/templates/core/account.html:3
+msgid "je Vois — Voisinternet"
+msgstr "je Vois — Voisinternet"
+
+#: core/templates/core/account.html:10
+msgid "Votre numéro de compte"
+msgstr "رقم حسابك"
+
+#: core/templates/core/account.html:12
+msgid ""
+"Notez-le maintenant. Nous n'en gardons qu'une empreinte : nous ne pourrons "
+"jamais vous le redonner. Il suffit, seul, pour retrouver vos raccourcis sur "
+"un autre appareil."
+msgstr ""
+"دوّنه الآن. نحتفظ ببصمته فقط: لن نتمكن أبدًا من إعادته إليك. يكفي وحده "
+"لاستعادة اختصاراتك على جهاز آخر."
+
+#: core/templates/core/account.html:18
+msgid "Un compte anonyme est ouvert sur cet appareil"
+msgstr "هناك حساب مجهول مفتوح على هذا الجهاز"
+
+#: core/templates/core/account.html:19
+msgid ""
+"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
+" ensuite supprimé."
+msgstr "هل ترغب في ربط اختصاراته بحسابك؟ سيتم حذف الحساب المجهول بعد ذلك."
+
+#: core/templates/core/account.html:20
+msgid "Rattacher mes raccourcis"
+msgstr "ربط اختصاراتي"
+
+#: core/templates/core/account.html:27
+#: core/templates/core/partials/account_widget.html:16
+msgid "Mes raccourcis"
+msgstr "اختصاراتي"
+
+#: core/templates/core/account.html:28
+msgid "Connecté"
+msgstr "متصل"
+
+#: core/templates/core/account.html:28
+msgid "Compte anonyme"
+msgstr "حساب مجهول"
+
+#: core/templates/core/account.html:36
+msgid "Se déconnecter"
+msgstr "تسجيل الخروج"
+
+#: core/templates/core/account.html:38
+msgid "Rattacher à mon compte Grands Voisins"
+msgstr "الربط بحساب Grands Voisins الخاص بي"
+
+#: core/templates/core/account.html:39
+msgid "Fermer ce compte sur cet appareil"
+msgstr "إغلاق هذا الحساب على هذا الجهاز"
+
+#: core/templates/core/account.html:46
+msgid "Services disponibles"
+msgstr "الخدمات المتاحة"
+
+#: core/templates/core/account.html:47
+msgid "Ajoutez ceux qui vous intéressent à votre liste."
+msgstr "أضف ما يهمّك إلى قائمتك."
+
+#: core/templates/core/account.html:54
+msgid "Mes groupes"
+msgstr "مجموعاتي"
+
+#: core/templates/core/account.html:63
+msgid "Groupes disponibles"
+msgstr "المجموعات المتاحة"
+
+#: core/templates/core/account.html:64
+msgid ""
+"Un particulier, une association, une entreprise… Adhérez à ceux qui vous "
+"concernent."
+msgstr "فرد، جمعية، شركة… انضم إلى ما يخصك منها."
+
+#: core/templates/core/account.html:72 core/templates/core/account.html:75
+#: core/templates/core/partials/account_widget.html:10
+msgid "Se connecter"
+msgstr "تسجيل الدخول"
+
+#: core/templates/core/account.html:73
+msgid ""
+"Avec votre compte unique des Grands Voisins, le même que pour les autres "
+"outils de l'association."
+msgstr ""
+"باستخدام حسابك الموحّد في Grands Voisins، نفس الحساب المستخدم في أدوات "
+"الجمعية الأخرى."
+
+#: core/templates/core/account.html:77
+msgid ""
+"La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
+"serveur."
+msgstr "لم يتم بعد إعداد تسجيل الدخول عبر حساب Grands Voisins على هذا الخادم."
+
+#: core/templates/core/account.html:81
+msgid "Rester anonyme"
+msgstr "البقاء مجهولاً"
+
+#: core/templates/core/account.html:82
+msgid ""
+"Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
+"pour retrouver vos raccourcis."
+msgstr ""
+"رقم من 16 خانة، بلا اسم ولا بريد إلكتروني. تدوّنه، ويكفي لاستعادة اختصاراتك."
+
+#: core/templates/core/account.html:83
+msgid "Créer un compte anonyme"
+msgstr "إنشاء حساب مجهول"
+
+#: core/templates/core/account.html:85
+msgid "J'ai déjà un numéro"
+msgstr "لدي رقم بالفعل"
+
+#: core/templates/core/account.html:88
+msgid "Retrouver"
+msgstr "استعادة"
+
 #: core/templates/core/agenda.html:3
-msgid "tu Vois : se faire accompagner — Voisinternet"
-msgstr "tu Vois: الحصول على مرافقة — Voisinternet"
+msgid "Agenda : les Conseils des Voisins — Voisinternet"
+msgstr "الأجندة: Conseils des Voisins — Voisinternet"
 
 #: core/templates/core/agenda.html:5
 msgid ""
-"Un rapport entre deux individus, dans une logique d'entraide : vous recevez "
-"ce dont vous avez besoin. Personne ne naît administrateur de serveur. Posez "
-"vos questions, venez aux ateliers, ou demandez qu'un bénévole passe vous "
-"voir."
+"Le rendez-vous collectif des Grands Voisins : décider ensemble, en présence "
+"ou à distance."
 msgstr ""
-"علاقة بين فردين، في إطار منطق التعاضد: تتلقى ما تحتاجه. لا أحد يولد مسؤول "
-"خوادم. اطرح أسئلتك، احضر الورشات، أو اطلب أن يزورك متطوع."
+"اللقاء الجماعي لـ Les Grands Voisins: اتخاذ القرار معًا، حضوريًا أو عن بعد."
 
-#: core/templates/core/agenda.html:8
+#: core/templates/core/agenda.html:9
+msgid "Les Conseils des Voisins"
+msgstr "Conseils des Voisins"
+
+#: core/templates/core/agenda.html:10
+msgid ""
+"Un rendez-vous périodique et ouvert à tous, pour décider ensemble et "
+"construire les valeurs du voisinage. Chaque séance se tient en deux temps "
+"identiques, pour que chacun trouve son horaire."
+msgstr ""
+"لقاء دوري ومفتوح للجميع، لاتخاذ القرار معًا وبناء قيم الجوار. تُعقد كل جلسة "
+"على فترتين متطابقتين، ليجد كل شخص الوقت المناسب له."
+
+#: core/templates/core/agenda.html:13
+msgid "Deux séances, un seul ordre du jour"
+msgstr "جلستان، جدول أعمال واحد"
+
+#: core/templates/core/agenda.html:14
+msgid ""
+"De 13h à 14h45, ou de 18h à 19h45 : même agenda, deux horaires. En "
+"présentiel ou en ligne sur <a href=\"https://meet.lesgrandsvoisins.com\" "
+"target=\"_new\">meet.lesgrandsvoisins.com</a>, sur inscription."
+msgstr ""
+"من 13:00 إلى 14:45، أو من 18:00 إلى 19:45: نفس جدول الأعمال، بتوقيتين. "
+"حضوريًا أو عبر الإنترنت على <a href=\"https://meet.lesgrandsvoisins.com\" "
+"target=\"_new\">meet.lesgrandsvoisins.com</a>، بالتسجيل المسبق."
+
+#: core/templates/core/agenda.html:17
 msgid "Poser une question"
 msgstr "طرح سؤال"
 
-#: core/templates/core/agenda.html:8
+#: core/templates/core/agenda.html:18
 #, python-format
 msgid ""
 "Écrivez-nous à <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. "
@@ -526,22 +654,6 @@ msgid ""
 msgstr ""
 "راسلنا على <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. سيردّ"
 " عليك جار، لا روبوت."
-
-#: core/templates/core/agenda.html:9
-msgid "Venir aux ateliers"
-msgstr "حضور الورشات"
-
-#: core/templates/core/agenda.html:9
-msgid "[À compléter : jour, horaire et lieu des ateliers.]"
-msgstr "[سيتم استكماله: يوم ووقت ومكان الورشات.]"
-
-#: core/templates/core/agenda.html:10
-msgid "Un coup de main chez vous"
-msgstr "مساعدة في منزلك"
-
-#: core/templates/core/agenda.html:10
-msgid "[À compléter : comment demander une visite d'un bénévole.]"
-msgstr "[سيتم استكماله: كيفية طلب زيارة متطوع.]"
 
 #: core/templates/core/annuaire.html:3
 msgid "vous Voyez : l'annuaire"
@@ -627,6 +739,16 @@ msgstr ""
 "أبريل 2025: تكريم للرسام والكاتب فيليكس توشي أراكاكي، في منزله ومرسمه في "
 "أويّ، بمشاركة عائلته والجيران."
 
+#: core/templates/core/arts-plastiques.html:21
+msgid "Tableaux & roman « La Macha »"
+msgstr "لوحات ورواية «La Macha»"
+
+#: core/templates/core/arts-plastiques.html:22
+msgid ""
+"31 janvier et 1er février 2025 : une exposition de tableaux autour du roman "
+"« La Macha »."
+msgstr "31 يناير و1 فبراير 2025: معرض للوحات مستوحاة من رواية «La Macha»."
+
 #: core/templates/core/base.html:9
 msgid ""
 "Voisinternet, porté par Les Grands Voisins : héberger ses courriels, "
@@ -678,76 +800,6 @@ msgstr "خريطة الموقع"
 msgid "Des Voies · Nos Voix · Voisinternet"
 msgstr "طرق · أصوات · Voisinternet"
 
-#: core/templates/core/benevolat-et-dons.html:3
-msgid "il ou elle Voit : bénévolat et dons — Voisinternet"
-msgstr "il ou elle Voit: التطوع والتبرعات — Voisinternet"
-
-#: core/templates/core/benevolat-et-dons.html:5
-msgid ""
-"Soutenir Les Grands Voisins par son talent et sa volonté, par une "
-"participation économique, ou par un don de matériel : plusieurs façons de "
-"donner, sans rien attendre en retour."
-msgstr ""
-"دعم Les Grands Voisins بموهبتك ورغبتك، بمساهمة اقتصادية، أو بالتبرع بمعدات: "
-"طرق عديدة للعطاء، دون انتظار أي مقابل."
-
-#: core/templates/core/benevolat-et-dons.html:8
-msgid "Donner du temps"
-msgstr "تقديم الوقت"
-
-#: core/templates/core/benevolat-et-dons.html:8
-#, python-format
-msgid ""
-"Animer un atelier, relire le guide, dépanner un voisin, ou simplement être "
-"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
-msgstr ""
-"إدارة ورشة عمل، مراجعة الدليل، مساعدة جار، أو مجرد الحضور: كل شخص يمنح الوقت"
-" الذي يريده. راسلنا على <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
-
-#: core/templates/core/benevolat-et-dons.html:9
-msgid "Faire un don financier"
-msgstr "تقديم تبرع مالي"
-
-#: core/templates/core/benevolat-et-dons.html:9
-msgid ""
-"[À compléter : moyens de don, et possibilité de reçu fiscal selon "
-"l'éligibilité de l'association.]"
-msgstr ""
-"[سيتم استكماله: طرق التبرع، وإمكانية الحصول على إيصال ضريبي حسب أهلية "
-"الجمعية.]"
-
-#: core/templates/core/benevolat-et-dons.html:9
-msgid ""
-"Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous "
-"est nécessaire, mais elle n'est jamais publiée sans votre accord."
-msgstr ""
-"يمكن أن يبقى التبرع مجهولاً. إذا رغبت في الحصول على إيصال، نحتاج إلى هويتك، "
-"لكنها لا تُنشر أبدًا دون موافقتك."
-
-#: core/templates/core/benevolat-et-dons.html:10
-msgid "Donner du matériel"
-msgstr "التبرع بالمعدات"
-
-#: core/templates/core/benevolat-et-dons.html:10
-msgid ""
-"[À compléter : matériel accepté, effacement des données, lieu de dépôt.]"
-msgstr "[سيتم استكماله: المعدات المقبولة، محو البيانات، مكان التسليم.]"
-
-#: core/templates/core/benevolat-et-dons.html:14
-msgid "Nos soutiens"
-msgstr "داعمونا"
-
-#: core/templates/core/benevolat-et-dons.html:16
-#, python-format
-msgid "depuis %(since)s"
-msgstr "منذ %(since)s"
-
-#: core/templates/core/benevolat-et-dons.html:18
-msgid "Les premiers soutiens apparaîtront ici, avec leur accord."
-msgstr "سيظهر الداعمون الأوائل هنا، بموافقتهم."
-
 #: core/templates/core/civisme.html:3
 msgid "Civisme — Voisinternet"
 msgstr "الالتزام المدني — Voisinternet"
@@ -771,11 +823,81 @@ msgstr ""
 " التميز في العمل الاجتماعي من خلال جائزة أنيت مونو. أُقيمت نسخة 2025 في "
 "جمعية France Amérique-Latine."
 
-#: core/templates/core/grands-voisins.html:3
+#: core/templates/core/contributions.html:3
+msgid "il ou elle Voit : bénévolat et dons — Voisinternet"
+msgstr "il ou elle Voit: التطوع والتبرعات — Voisinternet"
+
+#: core/templates/core/contributions.html:5
+msgid ""
+"Soutenir Les Grands Voisins par son talent et sa volonté, par une "
+"participation économique, ou par un don de matériel : plusieurs façons de "
+"donner, sans rien attendre en retour."
+msgstr ""
+"دعم Les Grands Voisins بموهبتك ورغبتك، بمساهمة اقتصادية، أو بالتبرع بمعدات: "
+"طرق عديدة للعطاء، دون انتظار أي مقابل."
+
+#: core/templates/core/contributions.html:8
+msgid "Donner du temps"
+msgstr "تقديم الوقت"
+
+#: core/templates/core/contributions.html:8
+#, python-format
+msgid ""
+"Animer un atelier, relire le guide, dépanner un voisin, ou simplement être "
+"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+msgstr ""
+"إدارة ورشة عمل، مراجعة الدليل، مساعدة جار، أو مجرد الحضور: كل شخص يمنح الوقت"
+" الذي يريده. راسلنا على <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+
+#: core/templates/core/contributions.html:9
+msgid "Faire un don financier"
+msgstr "تقديم تبرع مالي"
+
+#: core/templates/core/contributions.html:9
+msgid ""
+"[À compléter : moyens de don, et possibilité de reçu fiscal selon "
+"l'éligibilité de l'association.]"
+msgstr ""
+"[سيتم استكماله: طرق التبرع، وإمكانية الحصول على إيصال ضريبي حسب أهلية "
+"الجمعية.]"
+
+#: core/templates/core/contributions.html:9
+msgid ""
+"Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous "
+"est nécessaire, mais elle n'est jamais publiée sans votre accord."
+msgstr ""
+"يمكن أن يبقى التبرع مجهولاً. إذا رغبت في الحصول على إيصال، نحتاج إلى هويتك، "
+"لكنها لا تُنشر أبدًا دون موافقتك."
+
+#: core/templates/core/contributions.html:10
+msgid "Donner du matériel"
+msgstr "التبرع بالمعدات"
+
+#: core/templates/core/contributions.html:10
+msgid ""
+"[À compléter : matériel accepté, effacement des données, lieu de dépôt.]"
+msgstr "[سيتم استكماله: المعدات المقبولة، محو البيانات، مكان التسليم.]"
+
+#: core/templates/core/contributions.html:14
+msgid "Nos soutiens"
+msgstr "داعمونا"
+
+#: core/templates/core/contributions.html:16
+#, python-format
+msgid "depuis %(since)s"
+msgstr "منذ %(since)s"
+
+#: core/templates/core/contributions.html:18
+msgid "Les premiers soutiens apparaîtront ici, avec leur accord."
+msgstr "سيظهر الداعمون الأوائل هنا، بموافقتهم."
+
+#: core/templates/core/grandsvoisins.html:3
 msgid "nous Voyons : l'association — Voisinternet"
 msgstr "nous Voyons: الجمعية — Voisinternet"
 
-#: core/templates/core/grands-voisins.html:5
+#: core/templates/core/grandsvoisins.html:5
 msgid ""
 "Voisinternet est un programme porté par l'association coopérative Les Grands"
 " Voisins : une conscience collective à laquelle chacun contribue. Nous "
@@ -784,11 +906,11 @@ msgstr ""
 "Voisinternet برنامج تديره الجمعية التعاونية Les Grands Voisins: وعي جماعي "
 "يساهم فيه الجميع. نطلب ثقتكم: وهذا ما يمكنكم التحقق منه."
 
-#: core/templates/core/grands-voisins.html:9
+#: core/templates/core/grandsvoisins.html:9
 msgid "Notre raison d'être"
 msgstr "غايتنا"
 
-#: core/templates/core/grands-voisins.html:10
+#: core/templates/core/grandsvoisins.html:10
 msgid ""
 "Écrite collectivement par une centaine de personnes en 2017, notre raison "
 "d'être vient des interstices du béton et des politiques publiques : nous "
@@ -798,11 +920,11 @@ msgstr ""
 "الإسمنت والسياسات العامة: نؤمن بالجسور بين اليوتوبيا والواقع، وباستقبال "
 "الجميع."
 
-#: core/templates/core/grands-voisins.html:13
+#: core/templates/core/grandsvoisins.html:13
 msgid "D'où nous venons"
 msgstr "من أين أتينا"
 
-#: core/templates/core/grands-voisins.html:14
+#: core/templates/core/grandsvoisins.html:14
 msgid ""
 "Les Grands Voisins sont nés entre 2015 et 2017 à l'hôpital Saint-Vincent-de-"
 "Paul, dans le 14ᵉ arrondissement de Paris, entre Port-Royal et les "
@@ -813,56 +935,56 @@ msgstr ""
 "الدائرة 14 بباريس، بين بور رويال والمقابر تحت الأرضية. ومنذ ذلك الحين، "
 "نتساءل عمّا إذا كان المكان المادي ما زال ضروريًا لنبقى جيرانًا."
 
-#: core/templates/core/grands-voisins.html:17
+#: core/templates/core/grandsvoisins.html:17
 msgid "Le bureau"
 msgstr "مجلس الإدارة"
 
-#: core/templates/core/grands-voisins.html:19
+#: core/templates/core/grandsvoisins.html:19
 msgid "Président"
 msgstr "الرئيس"
 
-#: core/templates/core/grands-voisins.html:20
+#: core/templates/core/grandsvoisins.html:20
 msgid "Trésorière"
 msgstr "أمينة الصندوق"
 
-#: core/templates/core/grands-voisins.html:21
+#: core/templates/core/grandsvoisins.html:21
 msgid "Vice-présidente"
 msgstr "نائبة الرئيس"
 
-#: core/templates/core/grands-voisins.html:25
+#: core/templates/core/grandsvoisins.html:25
 msgid "Statut légal"
 msgstr "الوضع القانوني"
 
-#: core/templates/core/grands-voisins.html:26
+#: core/templates/core/grandsvoisins.html:26
 msgid "Association loi de 1901. RNA W751240710, SIREN 832760102."
 msgstr ""
 "جمعية بموجب قانون 1901. الرقم الوطني للجمعيات W751240710، رقم SIREN "
 "832760102."
 
-#: core/templates/core/grands-voisins.html:29
+#: core/templates/core/grandsvoisins.html:29
 msgid "Transparence"
 msgstr "الشفافية"
 
-#: core/templates/core/grands-voisins.html:31
+#: core/templates/core/grandsvoisins.html:31
 msgid "Statuts de l'association"
 msgstr "النظام الأساسي للجمعية"
 
-#: core/templates/core/grands-voisins.html:31
-#: core/templates/core/grands-voisins.html:32
-#: core/templates/core/grands-voisins.html:33
-#: core/templates/core/grands-voisins.html:34
+#: core/templates/core/grandsvoisins.html:31
+#: core/templates/core/grandsvoisins.html:32
+#: core/templates/core/grandsvoisins.html:33
+#: core/templates/core/grandsvoisins.html:34
 msgid "[document à publier]"
 msgstr "[وثيقة سيتم نشرها]"
 
-#: core/templates/core/grands-voisins.html:32
+#: core/templates/core/grandsvoisins.html:32
 msgid "Comptes annuels"
 msgstr "الحسابات السنوية"
 
-#: core/templates/core/grands-voisins.html:33
+#: core/templates/core/grandsvoisins.html:33
 msgid "Comptes rendus d'assemblée générale"
 msgstr "محاضر الجمعية العمومية"
 
-#: core/templates/core/grands-voisins.html:34
+#: core/templates/core/grandsvoisins.html:34
 msgid "Nos engagements d'hébergeur"
 msgstr "التزاماتنا كمضيف"
 
@@ -1023,127 +1145,6 @@ msgstr "ستظهر أحدث المقالات هنا."
 #: core/templates/core/home.html:163
 msgid "Tous les articles"
 msgstr "جميع المقالات"
-
-#: core/templates/core/account.html:3
-msgid "je Vois — Voisinternet"
-msgstr "je Vois — Voisinternet"
-
-#: core/templates/core/account.html:10
-msgid "Votre numéro de compte"
-msgstr "رقم حسابك"
-
-#: core/templates/core/account.html:12
-msgid ""
-"Notez-le maintenant. Nous n'en gardons qu'une empreinte : nous ne pourrons "
-"jamais vous le redonner. Il suffit, seul, pour retrouver vos raccourcis sur "
-"un autre appareil."
-msgstr ""
-"دوّنه الآن. نحتفظ ببصمته فقط: لن نتمكن أبدًا من إعادته إليك. يكفي وحده "
-"لاستعادة اختصاراتك على جهاز آخر."
-
-#: core/templates/core/account.html:18
-msgid "Un compte anonyme est ouvert sur cet appareil"
-msgstr "هناك حساب مجهول مفتوح على هذا الجهاز"
-
-#: core/templates/core/account.html:19
-msgid ""
-"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
-" ensuite supprimé."
-msgstr "هل ترغب في ربط اختصاراته بحسابك؟ سيتم حذف الحساب المجهول بعد ذلك."
-
-#: core/templates/core/account.html:20
-msgid "Rattacher mes raccourcis"
-msgstr "ربط اختصاراتي"
-
-#: core/templates/core/account.html:27
-#: core/templates/core/partials/account_widget.html:16
-msgid "Mes raccourcis"
-msgstr "اختصاراتي"
-
-#: core/templates/core/account.html:28
-msgid "Connecté"
-msgstr "متصل"
-
-#: core/templates/core/account.html:28
-msgid "Compte anonyme"
-msgstr "حساب مجهول"
-
-#: core/templates/core/account.html:36
-msgid "Se déconnecter"
-msgstr "تسجيل الخروج"
-
-#: core/templates/core/account.html:38
-msgid "Rattacher à mon compte Grands Voisins"
-msgstr "الربط بحساب Grands Voisins الخاص بي"
-
-#: core/templates/core/account.html:39
-msgid "Fermer ce compte sur cet appareil"
-msgstr "إغلاق هذا الحساب على هذا الجهاز"
-
-#: core/templates/core/account.html:46
-msgid "Services disponibles"
-msgstr "الخدمات المتاحة"
-
-#: core/templates/core/account.html:47
-msgid "Ajoutez ceux qui vous intéressent à votre liste."
-msgstr "أضف ما يهمّك إلى قائمتك."
-
-#: core/templates/core/account.html:54
-msgid "Mes groupes"
-msgstr "مجموعاتي"
-
-#: core/templates/core/account.html:63
-msgid "Groupes disponibles"
-msgstr "المجموعات المتاحة"
-
-#: core/templates/core/account.html:64
-msgid ""
-"Un particulier, une association, une entreprise… Adhérez à ceux qui vous "
-"concernent."
-msgstr "فرد، جمعية، شركة… انضم إلى ما يخصك منها."
-
-#: core/templates/core/account.html:72
-#: core/templates/core/account.html:75
-#: core/templates/core/partials/account_widget.html:10
-msgid "Se connecter"
-msgstr "تسجيل الدخول"
-
-#: core/templates/core/account.html:73
-msgid ""
-"Avec votre compte unique des Grands Voisins, le même que pour les autres "
-"outils de l'association."
-msgstr ""
-"باستخدام حسابك الموحّد في Grands Voisins، نفس الحساب المستخدم في أدوات "
-"الجمعية الأخرى."
-
-#: core/templates/core/account.html:77
-msgid ""
-"La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
-"serveur."
-msgstr "لم يتم بعد إعداد تسجيل الدخول عبر حساب Grands Voisins على هذا الخادم."
-
-#: core/templates/core/account.html:81
-msgid "Rester anonyme"
-msgstr "البقاء مجهولاً"
-
-#: core/templates/core/account.html:82
-msgid ""
-"Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
-"pour retrouver vos raccourcis."
-msgstr ""
-"رقم من 16 خانة، بلا اسم ولا بريد إلكتروني. تدوّنه، ويكفي لاستعادة اختصاراتك."
-
-#: core/templates/core/account.html:83
-msgid "Créer un compte anonyme"
-msgstr "إنشاء حساب مجهول"
-
-#: core/templates/core/account.html:85
-msgid "J'ai déjà un numéro"
-msgstr "لدي رقم بالفعل"
-
-#: core/templates/core/account.html:88
-msgid "Retrouver"
-msgstr "استعادة"
 
 #: core/templates/core/numerique.html:3
 msgid "Numérique — Voisinternet"

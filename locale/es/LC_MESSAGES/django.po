@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 00:17+0200\n"
+"POT-Creation-Date: 2026-09-12 00:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,117 +66,101 @@ msgstr "un individuo, una cuenta, lo que decido compartir"
 msgid "se connecter, créer un compte, retrouver mes raccourcis"
 msgstr "iniciar sesión, crear una cuenta, recuperar mis accesos directos"
 
-#: core/menu.py:46
-msgid "programme"
-msgstr "calendario"
-
-#: core/menu.py:47
-msgid "& Agenda"
-msgstr "& Agenda"
-
-#: core/menu.py:48
-msgid "Agenda"
-msgstr "Agenda"
-
-#: core/menu.py:49
-msgid "un individu qui reçoit de l'aide, entre voisins"
-msgstr "un individuo que recibe ayuda, entre vecinos"
-
-#: core/menu.py:50
-msgid "poser une question, se faire accompagner"
-msgstr "hacer una pregunta, recibir acompañamiento"
-
-#: core/menu.py:56
-msgid "dons"
-msgstr "donaciones"
-
-#: core/menu.py:57
-msgid "& Bénévolat"
-msgstr "& Voluntariado"
-
-#: core/menu.py:58
-msgid "Bénévolat et dons"
-msgstr "Voluntariado y donaciones"
-
-#: core/menu.py:59
-msgid "un individu qui donne, sans rien attendre en retour"
-msgstr "un individuo que da, sin esperar nada a cambio"
-
-#: core/menu.py:60
-msgid "accompagner l'autre, donner du matériel"
-msgstr "acompañar a otros, donar equipos"
-
-#: core/menu.py:66
-msgid "Grands"
-msgstr "Grands"
-
-#: core/menu.py:67
-msgid "Voisins"
-msgstr "Voisins"
-
-#: core/menu.py:68
-msgid "Grands Voisins"
-msgstr "Grands Voisins"
-
-#: core/menu.py:69
-msgid "une conscience collective, l'association coopérative"
-msgstr "una conciencia colectiva, la asociación cooperativa"
-
-#: core/menu.py:70
-msgid "statuts, gouvernance, comptes : tout est public"
-msgstr "estatutos, gobernanza, cuentas: todo es público"
-
-#: core/menu.py:76 core/menu.py:78
+#: core/menu.py:46 core/menu.py:48
 msgid "Annuaire"
 msgstr "Directorio"
 
-#: core/menu.py:77
+#: core/menu.py:47
 msgid "des Voisins"
 msgstr "de los vecinos"
 
-#: core/menu.py:79
+#: core/menu.py:49
 msgid "qui fait partie de la communauté, et comment les joindre"
 msgstr "quién forma parte de la comunidad, y cómo contactarlo"
 
-#: core/menu.py:80
+#: core/menu.py:50
 msgid "un particulier, une association, une entreprise…"
 msgstr "un particular, una asociación, una empresa…"
 
-#: core/menu.py:86
-msgid "Civ"
-msgstr "Compromiso"
+#: core/menu.py:56
+msgid "programme"
+msgstr "calendario"
 
-#: core/menu.py:87
-msgid "isme"
-msgstr "cívico"
+#: core/menu.py:57
+msgid "& Agenda"
+msgstr "& Agenda"
 
-#: core/menu.py:88 core/menu.py:89
+#: core/menu.py:58
+msgid "Agenda"
+msgstr "Agenda"
+
+#: core/menu.py:59
+msgid "un individu qui reçoit de l'aide, entre voisins"
+msgstr "un individuo que recibe ayuda, entre vecinos"
+
+#: core/menu.py:60
+msgid "poser une question, se faire accompagner"
+msgstr "hacer una pregunta, recibir acompañamiento"
+
+#: core/menu.py:66 core/menu.py:76 core/menu.py:86
+msgid "pôle"
+msgstr "polo"
+
+#: core/menu.py:67 core/menu.py:68 core/menu.py:69
 msgid "Civisme"
 msgstr "Compromiso cívico"
 
-#: core/menu.py:90 core/menu.py:100 core/menu.py:110
+#: core/menu.py:70 core/menu.py:80 core/menu.py:90
 msgid "qui nous soutient — dons et partenaires — et comment nous soutenir"
 msgstr "quién nos apoya — donaciones y socios — y cómo apoyarnos"
 
-#: core/menu.py:96 core/menu.py:98 core/menu.py:99
-msgid "Arts"
-msgstr "Artes"
+#: core/menu.py:77 core/menu.py:78 core/menu.py:79
+msgid "Arts Plastiques"
+msgstr "Artes plásticas"
 
-#: core/menu.py:97
-msgid "Plastiques"
-msgstr "plásticas"
-
-#: core/menu.py:106
-msgid "Num"
-msgstr "Competencias"
-
-#: core/menu.py:107
-msgid "érique"
-msgstr "digitales"
-
-#: core/menu.py:108 core/menu.py:109
+#: core/menu.py:87 core/menu.py:88 core/menu.py:89
 msgid "Numérique"
 msgstr "Digital"
+
+#: core/menu.py:96
+msgid "dons"
+msgstr "donaciones"
+
+#: core/menu.py:97
+msgid "& Bénévolat"
+msgstr "& Voluntariado"
+
+#: core/menu.py:98
+msgid "Bénévolat et dons"
+msgstr "Voluntariado y donaciones"
+
+#: core/menu.py:99
+msgid "un individu qui donne, sans rien attendre en retour"
+msgstr "un individuo que da, sin esperar nada a cambio"
+
+#: core/menu.py:100
+msgid "accompagner l'autre, donner du matériel"
+msgstr "acompañar a otros, donar equipos"
+
+#: core/menu.py:106
+msgid "Grands"
+msgstr "Grands"
+
+#: core/menu.py:107
+msgid "Voisins"
+msgstr "Voisins"
+
+#: core/menu.py:108
+msgid "Grands Voisins"
+msgstr "Grands Voisins"
+
+#: core/menu.py:109
+msgid "une conscience collective, l'association coopérative"
+msgstr "una conciencia colectiva, la asociación cooperativa"
+
+#: core/menu.py:110
+msgid "statuts, gouvernance, comptes : tout est public"
+msgstr "estatutos, gobernanza, cuentas: todo es público"
 
 #: core/menu.py:116
 msgid "blog"
@@ -504,26 +488,178 @@ msgstr "apoya desde"
 msgid "donateur"
 msgstr "donante"
 
+#: core/templates/core/account.html:3
+msgid "je Vois — Voisinternet"
+msgstr "je Vois — Voisinternet"
+
+#: core/templates/core/account.html:10
+msgid "Votre numéro de compte"
+msgstr "Tu número de cuenta"
+
+#: core/templates/core/account.html:12
+msgid ""
+"Notez-le maintenant. Nous n'en gardons qu'une empreinte : nous ne pourrons "
+"jamais vous le redonner. Il suffit, seul, pour retrouver vos raccourcis sur "
+"un autre appareil."
+msgstr ""
+"Anótalo ahora. Solo conservamos una huella de él: nunca podremos volver a "
+"dártelo. Basta por sí solo para recuperar tus accesos directos en otro "
+"dispositivo."
+
+#: core/templates/core/account.html:18
+msgid "Un compte anonyme est ouvert sur cet appareil"
+msgstr "Hay una cuenta anónima abierta en este dispositivo"
+
+#: core/templates/core/account.html:19
+msgid ""
+"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
+" ensuite supprimé."
+msgstr ""
+"¿Quieres vincular sus accesos directos a tu cuenta? La cuenta anónima se "
+"eliminará después."
+
+#: core/templates/core/account.html:20
+msgid "Rattacher mes raccourcis"
+msgstr "Vincular mis accesos directos"
+
+#: core/templates/core/account.html:27
+#: core/templates/core/partials/account_widget.html:16
+msgid "Mes raccourcis"
+msgstr "Mis accesos directos"
+
+#: core/templates/core/account.html:28
+msgid "Connecté"
+msgstr "Conectado"
+
+#: core/templates/core/account.html:28
+msgid "Compte anonyme"
+msgstr "Cuenta anónima"
+
+#: core/templates/core/account.html:36
+msgid "Se déconnecter"
+msgstr "Cerrar sesión"
+
+#: core/templates/core/account.html:38
+msgid "Rattacher à mon compte Grands Voisins"
+msgstr "Vincular a mi cuenta de Grands Voisins"
+
+#: core/templates/core/account.html:39
+msgid "Fermer ce compte sur cet appareil"
+msgstr "Cerrar esta cuenta en este dispositivo"
+
+#: core/templates/core/account.html:46
+msgid "Services disponibles"
+msgstr "Servicios disponibles"
+
+#: core/templates/core/account.html:47
+msgid "Ajoutez ceux qui vous intéressent à votre liste."
+msgstr "Añade a tu lista los que te interesen."
+
+#: core/templates/core/account.html:54
+msgid "Mes groupes"
+msgstr "Mis grupos"
+
+#: core/templates/core/account.html:63
+msgid "Groupes disponibles"
+msgstr "Grupos disponibles"
+
+#: core/templates/core/account.html:64
+msgid ""
+"Un particulier, une association, une entreprise… Adhérez à ceux qui vous "
+"concernent."
+msgstr ""
+"Un particular, una asociación, una empresa… Únete a los que te conciernen."
+
+#: core/templates/core/account.html:72 core/templates/core/account.html:75
+#: core/templates/core/partials/account_widget.html:10
+msgid "Se connecter"
+msgstr "Iniciar sesión"
+
+#: core/templates/core/account.html:73
+msgid ""
+"Avec votre compte unique des Grands Voisins, le même que pour les autres "
+"outils de l'association."
+msgstr ""
+"Con tu cuenta única de Grands Voisins, la misma que usas para las demás "
+"herramientas de la asociación."
+
+#: core/templates/core/account.html:77
+msgid ""
+"La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
+"serveur."
+msgstr ""
+"El inicio de sesión con cuenta de Grands Voisins aún no está configurado en "
+"este servidor."
+
+#: core/templates/core/account.html:81
+msgid "Rester anonyme"
+msgstr "Permanecer anónimo"
+
+#: core/templates/core/account.html:82
+msgid ""
+"Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
+"pour retrouver vos raccourcis."
+msgstr ""
+"Un número de 16 cifras, sin nombre ni correo electrónico. Lo anotas, y basta"
+" para recuperar tus accesos directos."
+
+#: core/templates/core/account.html:83
+msgid "Créer un compte anonyme"
+msgstr "Crear una cuenta anónima"
+
+#: core/templates/core/account.html:85
+msgid "J'ai déjà un numéro"
+msgstr "Ya tengo un número"
+
+#: core/templates/core/account.html:88
+msgid "Retrouver"
+msgstr "Recuperar"
+
 #: core/templates/core/agenda.html:3
-msgid "tu Vois : se faire accompagner — Voisinternet"
-msgstr "tu Vois: recibir acompañamiento — Voisinternet"
+msgid "Agenda : les Conseils des Voisins — Voisinternet"
+msgstr "Agenda: los Conseils des Voisins — Voisinternet"
 
 #: core/templates/core/agenda.html:5
 msgid ""
-"Un rapport entre deux individus, dans une logique d'entraide : vous recevez "
-"ce dont vous avez besoin. Personne ne naît administrateur de serveur. Posez "
-"vos questions, venez aux ateliers, ou demandez qu'un bénévole passe vous "
-"voir."
+"Le rendez-vous collectif des Grands Voisins : décider ensemble, en présence "
+"ou à distance."
 msgstr ""
-"Una relación entre dos individuos, en una lógica de ayuda mutua: recibes lo "
-"que necesitas. Nadie nace administrador de servidores. Haz tus preguntas, "
-"ven a los talleres, o pide que un voluntario venga a verte."
+"El encuentro colectivo de Les Grands Voisins: decidir juntos, en persona o a"
+" distancia."
 
-#: core/templates/core/agenda.html:8
+#: core/templates/core/agenda.html:9
+msgid "Les Conseils des Voisins"
+msgstr "Los Conseils des Voisins"
+
+#: core/templates/core/agenda.html:10
+msgid ""
+"Un rendez-vous périodique et ouvert à tous, pour décider ensemble et "
+"construire les valeurs du voisinage. Chaque séance se tient en deux temps "
+"identiques, pour que chacun trouve son horaire."
+msgstr ""
+"Un encuentro periódico y abierto a todos, para decidir juntos y construir "
+"los valores del vecindario. Cada sesión se celebra en dos momentos "
+"idénticos, para que cada uno encuentre su horario."
+
+#: core/templates/core/agenda.html:13
+msgid "Deux séances, un seul ordre du jour"
+msgstr "Dos sesiones, un solo orden del día"
+
+#: core/templates/core/agenda.html:14
+msgid ""
+"De 13h à 14h45, ou de 18h à 19h45 : même agenda, deux horaires. En "
+"présentiel ou en ligne sur <a href=\"https://meet.lesgrandsvoisins.com\" "
+"target=\"_new\">meet.lesgrandsvoisins.com</a>, sur inscription."
+msgstr ""
+"De 13h a 14h45, o de 18h a 19h45: mismo orden del día, dos horarios. "
+"Presencial o en línea en <a href=\"https://meet.lesgrandsvoisins.com\" "
+"target=\"_new\">meet.lesgrandsvoisins.com</a>, con inscripción previa."
+
+#: core/templates/core/agenda.html:17
 msgid "Poser une question"
 msgstr "Hacer una pregunta"
 
-#: core/templates/core/agenda.html:8
+#: core/templates/core/agenda.html:18
 #, python-format
 msgid ""
 "Écrivez-nous à <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. "
@@ -531,22 +667,6 @@ msgid ""
 msgstr ""
 "Escríbenos a <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Te "
 "responde un vecino, no un robot."
-
-#: core/templates/core/agenda.html:9
-msgid "Venir aux ateliers"
-msgstr "Venir a los talleres"
-
-#: core/templates/core/agenda.html:9
-msgid "[À compléter : jour, horaire et lieu des ateliers.]"
-msgstr "[Por completar: día, horario y lugar de los talleres.]"
-
-#: core/templates/core/agenda.html:10
-msgid "Un coup de main chez vous"
-msgstr "Una ayuda en tu casa"
-
-#: core/templates/core/agenda.html:10
-msgid "[À compléter : comment demander une visite d'un bénévole.]"
-msgstr "[Por completar: cómo solicitar la visita de un voluntario.]"
 
 #: core/templates/core/annuaire.html:3
 msgid "vous Voyez : l'annuaire"
@@ -636,6 +756,18 @@ msgstr ""
 "casa-taller de Houilles, con la participación de su familia y del "
 "vecindario."
 
+#: core/templates/core/arts-plastiques.html:21
+msgid "Tableaux & roman « La Macha »"
+msgstr "Cuadros y novela «La Macha»"
+
+#: core/templates/core/arts-plastiques.html:22
+msgid ""
+"31 janvier et 1er février 2025 : une exposition de tableaux autour du roman "
+"« La Macha »."
+msgstr ""
+"31 de enero y 1 de febrero de 2025: una exposición de cuadros en torno a la "
+"novela «La Macha»."
+
 #: core/templates/core/base.html:9
 msgid ""
 "Voisinternet, porté par Les Grands Voisins : héberger ses courriels, "
@@ -688,78 +820,6 @@ msgstr "Mapa del sitio"
 msgid "Des Voies · Nos Voix · Voisinternet"
 msgstr "Vías · Voces · Voisinternet"
 
-#: core/templates/core/benevolat-et-dons.html:3
-msgid "il ou elle Voit : bénévolat et dons — Voisinternet"
-msgstr "il ou elle Voit: voluntariado y donaciones — Voisinternet"
-
-#: core/templates/core/benevolat-et-dons.html:5
-msgid ""
-"Soutenir Les Grands Voisins par son talent et sa volonté, par une "
-"participation économique, ou par un don de matériel : plusieurs façons de "
-"donner, sans rien attendre en retour."
-msgstr ""
-"Apoyar a Les Grands Voisins con tu talento y tu voluntad, con una aportación"
-" económica, o con una donación de material: varias formas de dar, sin "
-"esperar nada a cambio."
-
-#: core/templates/core/benevolat-et-dons.html:8
-msgid "Donner du temps"
-msgstr "Dar tu tiempo"
-
-#: core/templates/core/benevolat-et-dons.html:8
-#, python-format
-msgid ""
-"Animer un atelier, relire le guide, dépanner un voisin, ou simplement être "
-"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
-msgstr ""
-"Dirigir un taller, revisar la guía, ayudar a un vecino, o simplemente estar "
-"presente: cada uno da el tiempo que quiere. Escríbenos a <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
-
-#: core/templates/core/benevolat-et-dons.html:9
-msgid "Faire un don financier"
-msgstr "Hacer una donación financiera"
-
-#: core/templates/core/benevolat-et-dons.html:9
-msgid ""
-"[À compléter : moyens de don, et possibilité de reçu fiscal selon "
-"l'éligibilité de l'association.]"
-msgstr ""
-"[Por completar: formas de donar, y posibilidad de recibo fiscal según la "
-"elegibilidad de la asociación.]"
-
-#: core/templates/core/benevolat-et-dons.html:9
-msgid ""
-"Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous "
-"est nécessaire, mais elle n'est jamais publiée sans votre accord."
-msgstr ""
-"Una donación puede permanecer anónima. Si deseas un recibo, necesitamos tu "
-"identidad, pero nunca se publica sin tu consentimiento."
-
-#: core/templates/core/benevolat-et-dons.html:10
-msgid "Donner du matériel"
-msgstr "Donar equipos"
-
-#: core/templates/core/benevolat-et-dons.html:10
-msgid ""
-"[À compléter : matériel accepté, effacement des données, lieu de dépôt.]"
-msgstr ""
-"[Por completar: equipos aceptados, borrado de datos, lugar de entrega.]"
-
-#: core/templates/core/benevolat-et-dons.html:14
-msgid "Nos soutiens"
-msgstr "Nuestros apoyos"
-
-#: core/templates/core/benevolat-et-dons.html:16
-#, python-format
-msgid "depuis %(since)s"
-msgstr "desde %(since)s"
-
-#: core/templates/core/benevolat-et-dons.html:18
-msgid "Les premiers soutiens apparaîtront ici, avec leur accord."
-msgstr "Los primeros apoyos aparecerán aquí, con su consentimiento."
-
 #: core/templates/core/civisme.html:3
 msgid "Civisme — Voisinternet"
 msgstr "Compromiso cívico — Voisinternet"
@@ -784,11 +844,83 @@ msgstr ""
 "premio Annette Monod. La edición de 2025 se celebró en la asociación France "
 "Amérique-Latine."
 
-#: core/templates/core/grands-voisins.html:3
+#: core/templates/core/contributions.html:3
+msgid "il ou elle Voit : bénévolat et dons — Voisinternet"
+msgstr "il ou elle Voit: voluntariado y donaciones — Voisinternet"
+
+#: core/templates/core/contributions.html:5
+msgid ""
+"Soutenir Les Grands Voisins par son talent et sa volonté, par une "
+"participation économique, ou par un don de matériel : plusieurs façons de "
+"donner, sans rien attendre en retour."
+msgstr ""
+"Apoyar a Les Grands Voisins con tu talento y tu voluntad, con una aportación"
+" económica, o con una donación de material: varias formas de dar, sin "
+"esperar nada a cambio."
+
+#: core/templates/core/contributions.html:8
+msgid "Donner du temps"
+msgstr "Dar tu tiempo"
+
+#: core/templates/core/contributions.html:8
+#, python-format
+msgid ""
+"Animer un atelier, relire le guide, dépanner un voisin, ou simplement être "
+"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+msgstr ""
+"Dirigir un taller, revisar la guía, ayudar a un vecino, o simplemente estar "
+"presente: cada uno da el tiempo que quiere. Escríbenos a <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+
+#: core/templates/core/contributions.html:9
+msgid "Faire un don financier"
+msgstr "Hacer una donación financiera"
+
+#: core/templates/core/contributions.html:9
+msgid ""
+"[À compléter : moyens de don, et possibilité de reçu fiscal selon "
+"l'éligibilité de l'association.]"
+msgstr ""
+"[Por completar: formas de donar, y posibilidad de recibo fiscal según la "
+"elegibilidad de la asociación.]"
+
+#: core/templates/core/contributions.html:9
+msgid ""
+"Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous "
+"est nécessaire, mais elle n'est jamais publiée sans votre accord."
+msgstr ""
+"Una donación puede permanecer anónima. Si deseas un recibo, necesitamos tu "
+"identidad, pero nunca se publica sin tu consentimiento."
+
+#: core/templates/core/contributions.html:10
+msgid "Donner du matériel"
+msgstr "Donar equipos"
+
+#: core/templates/core/contributions.html:10
+msgid ""
+"[À compléter : matériel accepté, effacement des données, lieu de dépôt.]"
+msgstr ""
+"[Por completar: equipos aceptados, borrado de datos, lugar de entrega.]"
+
+#: core/templates/core/contributions.html:14
+msgid "Nos soutiens"
+msgstr "Nuestros apoyos"
+
+#: core/templates/core/contributions.html:16
+#, python-format
+msgid "depuis %(since)s"
+msgstr "desde %(since)s"
+
+#: core/templates/core/contributions.html:18
+msgid "Les premiers soutiens apparaîtront ici, avec leur accord."
+msgstr "Los primeros apoyos aparecerán aquí, con su consentimiento."
+
+#: core/templates/core/grandsvoisins.html:3
 msgid "nous Voyons : l'association — Voisinternet"
 msgstr "nous Voyons: la asociación — Voisinternet"
 
-#: core/templates/core/grands-voisins.html:5
+#: core/templates/core/grandsvoisins.html:5
 msgid ""
 "Voisinternet est un programme porté par l'association coopérative Les Grands"
 " Voisins : une conscience collective à laquelle chacun contribue. Nous "
@@ -798,11 +930,11 @@ msgstr ""
 "Grands Voisins: una conciencia colectiva a la que todos contribuyen. Te "
 "pedimos confianza: aquí tienes con qué comprobarla."
 
-#: core/templates/core/grands-voisins.html:9
+#: core/templates/core/grandsvoisins.html:9
 msgid "Notre raison d'être"
 msgstr "Nuestra razón de ser"
 
-#: core/templates/core/grands-voisins.html:10
+#: core/templates/core/grandsvoisins.html:10
 msgid ""
 "Écrite collectivement par une centaine de personnes en 2017, notre raison "
 "d'être vient des interstices du béton et des politiques publiques : nous "
@@ -813,11 +945,11 @@ msgstr ""
 "creemos en los puentes entre la utopía y la realidad, y en la acogida de "
 "cada persona."
 
-#: core/templates/core/grands-voisins.html:13
+#: core/templates/core/grandsvoisins.html:13
 msgid "D'où nous venons"
 msgstr "De dónde venimos"
 
-#: core/templates/core/grands-voisins.html:14
+#: core/templates/core/grandsvoisins.html:14
 msgid ""
 "Les Grands Voisins sont nés entre 2015 et 2017 à l'hôpital Saint-Vincent-de-"
 "Paul, dans le 14ᵉ arrondissement de Paris, entre Port-Royal et les "
@@ -829,54 +961,54 @@ msgstr ""
 "entonces, nos preguntamos si un lugar físico sigue siendo necesario para "
 "seguir siendo vecinos."
 
-#: core/templates/core/grands-voisins.html:17
+#: core/templates/core/grandsvoisins.html:17
 msgid "Le bureau"
 msgstr "La junta directiva"
 
-#: core/templates/core/grands-voisins.html:19
+#: core/templates/core/grandsvoisins.html:19
 msgid "Président"
 msgstr "Presidente"
 
-#: core/templates/core/grands-voisins.html:20
+#: core/templates/core/grandsvoisins.html:20
 msgid "Trésorière"
 msgstr "Tesorera"
 
-#: core/templates/core/grands-voisins.html:21
+#: core/templates/core/grandsvoisins.html:21
 msgid "Vice-présidente"
 msgstr "Vicepresidenta"
 
-#: core/templates/core/grands-voisins.html:25
+#: core/templates/core/grandsvoisins.html:25
 msgid "Statut légal"
 msgstr "Estatuto legal"
 
-#: core/templates/core/grands-voisins.html:26
+#: core/templates/core/grandsvoisins.html:26
 msgid "Association loi de 1901. RNA W751240710, SIREN 832760102."
 msgstr "Asociación bajo la ley de 1901. RNA W751240710, SIREN 832760102."
 
-#: core/templates/core/grands-voisins.html:29
+#: core/templates/core/grandsvoisins.html:29
 msgid "Transparence"
 msgstr "Transparencia"
 
-#: core/templates/core/grands-voisins.html:31
+#: core/templates/core/grandsvoisins.html:31
 msgid "Statuts de l'association"
 msgstr "Estatutos de la asociación"
 
-#: core/templates/core/grands-voisins.html:31
-#: core/templates/core/grands-voisins.html:32
-#: core/templates/core/grands-voisins.html:33
-#: core/templates/core/grands-voisins.html:34
+#: core/templates/core/grandsvoisins.html:31
+#: core/templates/core/grandsvoisins.html:32
+#: core/templates/core/grandsvoisins.html:33
+#: core/templates/core/grandsvoisins.html:34
 msgid "[document à publier]"
 msgstr "[documento por publicar]"
 
-#: core/templates/core/grands-voisins.html:32
+#: core/templates/core/grandsvoisins.html:32
 msgid "Comptes annuels"
 msgstr "Cuentas anuales"
 
-#: core/templates/core/grands-voisins.html:33
+#: core/templates/core/grandsvoisins.html:33
 msgid "Comptes rendus d'assemblée générale"
 msgstr "Actas de la asamblea general"
 
-#: core/templates/core/grands-voisins.html:34
+#: core/templates/core/grandsvoisins.html:34
 msgid "Nos engagements d'hébergeur"
 msgstr "Nuestros compromisos como proveedor de alojamiento"
 
@@ -1044,134 +1176,6 @@ msgstr "Los últimos artículos aparecerán aquí."
 #: core/templates/core/home.html:163
 msgid "Tous les articles"
 msgstr "Todos los artículos"
-
-#: core/templates/core/account.html:3
-msgid "je Vois — Voisinternet"
-msgstr "je Vois — Voisinternet"
-
-#: core/templates/core/account.html:10
-msgid "Votre numéro de compte"
-msgstr "Tu número de cuenta"
-
-#: core/templates/core/account.html:12
-msgid ""
-"Notez-le maintenant. Nous n'en gardons qu'une empreinte : nous ne pourrons "
-"jamais vous le redonner. Il suffit, seul, pour retrouver vos raccourcis sur "
-"un autre appareil."
-msgstr ""
-"Anótalo ahora. Solo conservamos una huella de él: nunca podremos volver a "
-"dártelo. Basta por sí solo para recuperar tus accesos directos en otro "
-"dispositivo."
-
-#: core/templates/core/account.html:18
-msgid "Un compte anonyme est ouvert sur cet appareil"
-msgstr "Hay una cuenta anónima abierta en este dispositivo"
-
-#: core/templates/core/account.html:19
-msgid ""
-"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
-" ensuite supprimé."
-msgstr ""
-"¿Quieres vincular sus accesos directos a tu cuenta? La cuenta anónima se "
-"eliminará después."
-
-#: core/templates/core/account.html:20
-msgid "Rattacher mes raccourcis"
-msgstr "Vincular mis accesos directos"
-
-#: core/templates/core/account.html:27
-#: core/templates/core/partials/account_widget.html:16
-msgid "Mes raccourcis"
-msgstr "Mis accesos directos"
-
-#: core/templates/core/account.html:28
-msgid "Connecté"
-msgstr "Conectado"
-
-#: core/templates/core/account.html:28
-msgid "Compte anonyme"
-msgstr "Cuenta anónima"
-
-#: core/templates/core/account.html:36
-msgid "Se déconnecter"
-msgstr "Cerrar sesión"
-
-#: core/templates/core/account.html:38
-msgid "Rattacher à mon compte Grands Voisins"
-msgstr "Vincular a mi cuenta de Grands Voisins"
-
-#: core/templates/core/account.html:39
-msgid "Fermer ce compte sur cet appareil"
-msgstr "Cerrar esta cuenta en este dispositivo"
-
-#: core/templates/core/account.html:46
-msgid "Services disponibles"
-msgstr "Servicios disponibles"
-
-#: core/templates/core/account.html:47
-msgid "Ajoutez ceux qui vous intéressent à votre liste."
-msgstr "Añade a tu lista los que te interesen."
-
-#: core/templates/core/account.html:54
-msgid "Mes groupes"
-msgstr "Mis grupos"
-
-#: core/templates/core/account.html:63
-msgid "Groupes disponibles"
-msgstr "Grupos disponibles"
-
-#: core/templates/core/account.html:64
-msgid ""
-"Un particulier, une association, une entreprise… Adhérez à ceux qui vous "
-"concernent."
-msgstr ""
-"Un particular, una asociación, una empresa… Únete a los que te conciernen."
-
-#: core/templates/core/account.html:72
-#: core/templates/core/account.html:75
-#: core/templates/core/partials/account_widget.html:10
-msgid "Se connecter"
-msgstr "Iniciar sesión"
-
-#: core/templates/core/account.html:73
-msgid ""
-"Avec votre compte unique des Grands Voisins, le même que pour les autres "
-"outils de l'association."
-msgstr ""
-"Con tu cuenta única de Grands Voisins, la misma que usas para las demás "
-"herramientas de la asociación."
-
-#: core/templates/core/account.html:77
-msgid ""
-"La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
-"serveur."
-msgstr ""
-"El inicio de sesión con cuenta de Grands Voisins aún no está configurado en "
-"este servidor."
-
-#: core/templates/core/account.html:81
-msgid "Rester anonyme"
-msgstr "Permanecer anónimo"
-
-#: core/templates/core/account.html:82
-msgid ""
-"Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
-"pour retrouver vos raccourcis."
-msgstr ""
-"Un número de 16 cifras, sin nombre ni correo electrónico. Lo anotas, y basta"
-" para recuperar tus accesos directos."
-
-#: core/templates/core/account.html:83
-msgid "Créer un compte anonyme"
-msgstr "Crear una cuenta anónima"
-
-#: core/templates/core/account.html:85
-msgid "J'ai déjà un numéro"
-msgstr "Ya tengo un número"
-
-#: core/templates/core/account.html:88
-msgid "Retrouver"
-msgstr "Recuperar"
 
 #: core/templates/core/numerique.html:3
 msgid "Numérique — Voisinternet"

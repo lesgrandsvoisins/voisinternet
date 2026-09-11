@@ -1,12 +1,21 @@
 {% extends "core/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "tu Vois : se faire accompagner — Voisinternet" %}{% endblock %}
+{% block title %}{% trans "Agenda : les Conseils des Voisins — Voisinternet" %}{% endblock %}
 {% block content %}
-{% trans "Un rapport entre deux individus, dans une logique d'entraide : vous recevez ce dont vous avez besoin. Personne ne naît administrateur de serveur. Posez vos questions, venez aux ateliers, ou demandez qu'un bénévole passe vous voir." as page_lead %}
-{% include "core/partials/page_head.html" with item=conj.tu lead=page_lead %}
+{% trans "Le rendez-vous collectif des Grands Voisins : décider ensemble, en présence ou à distance." as page_lead %}
+{% include "core/partials/page_head.html" with item=conj.agenda lead=page_lead %}
 <div class="wrap page cols">
-  <section class="card"><h2>{% trans "Poser une question" %}</h2><p>{% blocktrans %}Écrivez-nous à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>. Un voisin vous répond, pas un robot.{% endblocktrans %}</p></section>
-  <section class="card"><h2>{% trans "Venir aux ateliers" %}</h2><p>{% trans "[À compléter : jour, horaire et lieu des ateliers.]" %}</p></section>
-  <section class="card"><h2>{% trans "Un coup de main chez vous" %}</h2><p>{% trans "[À compléter : comment demander une visite d'un bénévole.]" %}</p></section>
+  <section class="card">
+    <h2>{% trans "Les Conseils des Voisins" %}</h2>
+    <p>{% trans "Un rendez-vous périodique et ouvert à tous, pour décider ensemble et construire les valeurs du voisinage. Chaque séance se tient en deux temps identiques, pour que chacun trouve son horaire." %}</p>
+  </section>
+  <section class="card">
+    <h2>{% trans "Deux séances, un seul ordre du jour" %}</h2>
+    <p>{% blocktrans %}De 13h à 14h45, ou de 18h à 19h45 : même agenda, deux horaires. En présentiel ou en ligne sur <a href="https://meet.lesgrandsvoisins.com" target="_new">meet.lesgrandsvoisins.com</a>, sur inscription.{% endblocktrans %}</p>
+  </section>
+  <section class="card">
+    <h2>{% trans "Poser une question" %}</h2>
+    <p>{% blocktrans %}Écrivez-nous à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>. Un voisin vous répond, pas un robot.{% endblocktrans %}</p>
+  </section>
 </div>
 {% endblock %}

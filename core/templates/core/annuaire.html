@@ -3,12 +3,12 @@
 {% block title %}{% trans "vous Voyez : l'annuaire" %}{% if sector %} — {{ sector.name }}{% endif %} — Voisinternet{% endblock %}
 {% block content %}
 {% trans "Qui fait partie de la communauté, et comment les joindre : personnes et structures, individuelles ou collectives, avec leur accord." as page_lead %}
-{% include "core/partials/page_head.html" with item=conj.vous lead=page_lead %}
+{% include "core/partials/page_head.html" with item=conj.annuaire lead=page_lead %}
 <div class="wrap page">
   {% if sectors %}
   <nav class="chips" aria-label="{% trans 'Secteurs d’activité' %}">
-    <a href="{% url 'core:vous_voyez' %}"{% if not sector %} aria-current="page"{% endif %}>{% trans "Tous les secteurs" %}</a>
-    {% for s in sectors %}<a href="{% url 'core:vous_voyez_pour' s.slug %}"{% if sector == s %} aria-current="page"{% endif %}>{{ s.name }}</a>{% endfor %}
+    <a href="{% url 'core:annuaire' %}"{% if not sector %} aria-current="page"{% endif %}>{% trans "Tous les secteurs" %}</a>
+    {% for s in sectors %}<a href="{% url 'core:annuaire_pour' s.slug %}"{% if sector == s %} aria-current="page"{% endif %}>{{ s.name }}</a>{% endfor %}
   </nav>
   {% endif %}
 

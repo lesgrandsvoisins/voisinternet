@@ -33,20 +33,20 @@ GROUPS = [
 # les langues : c'est la signature du site, comme son nom. Seuls le titre, l'accroche
 # courte et le détail sont traduits.
 ENTRIES = [
-    Entry("je", "mon Compte", "Compte", _("mon Compte"), _("un individu, un compte, ce que je choisis de partager"),
+    Entry("je", _("mon Compte"), _("mon Compte"), _("mon Compte"), _("un individu, un compte, ce que je choisis de partager"),
           _("se connecter, créer un compte, retrouver mes raccourcis"), "core:je_vois", "singulier"),
-    Entry("tu", "Agenda", "Agenda programmé", _("Agenda"), _("un individu qui reçoit de l'aide, entre voisins"),
+    Entry("tu", _("Agenda"), _("Agenda"), _("Agenda"), _("un individu qui reçoit de l'aide, entre voisins"),
           _("poser une question, se faire accompagner"), "core:tu_vois", "singulier"),
-    Entry("il", "Bénévolat et dons", "Bénévolat et dons", _("Bénévolat et dons"), _("un individu qui donne, sans rien attendre en retour"),
+    Entry("il",_("Bénévolat et dons"),_("Bénévolat et dons"), _("Bénévolat et dons"), _("un individu qui donne, sans rien attendre en retour"),
           _("accompagner l'autre, donner du matériel"), "core:il_ou_elle_voit", "singulier"),
-    Entry("nous", "Grands Voisins", "Association coopérative", _("Grands Voisins"), _("une conscience collective, l'association coopérative"),
+    Entry("nous", _("Grands Voisins"),_("Grands Voisins"), _("Grands Voisins"), _("une conscience collective, l'association coopérative"),
           _("statuts, gouvernance, comptes : tout est public"), "core:nous_voyons", "pluriel"),
-    Entry("vous", "Annuaire", "pages de l'Annuaire des Voisins", _("Pages"), _("qui fait partie de la communauté, et comment les joindre"),
+    Entry("vous", _("Pages"),_("Pages"), _("Pages"), _("qui fait partie de la communauté, et comment les joindre"),
           _("un particulier, une association, une entreprise…"), "core:vous_voyez", "pluriel"),
-    Entry("ils", "Pôles", "Pôles d'Activités", _("Activités"), _("dons et partenaires qui nous ont aidés à naître"),
+    Entry("ils",  _("Pôles"), _("Pôles"), _("Pôles"), _("Civisme, arts plastique et numérique"),
           _("qui nous soutient — dons et partenaires — et comment nous soutenir"), "core:ils_et_elles_voient", "pluriel"),
-    Entry("grandzine", "Notre blog GrandZine", "GrandZine", _("Blog"), _("le blog"),
+    Entry("grandzine", _("Blog GrandZine"), _("Blog GrandZine"), _("Blog GrandZine"), _("le blog"),
           _("les nouvelles et les tribunes des adhérents"), "setting:BLOG_URL", "lire"),
-    Entry("wiki", "Notre wiki avec des guides d'usages", "Wiki", _("Guide"), _("le guide"),
+    Entry("wiki"_("Wiki / Guide"), _("Wiki / Guide"), , _("Wiki / Guide"), _("le guide"),
           _("pas à pas, du premier serveur aux sauvegardes"), "setting:GUIDE_URL", "lire"),
 ]

@@ -29,7 +29,7 @@
         <div class="wrap">
           {% for group in conj_groups %}
           <div>
-            <p class="cap">{{ group.caption }}</p>
+            <p class="cap cap-{{ group.key }}">{{ group.caption }}</p>
             <ul>
               {% for item in group.items %}
               <li><a href="{{ item.href }}" aria-label="{{ item.entry.aria }}"{% if item.current %} aria-current="page"{% endif %}><span class="form">{{ item.entry.pronoun }} {% include "core/partials/verb.html" with form=item.entry.form %}</span><small>{{ item.entry.short }}</small></a></li>

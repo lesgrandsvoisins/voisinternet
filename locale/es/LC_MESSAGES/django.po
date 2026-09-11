@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 00:47+0200\n"
+"POT-Creation-Date: 2026-09-12 01:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,32 +47,36 @@ msgid "à lire"
 msgstr "para leer"
 
 #: core/menu.py:36
-msgid "mon"
-msgstr "mi"
+msgid "raccourcis"
+msgstr "accesos directos"
 
 #: core/menu.py:37
-msgid "Compte"
-msgstr "Cuenta"
+msgid "& Communités"
+msgstr "& Comunidades"
 
 #: core/menu.py:38
 msgid "mon Compte"
 msgstr "mi Cuenta"
 
 #: core/menu.py:39
-msgid "un individu, un compte, ce que je choisis de partager"
-msgstr "un individuo, una cuenta, lo que decido compartir"
+msgid "ce que vous choisissez de partager, les groupes auxquels vous adhérez"
+msgstr "lo que decides compartir, los grupos a los que perteneces"
 
 #: core/menu.py:40
 msgid "se connecter, créer un compte, retrouver mes raccourcis"
 msgstr "iniciar sesión, crear una cuenta, recuperar mis accesos directos"
 
-#: core/menu.py:46 core/menu.py:48
-msgid "Annuaire"
-msgstr "Directorio"
+#: core/menu.py:46
+msgid "rencontrez"
+msgstr "conoce"
 
 #: core/menu.py:47
-msgid "des Voisins"
-msgstr "de los vecinos"
+msgid "les Voisins"
+msgstr "a los Vecinos"
+
+#: core/menu.py:48 core/templates/core/annuaire.html:3
+msgid "Annuaire"
+msgstr "Directorio"
 
 #: core/menu.py:49
 msgid "qui fait partie de la communauté, et comment les joindre"
@@ -83,64 +87,101 @@ msgid "un particulier, une association, une entreprise…"
 msgstr "un particular, una asociación, una empresa…"
 
 #: core/menu.py:56
-msgid "programme"
-msgstr "calendario"
+msgid "évènements"
+msgstr "eventos"
 
 #: core/menu.py:57
-msgid "& Agenda"
-msgstr "& Agenda"
+msgid "& Programmation"
+msgstr "y Programación"
 
 #: core/menu.py:58
 msgid "Agenda"
 msgstr "Agenda"
 
 #: core/menu.py:59
-msgid "un individu qui reçoit de l'aide, entre voisins"
-msgstr "un individuo que recibe ayuda, entre vecinos"
+msgid "les rendez-vous collectifs, en ligne ou en présence"
+msgstr "encuentros colectivos, en línea o presenciales"
 
 #: core/menu.py:60
-msgid "poser une question, se faire accompagner"
-msgstr "hacer una pregunta, recibir acompañamiento"
+msgid "les conseils des voisins, deux séances pour un même ordre du jour"
+msgstr "los Conseils des Voisins, dos sesiones para un mismo orden del día"
 
 #: core/menu.py:66 core/menu.py:76 core/menu.py:86
 msgid "pôle"
 msgstr "polo"
 
-#: core/menu.py:67 core/menu.py:68 core/menu.py:69
+#: core/menu.py:67
+msgid "pour se comprendre"
+msgstr "para entendernos"
+
+#: core/menu.py:68
 msgid "Civisme"
 msgstr "Compromiso cívico"
 
-#: core/menu.py:70 core/menu.py:80 core/menu.py:90
-msgid "qui nous soutient — dons et partenaires — et comment nous soutenir"
-msgstr "quién nos apoya — donaciones y socios — y cómo apoyarnos"
+#: core/menu.py:69
+msgid ""
+"Profession d'empathie nationale, prix d'excellence en service public et en "
+"travail social"
+msgstr ""
+"Profession d'Empathie Nationale, premio a la excelencia en el servicio "
+"público y el trabajo social"
 
-#: core/menu.py:77 core/menu.py:78 core/menu.py:79
+#: core/menu.py:70
+msgid "s'engager pour l'intérêt général, entre voisins"
+msgstr "comprometerse por el interés general, entre vecinos"
+
+#: core/menu.py:77
+msgid "visuel"
+msgstr "visual"
+
+#: core/menu.py:78
 msgid "Arts Plastiques"
 msgstr "Artes plásticas"
 
-#: core/menu.py:87 core/menu.py:88 core/menu.py:89
+#: core/menu.py:79
+msgid "Galléries d'art dans des lieux insolites et soutien aux artistes"
+msgstr "Galerías de arte en lugares insólitos, y apoyo a los artistas"
+
+#: core/menu.py:80
+msgid "transformer tout lieu en galerie d'art hybride"
+msgstr "transformar cualquier lugar en una galería de arte híbrida"
+
+#: core/menu.py:87
+msgid "pour le dèsenclavement"
+msgstr "para la inclusión digital"
+
+#: core/menu.py:88
 msgid "Numérique"
 msgstr "Digital"
 
+#: core/menu.py:89
+msgid "Salles de sociabilité numérique et Voisinternet"
+msgstr "Salas de sociabilidad digital, y Voisinternet"
+
+#: core/menu.py:90
+msgid "matériel reconditionné et compétences partagées"
+msgstr "material reacondicionado y competencias compartidas"
+
 #: core/menu.py:96
-msgid "dons"
-msgstr "donaciones"
+msgid "bénévolat"
+msgstr "voluntariado"
 
 #: core/menu.py:97
-msgid "& Bénévolat"
-msgstr "& Voluntariado"
+msgid "& Dons"
+msgstr "y Donaciones"
 
 #: core/menu.py:98
-msgid "Bénévolat et dons"
-msgstr "Voluntariado y donaciones"
+msgid "Contributions"
+msgstr "Contribuciones"
 
 #: core/menu.py:99
-msgid "un individu qui donne, sans rien attendre en retour"
-msgstr "un individuo que da, sin esperar nada a cambio"
+msgid ""
+"du temps, un don financier, ou du matériel : sans rien attendre en retour"
+msgstr "tiempo, una donación económica, o material: sin esperar nada a cambio"
 
 #: core/menu.py:100
-msgid "accompagner l'autre, donner du matériel"
-msgstr "acompañar a otros, donar equipos"
+msgid "donner du temps, faire un don, ou donner du matériel"
+msgstr "dar tu tiempo, hacer una donación, o donar material"
 
 #: core/menu.py:106
 msgid "Grands"
@@ -151,8 +192,8 @@ msgid "Voisins"
 msgstr "Voisins"
 
 #: core/menu.py:108
-msgid "Grands Voisins"
-msgstr "Grands Voisins"
+msgid "L'association"
+msgstr "La Asociación"
 
 #: core/menu.py:109
 msgid "une conscience collective, l'association coopérative"
@@ -163,36 +204,40 @@ msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "estatutos, gobernanza, cuentas: todo es público"
 
 #: core/menu.py:116
-msgid "blog"
-msgstr "blog"
+msgid "notre blog"
+msgstr "nuestro blog"
 
-#: core/menu.py:117 core/menu.py:118
+#: core/menu.py:117
 msgid "GrandZine"
 msgstr "GrandZine"
 
+#: core/menu.py:118
+msgid "Lisez nos articles"
+msgstr "Lee nuestros artículos"
+
 #: core/menu.py:119
-msgid "le blog"
-msgstr "el blog"
+msgid "le blog couvre le civisme, les arts plastiques et le numérique"
+msgstr "el blog cubre el civismo, las artes plásticas y lo digital"
 
 #: core/menu.py:120
 msgid "les nouvelles et les tribunes des adhérents"
 msgstr "noticias y tribunas de los socios"
 
 #: core/menu.py:126
+msgid "lire"
+msgstr "leer"
+
+#: core/menu.py:127
+msgid "le manuel d'utilisation"
+msgstr "el manual de uso"
+
+#: core/menu.py:128
 msgid "Wiki"
 msgstr "Wiki"
 
-#: core/menu.py:127
-msgid "/ guide"
-msgstr "/ guía"
-
-#: core/menu.py:128
-msgid "Wiki / guide"
-msgstr "Wiki / guía"
-
 #: core/menu.py:129
-msgid "le guide"
-msgstr "la guía"
+msgid "le guide sur comment utiliser nos outils"
+msgstr "la guía sobre cómo usar nuestras herramientas"
 
 #: core/menu.py:130
 msgid "pas à pas, du premier serveur aux sauvegardes"
@@ -489,8 +534,8 @@ msgid "donateur"
 msgstr "donante"
 
 #: core/templates/core/account.html:3
-msgid "je Vois — Voisinternet"
-msgstr "je Vois — Voisinternet"
+msgid "mon Compte — Voisinternet"
+msgstr "mi Cuenta — Voisinternet"
 
 #: core/templates/core/account.html:10
 msgid "Votre numéro de compte"
@@ -668,10 +713,6 @@ msgstr ""
 "Escríbenos a <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Te "
 "responde un vecino, no un robot."
 
-#: core/templates/core/annuaire.html:3
-msgid "vous Voyez : l'annuaire"
-msgstr "vous Voyez: el directorio"
-
 #: core/templates/core/annuaire.html:5
 msgid ""
 "Qui fait partie de la communauté, et comment les joindre : personnes et "
@@ -845,8 +886,8 @@ msgstr ""
 "Amérique-Latine."
 
 #: core/templates/core/contributions.html:3
-msgid "il ou elle Voit : bénévolat et dons — Voisinternet"
-msgstr "il ou elle Voit: voluntariado y donaciones — Voisinternet"
+msgid "Contributions : bénévolat et dons — Voisinternet"
+msgstr "Contribuciones: voluntariado y donaciones — Voisinternet"
 
 #: core/templates/core/contributions.html:5
 msgid ""
@@ -879,11 +920,11 @@ msgstr "Hacer una donación financiera"
 
 #: core/templates/core/contributions.html:9
 msgid ""
-"[À compléter : moyens de don, et possibilité de reçu fiscal selon "
-"l'éligibilité de l'association.]"
+"Par adhésion annuelle via HelloAsso, ou par don ponctuel via PayPal ou "
+"Stripe : ces trois raccourcis vous attendent dans « mon Compte »."
 msgstr ""
-"[Por completar: formas de donar, y posibilidad de recibo fiscal según la "
-"elegibilidad de la asociación.]"
+"Mediante una cuota anual a través de HelloAsso, o una donación puntual vía "
+"PayPal o Stripe: estos tres accesos directos te esperan en «mi Cuenta»."
 
 #: core/templates/core/contributions.html:9
 msgid ""
@@ -917,8 +958,8 @@ msgid "Les premiers soutiens apparaîtront ici, avec leur accord."
 msgstr "Los primeros apoyos aparecerán aquí, con su consentimiento."
 
 #: core/templates/core/grandsvoisins.html:3
-msgid "nous Voyons : l'association — Voisinternet"
-msgstr "nous Voyons: la asociación — Voisinternet"
+msgid "Grands Voisins : l'association — Voisinternet"
+msgstr "Grands Voisins: la asociación — Voisinternet"
 
 #: core/templates/core/grandsvoisins.html:5
 msgid ""
@@ -1121,11 +1162,11 @@ msgstr "los servicios"
 
 #: core/templates/core/home.html:98
 msgid ""
-"Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « je "
-"Vois », même sans compte nominatif."
+"Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « mon "
+"Compte », même sans compte nominatif."
 msgstr ""
-"Añade los que te interesen. Se unirán a tus accesos directos en «je Vois», "
-"incluso sin una cuenta con tu nombre."
+"Añade los que te interesen. Se unirán a tus accesos directos en «mi Cuenta»,"
+" incluso sin una cuenta con tu nombre."
 
 #: core/templates/core/home.html:102
 msgid "Tous les services, avec ce que chacun conserve"
@@ -1218,16 +1259,16 @@ msgstr ""
 
 #: core/templates/core/partials/account_widget.html:2
 #, python-format
-msgid "Je vois : %(account_sub)s"
-msgstr "je Vois: %(account_sub)s"
+msgid "Mon compte : %(account_sub)s"
+msgstr "Mi cuenta: %(account_sub)s"
 
 #: core/templates/core/partials/account_widget.html:3
 msgid "mes Raccourcis"
 msgstr "mis Accesos directos"
 
 #: core/templates/core/partials/account_widget.html:7
-msgid "Options de je Vois"
-msgstr "Opciones de je Vois"
+msgid "Options de mon compte"
+msgstr "Opciones de mi cuenta"
 
 #: core/templates/core/partials/account_widget.html:11
 msgid "Créer un compte"

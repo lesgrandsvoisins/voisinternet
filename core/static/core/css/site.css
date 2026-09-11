@@ -19,6 +19,9 @@
   --hover: #DCE8F0;
   --wm-inter: #6F8190;
   --danger: #A8322A;
+  --group-singulier: #C9971F;
+  --group-pluriel: #2E8B8B;
+  --group-lire: #7A5C99;
   --serif: "Charter", "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
   color-scheme: light;
@@ -45,6 +48,9 @@
     --hover: #1E3140;
     --wm-inter: #A9B8C3;
     --danger: #F08A80;
+    --group-singulier: #E0B84A;
+    --group-pluriel: #4FB3B3;
+    --group-lire: #A67FD9;
     color-scheme: dark;
   }
 }
@@ -69,6 +75,9 @@
   --hover: #1E3140;
   --wm-inter: #A9B8C3;
   --danger: #F08A80;
+  --group-singulier: #E0B84A;
+  --group-pluriel: #4FB3B3;
+  --group-lire: #A67FD9;
   color-scheme: dark;
 }
 
@@ -390,7 +399,21 @@ a {
   font-style: italic;
   font-size: .95rem;
   color: var(--ink-soft);
-  margin: 0 0 .4rem
+  margin: 0 0 .4rem;
+  padding-inline-start: .6rem;
+  border-inline-start: 3px solid var(--line)
+}
+
+.cap-singulier {
+  border-inline-start-color: var(--group-singulier)
+}
+
+.cap-pluriel {
+  border-inline-start-color: var(--group-pluriel)
+}
+
+.cap-lire {
+  border-inline-start-color: var(--group-lire)
 }
 
 .panel ul {
@@ -666,6 +689,18 @@ section.block {
   padding: 0 .75rem .5rem;
   border-bottom: 2px solid var(--ink);
   margin: 0
+}
+
+.col-cap.cap-singulier {
+  border-bottom-color: var(--group-singulier)
+}
+
+.col-cap.cap-pluriel {
+  border-bottom-color: var(--group-pluriel)
+}
+
+.col-cap.cap-lire {
+  border-bottom-color: var(--group-lire)
 }
 
 .conj ul {

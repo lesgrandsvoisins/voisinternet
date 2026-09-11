@@ -31,7 +31,7 @@
           {% for group in conj_groups %}
             {% if group.key != "lire" %}
               <div>
-                <p class="col-cap">{{ group.caption }}</p>
+                <p class="col-cap cap-{{ group.key }}">{{ group.caption }}</p>
                 <ul>
                   {% for item in group.items %}
                     <li>{% include "core/partials/conj_link.html" %}</li>
@@ -92,10 +92,10 @@
   <section class="block" aria-labelledby="svc-title">
     <div class="wrap">
       <h2 id="svc-title">
-        <span class="form">je <span class="V">V</span>ois</span> : {% trans "les services" %}
+        <span class="form">mon <span class="V">C</span>ompte</span> : {% trans "les services" %}
       </h2>
       <p class="intro">
-        {% trans "Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « je Vois », même sans compte nominatif." %}
+        {% trans "Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « mon Compte », même sans compte nominatif." %}
       </p>
       {% include "core/partials/service_list.html" %}
       <p class="note">
@@ -160,7 +160,7 @@
         {% else %}
           <p class="intro">{% trans "Les derniers articles s'afficheront ici." %}</p>
         {% endif %}
-        <a class="more" href="{{ BLOG_URL }}">{% trans "Tous les articles" %}</a>
+        <a class="more" target="_new" href="{{ BLOG_URL }}">{% trans "Tous les articles" %}</a>
       </div>
     </div>
   </section>

@@ -57,6 +57,7 @@ sur l'accueil : il se précisera au moment du compte ou du contrat.
 python -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
 export DJANGO_DEBUG=true
+export EnvironmentFile="$(pwd)/.env"
 mkdir -p var
 python manage.py migrate
 python manage.py loaddata initial      # services et livres du guide d'exemple

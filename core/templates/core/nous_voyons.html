@@ -1,14 +1,16 @@
 {% extends "core/base.html" %}
-{% block title %}nous Voyons : l'association — Voisinternet{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "nous Voyons : l'association — Voisinternet" %}{% endblock %}
 {% block content %}
-{% include "core/partials/page_head.html" with item=conj.nous lead="Voisinternet est un programme porté par l'association Les Grands Voisins. Nous demandons votre confiance : voici de quoi la vérifier." %}
+{% trans "Voisinternet est un programme porté par l'association Les Grands Voisins. Nous demandons votre confiance : voici de quoi la vérifier." as page_lead %}
+{% include "core/partials/page_head.html" with item=conj.nous lead=page_lead %}
 <div class="wrap page">
   <ul class="docs">
-    <li><strong>Statuts de l'association</strong><span>[document à publier]</span></li>
-    <li><strong>Composition du bureau</strong><span>[document à publier]</span></li>
-    <li><strong>Comptes annuels</strong><span>[document à publier]</span></li>
-    <li><strong>Comptes rendus d'assemblée générale</strong><span>[document à publier]</span></li>
-    <li><strong>Nos engagements d'hébergeur</strong><span>[document à publier]</span></li>
+    <li><strong>{% trans "Statuts de l'association" %}</strong><span>{% trans "[document à publier]" %}</span></li>
+    <li><strong>{% trans "Composition du bureau" %}</strong><span>{% trans "[document à publier]" %}</span></li>
+    <li><strong>{% trans "Comptes annuels" %}</strong><span>{% trans "[document à publier]" %}</span></li>
+    <li><strong>{% trans "Comptes rendus d'assemblée générale" %}</strong><span>{% trans "[document à publier]" %}</span></li>
+    <li><strong>{% trans "Nos engagements d'hébergeur" %}</strong><span>{% trans "[document à publier]" %}</span></li>
   </ul>
 </div>
 {% endblock %}

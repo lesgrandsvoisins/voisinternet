@@ -1,0 +1,952 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-11 15:28+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: core/accounts.py:48 core/accounts.py:53
+#, python-format
+msgid "mes raccourcis (%d)"
+msgstr "my shortcuts (%d)"
+
+#: core/accounts.py:48
+msgid "mon compte"
+msgstr "my account"
+
+#: core/accounts.py:51
+msgid "se connecter"
+msgstr "log in"
+
+#: core/accounts.py:53
+msgid "compte anonyme"
+msgstr "anonymous account"
+
+#: core/menu.py:27
+msgid "au singulier, chacun"
+msgstr "singular, each on their own"
+
+#: core/menu.py:28
+msgid "au pluriel, ensemble"
+msgstr "plural, together"
+
+#: core/menu.py:29
+msgid "à lire"
+msgstr "to read"
+
+#: core/menu.py:36
+msgid "Mon compte"
+msgstr "My account"
+
+#: core/menu.py:36
+msgid "se connecter, mon compte, mes raccourcis"
+msgstr "log in, my account, my shortcuts"
+
+#: core/menu.py:37
+msgid "se connecter, créer un compte, retrouver mes raccourcis"
+msgstr "log in, create an account, recover my shortcuts"
+
+#: core/menu.py:38
+msgid "Contact"
+msgstr "Contact"
+
+#: core/menu.py:38
+msgid "contact, se faire accompagner"
+msgstr "contact, get support"
+
+#: core/menu.py:39
+msgid "poser une question, se faire accompagner"
+msgstr "ask a question, get support"
+
+#: core/menu.py:40
+msgid "Bénévolat"
+msgstr "Volunteering"
+
+#: core/menu.py:40
+msgid "bénévolat, accompagner l'autre"
+msgstr "volunteering, supporting others"
+
+#: core/menu.py:41
+msgid "accompagner l'autre, donner du matériel"
+msgstr "supporting others, donating equipment"
+
+#: core/menu.py:42 core/models.py:167
+msgid "Association"
+msgstr "Association"
+
+#: core/menu.py:42
+msgid "l'association"
+msgstr "the association"
+
+#: core/menu.py:43
+msgid "statuts, gouvernance, comptes : tout est public"
+msgstr "bylaws, governance, accounts: everything is public"
+
+#: core/menu.py:44
+msgid "Services"
+msgstr "Services"
+
+#: core/menu.py:44 core/templates/core/home.html:95
+msgid "les services"
+msgstr "the services"
+
+#: core/menu.py:45
+msgid "à ajouter à votre compte, même anonyme"
+msgstr "to add to your account, even anonymously"
+
+#: core/menu.py:46
+msgid "Dons et donateurs"
+msgstr "Donations and donors"
+
+#: core/menu.py:46
+msgid "dons financiers et donateurs"
+msgstr "financial donations and donors"
+
+#: core/menu.py:47
+msgid "qui nous soutient, et comment nous soutenir"
+msgstr "who supports us, and how to support us"
+
+#: core/menu.py:48
+msgid "Blog"
+msgstr "Blog"
+
+#: core/menu.py:48
+msgid "le blog"
+msgstr "the blog"
+
+#: core/menu.py:49
+msgid "les nouvelles et les tribunes des adhérents"
+msgstr "member news and opinion pieces"
+
+#: core/menu.py:50
+msgid "Guide"
+msgstr "Guide"
+
+#: core/menu.py:50
+msgid "le guide"
+msgstr "the guide"
+
+#: core/menu.py:51
+msgid "pas à pas, du premier serveur aux sauvegardes"
+msgstr "step by step, from your first server to backups"
+
+#: core/models.py:34
+msgid "vous êtes…"
+msgstr "you are…"
+
+#: core/models.py:34
+msgid "Par exemple : « Une association »."
+msgstr "For example: “An association”."
+
+#: core/models.py:36
+msgid "qui est concerné"
+msgstr "who this is for"
+
+#: core/models.py:37 core/models.py:57
+msgid "en une phrase"
+msgstr "in one sentence"
+
+#: core/models.py:38
+msgid "texte de la page"
+msgstr "page text"
+
+#: core/models.py:40
+msgid "partenariat plutôt que services"
+msgstr "partnership rather than services"
+
+#: core/models.py:41
+msgid ""
+"Pour les acteurs publics et sociaux : la page propose un partenariat, sans "
+"bouton « Ajouter »."
+msgstr ""
+"For public and social actors: the page offers a partnership, with no “Add” "
+"button."
+
+#: core/models.py:43 core/models.py:71
+msgid "ordre"
+msgstr "order"
+
+#: core/models.py:47
+msgid "public"
+msgstr "audience"
+
+#: core/models.py:48 core/models.py:66
+msgid "publics"
+msgstr "audiences"
+
+#: core/models.py:55
+msgid "nom"
+msgstr "name"
+
+#: core/models.py:60
+msgid "ce que l'association conserve"
+msgstr "what the association keeps"
+
+#: core/models.py:62
+msgid ""
+"Ce qui reste anonyme, et ce que l'association doit conserver en tant "
+"qu'hébergeur."
+msgstr "What stays anonymous, and what the association must keep as a host."
+
+#: core/models.py:64
+msgid "adresse du service"
+msgstr "service address"
+
+#: core/models.py:67
+msgid "Laisser vide si le service s'adresse à tout le monde."
+msgstr "Leave empty if the service is for everyone."
+
+#: core/models.py:69
+msgid "mis en avant"
+msgstr "featured"
+
+#: core/models.py:70
+msgid "proposé"
+msgstr "offered"
+
+#: core/models.py:75
+msgid "service"
+msgstr "service"
+
+#: core/models.py:96
+msgid "compte"
+msgstr "account"
+
+#: core/models.py:100
+#, python-format
+msgid "Compte de %(user)s"
+msgstr "Account of %(user)s"
+
+#: core/models.py:101
+#, python-format
+msgid "Compte anonyme n° %(pk)s"
+msgstr "Anonymous account no. %(pk)s"
+
+#: core/models.py:133
+msgid "ordre personnel"
+msgstr "personal order"
+
+#: core/models.py:139
+msgid "raccourci"
+msgstr "shortcut"
+
+#: core/models.py:163
+msgid "Particulier"
+msgstr "Individual"
+
+#: core/models.py:164
+msgid "Entreprise"
+msgstr "Company"
+
+#: core/models.py:165
+msgid "Fondation"
+msgstr "Foundation"
+
+#: core/models.py:166
+msgid "Collectivité"
+msgstr "Local authority"
+
+#: core/models.py:169
+msgid "nom affiché"
+msgstr "displayed name"
+
+#: core/models.py:170
+msgid "type"
+msgstr "type"
+
+#: core/models.py:172
+msgid "apparaît publiquement"
+msgstr "appears publicly"
+
+#: core/models.py:173
+msgid "Uniquement avec le consentement explicite du donateur (RGPD)."
+msgstr "Only with the donor's explicit consent (GDPR)."
+
+#: core/models.py:175
+msgid "soutien depuis"
+msgstr "supporting since"
+
+#: core/models.py:179
+msgid "donateur"
+msgstr "donor"
+
+#: core/templates/core/base.html:9
+msgid ""
+"Voisinternet, porté par Les Grands Voisins : héberger ses courriels, "
+"fichiers et agendas chez soi ou chez un voisin de confiance."
+msgstr ""
+"Voisinternet, run by Les Grands Voisins: host your emails, files and "
+"calendars at home, or with a trusted neighbor."
+
+#: core/templates/core/base.html:16
+msgid "Aller au contenu"
+msgstr "Skip to content"
+
+#: core/templates/core/base.html:20
+msgid "Voisinternet, accueil"
+msgstr "Voisinternet, home"
+
+#: core/templates/core/base.html:21
+msgid "Accès rapide"
+msgstr "Quick access"
+
+#: core/templates/core/base.html:27
+msgid "Menu"
+msgstr "Menu"
+
+#: core/templates/core/base.html:28
+msgid "Menu principal"
+msgstr "Main menu"
+
+#: core/templates/core/base.html:57
+msgid ""
+"Porté par Les Grands Voisins, à Fontenay-aux-Roses et dans le 14ᵉ "
+"arrondissement de Paris."
+msgstr ""
+"Run by Les Grands Voisins, in Fontenay-aux-Roses and the 14th arrondissement"
+" of Paris."
+
+#: core/templates/core/base.html:58
+msgid ""
+"Seulement deux cookies techniques : votre session et la protection des "
+"formulaires. Aucun traceur, rien n'est chargé depuis un tiers."
+msgstr ""
+"Only two technical cookies: your session and form protection. No trackers, "
+"nothing loaded from a third party."
+
+#: core/templates/core/base.html:60
+msgid "Plan du site"
+msgstr "Site map"
+
+#: core/templates/core/base.html:71
+msgid "Des Voies · Nos Voix · Voisinternet"
+msgstr "Ways · Voices · Voisinternet"
+
+#: core/templates/core/home.html:3
+msgid "Voisinternet — Ôtez-vous de leur nuage"
+msgstr "Voisinternet — Get out of their cloud"
+
+#: core/templates/core/home.html:8
+msgid "Ôtez-vous de leur nuage."
+msgstr "Get out of their cloud."
+
+#: core/templates/core/home.html:11
+msgid ""
+"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un"
+" voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
+"accompagnent."
+msgstr ""
+"Your emails, photos and calendars can live at home, or with a trusted "
+"neighbor. Voisinternet shows you how, and neighbors support you."
+
+#: core/templates/core/home.html:14
+msgid "Voir les services"
+msgstr "See the services"
+
+#: core/templates/core/home.html:15
+msgid "Lire le guide"
+msgstr "Read the guide"
+
+#: core/templates/core/home.html:18
+msgid "Voies · Voix · Vous"
+msgstr "Ways · Voices · You"
+
+#: core/templates/core/home.html:18
+msgid "porté par Les Grands Voisins"
+msgstr "run by Les Grands Voisins"
+
+#: core/templates/core/home.html:27
+msgid "Voir, au présent"
+msgstr "To see, in the present tense"
+
+#: core/templates/core/home.html:28
+msgid ""
+"Tout le site se conjugue. Choisissez votre personne, elle vous mène au bon "
+"endroit."
+msgstr ""
+"The whole site is conjugated. Pick your person, it takes you to the right "
+"place."
+
+#: core/templates/core/home.html:57 core/templates/core/vous_voyez.html:9
+msgid "Vous êtes…"
+msgstr "You are…"
+
+#: core/templates/core/home.html:70
+msgid "Comment ça marche"
+msgstr "How it works"
+
+#: core/templates/core/home.html:71
+msgid ""
+"Pas besoin d'être informaticien. Il suffit d'un peu de curiosité et d'un "
+"voisin."
+msgstr ""
+"No need to be a computer expert. Just a bit of curiosity and a neighbor."
+
+#: core/templates/core/home.html:74
+#: core/templates/core/partials/shortcut_list.html:16
+msgid "Choisissez vos services"
+msgstr "Choose your services"
+
+#: core/templates/core/home.html:75
+msgid "Ajoutez-les à votre compte. Un numéro suffit : ni nom, ni courriel."
+msgstr "Add them to your account. A number is enough: no name, no email."
+
+#: core/templates/core/home.html:78
+msgid "Installez chez vous, ou chez un voisin"
+msgstr "Set it up at home, or at a neighbor's"
+
+#: core/templates/core/home.html:79
+msgid ""
+"Un petit serveur consomme à peu près comme une box internet. Pas de place ? "
+"Un voisin de confiance l'héberge."
+msgstr ""
+"A small server uses about as much power as an internet box. No room? A "
+"trusted neighbor can host it."
+
+#: core/templates/core/home.html:82
+msgid "Ne restez pas seul devant l'écran"
+msgstr "Don't stay alone in front of the screen"
+
+#: core/templates/core/home.html:83
+msgid ""
+"Des voisins bénévoles vous accompagnent, en atelier ou chez vous. Et un "
+"jour, peut-être, ce sera votre tour."
+msgstr ""
+"Volunteer neighbors support you, in a workshop or at home. And one day, "
+"maybe, it will be your turn."
+
+#: core/templates/core/home.html:85
+msgid "Se faire accompagner"
+msgstr "Get support"
+
+#: core/templates/core/home.html:86 core/templates/core/il_ou_elle_voit.html:8
+msgid "Devenir bénévole"
+msgstr "Become a volunteer"
+
+#: core/templates/core/home.html:98
+msgid ""
+"Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « je "
+"Vois », même sans compte nominatif."
+msgstr ""
+"Add the ones you're interested in. They'll join your shortcuts in “je Vois”,"
+" even without a named account."
+
+#: core/templates/core/home.html:102
+msgid "Tous les services, avec ce que chacun conserve"
+msgstr "All the services, with what each one keeps"
+
+#: core/templates/core/home.html:109
+msgid "D'où vient notre devise"
+msgstr "Where our motto comes from"
+
+#: core/templates/core/home.html:111
+msgid "« Ôte-toi de mon soleil. »"
+msgstr "“Get out of my sunlight.”"
+
+#: core/templates/core/home.html:114
+msgid ""
+"Diogène à Alexandre le Grand, qui lui offrait ce qu'il voulait. D'après "
+"Plutarque, <cite>Vie d'Alexandre</cite>, 14."
+msgstr ""
+"Diogenes to Alexander the Great, who offered him anything he wanted. After "
+"Plutarch, <cite>Life of Alexander</cite>, 14."
+
+#: core/templates/core/home.html:118
+msgid ""
+"Le philosophe ne demandait rien au plus puissant, sinon de cesser de lui "
+"faire de l'ombre. Nous l'avons mis au pluriel : <strong>ôtez-vous de leur "
+"nuage</strong>, et gardez votre part de soleil."
+msgstr ""
+"The philosopher asked the most powerful man for nothing, except to stop "
+"blocking his light. We put it in the plural: <strong>get out of their "
+"cloud</strong>, and keep your share of sunlight."
+
+#: core/templates/core/home.html:122
+msgid "Le guide et le blog"
+msgstr "The guide and the blog"
+
+#: core/templates/core/home.html:139
+msgid "Les livres du guide s'afficheront ici."
+msgstr "The guide's books will appear here."
+
+#: core/templates/core/home.html:141
+msgid "Tout le guide"
+msgstr "The whole guide"
+
+#: core/templates/core/home.html:161
+msgid "Les derniers articles s'afficheront ici."
+msgstr "The latest articles will appear here."
+
+#: core/templates/core/home.html:163
+msgid "Tous les articles"
+msgstr "All articles"
+
+#: core/templates/core/il_ou_elle_voit.html:3
+msgid "il ou elle Voit : accompagner l'autre — Voisinternet"
+msgstr "il ou elle Voit: supporting others — Voisinternet"
+
+#: core/templates/core/il_ou_elle_voit.html:5
+msgid ""
+"Vous savez installer un serveur, ou vous avez un vieil ordinateur au placard"
+" ? Un voisin en a besoin."
+msgstr ""
+"Know how to set up a server, or have an old computer in a closet? A neighbor"
+" needs it."
+
+#: core/templates/core/il_ou_elle_voit.html:8
+#, python-format
+msgid ""
+"Animer un atelier, relire le guide, dépanner un voisin : chacun donne le "
+"temps qu'il veut. Écrivez-nous à <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+msgstr ""
+"Run a workshop, proofread the guide, help fix a neighbor's issue: everyone "
+"gives as much time as they want. Write to us at <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+
+#: core/templates/core/il_ou_elle_voit.html:9
+msgid "Donner du matériel"
+msgstr "Donate equipment"
+
+#: core/templates/core/il_ou_elle_voit.html:9
+msgid ""
+"[À compléter : matériel accepté, effacement des données, lieu de dépôt.]"
+msgstr ""
+"[To be completed: accepted equipment, data wiping, drop-off location.]"
+
+#: core/templates/core/ils_et_elles_voient.html:3
+msgid "ils et elles Voient : dons et donateurs — Voisinternet"
+msgstr "ils et elles Voient: donations and donors — Voisinternet"
+
+#: core/templates/core/ils_et_elles_voient.html:5
+msgid ""
+"Ils et elles nous soutiennent. Leur nom n'apparaît ici qu'avec leur accord."
+msgstr "They support us. Their name appears here only with their consent."
+
+#: core/templates/core/ils_et_elles_voient.html:9
+msgid "Nos soutiens"
+msgstr "Our supporters"
+
+#: core/templates/core/ils_et_elles_voient.html:11
+#, python-format
+msgid "depuis %(since)s"
+msgstr "since %(since)s"
+
+#: core/templates/core/ils_et_elles_voient.html:13
+msgid "Les premiers soutiens apparaîtront ici, avec leur accord."
+msgstr "The first supporters will appear here, with their consent."
+
+#: core/templates/core/ils_et_elles_voient.html:17
+msgid "Nous soutenir"
+msgstr "Support us"
+
+#: core/templates/core/ils_et_elles_voient.html:18
+msgid ""
+"[À compléter : moyens de don, et possibilité de reçu fiscal selon "
+"l'éligibilité de l'association.]"
+msgstr ""
+"[To be completed: ways to donate, and possible tax receipt depending on the "
+"association's eligibility.]"
+
+#: core/templates/core/ils_et_elles_voient.html:19
+msgid ""
+"Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous "
+"est nécessaire, mais elle n'est jamais publiée sans votre accord."
+msgstr ""
+"A donation can stay anonymous. If you want a receipt, we need your identity,"
+" but it is never published without your consent."
+
+#: core/templates/core/je_vois.html:3
+msgid "je Vois — Voisinternet"
+msgstr "je Vois — Voisinternet"
+
+#: core/templates/core/je_vois.html:10
+msgid "Votre numéro de compte"
+msgstr "Your account number"
+
+#: core/templates/core/je_vois.html:12
+msgid ""
+"Notez-le maintenant. Nous n'en gardons qu'une empreinte : nous ne pourrons "
+"jamais vous le redonner. Il suffit, seul, pour retrouver vos raccourcis sur "
+"un autre appareil."
+msgstr ""
+"Write it down now. We only keep a fingerprint of it: we can never give it "
+"back to you. It's enough, on its own, to find your shortcuts on another "
+"device."
+
+#: core/templates/core/je_vois.html:18
+msgid "Un compte anonyme est ouvert sur cet appareil"
+msgstr "An anonymous account is open on this device"
+
+#: core/templates/core/je_vois.html:19
+msgid ""
+"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
+" ensuite supprimé."
+msgstr ""
+"Would you like to attach its shortcuts to your account? The anonymous "
+"account will then be deleted."
+
+#: core/templates/core/je_vois.html:20
+msgid "Rattacher mes raccourcis"
+msgstr "Attach my shortcuts"
+
+#: core/templates/core/je_vois.html:27
+#: core/templates/core/partials/account_widget.html:15
+msgid "Mes raccourcis"
+msgstr "My shortcuts"
+
+#: core/templates/core/je_vois.html:28
+msgid "Connecté"
+msgstr "Logged in"
+
+#: core/templates/core/je_vois.html:28
+msgid "Compte anonyme"
+msgstr "Anonymous account"
+
+#: core/templates/core/je_vois.html:36
+msgid "Se déconnecter"
+msgstr "Log out"
+
+#: core/templates/core/je_vois.html:38
+msgid "Rattacher à mon compte Grands Voisins"
+msgstr "Attach to my Grands Voisins account"
+
+#: core/templates/core/je_vois.html:39
+msgid "Fermer ce compte sur cet appareil"
+msgstr "Close this account on this device"
+
+#: core/templates/core/je_vois.html:46
+msgid "Services disponibles"
+msgstr "Available services"
+
+#: core/templates/core/je_vois.html:47
+msgid "Ajoutez ceux qui vous intéressent à votre liste."
+msgstr "Add the ones you're interested in to your list."
+
+#: core/templates/core/je_vois.html:55 core/templates/core/je_vois.html:58
+#: core/templates/core/partials/account_widget.html:8
+msgid "Se connecter"
+msgstr "Log in"
+
+#: core/templates/core/je_vois.html:56
+msgid ""
+"Avec votre compte unique des Grands Voisins, le même que pour les autres "
+"outils de l'association."
+msgstr ""
+"With your single Grands Voisins account, the same one used for the "
+"association's other tools."
+
+#: core/templates/core/je_vois.html:60
+msgid ""
+"La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
+"serveur."
+msgstr ""
+"Login with a Grands Voisins account is not yet configured on this server."
+
+#: core/templates/core/je_vois.html:64
+msgid "Rester anonyme"
+msgstr "Stay anonymous"
+
+#: core/templates/core/je_vois.html:65
+msgid ""
+"Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
+"pour retrouver vos raccourcis."
+msgstr ""
+"A 16-digit number, with no name or email. You write it down, and it's enough"
+" to recover your shortcuts."
+
+#: core/templates/core/je_vois.html:66
+msgid "Créer un compte anonyme"
+msgstr "Create an anonymous account"
+
+#: core/templates/core/je_vois.html:68
+msgid "J'ai déjà un numéro"
+msgstr "I already have a number"
+
+#: core/templates/core/je_vois.html:71
+msgid "Retrouver"
+msgstr "Recover"
+
+#: core/templates/core/nous_voyons.html:3
+msgid "nous Voyons : l'association — Voisinternet"
+msgstr "nous Voyons: the association — Voisinternet"
+
+#: core/templates/core/nous_voyons.html:5
+msgid ""
+"Voisinternet est un programme porté par l'association Les Grands Voisins. "
+"Nous demandons votre confiance : voici de quoi la vérifier."
+msgstr ""
+"Voisinternet is a program run by the association Les Grands Voisins. We're "
+"asking for your trust: here's what you can check."
+
+#: core/templates/core/nous_voyons.html:9
+msgid "Statuts de l'association"
+msgstr "Association's bylaws"
+
+#: core/templates/core/nous_voyons.html:9
+#: core/templates/core/nous_voyons.html:10
+#: core/templates/core/nous_voyons.html:11
+#: core/templates/core/nous_voyons.html:12
+#: core/templates/core/nous_voyons.html:13
+msgid "[document à publier]"
+msgstr "[document to be published]"
+
+#: core/templates/core/nous_voyons.html:10
+msgid "Composition du bureau"
+msgstr "Board composition"
+
+#: core/templates/core/nous_voyons.html:11
+msgid "Comptes annuels"
+msgstr "Annual accounts"
+
+#: core/templates/core/nous_voyons.html:12
+msgid "Comptes rendus d'assemblée générale"
+msgstr "General assembly minutes"
+
+#: core/templates/core/nous_voyons.html:13
+msgid "Nos engagements d'hébergeur"
+msgstr "Our hosting commitments"
+
+#: core/templates/core/partials/account_widget.html:2
+#, python-format
+msgid "Je vois : %(account_sub)s"
+msgstr "je Vois: %(account_sub)s"
+
+#: core/templates/core/partials/account_widget.html:5
+msgid "Options de je Vois"
+msgstr "je Vois options"
+
+#: core/templates/core/partials/account_widget.html:9
+msgid "Créer un compte"
+msgstr "Create an account"
+
+#: core/templates/core/partials/account_widget.html:25
+msgid "Aucun service ajouté pour l'instant."
+msgstr "No service added yet."
+
+#: core/templates/core/partials/lang_switcher.html:5
+msgid "Langue"
+msgstr "Language"
+
+#: core/templates/core/partials/lang_switcher.html:13
+msgid "Changer"
+msgstr "Change"
+
+#: core/templates/core/partials/scene.html:1
+msgid ""
+"Une rue de quartier au soleil : café, galerie, théâtre et salle de concert, "
+"restaurant, salon de thé, centre social, atelier d'art et hôpital, reliés "
+"entre eux ; un nuage s'éloigne."
+msgstr ""
+"A neighborhood street in the sun: café, gallery, theater and concert hall, "
+"restaurant, tea room, community center, art workshop and hospital, all "
+"connected; a cloud drifts away."
+
+#: core/templates/core/partials/scene.html:13
+msgid "Café"
+msgstr "Café"
+
+#: core/templates/core/partials/scene.html:30
+msgid "Galerie"
+msgstr "Gallery"
+
+#: core/templates/core/partials/scene.html:42
+msgid "Théâtre · Concerts"
+msgstr "Theater · Concerts"
+
+#: core/templates/core/partials/scene.html:66
+msgid "Restaurant"
+msgstr "Restaurant"
+
+#: core/templates/core/partials/scene.html:79
+msgid "Salon de thé"
+msgstr "Tea room"
+
+#: core/templates/core/partials/scene.html:97
+msgid "Centre social"
+msgstr "Community center"
+
+#: core/templates/core/partials/scene.html:106
+msgid "Atelier"
+msgstr "Workshop"
+
+#: core/templates/core/partials/service_list.html:9
+msgid "Ce qui reste anonyme, ce que nous conservons"
+msgstr "What stays anonymous, what we keep"
+
+#: core/templates/core/partials/service_list.html:15
+msgid "Aucun service pour l'instant"
+msgstr "No service yet"
+
+#: core/templates/core/partials/service_list.html:15
+msgid "Les services apparaîtront ici dès qu'ils seront ouverts."
+msgstr "Services will appear here as soon as they're available."
+
+#: core/templates/core/partials/shortcut_button.html:3
+#, python-format
+msgid "Retirer %(name)s de mes raccourcis"
+msgstr "Remove %(name)s from my shortcuts"
+
+#: core/templates/core/partials/shortcut_button.html:3
+#, python-format
+msgid "Ajouter %(name)s à mes raccourcis"
+msgstr "Add %(name)s to my shortcuts"
+
+#: core/templates/core/partials/shortcut_button.html:3
+msgid "Ajouté"
+msgstr "Added"
+
+#: core/templates/core/partials/shortcut_button.html:3
+msgid "Ajouter"
+msgstr "Add"
+
+#: core/templates/core/partials/shortcut_list.html:8
+#, python-format
+msgid "Monter %(name)s"
+msgstr "Move %(name)s up"
+
+#: core/templates/core/partials/shortcut_list.html:9
+#, python-format
+msgid "Descendre %(name)s"
+msgstr "Move %(name)s down"
+
+#: core/templates/core/partials/shortcut_list.html:16
+msgid "Aucun raccourci pour l'instant."
+msgstr "No shortcut yet."
+
+#: core/templates/core/partials/shortcut_list.html:16
+msgid "ils apparaîtront ici."
+msgstr "they will appear here."
+
+#: core/templates/core/partials/toasts.html:4
+msgid "Compte anonyme créé. Notez votre numéro :"
+msgstr "Anonymous account created. Write down your number:"
+
+#: core/templates/core/partials/toasts.html:4
+msgid "Il ne sera plus jamais affiché."
+msgstr "It will never be shown again."
+
+#: core/templates/core/partials/toasts.html:4
+msgid "Voir mon compte"
+msgstr "See my account"
+
+#: core/templates/core/tu_vois.html:3
+msgid "tu Vois : se faire accompagner — Voisinternet"
+msgstr "tu Vois: getting support — Voisinternet"
+
+#: core/templates/core/tu_vois.html:5
+msgid ""
+"Personne ne naît administrateur de serveur. Posez vos questions, venez aux "
+"ateliers, ou demandez qu'un bénévole passe vous voir."
+msgstr ""
+"No one is born a server administrator. Ask your questions, come to a "
+"workshop, or ask a volunteer to come see you."
+
+#: core/templates/core/tu_vois.html:8
+msgid "Poser une question"
+msgstr "Ask a question"
+
+#: core/templates/core/tu_vois.html:8
+#, python-format
+msgid ""
+"Écrivez-nous à <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. "
+"Un voisin vous répond, pas un robot."
+msgstr ""
+"Write to us at <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. A"
+" neighbor answers you, not a robot."
+
+#: core/templates/core/tu_vois.html:9
+msgid "Venir aux ateliers"
+msgstr "Come to a workshop"
+
+#: core/templates/core/tu_vois.html:9
+msgid "[À compléter : jour, horaire et lieu des ateliers.]"
+msgstr "[To be completed: day, time and location of workshops.]"
+
+#: core/templates/core/tu_vois.html:10
+msgid "Un coup de main chez vous"
+msgstr "A helping hand at home"
+
+#: core/templates/core/tu_vois.html:10
+msgid "[À compléter : comment demander une visite d'un bénévole.]"
+msgstr "[To be completed: how to request a volunteer visit.]"
+
+#: core/templates/core/vous_voyez.html:3
+msgid "vous Voyez : les services"
+msgstr "vous Voyez: the services"
+
+#: core/templates/core/vous_voyez.html:5
+msgid ""
+"Ajoutez ceux qui vous intéressent à vos raccourcis, même sans compte "
+"nominatif. Chaque service indique ce qui reste anonyme et ce que "
+"l'association doit conserver en tant qu'hébergeur."
+msgstr ""
+"Add the ones you're interested in to your shortcuts, even without a named "
+"account. Each service states what stays anonymous and what the association "
+"must keep as a host."
+
+#: core/templates/core/vous_voyez.html:10
+msgid "Tout le monde"
+msgstr "Everyone"
+
+#: core/templates/core/vous_voyez.html:22
+msgid "Partenariat Voisinternet"
+msgstr "Voisinternet partnership"
+
+#: core/templates/core/vous_voyez.html:23
+msgid "Proposer un partenariat"
+msgstr "Propose a partnership"
+
+#: core/templates/core/vous_voyez.html:29
+msgid "Voir les services proposés aux habitants"
+msgstr "See the services offered to residents"
+
+#: core/views.py:113
+msgid "Compte anonyme créé."
+msgstr "Anonymous account created."
+
+#: core/views.py:120
+msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
+msgstr "Too many attempts from this device. Try again in fifteen minutes."
+
+#: core/views.py:124
+msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
+msgstr "No account matches this number. Check the 16 digits."
+
+#: core/views.py:127
+msgid "Compte retrouvé. Vos raccourcis sont de retour."
+msgstr "Account found. Your shortcuts are back."
+
+#: core/views.py:134
+msgid ""
+"Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
+"retrouver."
+msgstr ""
+"This account is no longer open on this device. Your number lets you find it "
+"again."
+
+#: core/views.py:145
+msgid "Vos raccourcis anonymes ont rejoint votre compte."
+msgstr "Your anonymous shortcuts have joined your account."
+
+#: core/views.py:161
+#, python-format
+msgid "« %(name)s » retiré de vos raccourcis."
+msgstr "“%(name)s” removed from your shortcuts."
+
+#: core/views.py:165
+#, python-format
+msgid "« %(name)s » ajouté à vos raccourcis."
+msgstr "“%(name)s” added to your shortcuts."

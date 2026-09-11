@@ -1,4 +1,4 @@
-<svg class="scene" viewBox="0 18 720 382" role="img" aria-label="Une rue de quartier au soleil : café, galerie, théâtre et salle de concert, restaurant, salon de thé, centre social, atelier d'art et hôpital, reliés entre eux ; un nuage s'éloigne.">
+{% load i18n %}<svg class="scene" viewBox="0 18 720 382" role="img" aria-label="{% trans "Une rue de quartier au soleil : café, galerie, théâtre et salle de concert, restaurant, salon de thé, centre social, atelier d'art et hôpital, reliés entre eux ; un nuage s'éloigne." %}">
 <circle cx="92" cy="70" r="42" fill="var(--sun)"/>
 <g class="cloud" fill="var(--cloud)"><circle cx="455" cy="62" r="27"/><circle cx="490" cy="50" r="35"/><circle cx="527" cy="66" r="24"/><rect x="428" y="64" width="124" height="26" rx="13"/></g>
 <polygon points="8,182 20,154 88,154 100,182" fill="var(--zinc)"/>
@@ -10,7 +10,7 @@
 <rect x="47.0" y="231.3" width="14" height="24" fill="var(--win-lit)"/>
 <rect x="73.5" y="231.3" width="14" height="24" fill="var(--win)"/>
 <rect x="22" y="270" width="64" height="17" rx="2" fill="var(--sign-bg)"/>
-<text x="54.0" y="283.2" text-anchor="middle" font-family="Charter,'Bitstream Charter',Georgia,serif" font-size="13" font-weight="700" fill="var(--sun)">Café</text>
+<text x="54.0" y="283.2" text-anchor="middle" font-family="Charter,'Bitstream Charter',Georgia,serif" font-size="13" font-weight="700" fill="var(--sun)">{% trans "Café" %}</text>
 <polygon points="11,290 97,290 103,305 5,305" fill="var(--paper)"/>
 <polygon points="23.8,290 37.7,290 37.7,305 21.3,305" fill="var(--sun)"/>
 <polygon points="55.5,290 70.3,290 70.3,305 54.0,305" fill="var(--sun)"/>
@@ -27,7 +27,7 @@
 <rect x="145.0" y="224.7" width="14" height="24" fill="var(--win)"/>
 <rect x="172.5" y="224.7" width="14" height="24" fill="var(--win-lit)"/>
 <rect x="116" y="270" width="72" height="17" rx="2" fill="var(--paper)"/>
-<text x="152.0" y="282.8" text-anchor="middle" font-family="Charter,'Bitstream Charter',Georgia,serif" font-size="12" font-weight="700" fill="var(--ink)">Galerie</text>
+<text x="152.0" y="282.8" text-anchor="middle" font-family="Charter,'Bitstream Charter',Georgia,serif" font-size="12" font-weight="700" fill="var(--ink)">{% trans "Galerie" %}</text>
 <rect x="112" y="292" width="80" height="60" fill="var(--paper)" stroke="var(--zinc)" stroke-width="2"/>
 <rect x="120" y="306" width="15" height="20" fill="var(--sun)" stroke="var(--ink)" stroke-width="2"/>
 <rect x="145" y="306" width="15" height="20" fill="var(--led)" stroke="var(--ink)" stroke-width="2"/>
@@ -39,7 +39,7 @@
 <path d="M260 214 V172 a8 8 0 0 1 16 0 V214 Z" fill="var(--win-lit)"/>
 <path d="M298 214 V172 a8 8 0 0 1 16 0 V214 Z" fill="var(--win)"/>
 <rect x="214" y="232" width="108" height="19" rx="2" fill="var(--sign-bg)"/>
-<text x="268.0" y="245.5" text-anchor="middle" font-family="Charter,'Bitstream Charter',Georgia,serif" font-size="11" font-weight="700" fill="var(--sun)">Théâtre · Concerts</text>
+<text x="268.0" y="245.5" text-anchor="middle" font-family="Charter,'Bitstream Charter',Georgia,serif" font-size="11" font-weight="700" fill="var(--sun)">{% trans "Théâtre · Concerts" %}</text>
 <circle cx="220" cy="258" r="2.2" fill="var(--sun)"/>
 <circle cx="232" cy="258" r="2.2" fill="var(--sun)"/>
 <circle cx="244" cy="258" r="2.2" fill="var(--sun)"/>
@@ -63,7 +63,7 @@
 <rect x="371.0" y="232.7" width="14" height="24" fill="var(--win)"/>
 <rect x="395.5" y="232.7" width="14" height="24" fill="var(--win)"/>
 <rect x="342" y="270" width="72" height="17" rx="2" fill="var(--sign-bg)"/>
-<text x="378.0" y="282.5" text-anchor="middle" font-family="Charter,'Bitstream Charter',Georgia,serif" font-size="11" font-weight="700" fill="var(--sun)">Restaurant</text>
+<text x="378.0" y="282.5" text-anchor="middle" font-family="Charter,'Bitstream Charter',Georgia,serif" font-size="11" font-weight="700" fill="var(--sun)">{% trans "Restaurant" %}</text>
 <polygon points="339,290 417,290 423,305 333,305" fill="var(--led)"/>
 <polygon points="350.5,290 363.0,290 363.0,305 348.0,305" fill="var(--paper)"/>
 <polygon points="379.5,290 393.0,290 393.0,305 378.0,305" fill="var(--paper)"/>
@@ -76,7 +76,7 @@
 <rect x="467.3" y="205.0" width="14" height="20" fill="var(--win-lit)"/>
 <g fill="var(--sun)" stroke="var(--ink)" stroke-width="1.5"><ellipse cx="460.0" cy="252" rx="11" ry="8.5"/><path d="M470.0 250 l8 -7" fill="none"/><path d="M450.0 247 q-7 5 0 10" fill="none"/><circle cx="460.0" cy="242" r="2.8"/></g>
 <rect x="427" y="270" width="66" height="17" rx="2" fill="var(--sign-bg)"/>
-<text x="460.0" y="281.9" text-anchor="middle" font-family="Charter,'Bitstream Charter',Georgia,serif" font-size="9.5" font-weight="700" fill="var(--sun)">Salon de thé</text>
+<text x="460.0" y="281.9" text-anchor="middle" font-family="Charter,'Bitstream Charter',Georgia,serif" font-size="9.5" font-weight="700" fill="var(--sun)">{% trans "Salon de thé" %}</text>
 <polygon points="427,290 493,290 499,305 421,305" fill="var(--paper)"/>
 <polygon points="439.0,290 452.2,290 452.2,305 436.6,305" fill="var(--zinc)"/>
 <polygon points="469.0,290 483.4,290 483.4,305 467.8,305" fill="var(--zinc)"/>
@@ -94,7 +94,7 @@
 <rect x="554.8" y="227.3" width="13" height="24" fill="var(--win-lit)"/>
 <rect x="577.4" y="227.3" width="13" height="24" fill="var(--win)"/>
 <rect x="510" y="270" width="80" height="17" rx="2" fill="var(--sign-bg)"/>
-<text x="550.0" y="282.5" text-anchor="middle" font-family="Charter,'Bitstream Charter',Georgia,serif" font-size="11" font-weight="700" fill="var(--sun)">Centre social</text>
+<text x="550.0" y="282.5" text-anchor="middle" font-family="Charter,'Bitstream Charter',Georgia,serif" font-size="11" font-weight="700" fill="var(--sun)">{% trans "Centre social" %}</text>
 <rect x="522" y="298" width="24" height="54" fill="var(--win)"/>
 <rect x="554" y="298" width="24" height="54" fill="var(--win)"/>
 <rect x="506" y="304" width="12" height="18" fill="var(--paper)" stroke="var(--zinc)"/>
@@ -103,7 +103,7 @@
 <rect x="612.0" y="223.0" width="14" height="24" fill="var(--win)"/>
 <rect x="634.0" y="223.0" width="14" height="24" fill="var(--win-lit)"/>
 <rect x="607" y="270" width="46" height="17" rx="2" fill="var(--paper)"/>
-<text x="630.0" y="282.1" text-anchor="middle" font-family="Charter,'Bitstream Charter',Georgia,serif" font-size="10" font-weight="700" fill="var(--ink)">Atelier</text>
+<text x="630.0" y="282.1" text-anchor="middle" font-family="Charter,'Bitstream Charter',Georgia,serif" font-size="10" font-weight="700" fill="var(--ink)">{% trans "Atelier" %}</text>
 <rect x="610" y="294" width="40" height="58" fill="var(--paper)" stroke="var(--zinc)" stroke-width="2"/>
 <path d="M619 334 q-6 -10 0 -18 h8 q6 8 0 18 Z" fill="var(--led)"/><path d="M634 334 q-4 -14 2 -24 h4 q6 10 2 24 Z" fill="var(--sun)"/>
 <rect x="657" y="112" width="62" height="7" fill="var(--zinc)"/>

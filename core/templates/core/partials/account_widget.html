@@ -1,18 +1,18 @@
-<details class="account-panel" id="account-panel"{% if oob %} hx-swap-oob="true"{% endif %}>
-  <summary class="account" id="account" aria-label="Je vois : {{ account_sub }}">
-    <b>je <span class="V">V</span>ois</b><small>{{ account_sub }}</small>{% if account_count %}<span class="badge" aria-hidden="true">{{ account_count }}</span>{% endif %}
+{% load i18n %}<details class="account-panel" id="account-panel"{% if oob %} hx-swap-oob="true"{% endif %}>
+  <summary class="account" id="account" aria-label="{% blocktrans %}Je vois : {{ account_sub }}{% endblocktrans %}">
+    <b>je <span class="V">V</span>ois</b><small>{{ account_sub }}</small>
   </summary>
-  <div class="account-menu" role="menu" aria-label="Options de je Vois">
+  <div class="account-menu" role="menu" aria-label="{% trans 'Options de je Vois' %}">
     {% if not user.is_authenticated and keycloak_login_url %}
     <div class="account-actions">
-      <a class="account-action" href="{{ keycloak_login_url }}">Se connecter</a>
-      {% if keycloak_register_url %}<a class="account-action account-action-secondary" href="{{ keycloak_register_url }}">Créer un compte</a>{% endif %}
+      <a class="account-action" href="{{ keycloak_login_url }}">{% trans "Se connecter" %}</a>
+      {% if keycloak_register_url %}<a class="account-action account-action-secondary" href="{{ keycloak_register_url }}">{% trans "Créer un compte" %}</a>{% endif %}
     </div>
     {% endif %}
 
     {% if account_shortcuts %}
     <div class="account-shortcuts">
-      <p class="account-subhead">Mes raccourcis</p>
+      <p class="account-subhead">{% trans "Mes raccourcis" %}</p>
       <ul>
         {% for shortcut in account_shortcuts %}{% with service=shortcut.service %}
         <li>
@@ -22,7 +22,7 @@
       </ul>
     </div>
     {% elif account and not user.is_authenticated %}
-    <p class="account-empty">Aucun service ajouté pour l'instant.</p>
+    <p class="account-empty">{% trans "Aucun service ajouté pour l'instant." %}</p>
     {% endif %}
   </div>
 </details>

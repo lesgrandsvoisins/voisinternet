@@ -1,10 +1,12 @@
 {% extends "core/base.html" %}
-{% block title %}tu Vois : se faire accompagner — Voisinternet{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "tu Vois : se faire accompagner — Voisinternet" %}{% endblock %}
 {% block content %}
-{% include "core/partials/page_head.html" with item=conj.tu lead="Personne ne naît administrateur de serveur. Posez vos questions, venez aux ateliers, ou demandez qu'un bénévole passe vous voir." %}
+{% trans "Personne ne naît administrateur de serveur. Posez vos questions, venez aux ateliers, ou demandez qu'un bénévole passe vous voir." as page_lead %}
+{% include "core/partials/page_head.html" with item=conj.tu lead=page_lead %}
 <div class="wrap page cols">
-  <section class="card"><h2>Poser une question</h2><p>Écrivez-nous à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>. Un voisin vous répond, pas un robot.</p></section>
-  <section class="card"><h2>Venir aux ateliers</h2><p>[À compléter : jour, horaire et lieu des ateliers.]</p></section>
-  <section class="card"><h2>Un coup de main chez vous</h2><p>[À compléter : comment demander une visite d'un bénévole.]</p></section>
+  <section class="card"><h2>{% trans "Poser une question" %}</h2><p>{% blocktrans %}Écrivez-nous à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>. Un voisin vous répond, pas un robot.{% endblocktrans %}</p></section>
+  <section class="card"><h2>{% trans "Venir aux ateliers" %}</h2><p>{% trans "[À compléter : jour, horaire et lieu des ateliers.]" %}</p></section>
+  <section class="card"><h2>{% trans "Un coup de main chez vous" %}</h2><p>{% trans "[À compléter : comment demander une visite d'un bénévole.]" %}</p></section>
 </div>
 {% endblock %}

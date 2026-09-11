@@ -1,4 +1,5 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 
 from .models import Account, Audience, Donor, GuideBook, Service, Shortcut
 
@@ -8,14 +9,14 @@ admin.site.index_title = "Administration"
 
 
 @admin.register(Audience)
-class AudienceAdmin(admin.ModelAdmin):
+class AudienceAdmin(TranslationAdmin):
     list_display = ["name", "who", "partnership", "order"]
     list_editable = ["order"]
     prepopulated_fields = {"slug": ["name"]}
 
 
 @admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
+class ServiceAdmin(TranslationAdmin):
     list_display = ["name", "summary", "featured", "active", "order"]
     filter_horizontal = ["audiences"]
     list_editable = ["featured", "active", "order"]
@@ -42,7 +43,7 @@ class AccountAdmin(admin.ModelAdmin):
 
 
 @admin.register(GuideBook)
-class GuideBookAdmin(admin.ModelAdmin):
+class GuideBookAdmin(TranslationAdmin):
     list_display = ["title", "url", "order"]
     list_editable = ["order"]
 

@@ -6,6 +6,7 @@ import secrets
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 ANON_DIGITS = 16
 
@@ -30,48 +31,48 @@ class Audience(models.Model):
     À qui s'adresse-t-on. Des mots de tous les jours, pas des catégories juridiques :
     le statut (personne physique ou morale) se précise au moment du compte ou du contrat.
     """
-    name = models.CharField("vous êtes…", max_length=80, help_text="Par exemple : « Une association ».")
+    name = models.CharField(_("vous êtes…"), max_length=80, help_text=_("Par exemple : « Une association »."))
     slug = models.SlugField(unique=True)
-    who = models.CharField("qui est concerné", max_length=200, blank=True)
-    pitch = models.CharField("en une phrase", max_length=240)
-    note = models.TextField("texte de la page", blank=True)
+    who = models.CharField(_("qui est concerné"), max_length=200, blank=True)
+    pitch = models.CharField(_("en une phrase"), max_length=240)
+    note = models.TextField(_("texte de la page"), blank=True)
     partnership = models.BooleanField(
-        "partenariat plutôt que services", default=False,
-        help_text="Pour les acteurs publics et sociaux : la page propose un partenariat, sans bouton « Ajouter ».",
+        _("partenariat plutôt que services"), default=False,
+        help_text=_("Pour les acteurs publics et sociaux : la page propose un partenariat, sans bouton « Ajouter »."),
     )
-    order = models.PositiveSmallIntegerField("ordre", default=0)
+    order = models.PositiveSmallIntegerField(_("ordre"), default=0)
 
     class Meta:
         ordering = ["order", "name"]
-        verbose_name = "public"
-        verbose_name_plural = "publics"
+        verbose_name = _("public")
+        verbose_name_plural = _("publics")
 
     def __str__(self):
         return self.name
 
 
 class Service(models.Model):
-    name = models.CharField("nom", max_length=80)
+    name = models.CharField(_("nom"), max_length=80)
     slug = models.SlugField(unique=True)
-    summary = models.CharField("en une phrase", max_length=200)
+    summary = models.CharField(_("en une phrase"), max_length=200)
     description = models.TextField(blank=True)
     retention = models.TextField(
-        "ce que l'association conserve",
+        _("ce que l'association conserve"),
         blank=True,
-        help_text="Ce qui reste anonyme, et ce que l'association doit conserver en tant qu'hébergeur.",
+        help_text=_("Ce qui reste anonyme, et ce que l'association doit conserver en tant qu'hébergeur."),
     )
-    url = models.URLField("adresse du service", blank=True)
+    url = models.URLField(_("adresse du service"), blank=True)
     audiences = models.ManyToManyField(
-        Audience, blank=True, related_name="services", verbose_name="publics",
-        help_text="Laisser vide si le service s'adresse à tout le monde.",
+        Audience, blank=True, related_name="services", verbose_name=_("publics"),
+        help_text=_("Laisser vide si le service s'adresse à tout le monde."),
     )
-    featured = models.BooleanField("mis en avant", default=False)
-    active = models.BooleanField("proposé", default=True)
-    order = models.PositiveSmallIntegerField("ordre", default=0)
+    featured = models.BooleanField(_("mis en avant"), default=False)
+    active = models.BooleanField(_("proposé"), default=True)
+    order = models.PositiveSmallIntegerField(_("ordre"), default=0)
 
     class Meta:
         ordering = ["order", "name"]
-        verbose_name = "service"
+        verbose_name = _("service")
 
     def __str__(self):
         return self.name
@@ -92,12 +93,12 @@ class Account(models.Model):
     last_seen = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = "compte"
+        verbose_name = _("compte")
 
     def __str__(self):
         if self.user_id:
-            return f"Compte de {self.user}"
-        return f"Compte anonyme n° {self.pk}"
+            return _("Compte de %(user)s") % {"user": self.user}
+        return _("Compte anonyme n° %(pk)s") % {"pk": self.pk}
 
     @property
     def is_anonymous_only(self):
@@ -129,13 +130,13 @@ class Account(models.Model):
 class Shortcut(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    position = models.PositiveIntegerField("ordre personnel", default=0)
+    position = models.PositiveIntegerField(_("ordre personnel"), default=0)
     created = models.DateTimeField(default=timezone.now, editable=False)
 
     class Meta:
         constraints = [models.UniqueConstraint(fields=["account", "service"], name="unique_shortcut")]
         ordering = ["account", "position", "service__name"]
-        verbose_name = "raccourci"
+        verbose_name = _("raccourci")
 
     def __str__(self):
         return f"{self.service} ({self.account})"
@@ -159,23 +160,23 @@ class GuideBook(models.Model):
 
 class Donor(models.Model):
     KINDS = [
-        ("particulier", "Particulier"),
-        ("entreprise", "Entreprise"),
-        ("fondation", "Fondation"),
-        ("collectivite", "Collectivité"),
-        ("association", "Association"),
+        ("particulier", _("Particulier")),
+        ("entreprise", _("Entreprise")),
+        ("fondation", _("Fondation")),
+        ("collectivite", _("Collectivité")),
+        ("association", _("Association")),
     ]
-    name = models.CharField("nom affiché", max_length=120)
-    kind = models.CharField("type", max_length=20, choices=KINDS, default="particulier")
+    name = models.CharField(_("nom affiché"), max_length=120)
+    kind = models.CharField(_("type"), max_length=20, choices=KINDS, default="particulier")
     public = models.BooleanField(
-        "apparaît publiquement", default=False,
-        help_text="Uniquement avec le consentement explicite du donateur (RGPD).",
+        _("apparaît publiquement"), default=False,
+        help_text=_("Uniquement avec le consentement explicite du donateur (RGPD)."),
     )
-    since = models.DateField("soutien depuis", default=timezone.localdate)
+    since = models.DateField(_("soutien depuis"), default=timezone.localdate)
 
     class Meta:
         ordering = ["-since", "name"]
-        verbose_name = "donateur"
+        verbose_name = _("donateur")
 
     def __str__(self):
         return self.name

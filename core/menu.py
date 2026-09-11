@@ -4,6 +4,8 @@ Une seule source : l'en-tête, la page d'accueil et le pied de page lisent cette
 """
 from dataclasses import dataclass
 
+from django.utils.translation import gettext_lazy as _
+
 
 @dataclass(frozen=True)
 class Entry:
@@ -22,26 +24,29 @@ class Entry:
 
 
 GROUPS = [
-    ("singulier", "au singulier, chacun"),
-    ("pluriel", "au pluriel, ensemble"),
-    ("lire", "à lire"),
+    ("singulier", _("au singulier, chacun")),
+    ("pluriel", _("au pluriel, ensemble")),
+    ("lire", _("à lire")),
 ]
 
+# Le pronom et la forme conjuguée (« je » / « Vois »…) restent en français dans toutes
+# les langues : c'est la signature du site, comme son nom. Seuls le titre, l'accroche
+# courte et le détail sont traduits.
 ENTRIES = [
-    Entry("je", "je", "Vois", "Mon compte", "se connecter, mon compte, mes raccourcis",
-          "se connecter, créer un compte, retrouver mes raccourcis", "core:je_vois", "singulier"),
-    Entry("tu", "tu", "Vois", "Contact", "contact, se faire accompagner",
-          "poser une question, se faire accompagner", "core:tu_vois", "singulier"),
-    Entry("il", "il ou elle", "Voit", "Bénévolat", "bénévolat, accompagner l'autre",
-          "accompagner l'autre, donner du matériel", "core:il_ou_elle_voit", "singulier"),
-    Entry("nous", "nous", "Voyons", "Association", "l'association",
-          "statuts, gouvernance, comptes : tout est public", "core:nous_voyons", "pluriel"),
-    Entry("vous", "vous", "Voyez", "Services", "les services",
-          "à ajouter à votre compte, même anonyme", "core:vous_voyez", "pluriel"),
-    Entry("ils", "ils et elles", "Voient", "Dons et donateurs", "dons financiers et donateurs",
-          "qui nous soutient, et comment nous soutenir", "core:ils_et_elles_voient", "pluriel"),
-    Entry("voix", "nos", "Voix", "Blog", "le blog",
-          "les nouvelles et les tribunes des adhérents", "setting:BLOG_URL", "lire"),
-    Entry("voie", "notre", "Voie", "Guide", "le guide",
-          "pas à pas, du premier serveur aux sauvegardes", "setting:GUIDE_URL", "lire"),
+    Entry("je", "je", "Vois", _("Mon compte"), _("se connecter, mon compte, mes raccourcis"),
+          _("se connecter, créer un compte, retrouver mes raccourcis"), "core:je_vois", "singulier"),
+    Entry("tu", "tu", "Vois", _("Contact"), _("contact, se faire accompagner"),
+          _("poser une question, se faire accompagner"), "core:tu_vois", "singulier"),
+    Entry("il", "il ou elle", "Voit", _("Bénévolat"), _("bénévolat, accompagner l'autre"),
+          _("accompagner l'autre, donner du matériel"), "core:il_ou_elle_voit", "singulier"),
+    Entry("nous", "nous", "Voyons", _("Association"), _("l'association"),
+          _("statuts, gouvernance, comptes : tout est public"), "core:nous_voyons", "pluriel"),
+    Entry("vous", "vous", "Voyez", _("Services"), _("les services"),
+          _("à ajouter à votre compte, même anonyme"), "core:vous_voyez", "pluriel"),
+    Entry("ils", "ils et elles", "Voient", _("Dons et donateurs"), _("dons financiers et donateurs"),
+          _("qui nous soutient, et comment nous soutenir"), "core:ils_et_elles_voient", "pluriel"),
+    Entry("voix", "nos", "Voix", _("Blog"), _("le blog"),
+          _("les nouvelles et les tribunes des adhérents"), "setting:BLOG_URL", "lire"),
+    Entry("voie", "notre", "Voie", _("Guide"), _("le guide"),
+          _("pas à pas, du premier serveur aux sauvegardes"), "setting:GUIDE_URL", "lire"),
 ]

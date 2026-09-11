@@ -29,7 +29,7 @@ def site(request):
     account_shortcuts = []
     if account:
         account_shortcuts = account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name")
-    label, count = account_label(request)
+    label, _ = account_label(request)
     keycloak_login_url = ""
     keycloak_register_url = ""
     if settings.OIDC_ENABLED:
@@ -42,7 +42,6 @@ def site(request):
         "account": account,
         "account_shortcuts": account_shortcuts,
         "account_sub": label,
-        "account_count": count,
         "OIDC_ENABLED": settings.OIDC_ENABLED,
         "keycloak_login_url": keycloak_login_url,
         "keycloak_register_url": keycloak_register_url,

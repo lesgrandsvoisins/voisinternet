@@ -1,4 +1,6 @@
 """Retrouver le compte de la personne qui navigue, qu'il soit anonyme ou nominatif."""
+from django.utils.translation import gettext_lazy as _
+
 from .models import Account
 
 SESSION_KEY = "voisinternet_account"
@@ -12,7 +14,7 @@ def current_account(request, create=False):
 
     account = None
     if request.user.is_authenticated:
-        account, _ = Account.objects.get_or_create(user=request.user)
+        account, _created = Account.objects.get_or_create(user=request.user)
     else:
         account_id = request.session.get(SESSION_KEY)
         if account_id:
@@ -42,9 +44,10 @@ def pending_anonymous_account(request):
 def account_label(request):
     """Sous-titre de « je Vois » selon l'état de la personne."""
     if request.user.is_authenticated:
-        return "mon compte", current_account(request).shortcut_set.count()
+        count = current_account(request).shortcut_set.count()
+        return (_("mes raccourcis (%d)") % count if count else _("mon compte")), count
     account = current_account(request)
     if account is None:
-        return "se connecter", 0
+        return _("se connecter"), 0
     count = account.shortcut_set.count()
-    return (f"mes raccourcis ({count})" if count else "compte anonyme"), count
+    return (_("mes raccourcis (%d)") % count if count else _("compte anonyme")), count

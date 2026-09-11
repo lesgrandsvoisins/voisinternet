@@ -42,7 +42,12 @@ CSRF_TRUSTED_ORIGINS = env_list("DJANGO_CSRF_TRUSTED_ORIGINS")
 KEYCLOAK_REALM_URL = env("KEYCLOAK_REALM_URL", "").rstrip("/")
 OIDC_ENABLED = bool(KEYCLOAK_REALM_URL and env("OIDC_RP_CLIENT_ID"))
 
+MODELTRANSLATION_DEFAULT_LANGUAGE = "fr"
+MODELTRANSLATION_LANGUAGES = ("fr", "en", "es", "ar", "ko")
+MODELTRANSLATION_FALLBACK_LANGUAGES = ("fr",)
+
 INSTALLED_APPS = [
+    "modeltranslation",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -57,6 +62,7 @@ if OIDC_ENABLED:
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -76,6 +82,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.i18n",
                 "core.context_processors.site",
             ],
         },
@@ -137,7 +144,15 @@ LOGIN_URL = "core:je_vois"
 LOGIN_REDIRECT_URL = "core:je_vois"
 LOGOUT_REDIRECT_URL = "core:home"
 
-LANGUAGE_CODE = "fr-fr"
+LANGUAGE_CODE = "fr"
+LANGUAGES = [
+    ("fr", "Français"),
+    ("en", "English"),
+    ("es", "Español"),
+    ("ar", "العربية"),
+    ("ko", "한국어"),
+]
+LOCALE_PATHS = [BASE_DIR / "locale"]
 TIME_ZONE = "Europe/Paris"
 USE_I18N = True
 USE_TZ = True
@@ -164,8 +179,8 @@ ANON_ACCOUNT_PEPPER = env("VOISINTERNET_ANON_PEPPER", SECRET_KEY)
 # Derrière Caddy ou nginx, l'adresse du visiteur arrive dans X-Forwarded-For.
 BEHIND_PROXY = env_bool("VOISINTERNET_BEHIND_PROXY", False)
 
-BLOG_URL = env("VOISINTERNET_BLOG_URL", "https://voix.voisinter.net")
-GUIDE_URL = env("VOISINTERNET_GUIDE_URL", "https://voies.voisinter.net")
+BLOG_URL = env("VOISINTERNET_BLOG_URL", "https://blog.lesgrandsvoisins.com")
+GUIDE_URL = env("VOISINTERNET_GUIDE_URL", "https://wiki.grandsvoisins.org/")
 GHOST_URL = env("GHOST_URL", BLOG_URL)
 GHOST_CONTENT_KEY = env("GHOST_CONTENT_KEY", "")
 CONTACT_EMAIL = env("VOISINTERNET_CONTACT_EMAIL", "contact@voisinter.net")

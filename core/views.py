@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
@@ -109,28 +110,28 @@ def ils_et_elles_voient(request):
 def create_anonymous(request):
     if current_account(request) is None:
         current_account(request, create=True)
-        messages.success(request, "Compte anonyme créé.")
+        messages.success(request, _("Compte anonyme créé."))
     return redirect("core:je_vois")
 
 
 @require_POST
 def recover_anonymous(request):
     if _throttled(request, "recover"):
-        messages.error(request, "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure.")
+        messages.error(request, _("Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."))
         return redirect("core:je_vois")
     account = Account.find_by_number(request.POST.get("number", ""))
     if account is None:
-        messages.error(request, "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres.")
+        messages.error(request, _("Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."))
     else:
         request.session[SESSION_KEY] = account.pk
-        messages.success(request, "Compte retrouvé. Vos raccourcis sont de retour.")
+        messages.success(request, _("Compte retrouvé. Vos raccourcis sont de retour."))
     return redirect("core:je_vois")
 
 
 @require_POST
 def forget_anonymous(request):
     request.session.pop(SESSION_KEY, None)
-    messages.success(request, "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le retrouver.")
+    messages.success(request, _("Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le retrouver."))
     return redirect("core:home")
 
 
@@ -141,7 +142,7 @@ def link_anonymous(request):
     if pending is not None:
         current_account(request).absorb(pending)
         request.session.pop(SESSION_KEY, None)
-        messages.success(request, "Vos raccourcis anonymes ont rejoint votre compte.")
+        messages.success(request, _("Vos raccourcis anonymes ont rejoint votre compte."))
     return redirect("core:je_vois")
 
 
@@ -157,11 +158,11 @@ def toggle_shortcut(request, slug):
     if shortcut:
         shortcut.delete()
         added = False
-        text = f"« {service.name} » retiré de vos raccourcis."
+        text = _("« %(name)s » retiré de vos raccourcis.") % {"name": service.name}
     else:
         Shortcut.objects.create(account=account, service=service, position=account.shortcut_set.count())
         added = True
-        text = f"« {service.name} » ajouté à vos raccourcis."
+        text = _("« %(name)s » ajouté à vos raccourcis.") % {"name": service.name}
 
     new_number = None
     if not had_account and account.is_anonymous_only:

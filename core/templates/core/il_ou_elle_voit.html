@@ -1,9 +1,11 @@
 {% extends "core/base.html" %}
-{% block title %}il ou elle Voit : accompagner l'autre — Voisinternet{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "il ou elle Voit : accompagner l'autre — Voisinternet" %}{% endblock %}
 {% block content %}
-{% include "core/partials/page_head.html" with item=conj.il lead="Vous savez installer un serveur, ou vous avez un vieil ordinateur au placard ? Un voisin en a besoin." %}
+{% trans "Vous savez installer un serveur, ou vous avez un vieil ordinateur au placard ? Un voisin en a besoin." as page_lead %}
+{% include "core/partials/page_head.html" with item=conj.il lead=page_lead %}
 <div class="wrap page cols">
-  <section class="card"><h2>Devenir bénévole</h2><p>Animer un atelier, relire le guide, dépanner un voisin : chacun donne le temps qu'il veut. Écrivez-nous à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.</p></section>
-  <section class="card"><h2>Donner du matériel</h2><p>Mini-PC, ordinateurs portables, disques : un appareil qui dort peut devenir le serveur d'un voisin. [À compléter : matériel accepté, effacement des données, lieu de dépôt.]</p></section>
+  <section class="card"><h2>{% trans "Devenir bénévole" %}</h2><p>{% blocktrans %}Animer un atelier, relire le guide, dépanner un voisin : chacun donne le temps qu'il veut. Écrivez-nous à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.{% endblocktrans %}</p></section>
+  <section class="card"><h2>{% trans "Donner du matériel" %}</h2><p>{% trans "[À compléter : matériel accepté, effacement des données, lieu de dépôt.]" %}</p></section>
 </div>
 {% endblock %}

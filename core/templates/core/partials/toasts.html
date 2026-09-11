@@ -1,5 +1,5 @@
-<div id="toasts" class="toasts" role="status" aria-live="polite"{% if oob %} hx-swap-oob="true"{% endif %}>
+{% load i18n %}<div id="toasts" class="toasts" role="status" aria-live="polite"{% if oob %} hx-swap-oob="true"{% endif %}>
   {% for message in messages %}<div class="toast{% if message.tags %} toast-{{ message.tags }}{% endif %}">{{ message }}</div>{% endfor %}
   {% if toast %}<div class="toast">{{ toast }}</div>{% endif %}
-  {% if new_number %}<div class="toast toast-number">Compte anonyme créé. Notez votre numéro : <code>{{ new_number }}</code> Il ne sera plus jamais affiché. <a href="{% url 'core:je_vois' %}">Voir mon compte</a></div>{% endif %}
+  {% if new_number %}<div class="toast toast-number">{% trans "Compte anonyme créé. Notez votre numéro :" %} <code>{{ new_number }}</code> {% trans "Il ne sera plus jamais affiché." %} <a href="{% url 'core:je_vois' %}">{% trans "Voir mon compte" %}</a></div>{% endif %}
 </div>

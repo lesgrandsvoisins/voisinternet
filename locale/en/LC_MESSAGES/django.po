@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 22:44+0200\n"
+"POT-Creation-Date: 2026-09-11 22:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,7 +82,7 @@ msgstr "an individual who gives, expecting nothing in return"
 msgid "accompagner l'autre, donner du matériel"
 msgstr "supporting others, donating equipment"
 
-#: core/menu.py:42 core/models.py:185
+#: core/menu.py:42 core/models.py:258
 msgid "Association"
 msgstr "Association"
 
@@ -95,12 +95,12 @@ msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "bylaws, governance, accounts: everything is public"
 
 #: core/menu.py:44
-msgid "Groupes"
-msgstr "Groups"
+msgid "Annuaire"
+msgstr "Directory"
 
 #: core/menu.py:44
-msgid "les groupes auxquels vous appartenez, ou pas encore"
-msgstr "the groups you belong to, or not yet"
+msgid "qui fait partie de la communauté, et comment les joindre"
+msgstr "who is part of the community, and how to reach them"
 
 #: core/menu.py:45
 msgid "un particulier, une association, une entreprise…"
@@ -154,7 +154,7 @@ msgstr "For example: “An association”."
 msgid "qui est concerné"
 msgstr "who this is for"
 
-#: core/models.py:37 core/models.py:57
+#: core/models.py:37 core/models.py:72
 msgid "en une phrase"
 msgstr "in one sentence"
 
@@ -174,7 +174,8 @@ msgstr ""
 "For public and social actors: the page offers a partnership, with no “Add” "
 "button."
 
-#: core/models.py:43 core/models.py:71
+#: core/models.py:43 core/models.py:58 core/models.py:91 core/models.py:187
+#: core/models.py:225
 msgid "ordre"
 msgstr "order"
 
@@ -182,107 +183,185 @@ msgstr "order"
 msgid "public"
 msgstr "audience"
 
-#: core/models.py:48 core/models.py:66
+#: core/models.py:48 core/models.py:86
 msgid "publics"
 msgstr "audiences"
 
-#: core/models.py:55
+#: core/models.py:56 core/models.py:70 core/models.py:185 core/models.py:208
 msgid "nom"
 msgstr "name"
 
-#: core/models.py:60
+#: core/models.py:62
+msgid "catégorie de service"
+msgstr "service category"
+
+#: core/models.py:63
+msgid "catégories de service"
+msgstr "service categories"
+
+#: core/models.py:75
 msgid "ce que l'association conserve"
 msgstr "what the association keeps"
 
-#: core/models.py:62
+#: core/models.py:77
 msgid ""
 "Ce qui reste anonyme, et ce que l'association doit conserver en tant "
 "qu'hébergeur."
 msgstr "What stays anonymous, and what the association must keep as a host."
 
-#: core/models.py:64
+#: core/models.py:79
 msgid "adresse du service"
 msgstr "service address"
 
-#: core/models.py:67
+#: core/models.py:80
+msgid "icône"
+msgstr "icon"
+
+#: core/models.py:83
+msgid "catégorie"
+msgstr "category"
+
+#: core/models.py:87
 msgid "Laisser vide si le service s'adresse à tout le monde."
 msgstr "Leave empty if the service is for everyone."
 
-#: core/models.py:69
+#: core/models.py:89
 msgid "mis en avant"
 msgstr "featured"
 
-#: core/models.py:70
+#: core/models.py:90
 msgid "proposé"
 msgstr "offered"
 
-#: core/models.py:75
+#: core/models.py:95
 msgid "service"
 msgstr "service"
 
-#: core/models.py:97
+#: core/models.py:117
 msgid "compte"
 msgstr "account"
 
-#: core/models.py:101
+#: core/models.py:121
 #, python-format
 msgid "Compte de %(user)s"
 msgstr "Account of %(user)s"
 
-#: core/models.py:102
+#: core/models.py:122
 #, python-format
 msgid "Compte anonyme n° %(pk)s"
 msgstr "Anonymous account no. %(pk)s"
 
-#: core/models.py:136 core/models.py:151
+#: core/models.py:156 core/models.py:171
 msgid "ordre personnel"
 msgstr "personal order"
 
-#: core/models.py:142
+#: core/models.py:162
 msgid "raccourci"
 msgstr "shortcut"
 
-#: core/models.py:157
+#: core/models.py:177
 msgid "appartenance"
 msgstr "membership"
 
-#: core/models.py:181
-msgid "Particulier"
+#: core/models.py:191
+msgid "secteur d'activité"
+msgstr "activity sector"
+
+#: core/models.py:192
+msgid "secteurs d'activité"
+msgstr "activity sectors"
+
+#: core/models.py:205
+msgid "Individuel"
 msgstr "Individual"
 
-#: core/models.py:182
-msgid "Entreprise"
-msgstr "Company"
+#: core/models.py:206
+msgid "Collectif"
+msgstr "Collective"
 
-#: core/models.py:183
-msgid "Fondation"
-msgstr "Foundation"
+#: core/models.py:210
+msgid "individuel ou collectif"
+msgstr "individual or collective"
 
-#: core/models.py:184
-msgid "Collectivité"
-msgstr "Local authority"
+#: core/models.py:213
+msgid "secteur"
+msgstr "sector"
 
-#: core/models.py:187
-msgid "nom affiché"
-msgstr "displayed name"
+#: core/models.py:215
+msgid "description"
+msgstr "description"
 
-#: core/models.py:188
-msgid "type"
-msgstr "type"
+#: core/models.py:216
+msgid "photo ou logo"
+msgstr "photo or logo"
 
-#: core/models.py:190
+#: core/models.py:217
+msgid "courriel"
+msgstr "email"
+
+#: core/models.py:218
+msgid "téléphone"
+msgstr "phone"
+
+#: core/models.py:219
+msgid "site ou lien"
+msgstr "website or link"
+
+#: core/models.py:220
+msgid "adresse"
+msgstr "address"
+
+#: core/models.py:222 core/models.py:263
 msgid "apparaît publiquement"
 msgstr "appears publicly"
 
-#: core/models.py:191
+#: core/models.py:223
+msgid ""
+"Uniquement avec le consentement explicite de la personne ou de la structure "
+"(RGPD)."
+msgstr "Only with the explicit consent of the person or organization (GDPR)."
+
+#: core/models.py:229
+msgid "fiche de l'annuaire"
+msgstr "directory entry"
+
+#: core/models.py:230
+msgid "annuaire"
+msgstr "directory"
+
+#: core/models.py:254
+msgid "Particulier"
+msgstr "Individual"
+
+#: core/models.py:255
+msgid "Entreprise"
+msgstr "Company"
+
+#: core/models.py:256
+msgid "Fondation"
+msgstr "Foundation"
+
+#: core/models.py:257
+msgid "Collectivité"
+msgstr "Local authority"
+
+#: core/models.py:260
+msgid "nom affiché"
+msgstr "displayed name"
+
+#: core/models.py:261
+msgid "type"
+msgstr "type"
+
+#: core/models.py:264
 msgid "Uniquement avec le consentement explicite du donateur (RGPD)."
 msgstr "Only with the donor's explicit consent (GDPR)."
 
-#: core/models.py:193
+#: core/models.py:266
 msgid "soutien depuis"
 msgstr "supporting since"
 
-#: core/models.py:197
+#: core/models.py:270
 msgid "donateur"
 msgstr "donor"
 
@@ -975,47 +1054,54 @@ msgid "[À compléter : comment demander une visite d'un bénévole.]"
 msgstr "[To be completed: how to request a volunteer visit.]"
 
 #: core/templates/core/vous_voyez.html:3
-msgid "vous Voyez — Voisinternet"
-msgstr "vous Voyez — Voisinternet"
+msgid "vous Voyez : l'annuaire"
+msgstr "vous Voyez: the directory"
 
 #: core/templates/core/vous_voyez.html:5
 msgid ""
-"Les identités, individuelles ou collectives, auxquelles vous adhérez : un "
-"particulier, une association, une entreprise… Chacune donne accès à ce qui "
-"la concerne."
+"Qui fait partie de la communauté, et comment les joindre : personnes et "
+"structures, individuelles ou collectives, avec leur accord."
 msgstr ""
-"The identities, individual or collective, that you belong to: an individual,"
-" an association, a business… Each one gives access to what concerns it."
+"Who is part of the community, and how to reach them: people and "
+"organizations, individual or collective, with their consent."
 
-#: core/templates/core/vous_voyez.html:8
-msgid ""
-"Cette page reste à construire : elle décrira ce que signifie appartenir à "
-"chaque groupe. En attendant, gérez vos groupes depuis"
-msgstr ""
-"This page is still being built: it will describe what belonging to each "
-"group means. In the meantime, manage your groups from"
+#: core/templates/core/vous_voyez.html:9
+msgid "Secteurs d’activité"
+msgstr "Activity sectors"
 
-#: core/templates/core/vous_voyez.html:8
-msgid "je Vois"
-msgstr "je Vois"
+#: core/templates/core/vous_voyez.html:10
+msgid "Tous les secteurs"
+msgstr "All sectors"
 
-#: core/views.py:115
+#: core/templates/core/vous_voyez.html:25
+msgid "Site"
+msgstr "Website"
+
+#: core/templates/core/vous_voyez.html:33
+msgid "Personne pour l'instant"
+msgstr "No one yet"
+
+#: core/templates/core/vous_voyez.html:33
+msgid "Les fiches apparaîtront ici, avec l'accord de chacun."
+msgstr "Entries will appear here, with everyone's consent."
+
+#: core/views.py:121
 msgid "Compte anonyme créé."
 msgstr "Anonymous account created."
 
-#: core/views.py:122
+#: core/views.py:128
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "Too many attempts from this device. Try again in fifteen minutes."
 
-#: core/views.py:126
+#: core/views.py:132
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "No account matches this number. Check the 16 digits."
 
-#: core/views.py:129
+#: core/views.py:135
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "Account found. Your shortcuts are back."
 
-#: core/views.py:136
+#: core/views.py:142
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
@@ -1023,26 +1109,26 @@ msgstr ""
 "This account is no longer open on this device. Your number lets you find it "
 "again."
 
-#: core/views.py:147
+#: core/views.py:153
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "Your anonymous shortcuts have joined your account."
 
-#: core/views.py:163
+#: core/views.py:169
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "“%(name)s” removed from your shortcuts."
 
-#: core/views.py:167
+#: core/views.py:173
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "“%(name)s” added to your shortcuts."
 
-#: core/views.py:256
+#: core/views.py:262
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "“%(name)s” removed from your groups."
 
-#: core/views.py:260
+#: core/views.py:266
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "“%(name)s” added to your groups."

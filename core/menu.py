@@ -41,7 +41,7 @@ ENTRIES = [
           _("accompagner l'autre, donner du matériel"), "core:il_ou_elle_voit", "singulier"),
     Entry("nous", "nous", "Voyons", _("Association"), _("une conscience collective, l'association coopérative"),
           _("statuts, gouvernance, comptes : tout est public"), "core:nous_voyons", "pluriel"),
-    Entry("vous", "vous", "Voyez", _("Groupes"), _("les groupes auxquels vous appartenez, ou pas encore"),
+    Entry("vous", "vous", "Voyez", _("Annuaire"), _("qui fait partie de la communauté, et comment les joindre"),
           _("un particulier, une association, une entreprise…"), "core:vous_voyez", "pluriel"),
     Entry("ils", "ils et elles", "Voient", _("Dons et partenaires"), _("dons et partenaires qui nous ont aidés à naître"),
           _("qui nous soutient — dons et partenaires — et comment nous soutenir"), "core:ils_et_elles_voient", "pluriel"),

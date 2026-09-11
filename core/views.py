@@ -11,7 +11,10 @@ from django.views.decorators.http import require_POST
 
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
 from .ghost import latest_posts
-from .models import Account, Audience, Donor, GuideBook, Membership, Service, Shortcut, format_number
+from .models import (
+    Account, Audience, DirectoryEntry, DirectorySector, Donor, GuideBook, Membership, Service, Shortcut,
+    format_number,
+)
 
 
 def _is_htmx(request):
@@ -90,13 +93,16 @@ def je_vois(request):
     })
 
 
-def vous_voyez(request, audience=None):
+def vous_voyez(request, secteur=None):
+    entries = DirectoryEntry.objects.filter(public=True)
     current = None
-    if audience:
-        current = get_object_or_404(Audience, slug=audience)
+    if secteur:
+        current = get_object_or_404(DirectorySector, slug=secteur)
+        entries = entries.filter(sector=current)
     return render(request, "core/vous_voyez.html", {
-        "audiences": Audience.objects.all(),
-        "audience": current,
+        "entries": entries,
+        "sectors": DirectorySector.objects.all(),
+        "sector": current,
     })
 
 

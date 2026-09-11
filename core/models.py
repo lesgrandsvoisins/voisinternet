@@ -180,6 +180,59 @@ class Membership(models.Model):
         return f"{self.audience} ({self.account})"
 
 
+class DirectorySector(models.Model):
+    """Secteur d'activité de l'annuaire (civisme, arts plastiques…), à la manière de gdvoisins.com."""
+    name = models.CharField(_("nom"), max_length=80)
+    slug = models.SlugField(unique=True)
+    order = models.PositiveSmallIntegerField(_("ordre"), default=0)
+
+    class Meta:
+        ordering = ["order", "name"]
+        verbose_name = _("secteur d'activité")
+        verbose_name_plural = _("secteurs d'activité")
+
+    def __str__(self):
+        return self.name
+
+
+class DirectoryEntry(models.Model):
+    """
+    Une fiche de l'annuaire (« vous Voyez ») : une personne ou une structure de la communauté.
+    Comme pour les donateurs, la fiche n'apparaît publiquement qu'avec le consentement explicite
+    de la personne ou de la structure concernée.
+    """
+    KINDS = [
+        ("individuel", _("Individuel")),
+        ("collectif", _("Collectif")),
+    ]
+    name = models.CharField(_("nom"), max_length=120)
+    slug = models.SlugField(unique=True)
+    kind = models.CharField(_("individuel ou collectif"), max_length=20, choices=KINDS, default="individuel")
+    sector = models.ForeignKey(
+        DirectorySector, null=True, blank=True, on_delete=models.SET_NULL,
+        related_name="entries", verbose_name=_("secteur"),
+    )
+    description = models.TextField(_("description"), blank=True)
+    photo = models.ImageField(_("photo ou logo"), upload_to="annuaire/photos/", blank=True)
+    email = models.EmailField(_("courriel"), blank=True)
+    phone = models.CharField(_("téléphone"), max_length=30, blank=True)
+    website = models.URLField(_("site ou lien"), blank=True)
+    address = models.CharField(_("adresse"), max_length=200, blank=True)
+    public = models.BooleanField(
+        _("apparaît publiquement"), default=False,
+        help_text=_("Uniquement avec le consentement explicite de la personne ou de la structure (RGPD)."),
+    )
+    order = models.PositiveSmallIntegerField(_("ordre"), default=0)
+
+    class Meta:
+        ordering = ["order", "name"]
+        verbose_name = _("fiche de l'annuaire")
+        verbose_name_plural = _("annuaire")
+
+    def __str__(self):
+        return self.name
+
+
 class GuideBook(models.Model):
     """Un livre du guide (BookStack), affiché sur l'accueil."""
     title = models.CharField("titre", max_length=120)

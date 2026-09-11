@@ -1,7 +1,10 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
-from .models import Account, Audience, Donor, GuideBook, Membership, Service, ServiceCategory, Shortcut
+from .models import (
+    Account, Audience, DirectoryEntry, DirectorySector, Donor, GuideBook, Membership, Service, ServiceCategory,
+    Shortcut,
+)
 
 admin.site.site_header = "Voisinternet"
 admin.site.site_title = "Voisinternet"
@@ -74,3 +77,21 @@ class DonorAdmin(admin.ModelAdmin):
     list_display = ["name", "kind", "public", "since"]
     list_filter = ["kind", "public"]
     list_editable = ["public"]
+
+
+@admin.register(DirectorySector)
+class DirectorySectorAdmin(admin.ModelAdmin):
+    list_display = ["name", "order"]
+    list_editable = ["order"]
+    prepopulated_fields = {"slug": ["name"]}
+    search_fields = ["name"]
+
+
+@admin.register(DirectoryEntry)
+class DirectoryEntryAdmin(admin.ModelAdmin):
+    list_display = ["name", "kind", "sector", "public", "order"]
+    list_filter = ["kind", "sector", "public"]
+    list_editable = ["public", "order"]
+    prepopulated_fields = {"slug": ["name"]}
+    search_fields = ["name", "description"]
+    autocomplete_fields = ["sector"]

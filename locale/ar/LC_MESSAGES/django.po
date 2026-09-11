@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 22:44+0200\n"
+"POT-Creation-Date: 2026-09-11 22:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,7 +82,7 @@ msgstr "فرد يعطي، دون انتظار مقابل"
 msgid "accompagner l'autre, donner du matériel"
 msgstr "مرافقة الآخرين، التبرع بالمعدات"
 
-#: core/menu.py:42 core/models.py:185
+#: core/menu.py:42 core/models.py:258
 msgid "Association"
 msgstr "الجمعية"
 
@@ -95,12 +95,12 @@ msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "النظام الأساسي، الحوكمة، الحسابات: كل شيء علني"
 
 #: core/menu.py:44
-msgid "Groupes"
-msgstr "المجموعات"
+msgid "Annuaire"
+msgstr "الدليل"
 
 #: core/menu.py:44
-msgid "les groupes auxquels vous appartenez, ou pas encore"
-msgstr "المجموعات التي تنتمي إليها، أو لم تنتمِ إليها بعد"
+msgid "qui fait partie de la communauté, et comment les joindre"
+msgstr "من ينتمي إلى المجتمع، وكيفية التواصل معه"
 
 #: core/menu.py:45
 msgid "un particulier, une association, une entreprise…"
@@ -154,7 +154,7 @@ msgstr "على سبيل المثال: «جمعية»."
 msgid "qui est concerné"
 msgstr "من يخص هذا"
 
-#: core/models.py:37 core/models.py:57
+#: core/models.py:37 core/models.py:72
 msgid "en une phrase"
 msgstr "بجملة واحدة"
 
@@ -172,7 +172,8 @@ msgid ""
 "bouton « Ajouter »."
 msgstr "للجهات العامة والاجتماعية: تقترح الصفحة شراكة، دون زر «إضافة»."
 
-#: core/models.py:43 core/models.py:71
+#: core/models.py:43 core/models.py:58 core/models.py:91 core/models.py:187
+#: core/models.py:225
 msgid "ordre"
 msgstr "الترتيب"
 
@@ -180,107 +181,186 @@ msgstr "الترتيب"
 msgid "public"
 msgstr "الفئة المستهدفة"
 
-#: core/models.py:48 core/models.py:66
+#: core/models.py:48 core/models.py:86
 msgid "publics"
 msgstr "الفئات المستهدفة"
 
-#: core/models.py:55
+#: core/models.py:56 core/models.py:70 core/models.py:185 core/models.py:208
 msgid "nom"
 msgstr "الاسم"
 
-#: core/models.py:60
+#: core/models.py:62
+msgid "catégorie de service"
+msgstr "فئة الخدمة"
+
+#: core/models.py:63
+msgid "catégories de service"
+msgstr "فئات الخدمة"
+
+#: core/models.py:75
 msgid "ce que l'association conserve"
 msgstr "ما تحتفظ به الجمعية"
 
-#: core/models.py:62
+#: core/models.py:77
 msgid ""
 "Ce qui reste anonyme, et ce que l'association doit conserver en tant "
 "qu'hébergeur."
 msgstr "ما يبقى مجهولاً، وما يجب أن تحتفظ به الجمعية بصفتها مضيفًا."
 
-#: core/models.py:64
+#: core/models.py:79
 msgid "adresse du service"
 msgstr "عنوان الخدمة"
 
-#: core/models.py:67
+#: core/models.py:80
+msgid "icône"
+msgstr "أيقونة"
+
+#: core/models.py:83
+msgid "catégorie"
+msgstr "الفئة"
+
+#: core/models.py:87
 msgid "Laisser vide si le service s'adresse à tout le monde."
 msgstr "اتركه فارغًا إذا كانت الخدمة موجهة للجميع."
 
-#: core/models.py:69
+#: core/models.py:89
 msgid "mis en avant"
 msgstr "مميز"
 
-#: core/models.py:70
+#: core/models.py:90
 msgid "proposé"
 msgstr "متاح"
 
-#: core/models.py:75
+#: core/models.py:95
 msgid "service"
 msgstr "خدمة"
 
-#: core/models.py:97
+#: core/models.py:117
 msgid "compte"
 msgstr "حساب"
 
-#: core/models.py:101
+#: core/models.py:121
 #, python-format
 msgid "Compte de %(user)s"
 msgstr "حساب %(user)s"
 
-#: core/models.py:102
+#: core/models.py:122
 #, python-format
 msgid "Compte anonyme n° %(pk)s"
 msgstr "حساب مجهول رقم %(pk)s"
 
-#: core/models.py:136 core/models.py:151
+#: core/models.py:156 core/models.py:171
 msgid "ordre personnel"
 msgstr "الترتيب الشخصي"
 
-#: core/models.py:142
+#: core/models.py:162
 msgid "raccourci"
 msgstr "اختصار"
 
-#: core/models.py:157
+#: core/models.py:177
 msgid "appartenance"
 msgstr "عضوية"
 
-#: core/models.py:181
-msgid "Particulier"
-msgstr "فرد"
+#: core/models.py:191
+msgid "secteur d'activité"
+msgstr "قطاع النشاط"
 
-#: core/models.py:182
-msgid "Entreprise"
-msgstr "شركة"
+#: core/models.py:192
+msgid "secteurs d'activité"
+msgstr "قطاعات النشاط"
 
-#: core/models.py:183
-msgid "Fondation"
-msgstr "مؤسسة"
+#: core/models.py:205
+msgid "Individuel"
+msgstr "فردي"
 
-#: core/models.py:184
-msgid "Collectivité"
-msgstr "هيئة عامة"
+#: core/models.py:206
+msgid "Collectif"
+msgstr "جماعي"
 
-#: core/models.py:187
-msgid "nom affiché"
-msgstr "الاسم المعروض"
+#: core/models.py:210
+msgid "individuel ou collectif"
+msgstr "فردي أو جماعي"
 
-#: core/models.py:188
-msgid "type"
-msgstr "النوع"
+#: core/models.py:213
+msgid "secteur"
+msgstr "القطاع"
 
-#: core/models.py:190
+#: core/models.py:215
+msgid "description"
+msgstr "الوصف"
+
+#: core/models.py:216
+msgid "photo ou logo"
+msgstr "صورة أو شعار"
+
+#: core/models.py:217
+msgid "courriel"
+msgstr "البريد الإلكتروني"
+
+#: core/models.py:218
+msgid "téléphone"
+msgstr "الهاتف"
+
+#: core/models.py:219
+msgid "site ou lien"
+msgstr "موقع أو رابط"
+
+#: core/models.py:220
+msgid "adresse"
+msgstr "العنوان"
+
+#: core/models.py:222 core/models.py:263
 msgid "apparaît publiquement"
 msgstr "يظهر علنًا"
 
-#: core/models.py:191
+#: core/models.py:223
+msgid ""
+"Uniquement avec le consentement explicite de la personne ou de la structure "
+"(RGPD)."
+msgstr ""
+"فقط بموافقة صريحة من الشخص أو الجهة (وفق اللائحة العامة لحماية البيانات)."
+
+#: core/models.py:229
+msgid "fiche de l'annuaire"
+msgstr "بطاقة الدليل"
+
+#: core/models.py:230
+msgid "annuaire"
+msgstr "الدليل"
+
+#: core/models.py:254
+msgid "Particulier"
+msgstr "فرد"
+
+#: core/models.py:255
+msgid "Entreprise"
+msgstr "شركة"
+
+#: core/models.py:256
+msgid "Fondation"
+msgstr "مؤسسة"
+
+#: core/models.py:257
+msgid "Collectivité"
+msgstr "هيئة عامة"
+
+#: core/models.py:260
+msgid "nom affiché"
+msgstr "الاسم المعروض"
+
+#: core/models.py:261
+msgid "type"
+msgstr "النوع"
+
+#: core/models.py:264
 msgid "Uniquement avec le consentement explicite du donateur (RGPD)."
 msgstr "فقط بموافقة صريحة من المتبرع (وفق اللائحة العامة لحماية البيانات)."
 
-#: core/models.py:193
+#: core/models.py:266
 msgid "soutien depuis"
 msgstr "يدعم منذ"
 
-#: core/models.py:197
+#: core/models.py:270
 msgid "donateur"
 msgstr "متبرع"
 
@@ -954,72 +1034,79 @@ msgid "[À compléter : comment demander une visite d'un bénévole.]"
 msgstr "[سيتم استكماله: كيفية طلب زيارة متطوع.]"
 
 #: core/templates/core/vous_voyez.html:3
-msgid "vous Voyez — Voisinternet"
-msgstr "vous Voyez — Voisinternet"
+msgid "vous Voyez : l'annuaire"
+msgstr "vous Voyez: الدليل"
 
 #: core/templates/core/vous_voyez.html:5
 msgid ""
-"Les identités, individuelles ou collectives, auxquelles vous adhérez : un "
-"particulier, une association, une entreprise… Chacune donne accès à ce qui "
-"la concerne."
+"Qui fait partie de la communauté, et comment les joindre : personnes et "
+"structures, individuelles ou collectives, avec leur accord."
 msgstr ""
-"الهويات، الفردية أو الجماعية، التي تنتمي إليها: فرد، جمعية، شركة… تمنحك كل "
-"واحدة منها الوصول إلى ما يخصها."
+"من ينتمي إلى المجتمع، وكيفية التواصل معه: أفراد وهياكل، فردية أو جماعية، "
+"بموافقتهم."
 
-#: core/templates/core/vous_voyez.html:8
-msgid ""
-"Cette page reste à construire : elle décrira ce que signifie appartenir à "
-"chaque groupe. En attendant, gérez vos groupes depuis"
-msgstr ""
-"هذه الصفحة لا تزال قيد الإنشاء: ستوضح معنى الانتماء إلى كل مجموعة. في غضون "
-"ذلك، يمكنك إدارة مجموعاتك من"
+#: core/templates/core/vous_voyez.html:9
+msgid "Secteurs d’activité"
+msgstr "قطاعات النشاط"
 
-#: core/templates/core/vous_voyez.html:8
-msgid "je Vois"
-msgstr "je Vois"
+#: core/templates/core/vous_voyez.html:10
+msgid "Tous les secteurs"
+msgstr "جميع القطاعات"
 
-#: core/views.py:115
+#: core/templates/core/vous_voyez.html:25
+msgid "Site"
+msgstr "الموقع"
+
+#: core/templates/core/vous_voyez.html:33
+msgid "Personne pour l'instant"
+msgstr "لا يوجد أحد حتى الآن"
+
+#: core/templates/core/vous_voyez.html:33
+msgid "Les fiches apparaîtront ici, avec l'accord de chacun."
+msgstr "ستظهر البطاقات هنا، بموافقة كل شخص."
+
+#: core/views.py:121
 msgid "Compte anonyme créé."
 msgstr "تم إنشاء حساب مجهول."
 
-#: core/views.py:122
+#: core/views.py:128
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "عدد كبير جدًا من المحاولات من هذا الجهاز. أعد المحاولة بعد ربع ساعة."
 
-#: core/views.py:126
+#: core/views.py:132
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "لا يوجد حساب مطابق لهذا الرقم. تحقق من الخانات الـ16."
 
-#: core/views.py:129
+#: core/views.py:135
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "تم العثور على الحساب. عادت اختصاراتك."
 
-#: core/views.py:136
+#: core/views.py:142
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
 msgstr "لم يعد هذا الحساب مفتوحًا على هذا الجهاز. رقمك يتيح لك استعادته."
 
-#: core/views.py:147
+#: core/views.py:153
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "انضمت اختصاراتك المجهولة إلى حسابك."
 
-#: core/views.py:163
+#: core/views.py:169
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "تمت إزالة «%(name)s» من اختصاراتك."
 
-#: core/views.py:167
+#: core/views.py:173
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "تمت إضافة «%(name)s» إلى اختصاراتك."
 
-#: core/views.py:256
+#: core/views.py:262
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "تمت إزالة «%(name)s» من مجموعاتك."
 
-#: core/views.py:260
+#: core/views.py:266
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "تمت إضافة «%(name)s» إلى مجموعاتك."

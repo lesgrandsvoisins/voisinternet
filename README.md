@@ -17,24 +17,28 @@ entrée là suffit.
 | tu Vois | `/tu-vois/` | contact, se faire accompagner |
 | il ou elle Voit | `/il-ou-elle-voit/` | bénévolat, accompagner l'autre, don de matériel |
 | nous Voyons | `/nous-voyons/` | l'association, la transparence |
-| vous Voyez | `/vous-voyez/` | les groupes, individuels ou collectifs, auxquels on adhère |
+| vous Voyez | `/vous-voyez/` | l'annuaire : qui fait partie de la communauté |
 | ils et elles Voient | `/ils-et-elles-voient/` | dons et partenaires |
 | notre Voie | voies.voisinter.net | le guide (BookStack) |
 | nos Voix | voix.voisinter.net | le blog (Ghost) |
 
+## L'annuaire : « vous Voyez »
+
+`/vous-voyez/` liste les personnes et structures de la communauté (à la
+manière de gdvoisins.com) : un particulier, une association, une entreprise…
+Comme pour les donateurs, une fiche n'apparaît publiquement qu'avec le
+consentement explicite de la personne ou de la structure concernée (case
+« apparaît publiquement »). Chaque fiche a un secteur d'activité (civisme,
+arts plastiques…), une description, et selon les cas un courriel, un
+téléphone, un site. `/vous-voyez/secteur/<secteur>/` filtre par secteur. Les
+secteurs sont des données, gérées dans l'administration.
+
 ## Publics : « Vous êtes… »
 
 Sous le bandeau d'accueil, chaque visiteur se reconnaît en mots de tous les
-jours (un particulier, une association, une mairie…) et arrive sur
-`/vous-voyez/pour/<public>/`, qui présente ce groupe : qui est concerné, en une
-phrase, et pour les acteurs publics et sociaux, une proposition de partenariat
-plutôt que des services à ajouter. Les publics sont des données, gérées dans
-l'administration : on les ajoute, les regroupe ou les renomme sans toucher au
-code.
-
-Les services eux-mêmes se gèrent entièrement depuis « je Vois » (mon compte) :
-« vous Voyez » ne les affiche plus, il ne concerne que les identités
-auxquelles on adhère.
+jours (un particulier, une association, une mairie…). Adhérer à l'un de ces
+groupes se fait depuis « je Vois » (mon compte), exactement comme pour les
+services : ce n'est pas l'annuaire, qui reste public et non personnel.
 
 Le statut juridique (personne physique ou morale, SIRET, RNA) n'a pas sa place
 sur l'accueil : il se précisera au moment du compte ou du contrat.

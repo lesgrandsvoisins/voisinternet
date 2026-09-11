@@ -1,10 +1,37 @@
 {% extends "core/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "vous Voyez — Voisinternet" %}{% endblock %}
+{% block title %}{% trans "vous Voyez : l'annuaire" %}{% if sector %} — {{ sector.name }}{% endif %} — Voisinternet{% endblock %}
 {% block content %}
-{% trans "Les identités, individuelles ou collectives, auxquelles vous adhérez : un particulier, une association, une entreprise… Chacune donne accès à ce qui la concerne." as page_lead %}
+{% trans "Qui fait partie de la communauté, et comment les joindre : personnes et structures, individuelles ou collectives, avec leur accord." as page_lead %}
 {% include "core/partials/page_head.html" with item=conj.vous lead=page_lead %}
 <div class="wrap page">
-  <p class="intro">{% trans "Cette page reste à construire : elle décrira ce que signifie appartenir à chaque groupe. En attendant, gérez vos groupes depuis" %} <a href="{% url 'core:je_vois' %}#available-groups">{% trans "je Vois" %}</a>.</p>
+  {% if sectors %}
+  <nav class="chips" aria-label="{% trans 'Secteurs d’activité' %}">
+    <a href="{% url 'core:vous_voyez' %}"{% if not sector %} aria-current="page"{% endif %}>{% trans "Tous les secteurs" %}</a>
+    {% for s in sectors %}<a href="{% url 'core:vous_voyez_pour' s.slug %}"{% if sector == s %} aria-current="page"{% endif %}>{{ s.name }}</a>{% endfor %}
+  </nav>
+  {% endif %}
+
+  <ul class="svc">
+    {% for entry in entries %}
+    <li>
+      {% if entry.photo %}<img class="svc-icon" src="{{ entry.photo.url }}" alt="">{% else %}<span class="led" aria-hidden="true"></span>{% endif %}
+      <div>
+        <h3>{{ entry.name }}</h3>
+        {% if entry.sector %}<p class="muted">{{ entry.sector.name }}</p>{% endif %}
+        {% if entry.description %}<p>{{ entry.description }}</p>{% endif %}
+        {% if entry.website or entry.email or entry.phone %}
+        <p class="pair">
+          {% if entry.website %}<a href="{{ entry.website }}" target="_new">{% trans "Site" %}</a>{% endif %}
+          {% if entry.email %}<a href="mailto:{{ entry.email }}">{{ entry.email }}</a>{% endif %}
+          {% if entry.phone %}<span>{{ entry.phone }}</span>{% endif %}
+        </p>
+        {% endif %}
+      </div>
+    </li>
+    {% empty %}
+    <li class="empty"><div><h3>{% trans "Personne pour l'instant" %}</h3><p>{% trans "Les fiches apparaîtront ici, avec l'accord de chacun." %}</p></div></li>
+    {% endfor %}
+  </ul>
 </div>
 {% endblock %}

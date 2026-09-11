@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 22:59+0200\n"
+"POT-Creation-Date: 2026-09-11 23:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgid "à lire"
 msgstr "للقراءة"
 
 #: core/menu.py:36
-msgid "Mon compte"
+msgid "mon Compte"
 msgstr "حسابي"
 
 #: core/menu.py:36
@@ -59,8 +59,8 @@ msgid "se connecter, créer un compte, retrouver mes raccourcis"
 msgstr "تسجيل الدخول، إنشاء حساب، استعادة اختصاراتي"
 
 #: core/menu.py:38
-msgid "Contact"
-msgstr "التواصل"
+msgid "Agenda"
+msgstr "الأجندة"
 
 #: core/menu.py:38
 msgid "un individu qui reçoit de l'aide, entre voisins"
@@ -71,8 +71,8 @@ msgid "poser une question, se faire accompagner"
 msgstr "طرح سؤال، الحصول على مرافقة"
 
 #: core/menu.py:40
-msgid "Bénévolat"
-msgstr "التطوع"
+msgid "Bénévolat et dons"
+msgstr "التطوع والتبرعات"
 
 #: core/menu.py:40
 msgid "un individu qui donne, sans rien attendre en retour"
@@ -82,9 +82,9 @@ msgstr "فرد يعطي، دون انتظار مقابل"
 msgid "accompagner l'autre, donner du matériel"
 msgstr "مرافقة الآخرين، التبرع بالمعدات"
 
-#: core/menu.py:42 core/models.py:258
-msgid "Association"
-msgstr "الجمعية"
+#: core/menu.py:42
+msgid "Grands Voisins"
+msgstr "Grands Voisins"
 
 #: core/menu.py:42
 msgid "une conscience collective, l'association coopérative"
@@ -95,8 +95,8 @@ msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "النظام الأساسي، الحوكمة، الحسابات: كل شيء علني"
 
 #: core/menu.py:44
-msgid "Annuaire"
-msgstr "الدليل"
+msgid "Pages"
+msgstr "الصفحات"
 
 #: core/menu.py:44
 msgid "qui fait partie de la communauté, et comment les joindre"
@@ -107,8 +107,8 @@ msgid "un particulier, une association, une entreprise…"
 msgstr "فرد، جمعية، شركة…"
 
 #: core/menu.py:46
-msgid "Dons et partenaires"
-msgstr "التبرعات والشركاء"
+msgid "Activités"
+msgstr "الأنشطة"
 
 #: core/menu.py:46
 msgid "dons et partenaires qui nous ont aidés à naître"
@@ -173,7 +173,7 @@ msgid ""
 msgstr "للجهات العامة والاجتماعية: تقترح الصفحة شراكة، دون زر «إضافة»."
 
 #: core/models.py:43 core/models.py:58 core/models.py:91 core/models.py:187
-#: core/models.py:225
+#: core/models.py:247
 msgid "ordre"
 msgstr "الترتيب"
 
@@ -285,82 +285,146 @@ msgstr "فردي أو جماعي"
 msgid "secteur"
 msgstr "القطاع"
 
-#: core/models.py:215
+#: core/models.py:216
+msgid "titre de la page"
+msgstr "عنوان الصفحة"
+
+#: core/models.py:217
+msgid "texte d'accroche"
+msgstr "شعار تعريفي"
+
+#: core/models.py:218
 msgid "description"
 msgstr "الوصف"
 
-#: core/models.py:216
-msgid "photo ou logo"
-msgstr "صورة أو شعار"
+#: core/models.py:220
+msgid "logo"
+msgstr "الشعار"
 
-#: core/models.py:217
+#: core/models.py:221
+msgid "photo promotionnelle"
+msgstr "صورة ترويجية"
+
+#: core/models.py:222
+msgid "photo de la structure"
+msgstr "صورة الهيكل"
+
+#: core/models.py:223
+msgid "photo du lieu"
+msgstr "صورة المكان"
+
+#: core/models.py:225
+msgid "vidéo promotionnelle"
+msgstr "فيديو ترويجي"
+
+#: core/models.py:226
+msgid ""
+"Lien vers une vidéo (YouTube, PeerTube…) : affiché en lien, jamais intégré "
+"en cadre."
+msgstr ""
+"رابط لفيديو (YouTube، PeerTube…): يُعرض كرابط فقط، ولا يُضمَّن أبدًا في "
+"إطار."
+
+#: core/models.py:229
 msgid "courriel"
 msgstr "البريد الإلكتروني"
 
-#: core/models.py:218
+#: core/models.py:230
 msgid "téléphone"
 msgstr "الهاتف"
 
-#: core/models.py:219
+#: core/models.py:231
 msgid "site ou lien"
 msgstr "موقع أو رابط"
 
-#: core/models.py:220
+#: core/models.py:233
 msgid "adresse"
 msgstr "العنوان"
 
-#: core/models.py:222 core/models.py:263
+#: core/models.py:234
+msgid "ville"
+msgstr "المدينة"
+
+#: core/models.py:235
+msgid "pays"
+msgstr "البلد"
+
+#: core/models.py:236
+msgid "latitude"
+msgstr "خط العرض"
+
+#: core/models.py:237
+msgid "longitude"
+msgstr "خط الطول"
+
+#: core/models.py:239
+msgid "introduction de l'appel à l'action"
+msgstr "مقدمة الدعوة إلى اتخاذ إجراء"
+
+#: core/models.py:240
+msgid "texte du bouton d'appel à l'action"
+msgstr "نص زر الدعوة إلى اتخاذ إجراء"
+
+#: core/models.py:241
+msgid "lien de l'appel à l'action"
+msgstr "رابط الدعوة إلى اتخاذ إجراء"
+
+#: core/models.py:244 core/models.py:285
 msgid "apparaît publiquement"
 msgstr "يظهر علنًا"
 
-#: core/models.py:223
+#: core/models.py:245
 msgid ""
 "Uniquement avec le consentement explicite de la personne ou de la structure "
 "(RGPD)."
 msgstr ""
 "فقط بموافقة صريحة من الشخص أو الجهة (وفق اللائحة العامة لحماية البيانات)."
 
-#: core/models.py:229
-msgid "fiche de l'annuaire"
-msgstr "بطاقة الدليل"
+#: core/models.py:251
+msgid "page de l'annuaire"
+msgstr "صفحة الدليل"
 
-#: core/models.py:230
-msgid "annuaire"
-msgstr "الدليل"
+#: core/models.py:252
+msgid "pages de l'annuaire"
+msgstr "صفحات الدليل"
 
-#: core/models.py:254
+#: core/models.py:276
 msgid "Particulier"
 msgstr "فرد"
 
-#: core/models.py:255
+#: core/models.py:277
 msgid "Entreprise"
 msgstr "شركة"
 
-#: core/models.py:256
+#: core/models.py:278
 msgid "Fondation"
 msgstr "مؤسسة"
 
-#: core/models.py:257
+#: core/models.py:279
 msgid "Collectivité"
 msgstr "هيئة عامة"
 
-#: core/models.py:260
+#: core/models.py:280
+msgid "Association"
+msgstr "الجمعية"
+
+#: core/models.py:282
 msgid "nom affiché"
 msgstr "الاسم المعروض"
 
-#: core/models.py:261
+#: core/models.py:283
 msgid "type"
 msgstr "النوع"
 
-#: core/models.py:264
+#: core/models.py:286
 msgid "Uniquement avec le consentement explicite du donateur (RGPD)."
 msgstr "فقط بموافقة صريحة من المتبرع (وفق اللائحة العامة لحماية البيانات)."
 
-#: core/models.py:266
+#: core/models.py:288
 msgid "soutien depuis"
 msgstr "يدعم منذ"
 
-#: core/models.py:270
+#: core/models.py:292
 msgid "donateur"
 msgstr "متبرع"
 
@@ -1053,15 +1117,23 @@ msgstr "قطاعات النشاط"
 msgid "Tous les secteurs"
 msgstr "جميع القطاعات"
 
-#: core/templates/core/vous_voyez.html:25
+#: core/templates/core/vous_voyez.html:27
 msgid "Site"
 msgstr "الموقع"
 
-#: core/templates/core/vous_voyez.html:33
+#: core/templates/core/vous_voyez.html:28
+msgid "Vidéo"
+msgstr "الفيديو"
+
+#: core/templates/core/vous_voyez.html:34
+msgid "En savoir plus"
+msgstr "معرفة المزيد"
+
+#: core/templates/core/vous_voyez.html:39
 msgid "Personne pour l'instant"
 msgstr "لا يوجد أحد حتى الآن"
 
-#: core/templates/core/vous_voyez.html:33
+#: core/templates/core/vous_voyez.html:39
 msgid "Les fiches apparaîtront ici, avec l'accord de chacun."
 msgstr "ستظهر البطاقات هنا، بموافقة كل شخص."
 

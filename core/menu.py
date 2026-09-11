@@ -33,17 +33,17 @@ GROUPS = [
 # les langues : c'est la signature du site, comme son nom. Seuls le titre, l'accroche
 # courte et le détail sont traduits.
 ENTRIES = [
-    Entry("je", "je", "Vois", _("Mon compte"), _("un individu, un compte, ce que je choisis de partager"),
+    Entry("je", "je", "Vois", _("mon Compte"), _("un individu, un compte, ce que je choisis de partager"),
           _("se connecter, créer un compte, retrouver mes raccourcis"), "core:je_vois", "singulier"),
-    Entry("tu", "tu", "Vois", _("Contact"), _("un individu qui reçoit de l'aide, entre voisins"),
+    Entry("tu", "tu", "Vois", _("Agenda"), _("un individu qui reçoit de l'aide, entre voisins"),
           _("poser une question, se faire accompagner"), "core:tu_vois", "singulier"),
-    Entry("il", "il ou elle", "Voit", _("Bénévolat"), _("un individu qui donne, sans rien attendre en retour"),
+    Entry("il", "il ou elle", "Voit", _("Bénévolat et dons"), _("un individu qui donne, sans rien attendre en retour"),
           _("accompagner l'autre, donner du matériel"), "core:il_ou_elle_voit", "singulier"),
-    Entry("nous", "nous", "Voyons", _("Association"), _("une conscience collective, l'association coopérative"),
+    Entry("nous", "nous", "Voyons", _("Grands Voisins"), _("une conscience collective, l'association coopérative"),
           _("statuts, gouvernance, comptes : tout est public"), "core:nous_voyons", "pluriel"),
-    Entry("vous", "vous", "Voyez", _("Annuaire"), _("qui fait partie de la communauté, et comment les joindre"),
+    Entry("vous", "vous", "Voyez", _("Pages"), _("qui fait partie de la communauté, et comment les joindre"),
           _("un particulier, une association, une entreprise…"), "core:vous_voyez", "pluriel"),
-    Entry("ils", "ils et elles", "Voient", _("Dons et partenaires"), _("dons et partenaires qui nous ont aidés à naître"),
+    Entry("ils", "ils et elles", "Voient", _("Activités"), _("dons et partenaires qui nous ont aidés à naître"),
           _("qui nous soutient — dons et partenaires — et comment nous soutenir"), "core:ils_et_elles_voient", "pluriel"),
     Entry("grandzine", "nos", "GrandZine", _("Blog"), _("le blog"),
           _("les nouvelles et les tribunes des adhérents"), "setting:BLOG_URL", "lire"),

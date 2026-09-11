@@ -15,17 +15,23 @@
   <ul class="svc">
     {% for entry in entries %}
     <li>
-      {% if entry.photo %}<img class="svc-icon" src="{{ entry.photo.url }}" alt="">{% else %}<span class="led" aria-hidden="true"></span>{% endif %}
+      {% if entry.logo %}<img class="svc-icon" src="{{ entry.logo.url }}" alt="">{% else %}<span class="led" aria-hidden="true"></span>{% endif %}
       <div>
         <h3>{{ entry.name }}</h3>
-        {% if entry.sector %}<p class="muted">{{ entry.sector.name }}</p>{% endif %}
+        {% if entry.title %}<p class="muted">{{ entry.title }}</p>{% elif entry.sector %}<p class="muted">{{ entry.sector.name }}</p>{% endif %}
+        {% if entry.tagline %}<p><strong>{{ entry.tagline }}</strong></p>{% endif %}
         {% if entry.description %}<p>{{ entry.description }}</p>{% endif %}
-        {% if entry.website or entry.email or entry.phone %}
+        {% if entry.city %}<p class="muted">{{ entry.city }}{% if entry.country %}, {{ entry.country }}{% endif %}</p>{% endif %}
+        {% if entry.website or entry.email or entry.phone or entry.video_url %}
         <p class="pair">
           {% if entry.website %}<a href="{{ entry.website }}" target="_new">{% trans "Site" %}</a>{% endif %}
+          {% if entry.video_url %}<a href="{{ entry.video_url }}" target="_new">{% trans "Vidéo" %}</a>{% endif %}
           {% if entry.email %}<a href="mailto:{{ entry.email }}">{{ entry.email }}</a>{% endif %}
           {% if entry.phone %}<span>{{ entry.phone }}</span>{% endif %}
         </p>
+        {% endif %}
+        {% if entry.cta_link %}
+        <p>{% if entry.cta_intro %}{{ entry.cta_intro }} {% endif %}<a class="btn btn-sun" href="{{ entry.cta_link }}">{{ entry.cta_label|default:_("En savoir plus") }}</a></p>
         {% endif %}
       </div>
     </li>

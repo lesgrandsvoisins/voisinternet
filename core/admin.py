@@ -89,9 +89,17 @@ class DirectorySectorAdmin(admin.ModelAdmin):
 
 @admin.register(DirectoryEntry)
 class DirectoryEntryAdmin(admin.ModelAdmin):
-    list_display = ["name", "kind", "sector", "public", "order"]
+    list_display = ["name", "kind", "sector", "city", "public", "order"]
     list_filter = ["kind", "sector", "public"]
     list_editable = ["public", "order"]
     prepopulated_fields = {"slug": ["name"]}
-    search_fields = ["name", "description"]
+    search_fields = ["name", "description", "city"]
     autocomplete_fields = ["sector"]
+    fieldsets = [
+        (None, {"fields": ["name", "slug", "kind", "sector", "public", "order"]}),
+        ("Présentation", {"fields": ["title", "tagline", "description"]}),
+        ("Médias", {"fields": ["logo", "photo_promo", "photo_structure", "photo_lieu", "video_url"]}),
+        ("Coordonnées", {"fields": ["email", "phone", "website"]}),
+        ("Localisation", {"fields": ["address", "city", "country", "latitude", "longitude"]}),
+        ("Appel à l'action", {"fields": ["cta_intro", "cta_label", "cta_link"]}),
+    ]

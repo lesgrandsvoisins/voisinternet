@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 22:59+0200\n"
+"POT-Creation-Date: 2026-09-11 23:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,8 +47,8 @@ msgid "à lire"
 msgstr "to read"
 
 #: core/menu.py:36
-msgid "Mon compte"
-msgstr "My account"
+msgid "mon Compte"
+msgstr "my Account"
 
 #: core/menu.py:36
 msgid "un individu, un compte, ce que je choisis de partager"
@@ -59,8 +59,8 @@ msgid "se connecter, créer un compte, retrouver mes raccourcis"
 msgstr "log in, create an account, recover my shortcuts"
 
 #: core/menu.py:38
-msgid "Contact"
-msgstr "Contact"
+msgid "Agenda"
+msgstr "Agenda"
 
 #: core/menu.py:38
 msgid "un individu qui reçoit de l'aide, entre voisins"
@@ -71,8 +71,8 @@ msgid "poser une question, se faire accompagner"
 msgstr "ask a question, get support"
 
 #: core/menu.py:40
-msgid "Bénévolat"
-msgstr "Volunteering"
+msgid "Bénévolat et dons"
+msgstr "Volunteering and donations"
 
 #: core/menu.py:40
 msgid "un individu qui donne, sans rien attendre en retour"
@@ -82,9 +82,9 @@ msgstr "an individual who gives, expecting nothing in return"
 msgid "accompagner l'autre, donner du matériel"
 msgstr "supporting others, donating equipment"
 
-#: core/menu.py:42 core/models.py:258
-msgid "Association"
-msgstr "Association"
+#: core/menu.py:42
+msgid "Grands Voisins"
+msgstr "Grands Voisins"
 
 #: core/menu.py:42
 msgid "une conscience collective, l'association coopérative"
@@ -95,8 +95,8 @@ msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "bylaws, governance, accounts: everything is public"
 
 #: core/menu.py:44
-msgid "Annuaire"
-msgstr "Directory"
+msgid "Pages"
+msgstr "Pages"
 
 #: core/menu.py:44
 msgid "qui fait partie de la communauté, et comment les joindre"
@@ -107,8 +107,8 @@ msgid "un particulier, une association, une entreprise…"
 msgstr "an individual, an association, a business…"
 
 #: core/menu.py:46
-msgid "Dons et partenaires"
-msgstr "Donations and partners"
+msgid "Activités"
+msgstr "Activities"
 
 #: core/menu.py:46
 msgid "dons et partenaires qui nous ont aidés à naître"
@@ -175,7 +175,7 @@ msgstr ""
 "button."
 
 #: core/models.py:43 core/models.py:58 core/models.py:91 core/models.py:187
-#: core/models.py:225
+#: core/models.py:247
 msgid "ordre"
 msgstr "order"
 
@@ -287,81 +287,145 @@ msgstr "individual or collective"
 msgid "secteur"
 msgstr "sector"
 
-#: core/models.py:215
+#: core/models.py:216
+msgid "titre de la page"
+msgstr "page title"
+
+#: core/models.py:217
+msgid "texte d'accroche"
+msgstr "tagline"
+
+#: core/models.py:218
 msgid "description"
 msgstr "description"
 
-#: core/models.py:216
-msgid "photo ou logo"
-msgstr "photo or logo"
+#: core/models.py:220
+msgid "logo"
+msgstr "logo"
 
-#: core/models.py:217
+#: core/models.py:221
+msgid "photo promotionnelle"
+msgstr "promotional photo"
+
+#: core/models.py:222
+msgid "photo de la structure"
+msgstr "photo of the organization"
+
+#: core/models.py:223
+msgid "photo du lieu"
+msgstr "photo of the venue"
+
+#: core/models.py:225
+msgid "vidéo promotionnelle"
+msgstr "promotional video"
+
+#: core/models.py:226
+msgid ""
+"Lien vers une vidéo (YouTube, PeerTube…) : affiché en lien, jamais intégré "
+"en cadre."
+msgstr ""
+"Link to a video (YouTube, PeerTube…): shown as a link, never embedded in a "
+"frame."
+
+#: core/models.py:229
 msgid "courriel"
 msgstr "email"
 
-#: core/models.py:218
+#: core/models.py:230
 msgid "téléphone"
 msgstr "phone"
 
-#: core/models.py:219
+#: core/models.py:231
 msgid "site ou lien"
 msgstr "website or link"
 
-#: core/models.py:220
+#: core/models.py:233
 msgid "adresse"
 msgstr "address"
 
-#: core/models.py:222 core/models.py:263
+#: core/models.py:234
+msgid "ville"
+msgstr "city"
+
+#: core/models.py:235
+msgid "pays"
+msgstr "country"
+
+#: core/models.py:236
+msgid "latitude"
+msgstr "latitude"
+
+#: core/models.py:237
+msgid "longitude"
+msgstr "longitude"
+
+#: core/models.py:239
+msgid "introduction de l'appel à l'action"
+msgstr "call-to-action intro"
+
+#: core/models.py:240
+msgid "texte du bouton d'appel à l'action"
+msgstr "call-to-action button text"
+
+#: core/models.py:241
+msgid "lien de l'appel à l'action"
+msgstr "call-to-action link"
+
+#: core/models.py:244 core/models.py:285
 msgid "apparaît publiquement"
 msgstr "appears publicly"
 
-#: core/models.py:223
+#: core/models.py:245
 msgid ""
 "Uniquement avec le consentement explicite de la personne ou de la structure "
 "(RGPD)."
 msgstr "Only with the explicit consent of the person or organization (GDPR)."
 
-#: core/models.py:229
-msgid "fiche de l'annuaire"
-msgstr "directory entry"
+#: core/models.py:251
+msgid "page de l'annuaire"
+msgstr "directory page"
 
-#: core/models.py:230
-msgid "annuaire"
-msgstr "directory"
+#: core/models.py:252
+msgid "pages de l'annuaire"
+msgstr "directory pages"
 
-#: core/models.py:254
+#: core/models.py:276
 msgid "Particulier"
 msgstr "Individual"
 
-#: core/models.py:255
+#: core/models.py:277
 msgid "Entreprise"
 msgstr "Company"
 
-#: core/models.py:256
+#: core/models.py:278
 msgid "Fondation"
 msgstr "Foundation"
 
-#: core/models.py:257
+#: core/models.py:279
 msgid "Collectivité"
 msgstr "Local authority"
 
-#: core/models.py:260
+#: core/models.py:280
+msgid "Association"
+msgstr "Association"
+
+#: core/models.py:282
 msgid "nom affiché"
 msgstr "displayed name"
 
-#: core/models.py:261
+#: core/models.py:283
 msgid "type"
 msgstr "type"
 
-#: core/models.py:264
+#: core/models.py:286
 msgid "Uniquement avec le consentement explicite du donateur (RGPD)."
 msgstr "Only with the donor's explicit consent (GDPR)."
 
-#: core/models.py:266
+#: core/models.py:288
 msgid "soutien depuis"
 msgstr "supporting since"
 
-#: core/models.py:270
+#: core/models.py:292
 msgid "donateur"
 msgstr "donor"
 
@@ -1073,15 +1137,23 @@ msgstr "Activity sectors"
 msgid "Tous les secteurs"
 msgstr "All sectors"
 
-#: core/templates/core/vous_voyez.html:25
+#: core/templates/core/vous_voyez.html:27
 msgid "Site"
 msgstr "Website"
 
-#: core/templates/core/vous_voyez.html:33
+#: core/templates/core/vous_voyez.html:28
+msgid "Vidéo"
+msgstr "Video"
+
+#: core/templates/core/vous_voyez.html:34
+msgid "En savoir plus"
+msgstr "Learn more"
+
+#: core/templates/core/vous_voyez.html:39
 msgid "Personne pour l'instant"
 msgstr "No one yet"
 
-#: core/templates/core/vous_voyez.html:33
+#: core/templates/core/vous_voyez.html:39
 msgid "Les fiches apparaîtront ici, avec l'accord de chacun."
 msgstr "Entries will appear here, with everyone's consent."
 

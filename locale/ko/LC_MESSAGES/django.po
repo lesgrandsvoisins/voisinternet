@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 22:59+0200\n"
+"POT-Creation-Date: 2026-09-11 23:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgid "à lire"
 msgstr "읽을거리"
 
 #: core/menu.py:36
-msgid "Mon compte"
+msgid "mon Compte"
 msgstr "내 계정"
 
 #: core/menu.py:36
@@ -59,8 +59,8 @@ msgid "se connecter, créer un compte, retrouver mes raccourcis"
 msgstr "로그인, 계정 만들기, 바로가기 복구하기"
 
 #: core/menu.py:38
-msgid "Contact"
-msgstr "문의"
+msgid "Agenda"
+msgstr "일정"
 
 #: core/menu.py:38
 msgid "un individu qui reçoit de l'aide, entre voisins"
@@ -71,8 +71,8 @@ msgid "poser une question, se faire accompagner"
 msgstr "질문하기, 도움 받기"
 
 #: core/menu.py:40
-msgid "Bénévolat"
-msgstr "자원봉사"
+msgid "Bénévolat et dons"
+msgstr "자원봉사 및 후원"
 
 #: core/menu.py:40
 msgid "un individu qui donne, sans rien attendre en retour"
@@ -82,9 +82,9 @@ msgstr "대가를 바라지 않고 베푸는 개인"
 msgid "accompagner l'autre, donner du matériel"
 msgstr "이웃 돕기, 장비 기부하기"
 
-#: core/menu.py:42 core/models.py:258
-msgid "Association"
-msgstr "협회"
+#: core/menu.py:42
+msgid "Grands Voisins"
+msgstr "Grands Voisins"
 
 #: core/menu.py:42
 msgid "une conscience collective, l'association coopérative"
@@ -95,8 +95,8 @@ msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "정관, 운영, 회계: 모두 공개됩니다"
 
 #: core/menu.py:44
-msgid "Annuaire"
-msgstr "디렉터리"
+msgid "Pages"
+msgstr "페이지"
 
 #: core/menu.py:44
 msgid "qui fait partie de la communauté, et comment les joindre"
@@ -107,8 +107,8 @@ msgid "un particulier, une association, une entreprise…"
 msgstr "개인, 협회, 기업…"
 
 #: core/menu.py:46
-msgid "Dons et partenaires"
-msgstr "후원 및 파트너"
+msgid "Activités"
+msgstr "활동"
 
 #: core/menu.py:46
 msgid "dons et partenaires qui nous ont aidés à naître"
@@ -173,7 +173,7 @@ msgid ""
 msgstr "공공 및 사회 기관용: 이 페이지는 “추가” 버튼 없이 파트너십을 제안합니다."
 
 #: core/models.py:43 core/models.py:58 core/models.py:91 core/models.py:187
-#: core/models.py:225
+#: core/models.py:247
 msgid "ordre"
 msgstr "순서"
 
@@ -285,81 +285,143 @@ msgstr "개인 또는 단체"
 msgid "secteur"
 msgstr "분야"
 
-#: core/models.py:215
+#: core/models.py:216
+msgid "titre de la page"
+msgstr "페이지 제목"
+
+#: core/models.py:217
+msgid "texte d'accroche"
+msgstr "홍보 문구"
+
+#: core/models.py:218
 msgid "description"
 msgstr "설명"
 
-#: core/models.py:216
-msgid "photo ou logo"
-msgstr "사진 또는 로고"
+#: core/models.py:220
+msgid "logo"
+msgstr "로고"
 
-#: core/models.py:217
+#: core/models.py:221
+msgid "photo promotionnelle"
+msgstr "홍보 사진"
+
+#: core/models.py:222
+msgid "photo de la structure"
+msgstr "단체 사진"
+
+#: core/models.py:223
+msgid "photo du lieu"
+msgstr "장소 사진"
+
+#: core/models.py:225
+msgid "vidéo promotionnelle"
+msgstr "홍보 영상"
+
+#: core/models.py:226
+msgid ""
+"Lien vers une vidéo (YouTube, PeerTube…) : affiché en lien, jamais intégré "
+"en cadre."
+msgstr "영상 링크(YouTube, PeerTube 등): 프레임에 삽입되지 않고 링크로만 표시됩니다."
+
+#: core/models.py:229
 msgid "courriel"
 msgstr "이메일"
 
-#: core/models.py:218
+#: core/models.py:230
 msgid "téléphone"
 msgstr "전화번호"
 
-#: core/models.py:219
+#: core/models.py:231
 msgid "site ou lien"
 msgstr "웹사이트 또는 링크"
 
-#: core/models.py:220
+#: core/models.py:233
 msgid "adresse"
 msgstr "주소"
 
-#: core/models.py:222 core/models.py:263
+#: core/models.py:234
+msgid "ville"
+msgstr "도시"
+
+#: core/models.py:235
+msgid "pays"
+msgstr "국가"
+
+#: core/models.py:236
+msgid "latitude"
+msgstr "위도"
+
+#: core/models.py:237
+msgid "longitude"
+msgstr "경도"
+
+#: core/models.py:239
+msgid "introduction de l'appel à l'action"
+msgstr "행동 유도 문구 소개"
+
+#: core/models.py:240
+msgid "texte du bouton d'appel à l'action"
+msgstr "행동 유도 버튼 텍스트"
+
+#: core/models.py:241
+msgid "lien de l'appel à l'action"
+msgstr "행동 유도 링크"
+
+#: core/models.py:244 core/models.py:285
 msgid "apparaît publiquement"
 msgstr "공개적으로 표시됨"
 
-#: core/models.py:223
+#: core/models.py:245
 msgid ""
 "Uniquement avec le consentement explicite de la personne ou de la structure "
 "(RGPD)."
 msgstr "본인 또는 단체의 명시적 동의가 있는 경우에만(GDPR)."
 
-#: core/models.py:229
-msgid "fiche de l'annuaire"
-msgstr "디렉터리 항목"
+#: core/models.py:251
+msgid "page de l'annuaire"
+msgstr "디렉터리 페이지"
 
-#: core/models.py:230
-msgid "annuaire"
-msgstr "디렉터리"
+#: core/models.py:252
+msgid "pages de l'annuaire"
+msgstr "디렉터리 페이지"
 
-#: core/models.py:254
+#: core/models.py:276
 msgid "Particulier"
 msgstr "개인"
 
-#: core/models.py:255
+#: core/models.py:277
 msgid "Entreprise"
 msgstr "기업"
 
-#: core/models.py:256
+#: core/models.py:278
 msgid "Fondation"
 msgstr "재단"
 
-#: core/models.py:257
+#: core/models.py:279
 msgid "Collectivité"
 msgstr "지자체"
 
-#: core/models.py:260
+#: core/models.py:280
+msgid "Association"
+msgstr "협회"
+
+#: core/models.py:282
 msgid "nom affiché"
 msgstr "표시 이름"
 
-#: core/models.py:261
+#: core/models.py:283
 msgid "type"
 msgstr "유형"
 
-#: core/models.py:264
+#: core/models.py:286
 msgid "Uniquement avec le consentement explicite du donateur (RGPD)."
 msgstr "기부자의 명시적 동의가 있는 경우에만(GDPR)."
 
-#: core/models.py:266
+#: core/models.py:288
 msgid "soutien depuis"
 msgstr "후원 시작일"
 
-#: core/models.py:270
+#: core/models.py:292
 msgid "donateur"
 msgstr "후원자"
 
@@ -1034,15 +1096,23 @@ msgstr "활동 분야"
 msgid "Tous les secteurs"
 msgstr "전체 분야"
 
-#: core/templates/core/vous_voyez.html:25
+#: core/templates/core/vous_voyez.html:27
 msgid "Site"
 msgstr "웹사이트"
 
-#: core/templates/core/vous_voyez.html:33
+#: core/templates/core/vous_voyez.html:28
+msgid "Vidéo"
+msgstr "영상"
+
+#: core/templates/core/vous_voyez.html:34
+msgid "En savoir plus"
+msgstr "자세히 보기"
+
+#: core/templates/core/vous_voyez.html:39
 msgid "Personne pour l'instant"
 msgstr "아직 등록된 사람이 없습니다"
 
-#: core/templates/core/vous_voyez.html:33
+#: core/templates/core/vous_voyez.html:39
 msgid "Les fiches apparaîtront ici, avec l'accord de chacun."
 msgstr "각자의 동의를 받아 항목이 여기에 표시됩니다."
 

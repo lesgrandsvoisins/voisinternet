@@ -197,8 +197,8 @@ class DirectorySector(models.Model):
 
 class DirectoryEntry(models.Model):
     """
-    Une fiche de l'annuaire (« vous Voyez ») : une personne ou une structure de la communauté.
-    Comme pour les donateurs, la fiche n'apparaît publiquement qu'avec le consentement explicite
+    Une page de l'annuaire (« vous Voyez ») : une personne ou une structure de la communauté.
+    Comme pour les donateurs, la page n'apparaît publiquement qu'avec le consentement explicite
     de la personne ou de la structure concernée.
     """
     KINDS = [
@@ -212,12 +212,34 @@ class DirectoryEntry(models.Model):
         DirectorySector, null=True, blank=True, on_delete=models.SET_NULL,
         related_name="entries", verbose_name=_("secteur"),
     )
-    description = models.TextField(_("description"), blank=True)
-    photo = models.ImageField(_("photo ou logo"), upload_to="annuaire/photos/", blank=True)
-    email = models.EmailField(_("courriel"), blank=True)
-    phone = models.CharField(_("téléphone"), max_length=30, blank=True)
-    website = models.URLField(_("site ou lien"), blank=True)
-    address = models.CharField(_("adresse"), max_length=200, blank=True)
+
+    title = models.CharField(_("titre de la page"), max_length=140, blank=True, default="")
+    tagline = models.CharField(_("texte d'accroche"), max_length=240, blank=True, default="")
+    description = models.TextField(_("description"), blank=True, default="")
+
+    logo = models.ImageField(_("logo"), upload_to="annuaire/logos/", blank=True, default="")
+    photo_promo = models.ImageField(_("photo promotionnelle"), upload_to="annuaire/photos/", blank=True, default="")
+    photo_structure = models.ImageField(_("photo de la structure"), upload_to="annuaire/photos/", blank=True, default="")
+    photo_lieu = models.ImageField(_("photo du lieu"), upload_to="annuaire/photos/", blank=True, default="")
+    video_url = models.URLField(
+        _("vidéo promotionnelle"), blank=True, default="",
+        help_text=_("Lien vers une vidéo (YouTube, PeerTube…) : affiché en lien, jamais intégré en cadre."),
+    )
+
+    email = models.EmailField(_("courriel"), blank=True, default="")
+    phone = models.CharField(_("téléphone"), max_length=30, blank=True, default="")
+    website = models.URLField(_("site ou lien"), blank=True, default="")
+
+    address = models.CharField(_("adresse"), max_length=200, blank=True, default="")
+    city = models.CharField(_("ville"), max_length=100, blank=True, default="")
+    country = models.CharField(_("pays"), max_length=100, blank=True, default="")
+    latitude = models.DecimalField(_("latitude"), max_digits=9, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(_("longitude"), max_digits=9, decimal_places=6, null=True, blank=True)
+
+    cta_intro = models.CharField(_("introduction de l'appel à l'action"), max_length=200, blank=True, default="")
+    cta_label = models.CharField(_("texte du bouton d'appel à l'action"), max_length=60, blank=True, default="")
+    cta_link = models.URLField(_("lien de l'appel à l'action"), blank=True, default="")
+
     public = models.BooleanField(
         _("apparaît publiquement"), default=False,
         help_text=_("Uniquement avec le consentement explicite de la personne ou de la structure (RGPD)."),
@@ -226,8 +248,8 @@ class DirectoryEntry(models.Model):
 
     class Meta:
         ordering = ["order", "name"]
-        verbose_name = _("fiche de l'annuaire")
-        verbose_name_plural = _("annuaire")
+        verbose_name = _("page de l'annuaire")
+        verbose_name_plural = _("pages de l'annuaire")
 
     def __str__(self):
         return self.name

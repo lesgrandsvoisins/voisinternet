@@ -129,10 +129,12 @@ class Account(models.Model):
 class Shortcut(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    position = models.PositiveIntegerField("ordre personnel", default=0)
     created = models.DateTimeField(default=timezone.now, editable=False)
 
     class Meta:
         constraints = [models.UniqueConstraint(fields=["account", "service"], name="unique_shortcut")]
+        ordering = ["account", "position", "service__name"]
         verbose_name = "raccourci"
 
     def __str__(self):

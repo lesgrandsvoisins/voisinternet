@@ -77,6 +77,16 @@ class AnonymousAccountTests(Base):
         self.client.post(reverse("core:recover_anonymous"), {"number": digits})
         self.assertNotIn(SESSION_KEY, self.client.session)
 
+    def test_shortcuts_can_be_ordered_per_account(self):
+        account = Account.create_anonymous()[0]
+        service_two = Service.objects.create(name="Agenda", slug="agenda", summary="Agenda personnel.")
+        first = Shortcut.objects.create(account=account, service=self.service, position=20)
+        second = Shortcut.objects.create(account=account, service=service_two, position=10)
+        ordered = list(account.shortcut_set.order_by("position").values_list("service__slug", flat=True))
+        self.assertEqual(ordered, ["agenda", "courriel"])
+        self.assertEqual(first.service.name, "Courriel")
+        self.assertEqual(second.service.name, "Agenda")
+
     def test_htmx_toggle_returns_partial_with_out_of_band_updates(self):
         response = self.client.post(reverse("core:toggle_shortcut", args=["courriel"]), HTTP_HX_REQUEST="true")
         self.assertEqual(response.status_code, 200)

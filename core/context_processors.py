@@ -35,7 +35,7 @@ def site(request):
     if settings.OIDC_ENABLED:
         next_url = request.get_full_path()
         keycloak_login_url = f"{reverse('oidc_authentication_init')}?{urlencode({'next': next_url})}"
-        keycloak_register_url = f"{settings.KEYCLOAK_REALM_URL}/protocol/openid-connect/registrations?{urlencode({'client_id': settings.OIDC_RP_CLIENT_ID, 'redirect_uri': request.build_absolute_uri(reverse('core:je_vois'))})}"
+        keycloak_register_url = f"{settings.KEYCLOAK_REALM_URL}/protocol/openid-connect/registrations?{urlencode({'client_id': settings.OIDC_RP_CLIENT_ID, 'redirect_uri': request.build_absolute_uri(reverse('core:account'))})}"
     return {
         "conj": {i["entry"].key: i for i in entries},
         "conj_groups": groups,

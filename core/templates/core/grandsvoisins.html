@@ -1,0 +1,38 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "nous Voyons : l'association — Voisinternet" %}{% endblock %}
+{% block content %}
+{% trans "Voisinternet est un programme porté par l'association coopérative Les Grands Voisins : une conscience collective à laquelle chacun contribue. Nous demandons votre confiance : voici de quoi la vérifier." as page_lead %}
+{% include "core/partials/page_head.html" with item=conj.nous lead=page_lead %}
+<div class="wrap page">
+  <section>
+    <h2>{% trans "Notre raison d'être" %}</h2>
+    <p>{% blocktrans %}Écrite collectivement par une centaine de personnes en 2017, notre raison d'être vient des interstices du béton et des politiques publiques : nous croyons aux ponts entre l'utopie et le réel, et à l'accueil de chacun.{% endblocktrans %}</p>
+  </section>
+  <section>
+    <h2>{% trans "D'où nous venons" %}</h2>
+    <p>{% blocktrans %}Les Grands Voisins sont nés entre 2015 et 2017 à l'hôpital Saint-Vincent-de-Paul, dans le 14ᵉ arrondissement de Paris, entre Port-Royal et les Catacombes. Depuis, nous nous demandons si un lieu physique est encore nécessaire pour rester voisins.{% endblocktrans %}</p>
+  </section>
+  <section>
+    <h2>{% trans "Le bureau" %}</h2>
+    <ul class="docs">
+      <li><strong>Chris Mann</strong><span>{% trans "Président" %}</span></li>
+      <li><strong>Sviatlana Viarbitskaya</strong><span>{% trans "Trésorière" %}</span></li>
+      <li><strong>Caroline Lhomme</strong><span>{% trans "Vice-présidente" %}</span></li>
+    </ul>
+  </section>
+  <section>
+    <h2>{% trans "Statut légal" %}</h2>
+    <p>{% blocktrans %}Association loi de 1901. RNA W751240710, SIREN 832760102.{% endblocktrans %}</p>
+  </section>
+  <section>
+    <h2>{% trans "Transparence" %}</h2>
+    <ul class="docs">
+      <li><strong>{% trans "Statuts de l'association" %}</strong><span>{% trans "[document à publier]" %}</span></li>
+      <li><strong>{% trans "Comptes annuels" %}</strong><span>{% trans "[document à publier]" %}</span></li>
+      <li><strong>{% trans "Comptes rendus d'assemblée générale" %}</strong><span>{% trans "[document à publier]" %}</span></li>
+      <li><strong>{% trans "Nos engagements d'hébergeur" %}</strong><span>{% trans "[document à publier]" %}</span></li>
+    </ul>
+  </section>
+</div>
+{% endblock %}

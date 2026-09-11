@@ -65,7 +65,7 @@ def home(request):
     })
 
 
-def je_vois(request):
+def account(request):
     new_number = request.session.pop(NEW_NUMBER_KEY, None)
     account = current_account(request)
     if account:
@@ -80,7 +80,7 @@ def je_vois(request):
         membership_ids = set()
     available_services = Service.objects.filter(active=True).exclude(pk__in=shortcut_ids).order_by("order", "name")
     available_audiences = Audience.objects.exclude(pk__in=membership_ids).order_by("order", "name")
-    return render(request, "core/je_vois.html", {
+    return render(request, "core/account.html", {
         "account": account,
         "shortcuts": shortcuts,
         "shortcut_ids": shortcut_ids,
@@ -93,33 +93,35 @@ def je_vois(request):
     })
 
 
-def vous_voyez(request, secteur=None):
+def annuaire(request, secteur=None):
     entries = DirectoryEntry.objects.filter(public=True)
     current = None
     if secteur:
         current = get_object_or_404(DirectorySector, slug=secteur)
         entries = entries.filter(sector=current)
-    return render(request, "core/vous_voyez.html", {
+    return render(request, "core/annuaire.html", {
         "entries": entries,
         "sectors": DirectorySector.objects.all(),
         "sector": current,
     })
 
 
-def civisme(request):
-    return render(request, "core/civisme.html", {
+def contributions(request):
+    return render(request, "core/contributions.html", {
         "donors": Donor.objects.filter(public=True),
     })
+
+
+def civisme(request):
+    return render(request, "core/civisme.html")
+
 
 def arts_plastiques(request):
-    return render(request, "core/arts-plastiques.html", {
-        "donors": Donor.objects.filter(public=True),
-    })
+    return render(request, "core/arts-plastiques.html")
+
 
 def numerique(request):
-    return render(request, "core/numerique.html", {
-        "donors": Donor.objects.filter(public=True),
-    })
+    return render(request, "core/numerique.html")
 
 # --- Comptes anonymes
 
@@ -128,21 +130,21 @@ def create_anonymous(request):
     if current_account(request) is None:
         current_account(request, create=True)
         messages.success(request, _("Compte anonyme créé."))
-    return redirect("core:je_vois")
+    return redirect("core:account")
 
 
 @require_POST
 def recover_anonymous(request):
     if _throttled(request, "recover"):
         messages.error(request, _("Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."))
-        return redirect("core:je_vois")
+        return redirect("core:account")
     account = Account.find_by_number(request.POST.get("number", ""))
     if account is None:
         messages.error(request, _("Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."))
     else:
         request.session[SESSION_KEY] = account.pk
         messages.success(request, _("Compte retrouvé. Vos raccourcis sont de retour."))
-    return redirect("core:je_vois")
+    return redirect("core:account")
 
 
 @require_POST
@@ -160,7 +162,7 @@ def link_anonymous(request):
         current_account(request).absorb(pending)
         request.session.pop(SESSION_KEY, None)
         messages.success(request, _("Vos raccourcis anonymes ont rejoint votre compte."))
-    return redirect("core:je_vois")
+    return redirect("core:account")
 
 
 # --- Raccourcis
@@ -205,9 +207,9 @@ def toggle_shortcut(request, slug):
         # Sans JavaScript : on passe par « je Vois » pour montrer le numéro une fois.
         request.session[NEW_NUMBER_KEY] = new_number
         messages.success(request, text)
-        return redirect("core:je_vois")
+        return redirect("core:account")
     messages.success(request, text)
-    return redirect(_safe_next(request, reverse("core:je_vois")))
+    return redirect(_safe_next(request, reverse("core:account")))
 
 
 @require_POST
@@ -216,27 +218,27 @@ def reorder_shortcut(request, slug, direction):
     if account is None:
         if _is_htmx(request):
             return HttpResponse(status=403)
-        return redirect("core:je_vois")
+        return redirect("core:account")
 
     service = get_object_or_404(Service, slug=slug, active=True)
     shortcut = account.shortcut_set.filter(service=service).first()
     if shortcut is None:
         if _is_htmx(request):
             return HttpResponse(status=404)
-        return redirect("core:je_vois")
+        return redirect("core:account")
 
     direction = direction.lower()
     if direction not in {"up", "down"}:
         if _is_htmx(request):
             return HttpResponse(status=400)
-        return redirect("core:je_vois")
+        return redirect("core:account")
 
     shortcuts = list(account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name"))
     index = next((i for i, item in enumerate(shortcuts) if item.pk == shortcut.pk), None)
     if index is None:
         if _is_htmx(request):
             return HttpResponse(status=404)
-        return redirect("core:je_vois")
+        return redirect("core:account")
 
     target_index = index - 1 if direction == "up" else index + 1
     if 0 <= target_index < len(shortcuts):
@@ -253,7 +255,7 @@ def reorder_shortcut(request, slug, direction):
             "shortcuts": account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name"),
         })
 
-    return redirect("core:je_vois")
+    return redirect("core:account")
 
 
 # --- Appartenances
@@ -297,9 +299,9 @@ def toggle_membership(request, slug):
     if new_number:
         request.session[NEW_NUMBER_KEY] = new_number
         messages.success(request, text)
-        return redirect("core:je_vois")
+        return redirect("core:account")
     messages.success(request, text)
-    return redirect(_safe_next(request, reverse("core:je_vois")))
+    return redirect(_safe_next(request, reverse("core:account")))
 
 
 @require_POST
@@ -308,27 +310,27 @@ def reorder_membership(request, slug, direction):
     if account is None:
         if _is_htmx(request):
             return HttpResponse(status=403)
-        return redirect("core:je_vois")
+        return redirect("core:account")
 
     audience = get_object_or_404(Audience, slug=slug)
     membership = account.membership_set.filter(audience=audience).first()
     if membership is None:
         if _is_htmx(request):
             return HttpResponse(status=404)
-        return redirect("core:je_vois")
+        return redirect("core:account")
 
     direction = direction.lower()
     if direction not in {"up", "down"}:
         if _is_htmx(request):
             return HttpResponse(status=400)
-        return redirect("core:je_vois")
+        return redirect("core:account")
 
     memberships = list(account.membership_set.select_related("audience").order_by("position", "audience__order", "audience__name"))
     index = next((i for i, item in enumerate(memberships) if item.pk == membership.pk), None)
     if index is None:
         if _is_htmx(request):
             return HttpResponse(status=404)
-        return redirect("core:je_vois")
+        return redirect("core:account")
 
     target_index = index - 1 if direction == "up" else index + 1
     if 0 <= target_index < len(memberships):
@@ -345,4 +347,4 @@ def reorder_membership(request, slug, direction):
             "memberships": account.membership_set.select_related("audience").order_by("position", "audience__order", "audience__name"),
         })
 
-    return redirect("core:je_vois")
+    return redirect("core:account")

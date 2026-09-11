@@ -164,7 +164,8 @@ a {
   align-items: center;
   gap: .6rem;
   text-decoration: none;
-  margin-inline-end: auto
+  margin-inline-end: auto;
+  margin-right: 3rem;
 }
 
 .mark {

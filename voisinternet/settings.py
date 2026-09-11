@@ -140,8 +140,8 @@ if OIDC_ENABLED:
     OIDC_OP_JWKS_ENDPOINT = f"{KEYCLOAK_REALM_URL}/protocol/openid-connect/certs"
     OIDC_OP_LOGOUT_URL_METHOD = "core.auth.keycloak_logout_url"
 
-LOGIN_URL = "core:je_vois"
-LOGIN_REDIRECT_URL = "core:je_vois"
+LOGIN_URL = "core:account"
+LOGIN_REDIRECT_URL = "core:account"
 LOGOUT_REDIRECT_URL = "core:home"
 
 LANGUAGE_CODE = "fr"

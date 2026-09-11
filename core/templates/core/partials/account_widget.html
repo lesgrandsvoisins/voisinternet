@@ -1,6 +1,7 @@
 {% load i18n %}<details class="account-panel" id="account-panel"{% if oob %} hx-swap-oob="true"{% endif %}>
   <summary class="account" id="account" aria-label="{% blocktrans %}Je vois : {{ account_sub }}{% endblocktrans %}">
-    <b>{% trans "mes Raccourcis" %}</b><small>{{ account_sub }}</small>
+    <b>{% trans "mes Raccourcis" %}</b>
+    {% comment %} <small>{{ account_sub }}</small> {% endcomment %}
   </summary>
   <div class="account-menu" role="menu" aria-label="{% trans 'Options de je Vois' %}">
     {% if not user.is_authenticated and keycloak_login_url %}
@@ -13,7 +14,7 @@
     <div class="account-shortcuts">
       <p class="account-subhead">{% trans "Mes raccourcis" %}</p>
       <ul>
-        <li><a href="{% url 'core:je_vois' %}"><span class="gear" aria-hidden="true">⚙</span>{% trans "Paramètres" %}</a></li>
+        <li><a href="{% url 'core:account' %}"><span class="gear" aria-hidden="true">⚙</span>{% trans "Paramètres" %}</a></li>
         {% for shortcut in account_shortcuts %}{% with service=shortcut.service %}
         <li>
           {% if service.url %}<a href="{{ service.url }}" target="_new">{{ service.name }}</a>{% else %}<span>{{ service.name }}</span>{% endif %}

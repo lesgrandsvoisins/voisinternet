@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "il ou elle Voit : bénévolat et dons — Voisinternet" %}{% endblock %}
+{% block content %}
+{% trans "Soutenir Les Grands Voisins par son talent et sa volonté, par une participation économique, ou par un don de matériel : plusieurs façons de donner, sans rien attendre en retour." as page_lead %}
+{% include "core/partials/page_head.html" with item=conj.il lead=page_lead %}
+<div class="wrap page cols">
+  <section class="card"><h2>{% trans "Donner du temps" %}</h2><p>{% blocktrans %}Animer un atelier, relire le guide, dépanner un voisin, ou simplement être présent : chacun donne le temps qu'il veut. Écrivez-nous à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.{% endblocktrans %}</p></section>
+  <section class="card"><h2>{% trans "Faire un don financier" %}</h2><p>{% trans "[À compléter : moyens de don, et possibilité de reçu fiscal selon l'éligibilité de l'association.]" %}</p><p>{% trans "Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous est nécessaire, mais elle n'est jamais publiée sans votre accord." %}</p></section>
+  <section class="card"><h2>{% trans "Donner du matériel" %}</h2><p>{% trans "[À compléter : matériel accepté, effacement des données, lieu de dépôt.]" %}</p></section>
+</div>
+<div class="wrap page">
+  <section>
+    <h2>{% trans "Nos soutiens" %}</h2>
+    {% if donors %}
+    <ul class="donors">{% for donor in donors %}<li><strong>{{ donor.name }}</strong><span>{{ donor.get_kind_display }}, {% blocktrans with since=donor.since|date:"F Y" %}depuis {{ since }}{% endblocktrans %}</span></li>{% endfor %}</ul>
+    {% else %}
+    <p class="intro">{% trans "Les premiers soutiens apparaîtront ici, avec leur accord." %}</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

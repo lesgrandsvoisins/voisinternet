@@ -35,7 +35,7 @@
       {% if user.is_authenticated %}
         {% if OIDC_ENABLED %}<form method="post" action="{% url 'oidc_logout' %}">{% csrf_token %}<button class="btn btn-line" type="submit">{% trans "Se déconnecter" %}</button></form>{% endif %}
       {% else %}
-        {% if OIDC_ENABLED %}<a class="btn btn-sun" href="{% url 'oidc_authentication_init' %}?next={% url 'core:je_vois' %}">{% trans "Rattacher à mon compte Grands Voisins" %}</a>{% endif %}
+        {% if OIDC_ENABLED %}<a class="btn btn-sun" href="{% url 'oidc_authentication_init' %}?next={% url 'core:account' %}">{% trans "Rattacher à mon compte Grands Voisins" %}</a>{% endif %}
         <form method="post" action="{% url 'core:forget_anonymous' %}">{% csrf_token %}<button class="btn btn-line" type="submit">{% trans "Fermer ce compte sur cet appareil" %}</button></form>
       {% endif %}
     </div>
@@ -72,7 +72,7 @@
       <h2 id="login-title">{% trans "Se connecter" %}</h2>
       <p>{% trans "Avec votre compte unique des Grands Voisins, le même que pour les autres outils de l'association." %}</p>
       {% if OIDC_ENABLED %}
-      <a class="btn btn-sun" href="{% url 'oidc_authentication_init' %}?next={% url 'core:je_vois' %}">{% trans "Se connecter" %}</a>
+      <a class="btn btn-sun" href="{% url 'oidc_authentication_init' %}?next={% url 'core:account' %}">{% trans "Se connecter" %}</a>
       {% else %}
       <p class="muted">{% trans "La connexion par compte Grands Voisins n'est pas encore configurée sur ce serveur." %}</p>
       {% endif %}

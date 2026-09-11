@@ -17,7 +17,7 @@ class Base(TestCase):
 
 class PagesTests(Base):
     def test_every_conjugated_page_renders(self):
-        for name in ["home", "je_vois", "tu_vois", "il_ou_elle_voit", "nous_voyons",
+        for name in ["home", "account", "agenda", "contributions", "nous_voyons",
                      "vous_voyez", "ils_et_elles_voient"]:
             with self.subTest(page=name):
                 response = self.client.get(reverse(f"core:{name}"))
@@ -43,14 +43,14 @@ class PagesTests(Base):
 class AnonymousAccountTests(Base):
     def test_adding_a_service_creates_an_anonymous_account(self):
         response = self.client.post(reverse("core:toggle_shortcut", args=["courriel"]))
-        self.assertRedirects(response, reverse("core:je_vois"), fetch_redirect_response=False)
+        self.assertRedirects(response, reverse("core:account"), fetch_redirect_response=False)
         account = Account.objects.get()
         self.assertTrue(account.is_anonymous_only)
         self.assertTrue(Shortcut.objects.filter(account=account, service=self.service).exists())
         # Le numéro est montré une seule fois, puis oublié.
-        page = self.client.get(reverse("core:je_vois"))
+        page = self.client.get(reverse("core:account"))
         self.assertContains(page, "Votre numéro de compte")
-        again = self.client.get(reverse("core:je_vois"))
+        again = self.client.get(reverse("core:account"))
         self.assertNotContains(again, "Votre numéro de compte")
 
     def test_number_is_never_stored_in_clear(self):
@@ -62,7 +62,7 @@ class AnonymousAccountTests(Base):
         account, digits = Account.create_anonymous()
         Shortcut.objects.create(account=account, service=self.service)
         response = self.client.post(reverse("core:recover_anonymous"), {"number": format_number(digits)})
-        self.assertRedirects(response, reverse("core:je_vois"))
+        self.assertRedirects(response, reverse("core:account"))
         self.assertEqual(self.client.session[SESSION_KEY], account.pk)
         self.assertContains(self.client.get(reverse("core:home")), "mes raccourcis (1)")
 
@@ -98,7 +98,7 @@ class AnonymousAccountTests(Base):
 
         self.client.force_login(user)
         response = self.client.post(reverse("core:reorder_shortcut", args=[self.service.slug, "down"]))
-        self.assertRedirects(response, reverse("core:je_vois"), fetch_redirect_response=False)
+        self.assertRedirects(response, reverse("core:account"), fetch_redirect_response=False)
         ordered = list(account.shortcut_set.order_by("position").values_list("service__slug", flat=True))
         self.assertEqual(ordered, ["agenda", "courriel"])
         first.refresh_from_db()
@@ -139,10 +139,10 @@ class AnonymousAccountTests(Base):
         self.assertEqual(Account.objects.count(), 1)
         self.assertEqual(Shortcut.objects.count(), 0)
 
-    def test_htmx_toggle_refreshes_all_je_vois_lists(self):
+    def test_htmx_toggle_refreshes_all_account_lists(self):
         response = self.client.post(
             reverse("core:toggle_shortcut", args=["courriel"]),
-            {"next": reverse("core:je_vois")},
+            {"next": reverse("core:account")},
             HTTP_HX_REQUEST="true",
         )
 
@@ -158,7 +158,7 @@ class LinkingTests(Base):
         self.client.post(reverse("core:toggle_shortcut", args=["courriel"]))
         user = get_user_model().objects.create_user("voisine")
         self.client.force_login(user)
-        self.assertContains(self.client.get(reverse("core:je_vois")), "Rattacher mes raccourcis")
+        self.assertContains(self.client.get(reverse("core:account")), "Rattacher mes raccourcis")
         self.client.post(reverse("core:link_anonymous"))
         self.assertTrue(Shortcut.objects.filter(account__user=user, service=self.service).exists())
         self.assertFalse(Account.objects.filter(user__isnull=True).exists())

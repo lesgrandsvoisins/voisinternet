@@ -20,7 +20,7 @@
     <a class="brand" href="{% url 'core:home' %}" aria-label="{% trans 'Voisinternet, accueil' %}">{% include "core/partials/logo_mark.html" %}{% include "core/partials/wordmark.html" %}</a>
     <nav class="quicknav" aria-label="{% trans 'Accès rapide' %}">
       {% for group in conj_groups %}{% for item in group.items %}
-      <a target="_new" href="{{ item.href }}" aria-label="{{ item.entry.aria }}"{% if item.current %} aria-current="page"{% endif %}>{% if group.key == "lire" %}{{ item.entry.form|lower }}{% else %}{{ item.entry.pronoun }}{% endif %}</a>
+      <a target="_new" href="{{ item.href }}" aria-label="{{ item.entry.aria }}"{% if item.current %} aria-current="page"{% endif %}>{{ item.entry.title }}</a>
       {% endfor %}{% endfor %}
     </nav>
     <details class="menu">
@@ -69,7 +69,7 @@
     </div>
     <div class="foot-bottom">
       <span>{% trans "Des Voies · Nos Voix · Voisinternet" %}</span>
-      <a target="_new" href="https://github.com/lesgrandsvoisins/voisinternet" target="_blank" rel="noreferrer">GitHub</a>
+      <a target="_new" href="https://github.com/lesgrandsvoisins/voisinternet" rel="noreferrer">GitHub</a>
       <a target="_new" href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>
     </div>
   </div>

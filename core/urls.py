@@ -22,5 +22,7 @@ urlpatterns = [
     path("je-vois/<slug:slug>/raccourci/<str:direction>/", views.reorder_shortcut, name="reorder_shortcut"),
     path("je-vois/<slug:slug>/adherer/", views.toggle_membership, name="toggle_membership"),
     path("je-vois/<slug:slug>/adherer/<str:direction>/", views.reorder_membership, name="reorder_membership"),
-    path("ils-et-elles-voient/", views.ils_et_elles_voient, name="ils_et_elles_voient"),
+    path("civisme/", views.civisme, name="civisme"),
+    path("arts-plastiques/", views.arts_plastiques, name="arts_plastiques"),
+    path("numerique/", views.numerique, name="numerique"),
 ]

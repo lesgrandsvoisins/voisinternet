@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "ils et elles Voient : dons et partenaires — Voisinternet" %}{% endblock %}
+{% block content %}
+{% trans "Prendre conscience de ce qu'il a fallu pour que Les Grands Voisins existent : des dons, et des partenaires. Leur nom n'apparaît ici qu'avec leur accord." as page_lead %}
+{% include "core/partials/page_head.html" with item=conj.ils lead=page_lead %}
+<div class="wrap page cols">
+  <section>
+    <h2>{% trans "Nos soutiens" %}</h2>
+    {% if donors %}
+    <ul class="donors">{% for donor in donors %}<li><strong>{{ donor.name }}</strong><span>{{ donor.get_kind_display }}, {% blocktrans with since=donor.since|date:"F Y" %}depuis {{ since }}{% endblocktrans %}</span></li>{% endfor %}</ul>
+    {% else %}
+    <p class="intro">{% trans "Les premiers soutiens apparaîtront ici, avec leur accord." %}</p>
+    {% endif %}
+  </section>
+  <section>
+    <h2>{% trans "Nos partenaires" %}</h2>
+    <p class="intro">{% trans "Ceux qui nous ont aidés autrement que par un don : matériel, temps, expertise. [À compléter.]" %}</p>
+  </section>
+  <section class="card">
+    <h2>{% trans "Nous soutenir" %}</h2>
+    <p>{% trans "[À compléter : moyens de don, et possibilité de reçu fiscal selon l'éligibilité de l'association.]" %}</p>
+    <p>{% trans "Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous est nécessaire, mais elle n'est jamais publiée sans votre accord." %}</p>
+  </section>
+</div>
+{% endblock %}

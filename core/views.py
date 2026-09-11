@@ -106,11 +106,20 @@ def vous_voyez(request, secteur=None):
     })
 
 
-def ils_et_elles_voient(request):
-    return render(request, "core/ils_et_elles_voient.html", {
+def civisme(request):
+    return render(request, "core/civisme.html", {
         "donors": Donor.objects.filter(public=True),
     })
 
+def arts_plastiques(request):
+    return render(request, "core/arts-plastiques.html", {
+        "donors": Donor.objects.filter(public=True),
+    })
+
+def numerique(request):
+    return render(request, "core/numerique.html", {
+        "donors": Donor.objects.filter(public=True),
+    })
 
 # --- Comptes anonymes
 

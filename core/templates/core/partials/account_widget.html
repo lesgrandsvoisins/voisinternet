@@ -1,6 +1,6 @@
 {% load i18n %}<details class="account-panel" id="account-panel"{% if oob %} hx-swap-oob="true"{% endif %}>
   <summary class="account" id="account" aria-label="{% blocktrans %}Je vois : {{ account_sub }}{% endblocktrans %}">
-    <b>je <span class="V">V</span>ois</b><small>{{ account_sub }}</small>
+    <b>{% trans "mes Raccourcis" %}</b><small>{{ account_sub }}</small>
   </summary>
   <div class="account-menu" role="menu" aria-label="{% trans 'Options de je Vois' %}">
     {% if not user.is_authenticated and keycloak_login_url %}

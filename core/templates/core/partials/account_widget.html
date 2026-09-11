@@ -1,0 +1,3 @@
+<a class="account" id="account" href="{% url 'core:je_vois' %}" aria-label="Je vois : {{ account_sub }}"{% if oob %} hx-swap-oob="true"{% endif %}>
+  <b>je <span class="V">V</span>ois</b><small>{{ account_sub }}</small>{% if account_count %}<span class="badge" aria-hidden="true">{{ account_count }}</span>{% endif %}
+</a>

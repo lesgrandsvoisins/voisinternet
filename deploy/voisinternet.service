@@ -1,0 +1,18 @@
+[Unit]
+Description=Voisinternet (Django, gunicorn)
+After=network.target
+
+[Service]
+User=voisinternet
+Group=voisinternet
+WorkingDirectory=/srv/voisinternet
+EnvironmentFile=/srv/voisinternet/.env
+ExecStart=/srv/voisinternet/.venv/bin/gunicorn voisinternet.wsgi:application --bind 127.0.0.1:8000 --workers 2 --timeout 30
+Restart=on-failure
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/srv/voisinternet/var
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

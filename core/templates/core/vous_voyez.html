@@ -1,0 +1,8 @@
+{% extends "core/base.html" %}
+{% block title %}vous Voyez : les services — Voisinternet{% endblock %}
+{% block content %}
+{% include "core/partials/page_head.html" with item=conj.vous lead="Ajoutez ceux qui vous intéressent à vos raccourcis, même sans compte nominatif. Chaque service indique ce qui reste anonyme et ce que l'association doit conserver en tant qu'hébergeur." %}
+<div class="wrap page">
+  {% include "core/partials/service_list.html" with details=True %}
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+[
+  {"model": "core.service", "pk": 1, "fields": {"name": "Courriel", "slug": "courriel", "summary": "Votre adresse, sur votre nom de domaine.", "description": "", "retention": "[À compléter : ce qui reste anonyme, et les données de connexion que l'association conserve en tant qu'hébergeur.]", "url": "", "featured": false, "active": true, "order": 10}},
+  {"model": "core.service", "pk": 2, "fields": {"name": "Fichiers et photos", "slug": "fichiers-et-photos", "summary": "Synchronisés entre vos appareils, rangés chez vous.", "description": "", "retention": "[À compléter]", "url": "", "featured": false, "active": true, "order": 20}},
+  {"model": "core.service", "pk": 3, "fields": {"name": "Agendas et contacts", "slug": "agendas-et-contacts", "summary": "Partagés en famille, sans compte chez un géant.", "description": "", "retention": "[À compléter]", "url": "", "featured": false, "active": true, "order": 30}},
+  {"model": "core.service", "pk": 4, "fields": {"name": "Site ou blog", "slug": "site-ou-blog", "summary": "Votre page, à votre adresse.", "description": "", "retention": "[À compléter]", "url": "", "featured": false, "active": true, "order": 40}},
+  {"model": "core.service", "pk": 5, "fields": {"name": "Sauvegardes croisées", "slug": "sauvegardes-croisees", "summary": "Votre copie de secours dort chez un voisin, et la sienne chez vous.", "description": "", "retention": "Les sauvegardes sont chiffrées avant de quitter votre serveur : le voisin qui les garde ne peut pas les lire. [À confirmer selon l'outil retenu.]", "url": "", "featured": true, "active": true, "order": 50}},
+  {"model": "core.guidebook", "pk": 1, "fields": {"title": "Mon premier serveur", "url": "https://voies.voisinter.net/books/mon-premier-serveur", "summary": "", "order": 10}},
+  {"model": "core.guidebook", "pk": 2, "fields": {"title": "Mon courriel", "url": "https://voies.voisinter.net/books/mon-courriel", "summary": "", "order": 20}},
+  {"model": "core.guidebook", "pk": 3, "fields": {"title": "Mes sauvegardes", "url": "https://voies.voisinter.net/books/mes-sauvegardes", "summary": "", "order": 30}},
+  {"model": "core.guidebook", "pk": 4, "fields": {"title": "Mon nom de domaine", "url": "https://voies.voisinter.net/books/mon-nom-de-domaine", "summary": "", "order": 40}}
+]

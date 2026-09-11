@@ -1,0 +1,24 @@
+voisinter.net, www.voisinter.net {
+	encode zstd gzip
+
+	handle_path /static/* {
+		root * /srv/voisinternet/staticfiles
+		header Cache-Control "public, max-age=604800"
+		file_server
+	}
+
+	handle {
+		reverse_proxy 127.0.0.1:8000
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://auth.example.org"
+		Permissions-Policy "interest-cohort=(), camera=(), microphone=(), geolocation=()"
+	}
+}
+
+# Domaines de secours : redirection permanente en gardant le chemin.
+voisinternet.fr, voisinternet.com, voisinternet.org {
+	redir https://voisinter.net{uri} permanent
+}

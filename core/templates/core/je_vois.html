@@ -1,0 +1,79 @@
+{% extends "core/base.html" %}
+{% block title %}je Vois — Voisinternet{% endblock %}
+{% block content %}
+{% include "core/partials/page_head.html" with item=conj.je %}
+<div class="wrap page">
+
+  {% if new_number %}
+  <section class="card card-sun" aria-labelledby="num-title">
+    <h2 id="num-title">Votre numéro de compte</h2>
+    <p class="number"><code>{{ new_number }}</code></p>
+    <p>Notez-le maintenant. Nous n'en gardons qu'une empreinte : nous ne pourrons jamais vous le redonner. Il suffit, seul, pour retrouver vos raccourcis sur un autre appareil.</p>
+  </section>
+  {% endif %}
+
+  {% if pending %}
+  <section class="card" aria-labelledby="link-title">
+    <h2 id="link-title">Un compte anonyme est ouvert sur cet appareil</h2>
+    <p>Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera ensuite supprimé.</p>
+    <form method="post" action="{% url 'core:link_anonymous' %}">{% csrf_token %}<button class="btn btn-sun" type="submit">Rattacher mes raccourcis</button></form>
+  </section>
+  {% endif %}
+
+  {% if user.is_authenticated or account %}
+  <section aria-labelledby="sc-title">
+    <div class="split">
+      <h2 id="sc-title">Mes raccourcis</h2>
+      <p class="muted">{% if user.is_authenticated %}Connecté{% if user.first_name %} : {{ user.first_name }}{% endif %}{% else %}Compte anonyme{% endif %}</p>
+    </div>
+    {% if shortcuts %}
+    <ul class="svc">
+      {% for shortcut in shortcuts %}{% with service=shortcut.service %}
+      <li>
+        <span class="led" aria-hidden="true"></span>
+        <div><h3>{% if service.url %}<a href="{{ service.url }}">{{ service.name }}</a>{% else %}{{ service.name }}{% endif %}</h3><p>{{ service.summary }}</p></div>
+        {% include "core/partials/shortcut_button.html" with added=True %}
+      </li>
+      {% endwith %}{% endfor %}
+    </ul>
+    {% else %}
+    <p class="intro">Aucun raccourci pour l'instant. <a href="{% url 'core:vous_voyez' %}">Choisissez vos services</a>, ils apparaîtront ici.</p>
+    {% endif %}
+
+    <div class="actions">
+      {% if user.is_authenticated %}
+        {% if OIDC_ENABLED %}<form method="post" action="{% url 'oidc_logout' %}">{% csrf_token %}<button class="btn btn-line" type="submit">Se déconnecter</button></form>{% endif %}
+      {% else %}
+        {% if OIDC_ENABLED %}<a class="btn btn-sun" href="{% url 'oidc_authentication_init' %}?next={% url 'core:je_vois' %}">Rattacher à mon compte Grands Voisins</a>{% endif %}
+        <form method="post" action="{% url 'core:forget_anonymous' %}">{% csrf_token %}<button class="btn btn-line" type="submit">Fermer ce compte sur cet appareil</button></form>
+      {% endif %}
+    </div>
+  </section>
+
+  {% else %}
+  <div class="choices">
+    <section class="card" aria-labelledby="login-title">
+      <h2 id="login-title">Se connecter</h2>
+      <p>Avec votre compte unique des Grands Voisins, le même que pour les autres outils de l'association.</p>
+      {% if OIDC_ENABLED %}
+      <a class="btn btn-sun" href="{% url 'oidc_authentication_init' %}?next={% url 'core:je_vois' %}">Se connecter</a>
+      {% else %}
+      <p class="muted">La connexion par compte Grands Voisins n'est pas encore configurée sur ce serveur.</p>
+      {% endif %}
+    </section>
+    <section class="card" aria-labelledby="anon-title">
+      <h2 id="anon-title">Rester anonyme</h2>
+      <p>Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit pour retrouver vos raccourcis.</p>
+      <form method="post" action="{% url 'core:create_anonymous' %}">{% csrf_token %}<button class="btn btn-sun" type="submit">Créer un compte anonyme</button></form>
+      <form class="recover" method="post" action="{% url 'core:recover_anonymous' %}">{% csrf_token %}
+        <label for="number">J'ai déjà un numéro</label>
+        <div class="field">
+          <input id="number" name="number" inputmode="numeric" autocomplete="off" placeholder="0000 0000 0000 0000" required>
+          <button class="btn btn-line" type="submit">Retrouver</button>
+        </div>
+      </form>
+    </section>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

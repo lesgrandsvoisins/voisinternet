@@ -1,0 +1,20 @@
+{% extends "core/base.html" %}
+{% block title %}ils et elles Voient : dons et donateurs — Voisinternet{% endblock %}
+{% block content %}
+{% include "core/partials/page_head.html" with item=conj.ils lead="Ils et elles nous soutiennent. Leur nom n'apparaît ici qu'avec leur accord." %}
+<div class="wrap page two">
+  <section>
+    <h2>Nos soutiens</h2>
+    {% if donors %}
+    <ul class="donors">{% for donor in donors %}<li><strong>{{ donor.name }}</strong><span>{{ donor.get_kind_display }}, depuis {{ donor.since|date:"F Y" }}</span></li>{% endfor %}</ul>
+    {% else %}
+    <p class="intro">Les premiers soutiens apparaîtront ici, avec leur accord.</p>
+    {% endif %}
+  </section>
+  <section class="card">
+    <h2>Nous soutenir</h2>
+    <p>[À compléter : moyens de don, et possibilité de reçu fiscal selon l'éligibilité de l'association.]</p>
+    <p>Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous est nécessaire, mais elle n'est jamais publiée sans votre accord.</p>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,4 @@
+<form class="shortcut" method="post" action="{% url 'core:toggle_shortcut' service.slug %}" hx-post="{% url 'core:toggle_shortcut' service.slug %}" hx-target="this" hx-swap="outerHTML">
+  {% csrf_token %}<input type="hidden" name="next" value="{{ next|default:request.get_full_path }}">
+  <button class="add" type="submit" aria-pressed="{{ added|yesno:'true,false' }}" aria-label="{% if added %}Retirer {{ service.name }} de mes raccourcis{% else %}Ajouter {{ service.name }} à mes raccourcis{% endif %}">{% if added %}Ajouté{% else %}Ajouter{% endif %}</button>
+</form>

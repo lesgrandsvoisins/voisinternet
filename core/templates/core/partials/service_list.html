@@ -1,0 +1,17 @@
+<ul class="svc">
+  {% for service in services %}
+  <li{% if service.featured %} class="feat"{% endif %}>
+    <span class="led" aria-hidden="true"></span>
+    <div>
+      <h3>{{ service.name }}</h3>
+      <p>{{ service.summary }}</p>
+      {% if details and service.retention %}
+      <details class="retention"><summary>Ce qui reste anonyme, ce que nous conservons</summary><p>{{ service.retention|linebreaksbr }}</p></details>
+      {% endif %}
+    </div>
+    {% if service.pk in shortcut_ids %}{% include "core/partials/shortcut_button.html" with added=True %}{% else %}{% include "core/partials/shortcut_button.html" with added=False %}{% endif %}
+  </li>
+  {% empty %}
+  <li class="empty"><div><h3>Aucun service pour l'instant</h3><p>Les services apparaîtront ici dès qu'ils seront ouverts.</p></div></li>
+  {% endfor %}
+</ul>

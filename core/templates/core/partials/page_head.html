@@ -1,0 +1,7 @@
+<div class="page-head">
+  <div class="wrap">
+    <p class="page-conj">{{ item.entry.pronoun }} {% include "core/partials/verb.html" with form=item.entry.form %}</p>
+    <h1>{{ item.entry.title }}</h1>
+    {% if lead %}<p class="lead">{{ lead }}</p>{% endif %}
+  </div>
+</div>

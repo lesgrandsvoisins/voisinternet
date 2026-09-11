@@ -1,0 +1,10 @@
+{% extends "core/base.html" %}
+{% block title %}tu Vois : se faire accompagner — Voisinternet{% endblock %}
+{% block content %}
+{% include "core/partials/page_head.html" with item=conj.tu lead="Personne ne naît administrateur de serveur. Posez vos questions, venez aux ateliers, ou demandez qu'un bénévole passe vous voir." %}
+<div class="wrap page cols">
+  <section class="card"><h2>Poser une question</h2><p>Écrivez-nous à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>. Un voisin vous répond, pas un robot.</p></section>
+  <section class="card"><h2>Venir aux ateliers</h2><p>[À compléter : jour, horaire et lieu des ateliers.]</p></section>
+  <section class="card"><h2>Un coup de main chez vous</h2><p>[À compléter : comment demander une visite d'un bénévole.]</p></section>
+</div>
+{% endblock %}

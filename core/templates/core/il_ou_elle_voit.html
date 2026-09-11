@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block title %}{% trans "il ou elle Voit : accompagner l'autre — Voisinternet" %}{% endblock %}
 {% block content %}
-{% trans "Vous savez installer un serveur, ou vous avez un vieil ordinateur au placard ? Un voisin en a besoin." as page_lead %}
+{% trans "Un rapport désintéressé : vous participez à quelque chose de plus grand que vous, au bénéfice d'une personne que vous ne connaissez pas encore. Vous savez installer un serveur, ou vous avez un vieil ordinateur au placard ? Un voisin en a besoin." as page_lead %}
 {% include "core/partials/page_head.html" with item=conj.il lead=page_lead %}
 <div class="wrap page cols">
   <section class="card"><h2>{% trans "Devenir bénévole" %}</h2><p>{% blocktrans %}Animer un atelier, relire le guide, dépanner un voisin : chacun donne le temps qu'il veut. Écrivez-nous à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.{% endblocktrans %}</p></section>

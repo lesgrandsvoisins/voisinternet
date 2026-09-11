@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block title %}{% trans "tu Vois : se faire accompagner — Voisinternet" %}{% endblock %}
 {% block content %}
-{% trans "Personne ne naît administrateur de serveur. Posez vos questions, venez aux ateliers, ou demandez qu'un bénévole passe vous voir." as page_lead %}
+{% trans "Un rapport entre deux individus, dans une logique d'entraide : vous recevez ce dont vous avez besoin. Personne ne naît administrateur de serveur. Posez vos questions, venez aux ateliers, ou demandez qu'un bénévole passe vous voir." as page_lead %}
 {% include "core/partials/page_head.html" with item=conj.tu lead=page_lead %}
 <div class="wrap page cols">
   <section class="card"><h2>{% trans "Poser une question" %}</h2><p>{% blocktrans %}Écrivez-nous à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>. Un voisin vous répond, pas un robot.{% endblocktrans %}</p></section>

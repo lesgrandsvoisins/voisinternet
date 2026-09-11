@@ -1,0 +1,58 @@
+[
+ {
+  "model": "core.guidebook",
+  "pk": 1,
+  "fields": {
+   "title": "Mon premier serveur",
+   "url": "https://voies.voisinter.net/books/mon-premier-serveur",
+   "summary": "",
+   "order": 10,
+   "title_en": "My first server",
+   "title_es": "Mi primer servidor",
+   "title_ar": "خادمي الأول",
+   "title_ko": "나의 첫 서버"
+  }
+ },
+ {
+  "model": "core.guidebook",
+  "pk": 2,
+  "fields": {
+   "title": "Mon courriel",
+   "url": "https://voies.voisinter.net/books/mon-courriel",
+   "summary": "",
+   "order": 20,
+   "title_en": "My email",
+   "title_es": "Mi correo electrónico",
+   "title_ar": "بريدي الإلكتروني",
+   "title_ko": "나의 이메일"
+  }
+ },
+ {
+  "model": "core.guidebook",
+  "pk": 3,
+  "fields": {
+   "title": "Mes sauvegardes",
+   "url": "https://voies.voisinter.net/books/mes-sauvegardes",
+   "summary": "",
+   "order": 30,
+   "title_en": "My backups",
+   "title_es": "Mis copias de seguridad",
+   "title_ar": "نسخي الاحتياطية",
+   "title_ko": "나의 백업"
+  }
+ },
+ {
+  "model": "core.guidebook",
+  "pk": 4,
+  "fields": {
+   "title": "Mon nom de domaine",
+   "url": "https://voies.voisinter.net/books/mon-nom-de-domaine",
+   "summary": "",
+   "order": 40,
+   "title_en": "My domain name",
+   "title_es": "Mi nombre de dominio",
+   "title_ar": "اسم نطاقي",
+   "title_ko": "나의 도메인 이름"
+  }
+ }
+]

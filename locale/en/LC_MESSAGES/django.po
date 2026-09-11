@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 15:54+0200\n"
+"POT-Creation-Date: 2026-09-11 17:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,8 +51,8 @@ msgid "Mon compte"
 msgstr "My account"
 
 #: core/menu.py:36
-msgid "se connecter, mon compte, mes raccourcis"
-msgstr "log in, my account, my shortcuts"
+msgid "un individu, un compte, ce que je choisis de partager"
+msgstr "an individual, one account, what I choose to share"
 
 #: core/menu.py:37
 msgid "se connecter, créer un compte, retrouver mes raccourcis"
@@ -63,8 +63,8 @@ msgid "Contact"
 msgstr "Contact"
 
 #: core/menu.py:38
-msgid "contact, se faire accompagner"
-msgstr "contact, get support"
+msgid "un individu qui reçoit de l'aide, entre voisins"
+msgstr "an individual who receives help, between neighbors"
 
 #: core/menu.py:39
 msgid "poser une question, se faire accompagner"
@@ -75,8 +75,8 @@ msgid "Bénévolat"
 msgstr "Volunteering"
 
 #: core/menu.py:40
-msgid "bénévolat, accompagner l'autre"
-msgstr "volunteering, supporting others"
+msgid "un individu qui donne, sans rien attendre en retour"
+msgstr "an individual who gives, expecting nothing in return"
 
 #: core/menu.py:41
 msgid "accompagner l'autre, donner du matériel"
@@ -87,8 +87,8 @@ msgid "Association"
 msgstr "Association"
 
 #: core/menu.py:42
-msgid "l'association"
-msgstr "the association"
+msgid "une conscience collective, l'association coopérative"
+msgstr "a collective consciousness, the cooperative association"
 
 #: core/menu.py:43
 msgid "statuts, gouvernance, comptes : tout est public"
@@ -98,25 +98,25 @@ msgstr "bylaws, governance, accounts: everything is public"
 msgid "Services"
 msgstr "Services"
 
-#: core/menu.py:44 core/templates/core/home.html:95
-msgid "les services"
-msgstr "the services"
+#: core/menu.py:44
+msgid "des services entre voisins, sans obligation envers l'association"
+msgstr "services between neighbors, with no obligation to the association"
 
 #: core/menu.py:45
 msgid "à ajouter à votre compte, même anonyme"
 msgstr "to add to your account, even anonymously"
 
 #: core/menu.py:46
-msgid "Dons et donateurs"
-msgstr "Donations and donors"
+msgid "Dons et partenaires"
+msgstr "Donations and partners"
 
 #: core/menu.py:46
-msgid "dons financiers et donateurs"
-msgstr "financial donations and donors"
+msgid "dons et partenaires qui nous ont aidés à naître"
+msgstr "donations and partners who helped us come into being"
 
 #: core/menu.py:47
-msgid "qui nous soutient, et comment nous soutenir"
-msgstr "who supports us, and how to support us"
+msgid "qui nous soutient — dons et partenaires — et comment nous soutenir"
+msgstr "who supports us — donations and partners — and how to support us"
 
 #: core/menu.py:48
 msgid "Blog"
@@ -435,6 +435,10 @@ msgstr "Get support"
 msgid "Devenir bénévole"
 msgstr "Become a volunteer"
 
+#: core/templates/core/home.html:95
+msgid "les services"
+msgstr "the services"
+
 #: core/templates/core/home.html:98
 msgid ""
 "Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « je "
@@ -499,11 +503,14 @@ msgstr "il ou elle Voit: supporting others — Voisinternet"
 
 #: core/templates/core/il_ou_elle_voit.html:5
 msgid ""
-"Vous savez installer un serveur, ou vous avez un vieil ordinateur au placard"
-" ? Un voisin en a besoin."
+"Un rapport désintéressé : vous participez à quelque chose de plus grand que "
+"vous, au bénéfice d'une personne que vous ne connaissez pas encore. Vous "
+"savez installer un serveur, ou vous avez un vieil ordinateur au placard ? Un"
+" voisin en a besoin."
 msgstr ""
-"Know how to set up a server, or have an old computer in a closet? A neighbor"
-" needs it."
+"A selfless relationship: you take part in something bigger than yourself, "
+"for the benefit of someone you don't know yet. Know how to set up a server, "
+"or have an old computer in a closet? A neighbor needs it."
 
 #: core/templates/core/il_ou_elle_voit.html:8
 #, python-format
@@ -527,13 +534,16 @@ msgstr ""
 "[To be completed: accepted equipment, data wiping, drop-off location.]"
 
 #: core/templates/core/ils_et_elles_voient.html:3
-msgid "ils et elles Voient : dons et donateurs — Voisinternet"
-msgstr "ils et elles Voient: donations and donors — Voisinternet"
+msgid "ils et elles Voient : dons et partenaires — Voisinternet"
+msgstr "ils et elles Voient: donations and partners — Voisinternet"
 
 #: core/templates/core/ils_et_elles_voient.html:5
 msgid ""
-"Ils et elles nous soutiennent. Leur nom n'apparaît ici qu'avec leur accord."
-msgstr "They support us. Their name appears here only with their consent."
+"Prendre conscience de ce qu'il a fallu pour que Les Grands Voisins existent "
+": des dons, et des partenaires. Leur nom n'apparaît ici qu'avec leur accord."
+msgstr ""
+"Realizing what it took for Les Grands Voisins to exist: donations, and "
+"partners. Their name appears here only with their consent."
 
 #: core/templates/core/ils_et_elles_voient.html:9
 msgid "Nos soutiens"
@@ -549,10 +559,22 @@ msgid "Les premiers soutiens apparaîtront ici, avec leur accord."
 msgstr "The first supporters will appear here, with their consent."
 
 #: core/templates/core/ils_et_elles_voient.html:17
+msgid "Nos partenaires"
+msgstr "Our partners"
+
+#: core/templates/core/ils_et_elles_voient.html:18
+msgid ""
+"Ceux qui nous ont aidés autrement que par un don : matériel, temps, "
+"expertise. [À compléter.]"
+msgstr ""
+"Those who helped us in ways other than a donation: equipment, time, "
+"expertise. [To be completed.]"
+
+#: core/templates/core/ils_et_elles_voient.html:21
 msgid "Nous soutenir"
 msgstr "Support us"
 
-#: core/templates/core/ils_et_elles_voient.html:18
+#: core/templates/core/ils_et_elles_voient.html:22
 msgid ""
 "[À compléter : moyens de don, et possibilité de reçu fiscal selon "
 "l'éligibilité de l'association.]"
@@ -560,7 +582,7 @@ msgstr ""
 "[To be completed: ways to donate, and possible tax receipt depending on the "
 "association's eligibility.]"
 
-#: core/templates/core/ils_et_elles_voient.html:19
+#: core/templates/core/ils_et_elles_voient.html:23
 msgid ""
 "Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous "
 "est nécessaire, mais elle n'est jamais publiée sans votre accord."
@@ -685,10 +707,12 @@ msgstr "nous Voyons: the association — Voisinternet"
 
 #: core/templates/core/nous_voyons.html:5
 msgid ""
-"Voisinternet est un programme porté par l'association Les Grands Voisins. "
-"Nous demandons votre confiance : voici de quoi la vérifier."
+"Voisinternet est un programme porté par l'association coopérative Les Grands"
+" Voisins : une conscience collective à laquelle chacun contribue. Nous "
+"demandons votre confiance : voici de quoi la vérifier."
 msgstr ""
-"Voisinternet is a program run by the association Les Grands Voisins. We're "
+"Voisinternet is a program run by the cooperative association Les Grands "
+"Voisins: a collective consciousness that everyone contributes to. We're "
 "asking for your trust: here's what you can check."
 
 #: core/templates/core/nous_voyons.html:9
@@ -852,11 +876,14 @@ msgstr "tu Vois: getting support — Voisinternet"
 
 #: core/templates/core/tu_vois.html:5
 msgid ""
-"Personne ne naît administrateur de serveur. Posez vos questions, venez aux "
-"ateliers, ou demandez qu'un bénévole passe vous voir."
+"Un rapport entre deux individus, dans une logique d'entraide : vous recevez "
+"ce dont vous avez besoin. Personne ne naît administrateur de serveur. Posez "
+"vos questions, venez aux ateliers, ou demandez qu'un bénévole passe vous "
+"voir."
 msgstr ""
-"No one is born a server administrator. Ask your questions, come to a "
-"workshop, or ask a volunteer to come see you."
+"A relationship between two individuals, built on mutual aid: you receive "
+"what you need. No one is born a server administrator. Ask your questions, "
+"come to a workshop, or ask a volunteer to come see you."
 
 #: core/templates/core/tu_vois.html:8
 msgid "Poser une question"
@@ -893,13 +920,19 @@ msgstr "vous Voyez: the services"
 
 #: core/templates/core/vous_voyez.html:5
 msgid ""
-"Ajoutez ceux qui vous intéressent à vos raccourcis, même sans compte "
-"nominatif. Chaque service indique ce qui reste anonyme et ce que "
+"Un lieu de services proposés entre voisins, selon un principe de "
+"subsidiarité : vous n'avez pas besoin de collaborer avec Les Grands Voisins "
+"pour en profiter, même si l'association coopérative peut elle aussi y "
+"participer. Ajoutez ceux qui vous intéressent à vos raccourcis, même sans "
+"compte nominatif. Chaque service indique ce qui reste anonyme et ce que "
 "l'association doit conserver en tant qu'hébergeur."
 msgstr ""
-"Add the ones you're interested in to your shortcuts, even without a named "
-"account. Each service states what stays anonymous and what the association "
-"must keep as a host."
+"A place for services offered between neighbors, following a principle of "
+"subsidiarity: you don't need to work with Les Grands Voisins to benefit from"
+" it, even though the cooperative association can take part too. Add the ones"
+" you're interested in to your shortcuts, even without a named account. Each "
+"service states what stays anonymous and what the association must keep as a "
+"host."
 
 #: core/templates/core/vous_voyez.html:10
 msgid "Tout le monde"

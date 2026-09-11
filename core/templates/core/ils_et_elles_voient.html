@@ -1,10 +1,10 @@
 {% extends "core/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "ils et elles Voient : dons et donateurs — Voisinternet" %}{% endblock %}
+{% block title %}{% trans "ils et elles Voient : dons et partenaires — Voisinternet" %}{% endblock %}
 {% block content %}
-{% trans "Ils et elles nous soutiennent. Leur nom n'apparaît ici qu'avec leur accord." as page_lead %}
+{% trans "Prendre conscience de ce qu'il a fallu pour que Les Grands Voisins existent : des dons, et des partenaires. Leur nom n'apparaît ici qu'avec leur accord." as page_lead %}
 {% include "core/partials/page_head.html" with item=conj.ils lead=page_lead %}
-<div class="wrap page two">
+<div class="wrap page cols">
   <section>
     <h2>{% trans "Nos soutiens" %}</h2>
     {% if donors %}
@@ -12,6 +12,10 @@
     {% else %}
     <p class="intro">{% trans "Les premiers soutiens apparaîtront ici, avec leur accord." %}</p>
     {% endif %}
+  </section>
+  <section>
+    <h2>{% trans "Nos partenaires" %}</h2>
+    <p class="intro">{% trans "Ceux qui nous ont aidés autrement que par un don : matériel, temps, expertise. [À compléter.]" %}</p>
   </section>
   <section class="card">
     <h2>{% trans "Nous soutenir" %}</h2>

@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block title %}{% trans "vous Voyez : les services" %}{% if audience %} — {{ audience.name }}{% endif %} — Voisinternet{% endblock %}
 {% block content %}
-{% trans "Ajoutez ceux qui vous intéressent à vos raccourcis, même sans compte nominatif. Chaque service indique ce qui reste anonyme et ce que l'association doit conserver en tant qu'hébergeur." as page_lead %}
+{% trans "Un lieu de services proposés entre voisins, selon un principe de subsidiarité : vous n'avez pas besoin de collaborer avec Les Grands Voisins pour en profiter, même si l'association coopérative peut elle aussi y participer. Ajoutez ceux qui vous intéressent à vos raccourcis, même sans compte nominatif. Chaque service indique ce qui reste anonyme et ce que l'association doit conserver en tant qu'hébergeur." as page_lead %}
 {% include "core/partials/page_head.html" with item=conj.vous lead=page_lead %}
 <div class="wrap page">
   {% if audiences %}

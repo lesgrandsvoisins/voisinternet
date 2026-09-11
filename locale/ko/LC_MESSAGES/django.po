@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 15:54+0200\n"
+"POT-Creation-Date: 2026-09-11 17:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,8 +51,8 @@ msgid "Mon compte"
 msgstr "내 계정"
 
 #: core/menu.py:36
-msgid "se connecter, mon compte, mes raccourcis"
-msgstr "로그인, 내 계정, 내 바로가기"
+msgid "un individu, un compte, ce que je choisis de partager"
+msgstr "한 개인, 하나의 계정, 내가 공유하기로 선택한 것"
 
 #: core/menu.py:37
 msgid "se connecter, créer un compte, retrouver mes raccourcis"
@@ -63,8 +63,8 @@ msgid "Contact"
 msgstr "문의"
 
 #: core/menu.py:38
-msgid "contact, se faire accompagner"
-msgstr "문의, 도움 받기"
+msgid "un individu qui reçoit de l'aide, entre voisins"
+msgstr "이웃 사이에서 도움을 받는 개인"
 
 #: core/menu.py:39
 msgid "poser une question, se faire accompagner"
@@ -75,8 +75,8 @@ msgid "Bénévolat"
 msgstr "자원봉사"
 
 #: core/menu.py:40
-msgid "bénévolat, accompagner l'autre"
-msgstr "자원봉사, 이웃 돕기"
+msgid "un individu qui donne, sans rien attendre en retour"
+msgstr "대가를 바라지 않고 베푸는 개인"
 
 #: core/menu.py:41
 msgid "accompagner l'autre, donner du matériel"
@@ -87,8 +87,8 @@ msgid "Association"
 msgstr "협회"
 
 #: core/menu.py:42
-msgid "l'association"
-msgstr "협회"
+msgid "une conscience collective, l'association coopérative"
+msgstr "집단 의식, 협동조합 협회"
 
 #: core/menu.py:43
 msgid "statuts, gouvernance, comptes : tout est public"
@@ -98,25 +98,25 @@ msgstr "정관, 운영, 회계: 모두 공개됩니다"
 msgid "Services"
 msgstr "서비스"
 
-#: core/menu.py:44 core/templates/core/home.html:95
-msgid "les services"
-msgstr "서비스"
+#: core/menu.py:44
+msgid "des services entre voisins, sans obligation envers l'association"
+msgstr "협회에 대한 의무 없이 이웃 간에 제공되는 서비스"
 
 #: core/menu.py:45
 msgid "à ajouter à votre compte, même anonyme"
 msgstr "익명이라도 계정에 추가할 수 있는 서비스"
 
 #: core/menu.py:46
-msgid "Dons et donateurs"
-msgstr "후원 및 후원자"
+msgid "Dons et partenaires"
+msgstr "후원 및 파트너"
 
 #: core/menu.py:46
-msgid "dons financiers et donateurs"
-msgstr "재정 후원 및 후원자"
+msgid "dons et partenaires qui nous ont aidés à naître"
+msgstr "우리가 탄생하는 데 도움을 준 후원과 파트너"
 
 #: core/menu.py:47
-msgid "qui nous soutient, et comment nous soutenir"
-msgstr "누가 우리를 후원하는지, 그리고 후원 방법"
+msgid "qui nous soutient — dons et partenaires — et comment nous soutenir"
+msgstr "누가 우리를 후원하는지 — 후원과 파트너 — 그리고 후원 방법"
 
 #: core/menu.py:48
 msgid "Blog"
@@ -422,6 +422,10 @@ msgstr "도움 받기"
 msgid "Devenir bénévole"
 msgstr "자원봉사자 되기"
 
+#: core/templates/core/home.html:95
+msgid "les services"
+msgstr "서비스"
+
 #: core/templates/core/home.html:98
 msgid ""
 "Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « je "
@@ -483,9 +487,13 @@ msgstr "il ou elle Voit: 이웃 돕기 — Voisinternet"
 
 #: core/templates/core/il_ou_elle_voit.html:5
 msgid ""
-"Vous savez installer un serveur, ou vous avez un vieil ordinateur au placard"
-" ? Un voisin en a besoin."
-msgstr "서버 설치법을 알거나, 창고에 오래된 컴퓨터가 있으신가요? 이웃이 필요로 하고 있습니다."
+"Un rapport désintéressé : vous participez à quelque chose de plus grand que "
+"vous, au bénéfice d'une personne que vous ne connaissez pas encore. Vous "
+"savez installer un serveur, ou vous avez un vieil ordinateur au placard ? Un"
+" voisin en a besoin."
+msgstr ""
+"사심 없는 관계: 아직 알지 못하는 누군가를 위해, 나보다 더 큰 무언가에 참여하는 것입니다. 서버 설치법을 알거나, 창고에 오래된 "
+"컴퓨터가 있으신가요? 이웃이 필요로 하고 있습니다."
 
 #: core/templates/core/il_ou_elle_voit.html:8
 #, python-format
@@ -507,13 +515,16 @@ msgid ""
 msgstr "[추후 작성 예정: 수용 가능한 장비, 데이터 삭제, 접수 장소.]"
 
 #: core/templates/core/ils_et_elles_voient.html:3
-msgid "ils et elles Voient : dons et donateurs — Voisinternet"
-msgstr "ils et elles Voient: 후원 및 후원자 — Voisinternet"
+msgid "ils et elles Voient : dons et partenaires — Voisinternet"
+msgstr "ils et elles Voient: 후원 및 파트너 — Voisinternet"
 
 #: core/templates/core/ils_et_elles_voient.html:5
 msgid ""
-"Ils et elles nous soutiennent. Leur nom n'apparaît ici qu'avec leur accord."
-msgstr "이분들이 우리를 후원합니다. 이름은 본인의 동의가 있을 때만 표시됩니다."
+"Prendre conscience de ce qu'il a fallu pour que Les Grands Voisins existent "
+": des dons, et des partenaires. Leur nom n'apparaît ici qu'avec leur accord."
+msgstr ""
+"Les Grands Voisins가 존재하기까지 무엇이 필요했는지 되새기며: 후원과 파트너들. 이름은 본인의 동의가 있을 때만 "
+"표시됩니다."
 
 #: core/templates/core/ils_et_elles_voient.html:9
 msgid "Nos soutiens"
@@ -529,16 +540,26 @@ msgid "Les premiers soutiens apparaîtront ici, avec leur accord."
 msgstr "첫 후원자들이 동의 하에 여기에 표시될 예정입니다."
 
 #: core/templates/core/ils_et_elles_voient.html:17
+msgid "Nos partenaires"
+msgstr "파트너"
+
+#: core/templates/core/ils_et_elles_voient.html:18
+msgid ""
+"Ceux qui nous ont aidés autrement que par un don : matériel, temps, "
+"expertise. [À compléter.]"
+msgstr "후원이 아닌 다른 방식으로 도움을 준 분들: 장비, 시간, 전문성. [추후 작성 예정.]"
+
+#: core/templates/core/ils_et_elles_voient.html:21
 msgid "Nous soutenir"
 msgstr "후원하기"
 
-#: core/templates/core/ils_et_elles_voient.html:18
+#: core/templates/core/ils_et_elles_voient.html:22
 msgid ""
 "[À compléter : moyens de don, et possibilité de reçu fiscal selon "
 "l'éligibilité de l'association.]"
 msgstr "[추후 작성 예정: 후원 방법 및 협회의 자격 요건에 따른 세금 영수증 발급 가능 여부.]"
 
-#: core/templates/core/ils_et_elles_voient.html:19
+#: core/templates/core/ils_et_elles_voient.html:23
 msgid ""
 "Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous "
 "est nécessaire, mais elle n'est jamais publiée sans votre accord."
@@ -653,11 +674,12 @@ msgstr "nous Voyons: 협회 소개 — Voisinternet"
 
 #: core/templates/core/nous_voyons.html:5
 msgid ""
-"Voisinternet est un programme porté par l'association Les Grands Voisins. "
-"Nous demandons votre confiance : voici de quoi la vérifier."
+"Voisinternet est un programme porté par l'association coopérative Les Grands"
+" Voisins : une conscience collective à laquelle chacun contribue. Nous "
+"demandons votre confiance : voici de quoi la vérifier."
 msgstr ""
-"Voisinternet는 Les Grands Voisins 협회가 운영하는 프로그램입니다. 여러분의 신뢰를 부탁드리며, 이를 확인할 수 "
-"있는 자료를 아래에 공개합니다."
+"Voisinternet는 협동조합 협회인 Les Grands Voisins가 운영하는 프로그램입니다: 모두가 함께 만들어가는 집단 "
+"의식입니다. 여러분의 신뢰를 부탁드리며, 이를 확인할 수 있는 자료를 아래에 공개합니다."
 
 #: core/templates/core/nous_voyons.html:9
 msgid "Statuts de l'association"
@@ -819,10 +841,13 @@ msgstr "tu Vois: 도움 받기 — Voisinternet"
 
 #: core/templates/core/tu_vois.html:5
 msgid ""
-"Personne ne naît administrateur de serveur. Posez vos questions, venez aux "
-"ateliers, ou demandez qu'un bénévole passe vous voir."
+"Un rapport entre deux individus, dans une logique d'entraide : vous recevez "
+"ce dont vous avez besoin. Personne ne naît administrateur de serveur. Posez "
+"vos questions, venez aux ateliers, ou demandez qu'un bénévole passe vous "
+"voir."
 msgstr ""
-"누구도 처음부터 서버 관리자로 태어나지 않습니다. 궁금한 점을 물어보거나, 워크숍에 참여하거나, 자원봉사자의 방문을 요청해 보세요."
+"상호부조의 원리로 맺어진 두 개인 간의 관계: 필요한 도움을 받습니다. 누구도 처음부터 서버 관리자로 태어나지 않습니다. 궁금한 점을 "
+"물어보거나, 워크숍에 참여하거나, 자원봉사자의 방문을 요청해 보세요."
 
 #: core/templates/core/tu_vois.html:8
 msgid "Poser une question"
@@ -859,12 +884,16 @@ msgstr "vous Voyez: 서비스"
 
 #: core/templates/core/vous_voyez.html:5
 msgid ""
-"Ajoutez ceux qui vous intéressent à vos raccourcis, même sans compte "
-"nominatif. Chaque service indique ce qui reste anonyme et ce que "
+"Un lieu de services proposés entre voisins, selon un principe de "
+"subsidiarité : vous n'avez pas besoin de collaborer avec Les Grands Voisins "
+"pour en profiter, même si l'association coopérative peut elle aussi y "
+"participer. Ajoutez ceux qui vous intéressent à vos raccourcis, même sans "
+"compte nominatif. Chaque service indique ce qui reste anonyme et ce que "
 "l'association doit conserver en tant qu'hébergeur."
 msgstr ""
-"이름을 밝히지 않아도 관심 있는 서비스를 바로가기에 추가할 수 있습니다. 각 서비스는 무엇이 익명으로 유지되고 협회가 호스팅 제공자로서 "
-"무엇을 보관해야 하는지 안내합니다."
+"보충성의 원칙에 따라 이웃 간에 제안되는 서비스 공간입니다: 이용을 위해 Les Grands Voisins와 반드시 협력할 필요는 "
+"없으며, 협동조합 협회 역시 참여할 수 있습니다. 이름을 밝히지 않아도 관심 있는 서비스를 바로가기에 추가할 수 있습니다. 각 서비스는 "
+"무엇이 익명으로 유지되고 협회가 호스팅 제공자로서 무엇을 보관해야 하는지 안내합니다."
 
 #: core/templates/core/vous_voyez.html:10
 msgid "Tout le monde"

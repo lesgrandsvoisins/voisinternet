@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 15:54+0200\n"
+"POT-Creation-Date: 2026-09-11 17:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,8 +51,8 @@ msgid "Mon compte"
 msgstr "حسابي"
 
 #: core/menu.py:36
-msgid "se connecter, mon compte, mes raccourcis"
-msgstr "تسجيل الدخول، حسابي، اختصاراتي"
+msgid "un individu, un compte, ce que je choisis de partager"
+msgstr "فرد واحد، حساب واحد، وما أختار مشاركته"
 
 #: core/menu.py:37
 msgid "se connecter, créer un compte, retrouver mes raccourcis"
@@ -63,8 +63,8 @@ msgid "Contact"
 msgstr "التواصل"
 
 #: core/menu.py:38
-msgid "contact, se faire accompagner"
-msgstr "التواصل، الحصول على مرافقة"
+msgid "un individu qui reçoit de l'aide, entre voisins"
+msgstr "فرد يتلقى المساعدة، بين الجيران"
 
 #: core/menu.py:39
 msgid "poser une question, se faire accompagner"
@@ -75,8 +75,8 @@ msgid "Bénévolat"
 msgstr "التطوع"
 
 #: core/menu.py:40
-msgid "bénévolat, accompagner l'autre"
-msgstr "التطوع، مرافقة الآخرين"
+msgid "un individu qui donne, sans rien attendre en retour"
+msgstr "فرد يعطي، دون انتظار مقابل"
 
 #: core/menu.py:41
 msgid "accompagner l'autre, donner du matériel"
@@ -87,8 +87,8 @@ msgid "Association"
 msgstr "الجمعية"
 
 #: core/menu.py:42
-msgid "l'association"
-msgstr "الجمعية"
+msgid "une conscience collective, l'association coopérative"
+msgstr "وعي جماعي، الجمعية التعاونية"
 
 #: core/menu.py:43
 msgid "statuts, gouvernance, comptes : tout est public"
@@ -98,25 +98,25 @@ msgstr "النظام الأساسي، الحوكمة، الحسابات: كل ش
 msgid "Services"
 msgstr "الخدمات"
 
-#: core/menu.py:44 core/templates/core/home.html:95
-msgid "les services"
-msgstr "الخدمات"
+#: core/menu.py:44
+msgid "des services entre voisins, sans obligation envers l'association"
+msgstr "خدمات بين الجيران، دون أي التزام تجاه الجمعية"
 
 #: core/menu.py:45
 msgid "à ajouter à votre compte, même anonyme"
 msgstr "لإضافتها إلى حسابك، حتى لو كان مجهولًا"
 
 #: core/menu.py:46
-msgid "Dons et donateurs"
-msgstr "التبرعات والمتبرعون"
+msgid "Dons et partenaires"
+msgstr "التبرعات والشركاء"
 
 #: core/menu.py:46
-msgid "dons financiers et donateurs"
-msgstr "التبرعات المالية والمتبرعون"
+msgid "dons et partenaires qui nous ont aidés à naître"
+msgstr "تبرعات وشركاء ساعدونا على النشأة"
 
 #: core/menu.py:47
-msgid "qui nous soutient, et comment nous soutenir"
-msgstr "من يدعمنا، وكيف يمكنك دعمنا"
+msgid "qui nous soutient — dons et partenaires — et comment nous soutenir"
+msgstr "من يدعمنا — تبرعات وشركاء — وكيف يمكنك دعمنا"
 
 #: core/menu.py:48
 msgid "Blog"
@@ -428,6 +428,10 @@ msgstr "الحصول على مرافقة"
 msgid "Devenir bénévole"
 msgstr "كن متطوعًا"
 
+#: core/templates/core/home.html:95
+msgid "les services"
+msgstr "الخدمات"
+
 #: core/templates/core/home.html:98
 msgid ""
 "Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « je "
@@ -491,11 +495,13 @@ msgstr "il ou elle Voit: مرافقة الآخرين — Voisinternet"
 
 #: core/templates/core/il_ou_elle_voit.html:5
 msgid ""
-"Vous savez installer un serveur, ou vous avez un vieil ordinateur au placard"
-" ? Un voisin en a besoin."
+"Un rapport désintéressé : vous participez à quelque chose de plus grand que "
+"vous, au bénéfice d'une personne que vous ne connaissez pas encore. Vous "
+"savez installer un serveur, ou vous avez un vieil ordinateur au placard ? Un"
+" voisin en a besoin."
 msgstr ""
-"هل تعرف كيفية تركيب خادم، أو لديك حاسوب قديم في الخزانة؟ أحد الجيران بحاجة "
-"إليه."
+"علاقة غير أنانية: تشارك في شيء أكبر منك، لفائدة شخص لا تعرفه بعد. هل تعرف "
+"كيفية تركيب خادم، أو لديك حاسوب قديم في الخزانة؟ أحد الجيران بحاجة إليه."
 
 #: core/templates/core/il_ou_elle_voit.html:8
 #, python-format
@@ -518,13 +524,16 @@ msgid ""
 msgstr "[سيتم استكماله: المعدات المقبولة، محو البيانات، مكان التسليم.]"
 
 #: core/templates/core/ils_et_elles_voient.html:3
-msgid "ils et elles Voient : dons et donateurs — Voisinternet"
-msgstr "ils et elles Voient: التبرعات والمتبرعون — Voisinternet"
+msgid "ils et elles Voient : dons et partenaires — Voisinternet"
+msgstr "ils et elles Voient: التبرعات والشركاء — Voisinternet"
 
 #: core/templates/core/ils_et_elles_voient.html:5
 msgid ""
-"Ils et elles nous soutiennent. Leur nom n'apparaît ici qu'avec leur accord."
-msgstr "هم يدعموننا. لا يظهر اسمهم هنا إلا بموافقتهم."
+"Prendre conscience de ce qu'il a fallu pour que Les Grands Voisins existent "
+": des dons, et des partenaires. Leur nom n'apparaît ici qu'avec leur accord."
+msgstr ""
+"إدراك ما تطلبه الأمر لتأسيس Les Grands Voisins: تبرعات، وشركاء. لا يظهر "
+"اسمهم هنا إلا بموافقتهم."
 
 #: core/templates/core/ils_et_elles_voient.html:9
 msgid "Nos soutiens"
@@ -540,10 +549,20 @@ msgid "Les premiers soutiens apparaîtront ici, avec leur accord."
 msgstr "سيظهر الداعمون الأوائل هنا، بموافقتهم."
 
 #: core/templates/core/ils_et_elles_voient.html:17
+msgid "Nos partenaires"
+msgstr "شركاؤنا"
+
+#: core/templates/core/ils_et_elles_voient.html:18
+msgid ""
+"Ceux qui nous ont aidés autrement que par un don : matériel, temps, "
+"expertise. [À compléter.]"
+msgstr "من ساعدونا بطرق أخرى غير التبرع: معدات، وقت، خبرة. [سيتم استكماله.]"
+
+#: core/templates/core/ils_et_elles_voient.html:21
 msgid "Nous soutenir"
 msgstr "ادعمنا"
 
-#: core/templates/core/ils_et_elles_voient.html:18
+#: core/templates/core/ils_et_elles_voient.html:22
 msgid ""
 "[À compléter : moyens de don, et possibilité de reçu fiscal selon "
 "l'éligibilité de l'association.]"
@@ -551,7 +570,7 @@ msgstr ""
 "[سيتم استكماله: طرق التبرع، وإمكانية الحصول على إيصال ضريبي حسب أهلية "
 "الجمعية.]"
 
-#: core/templates/core/ils_et_elles_voient.html:19
+#: core/templates/core/ils_et_elles_voient.html:23
 msgid ""
 "Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous "
 "est nécessaire, mais elle n'est jamais publiée sans votre accord."
@@ -671,11 +690,12 @@ msgstr "nous Voyons: الجمعية — Voisinternet"
 
 #: core/templates/core/nous_voyons.html:5
 msgid ""
-"Voisinternet est un programme porté par l'association Les Grands Voisins. "
-"Nous demandons votre confiance : voici de quoi la vérifier."
+"Voisinternet est un programme porté par l'association coopérative Les Grands"
+" Voisins : une conscience collective à laquelle chacun contribue. Nous "
+"demandons votre confiance : voici de quoi la vérifier."
 msgstr ""
-"Voisinternet برنامج تديره جمعية Les Grands Voisins. نطلب ثقتكم: وهذا ما "
-"يمكنكم التحقق منه."
+"Voisinternet برنامج تديره الجمعية التعاونية Les Grands Voisins: وعي جماعي "
+"يساهم فيه الجميع. نطلب ثقتكم: وهذا ما يمكنكم التحقق منه."
 
 #: core/templates/core/nous_voyons.html:9
 msgid "Statuts de l'association"
@@ -837,10 +857,13 @@ msgstr "tu Vois: الحصول على مرافقة — Voisinternet"
 
 #: core/templates/core/tu_vois.html:5
 msgid ""
-"Personne ne naît administrateur de serveur. Posez vos questions, venez aux "
-"ateliers, ou demandez qu'un bénévole passe vous voir."
+"Un rapport entre deux individus, dans une logique d'entraide : vous recevez "
+"ce dont vous avez besoin. Personne ne naît administrateur de serveur. Posez "
+"vos questions, venez aux ateliers, ou demandez qu'un bénévole passe vous "
+"voir."
 msgstr ""
-"لا أحد يولد مسؤول خوادم. اطرح أسئلتك، احضر الورشات، أو اطلب أن يزورك متطوع."
+"علاقة بين فردين، في إطار منطق التعاضد: تتلقى ما تحتاجه. لا أحد يولد مسؤول "
+"خوادم. اطرح أسئلتك، احضر الورشات، أو اطلب أن يزورك متطوع."
 
 #: core/templates/core/tu_vois.html:8
 msgid "Poser une question"
@@ -877,12 +900,17 @@ msgstr "vous Voyez: الخدمات"
 
 #: core/templates/core/vous_voyez.html:5
 msgid ""
-"Ajoutez ceux qui vous intéressent à vos raccourcis, même sans compte "
-"nominatif. Chaque service indique ce qui reste anonyme et ce que "
+"Un lieu de services proposés entre voisins, selon un principe de "
+"subsidiarité : vous n'avez pas besoin de collaborer avec Les Grands Voisins "
+"pour en profiter, même si l'association coopérative peut elle aussi y "
+"participer. Ajoutez ceux qui vous intéressent à vos raccourcis, même sans "
+"compte nominatif. Chaque service indique ce qui reste anonyme et ce que "
 "l'association doit conserver en tant qu'hébergeur."
 msgstr ""
-"أضف ما يهمّك إلى اختصاراتك، حتى دون حساب باسمك. توضّح كل خدمة ما يبقى "
-"مجهولاً وما يجب أن تحتفظ به الجمعية بصفتها مضيفًا."
+"مكان لخدمات مقترحة بين الجيران، وفق مبدأ التفريع (subsidiarité): لست بحاجة "
+"للتعاون مع Les Grands Voisins للاستفادة منها، حتى لو كانت الجمعية التعاونية "
+"يمكنها أيضًا المشاركة فيها. أضف ما يهمّك إلى اختصاراتك، حتى دون حساب باسمك. "
+"توضّح كل خدمة ما يبقى مجهولاً وما يجب أن تحتفظ به الجمعية بصفتها مضيفًا."
 
 #: core/templates/core/vous_voyez.html:10
 msgid "Tout le monde"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 15:28+0200\n"
+"POT-Creation-Date: 2026-09-11 15:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -576,7 +576,7 @@ msgid "Rattacher mes raccourcis"
 msgstr "바로가기 연결하기"
 
 #: core/templates/core/je_vois.html:27
-#: core/templates/core/partials/account_widget.html:15
+#: core/templates/core/partials/account_widget.html:14
 msgid "Mes raccourcis"
 msgstr "내 바로가기"
 
@@ -700,7 +700,11 @@ msgstr "je Vois 옵션"
 msgid "Créer un compte"
 msgstr "계정 만들기"
 
-#: core/templates/core/partials/account_widget.html:25
+#: core/templates/core/partials/account_widget.html:16
+msgid "Paramètres"
+msgstr "설정"
+
+#: core/templates/core/partials/account_widget.html:24
 msgid "Aucun service ajouté pour l'instant."
 msgstr "아직 추가된 서비스가 없습니다."
 

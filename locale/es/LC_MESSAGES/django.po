@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 15:28+0200\n"
+"POT-Creation-Date: 2026-09-11 15:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -608,7 +608,7 @@ msgid "Rattacher mes raccourcis"
 msgstr "Vincular mis accesos directos"
 
 #: core/templates/core/je_vois.html:27
-#: core/templates/core/partials/account_widget.html:15
+#: core/templates/core/partials/account_widget.html:14
 msgid "Mes raccourcis"
 msgstr "Mis accesos directos"
 
@@ -738,7 +738,11 @@ msgstr "Opciones de je Vois"
 msgid "Créer un compte"
 msgstr "Crear una cuenta"
 
-#: core/templates/core/partials/account_widget.html:25
+#: core/templates/core/partials/account_widget.html:16
+msgid "Paramètres"
+msgstr "Ajustes"
+
+#: core/templates/core/partials/account_widget.html:24
 msgid "Aucun service ajouté pour l'instant."
 msgstr "Aún no se ha añadido ningún servicio."
 

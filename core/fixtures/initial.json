@@ -9,7 +9,19 @@
    "pitch": "Vos photos, courriels et agendas chez vous, avec une copie de secours chez un voisin.",
    "note": "",
    "partnership": false,
-   "order": 10
+   "order": 10,
+   "name_en": "An individual",
+   "name_es": "Un particular",
+   "name_ar": "فرد",
+   "name_ko": "개인",
+   "who_en": "you, your family",
+   "who_es": "tú, tu familia",
+   "who_ar": "أنت، عائلتك",
+   "who_ko": "본인, 가족",
+   "pitch_en": "Your photos, emails and calendars at home, with a backup copy at a neighbor's.",
+   "pitch_es": "Tus fotos, correos y calendarios en tu casa, con una copia de seguridad en la de un vecino.",
+   "pitch_ar": "صورك ورسائلك وتقويمك في منزلك، مع نسخة احتياطية عند جار.",
+   "pitch_ko": "사진, 이메일, 일정을 집에서 관리하고, 이웃 집에 백업 사본을 둡니다."
   }
  },
  {
@@ -22,7 +34,19 @@
    "pitch": "Votre vitrine, votre adresse professionnelle et vos fichiers clients, à votre nom.",
    "note": "",
    "partnership": false,
-   "order": 20
+   "order": 20,
+   "name_en": "An artist or a craftsperson",
+   "name_es": "Un artista o un artesano",
+   "name_ar": "فنان أو حرفي",
+   "name_ko": "예술가 또는 장인",
+   "who_en": "freelancers, sole proprietors",
+   "who_es": "autónomos, profesiones ejercidas a título personal",
+   "who_ar": "المستقلون، المهن الممارسة باسم شخصي",
+   "who_ko": "프리랜서, 개인 사업자",
+   "pitch_en": "Your showcase, your professional address and your client files, under your own name.",
+   "pitch_es": "Tu escaparate, tu dirección profesional y tus archivos de clientes, a tu nombre.",
+   "pitch_ar": "واجهتك التعريفية، وعنوانك المهني، وملفات عملائك، باسمك الخاص.",
+   "pitch_ko": "내 이름으로 만드는 홍보 페이지, 업무용 주소, 고객 파일."
   }
  },
  {
@@ -35,7 +59,19 @@
    "pitch": "Des outils partagés pour vos bénévoles, sans abonnement chez un géant.",
    "note": "",
    "partnership": false,
-   "order": 30
+   "order": 30,
+   "name_en": "An association",
+   "name_es": "Una asociación",
+   "name_ar": "جمعية",
+   "name_ko": "협회/단체",
+   "who_en": "associations, collectives",
+   "who_es": "asociaciones, colectivos",
+   "who_ar": "الجمعيات، التجمعات",
+   "who_ko": "협회, 단체",
+   "pitch_en": "Shared tools for your volunteers, with no subscription to a tech giant.",
+   "pitch_es": "Herramientas compartidas para tus voluntarios, sin suscripción a un gigante tecnológico.",
+   "pitch_ar": "أدوات مشتركة لمتطوعيك، دون اشتراك لدى إحدى الشركات الكبرى.",
+   "pitch_ko": "대형 IT 기업 구독 없이, 자원봉사자를 위한 공유 도구."
   }
  },
  {
@@ -48,7 +84,19 @@
    "pitch": "Vos données près de chez vous, et des sauvegardes croisées avec vos voisins d'activité.",
    "note": "",
    "partnership": false,
-   "order": 40
+   "order": 40,
+   "name_en": "A business",
+   "name_es": "Una empresa",
+   "name_ar": "شركة",
+   "name_ko": "기업",
+   "who_en": "shops, micro and small businesses",
+   "who_es": "comercios, microempresas y pymes",
+   "who_ar": "المتاجر، المشاريع الصغيرة والمتوسطة",
+   "who_ko": "상점, 소상공인 및 중소기업",
+   "pitch_en": "Your data close to home, and cross backups with your business neighbors.",
+   "pitch_es": "Tus datos cerca de ti, y copias de seguridad cruzadas con tus vecinos de actividad.",
+   "pitch_ar": "بياناتك قريبة منك، ونسخ احتياطي متبادل مع جيرانك في النشاط.",
+   "pitch_ko": "가까운 곳에 데이터를 두고, 이웃 사업체와 상호 백업하세요."
   }
  },
  {
@@ -61,7 +109,23 @@
    "pitch": "Accueillir des ateliers, relayer l'accompagnement, équiper une médiathèque.",
    "note": "Nous proposons aux collectivités des partenariats : ateliers dans vos locaux, permanences, réemploi de matériel. Toute prestation rémunérée relèverait de la commande publique : parlons-en en amont.",
    "partnership": true,
-   "order": 50
+   "order": 50,
+   "name_en": "A town hall or institution",
+   "name_es": "Un ayuntamiento o institución",
+   "name_ar": "بلدية أو مؤسسة",
+   "name_ko": "시청 또는 공공기관",
+   "who_en": "municipalities, public institutions",
+   "who_es": "municipios, instituciones públicas",
+   "who_ar": "البلديات، المؤسسات العامة",
+   "who_ko": "지자체, 공공기관",
+   "pitch_en": "Host workshops, relay support, equip a media library.",
+   "pitch_es": "Acoger talleres, transmitir el acompañamiento, equipar una mediateca.",
+   "pitch_ar": "استضافة ورشات عمل، ونقل المرافقة، وتجهيز مكتبة وسائط.",
+   "pitch_ko": "워크숍 개최, 지원 활동 연계, 미디어 도서관 장비 지원.",
+   "note_en": "We offer local authorities partnerships: workshops in your premises, drop-in sessions, equipment reuse. Any paid service would fall under public procurement: let's discuss it beforehand.",
+   "note_es": "Ofrecemos a las entidades públicas asociaciones: talleres en tus locales, permanencias, reutilización de material. Cualquier prestación remunerada estaría sujeta a la contratación pública: hablemos de ello con antelación.",
+   "note_ar": "نقترح على الهيئات العامة شراكات: ورشات عمل في مقراتكم، دوامات استقبال، إعادة استخدام المعدات. أي خدمة مدفوعة تخضع لقواعد الصفقات العمومية: لنتحدث عن ذلك مسبقًا.",
+   "note_ko": "지자체와의 파트너십을 제안합니다: 귀 기관 내 워크숍, 상담 시간, 장비 재활용 등. 유상 서비스는 공공 조달 규정의 적용을 받으므로 사전에 논의가 필요합니다."
   }
  },
  {
@@ -74,7 +138,23 @@
    "pitch": "Orienter les personnes vers un accompagnement et du matériel reconditionné.",
    "note": "Nous accompagnons les personnes que vous orientez : ateliers, aide à domicile, matériel reconditionné. Nous n'hébergeons pas les dossiers de vos bénéficiaires : leurs données sociales demandent un cadre que Voisinternet ne prétend pas offrir.",
    "partnership": true,
-   "order": 60
+   "order": 60,
+   "name_en": "A social service",
+   "name_es": "Un servicio social",
+   "name_ar": "خدمة اجتماعية",
+   "name_ko": "사회복지 기관",
+   "who_en": "CCAS (municipal welfare centers), social workers, integration organizations",
+   "who_es": "CCAS (centros municipales de acción social), trabajadores sociales, estructuras de inserción",
+   "who_ar": "مراكز العمل الاجتماعي البلدية، الأخصائيون الاجتماعيون، هياكل الإدماج",
+   "who_ko": "지역 복지센터(CCAS), 사회복지사, 자립지원 기관",
+   "pitch_en": "Direct people towards support and refurbished equipment.",
+   "pitch_es": "Orientar a las personas hacia un acompañamiento y material reacondicionado.",
+   "pitch_ar": "توجيه الأشخاص نحو المرافقة والمعدات المجددة.",
+   "pitch_ko": "이용자들을 지원 프로그램과 재생 장비로 연결해 드립니다.",
+   "note_en": "We support the people you refer to us: workshops, in-home help, refurbished equipment. We do not host your beneficiaries' case files: their social data requires a framework that Voisinternet does not claim to offer.",
+   "note_es": "Acompañamos a las personas que nos derivas: talleres, ayuda a domicilio, material reacondicionado. No alojamos los expedientes de tus beneficiarios: sus datos sociales requieren un marco que Voisinternet no pretende ofrecer.",
+   "note_ar": "نرافق الأشخاص الذين توجهونهم إلينا: ورشات عمل، مساعدة منزلية، معدات مجددة. لا نستضيف ملفات المستفيدين لديكم: بياناتهم الاجتماعية تتطلب إطارًا لا يدّعي Voisinternet توفيره.",
+   "note_ko": "귀 기관이 연계한 분들을 지원합니다: 워크숍, 재가 지원, 재생 장비 제공. 다만 수혜자의 개인 사회복지 기록은 저희가 호스팅하지 않습니다. 이러한 사회복지 데이터는 Voisinternet가 제공한다고 주장하지 않는 별도의 체계가 필요합니다."
   }
  },
  {
@@ -89,7 +169,19 @@
    "url": "",
    "featured": false,
    "active": true,
-   "order": 10
+   "order": 10,
+   "name_en": "Email",
+   "name_es": "Correo electrónico",
+   "name_ar": "البريد الإلكتروني",
+   "name_ko": "이메일",
+   "summary_en": "Your address, on your own domain name.",
+   "summary_es": "Tu dirección, en tu propio nombre de dominio.",
+   "summary_ar": "عنوانك، على نطاقك الخاص.",
+   "summary_ko": "내 도메인으로 만드는 내 이메일 주소.",
+   "retention_en": "[To be completed: what stays anonymous, and the connection data the association keeps as a host.]",
+   "retention_es": "[Por completar: lo que permanece anónimo, y los datos de conexión que la asociación conserva como proveedor de alojamiento.]",
+   "retention_ar": "[سيتم استكماله: ما يبقى مجهولاً، وبيانات الاتصال التي تحتفظ بها الجمعية بصفتها مضيفًا.]",
+   "retention_ko": "[추후 작성 예정: 무엇이 익명으로 유지되는지, 그리고 협회가 호스팅 제공자로서 보관하는 접속 데이터.]"
   }
  },
  {
@@ -104,7 +196,19 @@
    "url": "",
    "featured": false,
    "active": true,
-   "order": 20
+   "order": 20,
+   "name_en": "Files and photos",
+   "name_es": "Archivos y fotos",
+   "name_ar": "الملفات والصور",
+   "name_ko": "파일 및 사진",
+   "summary_en": "Synced across your devices, stored at home.",
+   "summary_es": "Sincronizados entre tus dispositivos, guardados en tu casa.",
+   "summary_ar": "متزامنة بين أجهزتك، ومخزّنة في منزلك.",
+   "summary_ko": "기기 간 동기화되고, 집에서 보관됩니다.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -119,7 +223,19 @@
    "url": "",
    "featured": false,
    "active": true,
-   "order": 30
+   "order": 30,
+   "name_en": "Calendars and contacts",
+   "name_es": "Calendarios y contactos",
+   "name_ar": "التقويم وجهات الاتصال",
+   "name_ko": "일정 및 연락처",
+   "summary_en": "Shared with your family, no account with a tech giant.",
+   "summary_es": "Compartidos en familia, sin cuenta en un gigante tecnológico.",
+   "summary_ar": "مشتركة مع العائلة، دون حساب لدى إحدى الشركات الكبرى.",
+   "summary_ko": "가족과 공유하고, 대형 IT 기업 계정 없이 사용합니다.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -134,7 +250,19 @@
    "url": "",
    "featured": false,
    "active": true,
-   "order": 40
+   "order": 40,
+   "name_en": "Website or blog",
+   "name_es": "Sitio web o blog",
+   "name_ar": "موقع أو مدونة",
+   "name_ko": "웹사이트 또는 블로그",
+   "summary_en": "Your page, at your own address.",
+   "summary_es": "Tu página, en tu propia dirección.",
+   "summary_ar": "صفحتك، على عنوانك الخاص.",
+   "summary_ko": "내 주소로 만드는 내 페이지.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -149,7 +277,19 @@
    "url": "",
    "featured": true,
    "active": true,
-   "order": 50
+   "order": 50,
+   "name_en": "Cross backups",
+   "name_es": "Copias de seguridad cruzadas",
+   "name_ar": "نسخ احتياطي متبادل",
+   "name_ko": "상호 백업",
+   "summary_en": "Your backup copy sleeps at a neighbor's, and theirs at yours.",
+   "summary_es": "Tu copia de seguridad descansa en casa de un vecino, y la suya en la tuya.",
+   "summary_ar": "تبقى نسختك الاحتياطية عند جار، ونسخته عندك.",
+   "summary_ko": "내 백업은 이웃 집에, 이웃의 백업은 우리 집에 보관됩니다.",
+   "retention_en": "Backups are encrypted before leaving your server: the neighbor who keeps them cannot read them. [To be confirmed depending on the chosen tool.]",
+   "retention_es": "Las copias de seguridad se cifran antes de salir de tu servidor: el vecino que las guarda no puede leerlas. [Por confirmar según la herramienta elegida.]",
+   "retention_ar": "تُشفَّر النسخ الاحتياطية قبل مغادرة خادمك: لا يستطيع الجار الذي يحتفظ بها قراءتها. [سيتم التأكيد بحسب الأداة المعتمدة.]",
+   "retention_ko": "백업은 서버를 떠나기 전에 암호화됩니다: 백업을 보관하는 이웃은 내용을 읽을 수 없습니다. [사용 도구에 따라 추후 확정 예정.]"
   }
  },
  {
@@ -164,7 +304,15 @@
    "url": "https://www.gv.je",
    "featured": false,
    "active": true,
-   "order": 60
+   "order": 60,
+   "summary_en": "A public site and a simple portal, on your own domain name.",
+   "summary_es": "Un sitio público y un portal sencillo, en tu propio nombre de dominio.",
+   "summary_ar": "موقع عام وبوابة بسيطة، على نطاقك الخاص.",
+   "summary_ko": "내 도메인으로 만드는 공개 사이트와 간단한 포털.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -179,7 +327,15 @@
    "url": "https://sync-in.gv.je",
    "featured": false,
    "active": true,
-   "order": 70
+   "order": 70,
+   "summary_en": "Your files and folders with your SYNC-IN locker.",
+   "summary_es": "Tus archivos y carpetas con tu casillero SYNC-IN.",
+   "summary_ar": "ملفاتك ومجلداتك عبر خزانة SYNC-IN.",
+   "summary_ko": "SYNC-IN 보관함으로 관리하는 파일과 폴더.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -194,7 +350,15 @@
    "url": "https://miniflux.gv.je/oauth2/oidc/redirect",
    "featured": false,
    "active": true,
-   "order": 80
+   "order": 80,
+   "summary_en": "Bring together your RSS feeds and news.",
+   "summary_es": "Reúne tus feeds RSS y noticias.",
+   "summary_ar": "تجميع خلاصات RSS والأخبار الخاصة بك.",
+   "summary_ko": "RSS 피드와 뉴스를 한곳에 모아보세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -209,7 +373,15 @@
    "url": "https://forgejo.roses.gv.je/user/login",
    "featured": false,
    "active": true,
-   "order": 90
+   "order": 90,
+   "summary_en": "Manage source code and collaborative repositories.",
+   "summary_es": "Gestiona código fuente y repositorios colaborativos.",
+   "summary_ar": "إدارة الشيفرة المصدرية والمستودعات التعاونية.",
+   "summary_ko": "소스 코드와 협업 저장소를 관리하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -224,7 +396,15 @@
    "url": "https://zensical.gv.je/fr/",
    "featured": false,
    "active": true,
-   "order": 100
+   "order": 100,
+   "summary_en": "Browse the Grands Voisins documentation.",
+   "summary_es": "Consulta la documentación de Grands Voisins.",
+   "summary_ar": "الاطلاع على وثائق Grands Voisins.",
+   "summary_ko": "Grands Voisins 문서를 확인하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -239,7 +419,15 @@
    "url": "https://mail.lesgrandsvoisins.com",
    "featured": false,
    "active": true,
-   "order": 110
+   "order": 110,
+   "summary_en": "Read and send your emails from the web.",
+   "summary_es": "Consulta y envía tus correos desde la web.",
+   "summary_ar": "قراءة وإرسال رسائلك الإلكترونية عبر الويب.",
+   "summary_ko": "웹에서 이메일을 확인하고 보내세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -254,7 +442,15 @@
    "url": "https://task.lesgrandsvoisins.com",
    "featured": false,
    "active": true,
-   "order": 120
+   "order": 120,
+   "summary_en": "Manage tasks and projects as a team.",
+   "summary_es": "Gestiona tareas y proyectos en equipo.",
+   "summary_ar": "إدارة المهام والمشاريع ضمن فريق.",
+   "summary_ko": "팀 단위로 작업과 프로젝트를 관리하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -269,7 +465,15 @@
    "url": "https://www.lesgrandsvoisins.com/cms-admin/",
    "featured": false,
    "active": true,
-   "order": 130
+   "order": 130,
+   "summary_en": "Edit content for the public site and the portals.",
+   "summary_es": "Edita los contenidos del sitio público y de los portales.",
+   "summary_ar": "تحرير محتوى الموقع العام والبوابات.",
+   "summary_ko": "공개 사이트와 포털의 콘텐츠를 편집하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -284,7 +488,19 @@
    "url": "https://guichet.resdigita.com/user",
    "featured": false,
    "active": true,
-   "order": 140
+   "order": 140,
+   "name_en": "Service desk",
+   "name_es": "Ventanilla",
+   "name_ar": "مكتب الخدمات",
+   "name_ko": "서비스 창구",
+   "summary_en": "Manage your account and your mailboxes.",
+   "summary_es": "Gestiona tu cuenta y tus buzones de correo.",
+   "summary_ar": "إدارة حسابك وصناديق بريدك.",
+   "summary_ko": "계정과 메일함을 관리하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -299,7 +515,15 @@
    "url": "https://key.gv.je/admin",
    "featured": false,
    "active": true,
-   "order": 150
+   "order": 150,
+   "summary_en": "Single account and centralized authentication.",
+   "summary_es": "Cuenta única y autenticación centralizada.",
+   "summary_ar": "حساب موحّد ومصادقة مركزية.",
+   "summary_ko": "단일 계정과 중앙 인증 시스템.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -314,7 +538,15 @@
    "url": "https://sftpgo.gv.je/",
    "featured": false,
    "active": true,
-   "order": 160
+   "order": 160,
+   "summary_en": "Store and share files in your locker.",
+   "summary_es": "Almacena y comparte archivos en tu casillero.",
+   "summary_ar": "تخزين ومشاركة الملفات في خزانتك.",
+   "summary_ko": "보관함에서 파일을 저장하고 공유하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -329,7 +561,15 @@
    "url": "https://up.lesgrandsvoisins.com",
    "featured": false,
    "active": true,
-   "order": 170
+   "order": 170,
+   "summary_en": "Monitor the status of our services and sites.",
+   "summary_es": "Supervisa el estado de nuestros servicios y sitios.",
+   "summary_ar": "مراقبة حالة خدماتنا ومواقعنا.",
+   "summary_ko": "서비스와 사이트의 상태를 모니터링하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -344,7 +584,15 @@
    "url": "https://homarr.gv.je",
    "featured": false,
    "active": true,
-   "order": 180
+   "order": 180,
+   "summary_en": "Your personal dashboard and access portal.",
+   "summary_es": "Tu panel personal y tu portal de acceso.",
+   "summary_ar": "لوحة تحكمك الشخصية وبوابة الوصول الخاصة بك.",
+   "summary_ko": "개인 대시보드이자 접속 포털.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -359,7 +607,15 @@
    "url": "https://cp.roses.gdvoisins.com/",
    "featured": false,
    "active": true,
-   "order": 190
+   "order": 190,
+   "summary_en": "Simply share files and folders between people.",
+   "summary_es": "Comparte fácilmente archivos y carpetas entre personas.",
+   "summary_ar": "مشاركة الملفات والمجلدات بين الأشخاص بكل بساطة.",
+   "summary_ko": "사람들 사이에 파일과 폴더를 간편하게 공유하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -374,7 +630,15 @@
    "url": "https://vw.lgv.info/",
    "featured": false,
    "active": true,
-   "order": 200
+   "order": 200,
+   "summary_en": "Manage your passwords and logins.",
+   "summary_es": "Gestiona tus contraseñas y credenciales.",
+   "summary_ar": "إدارة كلمات المرور وبيانات تسجيل الدخول.",
+   "summary_ko": "비밀번호와 로그인 정보를 관리하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -389,7 +653,15 @@
    "url": "https://keeweb.resdigita.com/",
    "featured": false,
    "active": true,
-   "order": 210
+   "order": 210,
+   "summary_en": "Manage password databases and sync them.",
+   "summary_es": "Gestiona bases de contraseñas y sincronízalas.",
+   "summary_ar": "إدارة قواعد بيانات كلمات المرور ومزامنتها.",
+   "summary_ko": "비밀번호 데이터베이스를 관리하고 동기화하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -404,7 +676,15 @@
    "url": "https://crabfit.resdigita.com/",
    "featured": false,
    "active": true,
-   "order": 220
+   "order": 220,
+   "summary_en": "Find a time to meet, together.",
+   "summary_es": "Encuentra un momento para quedar, juntos.",
+   "summary_ar": "إيجاد موعد مناسب للجميع.",
+   "summary_ko": "함께 만날 시간을 찾아보세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -419,7 +699,15 @@
    "url": "https://quartz.resdigita.com/",
    "featured": false,
    "active": true,
-   "order": 230
+   "order": 230,
+   "summary_en": "Technical documentation and community tools.",
+   "summary_es": "Documentación técnica y herramientas de la comunidad.",
+   "summary_ar": "وثائق تقنية وأدوات المجتمع.",
+   "summary_ko": "기술 문서와 커뮤니티 도구.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -434,7 +722,15 @@
    "url": "https://www.configmagic.com/",
    "featured": false,
    "active": true,
-   "order": 240
+   "order": 240,
+   "summary_en": "Configuration wiki and technical documentation.",
+   "summary_es": "Wiki de configuración y documentación técnica.",
+   "summary_ar": "ويكي للإعدادات ووثائق تقنية.",
+   "summary_ko": "설정 위키와 기술 문서.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -449,7 +745,15 @@
    "url": "https://auth.max.gdvoisins.com",
    "featured": false,
    "active": true,
-   "order": 250
+   "order": 250,
+   "summary_en": "Authentication server for Max's services.",
+   "summary_es": "Servidor de autenticación para los servicios de Max.",
+   "summary_ar": "خادم مصادقة لخدمات Max.",
+   "summary_ko": "Max 서비스를 위한 인증 서버.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -464,7 +768,15 @@
    "url": "https://dashy.max.gdvoisins.com",
    "featured": false,
    "active": true,
-   "order": 260
+   "order": 260,
+   "summary_en": "Personal dashboard hosted at Max's.",
+   "summary_es": "Panel personal alojado en casa de Max.",
+   "summary_ar": "لوحة تحكم شخصية مستضافة لدى Max.",
+   "summary_ko": "Max가 호스팅하는 개인 대시보드.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -479,7 +791,15 @@
    "url": "https://blog.lesgrandsvoisins.com/ghost/",
    "featured": false,
    "active": true,
-   "order": 270
+   "order": 270,
+   "summary_en": "Publish and manage the Grands Voisins blog.",
+   "summary_es": "Publica y gestiona el blog de Grands Voisins.",
+   "summary_ar": "نشر وإدارة مدونة Grands Voisins.",
+   "summary_ko": "Grands Voisins 블로그를 발행하고 관리하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -494,7 +814,15 @@
    "url": "https://list.lesgrandsvoisins.com",
    "featured": false,
    "active": true,
-   "order": 280
+   "order": 280,
+   "summary_en": "Mailing lists and newsletters.",
+   "summary_es": "Listas de distribución y boletines informativos.",
+   "summary_ar": "القوائم البريدية والنشرات الإخبارية.",
+   "summary_ko": "메일링 리스트와 뉴스레터.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -509,7 +837,15 @@
    "url": "https://www.helloasso.com/associations/les-grands-voisins/adhesions/souscription-annuelle",
    "featured": false,
    "active": true,
-   "order": 290
+   "order": 290,
+   "summary_en": "Make a donation to Les Grands Voisins.",
+   "summary_es": "Haz una donación a Les Grands Voisins.",
+   "summary_ar": "تقديم تبرع لجمعية Les Grands Voisins.",
+   "summary_ko": "Les Grands Voisins에 후원하기.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -524,7 +860,15 @@
    "url": "https://www.paypal.com/donate/?hosted_button_id=BPUUS6H6TP62Y",
    "featured": false,
    "active": true,
-   "order": 300
+   "order": 300,
+   "summary_en": "Donate to the association via PayPal.",
+   "summary_es": "Dona a la asociación a través de PayPal.",
+   "summary_ar": "التبرع للجمعية عبر PayPal.",
+   "summary_ko": "PayPal로 협회에 후원하기.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -539,7 +883,15 @@
    "url": "https://donate.stripe.com/fZe7uD07z9hAg0w288",
    "featured": false,
    "active": true,
-   "order": 310
+   "order": 310,
+   "summary_en": "Donate via Stripe.",
+   "summary_es": "Dona a través de Stripe.",
+   "summary_ar": "التبرع عبر Stripe.",
+   "summary_ko": "Stripe로 후원하기.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -554,7 +906,15 @@
    "url": "https://github.com/lesgrandsvoisins",
    "featured": false,
    "active": true,
-   "order": 320
+   "order": 320,
+   "summary_en": "Follow development and code projects.",
+   "summary_es": "Sigue el desarrollo y los proyectos de código.",
+   "summary_ar": "متابعة التطوير ومشاريع الشيفرة البرمجية.",
+   "summary_ko": "개발 현황과 코드 프로젝트를 확인하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -569,7 +929,15 @@
    "url": "https://www.instagram.com/les_grands_voisins",
    "featured": false,
    "active": true,
-   "order": 330
+   "order": 330,
+   "summary_en": "See the Grands Voisins visual updates.",
+   "summary_es": "Ve las novedades visuales de Grands Voisins.",
+   "summary_ar": "متابعة أخبار Grands Voisins المصوّرة.",
+   "summary_ko": "Grands Voisins의 사진과 소식을 확인하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -584,7 +952,15 @@
    "url": "https://www.youtube.com/@LesGrandsVoisinsCom",
    "featured": false,
    "active": true,
-   "order": 340
+   "order": 340,
+   "summary_en": "Discover our videos and multimedia content.",
+   "summary_es": "Descubre nuestros vídeos y contenidos multimedia.",
+   "summary_ar": "اكتشاف مقاطع الفيديو والمحتوى الوسائطي لدينا.",
+   "summary_ko": "우리의 영상과 멀티미디어 콘텐츠를 만나보세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -599,7 +975,15 @@
    "url": "https://oxicloud.gv.je",
    "featured": false,
    "active": true,
-   "order": 350
+   "order": 350,
+   "summary_en": "Your files and folders in your Oxicloud locker.",
+   "summary_es": "Tus archivos y carpetas en tu casillero Oxicloud.",
+   "summary_ar": "ملفاتك ومجلداتك في خزانة Oxicloud.",
+   "summary_ko": "Oxicloud 보관함의 파일과 폴더.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -614,7 +998,15 @@
    "url": "https://discourse.lesgrandsvoisins.com/",
    "featured": false,
    "active": true,
-   "order": 360
+   "order": 360,
+   "summary_en": "Discussion forum and community exchange.",
+   "summary_es": "Foro de discusión e intercambio comunitario.",
+   "summary_ar": "منتدى نقاش وتبادل مجتمعي.",
+   "summary_ko": "토론과 커뮤니티 교류를 위한 포럼.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -629,7 +1021,15 @@
    "url": "https://mm.lgv.info/",
    "featured": false,
    "active": true,
-   "order": 370
+   "order": 370,
+   "summary_en": "Discussions and chat channels for the association.",
+   "summary_es": "Conversaciones y canales de intercambio de la asociación.",
+   "summary_ar": "نقاشات وقنوات تواصل الجمعية.",
+   "summary_ko": "협회의 대화방과 채널.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -644,7 +1044,15 @@
    "url": "https://writefreely.lesgrandsvoisins.com/",
    "featured": false,
    "active": true,
-   "order": 380
+   "order": 380,
+   "summary_en": "Publish simple blog posts and articles.",
+   "summary_es": "Publica entradas y artículos de blog sencillos.",
+   "summary_ar": "نشر تدوينات ومقالات مدونة بسيطة.",
+   "summary_ko": "간단한 블로그 글과 게시물을 발행하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -659,7 +1067,15 @@
    "url": "https://phylum.roses.gdvoisins.com",
    "featured": false,
    "active": true,
-   "order": 390
+   "order": 390,
+   "summary_en": "Keep and share files and folders securely.",
+   "summary_es": "Guarda y comparte archivos y carpetas de forma segura.",
+   "summary_ar": "حفظ ومشاركة الملفات والمجلدات بأمان.",
+   "summary_ko": "파일과 폴더를 안전하게 보관하고 공유하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -674,7 +1090,15 @@
    "url": "https://linkding.lesgrandsvoisins.com/",
    "featured": false,
    "active": true,
-   "order": 400
+   "order": 400,
+   "summary_en": "Bookmark and find important web pages.",
+   "summary_es": "Marca y recupera páginas web importantes.",
+   "summary_ar": "حفظ الصفحات المهمة والعثور عليها لاحقًا.",
+   "summary_ko": "중요한 웹페이지를 북마크하고 다시 찾아보세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -689,7 +1113,15 @@
    "url": "https://mark.lesgrandsvoisins.com/auth/oauth2",
    "featured": false,
    "active": true,
-   "order": 410
+   "order": 410,
+   "summary_en": "Write, edit and collaborate in Markdown.",
+   "summary_es": "Escribe, edita y colabora en Markdown.",
+   "summary_ar": "الكتابة والتحرير والتعاون بصيغة Markdown.",
+   "summary_ko": "Markdown으로 작성, 편집, 협업하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -704,7 +1136,15 @@
    "url": "https://meet.lesgrandsvoisins.com/",
    "featured": false,
    "active": true,
-   "order": 420
+   "order": 420,
+   "summary_en": "Make quality video calls.",
+   "summary_es": "Realiza videollamadas de calidad.",
+   "summary_ar": "إجراء مكالمات فيديو عالية الجودة.",
+   "summary_ko": "고품질 화상 회의를 진행하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -719,7 +1159,19 @@
    "url": "https://wiki.grandsvoisins.org",
    "featured": false,
    "active": true,
-   "order": 430
+   "order": 430,
+   "name_en": "Grands Voisins Wiki",
+   "name_es": "Wiki de Grands Voisins",
+   "name_ar": "ويكي Grands Voisins",
+   "name_ko": "Grands Voisins 위키",
+   "summary_en": "General documentation about the association and its tools.",
+   "summary_es": "Documentación general sobre la asociación y sus usos.",
+   "summary_ar": "وثائق عامة حول الجمعية واستخداماتها.",
+   "summary_ko": "협회와 사용법에 대한 전반적인 문서.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -734,7 +1186,15 @@
    "url": "https://memos.gv.je/explore",
    "featured": false,
    "active": true,
-   "order": 440
+   "order": 440,
+   "summary_en": "Take and share notes, private or public.",
+   "summary_es": "Toma y comparte notas, privadas o públicas.",
+   "summary_ar": "تدوين ومشاركة الملاحظات، خاصة كانت أو عامة.",
+   "summary_ko": "비공개 또는 공개로 메모를 작성하고 공유하세요.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -749,7 +1209,15 @@
    "url": "https://www.lesgrandsvoisins.com/",
    "featured": false,
    "active": true,
-   "order": 450
+   "order": 450,
+   "summary_en": "The Grands Voisins public portal.",
+   "summary_es": "El portal público de Grands Voisins.",
+   "summary_ar": "البوابة العامة لـ Grands Voisins.",
+   "summary_ko": "Grands Voisins의 공개 포털.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -764,7 +1232,19 @@
    "url": "https://www.gdvoisins.com",
    "featured": false,
    "active": true,
-   "order": 460
+   "order": 460,
+   "name_en": "Grands Voisins Directory",
+   "name_es": "Directorio de Grands Voisins",
+   "name_ar": "دليل Grands Voisins",
+   "name_ko": "Grands Voisins 디렉터리",
+   "summary_en": "Directory of Grands Voisins and community members.",
+   "summary_es": "Directorio de Grands Voisins y de los miembros de la comunidad.",
+   "summary_ar": "دليل Grands Voisins وأعضاء المجتمع.",
+   "summary_ko": "Grands Voisins와 커뮤니티 구성원 디렉터리.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -779,7 +1259,19 @@
    "url": "https://blog.lesgrandsvoisins.com",
    "featured": false,
    "active": true,
-   "order": 470
+   "order": 470,
+   "name_en": "LesGrandsVoisins.com Blog",
+   "name_es": "Blog de LesGrandsVoisins.com",
+   "name_ar": "مدونة LesGrandsVoisins.com",
+   "name_ko": "LesGrandsVoisins.com 블로그",
+   "summary_en": "The association's news and articles.",
+   "summary_es": "Las noticias y artículos de la asociación.",
+   "summary_ar": "أخبار ومقالات الجمعية.",
+   "summary_ko": "협회의 소식과 글.",
+   "retention_en": "[To be completed]",
+   "retention_es": "[Por completar]",
+   "retention_ar": "[سيتم استكماله]",
+   "retention_ko": "[추후 작성 예정]"
   }
  },
  {
@@ -789,7 +1281,11 @@
    "title": "Mon premier serveur",
    "url": "https://voies.voisinter.net/books/mon-premier-serveur",
    "summary": "",
-   "order": 10
+   "order": 10,
+   "title_en": "My first server",
+   "title_es": "Mi primer servidor",
+   "title_ar": "خادمي الأول",
+   "title_ko": "나의 첫 서버"
   }
  },
  {
@@ -799,7 +1295,11 @@
    "title": "Mon courriel",
    "url": "https://voies.voisinter.net/books/mon-courriel",
    "summary": "",
-   "order": 20
+   "order": 20,
+   "title_en": "My email",
+   "title_es": "Mi correo electrónico",
+   "title_ar": "بريدي الإلكتروني",
+   "title_ko": "나의 이메일"
   }
  },
  {
@@ -809,7 +1309,11 @@
    "title": "Mes sauvegardes",
    "url": "https://voies.voisinter.net/books/mes-sauvegardes",
    "summary": "",
-   "order": 30
+   "order": 30,
+   "title_en": "My backups",
+   "title_es": "Mis copias de seguridad",
+   "title_ar": "نسخي الاحتياطية",
+   "title_ko": "나의 백업"
   }
  },
  {
@@ -819,7 +1323,11 @@
    "title": "Mon nom de domaine",
    "url": "https://voies.voisinter.net/books/mon-nom-de-domaine",
    "summary": "",
-   "order": 40
+   "order": 40,
+   "title_en": "My domain name",
+   "title_es": "Mi nombre de dominio",
+   "title_ar": "اسم نطاقي",
+   "title_ko": "나의 도메인 이름"
   }
  }
 ]

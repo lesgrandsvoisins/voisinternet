@@ -103,7 +103,9 @@ a{color:inherit}
 /* Sections */
 section.block{padding:3.5rem 0;border-top:1px solid var(--line)}
 .block h2,.page h2{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.15;margin:0 0 .5rem;letter-spacing:-.01em}
-.intro{color:var(--ink-soft);max-width:38em;margin:0 0 2rem}
+.intro{color:var(--ink-soft);
+  /* max-width:38em; */
+  margin:0 0 2rem}
 .kicker{font-family:var(--sans)!important;font-size:1rem!important;font-weight:400;color:var(--ink-soft);margin:0 0 .8rem!important}
 
 /* Publics : « Vous êtes… » */

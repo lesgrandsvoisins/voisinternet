@@ -168,6 +168,621 @@
   }
  },
  {
+  "model": "core.service",
+  "pk": 7,
+  "fields": {
+   "name": "SYNC-IN",
+   "slug": "sync-in",
+   "summary": "Vos fichiers et dossiers avec votre casier SYNC-IN.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://sync-in.gv.je",
+   "featured": false,
+   "active": true,
+   "order": 70
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 8,
+  "fields": {
+   "name": "Miniflux",
+   "slug": "miniflux",
+   "summary": "Consolider vos flux RSS et actualités.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://miniflux.gv.je/oauth2/oidc/redirect",
+   "featured": false,
+   "active": true,
+   "order": 80
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 9,
+  "fields": {
+   "name": "Forgejo",
+   "slug": "forgejo",
+   "summary": "Gérer du code source et des dépôts collaboratifs.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://forgejo.roses.gv.je/user/login",
+   "featured": false,
+   "active": true,
+   "order": 90
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 10,
+  "fields": {
+   "name": "Zensial",
+   "slug": "zensial",
+   "summary": "Consulter la documentation des Grands Voisins.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://zensical.gv.je/fr/",
+   "featured": false,
+   "active": true,
+   "order": 100
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 11,
+  "fields": {
+   "name": "Roundcube Webmail",
+   "slug": "roundcube-webmail",
+   "summary": "Consulter et envoyer vos courriels via le web.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://mail.lesgrandsvoisins.com",
+   "featured": false,
+   "active": true,
+   "order": 110
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 12,
+  "fields": {
+   "name": "Vikunja",
+   "slug": "vikunja",
+   "summary": "Gérer les tâches et projets en équipe.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://task.lesgrandsvoisins.com",
+   "featured": false,
+   "active": true,
+   "order": 120
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 13,
+  "fields": {
+   "name": "Wagtail",
+   "slug": "wagtail",
+   "summary": "Éditer les contenus du site public et des portails.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://www.lesgrandsvoisins.com/cms-admin/",
+   "featured": false,
+   "active": true,
+   "order": 130
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 14,
+  "fields": {
+   "name": "Guichet",
+   "slug": "guichet",
+   "summary": "Gérer votre compte et vos boîtes aux lettres.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://guichet.resdigita.com/user",
+   "featured": false,
+   "active": true,
+   "order": 140
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 15,
+  "fields": {
+   "name": "Keycloak",
+   "slug": "keycloak",
+   "summary": "Compte unique et authentification centralisée.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://key.gv.je/admin",
+   "featured": false,
+   "active": true,
+   "order": 150
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 16,
+  "fields": {
+   "name": "SFTPGo",
+   "slug": "sftpgo",
+   "summary": "Stocker et partager des fichiers dans votre casier.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://sftpgo.gv.je/",
+   "featured": false,
+   "active": true,
+   "order": 160
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 17,
+  "fields": {
+   "name": "Uptime Kuma",
+   "slug": "uptime-kuma",
+   "summary": "Surveiller l'état de nos services et sites.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://up.lesgrandsvoisins.com",
+   "featured": false,
+   "active": true,
+   "order": 170
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 18,
+  "fields": {
+   "name": "Homarr",
+   "slug": "homarr",
+   "summary": "Votre tableau de bord personnel et votre portail d'accès.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://homarr.gv.je",
+   "featured": false,
+   "active": true,
+   "order": 180
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 19,
+  "fields": {
+   "name": "CopyParty",
+   "slug": "copyparty",
+   "summary": "Partager simplement des fichiers et dossiers entre personnes.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://cp.roses.gdvoisins.com/",
+   "featured": false,
+   "active": true,
+   "order": 190
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 20,
+  "fields": {
+   "name": "Vaultwarden",
+   "slug": "vaultwarden",
+   "summary": "Gérer vos mots de passe et identifiants.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://vw.lgv.info/",
+   "featured": false,
+   "active": true,
+   "order": 200
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 21,
+  "fields": {
+   "name": "KeeWeb",
+   "slug": "keeweb",
+   "summary": "Gérer des bases de mots de passe et les synchroniser.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://keeweb.resdigita.com/",
+   "featured": false,
+   "active": true,
+   "order": 210
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 22,
+  "fields": {
+   "name": "Crabfit",
+   "slug": "crabfit",
+   "summary": "Trouver un moment de rendez-vous ensemble.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://crabfit.resdigita.com/",
+   "featured": false,
+   "active": true,
+   "order": 220
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 23,
+  "fields": {
+   "name": "Quartz",
+   "slug": "quartz",
+   "summary": "Documentation technique et outils de la communauté.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://quartz.resdigita.com/",
+   "featured": false,
+   "active": true,
+   "order": 230
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 24,
+  "fields": {
+   "name": "ConfigMagic",
+   "slug": "configmagic",
+   "summary": "Wiki de configuration et documentation technique.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://www.configmagic.com/",
+   "featured": false,
+   "active": true,
+   "order": 240
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 25,
+  "fields": {
+   "name": "Max Auth",
+   "slug": "max-auth",
+   "summary": "Serveur d'authentification pour les services de Max.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://auth.max.gdvoisins.com",
+   "featured": false,
+   "active": true,
+   "order": 250
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 26,
+  "fields": {
+   "name": "Max Dashy",
+   "slug": "max-dashy",
+   "summary": "Tableau de bord personnel hébergé chez Max.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://dashy.max.gdvoisins.com",
+   "featured": false,
+   "active": true,
+   "order": 260
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 27,
+  "fields": {
+   "name": "Ghost",
+   "slug": "ghost",
+   "summary": "Publier et gérer le blog des Grands Voisins.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://blog.lesgrandsvoisins.com/ghost/",
+   "featured": false,
+   "active": true,
+   "order": 270
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 28,
+  "fields": {
+   "name": "ListMonk",
+   "slug": "listmonk",
+   "summary": "Listes de diffusion et lettres d'information.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://list.lesgrandsvoisins.com",
+   "featured": false,
+   "active": true,
+   "order": 280
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 29,
+  "fields": {
+   "name": "HelloAsso",
+   "slug": "helloasso",
+   "summary": "Faire un don pour Les Grands Voisins.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://www.helloasso.com/associations/les-grands-voisins/adhesions/souscription-annuelle",
+   "featured": false,
+   "active": true,
+   "order": 290
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 30,
+  "fields": {
+   "name": "PayPal",
+   "slug": "paypal",
+   "summary": "Donner via PayPal à l'association.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://www.paypal.com/donate/?hosted_button_id=BPUUS6H6TP62Y",
+   "featured": false,
+   "active": true,
+   "order": 300
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 31,
+  "fields": {
+   "name": "Stripe",
+   "slug": "stripe",
+   "summary": "Donner via Stripe.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://donate.stripe.com/fZe7uD07z9hAg0w288",
+   "featured": false,
+   "active": true,
+   "order": 310
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 32,
+  "fields": {
+   "name": "GitHub",
+   "slug": "github",
+   "summary": "Suivre le développement et les projets de code.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://github.com/lesgrandsvoisins",
+   "featured": false,
+   "active": true,
+   "order": 320
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 33,
+  "fields": {
+   "name": "Instagram",
+   "slug": "instagram",
+   "summary": "Voir les actualités visuelles des Grands Voisins.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://www.instagram.com/les_grands_voisins",
+   "featured": false,
+   "active": true,
+   "order": 330
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 34,
+  "fields": {
+   "name": "YouTube",
+   "slug": "youtube",
+   "summary": "Découvrir nos vidéos et contenus multimédias.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://www.youtube.com/@LesGrandsVoisinsCom",
+   "featured": false,
+   "active": true,
+   "order": 340
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 35,
+  "fields": {
+   "name": "Oxicloud",
+   "slug": "oxicloud",
+   "summary": "Vos fichiers et dossiers dans votre casier Oxicloud.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://oxicloud.gv.je",
+   "featured": false,
+   "active": true,
+   "order": 350
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 36,
+  "fields": {
+   "name": "Discourse",
+   "slug": "discourse",
+   "summary": "Forum de discussion et échange communautaire.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://discourse.lesgrandsvoisins.com/",
+   "featured": false,
+   "active": true,
+   "order": 360
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 37,
+  "fields": {
+   "name": "Mattermost",
+   "slug": "mattermost",
+   "summary": "Discussions et canaux d'échange de l'association.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://mm.lgv.info/",
+   "featured": false,
+   "active": true,
+   "order": 370
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 38,
+  "fields": {
+   "name": "WriteFreely",
+   "slug": "writefreely",
+   "summary": "Publier des billets et articles de blog simples.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://writefreely.lesgrandsvoisins.com/",
+   "featured": false,
+   "active": true,
+   "order": 380
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 39,
+  "fields": {
+   "name": "Phylum",
+   "slug": "phylum",
+   "summary": "Garder et partager des fichiers et dossiers en sécurité.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://phylum.roses.gdvoisins.com",
+   "featured": false,
+   "active": true,
+   "order": 390
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 40,
+  "fields": {
+   "name": "Linkding",
+   "slug": "linkding",
+   "summary": "Marquer et retrouver des pages web importantes.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://linkding.lesgrandsvoisins.com/",
+   "featured": false,
+   "active": true,
+   "order": 400
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 41,
+  "fields": {
+   "name": "HedgeDoc",
+   "slug": "hedgedoc",
+   "summary": "Écrire, modifier et collaborer en Markdown.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://mark.lesgrandsvoisins.com/auth/oauth2",
+   "featured": false,
+   "active": true,
+   "order": 410
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 42,
+  "fields": {
+   "name": "Jitsi",
+   "slug": "jitsi",
+   "summary": "Passer des visioconférences de qualité.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://meet.lesgrandsvoisins.com/",
+   "featured": false,
+   "active": true,
+   "order": 420
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 43,
+  "fields": {
+   "name": "Wiki des Grands Voisins",
+   "slug": "wiki-grands-voisins",
+   "summary": "Documentation générale sur l'association et ses usages.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://wiki.grandsvoisins.org",
+   "featured": false,
+   "active": true,
+   "order": 430
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 44,
+  "fields": {
+   "name": "Memos",
+   "slug": "memos",
+   "summary": "Noter et partager des mémos, privés ou publics.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://memos.gv.je/explore",
+   "featured": false,
+   "active": true,
+   "order": 440
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 45,
+  "fields": {
+   "name": "LesGrandsVoisins.fr",
+   "slug": "lesgrandsvoisins-fr",
+   "summary": "Le portail public des Grands Voisins.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://www.lesgrandsvoisins.com/",
+   "featured": false,
+   "active": true,
+   "order": 450
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 46,
+  "fields": {
+   "name": "Annuaire des Grands Voisins",
+   "slug": "annuaire-grands-voisins",
+   "summary": "Annuaire des Grands Voisins et des acteurs de la communauté.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://www.gdvoisins.com",
+   "featured": false,
+   "active": true,
+   "order": 460
+  }
+ },
+ {
+  "model": "core.service",
+  "pk": 47,
+  "fields": {
+   "name": "Blog LesGrandsVoisins.com",
+   "slug": "blog-lesgrandsvoisins-com",
+   "summary": "Les nouvelles et articles de l'association.",
+   "description": "",
+   "retention": "[À compléter]",
+   "url": "https://blog.lesgrandsvoisins.com",
+   "featured": false,
+   "active": true,
+   "order": 470
+  }
+ },
+ {
   "model": "core.guidebook",
   "pk": 1,
   "fields": {

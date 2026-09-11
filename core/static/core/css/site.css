@@ -44,6 +44,7 @@ a{color:inherit}
 .top > .wrap{display:flex;align-items:center;gap:1rem;min-height:4.25rem}
 .brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;margin-right:auto}
 .mark{width:30px;height:30px}
+.quicknav{display:none}
 .menu > summary{list-style:none}
 .menu > summary::-webkit-details-marker{display:none}
 .menu-btn,.account{font:inherit;color:var(--ink);background:none;border:1px solid var(--line);border-radius:8px;cursor:pointer;padding:.45rem .8rem;display:flex;align-items:center;gap:.5rem;text-decoration:none}
@@ -241,6 +242,14 @@ blockquote p{margin:0}
 .foot-nav a{text-decoration:none}
 .foot-nav a:hover{text-decoration:underline}
 .foot-bottom{border-top:1px solid color-mix(in srgb,var(--sky) 20%,transparent);margin-top:2rem;padding-top:1rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;font-size:.9rem}
+
+@media (min-width:1180px){
+  .quicknav{display:flex;flex-wrap:wrap;gap:.35rem}
+  .quicknav a{text-decoration:none;font-size:.92rem;border:1px solid var(--line);border-radius:999px;padding:.4rem .95rem;color:inherit}
+  .quicknav a:hover{background:var(--hover)}
+  .quicknav a[aria-current="page"]{background:var(--ink);border-color:var(--ink);color:var(--sky)}
+  .menu{display:none}
+}
 
 /* Adaptatif */
 @media (max-width:900px){

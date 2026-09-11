@@ -17,6 +17,11 @@
 <header class="top">
   <div class="wrap">
     <a class="brand" href="{% url 'core:home' %}" aria-label="Voisinternet, accueil">{% include "core/partials/logo_mark.html" %}{% include "core/partials/wordmark.html" %}</a>
+    <nav class="quicknav" aria-label="Accès rapide">
+      {% for group in conj_groups %}{% for item in group.items %}
+      <a href="{{ item.href }}" aria-label="{{ item.entry.aria }}"{% if item.current %} aria-current="page"{% endif %}>{% if group.key == "lire" %}{{ item.entry.form|lower }}{% else %}{{ item.entry.pronoun }}{% endif %}</a>
+      {% endfor %}{% endfor %}
+    </nav>
     <details class="menu">
       <summary class="menu-btn"><span class="bars" aria-hidden="true"><i></i></span><span class="label">Menu</span></summary>
       <nav class="panel" aria-label="Menu principal">

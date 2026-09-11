@@ -1,4 +1,4 @@
-<details class="account-panel"{% if oob %} hx-swap-oob="true"{% endif %}>
+<details class="account-panel" id="account-panel"{% if oob %} hx-swap-oob="true"{% endif %}>
   <summary class="account" id="account" aria-label="Je vois : {{ account_sub }}">
     <b>je <span class="V">V</span>ois</b><small>{{ account_sub }}</small>{% if account_count %}<span class="badge" aria-hidden="true">{{ account_count }}</span>{% endif %}
   </summary>
@@ -16,7 +16,7 @@
       <ul>
         {% for shortcut in account_shortcuts %}{% with service=shortcut.service %}
         <li>
-          {% if service.url %}<a href="{{ service.url }}">{{ service.name }}</a>{% else %}<a href="{% url 'core:vous_voyez' %}">{{ service.name }}</a>{% endif %}
+          {% if service.url %}<a href="{{ service.url }}" target="_new">{{ service.name }}</a>{% else %}<a href="{% url 'core:vous_voyez' %}">{{ service.name }}</a>{% endif %}
         </li>
         {% endwith %}{% endfor %}
       </ul>

@@ -40,8 +40,8 @@ ENTRIES = [
           "à ajouter à votre compte, même anonyme", "core:vous_voyez", "pluriel"),
     Entry("ils", "ils et elles", "Voient", "Dons et donateurs", "dons financiers et donateurs",
           "qui nous soutient, et comment nous soutenir", "core:ils_et_elles_voient", "pluriel"),
-    Entry("voie", "notre", "Voie", "Guide", "le guide",
-          "pas à pas, du premier serveur aux sauvegardes", "setting:GUIDE_URL", "lire"),
     Entry("voix", "nos", "Voix", "Blog", "le blog",
           "les nouvelles et les tribunes des adhérents", "setting:BLOG_URL", "lire"),
+    Entry("voie", "notre", "Voie", "Guide", "le guide",
+          "pas à pas, du premier serveur aux sauvegardes", "setting:GUIDE_URL", "lire"),
 ]

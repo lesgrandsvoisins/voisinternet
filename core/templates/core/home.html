@@ -3,14 +3,16 @@
 {% block content %}
 <section class="hero">
   <div class="wrap">
-    <div>
+    <div class="hero-text">
       <h1>Ôtez-vous de leur nuage.</h1>
-      <p class="lead">Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un voisin de confiance. Voisinternet vous montre comment, et des voisins vous accompagnent.</p>
-      <div class="ctas">
-        <a class="btn btn-sun" href="{% url 'core:vous_voyez' %}">Voir les services</a>
-        <a class="btn btn-line" href="{{ GUIDE_URL }}">Lire le guide</a>
+      <div>
+        <p class="lead">Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un voisin de confiance. Voisinternet vous montre comment, et des voisins vous accompagnent.</p>
+        <div class="ctas">
+          <a class="btn btn-sun" href="{% url 'core:vous_voyez' %}">Voir les services</a>
+          <a class="btn btn-line" href="{{ GUIDE_URL }}">Lire le guide</a>
+        </div>
+        <p class="signature">Voies · Voix · Vous<small>porté par Les Grands Voisins</small></p>
       </div>
-      <p class="signature">Voies · Voix · Vous<small>porté par Les Grands Voisins</small></p>
     </div>
     {% include "core/partials/scene.html" %}
   </div>

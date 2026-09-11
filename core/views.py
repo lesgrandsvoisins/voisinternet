@@ -2,7 +2,6 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
-from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -84,15 +83,10 @@ def je_vois(request):
 
 
 def vous_voyez(request, audience=None):
-    services = Service.objects.filter(active=True)
     current = None
     if audience:
         current = get_object_or_404(Audience, slug=audience)
-        # Un service sans public désigné s'adresse à tout le monde.
-        services = services.filter(Q(audiences=current) | Q(audiences__isnull=True)).distinct()
     return render(request, "core/vous_voyez.html", {
-        "services": services,
-        "shortcut_ids": _shortcut_ids(request),
         "audiences": Audience.objects.all(),
         "audience": current,
     })

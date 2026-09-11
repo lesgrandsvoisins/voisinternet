@@ -1,8 +1,8 @@
 {% extends "core/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "vous Voyez : les services" %}{% if audience %} — {{ audience.name }}{% endif %} — Voisinternet{% endblock %}
+{% block title %}{% trans "vous Voyez : les groupes" %}{% if audience %} — {{ audience.name }}{% endif %} — Voisinternet{% endblock %}
 {% block content %}
-{% trans "Un lieu de services proposés entre voisins, selon un principe de subsidiarité : vous n'avez pas besoin de collaborer avec Les Grands Voisins pour en profiter, même si l'association coopérative peut elle aussi y participer. Ajoutez ceux qui vous intéressent à vos raccourcis, même sans compte nominatif. Chaque service indique ce qui reste anonyme et ce que l'association doit conserver en tant qu'hébergeur." as page_lead %}
+{% trans "Les identités, individuelles ou collectives, auxquelles vous adhérez : un particulier, une association, une entreprise… Chacune donne accès à ce qui la concerne." as page_lead %}
 {% include "core/partials/page_head.html" with item=conj.vous lead=page_lead %}
 <div class="wrap page">
   {% if audiences %}
@@ -23,12 +23,14 @@
     <p><a class="btn btn-sun" href="mailto:{{ CONTACT_EMAIL }}?subject={{ partnership_subject|urlencode }}">{% trans "Proposer un partenariat" %}</a></p>
     {% endif %}
   </section>
-  {% endif %}
-
-  {% if audience.partnership %}
-  <p class="note"><a href="{% url 'core:vous_voyez' %}">{% trans "Voir les services proposés aux habitants" %}</a></p>
   {% else %}
-  {% include "core/partials/service_list.html" with details=True %}
+  <ul class="aud">
+    {% for a in audiences %}
+      <li>
+        <a href="{% url 'core:vous_voyez_pour' a.slug %}"><strong>{{ a.name }}</strong><span>{{ a.pitch }}</span></a>
+      </li>
+    {% endfor %}
+  </ul>
   {% endif %}
 </div>
 {% endblock %}

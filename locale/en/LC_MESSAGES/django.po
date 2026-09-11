@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 17:33+0200\n"
+"POT-Creation-Date: 2026-09-11 22:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,16 +95,16 @@ msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "bylaws, governance, accounts: everything is public"
 
 #: core/menu.py:44
-msgid "Services"
-msgstr "Services"
+msgid "Groupes"
+msgstr "Groups"
 
 #: core/menu.py:44
-msgid "des services entre voisins, sans obligation envers l'association"
-msgstr "services between neighbors, with no obligation to the association"
+msgid "les groupes auxquels vous appartenez, ou pas encore"
+msgstr "the groups you belong to, or not yet"
 
 #: core/menu.py:45
-msgid "à ajouter à votre compte, même anonyme"
-msgstr "to add to your account, even anonymously"
+msgid "un particulier, une association, une entreprise…"
+msgstr "an individual, an association, a business…"
 
 #: core/menu.py:46
 msgid "Dons et partenaires"
@@ -915,24 +915,17 @@ msgid "[À compléter : comment demander une visite d'un bénévole.]"
 msgstr "[To be completed: how to request a volunteer visit.]"
 
 #: core/templates/core/vous_voyez.html:3
-msgid "vous Voyez : les services"
-msgstr "vous Voyez: the services"
+msgid "vous Voyez : les groupes"
+msgstr "vous Voyez: the groups"
 
 #: core/templates/core/vous_voyez.html:5
 msgid ""
-"Un lieu de services proposés entre voisins, selon un principe de "
-"subsidiarité : vous n'avez pas besoin de collaborer avec Les Grands Voisins "
-"pour en profiter, même si l'association coopérative peut elle aussi y "
-"participer. Ajoutez ceux qui vous intéressent à vos raccourcis, même sans "
-"compte nominatif. Chaque service indique ce qui reste anonyme et ce que "
-"l'association doit conserver en tant qu'hébergeur."
+"Les identités, individuelles ou collectives, auxquelles vous adhérez : un "
+"particulier, une association, une entreprise… Chacune donne accès à ce qui "
+"la concerne."
 msgstr ""
-"A place for services offered between neighbors, following a principle of "
-"subsidiarity: you don't need to work with Les Grands Voisins to benefit from"
-" it, even though the cooperative association can take part too. Add the ones"
-" you're interested in to your shortcuts, even without a named account. Each "
-"service states what stays anonymous and what the association must keep as a "
-"host."
+"The identities, individual or collective, that you belong to: an individual,"
+" an association, a business… Each one gives access to what concerns it."
 
 #: core/templates/core/vous_voyez.html:10
 msgid "Tout le monde"
@@ -946,27 +939,23 @@ msgstr "Voisinternet partnership"
 msgid "Proposer un partenariat"
 msgstr "Propose a partnership"
 
-#: core/templates/core/vous_voyez.html:29
-msgid "Voir les services proposés aux habitants"
-msgstr "See the services offered to residents"
-
-#: core/views.py:113
+#: core/views.py:107
 msgid "Compte anonyme créé."
 msgstr "Anonymous account created."
 
-#: core/views.py:120
+#: core/views.py:114
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "Too many attempts from this device. Try again in fifteen minutes."
 
-#: core/views.py:124
+#: core/views.py:118
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "No account matches this number. Check the 16 digits."
 
-#: core/views.py:127
+#: core/views.py:121
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "Account found. Your shortcuts are back."
 
-#: core/views.py:134
+#: core/views.py:128
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
@@ -974,16 +963,16 @@ msgstr ""
 "This account is no longer open on this device. Your number lets you find it "
 "again."
 
-#: core/views.py:145
+#: core/views.py:139
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "Your anonymous shortcuts have joined your account."
 
-#: core/views.py:161
+#: core/views.py:155
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "“%(name)s” removed from your shortcuts."
 
-#: core/views.py:165
+#: core/views.py:159
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "“%(name)s” added to your shortcuts."

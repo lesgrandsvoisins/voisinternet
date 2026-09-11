@@ -3,7 +3,7 @@
   {% for shortcut in shortcuts %}{% with service=shortcut.service %}
   <li>
     <span class="led" aria-hidden="true"></span>
-    <div><h3>{% if service.url %}<a href="{{ service.url }}">{{ service.name }}</a>{% else %}<a href="{% url 'core:vous_voyez' %}">{{ service.name }}</a>{% endif %}</h3><p>{{ service.summary }}</p></div>
+    <div><h3>{% if service.url %}<a href="{{ service.url }}">{{ service.name }}</a>{% else %}{{ service.name }}{% endif %}</h3><p>{{ service.summary }}</p></div>
     <div class="shortcut-tools">
       <form method="post" action="{% url 'core:reorder_shortcut' service.slug 'up' %}" hx-post="{% url 'core:reorder_shortcut' service.slug 'up' %}" hx-target="#shortcuts-list" hx-swap="innerHTML">{% csrf_token %}<button class="move-btn" type="submit" aria-label="{% blocktrans with name=service.name %}Monter {{ name }}{% endblocktrans %}" {% if forloop.first %}disabled{% endif %}>↑</button></form>
       <form method="post" action="{% url 'core:reorder_shortcut' service.slug 'down' %}" hx-post="{% url 'core:reorder_shortcut' service.slug 'down' %}" hx-target="#shortcuts-list" hx-swap="innerHTML">{% csrf_token %}<button class="move-btn" type="submit" aria-label="{% blocktrans with name=service.name %}Descendre {{ name }}{% endblocktrans %}" {% if forloop.last %}disabled{% endif %}>↓</button></form>
@@ -13,5 +13,5 @@
   {% endwith %}{% endfor %}
 </ul>
 {% else %}
-<p class="intro">{% trans "Aucun raccourci pour l'instant." %} <a href="{% url 'core:vous_voyez' %}">{% trans "Choisissez vos services" %}</a>, {% trans "ils apparaîtront ici." %}</p>
+<p class="intro">{% trans "Aucun raccourci pour l'instant." %} <a href="{% url 'core:je_vois' %}#available-services">{% trans "Choisissez vos services" %}</a>, {% trans "ils apparaîtront ici." %}</p>
 {% endif %}

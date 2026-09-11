@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 17:33+0200\n"
+"POT-Creation-Date: 2026-09-11 22:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,16 +95,16 @@ msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "정관, 운영, 회계: 모두 공개됩니다"
 
 #: core/menu.py:44
-msgid "Services"
-msgstr "서비스"
+msgid "Groupes"
+msgstr "그룹"
 
 #: core/menu.py:44
-msgid "des services entre voisins, sans obligation envers l'association"
-msgstr "협회에 대한 의무 없이 이웃 간에 제공되는 서비스"
+msgid "les groupes auxquels vous appartenez, ou pas encore"
+msgstr "아직 속하지 않았을 수도 있는, 당신이 속한 그룹"
 
 #: core/menu.py:45
-msgid "à ajouter à votre compte, même anonyme"
-msgstr "익명이라도 계정에 추가할 수 있는 서비스"
+msgid "un particulier, une association, une entreprise…"
+msgstr "개인, 협회, 기업…"
 
 #: core/menu.py:46
 msgid "Dons et partenaires"
@@ -879,21 +879,15 @@ msgid "[À compléter : comment demander une visite d'un bénévole.]"
 msgstr "[추후 작성 예정: 자원봉사자 방문 요청 방법.]"
 
 #: core/templates/core/vous_voyez.html:3
-msgid "vous Voyez : les services"
-msgstr "vous Voyez: 서비스"
+msgid "vous Voyez : les groupes"
+msgstr "vous Voyez: 그룹"
 
 #: core/templates/core/vous_voyez.html:5
 msgid ""
-"Un lieu de services proposés entre voisins, selon un principe de "
-"subsidiarité : vous n'avez pas besoin de collaborer avec Les Grands Voisins "
-"pour en profiter, même si l'association coopérative peut elle aussi y "
-"participer. Ajoutez ceux qui vous intéressent à vos raccourcis, même sans "
-"compte nominatif. Chaque service indique ce qui reste anonyme et ce que "
-"l'association doit conserver en tant qu'hébergeur."
-msgstr ""
-"보충성의 원칙에 따라 이웃 간에 제안되는 서비스 공간입니다: 이용을 위해 Les Grands Voisins와 반드시 협력할 필요는 "
-"없으며, 협동조합 협회 역시 참여할 수 있습니다. 이름을 밝히지 않아도 관심 있는 서비스를 바로가기에 추가할 수 있습니다. 각 서비스는 "
-"무엇이 익명으로 유지되고 협회가 호스팅 제공자로서 무엇을 보관해야 하는지 안내합니다."
+"Les identités, individuelles ou collectives, auxquelles vous adhérez : un "
+"particulier, une association, une entreprise… Chacune donne accès à ce qui "
+"la concerne."
+msgstr "당신이 속한 개인 또는 집단 정체성: 개인, 협회, 기업… 각 정체성은 그에 해당하는 정보로 안내합니다."
 
 #: core/templates/core/vous_voyez.html:10
 msgid "Tout le monde"
@@ -907,42 +901,38 @@ msgstr "Voisinternet 파트너십"
 msgid "Proposer un partenariat"
 msgstr "파트너십 제안하기"
 
-#: core/templates/core/vous_voyez.html:29
-msgid "Voir les services proposés aux habitants"
-msgstr "주민 대상 서비스 보기"
-
-#: core/views.py:113
+#: core/views.py:107
 msgid "Compte anonyme créé."
 msgstr "익명 계정이 생성되었습니다."
 
-#: core/views.py:120
+#: core/views.py:114
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "이 기기에서 시도 횟수가 너무 많습니다. 15분 후 다시 시도해 주세요."
 
-#: core/views.py:124
+#: core/views.py:118
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "이 번호와 일치하는 계정이 없습니다. 16자리 숫자를 확인해 주세요."
 
-#: core/views.py:127
+#: core/views.py:121
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "계정을 찾았습니다. 바로가기가 복구되었습니다."
 
-#: core/views.py:134
+#: core/views.py:128
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
 msgstr "이 기기에서는 더 이상 계정이 열려 있지 않습니다. 번호를 이용해 다시 찾을 수 있습니다."
 
-#: core/views.py:145
+#: core/views.py:139
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "익명 바로가기가 계정에 연결되었습니다."
 
-#: core/views.py:161
+#: core/views.py:155
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "“%(name)s”이(가) 바로가기에서 제거되었습니다."
 
-#: core/views.py:165
+#: core/views.py:159
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "“%(name)s”이(가) 바로가기에 추가되었습니다."

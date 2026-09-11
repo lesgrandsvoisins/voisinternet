@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 17:33+0200\n"
+"POT-Creation-Date: 2026-09-11 22:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,16 +95,16 @@ msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "النظام الأساسي، الحوكمة، الحسابات: كل شيء علني"
 
 #: core/menu.py:44
-msgid "Services"
-msgstr "الخدمات"
+msgid "Groupes"
+msgstr "المجموعات"
 
 #: core/menu.py:44
-msgid "des services entre voisins, sans obligation envers l'association"
-msgstr "خدمات بين الجيران، دون أي التزام تجاه الجمعية"
+msgid "les groupes auxquels vous appartenez, ou pas encore"
+msgstr "المجموعات التي تنتمي إليها، أو لم تنتمِ إليها بعد"
 
 #: core/menu.py:45
-msgid "à ajouter à votre compte, même anonyme"
-msgstr "لإضافتها إلى حسابك، حتى لو كان مجهولًا"
+msgid "un particulier, une association, une entreprise…"
+msgstr "فرد، جمعية، شركة…"
 
 #: core/menu.py:46
 msgid "Dons et partenaires"
@@ -895,22 +895,17 @@ msgid "[À compléter : comment demander une visite d'un bénévole.]"
 msgstr "[سيتم استكماله: كيفية طلب زيارة متطوع.]"
 
 #: core/templates/core/vous_voyez.html:3
-msgid "vous Voyez : les services"
-msgstr "vous Voyez: الخدمات"
+msgid "vous Voyez : les groupes"
+msgstr "vous Voyez: المجموعات"
 
 #: core/templates/core/vous_voyez.html:5
 msgid ""
-"Un lieu de services proposés entre voisins, selon un principe de "
-"subsidiarité : vous n'avez pas besoin de collaborer avec Les Grands Voisins "
-"pour en profiter, même si l'association coopérative peut elle aussi y "
-"participer. Ajoutez ceux qui vous intéressent à vos raccourcis, même sans "
-"compte nominatif. Chaque service indique ce qui reste anonyme et ce que "
-"l'association doit conserver en tant qu'hébergeur."
+"Les identités, individuelles ou collectives, auxquelles vous adhérez : un "
+"particulier, une association, une entreprise… Chacune donne accès à ce qui "
+"la concerne."
 msgstr ""
-"مكان لخدمات مقترحة بين الجيران، وفق مبدأ التفريع (subsidiarité): لست بحاجة "
-"للتعاون مع Les Grands Voisins للاستفادة منها، حتى لو كانت الجمعية التعاونية "
-"يمكنها أيضًا المشاركة فيها. أضف ما يهمّك إلى اختصاراتك، حتى دون حساب باسمك. "
-"توضّح كل خدمة ما يبقى مجهولاً وما يجب أن تحتفظ به الجمعية بصفتها مضيفًا."
+"الهويات، الفردية أو الجماعية، التي تنتمي إليها: فرد، جمعية، شركة… تمنحك كل "
+"واحدة منها الوصول إلى ما يخصها."
 
 #: core/templates/core/vous_voyez.html:10
 msgid "Tout le monde"
@@ -924,42 +919,38 @@ msgstr "شراكة Voisinternet"
 msgid "Proposer un partenariat"
 msgstr "اقتراح شراكة"
 
-#: core/templates/core/vous_voyez.html:29
-msgid "Voir les services proposés aux habitants"
-msgstr "عرض الخدمات المقدمة للسكان"
-
-#: core/views.py:113
+#: core/views.py:107
 msgid "Compte anonyme créé."
 msgstr "تم إنشاء حساب مجهول."
 
-#: core/views.py:120
+#: core/views.py:114
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "عدد كبير جدًا من المحاولات من هذا الجهاز. أعد المحاولة بعد ربع ساعة."
 
-#: core/views.py:124
+#: core/views.py:118
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "لا يوجد حساب مطابق لهذا الرقم. تحقق من الخانات الـ16."
 
-#: core/views.py:127
+#: core/views.py:121
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "تم العثور على الحساب. عادت اختصاراتك."
 
-#: core/views.py:134
+#: core/views.py:128
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
 msgstr "لم يعد هذا الحساب مفتوحًا على هذا الجهاز. رقمك يتيح لك استعادته."
 
-#: core/views.py:145
+#: core/views.py:139
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "انضمت اختصاراتك المجهولة إلى حسابك."
 
-#: core/views.py:161
+#: core/views.py:155
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "تمت إزالة «%(name)s» من اختصاراتك."
 
-#: core/views.py:165
+#: core/views.py:159
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "تمت إضافة «%(name)s» إلى اختصاراتك."

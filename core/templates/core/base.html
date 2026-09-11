@@ -20,7 +20,7 @@
     <a class="brand" href="{% url 'core:home' %}" aria-label="{% trans 'Voisinternet, accueil' %}">{% include "core/partials/logo_mark.html" %}{% include "core/partials/wordmark.html" %}</a>
     <nav class="quicknav" aria-label="{% trans 'Accès rapide' %}">
       {% for group in conj_groups %}{% for item in group.items %}
-      <a href="{{ item.href }}" aria-label="{{ item.entry.aria }}"{% if item.current %} aria-current="page"{% endif %}>{% if group.key == "lire" %}{{ item.entry.form|lower }}{% else %}{{ item.entry.pronoun }}{% endif %}</a>
+      <a target="_new" href="{{ item.href }}" aria-label="{{ item.entry.aria }}"{% if item.current %} aria-current="page"{% endif %}>{% if group.key == "lire" %}{{ item.entry.form|lower }}{% else %}{{ item.entry.pronoun }}{% endif %}</a>
       {% endfor %}{% endfor %}
     </nav>
     <details class="menu">
@@ -61,7 +61,7 @@
         {% for group in conj_groups %}
         <ul>
           {% for item in group.items %}
-          <li><a href="{{ item.href }}" aria-label="{{ item.entry.aria }}">{{ item.entry.pronoun }} {{ item.entry.form }}</a></li>
+          <li><a target="_new" href="{{ item.href }}" aria-label="{{ item.entry.aria }}">{{ item.entry.pronoun }} {{ item.entry.form }}</a></li>
           {% endfor %}
         </ul>
         {% endfor %}
@@ -69,8 +69,8 @@
     </div>
     <div class="foot-bottom">
       <span>{% trans "Des Voies · Nos Voix · Voisinternet" %}</span>
-      <a href="https://github.com/lesgrandsvoisins/voisinternet" target="_blank" rel="noreferrer">GitHub</a>
-      <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>
+      <a target="_new" href="https://github.com/lesgrandsvoisins/voisinternet" target="_blank" rel="noreferrer">GitHub</a>
+      <a target="_new" href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>
     </div>
   </div>
 </footer>

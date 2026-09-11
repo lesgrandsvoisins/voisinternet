@@ -248,7 +248,7 @@ a {
   top: 100%;
   inset-inline-end: 0;
   min-width: 17rem;
-  max-width: min(28rem, calc(100vw - 2.5rem));
+  max-width: min(50rem, calc(100vw - 2.5rem));
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -304,7 +304,8 @@ a {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  max-width: 48rem;
   gap: .35rem;
   max-height: 14rem;
   overflow-y: auto
@@ -324,6 +325,14 @@ a {
 
 .account-shortcuts a:hover {
   background: var(--hover)
+}
+
+.account-shortcuts li:first-child a {
+  font-weight: 600
+}
+
+.account-shortcuts .gear {
+  margin-inline-end: .35rem
 }
 
 .account-empty {

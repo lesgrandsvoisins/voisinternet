@@ -47,6 +47,6 @@ ENTRIES = [
           _("qui nous soutient — dons et partenaires — et comment nous soutenir"), "core:ils_et_elles_voient", "pluriel"),
     Entry("grandzine", _("Blog GrandZine"), _("Blog GrandZine"), _("Blog GrandZine"), _("le blog"),
           _("les nouvelles et les tribunes des adhérents"), "setting:BLOG_URL", "lire"),
-    Entry("wiki"_("Wiki / Guide"), _("Wiki / Guide"), , _("Wiki / Guide"), _("le guide"),
+    Entry("wiki", _("Wiki / Guide"), _("Wiki / Guide"), _("Wiki / Guide"), _("le guide"),
           _("pas à pas, du premier serveur aux sauvegardes"), "setting:GUIDE_URL", "lire"),
 ]

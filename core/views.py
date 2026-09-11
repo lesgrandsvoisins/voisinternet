@@ -64,7 +64,7 @@ def home(request):
 def je_vois(request):
     new_number = request.session.pop(NEW_NUMBER_KEY, None)
     account = current_account(request)
-    shortcuts = account.shortcut_set.select_related("service") if account else []
+    shortcuts = account.shortcut_set.select_related("service").order_by("service__order", "service__name") if account else []
     return render(request, "core/je_vois.html", {
         "account": account,
         "shortcuts": shortcuts,

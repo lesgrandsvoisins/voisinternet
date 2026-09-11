@@ -31,7 +31,7 @@
       {% for shortcut in shortcuts %}{% with service=shortcut.service %}
       <li>
         <span class="led" aria-hidden="true"></span>
-        <div><h3>{% if service.url %}<a href="{{ service.url }}">{{ service.name }}</a>{% else %}{{ service.name }}{% endif %}</h3><p>{{ service.summary }}</p></div>
+        <div><h3>{% if service.url %}<a href="{{ service.url }}">{{ service.name }}</a>{% else %}<a href="{% url 'core:vous_voyez' %}">{{ service.name }}</a>{% endif %}</h3><p>{{ service.summary }}</p></div>
         {% include "core/partials/shortcut_button.html" with added=True %}
       </li>
       {% endwith %}{% endfor %}

@@ -20,13 +20,8 @@
     });
   }
 
-  function closeMenu(focus) {
-    var menu = document.querySelector("details.menu[open]");
-    if (!menu) return;
-    menu.removeAttribute("open");
-    if (focus) menu.querySelector("summary").focus();
-  }
-
+  // Le menu principal (en-tête) est géré par Alpine.js (voir base.html) ; seul le
+  // panneau du compte, resté en <details>, a encore besoin d'être fermé ici.
   function closeAccountPanel() {
     var panel = document.querySelector("details.account-panel[open]");
     if (!panel) return;
@@ -35,11 +30,8 @@
 
   document.addEventListener("DOMContentLoaded", armToasts);
   document.addEventListener("htmx:afterSettle", armToasts);
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeMenu(true); closeAccountPanel(); } });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAccountPanel(); });
   document.addEventListener("click", function (e) {
-    var menu = document.querySelector("details.menu[open]");
-    if (menu && !menu.contains(e.target)) closeMenu(false);
-
     var accountPanel = document.querySelector("details.account-panel[open]");
     if (accountPanel && !accountPanel.contains(e.target)) closeAccountPanel();
   });

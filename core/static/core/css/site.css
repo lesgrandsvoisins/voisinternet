@@ -88,6 +88,11 @@
   box-sizing: border-box
 }
 
+/* Alpine.js : masque les éléments x-show avant l'initialisation, pour éviter un flash. */
+[x-cloak] {
+  display: none !important
+}
+
 html {
   -webkit-text-size-adjust: 100%
 }
@@ -168,7 +173,9 @@ a {
   display: flex;
   align-items: center;
   gap: 1rem;
-  min-height: 4.25rem
+  min-height: 4.25rem;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .brand {
@@ -183,14 +190,6 @@ a {
 .mark {
   width: 30px;
   height: 30px
-}
-
-.menu>summary {
-  list-style: none
-}
-
-.menu>summary::-webkit-details-marker {
-  display: none
 }
 
 .menu-btn,
@@ -213,7 +212,7 @@ a {
   background: var(--hover)
 }
 
-.menu[open]>.menu-btn {
+.menu-btn[aria-expanded="true"] {
   background: var(--hover)
 }
 
@@ -374,103 +373,139 @@ a {
 }
 
 /* Menu : la conjugaison */
-.panel {
+.mega {
   position: absolute;
   left: 0;
   right: 0;
   top: 100%;
   border-bottom: 1px solid var(--line);
   background: var(--paper);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, .08)
+  box-shadow: 0 16px 32px rgba(0, 0, 0, .1);
+  max-height: calc(100vh - 4.5rem);
+  overflow-y: auto
 }
 
-.panel .wrap {
+.mega-enter {
+  transition: opacity .15s ease, transform .15s ease
+}
+
+.mega-enter-start {
+  opacity: 0;
+  transform: translateY(-.4rem)
+}
+
+.mega-enter-end {
+  opacity: 1;
+  transform: translateY(0)
+}
+
+.mega-leave {
+  transition: opacity .1s ease
+}
+
+.mega-leave-start {
+  opacity: 1
+}
+
+.mega-leave-end {
+  opacity: 0
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .mega-enter,
+  .mega-leave {
+    transition: none
+  }
+}
+
+.mega-grid {
+  display: grid;
+  grid-template-columns: 13rem 1fr;
+  align-items: start
+}
+
+.mega-tabs {
   display: flex;
   flex-direction: column;
-  padding-top: .5rem;
-  padding-bottom: .5rem
+  border-inline-end: 1px solid var(--line);
+  padding: .75rem 0
 }
 
-.panel-group {
-  border-bottom: 1px solid var(--line)
-}
-
-.panel-group:last-child {
-  border-bottom: 0
-}
-
-.panel .cap {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: .5rem;
+.mega-tab {
+  display: block;
+  width: 100%;
+  font: inherit;
   font-family: var(--serif);
   font-style: italic;
-  font-size: .95rem;
+  font-size: 1rem;
   color: var(--ink-soft);
+  background: none;
+  border: none;
+  border-inline-start: 3px solid transparent;
   margin: 0;
-  padding: .85rem .25rem .85rem .6rem;
-  border-inline-start: 3px solid var(--line);
+  padding: .85rem 1.25rem;
   cursor: pointer;
-  list-style: none
+  text-align: start
 }
 
-.panel .cap::-webkit-details-marker {
-  display: none
-}
-
-.panel .cap::after {
-  content: "+";
-  font-style: normal;
-  color: var(--ink-soft)
-}
-
-.panel-group[open]>.cap::after {
-  content: "−"
-}
-
-.panel-group ul {
-  padding-bottom: .5rem
-}
-
-.cap-compte {
-  border-inline-start-color: var(--group-compte)
-}
-
-.cap-association {
-  border-inline-start-color: var(--group-association)
-}
-
-.cap-reperes {
-  border-inline-start-color: var(--group-reperes)
-}
-
-.cap-poles {
-  border-inline-start-color: var(--group-poles)
-}
-
-.panel ul {
-  list-style: none;
-  margin: 0;
-  padding: 0
-}
-
-.panel a {
-  display: block;
-  text-decoration: none;
-  padding: .4rem .5rem;
-  border-radius: 6px
-}
-
-.panel a:hover,
-.panel a[aria-current="page"] {
+.mega-tab:hover {
   background: var(--hover)
 }
 
-.panel a small {
+.mega-tab.is-active {
+  color: var(--ink);
+  font-style: normal;
+  font-weight: 600;
+  background: var(--sky)
+}
+
+.mega-tab.cap-compte {
+  border-inline-start-color: var(--group-compte)
+}
+
+.mega-tab.cap-association {
+  border-inline-start-color: var(--group-association)
+}
+
+.mega-tab.cap-reperes {
+  border-inline-start-color: var(--group-reperes)
+}
+
+.mega-tab.cap-poles {
+  border-inline-start-color: var(--group-poles)
+}
+
+.mega-panels {
+  padding: 1.5rem 1.75rem;
+  min-height: 16rem
+}
+
+.mega-panel {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .1rem 1.75rem
+}
+
+.mega-panel a {
+  display: block;
+  text-decoration: none;
+  padding: .7rem .6rem;
+  border-radius: 8px
+}
+
+.mega-panel a:hover,
+.mega-panel a[aria-current="page"] {
+  background: var(--hover)
+}
+
+.mega-panel a small {
   display: block;
   color: var(--ink-soft);
-  font-size: .82rem
+  font-size: .85rem;
+  margin-top: .15rem
 }
 
 .form {
@@ -1671,9 +1706,37 @@ blockquote p {
     gap: .15rem
   }
 
-  .panel .wrap {
-    max-height: calc(100vh - 5rem);
-    overflow-y: auto
+  .mega-grid {
+    grid-template-columns: 1fr
+  }
+
+  .mega-tabs {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-inline-end: none;
+    border-bottom: 1px solid var(--line);
+    padding: .75rem
+  }
+
+  .mega-tab {
+    width: auto;
+    border-inline-start: none;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: .4rem .9rem
+  }
+
+  .mega-tab.is-active {
+    background: var(--ink);
+    color: var(--sky)
+  }
+
+  .mega-panels {
+    padding: 1.25rem
+  }
+
+  .mega-panel {
+    grid-template-columns: 1fr
   }
 
   .foot-nav {

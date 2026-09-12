@@ -21,7 +21,8 @@ class PagesTests(Base):
         # Un raccourci crée un compte : nécessaire pour que « raccourcis » et « groupes » répondent 200.
         self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]))
         for name in ["home", "account", "raccourcis", "groupes", "agenda", "contact", "contributions",
-                     "grandsvoisins", "annuaire", "civisme", "arts_plastiques", "numerique"]:
+                     "grandsvoisins", "annuaire", "civisme", "arts_plastiques", "numerique",
+                     "activites", "poles", "a_propos"]:
             with self.subTest(page=name):
                 response = self.client.get(reverse(f"core:{name}"))
                 self.assertEqual(response.status_code, 200)
@@ -29,7 +30,7 @@ class PagesTests(Base):
 
     def test_header_says_se_connecter_for_new_visitor(self):
         response = self.client.get(reverse("core:home"))
-        self.assertContains(response, "Se connecter")
+        self.assertContains(response, "Connecter")
 
     def test_header_widget_lists_shortcuts_once_an_account_exists(self):
         # Une fois un compte créé (même anonyme), le widget bascule des actions de
@@ -42,6 +43,18 @@ class PagesTests(Base):
     def test_current_page_is_marked(self):
         response = self.client.get(reverse("core:annuaire"))
         self.assertContains(response, 'aria-current="page"')
+
+    def test_group_page_lists_its_entries(self):
+        response = self.client.get(reverse("core:activites"))
+        self.assertContains(response, "Annuaire")
+        self.assertContains(response, "Agenda")
+        self.assertContains(response, "Wiki")
+
+    def test_mega_menu_links_to_group_pages(self):
+        response = self.client.get(reverse("core:home"))
+        self.assertContains(response, reverse("core:activites"))
+        self.assertContains(response, reverse("core:poles"))
+        self.assertContains(response, reverse("core:a_propos"))
 
 
 class AnonymousAccountTests(Base):

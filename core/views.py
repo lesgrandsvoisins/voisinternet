@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
@@ -14,6 +14,7 @@ from django.views.decorators.http import require_POST
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
 from .forms import DirectoryEntryForm
 from .ghost import latest_posts, posts_by_tag
+from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectorySector, Donor, EntrySubscription, Event, GuideBook,
     Membership, Service, Shortcut, format_number,
@@ -24,6 +25,13 @@ BLOG_TAGS = {
     "civisme": "cooperations",
     "arts_plastiques": "[arts,arts-plastiques]",
     "numerique": "digital",
+}
+
+# Chapeau de présentation pour chaque page intermédiaire (une par groupe du menu).
+GROUP_PAGE_INTROS = {
+    "reperes": _("Les rendez-vous et les ressources pour s'y retrouver dans la communauté."),
+    "poles": _("Nos trois pôles d'action, portés ensemble par les bénévoles."),
+    "association": _("Nous rejoindre, nous soutenir, nous contacter."),
 }
 
 
@@ -230,6 +238,18 @@ def agenda(request):
 
 def contact(request):
     return render(request, "core/contact.html")
+
+
+def group_page(request, key):
+    caption = dict(GROUPS).get(key)
+    if caption is None:
+        raise Http404
+    items = [{"entry": e, "href": entry_href(e)} for e in ENTRIES if e.group == key]
+    return render(request, "core/group_page.html", {
+        "group_caption": caption,
+        "group_intro": GROUP_PAGE_INTROS.get(key, ""),
+        "items": items,
+    })
 
 
 @require_POST

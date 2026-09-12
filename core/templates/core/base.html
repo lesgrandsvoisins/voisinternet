@@ -91,6 +91,11 @@
                       id="mega-panel-{{ group.key }}"
                       aria-labelledby="mega-tab-{{ group.key }}"
                       x-show="active === '{{ group.key }}'">
+                    {% if group.page_url %}
+                      <li class="mega-panel-lead">
+                        <a href="{{ group.page_url }}">{% blocktrans with name=group.caption %}Voir « {{ name }} »{% endblocktrans %}</a>
+                      </li>
+                    {% endif %}
                     {% for item in group.items %}
                       <li>
                       <a href="{{ item.href }}"

@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{{ group_caption }} — Voisinternet{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+      <ol>
+        <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+        <li aria-current="page">{{ group_caption }}</li>
+      </ol>
+    </nav>
+    <h1>{{ group_caption }}</h1>
+    {% if group_intro %}<p class="lead">{{ group_intro }}</p>{% endif %}
+  </div>
+</div>
+<div class="wrap page">
+  <ul class="svc">
+    {% for item in items %}
+    <li>
+      <span class="led" aria-hidden="true"></span>
+      <div>
+        <h3><a href="{{ item.href }}">{{ item.entry.title }}</a></h3>
+        <p>{{ item.entry.short }}</p>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

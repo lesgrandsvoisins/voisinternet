@@ -4,6 +4,8 @@ Le plan du site : une seule source, lue par l'en-tête, la page d'accueil et le 
 
 from dataclasses import dataclass
 
+from django.conf import settings
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 
@@ -21,12 +23,25 @@ class Entry:
         return f"{self.title.capitalize()} : {self.short}"
 
 
+def entry_href(entry):
+    if entry.target.startswith("setting:"):
+        return getattr(settings, entry.target.split(":", 1)[1])
+    return reverse(entry.target)
+
+
 GROUPS = [
     ("reperes", _("activités")),
     ("poles", _("pôles")),
     ("association", _("à propos")),
     ("compte", _("mon compte")),
 ]
+
+# Pages intermédiaires (une par groupe, sauf « mon compte » qui a déjà /account/).
+GROUP_PAGES = {
+    "reperes": "core:activites",
+    "poles": "core:poles",
+    "association": "core:a_propos",
+}
 
 ENTRIES = [
     Entry(

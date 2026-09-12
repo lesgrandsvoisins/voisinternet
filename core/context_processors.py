@@ -4,13 +4,7 @@ from django.conf import settings
 from django.urls import reverse
 
 from .accounts import account_label, current_account
-from .menu import ENTRIES, GROUPS
-
-
-def _href(entry):
-    if entry.target.startswith("setting:"):
-        return getattr(settings, entry.target.split(":", 1)[1])
-    return reverse(entry.target)
+from .menu import ENTRIES, GROUP_PAGES, GROUPS, entry_href
 
 
 def site(request):
@@ -18,12 +12,13 @@ def site(request):
     current = match.view_name if match else None
     group_captions = dict(GROUPS)
     entries = [
-        {"entry": e, "href": _href(e), "external": e.target.startswith("setting:"),
+        {"entry": e, "href": entry_href(e), "external": e.target.startswith("setting:"),
          "current": current in {e.target, f"{e.target}_pour"}, "group_caption": group_captions[e.group]}
         for e in ENTRIES
     ]
     groups = [
-        {"key": key, "caption": caption, "items": [i for i in entries if i["entry"].group == key]}
+        {"key": key, "caption": caption, "items": [i for i in entries if i["entry"].group == key],
+         "page_url": reverse(GROUP_PAGES[key]) if key in GROUP_PAGES else None}
         for key, caption in GROUPS
     ]
     account = current_account(request)

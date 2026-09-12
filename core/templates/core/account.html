@@ -102,7 +102,10 @@
       <form class="recover" method="post" action="{% url 'core:recover_anonymous' %}">{% csrf_token %}
         <label for="number">{% trans "J'ai déjà un numéro" %}</label>
         <div class="field">
-          <input id="number" name="number" inputmode="numeric" autocomplete="off" placeholder="0000 0000 0000 0000" required>
+          <input id="number" name="number" inputmode="numeric" autocomplete="off" placeholder="0000 0000 0000 0000"
+                 pattern="[0-9]{4} ?[0-9]{4} ?[0-9]{4} ?[0-9]{4}" maxlength="19" required
+                 x-data
+                 x-on:input="$el.value = $el.value.replace(/\D/g, '').slice(0, 16).replace(/(.{4})(?=.)/g, '$1 ')">
           <button class="btn btn-line" type="submit">{% trans "Retrouver" %}</button>
         </div>
       </form>

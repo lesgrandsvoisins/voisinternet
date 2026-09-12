@@ -198,6 +198,9 @@ class AudienceTests(Base):
         self.assertContains(response, 'class="add"')
 
     def test_partnership_audience_offers_no_join_button(self):
+        # Aucune audience du fixture n'est un partenariat à ce jour : on en crée une pour
+        # vérifier que le cas spécial (pas de bouton « Adhérer », un mailto à la place) marche.
+        Audience.objects.create(name="Une institution", slug="une-institution", pitch="Test", partnership=True)
         self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]))  # crée un compte
         response = self.client.get(reverse("core:groupes"))
         self.assertContains(response, "Proposer un partenariat")

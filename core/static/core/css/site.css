@@ -942,7 +942,10 @@ section.block {
   list-style: none;
   margin: 0;
   padding: 0;
-  background: var(--paper);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1px;
+  background: var(--line);
   border: 1px solid var(--line);
   border-radius: 14px;
   overflow: hidden
@@ -954,11 +957,7 @@ section.block {
   align-items: center;
   gap: 1rem;
   padding: 1.05rem 1.35rem;
-  border-bottom: 1px solid var(--line)
-}
-
-.svc li:last-child {
-  border-bottom: 0
+  background: var(--paper)
 }
 
 .svc li.feat {

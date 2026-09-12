@@ -19,23 +19,30 @@
   <div class="wrap">
     <a class="brand" href="{% url 'core:home' %}" aria-label="{% trans 'Voisinternet, accueil' %}">{% include "core/partials/logo_mark.html" %}{% include "core/partials/wordmark.html" %}</a>
     <nav class="quicknav" aria-label="{% trans 'Accès rapide' %}">
-      {% for group in conj_groups %}{% for item in group.items %}
-      <a target="_new" href="{{ item.href }}" aria-label="{{ item.entry.aria }}"{% if item.current %} aria-current="page"{% endif %}>{{ item.entry.title }}</a>
-      {% endfor %}{% endfor %}
+      {% for group in conj_groups %}
+      <details class="quicknav-group">
+        <summary class="cap-{{ group.key }}">{{ group.caption }}</summary>
+        <ul>
+          {% for item in group.items %}
+          <li><a target="_new" href="{{ item.href }}" aria-label="{{ item.entry.aria }}"{% if item.current %} aria-current="page"{% endif %}>{{ item.entry.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </details>
+      {% endfor %}
     </nav>
     <details class="menu">
       <summary class="menu-btn"><span class="bars" aria-hidden="true"><i></i></span><span class="label">{% trans "Menu" %}</span></summary>
       <nav class="panel" aria-label="{% trans 'Menu principal' %}">
         <div class="wrap">
           {% for group in conj_groups %}
-          <div>
-            <p class="cap cap-{{ group.key }}">{{ group.caption }}</p>
+          <details class="panel-group">
+            <summary class="cap cap-{{ group.key }}">{{ group.caption }}</summary>
             <ul>
               {% for item in group.items %}
               <li><a href="{{ item.href }}" aria-label="{{ item.entry.aria }}"{% if item.current %} aria-current="page"{% endif %}><span class="form">{{ item.entry.pronoun }} {% include "core/partials/verb.html" with form=item.entry.form %}</span><small>{{ item.entry.short }}</small></a></li>
               {% endfor %}
             </ul>
-          </div>
+          </details>
           {% endfor %}
         </div>
       </nav>

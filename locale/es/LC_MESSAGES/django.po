@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 10:44+0200\n"
+"POT-Creation-Date: 2026-09-12 10:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -675,8 +675,7 @@ msgstr "mi Cuenta — Voisinternet"
 
 #: core/templates/core/account.html:5
 msgid ""
-"Votre statut, vos contributions financières, et les actions sur votre "
-"compte."
+"Votre statut, vos contributions financières, et les actions sur votre compte."
 msgstr ""
 "Su estado, sus contribuciones financieras, y las acciones sobre su cuenta."
 
@@ -700,8 +699,8 @@ msgstr "Hay una cuenta anónima abierta en este dispositivo"
 
 #: core/templates/core/account.html:20
 msgid ""
-"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
-" ensuite supprimé."
+"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera "
+"ensuite supprimé."
 msgstr ""
 "¿Quieres vincular sus accesos directos a tu cuenta? La cuenta anónima se "
 "eliminará después."
@@ -777,8 +776,8 @@ msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
 "pour retrouver vos raccourcis."
 msgstr ""
-"Un número de 16 cifras, sin nombre ni correo electrónico. Lo anotas, y basta"
-" para recuperar tus accesos directos."
+"Un número de 16 cifras, sin nombre ni correo electrónico. Lo anotas, y basta "
+"para recuperar tus accesos directos."
 
 #: core/templates/core/account.html:75
 msgid "Créer un compte anonyme"
@@ -801,8 +800,8 @@ msgid ""
 "Le rendez-vous collectif des Grands Voisins : décider ensemble, en présence "
 "ou à distance."
 msgstr ""
-"El encuentro colectivo de Les Grands Voisins: decidir juntos, en persona o a"
-" distancia."
+"El encuentro colectivo de Les Grands Voisins: decidir juntos, en persona o a "
+"distancia."
 
 #: core/templates/core/agenda.html:9
 msgid "Les Conseils des Voisins"
@@ -926,8 +925,8 @@ msgid ""
 "Le principe : transformer n'importe quel lieu en galerie d'art hybride, le "
 "temps d'une exposition."
 msgstr ""
-"La idea: transformar cualquier lugar en una galería de arte híbrida, durante"
-" una exposición."
+"La idea: transformar cualquier lugar en una galería de arte híbrida, durante "
+"una exposición."
 
 #: core/templates/core/arts-plastiques.html:13
 msgid "Galerie Les Arts Voisins à LADAPT Châtillon"
@@ -954,8 +953,7 @@ msgid ""
 "voisinage."
 msgstr ""
 "Abril de 2025: un homenaje al pintor y escritor Félix Toshi Arakaki, en su "
-"casa-taller de Houilles, con la participación de su familia y del "
-"vecindario."
+"casa-taller de Houilles, con la participación de su familia y del vecindario."
 
 #: core/templates/core/arts-plastiques.html:21
 msgid "Tableaux & roman « La Macha »"
@@ -994,15 +992,15 @@ msgstr "Voisinternet, inicio"
 msgid "Accès rapide"
 msgstr "Acceso rápido"
 
-#: core/templates/core/base.html:27
+#: core/templates/core/base.html:34
 msgid "Menu"
 msgstr "Menú"
 
-#: core/templates/core/base.html:28
+#: core/templates/core/base.html:35
 msgid "Menu principal"
 msgstr "Menú principal"
 
-#: core/templates/core/base.html:57
+#: core/templates/core/base.html:64
 msgid ""
 "Porté par Les Grands Voisins, à Fontenay-aux-Roses et dans le 14ᵉ "
 "arrondissement de Paris."
@@ -1010,7 +1008,7 @@ msgstr ""
 "Impulsado por Les Grands Voisins, en Fontenay-aux-Roses y en el distrito 14 "
 "de París."
 
-#: core/templates/core/base.html:58
+#: core/templates/core/base.html:65
 msgid ""
 "Seulement deux cookies techniques : votre session et la protection des "
 "formulaires. Aucun traceur, rien n'est chargé depuis un tiers."
@@ -1018,11 +1016,11 @@ msgstr ""
 "Solo dos cookies técnicas: tu sesión y la protección de formularios. Ningún "
 "rastreador, nada se carga desde terceros."
 
-#: core/templates/core/base.html:60
+#: core/templates/core/base.html:67
 msgid "Plan du site"
 msgstr "Mapa del sitio"
 
-#: core/templates/core/base.html:71
+#: core/templates/core/base.html:78
 msgid "Des Voies · Nos Voix · Voisinternet"
 msgstr "Vías · Voces · Voisinternet"
 
@@ -1068,13 +1066,11 @@ msgstr "Por correo electrónico"
 #: core/templates/core/contact.html:10
 #, python-format
 msgid ""
-"Écrivez-nous directement à <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Nous répondons en "
-"quelques jours."
+"Écrivez-nous directement à <a href=\"mailto:"
+"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Nous répondons en quelques jours."
 msgstr ""
-"Escríbanos directamente a <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Respondemos en unos"
-" días."
+"Escríbanos directamente a <a href=\"mailto:"
+"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Respondemos en unos días."
 
 #: core/templates/core/contact.html:13
 msgid "Aux Conseils des Voisins"
@@ -1110,9 +1106,9 @@ msgid ""
 "participation économique, ou par un don de matériel : plusieurs façons de "
 "donner, sans rien attendre en retour."
 msgstr ""
-"Apoyar a Les Grands Voisins con tu talento y tu voluntad, con una aportación"
-" económica, o con una donación de material: varias formas de dar, sin "
-"esperar nada a cambio."
+"Apoyar a Les Grands Voisins con tu talento y tu voluntad, con una aportación "
+"económica, o con una donación de material: varias formas de dar, sin esperar "
+"nada a cambio."
 
 #: core/templates/core/contributions.html:8
 msgid "Donner du temps"
@@ -1122,12 +1118,12 @@ msgstr "Dar tu tiempo"
 #, python-format
 msgid ""
 "Animer un atelier, relire le guide, dépanner un voisin, ou simplement être "
-"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a href=\"mailto:"
+"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 msgstr ""
 "Dirigir un taller, revisar la guía, ayudar a un vecino, o simplemente estar "
-"presente: cada uno da el tiempo que quiere. Escríbenos a <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+"presente: cada uno da el tiempo que quiere. Escríbenos a <a href=\"mailto:"
+"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 
 #: core/templates/core/contributions.html:10
 msgid "Faire un don financier"
@@ -1196,8 +1192,8 @@ msgstr "Grands Voisins: la asociación — Voisinternet"
 
 #: core/templates/core/grandsvoisins.html:5
 msgid ""
-"Voisinternet est un programme porté par l'association coopérative Les Grands"
-" Voisins : une conscience collective à laquelle chacun contribue. Nous "
+"Voisinternet est un programme porté par l'association coopérative Les Grands "
+"Voisins : une conscience collective à laquelle chacun contribue. Nous "
 "demandons votre confiance : voici de quoi la vérifier."
 msgstr ""
 "Voisinternet es un programa impulsado por la asociación cooperativa Les "
@@ -1214,8 +1210,8 @@ msgid ""
 "d'être vient des interstices du béton et des politiques publiques : nous "
 "croyons aux ponts entre l'utopie et le réel, et à l'accueil de chacun."
 msgstr ""
-"Escrita colectivamente por un centenar de personas en 2017, nuestra razón de"
-" ser viene de los intersticios del hormigón y de las políticas públicas: "
+"Escrita colectivamente por un centenar de personas en 2017, nuestra razón de "
+"ser viene de los intersticios del hormigón y de las políticas públicas: "
 "creemos en los puentes entre la utopía y la realidad, y en la acogida de "
 "cada persona."
 
@@ -1315,8 +1311,8 @@ msgstr "Sal de su nube."
 
 #: core/templates/core/home.html:11
 msgid ""
-"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un"
-" voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
+"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un "
+"voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
 "accompagnent."
 msgstr ""
 "Tus correos, fotos y calendarios pueden vivir en tu casa, o en la de un "
@@ -1413,8 +1409,8 @@ msgid ""
 "Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « mon "
 "Compte », même sans compte nominatif."
 msgstr ""
-"Añade los que te interesen. Se unirán a tus accesos directos en «mi Cuenta»,"
-" incluso sin una cuenta con tu nombre."
+"Añade los que te interesen. Se unirán a tus accesos directos en «mi Cuenta», "
+"incluso sin una cuenta con tu nombre."
 
 #: core/templates/core/home.html:93
 msgid "Tous les services, avec ce que chacun conserve"
@@ -1443,8 +1439,8 @@ msgid ""
 "nuage</strong>, et gardez votre part de soleil."
 msgstr ""
 "El filósofo no le pedía nada al más poderoso, salvo que dejara de hacerle "
-"sombra. Lo hemos puesto en plural: <strong>sal de su nube</strong>, y guarda"
-" tu parte de sol."
+"sombra. Lo hemos puesto en plural: <strong>sal de su nube</strong>, y guarda "
+"tu parte de sol."
 
 #: core/templates/core/home.html:113
 msgid "Le guide et le blog"
@@ -1661,8 +1657,8 @@ msgid ""
 "restaurant, salon de thé, centre social, atelier d'art et hôpital, reliés "
 "entre eux ; un nuage s'éloigne."
 msgstr ""
-"Una calle de barrio bajo el sol: café, galería, teatro y sala de conciertos,"
-" restaurante, salón de té, centro social, taller de arte y hospital, todos "
+"Una calle de barrio bajo el sol: café, galería, teatro y sala de conciertos, "
+"restaurante, salón de té, centro social, taller de arte y hospital, todos "
 "conectados entre sí; una nube se aleja."
 
 #: core/templates/core/partials/scene.html:13
@@ -1744,8 +1740,7 @@ msgid "Mes raccourcis — Voisinternet"
 msgstr "Mis accesos directos — Voisinternet"
 
 #: core/templates/core/raccourcis.html:5
-msgid ""
-"Les services que vous avez choisis, à ajouter ou retirer à tout moment."
+msgid "Les services que vous avez choisis, à ajouter ou retirer à tout moment."
 msgstr ""
 "Los servicios que ha elegido, para añadir o quitar en cualquier momento."
 
@@ -1786,8 +1781,8 @@ msgstr "Cuenta anónima creada."
 #: core/views.py:254
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr ""
-"Demasiados intentos desde este dispositivo. Vuelve a intentarlo en un cuarto"
-" de hora."
+"Demasiados intentos desde este dispositivo. Vuelve a intentarlo en un cuarto "
+"de hora."
 
 #: core/views.py:258
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."

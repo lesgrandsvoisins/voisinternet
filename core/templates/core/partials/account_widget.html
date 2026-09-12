@@ -2,15 +2,14 @@
 <div class="account-panel"
      id="account-panel"
      {% if oob %}hx-swap-oob="true"{% endif %}
-     x-data="{ open: false, pinned: false }"
+     x-data="{ open: false }"
      x-on:mouseenter="open = true"
-     x-on:mouseleave="if (!pinned) open = false"
-     x-on:keydown.escape.window="pinned = false; open = false"
-     x-on:click.outside="pinned = false; open = false">
+     x-on:keydown.escape.window="open = false"
+     x-on:click.outside="open = false">
   <button type="button"
           class="account"
           id="account"
-          x-on:click="pinned = !pinned; open = true"
+          x-on:click="open = true"
           x-bind:aria-expanded="open.toString()"
           aria-controls="account-menu"
           aria-label="{% blocktrans %}Mon compte : {{ account_sub }}{% endblocktrans %}">

@@ -19,9 +19,10 @@ rollout:
 	make setup
 	make makemigrations
 	make migrate
-	make fixtures
+	make fixtures-load
 	make collectstatic
-	rsync -a staticfiles/ /var/www/voisinter-django/static
+
+# rsync -a staticfiles/ /var/www/voisinter-django/static
 
 venv: ## Crée l'environnement virtuel .venv
 	python3 -m venv .venv
@@ -40,7 +41,7 @@ makemigrations: ## Génère les migrations manquantes
 fixtures-load: ## Charge les données d'exemple (services, publics, guide)
 	for i in core.audience core.guidebook core.service ; do \
 		echo $$i; \
-		$(LOADENV) $(PYTHON) manage.py loaddata $$i core/fixtures/$$i.json ; \
+		$(LOADENV) $(PYTHON) manage.py loaddata core/fixtures/$$i.json ; \
 	done
 
 fixtures-dump: ## Charge les données d'exemple (services, publics, guide)

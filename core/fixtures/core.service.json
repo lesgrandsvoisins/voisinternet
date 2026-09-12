@@ -31,8 +31,8 @@
       "url": "",
       "icon": "",
       "category": null,
-      "featured": null,
-      "active": null,
+      "featured": false,
+      "active": false,
       "order": 50,
       "audiences": []
     }

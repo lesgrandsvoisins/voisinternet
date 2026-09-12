@@ -581,10 +581,9 @@ msgstr "My account"
 
 #: core/templates/core/account.html:14
 msgid ""
-"Votre statut, vos contributions financières, et les actions sur votre "
-"compte."
+"Mon statut, mes contributions financières, et les actions sur mon compte."
 msgstr ""
-"Your status, your financial contributions, and the actions on your account."
+"My status, my financial contributions, and the actions on my account."
 
 #: core/templates/core/account.html:21
 msgid "Votre numéro de compte"

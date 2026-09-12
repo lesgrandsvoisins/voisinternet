@@ -575,8 +575,7 @@ msgstr "내 계정"
 
 #: core/templates/core/account.html:14
 msgid ""
-"Votre statut, vos contributions financières, et les actions sur votre "
-"compte."
+"Mon statut, mes contributions financières, et les actions sur mon compte."
 msgstr "계정 상태, 재정 기여 내역, 계정 관련 작업입니다."
 
 #: core/templates/core/account.html:21

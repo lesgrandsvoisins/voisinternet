@@ -580,8 +580,7 @@ msgstr "حسابي"
 
 #: core/templates/core/account.html:14
 msgid ""
-"Votre statut, vos contributions financières, et les actions sur votre "
-"compte."
+"Mon statut, mes contributions financières, et les actions sur mon compte."
 msgstr "حالتك، مساهماتك المالية، والإجراءات المتعلقة بحسابك."
 
 #: core/templates/core/account.html:21

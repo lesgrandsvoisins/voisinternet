@@ -1,4 +1,5 @@
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <div class="account-panel"
      id="account-panel"
      {% if oob %}hx-swap-oob="true"{% endif %}
@@ -25,11 +26,13 @@
     {% if not account and not user.is_authenticated %}
       <div class="account-actions">
         {% if keycloak_login_url %}
-          <a class="account-action" href="{{ keycloak_login_url }}">{% trans "Se connecter" %}</a>
+          <a class="account-action" href="{{ keycloak_login_url }}">{% trans "se Connecter ou Créer son compte" %}</a>
+          {% comment %} 
           {% if keycloak_register_url %}
             <a class="account-action account-action-secondary"
-               href="{{ keycloak_register_url }}">{% trans "Créer un compte" %}</a>
-          {% endif %}
+               href="{{ keycloak_register_url }}&kc_locale={{ LANGUAGE_CODE }}">{% trans "Créer un compte" %}</a>
+          {% endif %} 
+          {% endcomment %}
         {% endif %}
         <form method="post" action="{% url 'core:create_anonymous' %}">
           {% csrf_token %}

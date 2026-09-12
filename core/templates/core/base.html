@@ -43,6 +43,17 @@
                   aria-controls="main-menu-panel">
             <span class="label">{% trans "Menu" %}</span>
           </button>
+          <nav class="menu-quick" aria-label="{% trans 'Accès rapide' %}">
+            {% for group in conj_groups %}
+              <button type="button"
+                      class="menu-quick-tab cap-{{ group.key }}"
+                      x-bind:aria-expanded="(open && active === '{{ group.key }}').toString()"
+                      aria-controls="main-menu-panel"
+                      x-on:click="if (open && active === '{{ group.key }}') { open = false } else { active = '{{ group.key }}'; open = true }">
+                {{ group.caption }}
+              </button>
+            {% endfor %}
+          </nav>
           <nav class="mega"
                id="main-menu-panel"
                x-show="open"

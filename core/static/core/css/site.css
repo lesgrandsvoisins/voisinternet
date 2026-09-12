@@ -216,6 +216,42 @@ a {
   background: var(--hover)
 }
 
+.menu-quick {
+  display: none
+}
+
+.menu-quick-tab {
+  font: inherit;
+  font-size: .92rem;
+  color: var(--ink);
+  background: none;
+  border: 1px solid var(--line);
+  border-inline-start: 3px solid var(--line);
+  border-radius: 999px;
+  padding: .4rem .95rem;
+  cursor: pointer
+}
+
+.menu-quick-tab:hover {
+  background: var(--hover)
+}
+
+.menu-quick-tab[aria-expanded="true"] {
+  background: var(--hover)
+}
+
+@media (min-width:1180px) {
+  .menu-quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem
+  }
+
+  .menu-btn {
+    display: none
+  }
+}
+
 .account {
   flex-direction: column;
   align-items: flex-start;
@@ -358,36 +394,6 @@ a {
 
 .account-footer form {
   margin: 0
-}
-
-.bars {
-  width: 18px;
-  height: 12px;
-  position: relative
-}
-
-.bars::before,
-.bars::after,
-.bars i {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: currentColor;
-  border-radius: 2px
-}
-
-.bars::before {
-  top: 0
-}
-
-.bars i {
-  top: 5px
-}
-
-.bars::after {
-  bottom: 0
 }
 
 /* Menu : la conjugaison */
@@ -1764,14 +1770,6 @@ blockquote p {
 
   .aud {
     grid-template-columns: 1fr
-  }
-
-  .menu-btn .label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0)
   }
 
   .svc li {

@@ -1,0 +1,16 @@
+[
+  {
+    "model": "core.servicecategory",
+    "pk": 1,
+    "fields": {
+      "name": "webmestre",
+      "name_fr": "webmestre",
+      "name_en": "webmaster",
+      "name_es": "webmaster",
+      "name_ar": "webmaster",
+      "name_ko": "webmaster",
+      "slug": "webmaster",
+      "order": 200
+    }
+  }
+]

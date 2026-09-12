@@ -9,7 +9,7 @@ from .models import Account, Audience, Donor, Service, Shortcut, format_number
 
 @override_settings(CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}})
 class Base(TestCase):
-    fixtures = ["core.audience.json", "core.guidebook.json", "core.service.json"]
+    fixtures = ["core.audience.json", "core.guidebook.json", "core.servicecategory.json", "core.service.json"]
 
     def setUp(self):
         cache.clear()

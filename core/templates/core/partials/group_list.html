@@ -1,4 +1,4 @@
-{% load i18n %}<ul class="svc">
+{% load i18n markdown_filters %}<ul class="svc">
   {% for audience in audiences %}
   <li>
     <span class="led" aria-hidden="true"></span>
@@ -7,6 +7,9 @@
       <p>{{ audience.pitch }}</p>
       {% if details and audience.who %}
       <p class="muted">{{ audience.who }}</p>
+      {% endif %}
+      {% if details and audience.note %}
+      <div class="markdown">{{ audience.note|markdown }}</div>
       {% endif %}
     </div>
     {% if audience.partnership %}

@@ -212,6 +212,10 @@ class DirectoryEntry(models.Model):
         DirectorySector, null=True, blank=True, on_delete=models.SET_NULL,
         related_name="entries", verbose_name=_("secteur"),
     )
+    audiences = models.ManyToManyField(
+        Audience, blank=True, related_name="directory_entries", verbose_name=_("publics"),
+        help_text=_("Laisser vide si la fiche s'adresse à tout le monde."),
+    )
 
     owner = models.ForeignKey(
         Account, null=True, blank=True, on_delete=models.SET_NULL,

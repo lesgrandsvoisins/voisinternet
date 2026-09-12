@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 02:23+0200\n"
+"POT-Creation-Date: 2026-09-12 02:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,7 +121,7 @@ msgstr "Directorio"
 msgid "qui fait partie de la communauté, et comment les joindre"
 msgstr "quién forma parte de la comunidad, y cómo contactarlo"
 
-#: core/menu.py:76 core/models.py:299
+#: core/menu.py:76 core/models.py:303
 msgid "évènements"
 msgstr "eventos"
 
@@ -311,7 +311,7 @@ msgstr ""
 "botón «Añadir»."
 
 #: core/models.py:43 core/models.py:58 core/models.py:91 core/models.py:187
-#: core/models.py:251
+#: core/models.py:255
 msgid "ordre"
 msgstr "orden"
 
@@ -319,7 +319,7 @@ msgstr "orden"
 msgid "public"
 msgstr "público"
 
-#: core/models.py:48 core/models.py:86
+#: core/models.py:48 core/models.py:86 core/models.py:216
 msgid "publics"
 msgstr "públicos"
 
@@ -425,43 +425,47 @@ msgstr "individual o colectivo"
 msgid "secteur"
 msgstr "sector"
 
-#: core/models.py:218
+#: core/models.py:217
+msgid "Laisser vide si la fiche s'adresse à tout le monde."
+msgstr "Dejar vacío si la ficha está dirigida a todo el mundo."
+
+#: core/models.py:222
 msgid "compte propriétaire"
 msgstr "cuenta propietaria"
 
-#: core/models.py:220
+#: core/models.py:224
 msgid "titre de la page"
 msgstr "título de la página"
 
-#: core/models.py:221
+#: core/models.py:225
 msgid "texte d'accroche"
 msgstr "eslogan"
 
-#: core/models.py:222 core/models.py:286
+#: core/models.py:226 core/models.py:290
 msgid "description"
 msgstr "descripción"
 
-#: core/models.py:224
+#: core/models.py:228
 msgid "logo"
 msgstr "logotipo"
 
-#: core/models.py:225
+#: core/models.py:229
 msgid "photo promotionnelle"
 msgstr "foto promocional"
 
-#: core/models.py:226
+#: core/models.py:230
 msgid "photo de la structure"
 msgstr "foto de la estructura"
 
-#: core/models.py:227
+#: core/models.py:231
 msgid "photo du lieu"
 msgstr "foto del lugar"
 
-#: core/models.py:229
+#: core/models.py:233
 msgid "vidéo promotionnelle"
 msgstr "vídeo promocional"
 
-#: core/models.py:230
+#: core/models.py:234
 msgid ""
 "Lien vers une vidéo (YouTube, PeerTube…) : affiché en lien, jamais intégré "
 "en cadre."
@@ -469,174 +473,174 @@ msgstr ""
 "Enlace a un vídeo (YouTube, PeerTube…): se muestra como enlace, nunca "
 "integrado en un marco."
 
-#: core/models.py:233
+#: core/models.py:237
 msgid "courriel"
 msgstr "correo electrónico"
 
-#: core/models.py:234
+#: core/models.py:238
 msgid "téléphone"
 msgstr "teléfono"
 
-#: core/models.py:235
+#: core/models.py:239
 msgid "site ou lien"
 msgstr "sitio o enlace"
 
-#: core/models.py:237
+#: core/models.py:241
 msgid "adresse"
 msgstr "dirección"
 
-#: core/models.py:238
+#: core/models.py:242
 msgid "ville"
 msgstr "ciudad"
 
-#: core/models.py:239
+#: core/models.py:243
 msgid "pays"
 msgstr "país"
 
-#: core/models.py:240
+#: core/models.py:244
 msgid "latitude"
 msgstr "latitud"
 
-#: core/models.py:241
+#: core/models.py:245
 msgid "longitude"
 msgstr "longitud"
 
-#: core/models.py:243
+#: core/models.py:247
 msgid "introduction de l'appel à l'action"
 msgstr "introducción de la llamada a la acción"
 
-#: core/models.py:244
+#: core/models.py:248
 msgid "texte du bouton d'appel à l'action"
 msgstr "texto del botón de llamada a la acción"
 
-#: core/models.py:245
+#: core/models.py:249
 msgid "lien de l'appel à l'action"
 msgstr "enlace de la llamada a la acción"
 
-#: core/models.py:248 core/models.py:355
+#: core/models.py:252 core/models.py:359
 msgid "apparaît publiquement"
 msgstr "aparece públicamente"
 
-#: core/models.py:249
+#: core/models.py:253
 msgid ""
 "Uniquement avec le consentement explicite de la personne ou de la structure "
 "(RGPD)."
 msgstr ""
 "Solo con el consentimiento explícito de la persona o la estructura (RGPD)."
 
-#: core/models.py:255
+#: core/models.py:259
 msgid "page de l'annuaire"
 msgstr "página del directorio"
 
-#: core/models.py:256
+#: core/models.py:260
 msgid "pages de l'annuaire"
 msgstr "páginas del directorio"
 
-#: core/models.py:275
+#: core/models.py:279
 msgid "abonnement à une fiche"
 msgstr "suscripción a una ficha"
 
-#: core/models.py:276
+#: core/models.py:280
 msgid "abonnements aux fiches"
 msgstr "suscripciones a fichas"
 
-#: core/models.py:284
+#: core/models.py:288
 msgid "titre"
 msgstr "título"
 
-#: core/models.py:287
+#: core/models.py:291
 msgid "début"
 msgstr "inicio"
 
-#: core/models.py:288
+#: core/models.py:292
 msgid "fin"
 msgstr "fin"
 
-#: core/models.py:289
+#: core/models.py:293
 msgid "lieu"
 msgstr "lugar"
 
-#: core/models.py:291
+#: core/models.py:295
 msgid "lien en ligne"
 msgstr "enlace en línea"
 
-#: core/models.py:292
+#: core/models.py:296
 msgid "Pour une participation à distance (visioconférence…)."
 msgstr "Para participar a distancia (videollamada…)."
 
-#: core/models.py:294
+#: core/models.py:298
 msgid "publié"
 msgstr "publicado"
 
-#: core/models.py:298
+#: core/models.py:302
 msgid "évènement"
 msgstr "evento"
 
-#: core/models.py:311
+#: core/models.py:315
 msgid "Autre"
 msgstr "Otro"
 
-#: core/models.py:314
+#: core/models.py:318
 msgid "montant"
 msgstr "importe"
 
-#: core/models.py:315
+#: core/models.py:319
 msgid "moyen"
 msgstr "medio"
 
-#: core/models.py:316
+#: core/models.py:320
 msgid "date"
 msgstr "fecha"
 
-#: core/models.py:317
+#: core/models.py:321
 msgid "note"
 msgstr "nota"
 
-#: core/models.py:321
+#: core/models.py:325
 msgid "contribution financière"
 msgstr "contribución financiera"
 
-#: core/models.py:322
+#: core/models.py:326
 msgid "contributions financières"
 msgstr "contribuciones financieras"
 
-#: core/models.py:346
+#: core/models.py:350
 msgid "Particulier"
 msgstr "Particular"
 
-#: core/models.py:347
+#: core/models.py:351
 msgid "Entreprise"
 msgstr "Empresa"
 
-#: core/models.py:348
+#: core/models.py:352
 msgid "Fondation"
 msgstr "Fundación"
 
-#: core/models.py:349
+#: core/models.py:353
 msgid "Collectivité"
 msgstr "Entidad pública"
 
-#: core/models.py:350
+#: core/models.py:354
 msgid "Association"
 msgstr "Asociación"
 
-#: core/models.py:352
+#: core/models.py:356
 msgid "nom affiché"
 msgstr "nombre mostrado"
 
-#: core/models.py:353
+#: core/models.py:357
 msgid "type"
 msgstr "tipo"
 
-#: core/models.py:356
+#: core/models.py:360
 msgid "Uniquement avec le consentement explicite du donateur (RGPD)."
 msgstr "Solo con el consentimiento explícito del donante (RGPD)."
 
-#: core/models.py:358
+#: core/models.py:362
 msgid "soutien depuis"
 msgstr "apoya desde"
 
-#: core/models.py:362
+#: core/models.py:366
 msgid "donateur"
 msgstr "donante"
 
@@ -668,8 +672,8 @@ msgstr "Hay una cuenta anónima abierta en este dispositivo"
 
 #: core/templates/core/account.html:23
 msgid ""
-"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera "
-"ensuite supprimé."
+"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
+" ensuite supprimé."
 msgstr ""
 "¿Quieres vincular sus accesos directos a tu cuenta? La cuenta anónima se "
 "eliminará después."
@@ -749,8 +753,8 @@ msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
 "pour retrouver vos raccourcis."
 msgstr ""
-"Un número de 16 cifras, sin nombre ni correo electrónico. Lo anotas, y basta "
-"para recuperar tus accesos directos."
+"Un número de 16 cifras, sin nombre ni correo electrónico. Lo anotas, y basta"
+" para recuperar tus accesos directos."
 
 #: core/templates/core/account.html:78
 msgid "Créer un compte anonyme"
@@ -773,8 +777,8 @@ msgid ""
 "Le rendez-vous collectif des Grands Voisins : décider ensemble, en présence "
 "ou à distance."
 msgstr ""
-"El encuentro colectivo de Les Grands Voisins: decidir juntos, en persona o a "
-"distancia."
+"El encuentro colectivo de Les Grands Voisins: decidir juntos, en persona o a"
+" distancia."
 
 #: core/templates/core/agenda.html:9
 msgid "Les Conseils des Voisins"
@@ -853,31 +857,31 @@ msgstr "Sectores de actividad"
 msgid "Tous les secteurs"
 msgstr "Todos los sectores"
 
-#: core/templates/core/annuaire.html:34
+#: core/templates/core/annuaire.html:37
 msgid "Vidéo"
 msgstr "Vídeo"
 
-#: core/templates/core/annuaire.html:37
+#: core/templates/core/annuaire.html:40
 msgid "Site"
 msgstr "Sitio"
 
-#: core/templates/core/annuaire.html:43
+#: core/templates/core/annuaire.html:46
 msgid "En savoir plus"
 msgstr "Saber más"
 
-#: core/templates/core/annuaire.html:49
+#: core/templates/core/annuaire.html:52
 msgid "Abonné·e ✓"
 msgstr "Suscrito·a ✓"
 
-#: core/templates/core/annuaire.html:51
+#: core/templates/core/annuaire.html:54
 msgid "S'abonner"
 msgstr "Suscribirse"
 
-#: core/templates/core/annuaire.html:57
+#: core/templates/core/annuaire.html:60
 msgid "Personne pour l'instant"
 msgstr "Nadie por el momento"
 
-#: core/templates/core/annuaire.html:57
+#: core/templates/core/annuaire.html:60
 msgid "Les fiches apparaîtront ici, avec l'accord de chacun."
 msgstr "Las fichas aparecerán aquí, con el consentimiento de cada uno."
 
@@ -898,8 +902,8 @@ msgid ""
 "Le principe : transformer n'importe quel lieu en galerie d'art hybride, le "
 "temps d'une exposition."
 msgstr ""
-"La idea: transformar cualquier lugar en una galería de arte híbrida, durante "
-"una exposición."
+"La idea: transformar cualquier lugar en una galería de arte híbrida, durante"
+" una exposición."
 
 #: core/templates/core/arts-plastiques.html:13
 msgid "Galerie Les Arts Voisins à LADAPT Châtillon"
@@ -926,7 +930,8 @@ msgid ""
 "voisinage."
 msgstr ""
 "Abril de 2025: un homenaje al pintor y escritor Félix Toshi Arakaki, en su "
-"casa-taller de Houilles, con la participación de su familia y del vecindario."
+"casa-taller de Houilles, con la participación de su familia y del "
+"vecindario."
 
 #: core/templates/core/arts-plastiques.html:21
 msgid "Tableaux & roman « La Macha »"
@@ -1039,11 +1044,13 @@ msgstr "Por correo electrónico"
 #: core/templates/core/contact.html:10
 #, python-format
 msgid ""
-"Écrivez-nous directement à <a href=\"mailto:"
-"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Nous répondons en quelques jours."
+"Écrivez-nous directement à <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Nous répondons en "
+"quelques jours."
 msgstr ""
-"Escríbanos directamente a <a href=\"mailto:"
-"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Respondemos en unos días."
+"Escríbanos directamente a <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Respondemos en unos"
+" días."
 
 #: core/templates/core/contact.html:13
 msgid "Aux Conseils des Voisins"
@@ -1079,9 +1086,9 @@ msgid ""
 "participation économique, ou par un don de matériel : plusieurs façons de "
 "donner, sans rien attendre en retour."
 msgstr ""
-"Apoyar a Les Grands Voisins con tu talento y tu voluntad, con una aportación "
-"económica, o con una donación de material: varias formas de dar, sin esperar "
-"nada a cambio."
+"Apoyar a Les Grands Voisins con tu talento y tu voluntad, con una aportación"
+" económica, o con una donación de material: varias formas de dar, sin "
+"esperar nada a cambio."
 
 #: core/templates/core/contributions.html:8
 msgid "Donner du temps"
@@ -1091,12 +1098,12 @@ msgstr "Dar tu tiempo"
 #, python-format
 msgid ""
 "Animer un atelier, relire le guide, dépanner un voisin, ou simplement être "
-"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a href=\"mailto:"
-"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 msgstr ""
 "Dirigir un taller, revisar la guía, ayudar a un vecino, o simplemente estar "
-"presente: cada uno da el tiempo que quiere. Escríbenos a <a href=\"mailto:"
-"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+"presente: cada uno da el tiempo que quiere. Escríbenos a <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 
 #: core/templates/core/contributions.html:10
 msgid "Faire un don financier"
@@ -1165,8 +1172,8 @@ msgstr "Grands Voisins: la asociación — Voisinternet"
 
 #: core/templates/core/grandsvoisins.html:5
 msgid ""
-"Voisinternet est un programme porté par l'association coopérative Les Grands "
-"Voisins : une conscience collective à laquelle chacun contribue. Nous "
+"Voisinternet est un programme porté par l'association coopérative Les Grands"
+" Voisins : une conscience collective à laquelle chacun contribue. Nous "
 "demandons votre confiance : voici de quoi la vérifier."
 msgstr ""
 "Voisinternet es un programa impulsado por la asociación cooperativa Les "
@@ -1183,8 +1190,8 @@ msgid ""
 "d'être vient des interstices du béton et des politiques publiques : nous "
 "croyons aux ponts entre l'utopie et le réel, et à l'accueil de chacun."
 msgstr ""
-"Escrita colectivamente por un centenar de personas en 2017, nuestra razón de "
-"ser viene de los intersticios del hormigón y de las políticas públicas: "
+"Escrita colectivamente por un centenar de personas en 2017, nuestra razón de"
+" ser viene de los intersticios del hormigón y de las políticas públicas: "
 "creemos en los puentes entre la utopía y la realidad, y en la acogida de "
 "cada persona."
 
@@ -1284,8 +1291,8 @@ msgstr "Sal de su nube."
 
 #: core/templates/core/home.html:11
 msgid ""
-"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un "
-"voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
+"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un"
+" voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
 "accompagnent."
 msgstr ""
 "Tus correos, fotos y calendarios pueden vivir en tu casa, o en la de un "
@@ -1382,8 +1389,8 @@ msgid ""
 "Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « mon "
 "Compte », même sans compte nominatif."
 msgstr ""
-"Añade los que te interesen. Se unirán a tus accesos directos en «mi Cuenta», "
-"incluso sin una cuenta con tu nombre."
+"Añade los que te interesen. Se unirán a tus accesos directos en «mi Cuenta»,"
+" incluso sin una cuenta con tu nombre."
 
 #: core/templates/core/home.html:102
 msgid "Tous les services, avec ce que chacun conserve"
@@ -1412,8 +1419,8 @@ msgid ""
 "nuage</strong>, et gardez votre part de soleil."
 msgstr ""
 "El filósofo no le pedía nada al más poderoso, salvo que dejara de hacerle "
-"sombra. Lo hemos puesto en plural: <strong>sal de su nube</strong>, y guarda "
-"tu parte de sol."
+"sombra. Lo hemos puesto en plural: <strong>sal de su nube</strong>, y guarda"
+" tu parte de sol."
 
 #: core/templates/core/home.html:122
 msgid "Le guide et le blog"
@@ -1549,15 +1556,15 @@ msgstr "Ajustes"
 msgid "Aucun service ajouté pour l'instant."
 msgstr "Aún no se ha añadido ningún servicio."
 
-#: core/templates/core/partials/group_list.html:13
+#: core/templates/core/partials/group_list.html:16
 msgid "Partenariat Voisinternet"
 msgstr "Asociación Voisinternet"
 
-#: core/templates/core/partials/group_list.html:14
+#: core/templates/core/partials/group_list.html:17
 msgid "Proposer un partenariat"
 msgstr "Proponer una asociación"
 
-#: core/templates/core/partials/group_list.html:20
+#: core/templates/core/partials/group_list.html:23
 msgid "Aucun groupe pour l'instant"
 msgstr "Sin grupos por el momento"
 
@@ -1618,8 +1625,8 @@ msgid ""
 "restaurant, salon de thé, centre social, atelier d'art et hôpital, reliés "
 "entre eux ; un nuage s'éloigne."
 msgstr ""
-"Una calle de barrio bajo el sol: café, galería, teatro y sala de conciertos, "
-"restaurante, salón de té, centro social, taller de arte y hospital, todos "
+"Una calle de barrio bajo el sol: café, galería, teatro y sala de conciertos,"
+" restaurante, salón de té, centro social, taller de arte y hospital, todos "
 "conectados entre sí; una nube se aleja."
 
 #: core/templates/core/partials/scene.html:13
@@ -1650,15 +1657,15 @@ msgstr "Centro social"
 msgid "Atelier"
 msgstr "Taller"
 
-#: core/templates/core/partials/service_list.html:9
+#: core/templates/core/partials/service_list.html:12
 msgid "Ce qui reste anonyme, ce que nous conservons"
 msgstr "Lo que permanece anónimo, lo que conservamos"
 
-#: core/templates/core/partials/service_list.html:15
+#: core/templates/core/partials/service_list.html:18
 msgid "Aucun service pour l'instant"
 msgstr "Sin servicios por el momento"
 
-#: core/templates/core/partials/service_list.html:15
+#: core/templates/core/partials/service_list.html:18
 msgid "Les services apparaîtront ici dès qu'ils seront ouverts."
 msgstr "Los servicios aparecerán aquí en cuanto estén disponibles."
 
@@ -1701,7 +1708,8 @@ msgid "Mes raccourcis — Voisinternet"
 msgstr "Mis accesos directos — Voisinternet"
 
 #: core/templates/core/raccourcis.html:5
-msgid "Les services que vous avez choisis, à ajouter ou retirer à tout moment."
+msgid ""
+"Les services que vous avez choisis, à ajouter ou retirer à tout moment."
 msgstr ""
 "Los servicios que ha elegido, para añadir o quitar en cualquier momento."
 
@@ -1742,8 +1750,8 @@ msgstr "Cuenta anónima creada."
 #: core/views.py:247
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr ""
-"Demasiados intentos desde este dispositivo. Vuelve a intentarlo en un cuarto "
-"de hora."
+"Demasiados intentos desde este dispositivo. Vuelve a intentarlo en un cuarto"
+" de hora."
 
 #: core/views.py:251
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."

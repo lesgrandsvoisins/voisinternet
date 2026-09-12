@@ -1,5 +1,5 @@
 {% extends "core/base.html" %}
-{% load i18n %}
+{% load i18n markdown_filters %}
 {% block title %}{% trans "Annuaire" %}{% if sector %} — {{ sector.name }}{% endif %} — Voisinternet{% endblock %}
 {% block content %}
 {% trans "Qui fait partie de la communauté, et comment les joindre : personnes et structures, individuelles ou collectives, avec leur accord." as page_lead %}
@@ -29,7 +29,10 @@
         </div>
         {% if entry.title %}<p>{{ entry.title }}</p>{% elif entry.sector %}<p>{{ entry.sector.name }}</p>{% endif %}
         {% if entry.tagline %}<p class="tagline">{{ entry.tagline }}</p>{% endif %}
-        {% if entry.description %}<p>{{ entry.description }}</p>{% endif %}
+        {% if entry.audiences.all %}
+        <p class="chips-inline">{% for a in entry.audiences.all %}<span class="chip">{{ a.name }}</span>{% endfor %}</p>
+        {% endif %}
+        {% if entry.description %}<div class="markdown">{{ entry.description|markdown }}</div>{% endif %}
         {% if entry.city %}<p>{{ entry.city }}{% if entry.country %}, {{ entry.country }}{% endif %}</p>{% endif %}
         {% if entry.video_url %}<p><a href="{{ entry.video_url }}" target="_new">{% trans "Vidéo" %}</a></p>{% endif %}
         {% if entry.website or entry.email or entry.phone %}

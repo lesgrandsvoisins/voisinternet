@@ -100,8 +100,9 @@ class DirectoryEntryAdmin(TranslationAdmin):
     prepopulated_fields = {"slug": ["name"]}
     search_fields = ["name", "description", "city"]
     autocomplete_fields = ["sector"]
+    filter_horizontal = ["audiences"]
     fieldsets = [
-        (None, {"fields": ["name", "slug", "kind", "sector", "owner", "public", "order"]}),
+        (None, {"fields": ["name", "slug", "kind", "sector", "audiences", "owner", "public", "order"]}),
         ("Présentation", {"fields": ["title", "tagline", "description"]}),
         ("Médias", {"fields": ["logo", "photo_promo", "photo_structure", "photo_lieu", "video_url"]}),
         ("Coordonnées", {"fields": ["email", "phone", "website"]}),

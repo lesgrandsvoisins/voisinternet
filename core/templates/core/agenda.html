@@ -1,5 +1,5 @@
 {% extends "core/base.html" %}
-{% load i18n %}
+{% load i18n markdown_filters %}
 {% block title %}{% trans "Agenda : les Conseils des Voisins — Voisinternet" %}{% endblock %}
 {% block content %}
 {% trans "Le rendez-vous collectif des Grands Voisins : décider ensemble, en présence ou à distance." as page_lead %}
@@ -29,7 +29,7 @@
       <li>
         <div>
           <strong>{{ event.title }}</strong>
-          {% if event.description %}<p class="muted">{{ event.description }}</p>{% endif %}
+          {% if event.description %}<div class="markdown muted">{{ event.description|markdown }}</div>{% endif %}
         </div>
         <span>
           <time datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>

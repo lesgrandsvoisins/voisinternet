@@ -1,12 +1,15 @@
-{% load i18n %}<ul class="svc">
+{% load i18n markdown_filters %}<ul class="svc">
   {% for service in services %}
   <li{% if service.featured %} class="feat"{% endif %}>
     {% if service.icon %}<img class="svc-icon" src="{{ service.icon.url }}" alt="">{% else %}<span class="led" aria-hidden="true"></span>{% endif %}
     <div>
       <h3>{{ service.name }}</h3>
       <p>{{ service.summary }}</p>
+      {% if details and service.description %}
+      <div class="markdown">{{ service.description|markdown }}</div>
+      {% endif %}
       {% if details and service.retention %}
-      <details class="retention"><summary>{% trans "Ce qui reste anonyme, ce que nous conservons" %}</summary><p>{{ service.retention|linebreaksbr }}</p></details>
+      <details class="retention"><summary>{% trans "Ce qui reste anonyme, ce que nous conservons" %}</summary><div class="markdown">{{ service.retention|markdown }}</div></details>
       {% endif %}
     </div>
     {% if service.pk in shortcut_ids %}{% include "core/partials/shortcut_button.html" with added=True target_id="#available-services" swap="innerHTML" %}{% else %}{% include "core/partials/shortcut_button.html" with added=False target_id="#available-services" swap="innerHTML" %}{% endif %}

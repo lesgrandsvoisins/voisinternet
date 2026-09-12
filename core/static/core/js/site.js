@@ -20,19 +20,7 @@
     });
   }
 
-  // Le menu principal (en-tête) est géré par Alpine.js (voir base.html) ; seul le
-  // panneau du compte, resté en <details>, a encore besoin d'être fermé ici.
-  function closeAccountPanel() {
-    var panel = document.querySelector("details.account-panel[open]");
-    if (!panel) return;
-    panel.removeAttribute("open");
-  }
-
+  // Le menu principal et le widget du compte (en-tête) sont gérés par Alpine.js (voir base.html).
   document.addEventListener("DOMContentLoaded", armToasts);
   document.addEventListener("htmx:afterSettle", armToasts);
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAccountPanel(); });
-  document.addEventListener("click", function (e) {
-    var accountPanel = document.querySelector("details.account-panel[open]");
-    if (accountPanel && !accountPanel.contains(e.target)) closeAccountPanel();
-  });
 })();

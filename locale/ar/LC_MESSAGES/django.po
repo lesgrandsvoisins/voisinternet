@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 13:26+0200\n"
+"POT-Creation-Date: 2026-09-12 14:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
 
 #: core/accounts.py:48 core/accounts.py:53
 #, python-format
@@ -72,54 +73,54 @@ msgstr "الهويات التي تنتمي إليها، فردية أو جماع
 msgid "un particulier, une association, une entreprise…"
 msgstr "فرد، جمعية، شركة…"
 
-#: core/menu.py:50
-msgid "Contact"
-msgstr "اتصال"
-
-#: core/menu.py:51
-msgid "une question, un problème : écrivez-nous"
-msgstr "سؤال، مشكلة: راسلونا"
-
-#: core/menu.py:52
-msgid "un voisin vous répond, pas un robot"
-msgstr "يجيبك جار، وليس روبوتًا"
-
-#: core/menu.py:58 core/models.py:354
+#: core/menu.py:50 core/models.py:354
 msgid "Association"
 msgstr "الجمعية"
 
-#: core/menu.py:59
+#: core/menu.py:51
 msgid "une conscience collective, l'association coopérative"
 msgstr "وعي جماعي، الجمعية التعاونية"
 
-#: core/menu.py:60
+#: core/menu.py:52
 msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "النظام الأساسي، الحوكمة، الحسابات: كل شيء علني"
 
-#: core/menu.py:66
+#: core/menu.py:58
 msgid "Contributions"
 msgstr "المساهمات"
 
-#: core/menu.py:67
+#: core/menu.py:59
 msgid ""
 "du temps, un don financier, ou du matériel : sans rien attendre en retour"
 msgstr "الوقت، أو تبرع مالي، أو معدات: دون انتظار أي مقابل"
 
-#: core/menu.py:68
+#: core/menu.py:60
 msgid "donner du temps, faire un don, ou donner du matériel"
 msgstr "تقديم الوقت، أو التبرع ماليًا، أو التبرع بمعدات"
 
-#: core/menu.py:74
+#: core/menu.py:66
 msgid "Lisez nos articles"
 msgstr "اقرأ مقالاتنا"
 
-#: core/menu.py:75
+#: core/menu.py:67
 msgid "le blog couvre le civisme, les arts plastiques et le numérique"
 msgstr "تغطي المدونة الالتزام المدني والفنون التشكيلية والرقمي"
 
-#: core/menu.py:76
+#: core/menu.py:68
 msgid "les nouvelles et les tribunes des adhérents"
 msgstr "أخبار ومقالات رأي الأعضاء"
+
+#: core/menu.py:74
+msgid "Contact"
+msgstr "اتصال"
+
+#: core/menu.py:75
+msgid "une question, un problème : écrivez-nous"
+msgstr "سؤال، مشكلة: راسلونا"
+
+#: core/menu.py:76
+msgid "un voisin vous répond, pas un robot"
+msgstr "يجيبك جار، وليس روبوتًا"
 
 #: core/menu.py:82 core/templates/core/annuaire.html:3
 msgid "Annuaire"
@@ -381,8 +382,7 @@ msgid ""
 "Lien vers une vidéo (YouTube, PeerTube…) : affiché en lien, jamais intégré "
 "en cadre."
 msgstr ""
-"رابط لفيديو (YouTube، PeerTube…): يُعرض كرابط فقط، ولا يُضمَّن أبدًا في "
-"إطار."
+"رابط لفيديو (YouTube، PeerTube…): يُعرض كرابط فقط، ولا يُضمَّن أبدًا في إطار."
 
 #: core/models.py:237
 msgid "courriel"
@@ -559,15 +559,13 @@ msgstr "متبرع"
 msgid "mon Compte — Voisinternet"
 msgstr "حسابي — Voisinternet"
 
-#: core/templates/core/account.html:7
-#: core/templates/core/fiche_modifier.html:7
+#: core/templates/core/account.html:7 core/templates/core/fiche_modifier.html:7
 #: core/templates/core/mes_fiches.html:7
 #: core/templates/core/partials/page_head.html:3
 msgid "Fil d’Ariane"
 msgstr "مسار التنقل"
 
-#: core/templates/core/account.html:9
-#: core/templates/core/fiche_modifier.html:9
+#: core/templates/core/account.html:9 core/templates/core/fiche_modifier.html:9
 #: core/templates/core/mes_fiches.html:9
 #: core/templates/core/partials/page_head.html:5
 msgid "Accueil"
@@ -580,8 +578,7 @@ msgstr "حسابي"
 
 #: core/templates/core/account.html:14
 msgid ""
-"Votre statut, vos contributions financières, et les actions sur votre "
-"compte."
+"Votre statut, vos contributions financières, et les actions sur votre compte."
 msgstr "حالتك، مساهماتك المالية، والإجراءات المتعلقة بحسابك."
 
 #: core/templates/core/account.html:21
@@ -603,8 +600,8 @@ msgstr "هناك حساب مجهول مفتوح على هذا الجهاز"
 
 #: core/templates/core/account.html:30
 msgid ""
-"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
-" ensuite supprimé."
+"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera "
+"ensuite supprimé."
 msgstr "هل ترغب في ربط اختصاراته بحسابك؟ سيتم حذف الحساب المجهول بعد ذلك."
 
 #: core/templates/core/account.html:31
@@ -629,7 +626,7 @@ msgid "Mes fiches dans l'annuaire"
 msgstr "بطاقاتي في الدليل"
 
 #: core/templates/core/account.html:48
-#: core/templates/core/partials/account_widget.html:58
+#: core/templates/core/partials/account_widget.html:70
 msgid "Se déconnecter"
 msgstr "تسجيل الخروج"
 
@@ -638,7 +635,7 @@ msgid "Rattacher à mon compte Grands Voisins"
 msgstr "الربط بحساب Grands Voisins الخاص بي"
 
 #: core/templates/core/account.html:51
-#: core/templates/core/partials/account_widget.html:65
+#: core/templates/core/partials/account_widget.html:77
 msgid "Fermer ce compte sur cet appareil"
 msgstr "إغلاق هذا الحساب على هذا الجهاز"
 
@@ -675,7 +672,7 @@ msgid "Aucune contribution enregistrée pour l'instant."
 msgstr "لا توجد مساهمة مسجلة حتى الآن."
 
 #: core/templates/core/account.html:90 core/templates/core/account.html:93
-#: core/templates/core/partials/account_widget.html:18
+#: core/templates/core/partials/account_widget.html:30
 msgid "Se connecter"
 msgstr "تسجيل الدخول"
 
@@ -705,7 +702,7 @@ msgstr ""
 "رقم من 16 خانة، بلا اسم ولا بريد إلكتروني. تدوّنه، ويكفي لاستعادة اختصاراتك."
 
 #: core/templates/core/account.html:101
-#: core/templates/core/partials/account_widget.html:27
+#: core/templates/core/partials/account_widget.html:39
 msgid "Créer un compte anonyme"
 msgstr "إنشاء حساب مجهول"
 
@@ -765,8 +762,8 @@ msgid ""
 "Écrivez-nous à <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. "
 "Un voisin vous répond, pas un robot."
 msgstr ""
-"راسلنا على <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. سيردّ"
-" عليك جار، لا روبوت."
+"راسلنا على <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. سيردّ "
+"عليك جار، لا روبوت."
 
 #: core/templates/core/agenda.html:24
 msgid "Prochains évènements"
@@ -891,7 +888,7 @@ msgstr "31 يناير و1 فبراير 2025: معرض للوحات مستوحا�
 msgid "Derniers articles"
 msgstr "أحدث المقالات"
 
-#: core/templates/core/base.html:9
+#: core/templates/core/base.html:16
 msgid ""
 "Voisinternet, porté par Les Grands Voisins : héberger ses courriels, "
 "fichiers et agendas chez soi ou chez un voisin de confiance."
@@ -899,42 +896,42 @@ msgstr ""
 "Voisinternet، بدعم من Les Grands Voisins: استضف رسائلك الإلكترونية وملفاتك "
 "وتقويمك في منزلك أو عند جار موثوق."
 
-#: core/templates/core/base.html:17
+#: core/templates/core/base.html:26
 msgid "Aller au contenu"
 msgstr "الانتقال إلى المحتوى"
 
-#: core/templates/core/base.html:21
+#: core/templates/core/base.html:31
 msgid "Voisinternet, accueil"
 msgstr "Voisinternet، الصفحة الرئيسية"
 
-#: core/templates/core/base.html:23
+#: core/templates/core/base.html:44
 msgid "Menu"
 msgstr "القائمة"
 
-#: core/templates/core/base.html:24
+#: core/templates/core/base.html:50
 msgid "Menu principal"
 msgstr "القائمة الرئيسية"
 
-#: core/templates/core/base.html:71
+#: core/templates/core/base.html:112
 msgid ""
 "Porté par Les Grands Voisins, à Fontenay-aux-Roses et dans le 14ᵉ "
 "arrondissement de Paris."
 msgstr ""
 "بدعم من Les Grands Voisins، في Fontenay-aux-Roses وفي الدائرة 14 بباريس."
 
-#: core/templates/core/base.html:72
+#: core/templates/core/base.html:114
 msgid ""
 "Seulement deux cookies techniques : votre session et la protection des "
 "formulaires. Aucun traceur, rien n'est chargé depuis un tiers."
 msgstr ""
-"فقط ملفا تعريف ارتباط تقنيان: جلستك وحماية النماذج. لا متتبعات، ولا شيء "
-"يُحمَّل من طرف ثالث."
+"فقط ملفا تعريف ارتباط تقنيان: جلستك وحماية النماذج. لا متتبعات، ولا شيء يُحمَّل "
+"من طرف ثالث."
 
-#: core/templates/core/base.html:74
+#: core/templates/core/base.html:117
 msgid "Plan du site"
 msgstr "خريطة الموقع"
 
-#: core/templates/core/base.html:85
+#: core/templates/core/base.html:132
 msgid "Des Voies · Nos Voix · Voisinternet"
 msgstr "طرق · أصوات · Voisinternet"
 
@@ -957,9 +954,9 @@ msgid ""
 "Annette Monod. L'édition 2025 s'est tenue à l'association France Amérique-"
 "Latine."
 msgstr ""
-"حدث سنوي، يُقام في 2 مارس من كل عام منذ 2025، تكريمًا لفالنتين فرانسي. يكافئ"
-" التميز في العمل الاجتماعي من خلال جائزة أنيت مونو. أُقيمت نسخة 2025 في "
-"جمعية France Amérique-Latine."
+"حدث سنوي، يُقام في 2 مارس من كل عام منذ 2025، تكريمًا لفالنتين فرانسي. يكافئ "
+"التميز في العمل الاجتماعي من خلال جائزة أنيت مونو. أُقيمت نسخة 2025 في جمعية "
+"France Amérique-Latine."
 
 #: core/templates/core/contact.html:3
 msgid "Contact — Voisinternet"
@@ -978,13 +975,11 @@ msgstr "عبر البريد الإلكتروني"
 #: core/templates/core/contact.html:10
 #, python-format
 msgid ""
-"Écrivez-nous directement à <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Nous répondons en "
-"quelques jours."
+"Écrivez-nous directement à <a href=\"mailto:"
+"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Nous répondons en quelques jours."
 msgstr ""
-"راسلونا مباشرة على <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. نرد خلال أيام "
-"قليلة."
+"راسلونا مباشرة على <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</"
+"a>. نرد خلال أيام قليلة."
 
 #: core/templates/core/contact.html:13
 msgid "Aux Conseils des Voisins"
@@ -1031,12 +1026,12 @@ msgstr "تقديم الوقت"
 #, python-format
 msgid ""
 "Animer un atelier, relire le guide, dépanner un voisin, ou simplement être "
-"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a href=\"mailto:"
+"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 msgstr ""
-"إدارة ورشة عمل، مراجعة الدليل، مساعدة جار، أو مجرد الحضور: كل شخص يمنح الوقت"
-" الذي يريده. راسلنا على <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+"إدارة ورشة عمل، مراجعة الدليل، مساعدة جار، أو مجرد الحضور: كل شخص يمنح الوقت "
+"الذي يريده. راسلنا على <a href=\"mailto:"
+"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 
 #: core/templates/core/contributions.html:10
 msgid "Faire un don financier"
@@ -1110,8 +1105,8 @@ msgstr "Grands Voisins: الجمعية — Voisinternet"
 
 #: core/templates/core/grandsvoisins.html:5
 msgid ""
-"Voisinternet est un programme porté par l'association coopérative Les Grands"
-" Voisins : une conscience collective à laquelle chacun contribue. Nous "
+"Voisinternet est un programme porté par l'association coopérative Les Grands "
+"Voisins : une conscience collective à laquelle chacun contribue. Nous "
 "demandons votre confiance : voici de quoi la vérifier."
 msgstr ""
 "Voisinternet برنامج تديره الجمعية التعاونية Les Grands Voisins: وعي جماعي "
@@ -1227,8 +1222,8 @@ msgstr "اخرج من سحابتهم."
 
 #: core/templates/core/home.html:11
 msgid ""
-"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un"
-" voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
+"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un "
+"voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
 "accompagnent."
 msgstr ""
 "يمكن لرسائلك الإلكترونية وصورك وتقويمك أن تعيش في منزلك، أو عند جار موثوق. "
@@ -1273,7 +1268,7 @@ msgid ""
 msgstr "لست بحاجة لأن تكون خبيرًا في الحواسيب. يكفيك القليل من الفضول وجار."
 
 #: core/templates/core/home.html:65
-#: core/templates/core/partials/shortcut_list.html:16
+#: core/templates/core/partials/shortcut_list.html:53
 msgid "Choisissez vos services"
 msgstr "اختر خدماتك"
 
@@ -1316,8 +1311,7 @@ msgstr "الخدمات"
 msgid ""
 "Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « mon "
 "Compte », même sans compte nominatif."
-msgstr ""
-"أضف ما يهمّك منها. ستنضم إلى اختصاراتك في «حسابي»، حتى دون حساب باسمك."
+msgstr "أضف ما يهمّك منها. ستنضم إلى اختصاراتك في «حسابي»، حتى دون حساب باسمك."
 
 #: core/templates/core/home.html:93
 msgid "Tous les services, avec ce que chacun conserve"
@@ -1345,9 +1339,8 @@ msgid ""
 "faire de l'ombre. Nous l'avons mis au pluriel : <strong>ôtez-vous de leur "
 "nuage</strong>, et gardez votre part de soleil."
 msgstr ""
-"لم يطلب الفيلسوف من الرجل الأقوى شيئًا، سوى أن يكفّ عن حجب الضوء عنه. "
-"وضعناها بصيغة الجمع: <strong>اخرجوا من سحابتهم</strong>، واحتفظوا بنصيبكم من"
-" الشمس."
+"لم يطلب الفيلسوف من الرجل الأقوى شيئًا، سوى أن يكفّ عن حجب الضوء عنه. وضعناها "
+"بصيغة الجمع: <strong>اخرجوا من سحابتهم</strong>، واحتفظوا بنصيبكم من الشمس."
 
 #: core/templates/core/home.html:113
 msgid "Le guide et le blog"
@@ -1379,8 +1372,8 @@ msgid ""
 "Elles ne deviennent visibles de tous qu'une fois « apparaît publiquement » "
 "coché — c'est votre consentement explicite."
 msgstr ""
-"أنشئ وأدر بطاقاتك الخاصة في الدليل: أشخاص أو هيئات. لا تصبح مرئية للجميع إلا"
-" بعد تحديد «تظهر للعامة» — وهذا يمثل موافقتك الصريحة."
+"أنشئ وأدر بطاقاتك الخاصة في الدليل: أشخاص أو هيئات. لا تصبح مرئية للجميع إلا "
+"بعد تحديد «تظهر للعامة» — وهذا يمثل موافقتك الصريحة."
 
 #: core/templates/core/mes_fiches.html:30
 msgid "Publique"
@@ -1434,8 +1427,8 @@ msgid ""
 "Inscrivez-vous sur <a href=\"https://gdvoisins.com\" "
 "target=\"_new\">gdvoisins.com</a>."
 msgstr ""
-"إعادة تأهيل الحواسيب وتطوير المهارات الرقمية. سجّل عبر <a "
-"href=\"https://gdvoisins.com\" target=\"_new\">gdvoisins.com</a>."
+"إعادة تأهيل الحواسيب وتطوير المهارات الرقمية. سجّل عبر <a href=\"https://"
+"gdvoisins.com\" target=\"_new\">gdvoisins.com</a>."
 
 #: core/templates/core/numerique.html:13
 msgid "Paris le Nuage"
@@ -1450,28 +1443,28 @@ msgstr ""
 "استبدال خدمات عمالقة الويب بخوادم منزلية صغيرة، منخفضة استهلاك الطاقة، "
 "لملفاتك وصورك. هذا بالضبط ما يقترحه Voisinternet."
 
-#: core/templates/core/partials/account_widget.html:7
+#: core/templates/core/partials/account_widget.html:16
 #, python-format
 msgid "Mon compte : %(account_sub)s"
 msgstr "حسابي: %(account_sub)s"
 
-#: core/templates/core/partials/account_widget.html:8
+#: core/templates/core/partials/account_widget.html:17
 msgid "mon Compte"
 msgstr "حسابي"
 
-#: core/templates/core/partials/account_widget.html:14
+#: core/templates/core/partials/account_widget.html:26
 msgid "Options de mon compte"
 msgstr "خيارات حسابي"
 
-#: core/templates/core/partials/account_widget.html:21
+#: core/templates/core/partials/account_widget.html:33
 msgid "Créer un compte"
 msgstr "إنشاء حساب"
 
-#: core/templates/core/partials/account_widget.html:36
+#: core/templates/core/partials/account_widget.html:48
 msgid "Paramètres"
 msgstr "الإعدادات"
 
-#: core/templates/core/partials/account_widget.html:51
+#: core/templates/core/partials/account_widget.html:63
 msgid "Aucun service ajouté pour l'instant."
 msgstr "لم تتم إضافة أي خدمة حتى الآن."
 
@@ -1525,13 +1518,13 @@ msgid "Adhérer"
 msgstr "انضمام"
 
 #: core/templates/core/partials/membership_list.html:8
-#: core/templates/core/partials/shortcut_list.html:8
+#: core/templates/core/partials/shortcut_list.html:31
 #, python-format
 msgid "Monter %(name)s"
 msgstr "رفع %(name)s"
 
 #: core/templates/core/partials/membership_list.html:9
-#: core/templates/core/partials/shortcut_list.html:9
+#: core/templates/core/partials/shortcut_list.html:42
 #, python-format
 msgid "Descendre %(name)s"
 msgstr "خفض %(name)s"
@@ -1545,7 +1538,7 @@ msgid "Choisissez vos groupes"
 msgstr "اختر مجموعاتك"
 
 #: core/templates/core/partials/membership_list.html:16
-#: core/templates/core/partials/shortcut_list.html:16
+#: core/templates/core/partials/shortcut_list.html:53
 msgid "ils apparaîtront ici."
 msgstr "ستظهر هنا."
 
@@ -1586,15 +1579,15 @@ msgstr "مركز اجتماعي"
 msgid "Atelier"
 msgstr "ورشة"
 
-#: core/templates/core/partials/service_list.html:12
+#: core/templates/core/partials/service_list.html:16
 msgid "Ce qui reste anonyme, ce que nous conservons"
 msgstr "ما يبقى مجهولاً، وما نحتفظ به"
 
-#: core/templates/core/partials/service_list.html:18
+#: core/templates/core/partials/service_list.html:30
 msgid "Aucun service pour l'instant"
 msgstr "لا توجد خدمة حتى الآن"
 
-#: core/templates/core/partials/service_list.html:18
+#: core/templates/core/partials/service_list.html:31
 msgid "Les services apparaîtront ici dès qu'ils seront ouverts."
 msgstr "ستظهر الخدمات هنا فور توفرها."
 
@@ -1616,7 +1609,7 @@ msgstr "تمت الإضافة"
 msgid "Ajouter"
 msgstr "إضافة"
 
-#: core/templates/core/partials/shortcut_list.html:16
+#: core/templates/core/partials/shortcut_list.html:53
 msgid "Aucun raccourci pour l'instant."
 msgstr "لا يوجد أي اختصار حتى الآن."
 
@@ -1637,8 +1630,7 @@ msgid "Mes raccourcis — Voisinternet"
 msgstr "اختصاراتي — Voisinternet"
 
 #: core/templates/core/raccourcis.html:5
-msgid ""
-"Les services que vous avez choisis, à ajouter ou retirer à tout moment."
+msgid "Les services que vous avez choisis, à ajouter ou retirer à tout moment."
 msgstr "الخدمات التي اخترتها، للإضافة أو الإزالة في أي وقت."
 
 #: core/templates/core/raccourcis.html:19

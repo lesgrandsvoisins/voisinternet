@@ -1,15 +1,27 @@
 {% load i18n %}
-<details class="account-panel"
-         id="account-panel"
-         {% if oob %}hx-swap-oob="true"{% endif %}>
-  <summary class="account"
-           id="account"
-           aria-label="{% blocktrans %}Mon compte : {{ account_sub }}{% endblocktrans %}">
+<div class="account-panel"
+     id="account-panel"
+     {% if oob %}hx-swap-oob="true"{% endif %}
+     x-data="{ open: false, pinned: false }"
+     x-on:mouseenter="open = true"
+     x-on:mouseleave="if (!pinned) open = false"
+     x-on:keydown.escape.window="pinned = false; open = false"
+     x-on:click.outside="pinned = false; open = false">
+  <button type="button"
+          class="account"
+          id="account"
+          x-on:click="pinned = !pinned; open = true"
+          x-bind:aria-expanded="open.toString()"
+          aria-controls="account-menu"
+          aria-label="{% blocktrans %}Mon compte : {{ account_sub }}{% endblocktrans %}">
     <b>{% trans "mon Compte" %}</b>
     {% comment %} <small>{{ account_sub }}</small> {% endcomment %}
-  </summary>
+  </button>
   <div class="account-menu"
+       id="account-menu"
        role="menu"
+       x-show="open"
+       x-cloak
        aria-label="{% trans "Options de mon compte" %}">
     {% if not account and not user.is_authenticated %}
       <div class="account-actions">
@@ -65,4 +77,4 @@
       </div>
     {% endif %}
   </div>
-</details>
+</div>

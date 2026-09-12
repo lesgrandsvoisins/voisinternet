@@ -241,8 +241,8 @@ a {
   position: relative
 }
 
-.account-panel>summary::-webkit-details-marker {
-  display: none
+.account[aria-expanded="true"] {
+  background: var(--hover)
 }
 
 .account-menu {
@@ -253,8 +253,9 @@ a {
   max-width: min(34rem, calc(100vw - 2.5rem));
   background: var(--paper);
   border: 1px solid var(--line);
+  border-top: 3px solid var(--group-compte);
   border-radius: 12px;
-  box-shadow: 0 16px 30px rgba(0, 0, 0, .12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, .2);
   padding: 1rem;
   margin-top: .55rem;
   z-index: 30

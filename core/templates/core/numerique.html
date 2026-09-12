@@ -14,4 +14,24 @@
     <p>{% blocktrans %}Remplacer les services des géants du web par des petits serveurs à la maison, peu gourmands en énergie, pour ses fichiers et ses photos. C'est très exactement ce que propose Voisinternet.{% endblocktrans %}</p>
   </section>
 </div>
+{% if posts %}
+<div class="wrap page">
+  <section aria-labelledby="posts-title">
+    <div class="split">
+      <h2 id="posts-title">{% trans "Derniers articles" %}</h2>
+    </div>
+    <ul class="posts">
+      {% for post in posts %}
+      <li>
+        <a href="{{ post.url }}" target="_new">
+          <h3>{{ post.title }}</h3>
+          {% if post.excerpt %}<p>{{ post.excerpt }}</p>{% endif %}
+          {% if post.published_at %}<time datetime="{{ post.published_at|date:'c' }}">{{ post.published_at|date:"j F Y" }}</time>{% endif %}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+</div>
+{% endif %}
 {% endblock %}

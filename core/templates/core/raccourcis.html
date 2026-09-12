@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Mes raccourcis — Voisinternet" %}{% endblock %}
+{% block content %}
+{% trans "Les services que vous avez choisis, à ajouter ou retirer à tout moment." as page_lead %}
+{% include "core/partials/page_head.html" with item=conj.raccourcis lead=page_lead %}
+<div class="wrap page">
+  <section aria-labelledby="sc-title">
+    <div class="split">
+      <h2 id="sc-title">{% trans "Mes raccourcis" %}</h2>
+    </div>
+    <div id="shortcuts-list">
+      {% include "core/partials/shortcut_list.html" %}
+    </div>
+  </section>
+
+  <section id="available-services" aria-labelledby="add-title">
+    <div class="split">
+      <h2 id="add-title">{% trans "Services disponibles" %}</h2>
+      <p class="muted">{% trans "Ajoutez ceux qui vous intéressent à votre liste." %}</p>
+    </div>
+    {% include "core/partials/service_list.html" with services=available_services details=True %}
+  </section>
+</div>
+{% endblock %}

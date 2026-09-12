@@ -2,7 +2,11 @@
 {% load i18n %}
 {% block title %}{% trans "mon Compte — Voisinternet" %}{% endblock %}
 {% block content %}
-{% include "core/partials/page_head.html" with item=conj.account %}
+<div class="page-head">
+  <div class="wrap">
+    <h1>{% trans "mon Compte" %}</h1>
+  </div>
+</div>
 <div class="wrap page">
 
   {% if new_number %}
@@ -24,13 +28,14 @@
   {% if user.is_authenticated or account %}
   <section aria-labelledby="sc-title">
     <div class="split">
-      <h2 id="sc-title">{% trans "Mes raccourcis" %}</h2>
+      <h2 id="sc-title">{% trans "Mon compte" %}</h2>
       <p class="muted">{% if user.is_authenticated %}{% trans "Connecté" %}{% if user.first_name %} : {{ user.first_name }}{% endif %}{% else %}{% trans "Compte anonyme" %}{% endif %}</p>
     </div>
-    <div id="shortcuts-list">
-      {% include "core/partials/shortcut_list.html" %}
-    </div>
-
+    <ul class="docs">
+      <li><strong>{% trans "Mes raccourcis" %}</strong><span><a href="{% url 'core:raccourcis' %}">{% trans "Gérer" %}</a></span></li>
+      <li><strong>{% trans "Mes groupes" %}</strong><span><a href="{% url 'core:groupes' %}">{% trans "Gérer" %}</a></span></li>
+      <li><strong>{% trans "Mes fiches dans l'annuaire" %}</strong><span><a href="{% url 'core:mes_fiches' %}">{% trans "Gérer" %}</a></span></li>
+    </ul>
     <div class="actions">
       {% if user.is_authenticated %}
         {% if OIDC_ENABLED %}<form method="post" action="{% url 'oidc_logout' %}">{% csrf_token %}<button class="btn btn-line" type="submit">{% trans "Se déconnecter" %}</button></form>{% endif %}
@@ -41,29 +46,19 @@
     </div>
   </section>
 
-  <section id="available-services" aria-labelledby="add-title">
+  <section aria-labelledby="fin-title">
     <div class="split">
-      <h2 id="add-title">{% trans "Services disponibles" %}</h2>
-      <p class="muted">{% trans "Ajoutez ceux qui vous intéressent à votre liste." %}</p>
+      <h2 id="fin-title">{% trans "Mes contributions financières" %}</h2>
     </div>
-    {% include "core/partials/service_list.html" with services=available_services details=True %}
-  </section>
-
-  <section aria-labelledby="mb-title">
-    <div class="split">
-      <h2 id="mb-title">{% trans "Mes groupes" %}</h2>
-    </div>
-    <div id="memberships-list">
-      {% include "core/partials/membership_list.html" %}
-    </div>
-  </section>
-
-  <section id="available-groups" aria-labelledby="add-groups-title">
-    <div class="split">
-      <h2 id="add-groups-title">{% trans "Groupes disponibles" %}</h2>
-      <p class="muted">{% trans "Un particulier, une association, une entreprise… Adhérez à ceux qui vous concernent." %}</p>
-    </div>
-    {% include "core/partials/group_list.html" with audiences=available_audiences details=True %}
+    {% if account_contributions %}
+    <ul class="docs">
+      {% for c in account_contributions %}
+      <li><strong>{{ c.amount }} €</strong><span>{{ c.get_method_display }}, {{ c.date }}{% if c.note %} — {{ c.note }}{% endif %}</span></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="intro">{% trans "Aucune contribution enregistrée pour l'instant." %}</p>
+    {% endif %}
   </section>
 
   {% else %}

@@ -2,8 +2,8 @@ from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
 from .models import (
-    Account, Audience, DirectoryEntry, DirectorySector, Donor, GuideBook, Membership, Service, ServiceCategory,
-    Shortcut,
+    Account, Audience, Contribution, DirectoryEntry, DirectorySector, Donor, EntrySubscription, Event, GuideBook,
+    Membership, Service, ServiceCategory, Shortcut,
 )
 
 admin.site.site_header = "Voisinternet"
@@ -50,12 +50,17 @@ class MembershipInline(admin.TabularInline):
     autocomplete_fields = ["audience"]
 
 
+class ContributionInline(admin.TabularInline):
+    model = Contribution
+    extra = 0
+
+
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
     list_display = ["__str__", "user", "created", "last_seen", "shortcut_count", "membership_count"]
     list_filter = [("user", admin.EmptyFieldListFilter)]
     readonly_fields = ["created", "last_seen"]
-    inlines = [ShortcutInline, MembershipInline]
+    inlines = [ShortcutInline, MembershipInline, ContributionInline]
 
     @admin.display(description="raccourcis")
     def shortcut_count(self, obj):
@@ -89,17 +94,33 @@ class DirectorySectorAdmin(admin.ModelAdmin):
 
 @admin.register(DirectoryEntry)
 class DirectoryEntryAdmin(admin.ModelAdmin):
-    list_display = ["name", "kind", "sector", "city", "public", "order"]
+    list_display = ["name", "kind", "sector", "owner", "city", "public", "order"]
     list_filter = ["kind", "sector", "public"]
     list_editable = ["public", "order"]
     prepopulated_fields = {"slug": ["name"]}
     search_fields = ["name", "description", "city"]
     autocomplete_fields = ["sector"]
     fieldsets = [
-        (None, {"fields": ["name", "slug", "kind", "sector", "public", "order"]}),
+        (None, {"fields": ["name", "slug", "kind", "sector", "owner", "public", "order"]}),
         ("Présentation", {"fields": ["title", "tagline", "description"]}),
         ("Médias", {"fields": ["logo", "photo_promo", "photo_structure", "photo_lieu", "video_url"]}),
         ("Coordonnées", {"fields": ["email", "phone", "website"]}),
         ("Localisation", {"fields": ["address", "city", "country", "latitude", "longitude"]}),
         ("Appel à l'action", {"fields": ["cta_intro", "cta_label", "cta_link"]}),
     ]
+
+
+@admin.register(EntrySubscription)
+class EntrySubscriptionAdmin(admin.ModelAdmin):
+    list_display = ["account", "entry", "created"]
+    autocomplete_fields = ["entry"]
+
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display = ["title", "start", "end", "location", "public"]
+    list_filter = ["public"]
+    list_editable = ["public"]
+    prepopulated_fields = {"slug": ["title"]}
+    search_fields = ["title", "description"]
+    date_hierarchy = "start"

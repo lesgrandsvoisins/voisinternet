@@ -5,6 +5,7 @@
 {% trans "Qui fait partie de la communauté, et comment les joindre : personnes et structures, individuelles ou collectives, avec leur accord." as page_lead %}
 {% include "core/partials/page_head.html" with item=conj.annuaire lead=page_lead %}
 <div class="wrap page">
+  <p class="muted"><a href="{% url 'core:mes_fiches' %}">{% trans "Gérer mes fiches dans l'annuaire" %}</a></p>
   {% if sectors %}
   <nav class="chips" aria-label="{% trans 'Secteurs d’activité' %}">
     <a href="{% url 'core:annuaire' %}"{% if not sector %} aria-current="page"{% endif %}>{% trans "Tous les secteurs" %}</a>
@@ -33,6 +34,15 @@
         {% if entry.cta_link %}
         <p>{% if entry.cta_intro %}{{ entry.cta_intro }} {% endif %}<a class="btn btn-sun" href="{{ entry.cta_link }}">{{ entry.cta_label|default:_("En savoir plus") }}</a></p>
         {% endif %}
+        <form method="post" action="{% url 'core:toggle_subscription' entry.slug %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+          {% if entry.pk in subscribed_ids %}
+          <button class="sub-btn subscribed" type="submit">{% trans "Abonné·e ✓" %}</button>
+          {% else %}
+          <button class="sub-btn" type="submit">{% trans "S'abonner" %}</button>
+          {% endif %}
+        </form>
       </div>
     </li>
     {% empty %}

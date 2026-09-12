@@ -11,7 +11,7 @@
             {% trans "Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un voisin de confiance. Voisinternet vous montre comment, et des voisins vous accompagnent." %}
           </p>
           <div class="ctas">
-            <a class="btn btn-sun" href="{% url 'core:account' %}">{% trans "Voir les services" %}</a>
+            <a class="btn btn-sun" href="{% url 'core:raccourcis' %}">{% trans "Voir les services" %}</a>
             <a class="btn btn-line" href="{{ GUIDE_URL }}">{% trans "Lire le guide" %}</a>
           </div>
           <p class="signature">
@@ -58,7 +58,7 @@
         <ul class="aud">
           {% for a in audiences %}
             <li>
-              <a href="{% url 'core:account' %}#available-groups"><strong>{{ a.name }}</strong><span>{{ a.pitch }}</span></a>
+              <a href="{% url 'core:groupes' %}#available-groups"><strong>{{ a.name }}</strong><span>{{ a.pitch }}</span></a>
             </li>
           {% endfor %}
         </ul>
@@ -99,7 +99,7 @@
       </p>
       {% include "core/partials/service_list.html" %}
       <p class="note">
-        <a href="{% url 'core:account' %}">{% trans "Tous les services, avec ce que chacun conserve" %}</a>
+        <a href="{% url 'core:raccourcis' %}">{% trans "Tous les services, avec ce que chacun conserve" %}</a>
       </p>
     </div>
   </section>

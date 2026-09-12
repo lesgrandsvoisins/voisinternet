@@ -13,5 +13,5 @@
   {% endwith %}{% endfor %}
 </ul>
 {% else %}
-<p class="intro">{% trans "Aucune appartenance pour l'instant." %} <a href="{% url 'core:account' %}#available-groups">{% trans "Choisissez vos groupes" %}</a>, {% trans "ils apparaîtront ici." %}</p>
+<p class="intro">{% trans "Aucune appartenance pour l'instant." %} <a href="{% url 'core:groupes' %}#available-groups">{% trans "Choisissez vos groupes" %}</a>, {% trans "ils apparaîtront ici." %}</p>
 {% endif %}

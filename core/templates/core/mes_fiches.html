@@ -1,0 +1,45 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Mes fiches dans l'annuaire — Voisinternet" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="wrap">
+    <h1>{% trans "Mes fiches dans l'annuaire" %}</h1>
+    <p class="lead">{% trans "Créez et gérez vos propres pages dans l'annuaire : personnes ou structures. Elles ne deviennent visibles de tous qu'une fois « apparaît publiquement » coché — c'est votre consentement explicite." %}</p>
+  </div>
+</div>
+<div class="wrap page">
+  <section aria-labelledby="fiches-title">
+    <div class="split">
+      <h2 id="fiches-title">{% trans "Mes fiches" %}</h2>
+    </div>
+    {% if entries %}
+    <ul class="docs">
+      {% for entry in entries %}
+      <li>
+        <strong>{{ entry.name }}</strong>
+        <span>
+          {% if entry.public %}{% trans "Publique" %}{% else %}{% trans "Non publiée" %}{% endif %}
+          — <a href="{% url 'core:fiche_modifier' entry.slug %}">{% trans "Modifier" %}</a>
+          — <form method="post" action="{% url 'core:fiche_supprimer' entry.slug %}" onsubmit="return confirm('{% trans "Supprimer cette fiche ?" %}');">{% csrf_token %}<button class="link-btn" type="submit">{% trans "Supprimer" %}</button></form>
+        </span>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="intro">{% trans "Vous n'avez pas encore de fiche dans l'annuaire." %}</p>
+    {% endif %}
+  </section>
+
+  <section aria-labelledby="new-title">
+    <div class="split">
+      <h2 id="new-title">{% trans "Créer une fiche" %}</h2>
+    </div>
+    <form class="entry-form" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% include "core/partials/entry_form_fields.html" %}
+      <button class="btn btn-sun" type="submit">{% trans "Créer la fiche" %}</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

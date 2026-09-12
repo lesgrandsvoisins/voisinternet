@@ -18,4 +18,46 @@
     <p>{% blocktrans %}Écrivez-nous à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>. Un voisin vous répond, pas un robot.{% endblocktrans %}</p>
   </section>
 </div>
+<div class="wrap page">
+  <section aria-labelledby="upcoming-title">
+    <div class="split">
+      <h2 id="upcoming-title">{% trans "Prochains évènements" %}</h2>
+    </div>
+    {% if upcoming_events %}
+    <ul class="docs">
+      {% for event in upcoming_events %}
+      <li>
+        <div>
+          <strong>{{ event.title }}</strong>
+          {% if event.description %}<p class="muted">{{ event.description }}</p>{% endif %}
+        </div>
+        <span>
+          <time datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>
+          {% if event.location %} — {{ event.location }}{% endif %}
+          {% if event.online_url %} — <a href="{{ event.online_url }}" target="_new">{% trans "En ligne" %}</a>{% endif %}
+        </span>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="intro">{% trans "Aucun évènement à venir pour l'instant." %}</p>
+    {% endif %}
+  </section>
+
+  {% if past_events %}
+  <section aria-labelledby="past-title">
+    <div class="split">
+      <h2 id="past-title">{% trans "Évènements passés" %}</h2>
+    </div>
+    <ul class="docs">
+      {% for event in past_events %}
+      <li>
+        <strong>{{ event.title }}</strong>
+        <span><time datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y" }}</time>{% if event.location %} — {{ event.location }}{% endif %}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+</div>
 {% endblock %}

@@ -13,5 +13,5 @@
   {% endwith %}{% endfor %}
 </ul>
 {% else %}
-<p class="intro">{% trans "Aucun raccourci pour l'instant." %} <a href="{% url 'core:account' %}#available-services">{% trans "Choisissez vos services" %}</a>, {% trans "ils apparaîtront ici." %}</p>
+<p class="intro">{% trans "Aucun raccourci pour l'instant." %} <a href="{% url 'core:raccourcis' %}#available-services">{% trans "Choisissez vos services" %}</a>, {% trans "ils apparaîtront ici." %}</p>
 {% endif %}

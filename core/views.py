@@ -5,16 +5,26 @@ from django.core.cache import cache
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.http import url_has_allowed_host_and_scheme
+from django.utils.text import slugify
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
-from .ghost import latest_posts
+from .forms import DirectoryEntryForm
+from .ghost import latest_posts, posts_by_tag
 from .models import (
-    Account, Audience, DirectoryEntry, DirectorySector, Donor, GuideBook, Membership, Service, Shortcut,
-    format_number,
+    Account, Audience, Contribution, DirectoryEntry, DirectorySector, Donor, EntrySubscription, Event, GuideBook,
+    Membership, Service, Shortcut, format_number,
 )
+
+# Étiquettes Ghost associées à chaque pôle (à ajuster depuis l'administration du blog si besoin).
+BLOG_TAGS = {
+    "civisme": "cooperations",
+    "arts_plastiques": "[arts,arts-plastiques]",
+    "numerique": "digital",
+}
 
 
 def _is_htmx(request):
@@ -67,29 +77,43 @@ def home(request):
 
 def account(request):
     new_number = request.session.pop(NEW_NUMBER_KEY, None)
-    account = current_account(request)
-    if account:
-        shortcuts = account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name")
-        shortcut_ids = set(shortcuts.values_list("service_id", flat=True))
-        memberships = account.membership_set.select_related("audience").order_by("position", "audience__order", "audience__name")
-        membership_ids = set(memberships.values_list("audience_id", flat=True))
-    else:
-        shortcuts = []
-        shortcut_ids = set()
-        memberships = []
-        membership_ids = set()
-    available_services = Service.objects.filter(active=True).exclude(pk__in=shortcut_ids).order_by("order", "name")
-    available_audiences = Audience.objects.exclude(pk__in=membership_ids).order_by("order", "name")
+    acc = current_account(request)
     return render(request, "core/account.html", {
-        "account": account,
+        "account": acc,
+        "account_contributions": acc.contributions.all() if acc else [],
+        "owned_entries": acc.directory_entries.all() if acc else [],
+        "new_number": format_number(new_number) if new_number else None,
+        "pending": pending_anonymous_account(request),
+    })
+
+
+def raccourcis(request):
+    acc = current_account(request)
+    if acc is None:
+        return redirect("core:account")
+    shortcuts = acc.shortcut_set.select_related("service").order_by("position", "service__order", "service__name")
+    shortcut_ids = set(shortcuts.values_list("service_id", flat=True))
+    available_services = Service.objects.filter(active=True).exclude(pk__in=shortcut_ids).order_by("order", "name")
+    return render(request, "core/raccourcis.html", {
+        "account": acc,
         "shortcuts": shortcuts,
         "shortcut_ids": shortcut_ids,
         "available_services": available_services,
+    })
+
+
+def groupes(request):
+    acc = current_account(request)
+    if acc is None:
+        return redirect("core:account")
+    memberships = acc.membership_set.select_related("audience").order_by("position", "audience__order", "audience__name")
+    membership_ids = set(memberships.values_list("audience_id", flat=True))
+    available_audiences = Audience.objects.exclude(pk__in=membership_ids).order_by("order", "name")
+    return render(request, "core/groupes.html", {
+        "account": acc,
         "memberships": memberships,
         "membership_ids": membership_ids,
         "available_audiences": available_audiences,
-        "new_number": format_number(new_number) if new_number else None,
-        "pending": pending_anonymous_account(request),
     })
 
 
@@ -99,29 +123,113 @@ def annuaire(request, secteur=None):
     if secteur:
         current = get_object_or_404(DirectorySector, slug=secteur)
         entries = entries.filter(sector=current)
+    acc = current_account(request)
+    subscribed_ids = set(acc.entrysubscription_set.values_list("entry_id", flat=True)) if acc else set()
     return render(request, "core/annuaire.html", {
         "entries": entries,
         "sectors": DirectorySector.objects.all(),
         "sector": current,
+        "subscribed_ids": subscribed_ids,
     })
 
 
+def mes_fiches(request):
+    acc = current_account(request, create=True)
+    if request.method == "POST":
+        form = DirectoryEntryForm(request.POST, request.FILES)
+        if form.is_valid():
+            entry = form.save(commit=False)
+            entry.owner = acc
+            base_slug = slugify(entry.name) or "fiche"
+            slug = base_slug
+            suffix = 1
+            while DirectoryEntry.objects.filter(slug=slug).exists():
+                suffix += 1
+                slug = f"{base_slug}-{suffix}"
+            entry.slug = slug
+            entry.save()
+            messages.success(request, _("Fiche créée."))
+            return redirect("core:mes_fiches")
+    else:
+        form = DirectoryEntryForm()
+    return render(request, "core/mes_fiches.html", {
+        "entries": acc.directory_entries.order_by("name"),
+        "form": form,
+    })
+
+
+def fiche_modifier(request, slug):
+    acc = current_account(request)
+    entry = get_object_or_404(DirectoryEntry, slug=slug, owner=acc) if acc else None
+    if entry is None:
+        return redirect("core:mes_fiches")
+    if request.method == "POST":
+        form = DirectoryEntryForm(request.POST, request.FILES, instance=entry)
+        if form.is_valid():
+            form.save()
+            messages.success(request, _("Fiche mise à jour."))
+            return redirect("core:mes_fiches")
+    else:
+        form = DirectoryEntryForm(instance=entry)
+    return render(request, "core/fiche_modifier.html", {"form": form, "entry": entry})
+
+
+@require_POST
+def fiche_supprimer(request, slug):
+    acc = current_account(request)
+    if acc:
+        acc.directory_entries.filter(slug=slug).delete()
+        messages.success(request, _("Fiche supprimée."))
+    return redirect("core:mes_fiches")
+
+
+@require_POST
+def toggle_subscription(request, slug):
+    entry = get_object_or_404(DirectoryEntry, slug=slug, public=True)
+    acc = current_account(request, create=True)
+    sub = EntrySubscription.objects.filter(account=acc, entry=entry).first()
+    if sub:
+        sub.delete()
+        text = _("Abonnement à « %(name)s » retiré.") % {"name": entry.name}
+    else:
+        EntrySubscription.objects.create(account=acc, entry=entry)
+        text = _("Abonné à « %(name)s ».") % {"name": entry.name}
+    messages.success(request, text)
+    return redirect(_safe_next(request, reverse("core:annuaire")))
+
+
 def contributions(request):
+    donation_services = Service.objects.filter(
+        slug__in=["helloasso", "paypal", "stripe"], active=True,
+    ).order_by("order", "name")
     return render(request, "core/contributions.html", {
         "donors": Donor.objects.filter(public=True),
+        "donation_services": donation_services,
     })
 
 
 def civisme(request):
-    return render(request, "core/civisme.html")
+    return render(request, "core/civisme.html", {"posts": posts_by_tag(BLOG_TAGS["civisme"])})
 
 
 def arts_plastiques(request):
-    return render(request, "core/arts-plastiques.html")
+    return render(request, "core/arts-plastiques.html", {"posts": posts_by_tag(BLOG_TAGS["arts_plastiques"])})
 
 
 def numerique(request):
-    return render(request, "core/numerique.html")
+    return render(request, "core/numerique.html", {"posts": posts_by_tag(BLOG_TAGS["numerique"])})
+
+
+def agenda(request):
+    now = timezone.now()
+    return render(request, "core/agenda.html", {
+        "upcoming_events": Event.objects.filter(public=True, start__gte=now),
+        "past_events": Event.objects.filter(public=True, start__lt=now).order_by("-start")[:5],
+    })
+
+
+def contact(request):
+    return render(request, "core/contact.html")
 
 # --- Comptes anonymes
 
@@ -204,12 +312,12 @@ def toggle_shortcut(request, slug):
         })
 
     if new_number:
-        # Sans JavaScript : on passe par « je Vois » pour montrer le numéro une fois.
+        # Sans JavaScript : on passe par « mon Compte » pour montrer le numéro une fois.
         request.session[NEW_NUMBER_KEY] = new_number
         messages.success(request, text)
         return redirect("core:account")
     messages.success(request, text)
-    return redirect(_safe_next(request, reverse("core:account")))
+    return redirect(_safe_next(request, reverse("core:raccourcis")))
 
 
 @require_POST
@@ -218,27 +326,27 @@ def reorder_shortcut(request, slug, direction):
     if account is None:
         if _is_htmx(request):
             return HttpResponse(status=403)
-        return redirect("core:account")
+        return redirect("core:raccourcis")
 
     service = get_object_or_404(Service, slug=slug, active=True)
     shortcut = account.shortcut_set.filter(service=service).first()
     if shortcut is None:
         if _is_htmx(request):
             return HttpResponse(status=404)
-        return redirect("core:account")
+        return redirect("core:raccourcis")
 
     direction = direction.lower()
     if direction not in {"up", "down"}:
         if _is_htmx(request):
             return HttpResponse(status=400)
-        return redirect("core:account")
+        return redirect("core:raccourcis")
 
     shortcuts = list(account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name"))
     index = next((i for i, item in enumerate(shortcuts) if item.pk == shortcut.pk), None)
     if index is None:
         if _is_htmx(request):
             return HttpResponse(status=404)
-        return redirect("core:account")
+        return redirect("core:raccourcis")
 
     target_index = index - 1 if direction == "up" else index + 1
     if 0 <= target_index < len(shortcuts):
@@ -255,7 +363,7 @@ def reorder_shortcut(request, slug, direction):
             "shortcuts": account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name"),
         })
 
-    return redirect("core:account")
+    return redirect("core:raccourcis")
 
 
 # --- Appartenances
@@ -301,7 +409,7 @@ def toggle_membership(request, slug):
         messages.success(request, text)
         return redirect("core:account")
     messages.success(request, text)
-    return redirect(_safe_next(request, reverse("core:account")))
+    return redirect(_safe_next(request, reverse("core:groupes")))
 
 
 @require_POST
@@ -310,27 +418,27 @@ def reorder_membership(request, slug, direction):
     if account is None:
         if _is_htmx(request):
             return HttpResponse(status=403)
-        return redirect("core:account")
+        return redirect("core:groupes")
 
     audience = get_object_or_404(Audience, slug=slug)
     membership = account.membership_set.filter(audience=audience).first()
     if membership is None:
         if _is_htmx(request):
             return HttpResponse(status=404)
-        return redirect("core:account")
+        return redirect("core:groupes")
 
     direction = direction.lower()
     if direction not in {"up", "down"}:
         if _is_htmx(request):
             return HttpResponse(status=400)
-        return redirect("core:account")
+        return redirect("core:groupes")
 
     memberships = list(account.membership_set.select_related("audience").order_by("position", "audience__order", "audience__name"))
     index = next((i for i, item in enumerate(memberships) if item.pk == membership.pk), None)
     if index is None:
         if _is_htmx(request):
             return HttpResponse(status=404)
-        return redirect("core:account")
+        return redirect("core:groupes")
 
     target_index = index - 1 if direction == "up" else index + 1
     if 0 <= target_index < len(memberships):
@@ -347,4 +455,4 @@ def reorder_membership(request, slug, direction):
             "memberships": account.membership_set.select_related("audience").order_by("position", "audience__order", "audience__name"),
         })
 
-    return redirect("core:account")
+    return redirect("core:groupes")

@@ -1241,6 +1241,91 @@ blockquote p {
   color: var(--ink-soft)
 }
 
+.docs form {
+  display: inline;
+  margin: 0
+}
+
+.link-btn {
+  font: inherit;
+  color: var(--ink-soft);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline
+}
+
+.link-btn:hover {
+  color: var(--ink)
+}
+
+.entry-form {
+  display: grid;
+  gap: 1.1rem;
+  max-width: 40rem
+}
+
+.form-row label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: .35rem
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  width: 100%;
+  font: inherit;
+  padding: .6rem .8rem;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: var(--sky);
+  color: var(--ink)
+}
+
+.form-row textarea {
+  min-height: 6rem
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  border-color: var(--ink);
+  outline: none
+}
+
+.form-row .help {
+  color: var(--ink-soft);
+  font-size: .85rem;
+  margin-top: .3rem
+}
+
+.form-row .errorlist {
+  list-style: none;
+  padding: 0;
+  margin: .3rem 0 0;
+  color: var(--sun);
+  font-size: .9rem
+}
+
+.sub-btn {
+  font: inherit;
+  font-size: .85rem;
+  font-weight: 600;
+  padding: .4rem .8rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer
+}
+
+.sub-btn.subscribed {
+  background: var(--sun-soft);
+  border-color: var(--sun)
+}
+
 /* Messages */
 .toasts {
   position: fixed;

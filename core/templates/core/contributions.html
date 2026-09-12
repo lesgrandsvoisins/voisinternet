@@ -6,7 +6,16 @@
 {% include "core/partials/page_head.html" with item=conj.contributions lead=page_lead %}
 <div class="wrap page cols">
   <section class="card"><h2>{% trans "Donner du temps" %}</h2><p>{% blocktrans %}Animer un atelier, relire le guide, dépanner un voisin, ou simplement être présent : chacun donne le temps qu'il veut. Écrivez-nous à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.{% endblocktrans %}</p></section>
-  <section class="card"><h2>{% trans "Faire un don financier" %}</h2><p>{% blocktrans %}Par adhésion annuelle via HelloAsso, ou par don ponctuel via PayPal ou Stripe : ces trois raccourcis vous attendent dans « mon Compte ».{% endblocktrans %}</p><p>{% trans "Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous est nécessaire, mais elle n'est jamais publiée sans votre accord." %}</p></section>
+  <section class="card">
+    <h2>{% trans "Faire un don financier" %}</h2>
+    <p>{% trans "Par adhésion annuelle, ou par don ponctuel : choisissez votre moyen." %}</p>
+    {% if donation_services %}
+    <p class="pair">
+      {% for service in donation_services %}<a class="btn btn-sun" href="{{ service.url }}" target="_new">{{ service.name }}</a>{% endfor %}
+    </p>
+    {% endif %}
+    <p>{% trans "Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous est nécessaire, mais elle n'est jamais publiée sans votre accord." %}</p>
+  </section>
   <section class="card"><h2>{% trans "Donner du matériel" %}</h2><p>{% trans "[À compléter : matériel accepté, effacement des données, lieu de dépôt.]" %}</p></section>
 </div>
 <div class="wrap page">

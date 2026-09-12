@@ -32,14 +32,34 @@ GROUPS = [
 
 ENTRIES = [
     Entry(
-        "account",
-        _("raccourcis"),
-        _("& Communités"),
-        _("mon Compte"),
-        _("ce que vous choisissez de partager, les groupes auxquels vous adhérez"),
+        "raccourcis",
+        _("mes"),
+        _("Raccourcis"),
+        _("Mes raccourcis"),
+        _("les services que vous avez choisis, à ajouter ou retirer"),
         _("se connecter, créer un compte, retrouver mes raccourcis"),
-        "core:account",
-        "singulier"
+        "core:raccourcis",
+        "singulier",
+    ),
+    Entry(
+        "groupes",
+        _("mes"),
+        _("Groupes"),
+        _("Mes groupes"),
+        _("les identités auxquelles vous adhérez, individuelles ou collectives"),
+        _("un particulier, une association, une entreprise…"),
+        "core:groupes",
+        "singulier",
+    ),
+    Entry(
+        "contact",
+        _("nous"),
+        _("Contacter"),
+        _("Contact"),
+        _("une question, un problème : écrivez-nous"),
+        _("un voisin vous répond, pas un robot"),
+        "core:contact",
+        "singulier",
     ),
     Entry(
         "annuaire",

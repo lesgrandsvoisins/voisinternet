@@ -1,0 +1,21 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Contact — Voisinternet" %}{% endblock %}
+{% block content %}
+{% trans "Une question, un problème : écrivez-nous. Un voisin vous répond, pas un robot." as page_lead %}
+{% include "core/partials/page_head.html" with item=conj.contact lead=page_lead %}
+<div class="wrap page cols">
+  <section class="card">
+    <h2>{% trans "Par courriel" %}</h2>
+    <p>{% blocktrans %}Écrivez-nous directement à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>. Nous répondons en quelques jours.{% endblocktrans %}</p>
+  </section>
+  <section class="card">
+    <h2>{% trans "Aux Conseils des Voisins" %}</h2>
+    <p>{% blocktrans %}Un rendez-vous périodique et ouvert à tous : consultez {% endblocktrans %}<a href="{% url 'core:agenda' %}">{% trans "l'agenda" %}</a>.</p>
+  </section>
+  <section class="card">
+    <h2>{% trans "Devenir bénévole" %}</h2>
+    <p>{% blocktrans %}Donner du temps, un talent, ou un coup de main : voyez {% endblocktrans %}<a href="{% url 'core:contributions' %}">{% trans "nos contributions" %}</a>.</p>
+  </section>
+</div>
+{% endblock %}

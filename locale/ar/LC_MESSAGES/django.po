@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 01:05+0200\n"
+"POT-Creation-Date: 2026-09-12 01:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,79 +46,114 @@ msgstr "بصيغة الجمع، معًا"
 msgid "à lire"
 msgstr "للقراءة"
 
-#: core/menu.py:36
-msgid "raccourcis"
-msgstr "الاختصارات"
+#: core/menu.py:36 core/menu.py:46
+msgid "mes"
+msgstr "خاصتي"
 
 #: core/menu.py:37
-msgid "& Communités"
-msgstr "والمجتمعات"
+msgid "Raccourcis"
+msgstr "اختصارات"
 
-#: core/menu.py:38
-msgid "mon Compte"
-msgstr "حسابي"
+#: core/menu.py:38 core/templates/core/account.html:35
+#: core/templates/core/partials/account_widget.html:16
+#: core/templates/core/raccourcis.html:10
+msgid "Mes raccourcis"
+msgstr "اختصاراتي"
 
 #: core/menu.py:39
-msgid "ce que vous choisissez de partager, les groupes auxquels vous adhérez"
-msgstr "ما تختار مشاركته، والمجموعات التي تنتمي إليها"
+msgid "les services que vous avez choisis, à ajouter ou retirer"
+msgstr "الخدمات التي اخترتها، للإضافة أو الإزالة"
 
 #: core/menu.py:40
 msgid "se connecter, créer un compte, retrouver mes raccourcis"
 msgstr "تسجيل الدخول، إنشاء حساب، استعادة اختصاراتي"
 
-#: core/menu.py:46
-msgid "rencontrez"
-msgstr "تعرّف على"
-
 #: core/menu.py:47
-msgid "les Voisins"
-msgstr "الجيران"
+msgid "Groupes"
+msgstr "المجموعات"
 
-#: core/menu.py:48 core/templates/core/annuaire.html:3
-msgid "Annuaire"
-msgstr "دليل"
+#: core/menu.py:48 core/templates/core/account.html:36
+#: core/templates/core/groupes.html:10
+msgid "Mes groupes"
+msgstr "مجموعاتي"
 
 #: core/menu.py:49
-msgid "qui fait partie de la communauté, et comment les joindre"
-msgstr "من ينتمي إلى المجتمع، وكيفية التواصل معه"
+msgid "les identités auxquelles vous adhérez, individuelles ou collectives"
+msgstr "الهويات التي تنتمي إليها، فردية أو جماعية"
 
-#: core/menu.py:50
+#: core/menu.py:50 core/menu.py:70
 msgid "un particulier, une association, une entreprise…"
 msgstr "فرد، جمعية، شركة…"
 
 #: core/menu.py:56
+msgid "nous"
+msgstr "نحن"
+
+#: core/menu.py:57
+msgid "Contacter"
+msgstr "اتصل بنا"
+
+#: core/menu.py:58
+msgid "Contact"
+msgstr "اتصال"
+
+#: core/menu.py:59
+msgid "une question, un problème : écrivez-nous"
+msgstr "سؤال، مشكلة: راسلونا"
+
+#: core/menu.py:60
+msgid "un voisin vous répond, pas un robot"
+msgstr "يجيبك جار، وليس روبوتًا"
+
+#: core/menu.py:66
+msgid "rencontrez"
+msgstr "تعرّف على"
+
+#: core/menu.py:67
+msgid "les Voisins"
+msgstr "الجيران"
+
+#: core/menu.py:68 core/templates/core/annuaire.html:3
+msgid "Annuaire"
+msgstr "دليل"
+
+#: core/menu.py:69
+msgid "qui fait partie de la communauté, et comment les joindre"
+msgstr "من ينتمي إلى المجتمع، وكيفية التواصل معه"
+
+#: core/menu.py:76 core/models.py:295
 msgid "évènements"
 msgstr "الفعاليات"
 
-#: core/menu.py:57
+#: core/menu.py:77
 msgid "& Programmation"
 msgstr "والبرمجة"
 
-#: core/menu.py:58
+#: core/menu.py:78
 msgid "Agenda"
 msgstr "الأجندة"
 
-#: core/menu.py:59
+#: core/menu.py:79
 msgid "les rendez-vous collectifs, en ligne ou en présence"
 msgstr "لقاءات جماعية، عبر الإنترنت أو حضوريًا"
 
-#: core/menu.py:60
+#: core/menu.py:80
 msgid "les conseils des voisins, deux séances pour un même ordre du jour"
 msgstr "Conseils des Voisins، جلستان لنفس جدول الأعمال"
 
-#: core/menu.py:66 core/menu.py:76 core/menu.py:86
+#: core/menu.py:86 core/menu.py:96 core/menu.py:106
 msgid "pôle"
 msgstr "محور"
 
-#: core/menu.py:67
+#: core/menu.py:87
 msgid "pour se comprendre"
 msgstr "للتفاهم"
 
-#: core/menu.py:68
+#: core/menu.py:88
 msgid "Civisme"
 msgstr "الالتزام المدني"
 
-#: core/menu.py:69
+#: core/menu.py:89
 msgid ""
 "Profession d'empathie nationale, prix d'excellence en service public et en "
 "travail social"
@@ -126,120 +161,120 @@ msgstr ""
 "Profession d'Empathie Nationale، جائزة التميز في الخدمة العامة والعمل "
 "الاجتماعي"
 
-#: core/menu.py:70
+#: core/menu.py:90
 msgid "s'engager pour l'intérêt général, entre voisins"
 msgstr "الانخراط من أجل المصلحة العامة، بين الجيران"
 
-#: core/menu.py:77
+#: core/menu.py:97
 msgid "visuel"
 msgstr "بصري"
 
-#: core/menu.py:78
+#: core/menu.py:98
 msgid "Arts Plastiques"
 msgstr "الفنون التشكيلية"
 
-#: core/menu.py:79
+#: core/menu.py:99
 msgid "Galléries d'art dans des lieux insolites et soutien aux artistes"
 msgstr "معارض فنية في أماكن غير مألوفة، ودعم للفنانين"
 
-#: core/menu.py:80
+#: core/menu.py:100
 msgid "transformer tout lieu en galerie d'art hybride"
 msgstr "تحويل أي مكان إلى معرض فني هجين"
 
-#: core/menu.py:87
+#: core/menu.py:107
 msgid "pour le dèsenclavement"
 msgstr "من أجل كسر العزلة الرقمية"
 
-#: core/menu.py:88
+#: core/menu.py:108
 msgid "Numérique"
 msgstr "الرقمي"
 
-#: core/menu.py:89
+#: core/menu.py:109
 msgid "Salles de sociabilité numérique et Voisinternet"
 msgstr "قاعات التواصل الرقمي، وVoisinternet"
 
-#: core/menu.py:90
+#: core/menu.py:110
 msgid "matériel reconditionné et compétences partagées"
 msgstr "معدات مجددة ومهارات مشتركة"
 
-#: core/menu.py:96
+#: core/menu.py:116
 msgid "bénévolat"
 msgstr "التطوع"
 
-#: core/menu.py:97
+#: core/menu.py:117
 msgid "& Dons"
 msgstr "والتبرعات"
 
-#: core/menu.py:98
+#: core/menu.py:118
 msgid "Contributions"
 msgstr "المساهمات"
 
-#: core/menu.py:99
+#: core/menu.py:119
 msgid ""
 "du temps, un don financier, ou du matériel : sans rien attendre en retour"
 msgstr "الوقت، أو تبرع مالي، أو معدات: دون انتظار أي مقابل"
 
-#: core/menu.py:100
+#: core/menu.py:120
 msgid "donner du temps, faire un don, ou donner du matériel"
 msgstr "تقديم الوقت، أو التبرع ماليًا، أو التبرع بمعدات"
 
-#: core/menu.py:106
+#: core/menu.py:126
 msgid "Grands"
 msgstr "Grands"
 
-#: core/menu.py:107
+#: core/menu.py:127
 msgid "Voisins"
 msgstr "Voisins"
 
-#: core/menu.py:108
+#: core/menu.py:128
 msgid "L'association"
 msgstr "الجمعية"
 
-#: core/menu.py:109
+#: core/menu.py:129
 msgid "une conscience collective, l'association coopérative"
 msgstr "وعي جماعي، الجمعية التعاونية"
 
-#: core/menu.py:110
+#: core/menu.py:130
 msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "النظام الأساسي، الحوكمة، الحسابات: كل شيء علني"
 
-#: core/menu.py:116
+#: core/menu.py:136
 msgid "notre blog"
 msgstr "مدونتنا"
 
-#: core/menu.py:117
+#: core/menu.py:137
 msgid "GrandZine"
 msgstr "GrandZine"
 
-#: core/menu.py:118
+#: core/menu.py:138
 msgid "Lisez nos articles"
 msgstr "اقرأ مقالاتنا"
 
-#: core/menu.py:119
+#: core/menu.py:139
 msgid "le blog couvre le civisme, les arts plastiques et le numérique"
 msgstr "تغطي المدونة الالتزام المدني والفنون التشكيلية والرقمي"
 
-#: core/menu.py:120
+#: core/menu.py:140
 msgid "les nouvelles et les tribunes des adhérents"
 msgstr "أخبار ومقالات رأي الأعضاء"
 
-#: core/menu.py:126
+#: core/menu.py:146
 msgid "lire"
 msgstr "اقرأ"
 
-#: core/menu.py:127
+#: core/menu.py:147
 msgid "le manuel d'utilisation"
 msgstr "دليل الاستخدام"
 
-#: core/menu.py:128
+#: core/menu.py:148
 msgid "Wiki"
 msgstr "ويكي"
 
-#: core/menu.py:129
+#: core/menu.py:149
 msgid "le guide sur comment utiliser nos outils"
 msgstr "الدليل حول كيفية استخدام أدواتنا"
 
-#: core/menu.py:130
+#: core/menu.py:150
 msgid "pas à pas, du premier serveur aux sauvegardes"
 msgstr "خطوة بخطوة، من أول خادم إلى النسخ الاحتياطي"
 
@@ -274,7 +309,7 @@ msgid ""
 msgstr "للجهات العامة والاجتماعية: تقترح الصفحة شراكة، دون زر «إضافة»."
 
 #: core/models.py:43 core/models.py:58 core/models.py:91 core/models.py:187
-#: core/models.py:247
+#: core/models.py:251
 msgid "ordre"
 msgstr "الترتيب"
 
@@ -386,39 +421,43 @@ msgstr "فردي أو جماعي"
 msgid "secteur"
 msgstr "القطاع"
 
-#: core/models.py:216
+#: core/models.py:218
+msgid "compte propriétaire"
+msgstr "الحساب المالك"
+
+#: core/models.py:220
 msgid "titre de la page"
 msgstr "عنوان الصفحة"
 
-#: core/models.py:217
+#: core/models.py:221
 msgid "texte d'accroche"
 msgstr "شعار تعريفي"
 
-#: core/models.py:218
+#: core/models.py:222 core/models.py:282
 msgid "description"
 msgstr "الوصف"
 
-#: core/models.py:220
+#: core/models.py:224
 msgid "logo"
 msgstr "الشعار"
 
-#: core/models.py:221
+#: core/models.py:225
 msgid "photo promotionnelle"
 msgstr "صورة ترويجية"
 
-#: core/models.py:222
+#: core/models.py:226
 msgid "photo de la structure"
 msgstr "صورة الهيكل"
 
-#: core/models.py:223
+#: core/models.py:227
 msgid "photo du lieu"
 msgstr "صورة المكان"
 
-#: core/models.py:225
+#: core/models.py:229
 msgid "vidéo promotionnelle"
 msgstr "فيديو ترويجي"
 
-#: core/models.py:226
+#: core/models.py:230
 msgid ""
 "Lien vers une vidéo (YouTube, PeerTube…) : affiché en lien, jamais intégré "
 "en cadre."
@@ -426,106 +465,174 @@ msgstr ""
 "رابط لفيديو (YouTube، PeerTube…): يُعرض كرابط فقط، ولا يُضمَّن أبدًا في "
 "إطار."
 
-#: core/models.py:229
+#: core/models.py:233
 msgid "courriel"
 msgstr "البريد الإلكتروني"
 
-#: core/models.py:230
+#: core/models.py:234
 msgid "téléphone"
 msgstr "الهاتف"
 
-#: core/models.py:231
+#: core/models.py:235
 msgid "site ou lien"
 msgstr "موقع أو رابط"
 
-#: core/models.py:233
+#: core/models.py:237
 msgid "adresse"
 msgstr "العنوان"
 
-#: core/models.py:234
+#: core/models.py:238
 msgid "ville"
 msgstr "المدينة"
 
-#: core/models.py:235
+#: core/models.py:239
 msgid "pays"
 msgstr "البلد"
 
-#: core/models.py:236
+#: core/models.py:240
 msgid "latitude"
 msgstr "خط العرض"
 
-#: core/models.py:237
+#: core/models.py:241
 msgid "longitude"
 msgstr "خط الطول"
 
-#: core/models.py:239
+#: core/models.py:243
 msgid "introduction de l'appel à l'action"
 msgstr "مقدمة الدعوة إلى اتخاذ إجراء"
 
-#: core/models.py:240
+#: core/models.py:244
 msgid "texte du bouton d'appel à l'action"
 msgstr "نص زر الدعوة إلى اتخاذ إجراء"
 
-#: core/models.py:241
+#: core/models.py:245
 msgid "lien de l'appel à l'action"
 msgstr "رابط الدعوة إلى اتخاذ إجراء"
 
-#: core/models.py:244 core/models.py:285
+#: core/models.py:248 core/models.py:351
 msgid "apparaît publiquement"
 msgstr "يظهر علنًا"
 
-#: core/models.py:245
+#: core/models.py:249
 msgid ""
 "Uniquement avec le consentement explicite de la personne ou de la structure "
 "(RGPD)."
 msgstr ""
 "فقط بموافقة صريحة من الشخص أو الجهة (وفق اللائحة العامة لحماية البيانات)."
 
-#: core/models.py:251
+#: core/models.py:255
 msgid "page de l'annuaire"
 msgstr "صفحة الدليل"
 
-#: core/models.py:252
+#: core/models.py:256
 msgid "pages de l'annuaire"
 msgstr "صفحات الدليل"
 
-#: core/models.py:276
+#: core/models.py:271
+msgid "abonnement à une fiche"
+msgstr "اشتراك في بطاقة"
+
+#: core/models.py:272
+msgid "abonnements aux fiches"
+msgstr "اشتراكات في البطاقات"
+
+#: core/models.py:280
+msgid "titre"
+msgstr "العنوان"
+
+#: core/models.py:283
+msgid "début"
+msgstr "البداية"
+
+#: core/models.py:284
+msgid "fin"
+msgstr "النهاية"
+
+#: core/models.py:285
+msgid "lieu"
+msgstr "المكان"
+
+#: core/models.py:287
+msgid "lien en ligne"
+msgstr "رابط عبر الإنترنت"
+
+#: core/models.py:288
+msgid "Pour une participation à distance (visioconférence…)."
+msgstr "للمشاركة عن بُعد (مكالمة فيديو…)."
+
+#: core/models.py:290
+msgid "publié"
+msgstr "منشور"
+
+#: core/models.py:294
+msgid "évènement"
+msgstr "فعالية"
+
+#: core/models.py:307
+msgid "Autre"
+msgstr "أخرى"
+
+#: core/models.py:310
+msgid "montant"
+msgstr "المبلغ"
+
+#: core/models.py:311
+msgid "moyen"
+msgstr "الوسيلة"
+
+#: core/models.py:312
+msgid "date"
+msgstr "التاريخ"
+
+#: core/models.py:313
+msgid "note"
+msgstr "ملاحظة"
+
+#: core/models.py:317
+msgid "contribution financière"
+msgstr "مساهمة مالية"
+
+#: core/models.py:318
+msgid "contributions financières"
+msgstr "مساهمات مالية"
+
+#: core/models.py:342
 msgid "Particulier"
 msgstr "فرد"
 
-#: core/models.py:277
+#: core/models.py:343
 msgid "Entreprise"
 msgstr "شركة"
 
-#: core/models.py:278
+#: core/models.py:344
 msgid "Fondation"
 msgstr "مؤسسة"
 
-#: core/models.py:279
+#: core/models.py:345
 msgid "Collectivité"
 msgstr "هيئة عامة"
 
-#: core/models.py:280
+#: core/models.py:346
 msgid "Association"
 msgstr "الجمعية"
 
-#: core/models.py:282
+#: core/models.py:348
 msgid "nom affiché"
 msgstr "الاسم المعروض"
 
-#: core/models.py:283
+#: core/models.py:349
 msgid "type"
 msgstr "النوع"
 
-#: core/models.py:286
+#: core/models.py:352
 msgid "Uniquement avec le consentement explicite du donateur (RGPD)."
 msgstr "فقط بموافقة صريحة من المتبرع (وفق اللائحة العامة لحماية البيانات)."
 
-#: core/models.py:288
+#: core/models.py:354
 msgid "soutien depuis"
 msgstr "يدعم منذ"
 
-#: core/models.py:292
+#: core/models.py:358
 msgid "donateur"
 msgstr "متبرع"
 
@@ -533,11 +640,15 @@ msgstr "متبرع"
 msgid "mon Compte — Voisinternet"
 msgstr "حسابي — Voisinternet"
 
-#: core/templates/core/account.html:10
+#: core/templates/core/account.html:7
+msgid "mon Compte"
+msgstr "حسابي"
+
+#: core/templates/core/account.html:14
 msgid "Votre numéro de compte"
 msgstr "رقم حسابك"
 
-#: core/templates/core/account.html:12
+#: core/templates/core/account.html:16
 msgid ""
 "Notez-le maintenant. Nous n'en gardons qu'une empreinte : nous ne pourrons "
 "jamais vous le redonner. Il suffit, seul, pour retrouver vos raccourcis sur "
@@ -546,73 +657,67 @@ msgstr ""
 "دوّنه الآن. نحتفظ ببصمته فقط: لن نتمكن أبدًا من إعادته إليك. يكفي وحده "
 "لاستعادة اختصاراتك على جهاز آخر."
 
-#: core/templates/core/account.html:18
+#: core/templates/core/account.html:22
 msgid "Un compte anonyme est ouvert sur cet appareil"
 msgstr "هناك حساب مجهول مفتوح على هذا الجهاز"
 
-#: core/templates/core/account.html:19
+#: core/templates/core/account.html:23
 msgid ""
 "Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
 " ensuite supprimé."
 msgstr "هل ترغب في ربط اختصاراته بحسابك؟ سيتم حذف الحساب المجهول بعد ذلك."
 
-#: core/templates/core/account.html:20
+#: core/templates/core/account.html:24
 msgid "Rattacher mes raccourcis"
 msgstr "ربط اختصاراتي"
 
-#: core/templates/core/account.html:27
-#: core/templates/core/partials/account_widget.html:16
-msgid "Mes raccourcis"
-msgstr "اختصاراتي"
+#: core/templates/core/account.html:31
+msgid "Mon compte"
+msgstr "حسابي"
 
-#: core/templates/core/account.html:28
+#: core/templates/core/account.html:32
 msgid "Connecté"
 msgstr "متصل"
 
-#: core/templates/core/account.html:28
+#: core/templates/core/account.html:32
 msgid "Compte anonyme"
 msgstr "حساب مجهول"
 
-#: core/templates/core/account.html:36
+#: core/templates/core/account.html:35 core/templates/core/account.html:36
+#: core/templates/core/account.html:37
+msgid "Gérer"
+msgstr "إدارة"
+
+#: core/templates/core/account.html:37 core/templates/core/mes_fiches.html:7
+msgid "Mes fiches dans l'annuaire"
+msgstr "بطاقاتي في الدليل"
+
+#: core/templates/core/account.html:41
 msgid "Se déconnecter"
 msgstr "تسجيل الخروج"
 
-#: core/templates/core/account.html:38
+#: core/templates/core/account.html:43
 msgid "Rattacher à mon compte Grands Voisins"
 msgstr "الربط بحساب Grands Voisins الخاص بي"
 
-#: core/templates/core/account.html:39
+#: core/templates/core/account.html:44
 msgid "Fermer ce compte sur cet appareil"
 msgstr "إغلاق هذا الحساب على هذا الجهاز"
 
-#: core/templates/core/account.html:46
-msgid "Services disponibles"
-msgstr "الخدمات المتاحة"
+#: core/templates/core/account.html:51
+msgid "Mes contributions financières"
+msgstr "مساهماتي المالية"
 
-#: core/templates/core/account.html:47
-msgid "Ajoutez ceux qui vous intéressent à votre liste."
-msgstr "أضف ما يهمّك إلى قائمتك."
+#: core/templates/core/account.html:60
+msgid "Aucune contribution enregistrée pour l'instant."
+msgstr "لا توجد مساهمة مسجلة حتى الآن."
 
-#: core/templates/core/account.html:54
-msgid "Mes groupes"
-msgstr "مجموعاتي"
-
-#: core/templates/core/account.html:63
-msgid "Groupes disponibles"
-msgstr "المجموعات المتاحة"
-
-#: core/templates/core/account.html:64
-msgid ""
-"Un particulier, une association, une entreprise… Adhérez à ceux qui vous "
-"concernent."
-msgstr "فرد، جمعية، شركة… انضم إلى ما يخصك منها."
-
-#: core/templates/core/account.html:72 core/templates/core/account.html:75
+#: core/templates/core/account.html:67 core/templates/core/account.html:70
 #: core/templates/core/partials/account_widget.html:10
 msgid "Se connecter"
 msgstr "تسجيل الدخول"
 
-#: core/templates/core/account.html:73
+#: core/templates/core/account.html:68
 msgid ""
 "Avec votre compte unique des Grands Voisins, le même que pour les autres "
 "outils de l'association."
@@ -620,32 +725,32 @@ msgstr ""
 "باستخدام حسابك الموحّد في Grands Voisins، نفس الحساب المستخدم في أدوات "
 "الجمعية الأخرى."
 
-#: core/templates/core/account.html:77
+#: core/templates/core/account.html:72
 msgid ""
 "La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
 "serveur."
 msgstr "لم يتم بعد إعداد تسجيل الدخول عبر حساب Grands Voisins على هذا الخادم."
 
-#: core/templates/core/account.html:81
+#: core/templates/core/account.html:76
 msgid "Rester anonyme"
 msgstr "البقاء مجهولاً"
 
-#: core/templates/core/account.html:82
+#: core/templates/core/account.html:77
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
 "pour retrouver vos raccourcis."
 msgstr ""
 "رقم من 16 خانة، بلا اسم ولا بريد إلكتروني. تدوّنه، ويكفي لاستعادة اختصاراتك."
 
-#: core/templates/core/account.html:83
+#: core/templates/core/account.html:78
 msgid "Créer un compte anonyme"
 msgstr "إنشاء حساب مجهول"
 
-#: core/templates/core/account.html:85
+#: core/templates/core/account.html:80
 msgid "J'ai déjà un numéro"
 msgstr "لدي رقم بالفعل"
 
-#: core/templates/core/account.html:88
+#: core/templates/core/account.html:83
 msgid "Retrouver"
 msgstr "استعادة"
 
@@ -700,6 +805,22 @@ msgstr ""
 "راسلنا على <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. سيردّ"
 " عليك جار، لا روبوت."
 
+#: core/templates/core/agenda.html:24
+msgid "Prochains évènements"
+msgstr "الفعاليات القادمة"
+
+#: core/templates/core/agenda.html:37
+msgid "En ligne"
+msgstr "عبر الإنترنت"
+
+#: core/templates/core/agenda.html:43
+msgid "Aucun évènement à venir pour l'instant."
+msgstr "لا توجد فعاليات قادمة حاليًا."
+
+#: core/templates/core/agenda.html:50
+msgid "Évènements passés"
+msgstr "الفعاليات الماضية"
+
 #: core/templates/core/annuaire.html:5
 msgid ""
 "Qui fait partie de la communauté, et comment les joindre : personnes et "
@@ -708,31 +829,43 @@ msgstr ""
 "من ينتمي إلى المجتمع، وكيفية التواصل معه: أفراد وهياكل، فردية أو جماعية، "
 "بموافقتهم."
 
-#: core/templates/core/annuaire.html:9
+#: core/templates/core/annuaire.html:8
+msgid "Gérer mes fiches dans l'annuaire"
+msgstr "إدارة بطاقاتي في الدليل"
+
+#: core/templates/core/annuaire.html:10
 msgid "Secteurs d’activité"
 msgstr "قطاعات النشاط"
 
-#: core/templates/core/annuaire.html:10
+#: core/templates/core/annuaire.html:11
 msgid "Tous les secteurs"
 msgstr "جميع القطاعات"
 
-#: core/templates/core/annuaire.html:27
+#: core/templates/core/annuaire.html:28
 msgid "Site"
 msgstr "الموقع"
 
-#: core/templates/core/annuaire.html:28
+#: core/templates/core/annuaire.html:29
 msgid "Vidéo"
 msgstr "الفيديو"
 
-#: core/templates/core/annuaire.html:34
+#: core/templates/core/annuaire.html:35
 msgid "En savoir plus"
 msgstr "معرفة المزيد"
 
-#: core/templates/core/annuaire.html:39
+#: core/templates/core/annuaire.html:41
+msgid "Abonné·e ✓"
+msgstr "مشترك ✓"
+
+#: core/templates/core/annuaire.html:43
+msgid "S'abonner"
+msgstr "الاشتراك"
+
+#: core/templates/core/annuaire.html:49
 msgid "Personne pour l'instant"
 msgstr "لا يوجد أحد حتى الآن"
 
-#: core/templates/core/annuaire.html:39
+#: core/templates/core/annuaire.html:49
 msgid "Les fiches apparaîtront ici, avec l'accord de chacun."
 msgstr "ستظهر البطاقات هنا، بموافقة كل شخص."
 
@@ -789,6 +922,11 @@ msgid ""
 "31 janvier et 1er février 2025 : une exposition de tableaux autour du roman "
 "« La Macha »."
 msgstr "31 يناير و1 فبراير 2025: معرض للوحات مستوحاة من رواية «La Macha»."
+
+#: core/templates/core/arts-plastiques.html:29
+#: core/templates/core/civisme.html:17 core/templates/core/numerique.html:21
+msgid "Derniers articles"
+msgstr "أحدث المقالات"
 
 #: core/templates/core/base.html:9
 msgid ""
@@ -864,6 +1002,55 @@ msgstr ""
 " التميز في العمل الاجتماعي من خلال جائزة أنيت مونو. أُقيمت نسخة 2025 في "
 "جمعية France Amérique-Latine."
 
+#: core/templates/core/contact.html:3
+msgid "Contact — Voisinternet"
+msgstr "اتصال — Voisinternet"
+
+#: core/templates/core/contact.html:5
+msgid ""
+"Une question, un problème : écrivez-nous. Un voisin vous répond, pas un "
+"robot."
+msgstr "سؤال، مشكلة: راسلونا. يجيبك جار، وليس روبوتًا."
+
+#: core/templates/core/contact.html:9
+msgid "Par courriel"
+msgstr "عبر البريد الإلكتروني"
+
+#: core/templates/core/contact.html:10
+#, python-format
+msgid ""
+"Écrivez-nous directement à <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Nous répondons en "
+"quelques jours."
+msgstr ""
+"راسلونا مباشرة على <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. نرد خلال أيام "
+"قليلة."
+
+#: core/templates/core/contact.html:13
+msgid "Aux Conseils des Voisins"
+msgstr "في Conseils des Voisins"
+
+#: core/templates/core/contact.html:14
+msgid "Un rendez-vous périodique et ouvert à tous : consultez "
+msgstr "لقاء دوري ومفتوح للجميع: راجع "
+
+#: core/templates/core/contact.html:14
+msgid "l'agenda"
+msgstr "التقويم"
+
+#: core/templates/core/contact.html:17 core/templates/core/home.html:86
+msgid "Devenir bénévole"
+msgstr "كن متطوعًا"
+
+#: core/templates/core/contact.html:18
+msgid "Donner du temps, un talent, ou un coup de main : voyez "
+msgstr "قدّم وقتك، أو موهبتك، أو يد العون: راجع "
+
+#: core/templates/core/contact.html:18
+msgid "nos contributions"
+msgstr "مساهماتنا"
+
 #: core/templates/core/contributions.html:3
 msgid "Contributions : bénévolat et dons — Voisinternet"
 msgstr "المساهمات: التطوع والتبرعات — Voisinternet"
@@ -892,19 +1079,15 @@ msgstr ""
 " الذي يريده. راسلنا على <a "
 "href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 
-#: core/templates/core/contributions.html:9
+#: core/templates/core/contributions.html:10
 msgid "Faire un don financier"
 msgstr "تقديم تبرع مالي"
 
-#: core/templates/core/contributions.html:9
-msgid ""
-"Par adhésion annuelle via HelloAsso, ou par don ponctuel via PayPal ou "
-"Stripe : ces trois raccourcis vous attendent dans « mon Compte »."
-msgstr ""
-"عبر اشتراك سنوي بواسطة HelloAsso، أو تبرع لمرة واحدة عبر PayPal أو Stripe: "
-"هذه الاختصارات الثلاثة بانتظارك في «حسابي»."
+#: core/templates/core/contributions.html:11
+msgid "Par adhésion annuelle, ou par don ponctuel : choisissez votre moyen."
+msgstr "عبر الاشتراك السنوي، أو تبرع لمرة واحدة: اختر وسيلتك."
 
-#: core/templates/core/contributions.html:9
+#: core/templates/core/contributions.html:17
 msgid ""
 "Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous "
 "est nécessaire, mais elle n'est jamais publiée sans votre accord."
@@ -912,27 +1095,49 @@ msgstr ""
 "يمكن أن يبقى التبرع مجهولاً. إذا رغبت في الحصول على إيصال، نحتاج إلى هويتك، "
 "لكنها لا تُنشر أبدًا دون موافقتك."
 
-#: core/templates/core/contributions.html:10
+#: core/templates/core/contributions.html:19
 msgid "Donner du matériel"
 msgstr "التبرع بالمعدات"
 
-#: core/templates/core/contributions.html:10
+#: core/templates/core/contributions.html:19
 msgid ""
 "[À compléter : matériel accepté, effacement des données, lieu de dépôt.]"
 msgstr "[سيتم استكماله: المعدات المقبولة، محو البيانات، مكان التسليم.]"
 
-#: core/templates/core/contributions.html:14
+#: core/templates/core/contributions.html:23
 msgid "Nos soutiens"
 msgstr "داعمونا"
 
-#: core/templates/core/contributions.html:16
+#: core/templates/core/contributions.html:25
 #, python-format
 msgid "depuis %(since)s"
 msgstr "منذ %(since)s"
 
-#: core/templates/core/contributions.html:18
+#: core/templates/core/contributions.html:27
 msgid "Les premiers soutiens apparaîtront ici, avec leur accord."
 msgstr "سيظهر الداعمون الأوائل هنا، بموافقتهم."
+
+#: core/templates/core/fiche_modifier.html:3
+#, python-format
+msgid "Modifier « %(name)s » — Voisinternet"
+msgstr "تعديل «%(name)s» — Voisinternet"
+
+#: core/templates/core/fiche_modifier.html:7
+#, python-format
+msgid "Modifier « %(name)s »"
+msgstr "تعديل «%(name)s»"
+
+#: core/templates/core/fiche_modifier.html:13
+msgid "Ma fiche"
+msgstr "بطاقتي"
+
+#: core/templates/core/fiche_modifier.html:14
+msgid "← Mes fiches"
+msgstr "← بطاقاتي"
+
+#: core/templates/core/fiche_modifier.html:19
+msgid "Enregistrer"
+msgstr "حفظ"
 
 #: core/templates/core/grandsvoisins.html:3
 msgid "Grands Voisins : l'association — Voisinternet"
@@ -1029,6 +1234,24 @@ msgstr "محاضر الجمعية العمومية"
 msgid "Nos engagements d'hébergeur"
 msgstr "التزاماتنا كمضيف"
 
+#: core/templates/core/groupes.html:3
+msgid "Mes groupes — Voisinternet"
+msgstr "مجموعاتي — Voisinternet"
+
+#: core/templates/core/groupes.html:5
+msgid "Les identités auxquelles vous adhérez, individuelles ou collectives."
+msgstr "الهويات التي تنتمي إليها، فردية أو جماعية."
+
+#: core/templates/core/groupes.html:19
+msgid "Groupes disponibles"
+msgstr "المجموعات المتاحة"
+
+#: core/templates/core/groupes.html:20
+msgid ""
+"Un particulier, une association, une entreprise… Adhérez à ceux qui vous "
+"concernent."
+msgstr "فرد، جمعية، شركة… انضم إلى ما يخصك منها."
+
 #: core/templates/core/home.html:3
 msgid "Voisinternet — Ôtez-vous de leur nuage"
 msgstr "Voisinternet — اخرج من سحابتهم"
@@ -1122,10 +1345,6 @@ msgstr ""
 msgid "Se faire accompagner"
 msgstr "الحصول على مرافقة"
 
-#: core/templates/core/home.html:86
-msgid "Devenir bénévole"
-msgstr "كن متطوعًا"
-
 #: core/templates/core/home.html:95
 msgid "les services"
 msgstr "الخدمات"
@@ -1186,6 +1405,55 @@ msgstr "ستظهر أحدث المقالات هنا."
 #: core/templates/core/home.html:163
 msgid "Tous les articles"
 msgstr "جميع المقالات"
+
+#: core/templates/core/mes_fiches.html:3
+msgid "Mes fiches dans l'annuaire — Voisinternet"
+msgstr "بطاقاتي في الدليل — Voisinternet"
+
+#: core/templates/core/mes_fiches.html:8
+msgid ""
+"Créez et gérez vos propres pages dans l'annuaire : personnes ou structures. "
+"Elles ne deviennent visibles de tous qu'une fois « apparaît publiquement » "
+"coché — c'est votre consentement explicite."
+msgstr ""
+"أنشئ وأدر بطاقاتك الخاصة في الدليل: أشخاص أو هيئات. لا تصبح مرئية للجميع إلا"
+" بعد تحديد «تظهر للعامة» — وهذا يمثل موافقتك الصريحة."
+
+#: core/templates/core/mes_fiches.html:14
+msgid "Mes fiches"
+msgstr "بطاقاتي"
+
+#: core/templates/core/mes_fiches.html:22
+msgid "Publique"
+msgstr "عامة"
+
+#: core/templates/core/mes_fiches.html:22
+msgid "Non publiée"
+msgstr "غير منشورة"
+
+#: core/templates/core/mes_fiches.html:23
+msgid "Modifier"
+msgstr "تعديل"
+
+#: core/templates/core/mes_fiches.html:24
+msgid "Supprimer cette fiche ?"
+msgstr "هل تريد حذف هذه البطاقة؟"
+
+#: core/templates/core/mes_fiches.html:24
+msgid "Supprimer"
+msgstr "حذف"
+
+#: core/templates/core/mes_fiches.html:30
+msgid "Vous n'avez pas encore de fiche dans l'annuaire."
+msgstr "ليس لديك بعد بطاقة في الدليل."
+
+#: core/templates/core/mes_fiches.html:36
+msgid "Créer une fiche"
+msgstr "إنشاء بطاقة"
+
+#: core/templates/core/mes_fiches.html:41
+msgid "Créer la fiche"
+msgstr "إنشاء البطاقة"
 
 #: core/templates/core/numerique.html:3
 msgid "Numérique — Voisinternet"
@@ -1394,48 +1662,87 @@ msgstr "لن يتم عرضه مرة أخرى أبدًا."
 msgid "Voir mon compte"
 msgstr "عرض حسابي"
 
-#: core/views.py:132
+#: core/templates/core/raccourcis.html:3
+msgid "Mes raccourcis — Voisinternet"
+msgstr "اختصاراتي — Voisinternet"
+
+#: core/templates/core/raccourcis.html:5
+msgid ""
+"Les services que vous avez choisis, à ajouter ou retirer à tout moment."
+msgstr "الخدمات التي اخترتها، للإضافة أو الإزالة في أي وقت."
+
+#: core/templates/core/raccourcis.html:19
+msgid "Services disponibles"
+msgstr "الخدمات المتاحة"
+
+#: core/templates/core/raccourcis.html:20
+msgid "Ajoutez ceux qui vous intéressent à votre liste."
+msgstr "أضف ما يهمّك إلى قائمتك."
+
+#: core/views.py:151
+msgid "Fiche créée."
+msgstr "تم إنشاء البطاقة."
+
+#: core/views.py:170
+msgid "Fiche mise à jour."
+msgstr "تم تحديث البطاقة."
+
+#: core/views.py:182
+msgid "Fiche supprimée."
+msgstr "تم حذف البطاقة."
+
+#: core/views.py:193
+#, python-format
+msgid "Abonnement à « %(name)s » retiré."
+msgstr "تمت إزالة الاشتراك في «%(name)s»."
+
+#: core/views.py:196
+#, python-format
+msgid "Abonné à « %(name)s »."
+msgstr "تم الاشتراك في «%(name)s»."
+
+#: core/views.py:240
 msgid "Compte anonyme créé."
 msgstr "تم إنشاء حساب مجهول."
 
-#: core/views.py:139
+#: core/views.py:247
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "عدد كبير جدًا من المحاولات من هذا الجهاز. أعد المحاولة بعد ربع ساعة."
 
-#: core/views.py:143
+#: core/views.py:251
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "لا يوجد حساب مطابق لهذا الرقم. تحقق من الخانات الـ16."
 
-#: core/views.py:146
+#: core/views.py:254
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "تم العثور على الحساب. عادت اختصاراتك."
 
-#: core/views.py:153
+#: core/views.py:261
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
 msgstr "لم يعد هذا الحساب مفتوحًا على هذا الجهاز. رقمك يتيح لك استعادته."
 
-#: core/views.py:164
+#: core/views.py:272
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "انضمت اختصاراتك المجهولة إلى حسابك."
 
-#: core/views.py:180
+#: core/views.py:288
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "تمت إزالة «%(name)s» من اختصاراتك."
 
-#: core/views.py:184
+#: core/views.py:292
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "تمت إضافة «%(name)s» إلى اختصاراتك."
 
-#: core/views.py:273
+#: core/views.py:381
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "تمت إزالة «%(name)s» من مجموعاتك."
 
-#: core/views.py:277
+#: core/views.py:385
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "تمت إضافة «%(name)s» إلى مجموعاتك."

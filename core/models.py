@@ -213,6 +213,10 @@ class DirectoryEntry(models.Model):
         related_name="entries", verbose_name=_("secteur"),
     )
 
+    owner = models.ForeignKey(
+        Account, null=True, blank=True, on_delete=models.SET_NULL,
+        related_name="directory_entries", verbose_name=_("compte propriétaire"),
+    )
     title = models.CharField(_("titre de la page"), max_length=140, blank=True, default="")
     tagline = models.CharField(_("texte d'accroche"), max_length=240, blank=True, default="")
     description = models.TextField(_("description"), blank=True, default="")
@@ -253,6 +257,68 @@ class DirectoryEntry(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class EntrySubscription(models.Model):
+    """Un compte qui suit la fiche d'une autre personne ou structure dans l'annuaire."""
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    entry = models.ForeignKey(DirectoryEntry, on_delete=models.CASCADE, related_name="subscriptions")
+    created = models.DateTimeField(default=timezone.now, editable=False)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=["account", "entry"], name="unique_entry_subscription")]
+        ordering = ["account", "entry__name"]
+        verbose_name = _("abonnement à une fiche")
+        verbose_name_plural = _("abonnements aux fiches")
+
+    def __str__(self):
+        return f"{self.entry} ({self.account})"
+
+
+class Event(models.Model):
+    """Un évènement de l'agenda (conseil des voisins, atelier…)."""
+    title = models.CharField(_("titre"), max_length=140)
+    slug = models.SlugField(unique=True)
+    description = models.TextField(_("description"), blank=True, default="")
+    start = models.DateTimeField(_("début"))
+    end = models.DateTimeField(_("fin"), null=True, blank=True)
+    location = models.CharField(_("lieu"), max_length=200, blank=True, default="")
+    online_url = models.URLField(
+        _("lien en ligne"), blank=True, default="",
+        help_text=_("Pour une participation à distance (visioconférence…)."),
+    )
+    public = models.BooleanField(_("publié"), default=True)
+
+    class Meta:
+        ordering = ["start"]
+        verbose_name = _("évènement")
+        verbose_name_plural = _("évènements")
+
+    def __str__(self):
+        return self.title
+
+
+class Contribution(models.Model):
+    """Une contribution financière enregistrée pour un compte (adhésion, don ponctuel…)."""
+    METHODS = [
+        ("helloasso", "HelloAsso"),
+        ("paypal", "PayPal"),
+        ("stripe", "Stripe"),
+        ("autre", _("Autre")),
+    ]
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="contributions")
+    amount = models.DecimalField(_("montant"), max_digits=8, decimal_places=2)
+    method = models.CharField(_("moyen"), max_length=20, choices=METHODS, default="helloasso")
+    date = models.DateField(_("date"), default=timezone.localdate)
+    note = models.CharField(_("note"), max_length=200, blank=True, default="")
+
+    class Meta:
+        ordering = ["-date"]
+        verbose_name = _("contribution financière")
+        verbose_name_plural = _("contributions financières")
+
+    def __str__(self):
+        return f"{self.amount} € ({self.account})"
 
 
 class GuideBook(models.Model):

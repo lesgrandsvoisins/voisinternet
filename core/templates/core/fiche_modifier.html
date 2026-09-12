@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% blocktrans with name=entry.name %}Modifier « {{ name }} » — Voisinternet{% endblocktrans %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="wrap">
+    <h1>{% blocktrans with name=entry.name %}Modifier « {{ name }} »{% endblocktrans %}</h1>
+  </div>
+</div>
+<div class="wrap page">
+  <section aria-labelledby="edit-title">
+    <div class="split">
+      <h2 id="edit-title">{% trans "Ma fiche" %}</h2>
+      <p class="muted"><a href="{% url 'core:mes_fiches' %}">{% trans "← Mes fiches" %}</a></p>
+    </div>
+    <form class="entry-form" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% include "core/partials/entry_form_fields.html" %}
+      <button class="btn btn-sun" type="submit">{% trans "Enregistrer" %}</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

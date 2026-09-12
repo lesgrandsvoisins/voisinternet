@@ -1,5 +1,12 @@
-<div class="page-head">
+{% load i18n %}<div class="page-head">
   <div class="wrap">
+    <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+      <ol>
+        <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+        <li>{{ item.group_caption }}</li>
+        <li aria-current="page">{{ item.entry.title }}</li>
+      </ol>
+    </nav>
     <p class="page-conj">{{ item.entry.pronoun }} {% include "core/partials/verb.html" with form=item.entry.form %}</p>
     <h1>{{ item.entry.title }}</h1>
     {% if lead %}<p class="lead">{{ lead }}</p>{% endif %}

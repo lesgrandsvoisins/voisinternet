@@ -16,9 +16,10 @@ def _href(entry):
 def site(request):
     match = getattr(request, "resolver_match", None)
     current = match.view_name if match else None
+    group_captions = dict(GROUPS)
     entries = [
         {"entry": e, "href": _href(e), "external": e.target.startswith("setting:"),
-         "current": current in {e.target, f"{e.target}_pour"}}
+         "current": current in {e.target, f"{e.target}_pour"}, "group_caption": group_captions[e.group]}
         for e in ENTRIES
     ]
     groups = [

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 11:43+0200\n"
+"POT-Creation-Date: 2026-09-12 11:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -667,7 +667,8 @@ msgstr "my Account — Voisinternet"
 
 #: core/templates/core/account.html:5
 msgid ""
-"Votre statut, vos contributions financières, et les actions sur votre compte."
+"Votre statut, vos contributions financières, et les actions sur votre "
+"compte."
 msgstr ""
 "Your status, your financial contributions, and the actions on your account."
 
@@ -691,8 +692,8 @@ msgstr "An anonymous account is open on this device"
 
 #: core/templates/core/account.html:20
 msgid ""
-"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera "
-"ensuite supprimé."
+"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
+" ensuite supprimé."
 msgstr ""
 "Would you like to attach its shortcuts to your account? The anonymous "
 "account will then be deleted."
@@ -714,7 +715,7 @@ msgstr "Anonymous account"
 msgid "Gérer"
 msgstr "Manage"
 
-#: core/templates/core/account.html:34 core/templates/core/mes_fiches.html:7
+#: core/templates/core/account.html:34 core/templates/core/mes_fiches.html:15
 msgid "Mes fiches dans l'annuaire"
 msgstr "My directory listings"
 
@@ -767,8 +768,8 @@ msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
 "pour retrouver vos raccourcis."
 msgstr ""
-"A 16-digit number, with no name or email. You write it down, and it's enough "
-"to recover your shortcuts."
+"A 16-digit number, with no name or email. You write it down, and it's enough"
+" to recover your shortcuts."
 
 #: core/templates/core/account.html:75
 msgid "Créer un compte anonyme"
@@ -791,8 +792,8 @@ msgid ""
 "Le rendez-vous collectif des Grands Voisins : décider ensemble, en présence "
 "ou à distance."
 msgstr ""
-"The collective gathering of Les Grands Voisins: deciding together, in person "
-"or remotely."
+"The collective gathering of Les Grands Voisins: deciding together, in person"
+" or remotely."
 
 #: core/templates/core/agenda.html:9
 msgid "Les Conseils des Voisins"
@@ -832,8 +833,8 @@ msgid ""
 "Écrivez-nous à <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. "
 "Un voisin vous répond, pas un robot."
 msgstr ""
-"Write to us at <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. A "
-"neighbor answers you, not a robot."
+"Write to us at <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. A"
+" neighbor answers you, not a robot."
 
 #: core/templates/core/agenda.html:24
 msgid "Prochains évènements"
@@ -992,8 +993,8 @@ msgid ""
 "Porté par Les Grands Voisins, à Fontenay-aux-Roses et dans le 14ᵉ "
 "arrondissement de Paris."
 msgstr ""
-"Run by Les Grands Voisins, in Fontenay-aux-Roses and the 14th arrondissement "
-"of Paris."
+"Run by Les Grands Voisins, in Fontenay-aux-Roses and the 14th arrondissement"
+" of Paris."
 
 #: core/templates/core/base.html:69
 msgid ""
@@ -1052,11 +1053,13 @@ msgstr "By email"
 #: core/templates/core/contact.html:10
 #, python-format
 msgid ""
-"Écrivez-nous directement à <a href=\"mailto:"
-"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Nous répondons en quelques jours."
+"Écrivez-nous directement à <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Nous répondons en "
+"quelques jours."
 msgstr ""
-"Write to us directly at <a href=\"mailto:"
-"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. We reply within a few days."
+"Write to us directly at <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. We reply within a "
+"few days."
 
 #: core/templates/core/contact.html:13
 msgid "Aux Conseils des Voisins"
@@ -1104,8 +1107,8 @@ msgstr "Give your time"
 #, python-format
 msgid ""
 "Animer un atelier, relire le guide, dépanner un voisin, ou simplement être "
-"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a href=\"mailto:"
-"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 msgstr ""
 "Run a workshop, proofread the guide, help fix a neighbor's issue, or simply "
 "show up: everyone gives as much time as they want. Write to us at <a "
@@ -1124,8 +1127,8 @@ msgid ""
 "Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous "
 "est nécessaire, mais elle n'est jamais publiée sans votre accord."
 msgstr ""
-"A donation can stay anonymous. If you want a receipt, we need your identity, "
-"but it is never published without your consent."
+"A donation can stay anonymous. If you want a receipt, we need your identity,"
+" but it is never published without your consent."
 
 #: core/templates/core/contributions.html:19
 msgid "Donner du matériel"
@@ -1134,7 +1137,8 @@ msgstr "Donate equipment"
 #: core/templates/core/contributions.html:19
 msgid ""
 "[À compléter : matériel accepté, effacement des données, lieu de dépôt.]"
-msgstr "[To be completed: accepted equipment, data wiping, drop-off location.]"
+msgstr ""
+"[To be completed: accepted equipment, data wiping, drop-off location.]"
 
 #: core/templates/core/contributions.html:23
 msgid "Nos soutiens"
@@ -1155,19 +1159,37 @@ msgid "Modifier « %(name)s » — Voisinternet"
 msgstr "Edit “%(name)s” — Voisinternet"
 
 #: core/templates/core/fiche_modifier.html:7
+#: core/templates/core/mes_fiches.html:7
+#: core/templates/core/partials/page_head.html:3
+msgid "Fil d’Ariane"
+msgstr "Breadcrumb"
+
+#: core/templates/core/fiche_modifier.html:9
+#: core/templates/core/mes_fiches.html:9
+#: core/templates/core/partials/page_head.html:5
+msgid "Accueil"
+msgstr "Home"
+
+#: core/templates/core/fiche_modifier.html:12
+#: core/templates/core/mes_fiches.html:12
+#: core/templates/core/mes_fiches.html:22
+msgid "Mes fiches"
+msgstr "My listings"
+
+#: core/templates/core/fiche_modifier.html:16
 #, python-format
 msgid "Modifier « %(name)s »"
 msgstr "Edit “%(name)s”"
 
-#: core/templates/core/fiche_modifier.html:13
+#: core/templates/core/fiche_modifier.html:22
 msgid "Ma fiche"
 msgstr "My listing"
 
-#: core/templates/core/fiche_modifier.html:14
+#: core/templates/core/fiche_modifier.html:23
 msgid "← Mes fiches"
 msgstr "← My listings"
 
-#: core/templates/core/fiche_modifier.html:19
+#: core/templates/core/fiche_modifier.html:28
 msgid "Enregistrer"
 msgstr "Save"
 
@@ -1177,8 +1199,8 @@ msgstr "Grands Voisins: the association — Voisinternet"
 
 #: core/templates/core/grandsvoisins.html:5
 msgid ""
-"Voisinternet est un programme porté par l'association coopérative Les Grands "
-"Voisins : une conscience collective à laquelle chacun contribue. Nous "
+"Voisinternet est un programme porté par l'association coopérative Les Grands"
+" Voisins : une conscience collective à laquelle chacun contribue. Nous "
 "demandons votre confiance : voici de quoi la vérifier."
 msgstr ""
 "Voisinternet is a program run by the cooperative association Les Grands "
@@ -1196,8 +1218,8 @@ msgid ""
 "croyons aux ponts entre l'utopie et le réel, et à l'accueil de chacun."
 msgstr ""
 "Written collectively by around a hundred people in 2017, our purpose comes "
-"from the cracks in concrete and public policy: we believe in bridges between "
-"utopia and reality, and in welcoming everyone."
+"from the cracks in concrete and public policy: we believe in bridges between"
+" utopia and reality, and in welcoming everyone."
 
 #: core/templates/core/grandsvoisins.html:13
 msgid "D'où nous venons"
@@ -1295,8 +1317,8 @@ msgstr "Get out of their cloud."
 
 #: core/templates/core/home.html:11
 msgid ""
-"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un "
-"voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
+"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un"
+" voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
 "accompagnent."
 msgstr ""
 "Your emails, photos and calendars can live at home, or with a trusted "
@@ -1421,8 +1443,8 @@ msgid ""
 "nuage</strong>, et gardez votre part de soleil."
 msgstr ""
 "The philosopher asked the most powerful man for nothing, except to stop "
-"blocking his light. We put it in the plural: <strong>get out of their cloud</"
-"strong>, and keep your share of sunlight."
+"blocking his light. We put it in the plural: <strong>get out of their "
+"cloud</strong>, and keep your share of sunlight."
 
 #: core/templates/core/home.html:113
 msgid "Le guide et le blog"
@@ -1448,49 +1470,45 @@ msgstr "All articles"
 msgid "Mes fiches dans l'annuaire — Voisinternet"
 msgstr "My directory listings — Voisinternet"
 
-#: core/templates/core/mes_fiches.html:8
+#: core/templates/core/mes_fiches.html:16
 msgid ""
 "Créez et gérez vos propres pages dans l'annuaire : personnes ou structures. "
 "Elles ne deviennent visibles de tous qu'une fois « apparaît publiquement » "
 "coché — c'est votre consentement explicite."
 msgstr ""
-"Create and manage your own directory listings: people or organizations. They "
-"only become visible to everyone once “appears publicly” is checked — that is "
-"your explicit consent."
+"Create and manage your own directory listings: people or organizations. They"
+" only become visible to everyone once “appears publicly” is checked — that "
+"is your explicit consent."
 
-#: core/templates/core/mes_fiches.html:14
-msgid "Mes fiches"
-msgstr "My listings"
-
-#: core/templates/core/mes_fiches.html:22
+#: core/templates/core/mes_fiches.html:30
 msgid "Publique"
 msgstr "Public"
 
-#: core/templates/core/mes_fiches.html:22
+#: core/templates/core/mes_fiches.html:30
 msgid "Non publiée"
 msgstr "Not published"
 
-#: core/templates/core/mes_fiches.html:23
+#: core/templates/core/mes_fiches.html:31
 msgid "Modifier"
 msgstr "Edit"
 
-#: core/templates/core/mes_fiches.html:24
+#: core/templates/core/mes_fiches.html:32
 msgid "Supprimer cette fiche ?"
 msgstr "Delete this listing?"
 
-#: core/templates/core/mes_fiches.html:24
+#: core/templates/core/mes_fiches.html:32
 msgid "Supprimer"
 msgstr "Delete"
 
-#: core/templates/core/mes_fiches.html:30
+#: core/templates/core/mes_fiches.html:38
 msgid "Vous n'avez pas encore de fiche dans l'annuaire."
 msgstr "You don't have a directory listing yet."
 
-#: core/templates/core/mes_fiches.html:36
+#: core/templates/core/mes_fiches.html:44
 msgid "Créer une fiche"
 msgstr "Create a listing"
 
-#: core/templates/core/mes_fiches.html:41
+#: core/templates/core/mes_fiches.html:49
 msgid "Créer la fiche"
 msgstr "Create the listing"
 
@@ -1502,7 +1520,8 @@ msgstr "Digital — Voisinternet"
 msgid ""
 "Revalorisation en numérique : matériel reconditionné et compétences "
 "partagées."
-msgstr "Digital skills development: refurbished equipment and shared know-how."
+msgstr ""
+"Digital skills development: refurbished equipment and shared know-how."
 
 #: core/templates/core/numerique.html:9
 msgid "Revalorisation en numérique"
@@ -1560,8 +1579,8 @@ msgid ""
 "Markdown ou HTML acceptés : **gras**, _italique_, [lien](https://…), listes "
 "avec « - »."
 msgstr ""
-"Markdown or HTML accepted: **bold**, _italic_, [link](https://…), lists with "
-"“- ”."
+"Markdown or HTML accepted: **bold**, _italic_, [link](https://…), lists with"
+" “- ”."
 
 #: core/templates/core/partials/entry_form_fields.html:8
 msgid "Aperçu"
@@ -1719,7 +1738,8 @@ msgid "Mes raccourcis — Voisinternet"
 msgstr "My shortcuts — Voisinternet"
 
 #: core/templates/core/raccourcis.html:5
-msgid "Les services que vous avez choisis, à ajouter ou retirer à tout moment."
+msgid ""
+"Les services que vous avez choisis, à ajouter ou retirer à tout moment."
 msgstr "The services you've chosen, to add or remove at any time."
 
 #: core/templates/core/raccourcis.html:19

@@ -864,37 +864,12 @@ section.block {
 
 .pers {
   font-family: var(--serif);
-  font-style: italic;
-  color: var(--ink-soft)
-}
-
-.row .form {
   font-size: 1.35rem;
-  display: block;
-  font-style: normal;
   color: var(--ink)
 }
 
 .dest {
   color: var(--ink-soft)
-}
-
-.dest b {
-  color: var(--ink);
-  font-weight: 600;
-  display: block
-}
-
-.nouns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 2.5rem;
-  margin-top: 1rem
-}
-
-.nouns .row {
-  border-bottom: 0;
-  border-top: 1px dashed var(--line)
 }
 
 /* Étapes */
@@ -1338,14 +1313,6 @@ blockquote p {
   font-weight: 600
 }
 
-.page-conj {
-  font-family: var(--serif);
-  font-weight: 700;
-  font-size: 1.5rem;
-  margin: 0 0 .2rem;
-  color: var(--ink-soft)
-}
-
 .page-head h1 {
   font-family: var(--serif);
   font-size: clamp(2.1rem, 4.5vw, 3.2rem);
@@ -1744,8 +1711,7 @@ blockquote p {
     padding: 1.1rem .6rem .6rem
   }
 
-  .conj-grid,
-  .nouns {
+  .conj-grid {
     grid-template-columns: 1fr
   }
 

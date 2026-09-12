@@ -1,6 +1,5 @@
 """
-Le plan du site est la conjugaison de « voir ».
-Une seule source : l'en-tête, la page d'accueil et le pied de page lisent cette liste.
+Le plan du site : une seule source, lue par l'en-tête, la page d'accueil et le pied de page.
 """
 
 from dataclasses import dataclass
@@ -44,14 +43,6 @@ ENTRIES = [
         _("les identités auxquelles vous adhérez, individuelles ou collectives"),
         _("un particulier, une association, une entreprise…"),
         "core:groupes",
-        "compte",
-    ),
-    Entry(
-        "compte",
-        _("Mon compte"),
-        _("votre statut, vos contributions financières, les actions sur le compte"),
-        _("connecté ou anonyme : rattacher, retrouver ou fermer votre compte"),
-        "core:account",
         "compte",
     ),
     Entry(

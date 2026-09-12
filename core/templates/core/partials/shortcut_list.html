@@ -1,17 +1,55 @@
-{% load i18n %}{% if shortcuts %}
-<ul class="svc">
-  {% for shortcut in shortcuts %}{% with service=shortcut.service %}
-  <li>
-    {% if service.icon %}<img class="svc-icon" src="{{ service.icon.url }}" alt="">{% else %}<span class="led" aria-hidden="true"></span>{% endif %}
-    <div><h3>{% if service.url %}<a href="{{ service.url }}">{{ service.name }}</a>{% else %}{{ service.name }}{% endif %}</h3><p>{{ service.summary }}</p></div>
-    <div class="shortcut-tools">
-      <form method="post" action="{% url 'core:reorder_shortcut' service.slug 'up' %}" hx-post="{% url 'core:reorder_shortcut' service.slug 'up' %}" hx-target="#shortcuts-list" hx-swap="innerHTML">{% csrf_token %}<button class="move-btn" type="submit" aria-label="{% blocktrans with name=service.name %}Monter {{ name }}{% endblocktrans %}" {% if forloop.first %}disabled{% endif %}>↑</button></form>
-      <form method="post" action="{% url 'core:reorder_shortcut' service.slug 'down' %}" hx-post="{% url 'core:reorder_shortcut' service.slug 'down' %}" hx-target="#shortcuts-list" hx-swap="innerHTML">{% csrf_token %}<button class="move-btn" type="submit" aria-label="{% blocktrans with name=service.name %}Descendre {{ name }}{% endblocktrans %}" {% if forloop.last %}disabled{% endif %}>↓</button></form>
-      {% include "core/partials/shortcut_button.html" with added=True target_id="#shortcuts-list" swap="innerHTML" %}
-    </div>
-  </li>
-  {% endwith %}{% endfor %}
-</ul>
+{% load i18n %}
+{% if shortcuts %}
+  <ul class="svc">
+    {% for shortcut in shortcuts %}
+      {% with service=shortcut.service %}
+        <li>
+          {% if service.icon %}
+            <img class="svc-icon" src="{{ service.icon.url }}" alt="">
+          {% else %}
+            <span class="led" aria-hidden="true"></span>
+          {% endif %}
+          <div>
+            <h3>
+              {% if service.url %}
+                <a href="{{ service.url }}">{{ service.name }}</a>
+              {% else %}
+                {{ service.name }}
+              {% endif %}
+            </h3>
+            <p>{{ service.summary }}</p>
+          </div>
+          <div class="shortcut-tools">
+            <form method="post"
+                  action="{% url 'core:reorder_shortcut' service.slug 'up' %}"
+                  hx-post="{% url 'core:reorder_shortcut' service.slug 'up' %}"
+                  hx-target="#shortcuts-list"
+                  hx-swap="innerHTML">
+              {% csrf_token %}
+              <button class="move-btn"
+                      type="submit"
+                      aria-label="{% blocktrans with name=service.name %}Monter {{ name }}{% endblocktrans %}"
+                      {% if forloop.first %}disabled{% endif %}>↑</button>
+            </form>
+            <form method="post"
+                  action="{% url 'core:reorder_shortcut' service.slug 'down' %}"
+                  hx-post="{% url 'core:reorder_shortcut' service.slug 'down' %}"
+                  hx-target="#shortcuts-list"
+                  hx-swap="innerHTML">
+              {% csrf_token %}
+              <button class="move-btn"
+                      type="submit"
+                      aria-label="{% blocktrans with name=service.name %}Descendre {{ name }}{% endblocktrans %}"
+                      {% if forloop.last %}disabled{% endif %}>↓</button>
+            </form>
+            {% include "core/partials/shortcut_button.html" with added=True target_id="#shortcuts-list" swap="innerHTML" %}
+          </div>
+        </li>
+      {% endwith %}
+    {% endfor %}
+  </ul>
 {% else %}
-<p class="intro">{% trans "Aucun raccourci pour l'instant." %} <a href="{% url 'core:raccourcis' %}#available-services">{% trans "Choisissez vos services" %}</a>, {% trans "ils apparaîtront ici." %}</p>
+  <p class="intro">
+    {% trans "Aucun raccourci pour l'instant." %} <a href="{% url 'core:raccourcis' %}#available-services">{% trans "Choisissez vos services" %}</a>, {% trans "ils apparaîtront ici." %}
+  </p>
 {% endif %}

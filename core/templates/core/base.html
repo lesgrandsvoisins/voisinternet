@@ -1,53 +1,99 @@
-{% load static i18n %}<!DOCTYPE html>
+{% load static i18n %}
+<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
-<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="htmx-config" content='{"includeIndicatorStyles":false}'>
-<title>{% block title %}Voisinternet{% endblock %}</title>
-<meta name="description" content="{% block description %}{% blocktrans %}Voisinternet, porté par Les Grands Voisins : héberger ses courriels, fichiers et agendas chez soi ou chez un voisin de confiance.{% endblocktrans %}{% endblock %}">
-<link rel="icon" href="{% static 'core/favicon.svg' %}" type="image/svg+xml">
-<link rel="stylesheet" href="{% static 'core/css/site.css' %}">
-<script src="{% static 'core/js/htmx.min.js' %}" defer></script>
-<script src="{% static 'core/js/alpine.min.js' %}" defer></script>
-<script src="{% static 'core/js/site.js' %}" defer></script>
-</head>
-<body>
-<a class="skip" href="#contenu">{% trans "Aller au contenu" %}</a>
-
-<header class="top">
-  <div class="wrap">
-    <a class="brand" href="{% url 'core:home' %}" aria-label="{% trans 'Voisinternet, accueil' %}">{% include "core/partials/logo_mark.html" %}{% include "core/partials/wordmark.html" %}</a>
-    <div class="menu" x-data="{ open: false, active: '{{ conj_groups.0.key }}' }" x-on:keydown.escape.window="open = false" x-on:click.outside="open = false">
-      <button type="button" class="menu-btn" x-on:click="open = !open" x-bind:aria-expanded="open.toString()" aria-controls="main-menu-panel"><span class="bars" aria-hidden="true"><i></i></span><span class="label">{% trans "Menu" %}</span></button>
-      <nav class="mega" id="main-menu-panel" x-show="open" x-cloak aria-label="{% trans 'Menu principal' %}"
-           x-transition:enter="mega-enter" x-transition:enter-start="mega-enter-start" x-transition:enter-end="mega-enter-end"
-           x-transition:leave="mega-leave" x-transition:leave-start="mega-leave-start" x-transition:leave-end="mega-leave-end">
-        <div class="wrap mega-grid">
-          <div class="mega-tabs" role="tablist" aria-orientation="vertical">
-            {% for group in conj_groups %}
-            <button type="button" role="tab" class="mega-tab cap-{{ group.key }}"
-                    id="mega-tab-{{ group.key }}"
-                    aria-controls="mega-panel-{{ group.key }}"
-                    x-bind:aria-selected="(active === '{{ group.key }}').toString()"
-                    x-bind:tabindex="active === '{{ group.key }}' ? 0 : -1"
-                    x-bind:class="{ 'is-active': active === '{{ group.key }}' }"
-                    x-on:click="active = '{{ group.key }}'"
-                    x-on:focus="active = '{{ group.key }}'"
-                    x-on:keydown.down.prevent="($event.target.nextElementSibling || $event.target.parentElement.firstElementChild).focus()"
-                    x-on:keydown.up.prevent="($event.target.previousElementSibling || $event.target.parentElement.lastElementChild).focus()">{{ group.caption }}</button>
-            {% endfor %}
-          </div>
-          <div class="mega-panels">
-            {% for group in conj_groups %}
-            <ul class="mega-panel" role="tabpanel" id="mega-panel-{{ group.key }}" aria-labelledby="mega-tab-{{ group.key }}" x-show="active === '{{ group.key }}'">
-              {% for item in group.items %}
-              <li><a href="{{ item.href }}" aria-label="{{ item.entry.aria }}"{% if item.current %} aria-current="page"{% endif %}><span class="form">{{ item.entry.title }}</span>
-                <br/><small>{{ item.entry.short }}</small>
-              </a></li>
-              {% endfor %}
-            </ul>
+<html lang="{{ LANGUAGE_CODE }}"
+      dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="htmx-config" content='{"includeIndicatorStyles":false}'>
+    <title>
+      {% block title %}
+        Voisinternet
+      {% endblock title %}
+    </title>
+    <meta name="description"
+          content="{% block description %}{% blocktrans %}Voisinternet, porté par Les Grands Voisins : héberger ses courriels, fichiers et agendas chez soi ou chez un voisin de confiance.{% endblocktrans %}{% endblock description %}">
+    <link rel="icon"
+          href="{% static 'core/favicon.svg' %}"
+          type="image/svg+xml">
+    <link rel="stylesheet" href="{% static 'core/css/site.css' %}">
+    <script src="{% static 'core/js/htmx.min.js' %}" defer></script>
+    <script src="{% static 'core/js/alpine.min.js' %}" defer></script>
+    <script src="{% static 'core/js/site.js' %}" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#contenu">{% trans "Aller au contenu" %}</a>
+    <header class="top">
+      <div class="wrap">
+        <a class="brand"
+           href="{% url 'core:home' %}"
+           aria-label="{% trans 'Voisinternet, accueil' %}">
+          {% include "core/partials/logo_mark.html" %}
+          {% include "core/partials/wordmark.html" %}
+        </a>
+        <div class="menu"
+             x-data="{ open: false, active: '{{ conj_groups.0.key }}' }"
+             x-on:keydown.escape.window="open = false"
+             x-on:click.outside="open = false"
+             x-on:mouseenter="open = true"
+             x-on:mouseleave="open = false">
+          <button type="button"
+                  class="menu-btn"
+                  x-on:click="open = !open"
+                  x-bind:aria-expanded="open.toString()"
+                  aria-controls="main-menu-panel">
+            <span class="label">{% trans "Menu" %}</span>
+          </button>
+          <nav class="mega"
+               id="main-menu-panel"
+               x-show="open"
+               x-cloak
+               aria-label="{% trans 'Menu principal' %}"
+               x-transition:enter="mega-enter"
+               x-transition:enter-start="mega-enter-start"
+               x-transition:enter-end="mega-enter-end"
+               x-transition:leave="mega-leave"
+               x-transition:leave-start="mega-leave-start"
+               x-transition:leave-end="mega-leave-end">
+            <div class="wrap mega-grid">
+              <div class="mega-tabs" role="tablist" aria-orientation="vertical">
+                {% for group in conj_groups %}
+                  <button type="button"
+                          role="tab"
+                          class="mega-tab cap-{{ group.key }}"
+                          id="mega-tab-{{ group.key }}"
+                          aria-controls="mega-panel-{{ group.key }}"
+                          x-bind:aria-selected="(active === '{{ group.key }}').toString()"
+                          x-bind:tabindex="active === '{{ group.key }}' ? 0 : -1"
+                          x-bind:class="{ 'is-active': active === '{{ group.key }}' }"
+                          x-on:click="active = '{{ group.key }}'"
+                          x-on:focus="active = '{{ group.key }}'"
+                          x-on:mouseenter="active = '{{ group.key }}'"
+                          x-on:keydown.down.prevent="($event.target.nextElementSibling || $event.target.parentElement.firstElementChild).focus()"
+                          x-on:keydown.up.prevent="($event.target.previousElementSibling || $event.target.parentElement.lastElementChild).focus()">
+                    {{ group.caption }}
+                  </button>
+                {% endfor %}
+              </div>
+              <div class="mega-panels">
+                {% for group in conj_groups %}
+                  <ul class="mega-panel"
+                      role="tabpanel"
+                      id="mega-panel-{{ group.key }}"
+                      aria-labelledby="mega-tab-{{ group.key }}"
+                      x-show="active === '{{ group.key }}'">
+                    {% for item in group.items %}
+                      <li>
+                      <a href="{{ item.href }}"
+                         aria-label="{{ item.entry.aria }}"
+                         {% if item.current %}aria-current="page"{% endif %}><span class="form">{{ item.entry.title }}</span>
+                      <br />
+                      <small>{{ item.entry.short }}</small>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
             {% endfor %}
           </div>
         </div>
@@ -57,37 +103,43 @@
     {% include "core/partials/account_widget.html" %}
   </div>
 </header>
-
 <main id="contenu">
-{% block content %}{% endblock %}
+  {% block content %}
+  {% endblock content %}
 </main>
-
 <footer class="foot-wrap">
   <div class="wrap">
     <div class="foot">
       <div>
         {% include "core/partials/wordmark.html" with domain=True %}
         <p>{% trans "Porté par Les Grands Voisins, à Fontenay-aux-Roses et dans le 14ᵉ arrondissement de Paris." %}</p>
-        <p>{% trans "Seulement deux cookies techniques : votre session et la protection des formulaires. Aucun traceur, rien n'est chargé depuis un tiers." %}</p>
+        <p>
+          {% trans "Seulement deux cookies techniques : votre session et la protection des formulaires. Aucun traceur, rien n'est chargé depuis un tiers." %}
+        </p>
       </div>
       <nav class="foot-nav" aria-label="{% trans 'Plan du site' %}">
         {% for group in conj_groups %}
-        <ul>
-          {% for item in group.items %}
-          <li><a target="_new" href="{{ item.href }}" aria-label="{{ item.entry.aria }}">{{ item.entry.title }}</a></li>
-          {% endfor %}
-        </ul>
+          <ul>
+            {% for item in group.items %}
+              <li>
+                <a target="_new"
+                   href="{{ item.href }}"
+                   aria-label="{{ item.entry.aria }}">{{ item.entry.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
         {% endfor %}
       </nav>
     </div>
     <div class="foot-bottom">
       <span>{% trans "Des Voies · Nos Voix · Voisinternet" %}</span>
-      <a target="_new" href="https://github.com/lesgrandsvoisins/voisinternet" rel="noreferrer">GitHub</a>
+      <a target="_new"
+         href="https://github.com/lesgrandsvoisins/voisinternet"
+         rel="noreferrer">GitHub</a>
       <a target="_new" href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>
     </div>
   </div>
 </footer>
-
 {% include "core/partials/toasts.html" %}
 </body>
 </html>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 12:17+0200\n"
+"POT-Creation-Date: 2026-09-12 13:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "mes raccourcis (%d)"
 msgstr "mis accesos directos (%d)"
 
-#: core/accounts.py:48 core/menu.py:31
+#: core/accounts.py:48 core/menu.py:28
 msgid "mon compte"
 msgstr "mi cuenta"
 
@@ -34,228 +34,130 @@ msgstr "iniciar sesión"
 msgid "compte anonyme"
 msgstr "cuenta anónima"
 
-#: core/menu.py:28
+#: core/menu.py:25
 msgid "activités"
 msgstr "actividades"
 
-#: core/menu.py:29
+#: core/menu.py:26
 msgid "pôles"
 msgstr "polos"
 
-#: core/menu.py:30
+#: core/menu.py:27
 msgid "à propos"
 msgstr "acerca de"
 
-#: core/menu.py:37 core/menu.py:47
-msgid "mes"
-msgstr "mis"
-
-#: core/menu.py:38
-msgid "Raccourcis"
-msgstr "Accesos directos"
-
-#: core/menu.py:39 core/templates/core/account.html:32
-#: core/templates/core/partials/account_widget.html:19
+#: core/menu.py:34 core/templates/core/account.html:42
 #: core/templates/core/raccourcis.html:10
 msgid "Mes raccourcis"
 msgstr "Mis accesos directos"
 
-#: core/menu.py:40
+#: core/menu.py:35
 msgid "les services que vous avez choisis, à ajouter ou retirer"
 msgstr "los servicios que ha elegido, para añadir o quitar"
 
-#: core/menu.py:41
+#: core/menu.py:36
 msgid "se connecter, créer un compte, retrouver mes raccourcis"
 msgstr "iniciar sesión, crear una cuenta, recuperar mis accesos directos"
 
-#: core/menu.py:48
-msgid "Groupes"
-msgstr "Grupos"
-
-#: core/menu.py:49 core/templates/core/account.html:33
+#: core/menu.py:42 core/templates/core/account.html:43
 #: core/templates/core/groupes.html:10
 msgid "Mes groupes"
 msgstr "Mis grupos"
 
-#: core/menu.py:50
+#: core/menu.py:43
 msgid "les identités auxquelles vous adhérez, individuelles ou collectives"
 msgstr "las identidades a las que pertenece, individuales o colectivas"
 
-#: core/menu.py:51 core/menu.py:111
+#: core/menu.py:44 core/menu.py:84
 msgid "un particulier, une association, une entreprise…"
 msgstr "un particular, una asociación, una empresa…"
 
-#: core/menu.py:57
-msgid "mon"
-msgstr "mi"
-
-#: core/menu.py:58
-msgid "Compte"
-msgstr "Cuenta"
-
-#: core/menu.py:59 core/templates/core/account.html:28
-msgid "Mon compte"
-msgstr "Mi cuenta"
-
-#: core/menu.py:60
-msgid "votre statut, vos contributions financières, les actions sur le compte"
-msgstr ""
-"su estado, sus contribuciones financieras, y las acciones sobre la cuenta"
-
-#: core/menu.py:61
-msgid "connecté ou anonyme : rattacher, retrouver ou fermer votre compte"
-msgstr "conectado o anónimo: vincular, recuperar o cerrar su cuenta"
-
-#: core/menu.py:67
-msgid "nous"
-msgstr "nosotros"
-
-#: core/menu.py:68
-msgid "Contacter"
-msgstr "Contactar"
-
-#: core/menu.py:69
+#: core/menu.py:50
 msgid "Contact"
 msgstr "Contacto"
 
-#: core/menu.py:70
+#: core/menu.py:51
 msgid "une question, un problème : écrivez-nous"
 msgstr "una pregunta, un problema: escríbanos"
 
-#: core/menu.py:71
+#: core/menu.py:52
 msgid "un voisin vous répond, pas un robot"
 msgstr "un vecino le responde, no un robot"
 
-#: core/menu.py:77
-msgid "Grands"
-msgstr "Grands"
+#: core/menu.py:58 core/models.py:354
+msgid "Association"
+msgstr "Asociación"
 
-#: core/menu.py:78
-msgid "Voisins"
-msgstr "Voisins"
-
-#: core/menu.py:79
-msgid "L'association"
-msgstr "La Asociación"
-
-#: core/menu.py:80
+#: core/menu.py:59
 msgid "une conscience collective, l'association coopérative"
 msgstr "una conciencia colectiva, la asociación cooperativa"
 
-#: core/menu.py:81
+#: core/menu.py:60
 msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "estatutos, gobernanza, cuentas: todo es público"
 
-#: core/menu.py:87
-msgid "bénévolat"
-msgstr "voluntariado"
-
-#: core/menu.py:88
-msgid "& Dons"
-msgstr "y Donaciones"
-
-#: core/menu.py:89
+#: core/menu.py:66
 msgid "Contributions"
 msgstr "Contribuciones"
 
-#: core/menu.py:90
+#: core/menu.py:67
 msgid ""
 "du temps, un don financier, ou du matériel : sans rien attendre en retour"
 msgstr "tiempo, una donación económica, o material: sin esperar nada a cambio"
 
-#: core/menu.py:91
+#: core/menu.py:68
 msgid "donner du temps, faire un don, ou donner du matériel"
 msgstr "dar tu tiempo, hacer una donación, o donar material"
 
-#: core/menu.py:97
-msgid "notre blog"
-msgstr "nuestro blog"
-
-#: core/menu.py:98
-msgid "GrandZine"
-msgstr "GrandZine"
-
-#: core/menu.py:99
+#: core/menu.py:74
 msgid "Lisez nos articles"
 msgstr "Lee nuestros artículos"
 
-#: core/menu.py:100
+#: core/menu.py:75
 msgid "le blog couvre le civisme, les arts plastiques et le numérique"
 msgstr "el blog cubre el civismo, las artes plásticas y lo digital"
 
-#: core/menu.py:101
+#: core/menu.py:76
 msgid "les nouvelles et les tribunes des adhérents"
 msgstr "noticias y tribunas de los socios"
 
-#: core/menu.py:107
-msgid "rencontrez"
-msgstr "conoce"
-
-#: core/menu.py:108
-msgid "les Voisins"
-msgstr "a los Vecinos"
-
-#: core/menu.py:109 core/templates/core/annuaire.html:3
+#: core/menu.py:82 core/templates/core/annuaire.html:3
 msgid "Annuaire"
 msgstr "Directorio"
 
-#: core/menu.py:110
+#: core/menu.py:83
 msgid "qui fait partie de la communauté, et comment les joindre"
 msgstr "quién forma parte de la comunidad, y cómo contactarlo"
 
-#: core/menu.py:117 core/models.py:303
-msgid "évènements"
-msgstr "eventos"
-
-#: core/menu.py:118
-msgid "& Programmation"
-msgstr "y Programación"
-
-#: core/menu.py:119
+#: core/menu.py:90
 msgid "Agenda"
 msgstr "Agenda"
 
-#: core/menu.py:120
+#: core/menu.py:91
 msgid "les rendez-vous collectifs, en ligne ou en présence"
 msgstr "encuentros colectivos, en línea o presenciales"
 
-#: core/menu.py:121
+#: core/menu.py:92
 msgid "les conseils des voisins, deux séances pour un même ordre du jour"
 msgstr "los Conseils des Voisins, dos sesiones para un mismo orden del día"
 
-#: core/menu.py:127
-msgid "lire"
-msgstr "leer"
-
-#: core/menu.py:128
-msgid "le manuel d'utilisation"
-msgstr "el manual de uso"
-
-#: core/menu.py:129
+#: core/menu.py:98
 msgid "Wiki"
 msgstr "Wiki"
 
-#: core/menu.py:130
+#: core/menu.py:99
 msgid "le guide sur comment utiliser nos outils"
 msgstr "la guía sobre cómo usar nuestras herramientas"
 
-#: core/menu.py:131
+#: core/menu.py:100
 msgid "pas à pas, du premier serveur aux sauvegardes"
 msgstr "paso a paso, desde tu primer servidor hasta las copias de seguridad"
 
-#: core/menu.py:137 core/menu.py:147 core/menu.py:157
-msgid "pôle"
-msgstr "polo"
-
-#: core/menu.py:138
-msgid "pour se comprendre"
-msgstr "para entendernos"
-
-#: core/menu.py:139
+#: core/menu.py:106
 msgid "Civisme"
 msgstr "Compromiso cívico"
 
-#: core/menu.py:140
+#: core/menu.py:107
 msgid ""
 "Profession d'empathie nationale, prix d'excellence en service public et en "
 "travail social"
@@ -263,39 +165,31 @@ msgstr ""
 "Profession d'Empathie Nationale, premio a la excelencia en el servicio "
 "público y el trabajo social"
 
-#: core/menu.py:141
+#: core/menu.py:108
 msgid "s'engager pour l'intérêt général, entre voisins"
 msgstr "comprometerse por el interés general, entre vecinos"
 
-#: core/menu.py:148
-msgid "visuel"
-msgstr "visual"
-
-#: core/menu.py:149
+#: core/menu.py:114
 msgid "Arts Plastiques"
 msgstr "Artes plásticas"
 
-#: core/menu.py:150
+#: core/menu.py:115
 msgid "Galléries d'art dans des lieux insolites et soutien aux artistes"
 msgstr "Galerías de arte en lugares insólitos, y apoyo a los artistas"
 
-#: core/menu.py:151
+#: core/menu.py:116
 msgid "transformer tout lieu en galerie d'art hybride"
 msgstr "transformar cualquier lugar en una galería de arte híbrida"
 
-#: core/menu.py:158
-msgid "pour le dèsenclavement"
-msgstr "para la inclusión digital"
-
-#: core/menu.py:159
+#: core/menu.py:122
 msgid "Numérique"
 msgstr "Digital"
 
-#: core/menu.py:160
+#: core/menu.py:123
 msgid "Salles de sociabilité numérique et Voisinternet"
 msgstr "Salas de sociabilidad digital, y Voisinternet"
 
-#: core/menu.py:161
+#: core/menu.py:124
 msgid "matériel reconditionné et compétences partagées"
 msgstr "material reacondicionado y competencias compartidas"
 
@@ -597,6 +491,10 @@ msgstr "publicado"
 msgid "évènement"
 msgstr "evento"
 
+#: core/models.py:303
+msgid "évènements"
+msgstr "eventos"
+
 #: core/models.py:315
 msgid "Autre"
 msgstr "Otro"
@@ -641,10 +539,6 @@ msgstr "Fundación"
 msgid "Collectivité"
 msgstr "Entidad pública"
 
-#: core/models.py:354
-msgid "Association"
-msgstr "Asociación"
-
 #: core/models.py:356
 msgid "nom affiché"
 msgstr "nombre mostrado"
@@ -669,18 +563,37 @@ msgstr "donante"
 msgid "mon Compte — Voisinternet"
 msgstr "mi Cuenta — Voisinternet"
 
-#: core/templates/core/account.html:5
+#: core/templates/core/account.html:7
+#: core/templates/core/fiche_modifier.html:7
+#: core/templates/core/mes_fiches.html:7
+#: core/templates/core/partials/page_head.html:3
+msgid "Fil d’Ariane"
+msgstr "Ruta de navegación"
+
+#: core/templates/core/account.html:9
+#: core/templates/core/fiche_modifier.html:9
+#: core/templates/core/mes_fiches.html:9
+#: core/templates/core/partials/page_head.html:5
+msgid "Accueil"
+msgstr "Inicio"
+
+#: core/templates/core/account.html:10 core/templates/core/account.html:13
+#: core/templates/core/account.html:38
+msgid "Mon compte"
+msgstr "Mi cuenta"
+
+#: core/templates/core/account.html:14
 msgid ""
 "Votre statut, vos contributions financières, et les actions sur votre "
 "compte."
 msgstr ""
 "Su estado, sus contribuciones financieras, y las acciones sobre su cuenta."
 
-#: core/templates/core/account.html:11
+#: core/templates/core/account.html:21
 msgid "Votre numéro de compte"
 msgstr "Tu número de cuenta"
 
-#: core/templates/core/account.html:13
+#: core/templates/core/account.html:23
 msgid ""
 "Notez-le maintenant. Nous n'en gardons qu'une empreinte : nous ne pourrons "
 "jamais vous le redonner. Il suffit, seul, pour retrouver vos raccourcis sur "
@@ -690,11 +603,11 @@ msgstr ""
 "dártelo. Basta por sí solo para recuperar tus accesos directos en otro "
 "dispositivo."
 
-#: core/templates/core/account.html:19
+#: core/templates/core/account.html:29
 msgid "Un compte anonyme est ouvert sur cet appareil"
 msgstr "Hay una cuenta anónima abierta en este dispositivo"
 
-#: core/templates/core/account.html:20
+#: core/templates/core/account.html:30
 msgid ""
 "Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
 " ensuite supprimé."
@@ -702,79 +615,79 @@ msgstr ""
 "¿Quieres vincular sus accesos directos a tu cuenta? La cuenta anónima se "
 "eliminará después."
 
-#: core/templates/core/account.html:21
+#: core/templates/core/account.html:31
 msgid "Rattacher mes raccourcis"
 msgstr "Vincular mis accesos directos"
 
-#: core/templates/core/account.html:29
+#: core/templates/core/account.html:39
 msgid "Connecté"
 msgstr "Conectado"
 
-#: core/templates/core/account.html:29
+#: core/templates/core/account.html:39
 msgid "Compte anonyme"
 msgstr "Cuenta anónima"
 
-#: core/templates/core/account.html:32 core/templates/core/account.html:33
-#: core/templates/core/account.html:34
+#: core/templates/core/account.html:42 core/templates/core/account.html:43
+#: core/templates/core/account.html:44
 msgid "Gérer"
 msgstr "Gestionar"
 
-#: core/templates/core/account.html:34 core/templates/core/mes_fiches.html:15
+#: core/templates/core/account.html:44 core/templates/core/mes_fiches.html:15
 msgid "Mes fiches dans l'annuaire"
 msgstr "Mis fichas en el directorio"
 
-#: core/templates/core/account.html:38
-#: core/templates/core/partials/account_widget.html:35
+#: core/templates/core/account.html:48
+#: core/templates/core/partials/account_widget.html:58
 msgid "Se déconnecter"
 msgstr "Cerrar sesión"
 
-#: core/templates/core/account.html:40
+#: core/templates/core/account.html:50
 msgid "Rattacher à mon compte Grands Voisins"
 msgstr "Vincular a mi cuenta de Grands Voisins"
 
-#: core/templates/core/account.html:41
-#: core/templates/core/partials/account_widget.html:39
+#: core/templates/core/account.html:51
+#: core/templates/core/partials/account_widget.html:65
 msgid "Fermer ce compte sur cet appareil"
 msgstr "Cerrar esta cuenta en este dispositivo"
 
-#: core/templates/core/account.html:49
+#: core/templates/core/account.html:59
 msgid "Mon profil"
 msgstr "Mi perfil"
 
-#: core/templates/core/account.html:50
+#: core/templates/core/account.html:60
 msgid "Géré par votre compte unique Grands Voisins"
 msgstr "Gestionado por su cuenta única Grands Voisins"
 
-#: core/templates/core/account.html:53
+#: core/templates/core/account.html:63
 msgid "Nom"
 msgstr "Nombre"
 
-#: core/templates/core/account.html:53 core/templates/core/account.html:54
+#: core/templates/core/account.html:63 core/templates/core/account.html:64
 msgid "Non renseigné"
 msgstr "No indicado"
 
-#: core/templates/core/account.html:54
+#: core/templates/core/account.html:64
 msgid "Courriel"
 msgstr "Correo electrónico"
 
-#: core/templates/core/account.html:57
+#: core/templates/core/account.html:67
 msgid "Modifier mon profil"
 msgstr "Modificar mi perfil"
 
-#: core/templates/core/account.html:64
+#: core/templates/core/account.html:74
 msgid "Mes contributions financières"
 msgstr "Mis contribuciones financieras"
 
-#: core/templates/core/account.html:73
+#: core/templates/core/account.html:83
 msgid "Aucune contribution enregistrée pour l'instant."
 msgstr "Todavía no hay ninguna contribución registrada."
 
-#: core/templates/core/account.html:80 core/templates/core/account.html:83
-#: core/templates/core/partials/account_widget.html:11
+#: core/templates/core/account.html:90 core/templates/core/account.html:93
+#: core/templates/core/partials/account_widget.html:18
 msgid "Se connecter"
 msgstr "Iniciar sesión"
 
-#: core/templates/core/account.html:81
+#: core/templates/core/account.html:91
 msgid ""
 "Avec votre compte unique des Grands Voisins, le même que pour les autres "
 "outils de l'association."
@@ -782,7 +695,7 @@ msgstr ""
 "Con tu cuenta única de Grands Voisins, la misma que usas para las demás "
 "herramientas de la asociación."
 
-#: core/templates/core/account.html:85
+#: core/templates/core/account.html:95
 msgid ""
 "La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
 "serveur."
@@ -790,11 +703,11 @@ msgstr ""
 "El inicio de sesión con cuenta de Grands Voisins aún no está configurado en "
 "este servidor."
 
-#: core/templates/core/account.html:89
+#: core/templates/core/account.html:99
 msgid "Rester anonyme"
 msgstr "Permanecer anónimo"
 
-#: core/templates/core/account.html:90
+#: core/templates/core/account.html:100
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
 "pour retrouver vos raccourcis."
@@ -802,16 +715,16 @@ msgstr ""
 "Un número de 16 cifras, sin nombre ni correo electrónico. Lo anotas, y basta"
 " para recuperar tus accesos directos."
 
-#: core/templates/core/account.html:91
-#: core/templates/core/partials/account_widget.html:14
+#: core/templates/core/account.html:101
+#: core/templates/core/partials/account_widget.html:27
 msgid "Créer un compte anonyme"
 msgstr "Crear una cuenta anónima"
 
-#: core/templates/core/account.html:93
+#: core/templates/core/account.html:103
 msgid "J'ai déjà un numéro"
 msgstr "Ya tengo un número"
 
-#: core/templates/core/account.html:96
+#: core/templates/core/account.html:106
 msgid "Retrouver"
 msgstr "Recuperar"
 
@@ -1021,7 +934,7 @@ msgstr "Menú"
 msgid "Menu principal"
 msgstr "Menú principal"
 
-#: core/templates/core/base.html:72
+#: core/templates/core/base.html:71
 msgid ""
 "Porté par Les Grands Voisins, à Fontenay-aux-Roses et dans le 14ᵉ "
 "arrondissement de Paris."
@@ -1029,7 +942,7 @@ msgstr ""
 "Impulsado por Les Grands Voisins, en Fontenay-aux-Roses y en el distrito 14 "
 "de París."
 
-#: core/templates/core/base.html:73
+#: core/templates/core/base.html:72
 msgid ""
 "Seulement deux cookies techniques : votre session et la protection des "
 "formulaires. Aucun traceur, rien n'est chargé depuis un tiers."
@@ -1037,11 +950,11 @@ msgstr ""
 "Solo dos cookies técnicas: tu sesión y la protección de formularios. Ningún "
 "rastreador, nada se carga desde terceros."
 
-#: core/templates/core/base.html:75
+#: core/templates/core/base.html:74
 msgid "Plan du site"
 msgstr "Mapa del sitio"
 
-#: core/templates/core/base.html:86
+#: core/templates/core/base.html:85
 msgid "Des Voies · Nos Voix · Voisinternet"
 msgstr "Vías · Voces · Voisinternet"
 
@@ -1191,18 +1104,6 @@ msgstr "Los primeros apoyos aparecerán aquí, con su consentimiento."
 #, python-format
 msgid "Modifier « %(name)s » — Voisinternet"
 msgstr "Modificar «%(name)s» — Voisinternet"
-
-#: core/templates/core/fiche_modifier.html:7
-#: core/templates/core/mes_fiches.html:7
-#: core/templates/core/partials/page_head.html:3
-msgid "Fil d’Ariane"
-msgstr "Ruta de navegación"
-
-#: core/templates/core/fiche_modifier.html:9
-#: core/templates/core/mes_fiches.html:9
-#: core/templates/core/partials/page_head.html:5
-msgid "Accueil"
-msgstr "Inicio"
 
 #: core/templates/core/fiche_modifier.html:12
 #: core/templates/core/mes_fiches.html:12
@@ -1377,16 +1278,12 @@ msgid "porté par Les Grands Voisins"
 msgstr "impulsado por Les Grands Voisins"
 
 #: core/templates/core/home.html:27
-msgid "Voir, au présent"
-msgstr "Ver, en presente"
+msgid "Explorer le site"
+msgstr "Explorar el sitio"
 
 #: core/templates/core/home.html:28
-msgid ""
-"Tout le site se conjugue. Choisissez votre personne, elle vous mène au bon "
-"endroit."
-msgstr ""
-"Todo el sitio se conjuga. Elige tu persona gramatical, te lleva al lugar "
-"correcto."
+msgid "Un aperçu de chaque rubrique, pour vous y retrouver."
+msgstr "Un vistazo a cada sección, para orientarse."
 
 #: core/templates/core/home.html:48
 msgid "Vous êtes…"
@@ -1588,28 +1485,28 @@ msgstr ""
 "en casa, de bajo consumo, para tus archivos y fotos. Es exactamente lo que "
 "propone Voisinternet."
 
-#: core/templates/core/partials/account_widget.html:2
+#: core/templates/core/partials/account_widget.html:7
 #, python-format
 msgid "Mon compte : %(account_sub)s"
 msgstr "Mi cuenta: %(account_sub)s"
 
-#: core/templates/core/partials/account_widget.html:3
-msgid "mes Raccourcis"
-msgstr "mis Accesos directos"
+#: core/templates/core/partials/account_widget.html:8
+msgid "mon Compte"
+msgstr "Mi cuenta"
 
-#: core/templates/core/partials/account_widget.html:7
+#: core/templates/core/partials/account_widget.html:14
 msgid "Options de mon compte"
 msgstr "Opciones de mi cuenta"
 
-#: core/templates/core/partials/account_widget.html:12
+#: core/templates/core/partials/account_widget.html:21
 msgid "Créer un compte"
 msgstr "Crear una cuenta"
 
-#: core/templates/core/partials/account_widget.html:21
+#: core/templates/core/partials/account_widget.html:36
 msgid "Paramètres"
 msgstr "Ajustes"
 
-#: core/templates/core/partials/account_widget.html:29
+#: core/templates/core/partials/account_widget.html:51
 msgid "Aucun service ajouté pour l'instant."
 msgstr "Aún no se ha añadido ningún servicio."
 

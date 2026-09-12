@@ -10,7 +10,7 @@
   </summary>
   <div class="account-menu"
        role="menu"
-       aria-label="{% trans 'Options de mon compte' %}">
+       aria-label="{% trans "Options de mon compte" %}">
     {% if not account and not user.is_authenticated %}
       <div class="account-actions">
         {% if keycloak_login_url %}

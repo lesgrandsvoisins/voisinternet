@@ -2,8 +2,18 @@
 {% load i18n %}
 {% block title %}{% trans "mon Compte — Voisinternet" %}{% endblock %}
 {% block content %}
-{% trans "Votre statut, vos contributions financières, et les actions sur votre compte." as page_lead %}
-{% include "core/partials/page_head.html" with item=conj.compte lead=page_lead %}
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+      <ol>
+        <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+        <li aria-current="page">{% trans "Mon compte" %}</li>
+      </ol>
+    </nav>
+    <h1>{% trans "Mon compte" %}</h1>
+    <p class="lead">{% trans "Votre statut, vos contributions financières, et les actions sur votre compte." %}</p>
+  </div>
+</div>
 <div class="wrap page">
 
   {% if new_number %}

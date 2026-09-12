@@ -850,6 +850,12 @@ section.block {
   overflow: hidden
 }
 
+/* Listes personnelles réordonnables (raccourcis, groupes) : la rangée porte trois
+   contrôles (monter, descendre, retirer) qui ont besoin de toute la largeur. */
+.svc-actions {
+  grid-template-columns: 1fr
+}
+
 .svc li {
   display: grid;
   grid-template-columns: auto 1fr auto;

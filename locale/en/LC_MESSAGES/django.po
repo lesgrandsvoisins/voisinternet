@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 11:56+0200\n"
+"POT-Creation-Date: 2026-09-12 12:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,7 +55,7 @@ msgid "Raccourcis"
 msgstr "Shortcuts"
 
 #: core/menu.py:39 core/templates/core/account.html:32
-#: core/templates/core/partials/account_widget.html:16
+#: core/templates/core/partials/account_widget.html:19
 #: core/templates/core/raccourcis.html:10
 msgid "Mes raccourcis"
 msgstr "My shortcuts"
@@ -667,7 +667,8 @@ msgstr "my Account — Voisinternet"
 
 #: core/templates/core/account.html:5
 msgid ""
-"Votre statut, vos contributions financières, et les actions sur votre compte."
+"Votre statut, vos contributions financières, et les actions sur votre "
+"compte."
 msgstr ""
 "Your status, your financial contributions, and the actions on your account."
 
@@ -691,8 +692,8 @@ msgstr "An anonymous account is open on this device"
 
 #: core/templates/core/account.html:20
 msgid ""
-"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera "
-"ensuite supprimé."
+"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
+" ensuite supprimé."
 msgstr ""
 "Would you like to attach its shortcuts to your account? The anonymous "
 "account will then be deleted."
@@ -719,7 +720,7 @@ msgid "Mes fiches dans l'annuaire"
 msgstr "My directory listings"
 
 #: core/templates/core/account.html:38
-#: core/templates/core/partials/account_widget.html:32
+#: core/templates/core/partials/account_widget.html:35
 msgid "Se déconnecter"
 msgstr "Log out"
 
@@ -728,23 +729,48 @@ msgid "Rattacher à mon compte Grands Voisins"
 msgstr "Attach to my Grands Voisins account"
 
 #: core/templates/core/account.html:41
+#: core/templates/core/partials/account_widget.html:39
 msgid "Fermer ce compte sur cet appareil"
 msgstr "Close this account on this device"
 
-#: core/templates/core/account.html:48
+#: core/templates/core/account.html:49
+msgid "Mon profil"
+msgstr "My profile"
+
+#: core/templates/core/account.html:50
+msgid "Géré par votre compte unique Grands Voisins"
+msgstr "Managed by your single Grands Voisins account"
+
+#: core/templates/core/account.html:53
+msgid "Nom"
+msgstr "Name"
+
+#: core/templates/core/account.html:53 core/templates/core/account.html:54
+msgid "Non renseigné"
+msgstr "Not provided"
+
+#: core/templates/core/account.html:54
+msgid "Courriel"
+msgstr "Email"
+
+#: core/templates/core/account.html:57
+msgid "Modifier mon profil"
+msgstr "Edit my profile"
+
+#: core/templates/core/account.html:64
 msgid "Mes contributions financières"
 msgstr "My financial contributions"
 
-#: core/templates/core/account.html:57
+#: core/templates/core/account.html:73
 msgid "Aucune contribution enregistrée pour l'instant."
 msgstr "No contribution recorded yet."
 
-#: core/templates/core/account.html:64 core/templates/core/account.html:67
-#: core/templates/core/partials/account_widget.html:10
+#: core/templates/core/account.html:80 core/templates/core/account.html:83
+#: core/templates/core/partials/account_widget.html:11
 msgid "Se connecter"
 msgstr "Log in"
 
-#: core/templates/core/account.html:65
+#: core/templates/core/account.html:81
 msgid ""
 "Avec votre compte unique des Grands Voisins, le même que pour les autres "
 "outils de l'association."
@@ -752,34 +778,35 @@ msgstr ""
 "With your single Grands Voisins account, the same one used for the "
 "association's other tools."
 
-#: core/templates/core/account.html:69
+#: core/templates/core/account.html:85
 msgid ""
 "La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
 "serveur."
 msgstr ""
 "Login with a Grands Voisins account is not yet configured on this server."
 
-#: core/templates/core/account.html:73
+#: core/templates/core/account.html:89
 msgid "Rester anonyme"
 msgstr "Stay anonymous"
 
-#: core/templates/core/account.html:74
+#: core/templates/core/account.html:90
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
 "pour retrouver vos raccourcis."
 msgstr ""
-"A 16-digit number, with no name or email. You write it down, and it's enough "
-"to recover your shortcuts."
+"A 16-digit number, with no name or email. You write it down, and it's enough"
+" to recover your shortcuts."
 
-#: core/templates/core/account.html:75
+#: core/templates/core/account.html:91
+#: core/templates/core/partials/account_widget.html:14
 msgid "Créer un compte anonyme"
 msgstr "Create an anonymous account"
 
-#: core/templates/core/account.html:77
+#: core/templates/core/account.html:93
 msgid "J'ai déjà un numéro"
 msgstr "I already have a number"
 
-#: core/templates/core/account.html:80
+#: core/templates/core/account.html:96
 msgid "Retrouver"
 msgstr "Recover"
 
@@ -792,8 +819,8 @@ msgid ""
 "Le rendez-vous collectif des Grands Voisins : décider ensemble, en présence "
 "ou à distance."
 msgstr ""
-"The collective gathering of Les Grands Voisins: deciding together, in person "
-"or remotely."
+"The collective gathering of Les Grands Voisins: deciding together, in person"
+" or remotely."
 
 #: core/templates/core/agenda.html:9
 msgid "Les Conseils des Voisins"
@@ -833,8 +860,8 @@ msgid ""
 "Écrivez-nous à <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. "
 "Un voisin vous répond, pas un robot."
 msgstr ""
-"Write to us at <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. A "
-"neighbor answers you, not a robot."
+"Write to us at <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. A"
+" neighbor answers you, not a robot."
 
 #: core/templates/core/agenda.html:24
 msgid "Prochains évènements"
@@ -988,15 +1015,15 @@ msgstr "Menu"
 msgid "Menu principal"
 msgstr "Main menu"
 
-#: core/templates/core/base.html:68
+#: core/templates/core/base.html:72
 msgid ""
 "Porté par Les Grands Voisins, à Fontenay-aux-Roses et dans le 14ᵉ "
 "arrondissement de Paris."
 msgstr ""
-"Run by Les Grands Voisins, in Fontenay-aux-Roses and the 14th arrondissement "
-"of Paris."
+"Run by Les Grands Voisins, in Fontenay-aux-Roses and the 14th arrondissement"
+" of Paris."
 
-#: core/templates/core/base.html:69
+#: core/templates/core/base.html:73
 msgid ""
 "Seulement deux cookies techniques : votre session et la protection des "
 "formulaires. Aucun traceur, rien n'est chargé depuis un tiers."
@@ -1004,11 +1031,11 @@ msgstr ""
 "Only two technical cookies: your session and form protection. No trackers, "
 "nothing loaded from a third party."
 
-#: core/templates/core/base.html:71
+#: core/templates/core/base.html:75
 msgid "Plan du site"
 msgstr "Site map"
 
-#: core/templates/core/base.html:82
+#: core/templates/core/base.html:86
 msgid "Des Voies · Nos Voix · Voisinternet"
 msgstr "Ways · Voices · Voisinternet"
 
@@ -1053,11 +1080,13 @@ msgstr "By email"
 #: core/templates/core/contact.html:10
 #, python-format
 msgid ""
-"Écrivez-nous directement à <a href=\"mailto:"
-"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Nous répondons en quelques jours."
+"Écrivez-nous directement à <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Nous répondons en "
+"quelques jours."
 msgstr ""
-"Write to us directly at <a href=\"mailto:"
-"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. We reply within a few days."
+"Write to us directly at <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. We reply within a "
+"few days."
 
 #: core/templates/core/contact.html:13
 msgid "Aux Conseils des Voisins"
@@ -1105,8 +1134,8 @@ msgstr "Give your time"
 #, python-format
 msgid ""
 "Animer un atelier, relire le guide, dépanner un voisin, ou simplement être "
-"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a href=\"mailto:"
-"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a "
+"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 msgstr ""
 "Run a workshop, proofread the guide, help fix a neighbor's issue, or simply "
 "show up: everyone gives as much time as they want. Write to us at <a "
@@ -1125,8 +1154,8 @@ msgid ""
 "Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous "
 "est nécessaire, mais elle n'est jamais publiée sans votre accord."
 msgstr ""
-"A donation can stay anonymous. If you want a receipt, we need your identity, "
-"but it is never published without your consent."
+"A donation can stay anonymous. If you want a receipt, we need your identity,"
+" but it is never published without your consent."
 
 #: core/templates/core/contributions.html:19
 msgid "Donner du matériel"
@@ -1135,7 +1164,8 @@ msgstr "Donate equipment"
 #: core/templates/core/contributions.html:19
 msgid ""
 "[À compléter : matériel accepté, effacement des données, lieu de dépôt.]"
-msgstr "[To be completed: accepted equipment, data wiping, drop-off location.]"
+msgstr ""
+"[To be completed: accepted equipment, data wiping, drop-off location.]"
 
 #: core/templates/core/contributions.html:23
 msgid "Nos soutiens"
@@ -1196,8 +1226,8 @@ msgstr "Grands Voisins: the association — Voisinternet"
 
 #: core/templates/core/grandsvoisins.html:5
 msgid ""
-"Voisinternet est un programme porté par l'association coopérative Les Grands "
-"Voisins : une conscience collective à laquelle chacun contribue. Nous "
+"Voisinternet est un programme porté par l'association coopérative Les Grands"
+" Voisins : une conscience collective à laquelle chacun contribue. Nous "
 "demandons votre confiance : voici de quoi la vérifier."
 msgstr ""
 "Voisinternet is a program run by the cooperative association Les Grands "
@@ -1215,8 +1245,8 @@ msgid ""
 "croyons aux ponts entre l'utopie et le réel, et à l'accueil de chacun."
 msgstr ""
 "Written collectively by around a hundred people in 2017, our purpose comes "
-"from the cracks in concrete and public policy: we believe in bridges between "
-"utopia and reality, and in welcoming everyone."
+"from the cracks in concrete and public policy: we believe in bridges between"
+" utopia and reality, and in welcoming everyone."
 
 #: core/templates/core/grandsvoisins.html:13
 msgid "D'où nous venons"
@@ -1314,8 +1344,8 @@ msgstr "Get out of their cloud."
 
 #: core/templates/core/home.html:11
 msgid ""
-"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un "
-"voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
+"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un"
+" voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
 "accompagnent."
 msgstr ""
 "Your emails, photos and calendars can live at home, or with a trusted "
@@ -1440,8 +1470,8 @@ msgid ""
 "nuage</strong>, et gardez votre part de soleil."
 msgstr ""
 "The philosopher asked the most powerful man for nothing, except to stop "
-"blocking his light. We put it in the plural: <strong>get out of their cloud</"
-"strong>, and keep your share of sunlight."
+"blocking his light. We put it in the plural: <strong>get out of their "
+"cloud</strong>, and keep your share of sunlight."
 
 #: core/templates/core/home.html:113
 msgid "Le guide et le blog"
@@ -1473,9 +1503,9 @@ msgid ""
 "Elles ne deviennent visibles de tous qu'une fois « apparaît publiquement » "
 "coché — c'est votre consentement explicite."
 msgstr ""
-"Create and manage your own directory listings: people or organizations. They "
-"only become visible to everyone once “appears publicly” is checked — that is "
-"your explicit consent."
+"Create and manage your own directory listings: people or organizations. They"
+" only become visible to everyone once “appears publicly” is checked — that "
+"is your explicit consent."
 
 #: core/templates/core/mes_fiches.html:30
 msgid "Publique"
@@ -1517,7 +1547,8 @@ msgstr "Digital — Voisinternet"
 msgid ""
 "Revalorisation en numérique : matériel reconditionné et compétences "
 "partagées."
-msgstr "Digital skills development: refurbished equipment and shared know-how."
+msgstr ""
+"Digital skills development: refurbished equipment and shared know-how."
 
 #: core/templates/core/numerique.html:9
 msgid "Revalorisation en numérique"
@@ -1558,15 +1589,15 @@ msgstr "my Shortcuts"
 msgid "Options de mon compte"
 msgstr "My account options"
 
-#: core/templates/core/partials/account_widget.html:11
+#: core/templates/core/partials/account_widget.html:12
 msgid "Créer un compte"
 msgstr "Create an account"
 
-#: core/templates/core/partials/account_widget.html:18
+#: core/templates/core/partials/account_widget.html:21
 msgid "Paramètres"
 msgstr "Settings"
 
-#: core/templates/core/partials/account_widget.html:26
+#: core/templates/core/partials/account_widget.html:29
 msgid "Aucun service ajouté pour l'instant."
 msgstr "No service added yet."
 
@@ -1575,8 +1606,8 @@ msgid ""
 "Markdown ou HTML acceptés : **gras**, _italique_, [lien](https://…), listes "
 "avec « - »."
 msgstr ""
-"Markdown or HTML accepted: **bold**, _italic_, [link](https://…), lists with "
-"“- ”."
+"Markdown or HTML accepted: **bold**, _italic_, [link](https://…), lists with"
+" “- ”."
 
 #: core/templates/core/partials/entry_form_fields.html:8
 msgid "Aperçu"
@@ -1734,7 +1765,8 @@ msgid "Mes raccourcis — Voisinternet"
 msgstr "My shortcuts — Voisinternet"
 
 #: core/templates/core/raccourcis.html:5
-msgid "Les services que vous avez choisis, à ajouter ou retirer à tout moment."
+msgid ""
+"Les services que vous avez choisis, à ajouter ou retirer à tout moment."
 msgstr "The services you've chosen, to add or remove at any time."
 
 #: core/templates/core/raccourcis.html:19

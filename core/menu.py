@@ -11,8 +11,6 @@ from django.utils.translation import gettext_lazy as _
 @dataclass(frozen=True)
 class Entry:
     key: str
-    pronoun: str
-    form: str
     title: str
     short: str
     detail: str
@@ -21,7 +19,7 @@ class Entry:
 
     @property
     def aria(self):
-        return f"{self.pronoun.capitalize()} {self.form.lower()} : {self.short}"
+        return f"{self.title.capitalize()} : {self.short}"
 
 
 GROUPS = [
@@ -34,8 +32,6 @@ GROUPS = [
 ENTRIES = [
     Entry(
         "raccourcis",
-        _("mes"),
-        _("Raccourcis"),
         _("Mes raccourcis"),
         _("les services que vous avez choisis, à ajouter ou retirer"),
         _("se connecter, créer un compte, retrouver mes raccourcis"),
@@ -44,8 +40,6 @@ ENTRIES = [
     ),
     Entry(
         "groupes",
-        _("mes"),
-        _("Groupes"),
         _("Mes groupes"),
         _("les identités auxquelles vous adhérez, individuelles ou collectives"),
         _("un particulier, une association, une entreprise…"),
@@ -54,8 +48,6 @@ ENTRIES = [
     ),
     Entry(
         "compte",
-        _("mon"),
-        _("Compte"),
         _("Mon compte"),
         _("votre statut, vos contributions financières, les actions sur le compte"),
         _("connecté ou anonyme : rattacher, retrouver ou fermer votre compte"),
@@ -64,8 +56,6 @@ ENTRIES = [
     ),
     Entry(
         "contact",
-        _("nous"),
-        _("Contacter"),
         _("Contact"),
         _("une question, un problème : écrivez-nous"),
         _("un voisin vous répond, pas un robot"),
@@ -74,9 +64,7 @@ ENTRIES = [
     ),
     Entry(
         "grandsvoisins",
-        _("Grands"),
-        _("Voisins"),
-        _("L'association"),
+        _("Association"),
         _("une conscience collective, l'association coopérative"),
         _("statuts, gouvernance, comptes : tout est public"),
         "core:grandsvoisins",
@@ -84,8 +72,6 @@ ENTRIES = [
     ),
     Entry(
         "contributions",
-        _("bénévolat"),
-        _("& Dons"),
         _("Contributions"),
         _("du temps, un don financier, ou du matériel : sans rien attendre en retour"),
         _("donner du temps, faire un don, ou donner du matériel"),
@@ -94,8 +80,6 @@ ENTRIES = [
     ),
     Entry(
         "grandzine",
-        _("notre blog"),
-        _("GrandZine"),
         _("Lisez nos articles"),
         _("le blog couvre le civisme, les arts plastiques et le numérique"),
         _("les nouvelles et les tribunes des adhérents"),
@@ -104,8 +88,6 @@ ENTRIES = [
     ),
     Entry(
         "annuaire",
-        _("rencontrez"),
-        _("les Voisins"),
         _("Annuaire"),
         _("qui fait partie de la communauté, et comment les joindre"),
         _("un particulier, une association, une entreprise…"),
@@ -114,8 +96,6 @@ ENTRIES = [
     ),
     Entry(
         "agenda",
-        _("évènements"),
-        _("& Programmation"),
         _("Agenda"),
         _("les rendez-vous collectifs, en ligne ou en présence"),
         _("les conseils des voisins, deux séances pour un même ordre du jour"),
@@ -124,8 +104,6 @@ ENTRIES = [
     ),
     Entry(
         "wiki",
-        _("lire"),
-        _("le manuel d'utilisation"),
         _("Wiki"),
         _("le guide sur comment utiliser nos outils"),
         _("pas à pas, du premier serveur aux sauvegardes"),
@@ -134,8 +112,6 @@ ENTRIES = [
     ),
     Entry(
         "civisme",
-        _("pôle"),
-        _("pour se comprendre"),
         _("Civisme"),
         _("Profession d'empathie nationale, prix d'excellence en service public et en travail social"),
         _("s'engager pour l'intérêt général, entre voisins"),
@@ -144,8 +120,6 @@ ENTRIES = [
     ),
     Entry(
         "arts_plastiques",
-        _("pôle"),
-        _("visuel"),
         _("Arts Plastiques"),
         _("Galléries d'art dans des lieux insolites et soutien aux artistes"),
         _("transformer tout lieu en galerie d'art hybride"),
@@ -154,8 +128,6 @@ ENTRIES = [
     ),
     Entry(
         "numerique",
-        _("pôle"),
-        _("pour le dèsenclavement"),
         _("Numérique"),
         _("Salles de sociabilité numérique et Voisinternet"),
         _("matériel reconditionné et compétences partagées"),

@@ -44,7 +44,6 @@
             <ul class="mega-panel" role="tabpanel" id="mega-panel-{{ group.key }}" aria-labelledby="mega-tab-{{ group.key }}" x-show="active === '{{ group.key }}'">
               {% for item in group.items %}
               <li><a href="{{ item.href }}" aria-label="{{ item.entry.aria }}"{% if item.current %} aria-current="page"{% endif %}><span class="form">{{ item.entry.title }}</span>
-                {% comment %} <br/><span class="form">{{ item.entry.pronoun }} {% include "core/partials/verb.html" with form=item.entry.form %}</span><small>{{ item.entry.short }}</small>{% endcomment %}
                 <br/><small>{{ item.entry.short }}</small>
               </a></li>
               {% endfor %}
@@ -75,7 +74,7 @@
         {% for group in conj_groups %}
         <ul>
           {% for item in group.items %}
-          <li><a target="_new" href="{{ item.href }}" aria-label="{{ item.entry.aria }}">{{ item.entry.pronoun }} {{ item.entry.form }}</a></li>
+          <li><a target="_new" href="{{ item.href }}" aria-label="{{ item.entry.aria }}">{{ item.entry.title }}</a></li>
           {% endfor %}
         </ul>
         {% endfor %}

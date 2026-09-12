@@ -43,6 +43,22 @@
     </div>
   </section>
 
+  {% if user.is_authenticated %}
+  <section aria-labelledby="profile-title">
+    <div class="split">
+      <h2 id="profile-title">{% trans "Mon profil" %}</h2>
+      <p class="muted">{% trans "Géré par votre compte unique Grands Voisins" %}</p>
+    </div>
+    <ul class="docs">
+      <li><strong>{% trans "Nom" %}</strong><span>{{ user.get_full_name|default:_("Non renseigné") }}</span></li>
+      <li><strong>{% trans "Courriel" %}</strong><span>{{ user.email|default:_("Non renseigné") }}</span></li>
+    </ul>
+    {% if keycloak_account_url %}
+    <p class="note"><a href="{{ keycloak_account_url }}" target="_new">{% trans "Modifier mon profil" %}</a></p>
+    {% endif %}
+  </section>
+  {% endif %}
+
   <section aria-labelledby="fin-title">
     <div class="split">
       <h2 id="fin-title">{% trans "Mes contributions financières" %}</h2>

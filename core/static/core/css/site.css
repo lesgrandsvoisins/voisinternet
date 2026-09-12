@@ -266,9 +266,16 @@ a {
   margin-bottom: 1rem
 }
 
+.account-actions form {
+  margin: 0
+}
+
 .account-action {
   display: block;
+  width: 100%;
+  font: inherit;
   text-decoration: none;
+  cursor: pointer;
   padding: .6rem .8rem;
   border-radius: 8px;
   background: var(--sun);

@@ -35,9 +35,7 @@
         <div class="menu"
              x-data="{ open: false, active: '{{ conj_groups.0.key }}' }"
              x-on:keydown.escape.window="open = false"
-             x-on:click.outside="open = false"
-             x-on:mouseenter="open = true"
-             x-on:mouseleave="open = false">
+             x-on:click.outside="open = false">
           <button type="button"
                   class="menu-btn"
                   x-on:click="open = !open"
@@ -69,7 +67,6 @@
                           x-bind:class="{ 'is-active': active === '{{ group.key }}' }"
                           x-on:click="active = '{{ group.key }}'"
                           x-on:focus="active = '{{ group.key }}'"
-                          x-on:mouseenter="active = '{{ group.key }}'"
                           x-on:keydown.down.prevent="($event.target.nextElementSibling || $event.target.parentElement.firstElementChild).focus()"
                           x-on:keydown.up.prevent="($event.target.previousElementSibling || $event.target.parentElement.lastElementChild).focus()">
                     {{ group.caption }}

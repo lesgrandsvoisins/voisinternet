@@ -46,14 +46,6 @@ ENTRIES = [
         "compte",
     ),
     Entry(
-        "contact",
-        _("Contact"),
-        _("une question, un problème : écrivez-nous"),
-        _("un voisin vous répond, pas un robot"),
-        "core:contact",
-        "association",
-    ),
-    Entry(
         "grandsvoisins",
         _("Association"),
         _("une conscience collective, l'association coopérative"),
@@ -75,6 +67,14 @@ ENTRIES = [
         _("le blog couvre le civisme, les arts plastiques et le numérique"),
         _("les nouvelles et les tribunes des adhérents"),
         "setting:BLOG_URL",
+        "association",
+    ),
+    Entry(
+        "contact",
+        _("Contact"),
+        _("une question, un problème : écrivez-nous"),
+        _("un voisin vous répond, pas un robot"),
+        "core:contact",
         "association",
     ),
     Entry(

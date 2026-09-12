@@ -13,20 +13,28 @@
   </nav>
   {% endif %}
 
-  <ul class="svc">
+  <div class="directory">
     {% for entry in entries %}
-    <li>
-      {% if entry.logo %}<img class="svc-icon" src="{{ entry.logo.url }}" alt="">{% else %}<span class="led" aria-hidden="true"></span>{% endif %}
-      <div>
-        <h3>{{ entry.name }}</h3>
-        {% if entry.title %}<p class="muted">{{ entry.title }}</p>{% elif entry.sector %}<p class="muted">{{ entry.sector.name }}</p>{% endif %}
-        {% if entry.tagline %}<p><strong>{{ entry.tagline }}</strong></p>{% endif %}
+    <article class="directory-card">
+      {% if entry.photos %}<img class="hero" src="{{ entry.photos.0.url }}" alt="">{% endif %}
+      {% if entry.photos|length > 1 %}
+      <div class="gallery">
+        {% for photo in entry.photos|slice:"1:" %}<img src="{{ photo.url }}" alt="">{% endfor %}
+      </div>
+      {% endif %}
+      <div class="body">
+        <div class="logo-row">
+          {% if entry.logo %}<img class="svc-icon" src="{{ entry.logo.url }}" alt="">{% else %}<span class="led" aria-hidden="true"></span>{% endif %}
+          <h3>{{ entry.name }}</h3>
+        </div>
+        {% if entry.title %}<p>{{ entry.title }}</p>{% elif entry.sector %}<p>{{ entry.sector.name }}</p>{% endif %}
+        {% if entry.tagline %}<p class="tagline">{{ entry.tagline }}</p>{% endif %}
         {% if entry.description %}<p>{{ entry.description }}</p>{% endif %}
-        {% if entry.city %}<p class="muted">{{ entry.city }}{% if entry.country %}, {{ entry.country }}{% endif %}</p>{% endif %}
-        {% if entry.website or entry.email or entry.phone or entry.video_url %}
+        {% if entry.city %}<p>{{ entry.city }}{% if entry.country %}, {{ entry.country }}{% endif %}</p>{% endif %}
+        {% if entry.video_url %}<p><a href="{{ entry.video_url }}" target="_new">{% trans "Vidéo" %}</a></p>{% endif %}
+        {% if entry.website or entry.email or entry.phone %}
         <p class="pair">
           {% if entry.website %}<a href="{{ entry.website }}" target="_new">{% trans "Site" %}</a>{% endif %}
-          {% if entry.video_url %}<a href="{{ entry.video_url }}" target="_new">{% trans "Vidéo" %}</a>{% endif %}
           {% if entry.email %}<a href="mailto:{{ entry.email }}">{{ entry.email }}</a>{% endif %}
           {% if entry.phone %}<span>{{ entry.phone }}</span>{% endif %}
         </p>
@@ -44,10 +52,10 @@
           {% endif %}
         </form>
       </div>
-    </li>
+    </article>
     {% empty %}
-    <li class="empty"><div><h3>{% trans "Personne pour l'instant" %}</h3><p>{% trans "Les fiches apparaîtront ici, avec l'accord de chacun." %}</p></div></li>
+    <div class="directory-empty"><h3>{% trans "Personne pour l'instant" %}</h3><p>{% trans "Les fiches apparaîtront ici, avec l'accord de chacun." %}</p></div>
     {% endfor %}
-  </ul>
+  </div>
 </div>
 {% endblock %}

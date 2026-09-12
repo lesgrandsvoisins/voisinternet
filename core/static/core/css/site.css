@@ -875,6 +875,79 @@ section.block {
   font-size: .95rem
 }
 
+.directory {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))
+}
+
+.directory-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column
+}
+
+.directory-card .hero {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--sky);
+  display: block
+}
+
+.directory-card .gallery {
+  display: flex;
+  gap: .5rem;
+  padding: .75rem 1.3rem 0
+}
+
+.directory-card .gallery img {
+  width: 4.5rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 6px
+}
+
+.directory-card .body {
+  padding: 1.1rem 1.3rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  flex: 1
+}
+
+.directory-card .logo-row {
+  display: flex;
+  align-items: center;
+  gap: .6rem
+}
+
+.directory-card h3 {
+  margin: 0;
+  font-size: 1.1rem
+}
+
+.directory-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: .95rem
+}
+
+.directory-card .tagline {
+  color: var(--ink);
+  font-weight: 600
+}
+
+.directory-empty {
+  padding: 1.5rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px
+}
+
 .retention {
   margin-top: .4rem;
   font-size: .9rem

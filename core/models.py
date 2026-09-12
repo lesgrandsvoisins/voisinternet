@@ -258,6 +258,10 @@ class DirectoryEntry(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def photos(self):
+        return [p for p in (self.photo_promo, self.photo_lieu, self.photo_structure) if p]
+
 
 class EntrySubscription(models.Model):
     """Un compte qui suit la fiche d'une autre personne ou structure dans l'annuaire."""

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from modeltranslation.admin import TranslationAdmin
+from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectorySector, Donor, EntrySubscription, Event, GuideBook,
@@ -20,7 +20,7 @@ class AudienceAdmin(TranslationAdmin):
 
 
 @admin.register(ServiceCategory)
-class ServiceCategoryAdmin(admin.ModelAdmin):
+class ServiceCategoryAdmin(TranslationAdmin):
     list_display = ["name", "order"]
     list_editable = ["order"]
     prepopulated_fields = {"slug": ["name"]}
@@ -50,7 +50,7 @@ class MembershipInline(admin.TabularInline):
     autocomplete_fields = ["audience"]
 
 
-class ContributionInline(admin.TabularInline):
+class ContributionInline(TranslationTabularInline):
     model = Contribution
     extra = 0
 
@@ -78,14 +78,14 @@ class GuideBookAdmin(TranslationAdmin):
 
 
 @admin.register(Donor)
-class DonorAdmin(admin.ModelAdmin):
+class DonorAdmin(TranslationAdmin):
     list_display = ["name", "kind", "public", "since"]
     list_filter = ["kind", "public"]
     list_editable = ["public"]
 
 
 @admin.register(DirectorySector)
-class DirectorySectorAdmin(admin.ModelAdmin):
+class DirectorySectorAdmin(TranslationAdmin):
     list_display = ["name", "order"]
     list_editable = ["order"]
     prepopulated_fields = {"slug": ["name"]}
@@ -93,7 +93,7 @@ class DirectorySectorAdmin(admin.ModelAdmin):
 
 
 @admin.register(DirectoryEntry)
-class DirectoryEntryAdmin(admin.ModelAdmin):
+class DirectoryEntryAdmin(TranslationAdmin):
     list_display = ["name", "kind", "sector", "owner", "city", "public", "order"]
     list_filter = ["kind", "sector", "public"]
     list_editable = ["public", "order"]
@@ -117,7 +117,7 @@ class EntrySubscriptionAdmin(admin.ModelAdmin):
 
 
 @admin.register(Event)
-class EventAdmin(admin.ModelAdmin):
+class EventAdmin(TranslationAdmin):
     list_display = ["title", "start", "end", "location", "public"]
     list_filter = ["public"]
     list_editable = ["public"]

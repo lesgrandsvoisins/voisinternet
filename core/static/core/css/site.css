@@ -185,12 +185,6 @@ a {
   height: 30px
 }
 
-.quicknav {
-  display: none;
-  font-style: italic;
-  position: relative;
-}
-
 .menu>summary {
   list-style: none
 }
@@ -1624,81 +1618,6 @@ blockquote p {
   gap: 1rem;
   justify-content: space-between;
   font-size: .9rem
-}
-
-@media (min-width:1180px) {
-  .quicknav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .35rem
-  }
-
-  .quicknav-group summary {
-    list-style: none;
-    text-decoration: none;
-    font-size: .92rem;
-    border: 1px solid var(--line);
-    border-inline-start: 3px solid var(--line);
-    border-radius: 999px;
-    padding: .4rem .95rem;
-    color: inherit;
-    cursor: pointer
-  }
-
-  .quicknav-group summary::-webkit-details-marker {
-    display: none
-  }
-
-  .quicknav-group summary:hover {
-    background: var(--hover)
-  }
-
-  .quicknav-group[open]>summary {
-    background: var(--ink);
-    border-color: var(--ink);
-    color: var(--sky)
-  }
-
-  .quicknav-group ul {
-    position: absolute;
-    top: calc(100% + .5rem);
-    inset-inline-start: 0;
-    list-style: none;
-    margin: 0;
-    padding: .4rem;
-    min-width: 14rem;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, .12);
-    z-index: 20
-  }
-
-  .quicknav-group li {
-    margin: 0
-  }
-
-  .quicknav-group ul a {
-    display: block;
-    text-decoration: none;
-    font-style: normal;
-    font-size: .92rem;
-    padding: .5rem .6rem;
-    border-radius: 6px;
-    color: inherit
-  }
-
-  .quicknav-group ul a:hover {
-    background: var(--hover)
-  }
-
-  .quicknav-group ul a[aria-current="page"] {
-    font-weight: 600
-  }
-
-  .menu {
-    display: none
-  }
 }
 
 /* Adaptatif */

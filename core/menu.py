@@ -25,10 +25,10 @@ class Entry:
 
 
 GROUPS = [
-    ("compte", _("à vous")),
-    ("association", _("nous retrouver")),
-    ("reperes", _("pour s'y retrouver")),
-    ("poles", _("nos pôles, ensemble")),
+    ("reperes", _("activités")),
+    ("poles", _("pôles")),
+    ("association", _("à propos")),
+    ("compte", _("mon compte")),
 ]
 
 ENTRIES = [

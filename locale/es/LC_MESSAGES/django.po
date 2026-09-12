@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 02:30+0200\n"
+"POT-Creation-Date: 2026-09-12 03:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1556,6 +1556,18 @@ msgstr "Ajustes"
 msgid "Aucun service ajouté pour l'instant."
 msgstr "Aún no se ha añadido ningún servicio."
 
+#: core/templates/core/partials/entry_form_fields.html:7
+msgid ""
+"Markdown ou HTML acceptés : **gras**, _italique_, [lien](https://…), listes "
+"avec « - »."
+msgstr ""
+"Se aceptan Markdown o HTML: **negrita**, _cursiva_, [enlace](https://…), "
+"listas con «- »."
+
+#: core/templates/core/partials/entry_form_fields.html:8
+msgid "Aperçu"
+msgstr "Vista previa"
+
 #: core/templates/core/partials/group_list.html:16
 msgid "Partenariat Voisinternet"
 msgstr "Asociación Voisinternet"
@@ -1743,25 +1755,25 @@ msgstr "Suscripción a «%(name)s» eliminada."
 msgid "Abonné à « %(name)s »."
 msgstr "Suscrito a «%(name)s»."
 
-#: core/views.py:240
+#: core/views.py:247
 msgid "Compte anonyme créé."
 msgstr "Cuenta anónima creada."
 
-#: core/views.py:247
+#: core/views.py:254
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr ""
 "Demasiados intentos desde este dispositivo. Vuelve a intentarlo en un cuarto"
 " de hora."
 
-#: core/views.py:251
+#: core/views.py:258
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "Ninguna cuenta corresponde a este número. Verifica las 16 cifras."
 
-#: core/views.py:254
+#: core/views.py:261
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "Cuenta recuperada. Tus accesos directos han vuelto."
 
-#: core/views.py:261
+#: core/views.py:268
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
@@ -1769,26 +1781,26 @@ msgstr ""
 "Esta cuenta ya no está abierta en este dispositivo. Tu número permite "
 "recuperarla."
 
-#: core/views.py:272
+#: core/views.py:279
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "Tus accesos directos anónimos se han unido a tu cuenta."
 
-#: core/views.py:288
+#: core/views.py:295
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "«%(name)s» eliminado de tus accesos directos."
 
-#: core/views.py:292
+#: core/views.py:299
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "«%(name)s» añadido a tus accesos directos."
 
-#: core/views.py:381
+#: core/views.py:388
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "«%(name)s» eliminado de tus grupos."
 
-#: core/views.py:385
+#: core/views.py:392
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "«%(name)s» añadido a tus grupos."

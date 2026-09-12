@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 02:30+0200\n"
+"POT-Creation-Date: 2026-09-12 03:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1520,6 +1520,17 @@ msgstr "الإعدادات"
 msgid "Aucun service ajouté pour l'instant."
 msgstr "لم تتم إضافة أي خدمة حتى الآن."
 
+#: core/templates/core/partials/entry_form_fields.html:7
+msgid ""
+"Markdown ou HTML acceptés : **gras**, _italique_, [lien](https://…), listes "
+"avec « - »."
+msgstr ""
+"يُقبل Markdown أو HTML: **غامق**، _مائل_، [رابط](https://…)، قوائم بـ «- »."
+
+#: core/templates/core/partials/entry_form_fields.html:8
+msgid "Aperçu"
+msgstr "معاينة"
+
 #: core/templates/core/partials/group_list.html:16
 msgid "Partenariat Voisinternet"
 msgstr "شراكة Voisinternet"
@@ -1705,48 +1716,48 @@ msgstr "تمت إزالة الاشتراك في «%(name)s»."
 msgid "Abonné à « %(name)s »."
 msgstr "تم الاشتراك في «%(name)s»."
 
-#: core/views.py:240
+#: core/views.py:247
 msgid "Compte anonyme créé."
 msgstr "تم إنشاء حساب مجهول."
 
-#: core/views.py:247
+#: core/views.py:254
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "عدد كبير جدًا من المحاولات من هذا الجهاز. أعد المحاولة بعد ربع ساعة."
 
-#: core/views.py:251
+#: core/views.py:258
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "لا يوجد حساب مطابق لهذا الرقم. تحقق من الخانات الـ16."
 
-#: core/views.py:254
+#: core/views.py:261
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "تم العثور على الحساب. عادت اختصاراتك."
 
-#: core/views.py:261
+#: core/views.py:268
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
 msgstr "لم يعد هذا الحساب مفتوحًا على هذا الجهاز. رقمك يتيح لك استعادته."
 
-#: core/views.py:272
+#: core/views.py:279
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "انضمت اختصاراتك المجهولة إلى حسابك."
 
-#: core/views.py:288
+#: core/views.py:295
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "تمت إزالة «%(name)s» من اختصاراتك."
 
-#: core/views.py:292
+#: core/views.py:299
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "تمت إضافة «%(name)s» إلى اختصاراتك."
 
-#: core/views.py:381
+#: core/views.py:388
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "تمت إزالة «%(name)s» من مجموعاتك."
 
-#: core/views.py:385
+#: core/views.py:392
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "تمت إضافة «%(name)s» إلى مجموعاتك."

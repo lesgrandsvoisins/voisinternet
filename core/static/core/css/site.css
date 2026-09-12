@@ -1424,6 +1424,22 @@ blockquote p {
   margin-top: .3rem
 }
 
+.form-row .preview-label {
+  color: var(--ink-soft);
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin: .75rem 0 .3rem
+}
+
+.form-row .markdown-preview {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: .75rem 1rem;
+  min-height: 2.5rem;
+  background: var(--sky)
+}
+
 .form-row .errorlist {
   list-style: none;
   padding: 0;

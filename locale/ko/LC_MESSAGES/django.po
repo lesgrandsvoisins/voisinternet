@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 02:30+0200\n"
+"POT-Creation-Date: 2026-09-12 03:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1489,6 +1489,17 @@ msgstr "설정"
 msgid "Aucun service ajouté pour l'instant."
 msgstr "아직 추가된 서비스가 없습니다."
 
+#: core/templates/core/partials/entry_form_fields.html:7
+msgid ""
+"Markdown ou HTML acceptés : **gras**, _italique_, [lien](https://…), listes "
+"avec « - »."
+msgstr ""
+"Markdown 또는 HTML 사용 가능: **굵게**, _기울임_, [링크](https://…), “- ”로 시작하는 목록."
+
+#: core/templates/core/partials/entry_form_fields.html:8
+msgid "Aperçu"
+msgstr "미리보기"
+
 #: core/templates/core/partials/group_list.html:16
 msgid "Partenariat Voisinternet"
 msgstr "Voisinternet 파트너십"
@@ -1674,48 +1685,48 @@ msgstr "“%(name)s” 구독이 해지되었습니다."
 msgid "Abonné à « %(name)s »."
 msgstr "“%(name)s”에 구독했습니다."
 
-#: core/views.py:240
+#: core/views.py:247
 msgid "Compte anonyme créé."
 msgstr "익명 계정이 생성되었습니다."
 
-#: core/views.py:247
+#: core/views.py:254
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "이 기기에서 시도 횟수가 너무 많습니다. 15분 후 다시 시도해 주세요."
 
-#: core/views.py:251
+#: core/views.py:258
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "이 번호와 일치하는 계정이 없습니다. 16자리 숫자를 확인해 주세요."
 
-#: core/views.py:254
+#: core/views.py:261
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "계정을 찾았습니다. 바로가기가 복구되었습니다."
 
-#: core/views.py:261
+#: core/views.py:268
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
 msgstr "이 기기에서는 더 이상 계정이 열려 있지 않습니다. 번호를 이용해 다시 찾을 수 있습니다."
 
-#: core/views.py:272
+#: core/views.py:279
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "익명 바로가기가 계정에 연결되었습니다."
 
-#: core/views.py:288
+#: core/views.py:295
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "“%(name)s”이(가) 바로가기에서 제거되었습니다."
 
-#: core/views.py:292
+#: core/views.py:299
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "“%(name)s”이(가) 바로가기에 추가되었습니다."
 
-#: core/views.py:381
+#: core/views.py:388
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "“%(name)s”이(가) 그룹에서 제거되었습니다."
 
-#: core/views.py:385
+#: core/views.py:392
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "“%(name)s”이(가) 그룹에 추가되었습니다."

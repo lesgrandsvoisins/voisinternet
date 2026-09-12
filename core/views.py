@@ -231,6 +231,13 @@ def agenda(request):
 def contact(request):
     return render(request, "core/contact.html")
 
+
+@require_POST
+def markdown_preview(request):
+    return render(request, "core/partials/markdown_preview.html", {
+        "text": request.POST.get("description_fr", ""),
+    })
+
 # --- Comptes anonymes
 
 @require_POST

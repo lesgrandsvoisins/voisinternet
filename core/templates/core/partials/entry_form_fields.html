@@ -1,9 +1,15 @@
-{% load i18n %}{% if form.non_field_errors %}<ul class="errorlist">{{ form.non_field_errors }}</ul>{% endif %}
+{% load i18n markdown_filters %}{% if form.non_field_errors %}<ul class="errorlist">{{ form.non_field_errors }}</ul>{% endif %}
 {% for field in form %}
 <div class="form-row">
   {{ field.label_tag }}
   {{ field }}
-  {% if field.help_text %}<p class="help">{{ field.help_text }}</p>{% endif %}
+  {% if field.name == "description_fr" %}
+  <p class="help">{% trans "Markdown ou HTML acceptés : **gras**, _italique_, [lien](https://…), listes avec « - »." %}</p>
+  <p class="preview-label">{% trans "Aperçu" %}</p>
+  <div id="description-preview" class="markdown-preview">{{ form.instance.description_fr|default:""|markdown }}</div>
+  {% elif field.help_text %}
+  <p class="help">{{ field.help_text }}</p>
+  {% endif %}
   {{ field.errors }}
 </div>
 {% endfor %}

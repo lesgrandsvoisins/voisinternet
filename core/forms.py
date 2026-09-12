@@ -1,4 +1,5 @@
 from django import forms
+from django.urls import reverse_lazy
 
 from .models import DirectoryEntry
 
@@ -27,3 +28,12 @@ class DirectoryEntryForm(forms.ModelForm):
         # modeltranslation rend tous les champs par langue non-obligatoires en base : on
         # réimpose ici que le nom (en français) reste requis pour créer une fiche.
         self.fields["name_fr"].required = True
+        # Aperçu en direct du Markdown pendant la saisie (dégradation propre sans JS :
+        # le champ reste un simple texte, la description s'enregistre normalement).
+        self.fields["description_fr"].widget.attrs.update({
+            "hx-post": reverse_lazy("core:markdown_preview"),
+            "hx-trigger": "keyup changed delay:400ms, load",
+            "hx-target": "#description-preview",
+            "hx-swap": "innerHTML",
+            "hx-params": "description_fr,csrfmiddlewaretoken",
+        })

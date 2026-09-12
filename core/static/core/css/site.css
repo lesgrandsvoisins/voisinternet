@@ -342,6 +342,16 @@ a {
   color: var(--ink-soft)
 }
 
+.account-footer {
+  border-top: 1px solid var(--line);
+  margin-top: .8rem;
+  padding-top: .8rem
+}
+
+.account-footer form {
+  margin: 0
+}
+
 .bars {
   width: 18px;
   height: 12px;

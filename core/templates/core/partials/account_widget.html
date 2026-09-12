@@ -25,5 +25,11 @@
       <p class="account-empty">{% trans "Aucun service ajouté pour l'instant." %}</p>
       {% endif %}
     </div>
+
+    {% if user.is_authenticated and OIDC_ENABLED %}
+    <div class="account-footer">
+      <form method="post" action="{% url 'oidc_logout' %}">{% csrf_token %}<button class="link-btn" type="submit">{% trans "Se déconnecter" %}</button></form>
+    </div>
+    {% endif %}
   </div>
 </details>

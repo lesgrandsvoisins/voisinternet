@@ -29,25 +29,16 @@
       <div class="conj">
         <div class="conj-grid">
           {% for group in conj_groups %}
-            {% if group.key != "lire" %}
-              <div>
-                <p class="col-cap cap-{{ group.key }}">{{ group.caption }}</p>
-                <ul>
-                  {% for item in group.items %}
-                    <li>{% include "core/partials/conj_link.html" %}</li>
-                  {% endfor %}
-                </ul>
-              </div>
-            {% endif %}
+            <div>
+              <p class="col-cap cap-{{ group.key }}">{{ group.caption }}</p>
+              <ul>
+                {% for item in group.items %}
+                  <li>{% include "core/partials/conj_link.html" %}</li>
+                {% endfor %}
+              </ul>
+            </div>
           {% endfor %}
         </div>
-      </div>
-      <p> </p>
-        <div class="conj">
-          <div class="conj-grid">
-            {% include "core/partials/conj_link.html" with item=conj.grandzine %}
-            {% include "core/partials/conj_link.html" with item=conj.wiki %}
-          </div>
       </div>
     </div>
   </section>

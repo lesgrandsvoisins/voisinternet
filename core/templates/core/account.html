@@ -2,11 +2,8 @@
 {% load i18n %}
 {% block title %}{% trans "mon Compte — Voisinternet" %}{% endblock %}
 {% block content %}
-<div class="page-head">
-  <div class="wrap">
-    <h1>{% trans "mon Compte" %}</h1>
-  </div>
-</div>
+{% trans "Votre statut, vos contributions financières, et les actions sur votre compte." as page_lead %}
+{% include "core/partials/page_head.html" with item=conj.compte lead=page_lead %}
 <div class="wrap page">
 
   {% if new_number %}

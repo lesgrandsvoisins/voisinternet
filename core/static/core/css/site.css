@@ -19,9 +19,10 @@
   --hover: #DCE8F0;
   --wm-inter: #6F8190;
   --danger: #A8322A;
-  --group-singulier: #C9971F;
-  --group-pluriel: #2E8B8B;
-  --group-lire: #7A5C99;
+  --group-compte: #C9971F;
+  --group-association: #3B6EA5;
+  --group-reperes: #7A5C99;
+  --group-poles: #2E8B8B;
   --serif: "Charter", "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
   color-scheme: light;
@@ -48,9 +49,10 @@
     --hover: #1E3140;
     --wm-inter: #A9B8C3;
     --danger: #F08A80;
-    --group-singulier: #E0B84A;
-    --group-pluriel: #4FB3B3;
-    --group-lire: #A67FD9;
+    --group-compte: #E0B84A;
+    --group-association: #6FA8DC;
+    --group-reperes: #A67FD9;
+    --group-poles: #4FB3B3;
     color-scheme: dark;
   }
 }
@@ -75,9 +77,10 @@
   --hover: #1E3140;
   --wm-inter: #A9B8C3;
   --danger: #F08A80;
-  --group-singulier: #E0B84A;
-  --group-pluriel: #4FB3B3;
-  --group-lire: #A67FD9;
+  --group-compte: #E0B84A;
+  --group-association: #6FA8DC;
+  --group-reperes: #A67FD9;
+  --group-poles: #4FB3B3;
   color-scheme: dark;
 }
 
@@ -388,7 +391,7 @@ a {
 
 .panel .wrap {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   padding-top: 1.25rem;
   padding-bottom: 1.5rem
@@ -404,16 +407,20 @@ a {
   border-inline-start: 3px solid var(--line)
 }
 
-.cap-singulier {
-  border-inline-start-color: var(--group-singulier)
+.cap-compte {
+  border-inline-start-color: var(--group-compte)
 }
 
-.cap-pluriel {
-  border-inline-start-color: var(--group-pluriel)
+.cap-association {
+  border-inline-start-color: var(--group-association)
 }
 
-.cap-lire {
-  border-inline-start-color: var(--group-lire)
+.cap-reperes {
+  border-inline-start-color: var(--group-reperes)
+}
+
+.cap-poles {
+  border-inline-start-color: var(--group-poles)
 }
 
 .panel ul {
@@ -741,16 +748,20 @@ section.block {
   margin: 0
 }
 
-.col-cap.cap-singulier {
-  border-bottom-color: var(--group-singulier)
+.col-cap.cap-compte {
+  border-bottom-color: var(--group-compte)
 }
 
-.col-cap.cap-pluriel {
-  border-bottom-color: var(--group-pluriel)
+.col-cap.cap-association {
+  border-bottom-color: var(--group-association)
 }
 
-.col-cap.cap-lire {
-  border-bottom-color: var(--group-lire)
+.col-cap.cap-reperes {
+  border-bottom-color: var(--group-reperes)
+}
+
+.col-cap.cap-poles {
+  border-bottom-color: var(--group-poles)
 }
 
 .conj ul {
@@ -1549,7 +1560,7 @@ blockquote p {
 
 .foot-nav {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   font-style: italic;
 }
@@ -1642,6 +1653,10 @@ blockquote p {
   }
 
   .panel .wrap {
+    grid-template-columns: 1fr 1fr
+  }
+
+  .foot-nav {
     grid-template-columns: 1fr 1fr
   }
 }

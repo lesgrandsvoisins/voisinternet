@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 03:07+0200\n"
+"POT-Creation-Date: 2026-09-12 10:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,246 +35,270 @@ msgid "compte anonyme"
 msgstr "익명 계정"
 
 #: core/menu.py:28
-msgid "au singulier, chacun"
-msgstr "단수형, 각자"
+msgid "à vous"
+msgstr "당신을 위해"
 
 #: core/menu.py:29
-msgid "au pluriel, ensemble"
-msgstr "복수형, 함께"
+msgid "nous retrouver"
+msgstr "우리를 찾기"
 
 #: core/menu.py:30
-msgid "à lire"
-msgstr "읽을거리"
+msgid "pour s'y retrouver"
+msgstr "길잡이"
 
-#: core/menu.py:36 core/menu.py:46
+#: core/menu.py:31
+msgid "nos pôles, ensemble"
+msgstr "우리의 활동 영역, 함께"
+
+#: core/menu.py:37 core/menu.py:47
 msgid "mes"
 msgstr "나의"
 
-#: core/menu.py:37
+#: core/menu.py:38
 msgid "Raccourcis"
 msgstr "바로가기"
 
-#: core/menu.py:38 core/templates/core/account.html:35
+#: core/menu.py:39 core/templates/core/account.html:32
 #: core/templates/core/partials/account_widget.html:16
 #: core/templates/core/raccourcis.html:10
 msgid "Mes raccourcis"
 msgstr "내 바로가기"
 
-#: core/menu.py:39
+#: core/menu.py:40
 msgid "les services que vous avez choisis, à ajouter ou retirer"
 msgstr "선택하신 서비스, 추가하거나 제거할 수 있습니다"
 
-#: core/menu.py:40
+#: core/menu.py:41
 msgid "se connecter, créer un compte, retrouver mes raccourcis"
 msgstr "로그인, 계정 만들기, 바로가기 복구하기"
 
-#: core/menu.py:47
+#: core/menu.py:48
 msgid "Groupes"
 msgstr "그룹"
 
-#: core/menu.py:48 core/templates/core/account.html:36
+#: core/menu.py:49 core/templates/core/account.html:33
 #: core/templates/core/groupes.html:10
 msgid "Mes groupes"
 msgstr "내 그룹"
 
-#: core/menu.py:49
+#: core/menu.py:50
 msgid "les identités auxquelles vous adhérez, individuelles ou collectives"
 msgstr "당신이 속한 정체성, 개인 또는 단체"
 
-#: core/menu.py:50 core/menu.py:70
+#: core/menu.py:51 core/menu.py:111
 msgid "un particulier, une association, une entreprise…"
 msgstr "개인, 협회, 기업…"
 
-#: core/menu.py:56
+#: core/menu.py:57
+msgid "mon"
+msgstr "나의"
+
+#: core/menu.py:58
+msgid "Compte"
+msgstr "계정"
+
+#: core/menu.py:59 core/templates/core/account.html:28
+msgid "Mon compte"
+msgstr "내 계정"
+
+#: core/menu.py:60
+msgid "votre statut, vos contributions financières, les actions sur le compte"
+msgstr "계정 상태, 재정 기여 내역, 계정 관련 작업"
+
+#: core/menu.py:61
+msgid "connecté ou anonyme : rattacher, retrouver ou fermer votre compte"
+msgstr "로그인 또는 익명: 계정 연결, 복구 또는 해지"
+
+#: core/menu.py:67
 msgid "nous"
 msgstr "우리"
 
-#: core/menu.py:57
+#: core/menu.py:68
 msgid "Contacter"
 msgstr "연락하기"
 
-#: core/menu.py:58
+#: core/menu.py:69
 msgid "Contact"
 msgstr "연락처"
 
-#: core/menu.py:59
+#: core/menu.py:70
 msgid "une question, un problème : écrivez-nous"
 msgstr "질문이나 문제가 있으면 저희에게 연락하세요"
 
-#: core/menu.py:60
+#: core/menu.py:71
 msgid "un voisin vous répond, pas un robot"
 msgstr "로봇이 아닌 이웃이 답변합니다"
 
-#: core/menu.py:66
+#: core/menu.py:77
+msgid "Grands"
+msgstr "Grands"
+
+#: core/menu.py:78
+msgid "Voisins"
+msgstr "Voisins"
+
+#: core/menu.py:79
+msgid "L'association"
+msgstr "협회"
+
+#: core/menu.py:80
+msgid "une conscience collective, l'association coopérative"
+msgstr "집단 의식, 협동조합 협회"
+
+#: core/menu.py:81
+msgid "statuts, gouvernance, comptes : tout est public"
+msgstr "정관, 운영, 회계: 모두 공개됩니다"
+
+#: core/menu.py:87
+msgid "bénévolat"
+msgstr "자원봉사"
+
+#: core/menu.py:88
+msgid "& Dons"
+msgstr "및 후원"
+
+#: core/menu.py:89
+msgid "Contributions"
+msgstr "기여"
+
+#: core/menu.py:90
+msgid ""
+"du temps, un don financier, ou du matériel : sans rien attendre en retour"
+msgstr "시간, 재정 후원, 또는 장비: 대가를 바라지 않고"
+
+#: core/menu.py:91
+msgid "donner du temps, faire un don, ou donner du matériel"
+msgstr "시간 기부, 후원, 또는 장비 기부"
+
+#: core/menu.py:97
+msgid "notre blog"
+msgstr "우리의 블로그"
+
+#: core/menu.py:98
+msgid "GrandZine"
+msgstr "GrandZine"
+
+#: core/menu.py:99
+msgid "Lisez nos articles"
+msgstr "글 읽어보기"
+
+#: core/menu.py:100
+msgid "le blog couvre le civisme, les arts plastiques et le numérique"
+msgstr "블로그는 시민 참여, 조형 예술, 디지털 분야를 다룹니다"
+
+#: core/menu.py:101
+msgid "les nouvelles et les tribunes des adhérents"
+msgstr "회원 소식 및 기고문"
+
+#: core/menu.py:107
 msgid "rencontrez"
 msgstr "만나보세요"
 
-#: core/menu.py:67
+#: core/menu.py:108
 msgid "les Voisins"
 msgstr "이웃들"
 
-#: core/menu.py:68 core/templates/core/annuaire.html:3
+#: core/menu.py:109 core/templates/core/annuaire.html:3
 msgid "Annuaire"
 msgstr "디렉터리"
 
-#: core/menu.py:69
+#: core/menu.py:110
 msgid "qui fait partie de la communauté, et comment les joindre"
 msgstr "커뮤니티 구성원과 연락 방법"
 
-#: core/menu.py:76 core/models.py:303
+#: core/menu.py:117 core/models.py:303
 msgid "évènements"
 msgstr "행사"
 
-#: core/menu.py:77
+#: core/menu.py:118
 msgid "& Programmation"
 msgstr "및 일정"
 
-#: core/menu.py:78
+#: core/menu.py:119
 msgid "Agenda"
 msgstr "일정"
 
-#: core/menu.py:79
+#: core/menu.py:120
 msgid "les rendez-vous collectifs, en ligne ou en présence"
 msgstr "온라인 또는 대면으로 진행되는 공동 모임"
 
-#: core/menu.py:80
+#: core/menu.py:121
 msgid "les conseils des voisins, deux séances pour un même ordre du jour"
 msgstr "Conseils des Voisins, 동일한 안건을 위한 두 세션"
 
-#: core/menu.py:86 core/menu.py:96 core/menu.py:106
+#: core/menu.py:127
+msgid "lire"
+msgstr "읽기"
+
+#: core/menu.py:128
+msgid "le manuel d'utilisation"
+msgstr "사용 설명서"
+
+#: core/menu.py:129
+msgid "Wiki"
+msgstr "위키"
+
+#: core/menu.py:130
+msgid "le guide sur comment utiliser nos outils"
+msgstr "도구 사용법에 대한 가이드"
+
+#: core/menu.py:131
+msgid "pas à pas, du premier serveur aux sauvegardes"
+msgstr "첫 서버 구축부터 백업까지, 단계별로"
+
+#: core/menu.py:137 core/menu.py:147 core/menu.py:157
 msgid "pôle"
 msgstr "분야"
 
-#: core/menu.py:87
+#: core/menu.py:138
 msgid "pour se comprendre"
 msgstr "서로 이해하기 위해"
 
-#: core/menu.py:88
+#: core/menu.py:139
 msgid "Civisme"
 msgstr "시민 참여"
 
-#: core/menu.py:89
+#: core/menu.py:140
 msgid ""
 "Profession d'empathie nationale, prix d'excellence en service public et en "
 "travail social"
 msgstr "Profession d'Empathie Nationale, 공공서비스 및 사회복지 우수상"
 
-#: core/menu.py:90
+#: core/menu.py:141
 msgid "s'engager pour l'intérêt général, entre voisins"
 msgstr "이웃 간의 공동선을 위한 참여"
 
-#: core/menu.py:97
+#: core/menu.py:148
 msgid "visuel"
 msgstr "시각"
 
-#: core/menu.py:98
+#: core/menu.py:149
 msgid "Arts Plastiques"
 msgstr "조형 예술"
 
-#: core/menu.py:99
+#: core/menu.py:150
 msgid "Galléries d'art dans des lieux insolites et soutien aux artistes"
 msgstr "특별한 장소에서 열리는 아트 갤러리와 예술가 지원"
 
-#: core/menu.py:100
+#: core/menu.py:151
 msgid "transformer tout lieu en galerie d'art hybride"
 msgstr "어떤 공간이든 하이브리드 아트 갤러리로 변신시키기"
 
-#: core/menu.py:107
+#: core/menu.py:158
 msgid "pour le dèsenclavement"
 msgstr "디지털 소외 해소를 위해"
 
-#: core/menu.py:108
+#: core/menu.py:159
 msgid "Numérique"
 msgstr "디지털"
 
-#: core/menu.py:109
+#: core/menu.py:160
 msgid "Salles de sociabilité numérique et Voisinternet"
 msgstr "디지털 사교 공간, 그리고 Voisinternet"
 
-#: core/menu.py:110
+#: core/menu.py:161
 msgid "matériel reconditionné et compétences partagées"
 msgstr "재생 장비와 함께 나누는 기술"
-
-#: core/menu.py:116
-msgid "bénévolat"
-msgstr "자원봉사"
-
-#: core/menu.py:117
-msgid "& Dons"
-msgstr "및 후원"
-
-#: core/menu.py:118
-msgid "Contributions"
-msgstr "기여"
-
-#: core/menu.py:119
-msgid ""
-"du temps, un don financier, ou du matériel : sans rien attendre en retour"
-msgstr "시간, 재정 후원, 또는 장비: 대가를 바라지 않고"
-
-#: core/menu.py:120
-msgid "donner du temps, faire un don, ou donner du matériel"
-msgstr "시간 기부, 후원, 또는 장비 기부"
-
-#: core/menu.py:126
-msgid "Grands"
-msgstr "Grands"
-
-#: core/menu.py:127
-msgid "Voisins"
-msgstr "Voisins"
-
-#: core/menu.py:128
-msgid "L'association"
-msgstr "협회"
-
-#: core/menu.py:129
-msgid "une conscience collective, l'association coopérative"
-msgstr "집단 의식, 협동조합 협회"
-
-#: core/menu.py:130
-msgid "statuts, gouvernance, comptes : tout est public"
-msgstr "정관, 운영, 회계: 모두 공개됩니다"
-
-#: core/menu.py:136
-msgid "notre blog"
-msgstr "우리의 블로그"
-
-#: core/menu.py:137
-msgid "GrandZine"
-msgstr "GrandZine"
-
-#: core/menu.py:138
-msgid "Lisez nos articles"
-msgstr "글 읽어보기"
-
-#: core/menu.py:139
-msgid "le blog couvre le civisme, les arts plastiques et le numérique"
-msgstr "블로그는 시민 참여, 조형 예술, 디지털 분야를 다룹니다"
-
-#: core/menu.py:140
-msgid "les nouvelles et les tribunes des adhérents"
-msgstr "회원 소식 및 기고문"
-
-#: core/menu.py:146
-msgid "lire"
-msgstr "읽기"
-
-#: core/menu.py:147
-msgid "le manuel d'utilisation"
-msgstr "사용 설명서"
-
-#: core/menu.py:148
-msgid "Wiki"
-msgstr "위키"
-
-#: core/menu.py:149
-msgid "le guide sur comment utiliser nos outils"
-msgstr "도구 사용법에 대한 가이드"
-
-#: core/menu.py:150
-msgid "pas à pas, du premier serveur aux sauvegardes"
-msgstr "첫 서버 구축부터 백업까지, 단계별로"
 
 #: core/models.py:34
 msgid "vous êtes…"
@@ -639,15 +663,17 @@ msgstr "후원자"
 msgid "mon Compte — Voisinternet"
 msgstr "내 계정 — Voisinternet"
 
-#: core/templates/core/account.html:7
-msgid "mon Compte"
-msgstr "내 계정"
+#: core/templates/core/account.html:5
+msgid ""
+"Votre statut, vos contributions financières, et les actions sur votre "
+"compte."
+msgstr "계정 상태, 재정 기여 내역, 계정 관련 작업입니다."
 
-#: core/templates/core/account.html:14
+#: core/templates/core/account.html:11
 msgid "Votre numéro de compte"
 msgstr "계정 번호"
 
-#: core/templates/core/account.html:16
+#: core/templates/core/account.html:13
 msgid ""
 "Notez-le maintenant. Nous n'en gardons qu'une empreinte : nous ne pourrons "
 "jamais vous le redonner. Il suffit, seul, pour retrouver vos raccourcis sur "
@@ -656,97 +682,93 @@ msgstr ""
 "지금 바로 적어두세요. 저희는 이 번호의 해시값만 보관하므로 다시 알려드릴 수 없습니다. 다른 기기에서 바로가기를 되찾으려면 이 번호만 "
 "있으면 됩니다."
 
-#: core/templates/core/account.html:22
+#: core/templates/core/account.html:19
 msgid "Un compte anonyme est ouvert sur cet appareil"
 msgstr "이 기기에 익명 계정이 열려 있습니다"
 
-#: core/templates/core/account.html:23
+#: core/templates/core/account.html:20
 msgid ""
 "Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
 " ensuite supprimé."
 msgstr "이 계정의 바로가기를 회원님 계정에 연결하시겠습니까? 연결 후 익명 계정은 삭제됩니다."
 
-#: core/templates/core/account.html:24
+#: core/templates/core/account.html:21
 msgid "Rattacher mes raccourcis"
 msgstr "바로가기 연결하기"
 
-#: core/templates/core/account.html:31
-msgid "Mon compte"
-msgstr "내 계정"
-
-#: core/templates/core/account.html:32
+#: core/templates/core/account.html:29
 msgid "Connecté"
 msgstr "로그인됨"
 
-#: core/templates/core/account.html:32
+#: core/templates/core/account.html:29
 msgid "Compte anonyme"
 msgstr "익명 계정"
 
-#: core/templates/core/account.html:35 core/templates/core/account.html:36
-#: core/templates/core/account.html:37
+#: core/templates/core/account.html:32 core/templates/core/account.html:33
+#: core/templates/core/account.html:34
 msgid "Gérer"
 msgstr "관리"
 
-#: core/templates/core/account.html:37 core/templates/core/mes_fiches.html:7
+#: core/templates/core/account.html:34 core/templates/core/mes_fiches.html:7
 msgid "Mes fiches dans l'annuaire"
 msgstr "내 디렉터리 항목"
 
-#: core/templates/core/account.html:41
+#: core/templates/core/account.html:38
 msgid "Se déconnecter"
 msgstr "로그아웃"
 
-#: core/templates/core/account.html:43
+#: core/templates/core/account.html:40
 msgid "Rattacher à mon compte Grands Voisins"
 msgstr "내 Grands Voisins 계정에 연결하기"
 
-#: core/templates/core/account.html:44
+#: core/templates/core/account.html:41
 msgid "Fermer ce compte sur cet appareil"
 msgstr "이 기기에서 계정 닫기"
 
-#: core/templates/core/account.html:51
+#: core/templates/core/account.html:48
 msgid "Mes contributions financières"
 msgstr "나의 재정 기여"
 
-#: core/templates/core/account.html:60
+#: core/templates/core/account.html:57
 msgid "Aucune contribution enregistrée pour l'instant."
 msgstr "아직 등록된 기여가 없습니다."
 
-#: core/templates/core/account.html:67 core/templates/core/account.html:70
+#: core/templates/core/account.html:64 core/templates/core/account.html:67
 #: core/templates/core/partials/account_widget.html:10
 msgid "Se connecter"
 msgstr "로그인"
 
-#: core/templates/core/account.html:68
+#: core/templates/core/account.html:65
 msgid ""
 "Avec votre compte unique des Grands Voisins, le même que pour les autres "
 "outils de l'association."
 msgstr "협회의 다른 도구들과 동일한 Grands Voisins 통합 계정으로 로그인하세요."
 
-#: core/templates/core/account.html:72
+#: core/templates/core/account.html:69
 msgid ""
 "La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
 "serveur."
 msgstr "이 서버에는 아직 Grands Voisins 계정 로그인이 설정되어 있지 않습니다."
 
-#: core/templates/core/account.html:76
+#: core/templates/core/account.html:73
 msgid "Rester anonyme"
 msgstr "익명으로 유지하기"
 
-#: core/templates/core/account.html:77
+#: core/templates/core/account.html:74
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
 "pour retrouver vos raccourcis."
 msgstr "이름이나 이메일 없이 16자리 번호만 사용합니다. 번호를 적어두면 바로가기를 되찾을 수 있습니다."
 
-#: core/templates/core/account.html:78
+#: core/templates/core/account.html:75
 msgid "Créer un compte anonyme"
 msgstr "익명 계정 만들기"
 
-#: core/templates/core/account.html:80
+#: core/templates/core/account.html:77
 msgid "J'ai déjà un numéro"
 msgstr "이미 번호가 있어요"
 
-#: core/templates/core/account.html:83
+#: core/templates/core/account.html:80
 msgid "Retrouver"
 msgstr "복구하기"
 
@@ -1025,7 +1047,7 @@ msgstr "누구나 참여할 수 있는 정기 모임: 참고하세요 "
 msgid "l'agenda"
 msgstr "일정"
 
-#: core/templates/core/contact.html:17 core/templates/core/home.html:86
+#: core/templates/core/contact.html:17 core/templates/core/home.html:77
 msgid "Devenir bénévole"
 msgstr "자원봉사자 되기"
 
@@ -1274,76 +1296,76 @@ msgid ""
 "endroit."
 msgstr "이 사이트는 동사 활용으로 구성되어 있습니다. 인칭을 선택하면 알맞은 곳으로 안내합니다."
 
-#: core/templates/core/home.html:57
+#: core/templates/core/home.html:48
 msgid "Vous êtes…"
 msgstr "당신은…"
 
-#: core/templates/core/home.html:70
+#: core/templates/core/home.html:61
 msgid "Comment ça marche"
 msgstr "작동 방식"
 
-#: core/templates/core/home.html:71
+#: core/templates/core/home.html:62
 msgid ""
 "Pas besoin d'être informaticien. Il suffit d'un peu de curiosité et d'un "
 "voisin."
 msgstr "컴퓨터 전문가일 필요는 없습니다. 약간의 호기심과 이웃 한 명이면 충분합니다."
 
-#: core/templates/core/home.html:74
+#: core/templates/core/home.html:65
 #: core/templates/core/partials/shortcut_list.html:16
 msgid "Choisissez vos services"
 msgstr "서비스 선택하기"
 
-#: core/templates/core/home.html:75
+#: core/templates/core/home.html:66
 msgid "Ajoutez-les à votre compte. Un numéro suffit : ni nom, ni courriel."
 msgstr "계정에 추가하세요. 번호 하나면 충분합니다: 이름도, 이메일도 필요 없습니다."
 
-#: core/templates/core/home.html:78
+#: core/templates/core/home.html:69
 msgid "Installez chez vous, ou chez un voisin"
 msgstr "집에서, 또는 이웃 집에서 설치하기"
 
-#: core/templates/core/home.html:79
+#: core/templates/core/home.html:70
 msgid ""
 "Un petit serveur consomme à peu près comme une box internet. Pas de place ? "
 "Un voisin de confiance l'héberge."
 msgstr "작은 서버는 인터넷 공유기 정도의 전력만 사용합니다. 공간이 없다면? 신뢰할 수 있는 이웃이 대신 호스팅해 줄 수 있습니다."
 
-#: core/templates/core/home.html:82
+#: core/templates/core/home.html:73
 msgid "Ne restez pas seul devant l'écran"
 msgstr "화면 앞에 혼자 남겨두지 마세요"
 
-#: core/templates/core/home.html:83
+#: core/templates/core/home.html:74
 msgid ""
 "Des voisins bénévoles vous accompagnent, en atelier ou chez vous. Et un "
 "jour, peut-être, ce sera votre tour."
 msgstr "자원봉사 이웃들이 워크숍이나 집에서 도와드립니다. 그리고 언젠가는 당신도 도움을 줄 차례가 될 수 있습니다."
 
-#: core/templates/core/home.html:85
+#: core/templates/core/home.html:76
 msgid "Se faire accompagner"
 msgstr "도움 받기"
 
-#: core/templates/core/home.html:95
+#: core/templates/core/home.html:86
 msgid "les services"
 msgstr "서비스"
 
-#: core/templates/core/home.html:98
+#: core/templates/core/home.html:89
 msgid ""
 "Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « mon "
 "Compte », même sans compte nominatif."
 msgstr "관심 있는 서비스를 추가하세요. 이름을 밝히지 않아도 “내 계정”의 바로가기에 추가됩니다."
 
-#: core/templates/core/home.html:102
+#: core/templates/core/home.html:93
 msgid "Tous les services, avec ce que chacun conserve"
 msgstr "모든 서비스와 각 서비스가 보관하는 정보"
 
-#: core/templates/core/home.html:109
+#: core/templates/core/home.html:100
 msgid "D'où vient notre devise"
 msgstr "우리 모토의 유래"
 
-#: core/templates/core/home.html:111
+#: core/templates/core/home.html:102
 msgid "« Ôte-toi de mon soleil. »"
 msgstr "“내 햇빛을 가리지 마시오.”"
 
-#: core/templates/core/home.html:114
+#: core/templates/core/home.html:105
 msgid ""
 "Diogène à Alexandre le Grand, qui lui offrait ce qu'il voulait. D'après "
 "Plutarque, <cite>Vie d'Alexandre</cite>, 14."
@@ -1351,7 +1373,7 @@ msgstr ""
 "무엇이든 원하는 것을 주겠다고 한 알렉산드로스 대왕에게 디오게네스가 한 말. 플루타르코스, <cite>알렉산드로스전</cite>, "
 "14장에서."
 
-#: core/templates/core/home.html:118
+#: core/templates/core/home.html:109
 msgid ""
 "Le philosophe ne demandait rien au plus puissant, sinon de cesser de lui "
 "faire de l'ombre. Nous l'avons mis au pluriel : <strong>ôtez-vous de leur "
@@ -1360,23 +1382,23 @@ msgstr ""
 "그 철학자는 가장 강한 자에게 아무것도 요구하지 않았습니다, 다만 자신의 빛을 가리지 말라는 것 외에는. 우리는 이를 복수형으로 "
 "바꾸었습니다: <strong>그들의 클라우드에서 벗어나</strong>, 여러분의 햇빛을 지키세요."
 
-#: core/templates/core/home.html:122
+#: core/templates/core/home.html:113
 msgid "Le guide et le blog"
 msgstr "가이드와 블로그"
 
-#: core/templates/core/home.html:139
+#: core/templates/core/home.html:130
 msgid "Les livres du guide s'afficheront ici."
 msgstr "가이드 문서가 여기에 표시됩니다."
 
-#: core/templates/core/home.html:141
+#: core/templates/core/home.html:132
 msgid "Tout le guide"
 msgstr "전체 가이드 보기"
 
-#: core/templates/core/home.html:161
+#: core/templates/core/home.html:152
 msgid "Les derniers articles s'afficheront ici."
 msgstr "최신 글이 여기에 표시됩니다."
 
-#: core/templates/core/home.html:163
+#: core/templates/core/home.html:154
 msgid "Tous les articles"
 msgstr "모든 글 보기"
 

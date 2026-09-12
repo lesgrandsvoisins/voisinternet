@@ -37,8 +37,17 @@ migrate: ## Applique les migrations
 makemigrations: ## Génère les migrations manquantes
 	$(LOADENV) $(PYTHON) manage.py makemigrations
 
-fixtures: ## Charge les données d'exemple (services, publics, guide)
-	$(LOADENV) $(PYTHON) manage.py loaddata core-audience core-guidebook core-services
+fixtures-load: ## Charge les données d'exemple (services, publics, guide)
+	for i in core.audience core.guidebook core.service ; do \
+		echo $$i; \
+		$(LOADENV) $(PYTHON) manage.py loaddata $$i core/fixtures/$$i.json ; \
+	done
+
+fixtures-dump: ## Charge les données d'exemple (services, publics, guide)
+	for i in core.audience core.guidebook core.service ; do \
+		echo $$i; \
+		$(LOADENV) $(PYTHON) manage.py dumpdata $$i >core/fixtures/$$i.json ; \
+	done
 
 superuser: ## Crée un compte administrateur
 	$(LOADENV) $(PYTHON) manage.py createsuperuser

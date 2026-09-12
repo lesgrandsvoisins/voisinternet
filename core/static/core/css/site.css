@@ -525,17 +525,6 @@ a {
   background: var(--hover)
 }
 
-.mega-panel-lead {
-  grid-column: 1 / -1;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: .5rem;
-  padding-bottom: .5rem
-}
-
-.mega-panel-lead a {
-  font-weight: 600
-}
-
 .mega-panel a small {
   display: block;
   color: var(--ink-soft);

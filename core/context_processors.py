@@ -21,6 +21,9 @@ def site(request):
          "page_url": reverse(GROUP_PAGES[key]) if key in GROUP_PAGES else None}
         for key, caption in GROUPS
     ]
+    # Le menu de l'en-tête n'affiche pas « mon compte » : ce groupe vit dans son propre
+    # widget (haut à droite).
+    header_groups = [g for g in groups if g["key"] != "compte"]
     account = current_account(request)
     account_shortcuts = []
     if account:
@@ -37,6 +40,7 @@ def site(request):
     return {
         "conj": {i["entry"].key: i for i in entries},
         "conj_groups": groups,
+        "header_groups": header_groups,
         "account": account,
         "account_shortcuts": account_shortcuts,
         "account_sub": label,

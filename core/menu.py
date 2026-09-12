@@ -69,14 +69,6 @@ ENTRIES = [
         "association",
     ),
     Entry(
-        "contributions",
-        _("Contributions"),
-        _("du temps, un don financier, ou du matériel : sans rien attendre en retour"),
-        _("donner du temps, faire un don, ou donner du matériel"),
-        "core:contributions",
-        "association",
-    ),
-    Entry(
         "grandzine",
         _("Lisez nos articles"),
         _("le blog couvre le civisme, les arts plastiques et le numérique"),
@@ -93,12 +85,12 @@ ENTRIES = [
         "association",
     ),
     Entry(
-        "annuaire",
-        _("Annuaire"),
-        _("qui fait partie de la communauté, et comment les joindre"),
-        _("un particulier, une association, une entreprise…"),
-        "core:annuaire",
-        "reperes",
+        "contributions",
+        _("Dons"),
+        _("du temps, un don financier, ou du matériel : sans rien attendre en retour"),
+        _("donner du temps, faire un don, ou donner du matériel"),
+        "core:contributions",
+        "association",
     ),
     Entry(
         "agenda",
@@ -106,6 +98,14 @@ ENTRIES = [
         _("les rendez-vous collectifs, en ligne ou en présence"),
         _("les conseils des voisins, deux séances pour un même ordre du jour"),
         "core:agenda",
+        "reperes",
+    ),
+    Entry(
+        "annuaire",
+        _("Annuaire"),
+        _("qui fait partie de la communauté, et comment les joindre"),
+        _("un particulier, une association, une entreprise…"),
+        "core:annuaire",
         "reperes",
     ),
     Entry(

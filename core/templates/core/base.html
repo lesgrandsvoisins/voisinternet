@@ -33,7 +33,7 @@
           {% include "core/partials/wordmark.html" %}
         </a>
         <div class="menu"
-             x-data="{ open: false, active: '{{ conj_groups.0.key }}' }"
+             x-data="{ open: false }"
              x-on:keydown.escape.window="open = false"
              x-on:click.outside="open = false">
           <button type="button"
@@ -43,21 +43,6 @@
                   aria-controls="main-menu-panel">
             <span class="label">{% trans "Menu" %}</span>
           </button>
-          <nav class="menu-quick" aria-label="{% trans 'Accès rapide' %}">
-            {% for group in conj_groups %}
-              {% if group.page_url %}
-                <a href="{{ group.page_url }}" class="menu-quick-tab cap-{{ group.key }}">{{ group.caption }}</a>
-              {% else %}
-                <button type="button"
-                        class="menu-quick-tab cap-{{ group.key }}"
-                        x-bind:aria-expanded="(open && active === '{{ group.key }}').toString()"
-                        aria-controls="main-menu-panel"
-                        x-on:click="if (open && active === '{{ group.key }}') { open = false } else { active = '{{ group.key }}'; open = true }">
-                  {{ group.caption }}
-                </button>
-              {% endif %}
-            {% endfor %}
-          </nav>
           <nav class="mega"
                id="main-menu-panel"
                x-show="open"
@@ -69,60 +54,18 @@
                x-transition:leave="mega-leave"
                x-transition:leave-start="mega-leave-start"
                x-transition:leave-end="mega-leave-end">
-            <div class="wrap mega-grid">
-              <div class="mega-tabs" role="tablist" aria-orientation="vertical">
-                {% for group in conj_groups %}
-                  {% if group.page_url %}
-                    <a href="{{ group.page_url }}"
-                       role="tab"
-                       class="mega-tab cap-{{ group.key }}"
-                       id="mega-tab-{{ group.key }}"
-                       x-on:focus="active = '{{ group.key }}'"
-                       x-on:keydown.down.prevent="($event.target.nextElementSibling || $event.target.parentElement.firstElementChild).focus()"
-                       x-on:keydown.up.prevent="($event.target.previousElementSibling || $event.target.parentElement.lastElementChild).focus()">
-                      {{ group.caption }}
-                    </a>
-                  {% else %}
-                    <button type="button"
-                            role="tab"
-                            class="mega-tab cap-{{ group.key }}"
-                            id="mega-tab-{{ group.key }}"
-                            aria-controls="mega-panel-{{ group.key }}"
-                            x-bind:aria-selected="(active === '{{ group.key }}').toString()"
-                            x-bind:tabindex="active === '{{ group.key }}' ? 0 : -1"
-                            x-bind:class="{ 'is-active': active === '{{ group.key }}' }"
-                            x-on:click="active = '{{ group.key }}'"
-                            x-on:focus="active = '{{ group.key }}'"
-                            x-on:keydown.down.prevent="($event.target.nextElementSibling || $event.target.parentElement.firstElementChild).focus()"
-                            x-on:keydown.up.prevent="($event.target.previousElementSibling || $event.target.parentElement.lastElementChild).focus()">
-                      {{ group.caption }}
-                    </button>
-                  {% endif %}
-                {% endfor %}
-              </div>
-              <div class="mega-panels">
-                {% for group in conj_groups %}
-                  <ul class="mega-panel"
-                      role="tabpanel"
-                      id="mega-panel-{{ group.key }}"
-                      aria-labelledby="mega-tab-{{ group.key }}"
-                      x-show="active === '{{ group.key }}'">
-                    {% for item in group.items %}
-                      <li>
-                      <a href="{{ item.href }}"
-                         aria-label="{{ item.entry.aria }}"
-                         {% if item.current %}aria-current="page"{% endif %}><span class="form">{{ item.entry.title }}</span>
-                      <br />
-                      <small>{{ item.entry.short }}</small>
-                    </a>
-                  </li>
+            <div class="wrap">
+              <ul class="menu-flat">
+                {% for group in header_groups %}
+                  {% for item in group.items %}
+                    <li><a href="{{ item.href }}" aria-label="{{ item.entry.aria }}"{% if item.current %} aria-current="page"{% endif %}>{{ item.entry.title }}</a></li>
+                  {% endfor %}
+                  {% if not forloop.last %}<li class="menu-sep" role="separator" aria-hidden="true"></li>{% endif %}
                 {% endfor %}
               </ul>
-            {% endfor %}
-          </div>
+            </div>
+          </nav>
         </div>
-      </nav>
-    </div>
     {% include "core/partials/lang_switcher.html" %}
     {% include "core/partials/account_widget.html" %}
   </div>

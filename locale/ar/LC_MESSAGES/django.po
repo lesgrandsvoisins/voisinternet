@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 15:39+0200\n"
+"POT-Creation-Date: 2026-09-12 16:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,7 +68,7 @@ msgstr "مجموعاتي"
 msgid "les identités auxquelles vous adhérez, individuelles ou collectives"
 msgstr "الهويات التي تنتمي إليها، فردية أو جماعية"
 
-#: core/menu.py:59 core/menu.py:99
+#: core/menu.py:59 core/menu.py:107
 msgid "un particulier, une association, une entreprise…"
 msgstr "فرد، جمعية، شركة…"
 
@@ -85,61 +85,61 @@ msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "النظام الأساسي، الحوكمة، الحسابات: كل شيء علني"
 
 #: core/menu.py:73
-msgid "Contributions"
-msgstr "المساهمات"
+msgid "Lisez nos articles"
+msgstr "اقرأ مقالاتنا"
 
 #: core/menu.py:74
+msgid "le blog couvre le civisme, les arts plastiques et le numérique"
+msgstr "تغطي المدونة الالتزام المدني والفنون التشكيلية والرقمي"
+
+#: core/menu.py:75
+msgid "les nouvelles et les tribunes des adhérents"
+msgstr "أخبار ومقالات رأي الأعضاء"
+
+#: core/menu.py:81
+msgid "Contact"
+msgstr "اتصال"
+
+#: core/menu.py:82
+msgid "une question, un problème : écrivez-nous"
+msgstr "سؤال، مشكلة: راسلونا"
+
+#: core/menu.py:83
+msgid "un voisin vous répond, pas un robot"
+msgstr "يجيبك جار، وليس روبوتًا"
+
+#: core/menu.py:89
+msgid "Dons"
+msgstr "التبرعات"
+
+#: core/menu.py:90
 msgid ""
 "du temps, un don financier, ou du matériel : sans rien attendre en retour"
 msgstr "الوقت، أو تبرع مالي، أو معدات: دون انتظار أي مقابل"
 
-#: core/menu.py:75
+#: core/menu.py:91
 msgid "donner du temps, faire un don, ou donner du matériel"
 msgstr "تقديم الوقت، أو التبرع ماليًا، أو التبرع بمعدات"
 
-#: core/menu.py:81
-msgid "Lisez nos articles"
-msgstr "اقرأ مقالاتنا"
-
-#: core/menu.py:82
-msgid "le blog couvre le civisme, les arts plastiques et le numérique"
-msgstr "تغطي المدونة الالتزام المدني والفنون التشكيلية والرقمي"
-
-#: core/menu.py:83
-msgid "les nouvelles et les tribunes des adhérents"
-msgstr "أخبار ومقالات رأي الأعضاء"
-
-#: core/menu.py:89
-msgid "Contact"
-msgstr "اتصال"
-
-#: core/menu.py:90
-msgid "une question, un problème : écrivez-nous"
-msgstr "سؤال، مشكلة: راسلونا"
-
-#: core/menu.py:91
-msgid "un voisin vous répond, pas un robot"
-msgstr "يجيبك جار، وليس روبوتًا"
-
-#: core/menu.py:97 core/templates/core/annuaire.html:3
-msgid "Annuaire"
-msgstr "دليل"
-
-#: core/menu.py:98
-msgid "qui fait partie de la communauté, et comment les joindre"
-msgstr "من ينتمي إلى المجتمع، وكيفية التواصل معه"
-
-#: core/menu.py:105
+#: core/menu.py:97
 msgid "Agenda"
 msgstr "الأجندة"
 
-#: core/menu.py:106
+#: core/menu.py:98
 msgid "les rendez-vous collectifs, en ligne ou en présence"
 msgstr "لقاءات جماعية، عبر الإنترنت أو حضوريًا"
 
-#: core/menu.py:107
+#: core/menu.py:99
 msgid "les conseils des voisins, deux séances pour un même ordre du jour"
 msgstr "Conseils des Voisins، جلستان لنفس جدول الأعمال"
+
+#: core/menu.py:105 core/templates/core/annuaire.html:3
+msgid "Annuaire"
+msgstr "دليل"
+
+#: core/menu.py:106
+msgid "qui fait partie de la communauté, et comment les joindre"
+msgstr "من ينتمي إلى المجتمع، وكيفية التواصل معه"
 
 #: core/menu.py:113
 msgid "Wiki"
@@ -618,11 +618,6 @@ msgstr "متصل"
 msgid "Compte anonyme"
 msgstr "حساب مجهول"
 
-#: core/templates/core/account.html:42 core/templates/core/account.html:43
-#: core/templates/core/account.html:44
-msgid "Gérer"
-msgstr "إدارة"
-
 #: core/templates/core/account.html:44 core/templates/core/mes_fiches.html:15
 msgid "Mes fiches dans l'annuaire"
 msgstr "بطاقاتي في الدليل"
@@ -711,7 +706,7 @@ msgstr "إنشاء حساب مجهول"
 msgid "J'ai déjà un numéro"
 msgstr "لدي رقم بالفعل"
 
-#: core/templates/core/account.html:106
+#: core/templates/core/account.html:109
 msgid "Retrouver"
 msgstr "استعادة"
 
@@ -909,27 +904,18 @@ msgstr "Voisinternet، الصفحة الرئيسية"
 msgid "Menu"
 msgstr "القائمة"
 
-#: core/templates/core/base.html:46
-msgid "Accès rapide"
-msgstr "وصول سريع"
-
-#: core/templates/core/base.html:61
+#: core/templates/core/base.html:50
 msgid "Menu principal"
 msgstr "القائمة الرئيسية"
 
-#: core/templates/core/base.html:96
-#, python-format
-msgid "Voir « %(name)s »"
-msgstr "عرض «%(name)s»"
-
-#: core/templates/core/base.html:128
+#: core/templates/core/base.html:82
 msgid ""
 "Porté par Les Grands Voisins, à Fontenay-aux-Roses et dans le 14ᵉ "
 "arrondissement de Paris."
 msgstr ""
 "بدعم من Les Grands Voisins، في Fontenay-aux-Roses وفي الدائرة 14 بباريس."
 
-#: core/templates/core/base.html:130
+#: core/templates/core/base.html:84
 msgid ""
 "Seulement deux cookies techniques : votre session et la protection des "
 "formulaires. Aucun traceur, rien n'est chargé depuis un tiers."
@@ -937,11 +923,11 @@ msgstr ""
 "فقط ملفا تعريف ارتباط تقنيان: جلستك وحماية النماذج. لا متتبعات، ولا شيء "
 "يُحمَّل من طرف ثالث."
 
-#: core/templates/core/base.html:133
+#: core/templates/core/base.html:87
 msgid "Plan du site"
 msgstr "خريطة الموقع"
 
-#: core/templates/core/base.html:148
+#: core/templates/core/base.html:102
 msgid "Voisinternet"
 msgstr "Voisinternet"
 

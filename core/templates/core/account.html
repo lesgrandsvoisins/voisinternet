@@ -38,10 +38,10 @@
       <h2 id="sc-title">{% trans "Mon compte" %}</h2>
       <p class="muted">{% if user.is_authenticated %}{% trans "Connecté" %}{% if user.first_name %} : {{ user.first_name }}{% endif %}{% else %}{% trans "Compte anonyme" %}{% endif %}</p>
     </div>
-    <ul class="docs">
-      <li><strong>{% trans "Mes raccourcis" %}</strong><span><a href="{% url 'core:raccourcis' %}">{% trans "Gérer" %}</a></span></li>
-      <li><strong>{% trans "Mes groupes" %}</strong><span><a href="{% url 'core:groupes' %}">{% trans "Gérer" %}</a></span></li>
-      <li><strong>{% trans "Mes fiches dans l'annuaire" %}</strong><span><a href="{% url 'core:mes_fiches' %}">{% trans "Gérer" %}</a></span></li>
+    <ul class="svc">
+      <li><strong><a href="{% url 'core:raccourcis' %}">{% trans "Mes raccourcis" %}</strong></a></li>
+      <li><strong><a href="{% url 'core:groupes' %}">{% trans "Mes groupes" %}</strong></a></li>
+      <li><strong><a href="{% url 'core:mes_fiches' %}">{% trans "Mes fiches dans l'annuaire" %}</strong></a></li>
     </ul>
     <div class="actions">
       {% if user.is_authenticated %}
@@ -57,7 +57,7 @@
   <section aria-labelledby="profile-title">
     <div class="split">
       <h2 id="profile-title">{% trans "Mon profil" %}</h2>
-      <p class="muted">{% trans "Géré par votre compte unique Grands Voisins" %}</p>
+      <p class="muted"><a href="{{ keycloak_account_url }}">{% trans "Géré par votre compte unique Grands Voisins" %}</a></p>
     </div>
     <ul class="docs">
       <li><strong>{% trans "Nom" %}</strong><span>{{ user.get_full_name|default:_("Non renseigné") }}</span></li>

@@ -50,11 +50,17 @@ class PagesTests(Base):
         self.assertContains(response, "Agenda")
         self.assertContains(response, "Wiki")
 
-    def test_mega_menu_links_to_group_pages(self):
+    def test_header_menu_is_a_flat_list_without_account_group(self):
+        # Le menu de l'en-tête est une liste plate (pas d'onglets, pas de lien vers les
+        # pages intermédiaires) et n'affiche pas « mon compte » : ce groupe vit dans le widget.
         response = self.client.get(reverse("core:home"))
-        self.assertContains(response, reverse("core:activites"))
-        self.assertContains(response, reverse("core:poles"))
-        self.assertContains(response, reverse("core:a_propos"))
+        content = response.content.decode()
+        panel = content[content.index('id="main-menu-panel"'):content.index("</nav>", content.index('id="main-menu-panel"'))]
+        self.assertIn(reverse("core:agenda"), panel)
+        self.assertIn(reverse("core:annuaire"), panel)
+        self.assertIn('class="menu-sep"', panel)
+        self.assertNotIn(reverse("core:activites"), panel)
+        self.assertNotIn("Mes raccourcis", panel)
 
 
 class AnonymousAccountTests(Base):

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 15:39+0200\n"
+"POT-Creation-Date: 2026-09-12 16:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,7 +68,7 @@ msgstr "Mis grupos"
 msgid "les identités auxquelles vous adhérez, individuelles ou collectives"
 msgstr "las identidades a las que pertenece, individuales o colectivas"
 
-#: core/menu.py:59 core/menu.py:99
+#: core/menu.py:59 core/menu.py:107
 msgid "un particulier, une association, une entreprise…"
 msgstr "un particular, una asociación, una empresa…"
 
@@ -85,61 +85,61 @@ msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "estatutos, gobernanza, cuentas: todo es público"
 
 #: core/menu.py:73
-msgid "Contributions"
-msgstr "Contribuciones"
+msgid "Lisez nos articles"
+msgstr "Lee nuestros artículos"
 
 #: core/menu.py:74
+msgid "le blog couvre le civisme, les arts plastiques et le numérique"
+msgstr "el blog cubre el civismo, las artes plásticas y lo digital"
+
+#: core/menu.py:75
+msgid "les nouvelles et les tribunes des adhérents"
+msgstr "noticias y tribunas de los socios"
+
+#: core/menu.py:81
+msgid "Contact"
+msgstr "Contacto"
+
+#: core/menu.py:82
+msgid "une question, un problème : écrivez-nous"
+msgstr "una pregunta, un problema: escríbanos"
+
+#: core/menu.py:83
+msgid "un voisin vous répond, pas un robot"
+msgstr "un vecino le responde, no un robot"
+
+#: core/menu.py:89
+msgid "Dons"
+msgstr "Donaciones"
+
+#: core/menu.py:90
 msgid ""
 "du temps, un don financier, ou du matériel : sans rien attendre en retour"
 msgstr "tiempo, una donación económica, o material: sin esperar nada a cambio"
 
-#: core/menu.py:75
+#: core/menu.py:91
 msgid "donner du temps, faire un don, ou donner du matériel"
 msgstr "dar tu tiempo, hacer una donación, o donar material"
 
-#: core/menu.py:81
-msgid "Lisez nos articles"
-msgstr "Lee nuestros artículos"
-
-#: core/menu.py:82
-msgid "le blog couvre le civisme, les arts plastiques et le numérique"
-msgstr "el blog cubre el civismo, las artes plásticas y lo digital"
-
-#: core/menu.py:83
-msgid "les nouvelles et les tribunes des adhérents"
-msgstr "noticias y tribunas de los socios"
-
-#: core/menu.py:89
-msgid "Contact"
-msgstr "Contacto"
-
-#: core/menu.py:90
-msgid "une question, un problème : écrivez-nous"
-msgstr "una pregunta, un problema: escríbanos"
-
-#: core/menu.py:91
-msgid "un voisin vous répond, pas un robot"
-msgstr "un vecino le responde, no un robot"
-
-#: core/menu.py:97 core/templates/core/annuaire.html:3
-msgid "Annuaire"
-msgstr "Directorio"
-
-#: core/menu.py:98
-msgid "qui fait partie de la communauté, et comment les joindre"
-msgstr "quién forma parte de la comunidad, y cómo contactarlo"
-
-#: core/menu.py:105
+#: core/menu.py:97
 msgid "Agenda"
 msgstr "Agenda"
 
-#: core/menu.py:106
+#: core/menu.py:98
 msgid "les rendez-vous collectifs, en ligne ou en présence"
 msgstr "encuentros colectivos, en línea o presenciales"
 
-#: core/menu.py:107
+#: core/menu.py:99
 msgid "les conseils des voisins, deux séances pour un même ordre du jour"
 msgstr "los Conseils des Voisins, dos sesiones para un mismo orden del día"
+
+#: core/menu.py:105 core/templates/core/annuaire.html:3
+msgid "Annuaire"
+msgstr "Directorio"
+
+#: core/menu.py:106
+msgid "qui fait partie de la communauté, et comment les joindre"
+msgstr "quién forma parte de la comunidad, y cómo contactarlo"
 
 #: core/menu.py:113
 msgid "Wiki"
@@ -626,11 +626,6 @@ msgstr "Conectado"
 msgid "Compte anonyme"
 msgstr "Cuenta anónima"
 
-#: core/templates/core/account.html:42 core/templates/core/account.html:43
-#: core/templates/core/account.html:44
-msgid "Gérer"
-msgstr "Gestionar"
-
 #: core/templates/core/account.html:44 core/templates/core/mes_fiches.html:15
 msgid "Mes fiches dans l'annuaire"
 msgstr "Mis fichas en el directorio"
@@ -722,7 +717,7 @@ msgstr "Crear una cuenta anónima"
 msgid "J'ai déjà un numéro"
 msgstr "Ya tengo un número"
 
-#: core/templates/core/account.html:106
+#: core/templates/core/account.html:109
 msgid "Retrouver"
 msgstr "Recuperar"
 
@@ -928,20 +923,11 @@ msgstr "Voisinternet, inicio"
 msgid "Menu"
 msgstr "Menú"
 
-#: core/templates/core/base.html:46
-msgid "Accès rapide"
-msgstr "Acceso rápido"
-
-#: core/templates/core/base.html:61
+#: core/templates/core/base.html:50
 msgid "Menu principal"
 msgstr "Menú principal"
 
-#: core/templates/core/base.html:96
-#, python-format
-msgid "Voir « %(name)s »"
-msgstr "Ver «%(name)s»"
-
-#: core/templates/core/base.html:128
+#: core/templates/core/base.html:82
 msgid ""
 "Porté par Les Grands Voisins, à Fontenay-aux-Roses et dans le 14ᵉ "
 "arrondissement de Paris."
@@ -949,7 +935,7 @@ msgstr ""
 "Impulsado por Les Grands Voisins, en Fontenay-aux-Roses y en el distrito 14 "
 "de París."
 
-#: core/templates/core/base.html:130
+#: core/templates/core/base.html:84
 msgid ""
 "Seulement deux cookies techniques : votre session et la protection des "
 "formulaires. Aucun traceur, rien n'est chargé depuis un tiers."
@@ -957,11 +943,11 @@ msgstr ""
 "Solo dos cookies técnicas: tu sesión y la protección de formularios. Ningún "
 "rastreador, nada se carga desde terceros."
 
-#: core/templates/core/base.html:133
+#: core/templates/core/base.html:87
 msgid "Plan du site"
 msgstr "Mapa del sitio"
 
-#: core/templates/core/base.html:148
+#: core/templates/core/base.html:102
 msgid "Voisinternet"
 msgstr "Voisinternet"
 

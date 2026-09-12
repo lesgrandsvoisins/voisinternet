@@ -188,6 +188,7 @@ a {
 .quicknav {
   display: none;
   font-style: italic;
+  position: relative;
 }
 
 .menu>summary {
@@ -1630,10 +1631,6 @@ blockquote p {
     display: flex;
     flex-wrap: wrap;
     gap: .35rem
-  }
-
-  .quicknav-group {
-    position: relative
   }
 
   .quicknav-group summary {

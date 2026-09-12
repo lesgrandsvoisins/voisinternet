@@ -24,7 +24,7 @@
         <summary class="cap-{{ group.key }}">{{ group.caption }}</summary>
         <ul>
           {% for item in group.items %}
-          <li><a target="_new" href="{{ item.href }}" aria-label="{{ item.entry.aria }}"{% if item.current %} aria-current="page"{% endif %}>{{ item.entry.title }}</a></li>
+          <li><a href="{{ item.href }}" aria-label="{{ item.entry.aria }}"{% if item.current %} aria-current="page"{% endif %}>{{ item.entry.title }}</a></li>
           {% endfor %}
         </ul>
       </details>

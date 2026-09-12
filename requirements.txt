@@ -5,4 +5,4 @@ Pillow>=11.0
 Markdown>=3.7,<4
 bleach>=6.1,<7
 gunicorn>=23
-# psycopg[binary]>=3.2   # seulement si vous passez à PostgreSQL
+psycopg[binary]>=3.2   # nécessaire seulement si POSTGRES_DB est défini (voir .env.example)

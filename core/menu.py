@@ -70,7 +70,7 @@ ENTRIES = [
     ),
     Entry(
         "grandzine",
-        _("Lisez nos articles"),
+        _("Blog"),
         _("le blog couvre le civisme, les arts plastiques et le numérique"),
         _("les nouvelles et les tribunes des adhérents"),
         "setting:BLOG_URL",

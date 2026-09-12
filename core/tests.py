@@ -150,7 +150,7 @@ class AnonymousAccountTests(Base):
         response = self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]), HTTP_HX_REQUEST="true")
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'aria-pressed="true"')
-        self.assertContains(response, 'id="account"')
+        self.assertContains(response, 'id="account-panel-body"')
         self.assertContains(response, "hx-swap-oob")
         self.assertContains(response, "Notez votre numéro")
         # Deuxième clic : retrait, pas de nouveau compte.

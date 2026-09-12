@@ -85,7 +85,7 @@ msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "النظام الأساسي، الحوكمة، الحسابات: كل شيء علني"
 
 #: core/menu.py:73
-msgid "Lisez nos articles"
+msgid "Blog"
 msgstr "اقرأ مقالاتنا"
 
 #: core/menu.py:74

@@ -85,7 +85,7 @@ msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "bylaws, governance, accounts: everything is public"
 
 #: core/menu.py:73
-msgid "Lisez nos articles"
+msgid "Blog"
 msgstr "Read our articles"
 
 #: core/menu.py:74

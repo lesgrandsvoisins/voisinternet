@@ -85,7 +85,7 @@ msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "정관, 운영, 회계: 모두 공개됩니다"
 
 #: core/menu.py:73
-msgid "Lisez nos articles"
+msgid "Blog"
 msgstr "글 읽어보기"
 
 #: core/menu.py:74

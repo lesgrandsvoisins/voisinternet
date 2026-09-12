@@ -8,7 +8,7 @@
         <span class="led" aria-hidden="true"></span>
       {% endif %}
       <div>
-        <h3>{{ service.name }}</h3>
+        <h3><a target="_new" href="{{ service.url }}">{{ service.name }}</a></h3>
         <p>{{ service.summary }}</p>
         {% if details and service.description %}<div class="markdown">{{ service.description|markdown }}</div>{% endif %}
         {% if details and service.retention %}

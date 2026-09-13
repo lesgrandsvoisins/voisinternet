@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.postgres",
     "cms",
     "wagtail.contrib.forms",
     "wagtail.contrib.simple_translation",

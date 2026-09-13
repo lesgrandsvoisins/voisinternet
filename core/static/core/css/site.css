@@ -1462,9 +1462,11 @@ blockquote p {
 .event-media {
   display: flex;
   gap: .75rem;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   min-width: 0;
   width: 100%;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .event-thumb {
@@ -1510,7 +1512,7 @@ blockquote p {
 }
 
 .event-media {
-  flex: 1 1 260px
+  flex: 1 1 260px;
 }
 
 .event-where {

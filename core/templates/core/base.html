@@ -24,6 +24,7 @@
   </head>
   <body>
     <a class="skip" href="#contenu">{% trans "Aller au contenu" %}</a>
+  <!-- HEADER -->
     <header class="top">
       <div class="wrap">
         <a class="brand"
@@ -70,10 +71,12 @@
     {% include "core/partials/account_widget.html" %}
   </div>
 </header>
+<!-- MAIN -->
 <main id="contenu">
   {% block content %}
   {% endblock content %}
 </main>
+<!-- FOOTER -->
 <footer class="foot-wrap">
   <div class="wrap">
     <div class="foot">
@@ -99,9 +102,9 @@
       </nav>
     </div>
     <div class="foot-bottom">
-      <span>{% trans "Voisinternet" %}</span>
+      <span>{% trans "Voisinter.net" %}</span>
       <a target="_new"
-         href="https://github.com/lesgrandsvoisins/voisinternet"
+         href="https://github.com/lesgrandsvoisins"
          rel="noreferrer">GitHub</a>
       <a target="_new" href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>
     </div>

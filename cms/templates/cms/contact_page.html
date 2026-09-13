@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+{% load i18n wagtailcore_tags %}
+
+{% block title %}{{ page.title }} — Voisinternet{% endblock %}
+
+{% block content %}
+  <div class="page-head">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+        <ol>
+          <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+          <li aria-current="page">{{ page.title }}</li>
+        </ol>
+      </nav>
+      <h1>{{ page.title }}</h1>
+      {% if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
+    </div>
+  </div>
+  {% if page.cards %}
+    <div class="wrap page cols">
+      {% for block in page.cards %}
+        <section class="card">
+          <h2>{{ block.value.title }}</h2>
+          {{ block.value.text }}
+        </section>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock %}

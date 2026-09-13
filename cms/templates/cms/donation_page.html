@@ -1,0 +1,56 @@
+{% extends "core/base.html" %}
+{% load i18n wagtailcore_tags %}
+
+{% block title %}{{ page.title }} — Voisinternet{% endblock %}
+
+{% block content %}
+  <div class="page-head">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+        <ol>
+          <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+          <li aria-current="page">{{ page.title }}</li>
+        </ol>
+      </nav>
+      <h1>{{ page.title }}</h1>
+      {% if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
+    </div>
+  </div>
+  {% if page.cards %}
+    <div class="wrap page cols">
+      {% for block in page.cards %}
+        <section class="card">
+          <h2>{{ block.value.title }}</h2>
+          {{ block.value.text }}
+        </section>
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% if donation_services %}
+    <div class="wrap page">
+      <section>
+        <p class="pair">
+          {% for service in donation_services %}<a class="btn btn-sun" href="{{ service.url }}" target="_new">{{ service.name }}</a>{% endfor %}
+        </p>
+        <p class="intro">{% trans "Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous est nécessaire, mais elle n'est jamais publiée sans votre accord." %}</p>
+      </section>
+    </div>
+  {% endif %}
+  <div class="wrap page">
+    <section>
+      <h2>{% trans "Nos soutiens" %}</h2>
+      {% if donors %}
+        <ul class="donors">
+          {% for donor in donors %}
+            <li>
+              <strong>{{ donor.name }}</strong>
+              <span>{{ donor.get_kind_display }}, {% blocktrans with since=donor.since|date:"F Y" %}depuis {{ since }}{% endblocktrans %}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="intro">{% trans "Les premiers soutiens apparaîtront ici, avec leur accord." %}</p>
+      {% endif %}
+    </section>
+  </div>
+{% endblock %}

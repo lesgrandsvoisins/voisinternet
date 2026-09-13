@@ -27,9 +27,12 @@
     <ul class="docs">
       {% for event in upcoming_events %}
       <li>
-        <div>
-          <strong>{{ event.title }}</strong>
-          {% if event.description %}<div class="markdown muted">{{ event.description|markdown }}</div>{% endif %}
+        <div class="event-media">
+          {% if event.photo %}<img class="event-thumb" src="{{ event.photo.url }}" alt="">{% endif %}
+          <div>
+            <strong>{{ event.title }}</strong>
+            {% if event.description %}<div class="markdown muted">{{ event.description|markdown }}</div>{% endif %}
+          </div>
         </div>
         <span>
           <time datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>

@@ -74,7 +74,7 @@
           <p>{% trans "Des voisins bénévoles vous accompagnent, en atelier ou chez vous. Et un jour, peut-être, ce sera votre tour." %}</p>
           <div class="pair">
             <a href="{% url 'core:agenda' %}">{% trans "Se faire accompagner" %}</a>
-            <a href="{% url 'core:contributions' %}">{% trans "Devenir bénévole" %}</a>
+            <a href="/{{ LANGUAGE_CODE }}/contributions/">{% trans "Devenir bénévole" %}</a>
           </div>
         </li>
       </ol>

@@ -70,7 +70,7 @@ ENTRIES = [
         _("Association"),
         _("une conscience collective, l'association coopérative"),
         _("statuts, gouvernance, comptes : tout est public"),
-        "core:grandsvoisins",
+        "path:/grandsvoisins/",
         "association",
     ),
     Entry(
@@ -86,7 +86,7 @@ ENTRIES = [
         _("Contact"),
         _("une question, un problème : écrivez-nous"),
         _("un voisin vous répond, pas un robot"),
-        "core:contact",
+        "path:/contact/",
         "association",
     ),
     Entry(
@@ -94,7 +94,7 @@ ENTRIES = [
         _("Dons"),
         _("du temps, un don financier, ou du matériel : sans rien attendre en retour"),
         _("donner du temps, faire un don, ou donner du matériel"),
-        "core:contributions",
+        "path:/contributions/",
         "association",
     ),
     Entry(

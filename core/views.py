@@ -16,7 +16,7 @@ from .forms import DirectoryEntryForm
 from .ghost import latest_posts
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
-    Account, Audience, Contribution, DirectoryEntry, DirectorySector, Donor, EntrySubscription, Event, GuideBook,
+    Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntrySubscription, Event, GuideBook,
     Membership, Service, Shortcut, format_number,
 )
 
@@ -209,26 +209,12 @@ def toggle_subscription(request, slug):
     return redirect(_safe_next(request, reverse("core:annuaire")))
 
 
-def contributions(request):
-    donation_services = Service.objects.filter(
-        slug__in=["helloasso", "paypal", "stripe"], active=True,
-    ).order_by("order", "name")
-    return render(request, "core/contributions.html", {
-        "donors": Donor.objects.filter(public=True),
-        "donation_services": donation_services,
-    })
-
-
 def agenda(request):
     now = timezone.now()
     return render(request, "core/agenda.html", {
         "upcoming_events": Event.objects.filter(public=True, start__gte=now),
         "past_events": Event.objects.filter(public=True, start__lt=now).order_by("-start")[:5],
     })
-
-
-def contact(request):
-    return render(request, "core/contact.html")
 
 
 def group_page(request, key):

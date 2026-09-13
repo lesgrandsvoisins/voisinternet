@@ -1,0 +1,54 @@
+{% extends "core/base.html" %}
+{% load i18n wagtailcore_tags %}
+
+{% block title %}{{ page.title }} — Voisinternet{% endblock %}
+
+{% block content %}
+  <div class="page-head">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+        <ol>
+          <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+          <li aria-current="page">{{ page.title }}</li>
+        </ol>
+      </nav>
+      <h1>{{ page.title }}</h1>
+      {% if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
+    </div>
+  </div>
+  <div class="wrap page">
+    {% for block in page.body %}
+      {% if block.block_type == "card" %}
+        <section>
+          <h2>{{ block.value.title }}</h2>
+          {{ block.value.text }}
+        </section>
+      {% elif block.block_type == "board" %}
+        <section>
+          <h2>{% trans "Le bureau" %}</h2>
+          <ul class="docs">
+            {% for member in block.value %}
+              <li><strong>{{ member.name }}</strong><span>{{ member.role }}</span></li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% elif block.block_type == "documents" %}
+        <section>
+          <h2>{% trans "Transparence" %}</h2>
+          <ul class="docs">
+            {% for item in block.value %}
+              <li>
+                <strong>{{ item.label }}</strong>
+                {% if item.document %}
+                  <span><a href="{{ item.document.url }}">{% trans "Télécharger" %}</a></span>
+                {% else %}
+                  <span>{% trans "[document à publier]" %}</span>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endblock %}

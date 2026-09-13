@@ -20,17 +20,18 @@ class PagesTests(Base):
     def test_every_page_renders(self):
         # Un raccourci crée un compte : nécessaire pour que « raccourcis » et « groupes » répondent 200.
         self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]))
-        for name in ["home", "account", "raccourcis", "groupes", "agenda", "contact", "contributions",
-                     "grandsvoisins", "annuaire", "activites", "poles", "a_propos"]:
+        for name in ["home", "account", "raccourcis", "groupes", "agenda",
+                     "annuaire", "activites", "poles", "a_propos"]:
             with self.subTest(page=name):
                 response = self.client.get(reverse(f"core:{name}"))
                 self.assertEqual(response.status_code, 200)
                 self.assertContains(response, 'id="main-menu-panel"')  # le menu principal est présent
 
-    def test_pole_pages_render(self):
-        # Pages « pôles » (civisme, arts-plastiques, numérique) : gérées par Wagtail,
-        # donc sans nom d'URL Django à inverser (voir cms.PolePage et core/menu.py).
-        for path in ["/fr/civisme/", "/fr/arts-plastiques/", "/fr/numerique/"]:
+    def test_wagtail_pages_render(self):
+        # Pages gérées par Wagtail (cms.PolePage, ContactPage, AssociationPage,
+        # DonationPage) : pas de nom d'URL Django à inverser (voir core/menu.py).
+        for path in ["/fr/civisme/", "/fr/arts-plastiques/", "/fr/numerique/",
+                     "/fr/contact/", "/fr/grandsvoisins/", "/fr/contributions/"]:
             with self.subTest(path=path):
                 response = self.client.get(path)
                 self.assertEqual(response.status_code, 200)
@@ -194,7 +195,8 @@ class DonorPrivacyTests(TestCase):
     def test_only_consenting_donors_are_listed(self):
         Donor.objects.create(name="Voisine généreuse", public=True)
         Donor.objects.create(name="Donateur discret", public=False)
-        response = self.client.get(reverse("core:contributions"))
+        # Page Wagtail (cms.DonationPage) : pas de nom d'URL Django à inverser.
+        response = self.client.get("/fr/contributions/")
         self.assertContains(response, "Voisine généreuse")
         self.assertNotContains(response, "Donateur discret")
 

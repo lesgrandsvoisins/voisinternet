@@ -1446,6 +1446,21 @@ blockquote p {
   color: var(--ink-soft)
 }
 
+.event-media {
+  display: flex;
+  gap: .75rem;
+  align-items: flex-start;
+  min-width: 0
+}
+
+.event-thumb {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 10px;
+  object-fit: cover;
+  flex: none
+}
+
 .docs form {
   display: inline;
   margin: 0

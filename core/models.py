@@ -316,6 +316,7 @@ class Event(models.Model):
     start = models.DateTimeField(_("début"))
     end = models.DateTimeField(_("fin"), null=True, blank=True)
     location = models.CharField(_("lieu"), max_length=200, blank=True, default="")
+    photo = models.ImageField(_("photo"), upload_to="agenda/photos/", blank=True, default="")
     latitude = models.DecimalField(_("latitude"), max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(_("longitude"), max_digits=9, decimal_places=6, null=True, blank=True)
     online_url = models.URLField(

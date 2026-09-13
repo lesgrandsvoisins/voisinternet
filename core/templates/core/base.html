@@ -1,4 +1,4 @@
-{% load static i18n lang_switcher %}
+{% load static i18n lang_switcher wagtailuserbar %}
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <html lang="{{ LANGUAGE_CODE }}"
@@ -115,5 +115,6 @@
       </div>
     </footer>
     {% include "core/partials/toasts.html" %}
+    {% wagtailuserbar %}
   </body>
 </html>

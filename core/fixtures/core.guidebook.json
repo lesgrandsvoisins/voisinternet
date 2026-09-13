@@ -1,1 +1,191 @@
-[{"model": "core.guidebook", "pk": 1, "fields": {"title": "Mon premier serveur", "title_fr": "Mon premier serveur", "title_en": "My first server", "title_es": "Mi primer servidor", "title_ar": "خادمي الأول", "title_ko": "나의 첫 서버", "url": "https://voies.voisinter.net/books/mon-premier-serveur", "summary": "", "summary_fr": "", "summary_en": null, "summary_es": null, "summary_ar": null, "summary_ko": null, "order": 10}}, {"model": "core.guidebook", "pk": 2, "fields": {"title": "Mon courriel", "title_fr": "Mon courriel", "title_en": "My email", "title_es": "Mi correo electrónico", "title_ar": "بريدي الإلكتروني", "title_ko": "나의 이메일", "url": "https://voies.voisinter.net/books/mon-courriel", "summary": "", "summary_fr": "", "summary_en": null, "summary_es": null, "summary_ar": null, "summary_ko": null, "order": 20}}, {"model": "core.guidebook", "pk": 3, "fields": {"title": "Mes sauvegardes", "title_fr": "Mes sauvegardes", "title_en": "My backups", "title_es": "Mis copias de seguridad", "title_ar": "نسخي الاحتياطية", "title_ko": "나의 백업", "url": "https://voies.voisinter.net/books/mes-sauvegardes", "summary": "", "summary_fr": "", "summary_en": null, "summary_es": null, "summary_ar": null, "summary_ko": null, "order": 30}}, {"model": "core.guidebook", "pk": 4, "fields": {"title": "Mon nom de domaine", "title_fr": "Mon nom de domaine", "title_en": "My domain name", "title_es": "Mi nombre de dominio", "title_ar": "اسم نطاقي", "title_ko": "나의 도메인 이름", "url": "https://voies.voisinter.net/books/mon-nom-de-domaine", "summary": "", "summary_fr": "", "summary_en": null, "summary_es": null, "summary_ar": null, "summary_ko": null, "order": 40}}]
+[
+  {
+    "model": "core.guidebook",
+    "pk": 1,
+    "fields": {
+      "title": "Mon premier serveur",
+      "title_fr": "Mon premier serveur",
+      "title_en": "My first server",
+      "title_es": "Mi primer servidor",
+      "title_ar": "خادمي الأول",
+      "title_ko": "나의 첫 서버",
+      "url": "https://wiki.grandsvoisins.org/fr/numerique/serveurs.md",
+      "summary": "",
+      "summary_fr": null,
+      "summary_en": null,
+      "summary_es": null,
+      "summary_ar": null,
+      "summary_ko": null,
+      "order": 10,
+      "published": false
+    }
+  },
+  {
+    "model": "core.guidebook",
+    "pk": 2,
+    "fields": {
+      "title": "Mon courriel",
+      "title_fr": "Mon courriel",
+      "title_en": "My email",
+      "title_es": "Mi correo electrónico",
+      "title_ar": "بريدي الإلكتروني",
+      "title_ko": "나의 이메일",
+      "url": "https://wiki.grandsvoisins.org/fr/numerique/services/email.md",
+      "summary": "",
+      "summary_fr": null,
+      "summary_en": null,
+      "summary_es": null,
+      "summary_ar": null,
+      "summary_ko": null,
+      "order": 60,
+      "published": true
+    }
+  },
+  {
+    "model": "core.guidebook",
+    "pk": 3,
+    "fields": {
+      "title": "Mes sauvegardes",
+      "title_fr": "Mes sauvegardes",
+      "title_en": "My backups",
+      "title_es": "Mis copias de seguridad",
+      "title_ar": "نسخي الاحتياطية",
+      "title_ko": "나의 백업",
+      "url": "https://voies.voisinter.net/books/mes-sauvegardes",
+      "summary": "",
+      "summary_fr": "",
+      "summary_en": null,
+      "summary_es": null,
+      "summary_ar": null,
+      "summary_ko": null,
+      "order": 30,
+      "published": false
+    }
+  },
+  {
+    "model": "core.guidebook",
+    "pk": 4,
+    "fields": {
+      "title": "Mon nom de domaine",
+      "title_fr": "Mon nom de domaine",
+      "title_en": "My domain name",
+      "title_es": "Mi nombre de dominio",
+      "title_ar": "اسم نطاقي",
+      "title_ko": "나의 도메인 이름",
+      "url": "https://voies.voisinter.net/books/mon-nom-de-domaine",
+      "summary": "",
+      "summary_fr": "",
+      "summary_en": null,
+      "summary_es": null,
+      "summary_ar": null,
+      "summary_ko": null,
+      "order": 70,
+      "published": false
+    }
+  },
+  {
+    "model": "core.guidebook",
+    "pk": 5,
+    "fields": {
+      "title": "Numrique des Grands Voisins",
+      "title_fr": "Numrique des Grands Voisins",
+      "title_en": "Grands Vosins Digital",
+      "title_es": null,
+      "title_ar": null,
+      "title_ko": null,
+      "url": "https://wiki.grandsvoisins.org/fr/numerique",
+      "summary": "",
+      "summary_fr": null,
+      "summary_en": null,
+      "summary_es": null,
+      "summary_ar": null,
+      "summary_ko": null,
+      "order": 40,
+      "published": true
+    }
+  },
+  {
+    "model": "core.guidebook",
+    "pk": 6,
+    "fields": {
+      "title": "Apps des Grands Voisins",
+      "title_fr": "Apps des Grands Voisins",
+      "title_en": "Grands Voisins Apps",
+      "title_es": null,
+      "title_ar": null,
+      "title_ko": null,
+      "url": "https://wiki.grandsvoisins.org/fr/numerique/services.md",
+      "summary": "",
+      "summary_fr": null,
+      "summary_en": null,
+      "summary_es": null,
+      "summary_ar": null,
+      "summary_ko": null,
+      "order": 50,
+      "published": true
+    }
+  },
+  {
+    "model": "core.guidebook",
+    "pk": 7,
+    "fields": {
+      "title": "Votre compte sur Les Grands Voisins",
+      "title_fr": "Votre compte sur Les Grands Voisins",
+      "title_en": "Your account on Les Grands Voisins",
+      "title_es": null,
+      "title_ar": null,
+      "title_ko": null,
+      "url": "https://wiki.grandsvoisins.org/fr/numerique/services/keycloak.md",
+      "summary": "",
+      "summary_fr": null,
+      "summary_en": null,
+      "summary_es": null,
+      "summary_ar": null,
+      "summary_ko": null,
+      "order": 20,
+      "published": true
+    }
+  },
+  {
+    "model": "core.guidebook",
+    "pk": 8,
+    "fields": {
+      "title": "Vos casiers électroniques sur Les Grands Voisins",
+      "title_fr": "Vos casiers électroniques sur Les Grands Voisins",
+      "title_en": "Your electronique lockers on Les Grands Voisins",
+      "title_es": null,
+      "title_ar": null,
+      "title_ko": null,
+      "url": "https://wiki.grandsvoisins.org/fr/numerique/services/sftpgo.md",
+      "summary": "",
+      "summary_fr": null,
+      "summary_en": null,
+      "summary_es": null,
+      "summary_ar": null,
+      "summary_ko": null,
+      "order": 35,
+      "published": true
+    }
+  },
+  {
+    "model": "core.guidebook",
+    "pk": 9,
+    "fields": {
+      "title": "Donner aux Grands Voisins",
+      "title_fr": "Donner aux Grands Voisins",
+      "title_en": "Donations to Les Grands Voisins",
+      "title_es": null,
+      "title_ar": null,
+      "title_ko": null,
+      "url": "https://www.lesgrandsvoisins.com/fr/association/faire-un-don/",
+      "summary": "",
+      "summary_fr": null,
+      "summary_en": null,
+      "summary_es": null,
+      "summary_ar": null,
+      "summary_ko": null,
+      "order": 100,
+      "published": true
+    }
+  }
+]

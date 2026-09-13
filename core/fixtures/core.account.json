@@ -1,0 +1,22 @@
+[
+  {
+    "model": "core.account",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "number_digest": null,
+      "created": "2026-09-12T12:10:58.848Z",
+      "last_seen": "2026-09-12T12:10:58.849Z"
+    }
+  },
+  {
+    "model": "core.account",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "number_digest": null,
+      "created": "2026-09-12T12:35:40.979Z",
+      "last_seen": "2026-09-12T12:35:40.979Z"
+    }
+  }
+]

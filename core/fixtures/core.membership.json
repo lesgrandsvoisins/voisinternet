@@ -1,0 +1,22 @@
+[
+  {
+    "model": "core.membership",
+    "pk": 1,
+    "fields": {
+      "account": 1,
+      "audience": 1,
+      "position": 0,
+      "created": "2026-09-12T14:28:23.609Z"
+    }
+  },
+  {
+    "model": "core.membership",
+    "pk": 2,
+    "fields": {
+      "account": 1,
+      "audience": 3,
+      "position": 1,
+      "created": "2026-09-12T14:28:35.654Z"
+    }
+  }
+]

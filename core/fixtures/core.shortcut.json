@@ -1,0 +1,262 @@
+[
+  {
+    "model": "core.shortcut",
+    "pk": 1,
+    "fields": {
+      "account": 2,
+      "service": 48,
+      "position": 0,
+      "created": "2026-09-12T12:40:45.852Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 2,
+    "fields": {
+      "account": 2,
+      "service": 45,
+      "position": 1,
+      "created": "2026-09-12T12:47:25.531Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 3,
+    "fields": {
+      "account": 2,
+      "service": 46,
+      "position": 2,
+      "created": "2026-09-12T12:47:34.708Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 4,
+    "fields": {
+      "account": 2,
+      "service": 47,
+      "position": 4,
+      "created": "2026-09-12T12:47:35.555Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 5,
+    "fields": {
+      "account": 2,
+      "service": 11,
+      "position": 5,
+      "created": "2026-09-12T12:47:38.947Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 6,
+    "fields": {
+      "account": 2,
+      "service": 6,
+      "position": 6,
+      "created": "2026-09-12T12:47:40.523Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 7,
+    "fields": {
+      "account": 2,
+      "service": 16,
+      "position": 7,
+      "created": "2026-09-12T12:47:41.585Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 8,
+    "fields": {
+      "account": 2,
+      "service": 7,
+      "position": 8,
+      "created": "2026-09-12T12:47:42.743Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 9,
+    "fields": {
+      "account": 2,
+      "service": 15,
+      "position": 9,
+      "created": "2026-09-12T12:47:45.146Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 10,
+    "fields": {
+      "account": 2,
+      "service": 13,
+      "position": 10,
+      "created": "2026-09-12T12:47:47.118Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 11,
+    "fields": {
+      "account": 2,
+      "service": 41,
+      "position": 11,
+      "created": "2026-09-12T12:47:49.015Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 12,
+    "fields": {
+      "account": 2,
+      "service": 42,
+      "position": 12,
+      "created": "2026-09-12T12:47:52.945Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 13,
+    "fields": {
+      "account": 2,
+      "service": 43,
+      "position": 3,
+      "created": "2026-09-12T12:47:56.765Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 14,
+    "fields": {
+      "account": 2,
+      "service": 44,
+      "position": 13,
+      "created": "2026-09-12T12:49:29.364Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 15,
+    "fields": {
+      "account": 2,
+      "service": 40,
+      "position": 14,
+      "created": "2026-09-12T12:49:30.661Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 16,
+    "fields": {
+      "account": 2,
+      "service": 19,
+      "position": 15,
+      "created": "2026-09-12T12:49:42.755Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 17,
+    "fields": {
+      "account": 2,
+      "service": 18,
+      "position": 16,
+      "created": "2026-09-12T12:49:47.831Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 18,
+    "fields": {
+      "account": 1,
+      "service": 45,
+      "position": 0,
+      "created": "2026-09-12T13:13:13.364Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 19,
+    "fields": {
+      "account": 1,
+      "service": 46,
+      "position": 1,
+      "created": "2026-09-12T13:13:14.601Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 20,
+    "fields": {
+      "account": 1,
+      "service": 47,
+      "position": 2,
+      "created": "2026-09-12T13:13:17.057Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 21,
+    "fields": {
+      "account": 1,
+      "service": 43,
+      "position": 4,
+      "created": "2026-09-12T13:13:18.498Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 22,
+    "fields": {
+      "account": 1,
+      "service": 6,
+      "position": 5,
+      "created": "2026-09-12T13:13:21.653Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 23,
+    "fields": {
+      "account": 1,
+      "service": 44,
+      "position": 6,
+      "created": "2026-09-12T13:13:23.721Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 24,
+    "fields": {
+      "account": 1,
+      "service": 48,
+      "position": 7,
+      "created": "2026-09-12T13:36:47.828Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 25,
+    "fields": {
+      "account": 1,
+      "service": 13,
+      "position": 8,
+      "created": "2026-09-12T14:29:55.090Z"
+    }
+  },
+  {
+    "model": "core.shortcut",
+    "pk": 26,
+    "fields": {
+      "account": 1,
+      "service": 7,
+      "position": 3,
+      "created": "2026-09-12T14:53:01.321Z"
+    }
+  }
+]

@@ -12,7 +12,6 @@ from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 def env(name, default=None):
     return os.environ.get(name, default)
 
@@ -35,7 +34,11 @@ SECRET_KEY = env("DJANGO_SECRET_KEY", _DEV_KEY)
 if SECRET_KEY == _DEV_KEY and not DEBUG:
     raise ImproperlyConfigured("DJANGO_SECRET_KEY doit être défini en production.")
 
+DJANGO_IP=env("DJANGO_IP","127.0.0.1")
+DJANGO_PORT=env("DJANGO_PORT","8000")
+
 ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,[::1]")
+ALLOWED_HOSTS.append("{0}".format(DJANGO_IP))
 CSRF_TRUSTED_ORIGINS = env_list("DJANGO_CSRF_TRUSTED_ORIGINS")
 
 # --- Connexion par le compte unique des Grands Voisins (Keycloak, OpenID Connect)

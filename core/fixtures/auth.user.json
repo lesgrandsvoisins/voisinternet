@@ -1,0 +1,36 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "last_login": "2026-09-12T13:13:01.278Z",
+      "is_superuser": true,
+      "username": "34ba1b36-ee43-4e6d-bf92-c0cae572ae5f",
+      "first_name": "Chris",
+      "last_name": "Mann",
+      "email": "chris@mann.fr",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2026-09-12T12:10:58Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "last_login": "2026-09-12T12:35:40.872Z",
+      "is_superuser": true,
+      "username": "voisinter-django",
+      "first_name": "",
+      "last_name": "",
+      "email": "chris@lesgrandsvoisins.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2026-09-12T12:35:29.373Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

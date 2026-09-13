@@ -335,6 +335,7 @@ class GuideBook(models.Model):
     url = models.URLField("adresse")
     summary = models.CharField("en une phrase", max_length=200, blank=True)
     order = models.PositiveSmallIntegerField("ordre", default=0)
+    published = models.BooleanField("publié", default=True)
 
     class Meta:
         ordering = ["order", "title"]

@@ -77,7 +77,7 @@ def home(request):
     return render(request, "core/home.html", {
         "services": Service.objects.filter(active=True)[:6],
         "shortcut_ids": _shortcut_ids(request),
-        "books": GuideBook.objects.all()[:4],
+        "books": GuideBook.objects.filter(published=True)[:4],
         "posts": latest_posts(3),
         "audiences": Audience.objects.all(),
     })

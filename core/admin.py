@@ -73,8 +73,8 @@ class AccountAdmin(admin.ModelAdmin):
 
 @admin.register(GuideBook)
 class GuideBookAdmin(TranslationAdmin):
-    list_display = ["title", "url", "order"]
-    list_editable = ["order"]
+    list_display = ["title", "url", "order", "published"]
+    list_editable = ["order", "published"]
 
 
 @admin.register(Donor)

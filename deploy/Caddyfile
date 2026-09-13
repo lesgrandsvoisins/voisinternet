@@ -1,4 +1,4 @@
-voisinter.net, www.voisinter.net {
+lesgrandsvoisins.com, www.lesgrandsvoisins.com {
 	encode zstd gzip
 
 	handle_path /static/* {
@@ -24,7 +24,7 @@ voisinter.net, www.voisinter.net {
 	}
 }
 
-# Domaines de secours : redirection permanente en gardant le chemin.
-voisinternet.fr, voisinternet.com, voisinternet.org {
-	redir https://voisinter.net{uri} permanent
+# Anciens domaines : redirection permanente en gardant le chemin.
+voisinter.net, www.voisinter.net, voisinternet.fr, voisinternet.com, voisinternet.org {
+	redir https://lesgrandsvoisins.com{uri} permanent
 }

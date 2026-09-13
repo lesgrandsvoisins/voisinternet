@@ -1,6 +1,6 @@
 {% extends "core/base.html" %}
 {% load i18n markdown_filters %}
-{% block title %}{% trans "Annuaire" %}{% if sector %} — {{ sector.name }}{% endif %} — Voisinternet{% endblock %}
+{% block title %}{% trans "Annuaire" %}{% if sector %} — {{ sector.name }}{% endif %} — lesgrandsvoisins.com{% endblock %}
 {% block content %}
 {% trans "Qui fait partie de la communauté, et comment les joindre : personnes et structures, individuelles ou collectives, avec leur accord." as page_lead %}
 {% include "core/partials/page_head.html" with item=conj.annuaire lead=page_lead %}

@@ -206,7 +206,7 @@ BLOG_URL = env("VOISINTERNET_BLOG_URL", "https://blog.lesgrandsvoisins.com")
 GUIDE_URL = env("VOISINTERNET_GUIDE_URL", "https://wiki.grandsvoisins.org/")
 GHOST_URL = env("GHOST_URL", BLOG_URL)
 GHOST_CONTENT_KEY = env("GHOST_CONTENT_KEY", "")
-CONTACT_EMAIL = env("VOISINTERNET_CONTACT_EMAIL", "contact@voisinter.net")
+CONTACT_EMAIL = env("VOISINTERNET_CONTACT_EMAIL", "contact@lesgrandsvoisins.com")
 
 # --- Wagtail : pages de contenu gérées depuis /cms/ (indépendant de l'admin Django en /admin/).
 WAGTAIL_SITE_NAME = "Voisinternet"

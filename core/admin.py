@@ -7,8 +7,8 @@ from .models import (
     Membership, Service, ServiceCategory, Shortcut,
 )
 
-admin.site.site_header = "Voisinternet"
-admin.site.site_title = "Voisinternet"
+admin.site.site_header = "lesgrandsvoisins.com"
+admin.site.site_title = "lesgrandsvoisins.com"
 admin.site.index_title = "Administration"
 
 

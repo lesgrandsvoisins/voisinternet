@@ -9,11 +9,11 @@
     <meta name="htmx-config" content='{"includeIndicatorStyles":false}'>
     <title>
       {% block title %}
-        Voisinternet
+        lesgrandsvoisins.com
       {% endblock title %}
     </title>
     <meta name="description"
-          content="{% block description %}{% blocktrans %}Voisinternet, porté par Les Grands Voisins : héberger ses courriels, fichiers et agendas chez soi ou chez un voisin de confiance.{% endblocktrans %}{% endblock description %}">
+          content="{% block description %}{% blocktrans %}lesgrandsvoisins.com, porté par Les Grands Voisins : héberger ses courriels, fichiers et agendas chez soi, chez un voisin de confiance, ou avec son association.{% endblocktrans %}{% endblock description %}">
     <link rel="icon"
           href="{% static 'core/favicon.svg' %}"
           type="image/svg+xml">
@@ -29,7 +29,7 @@
       <div class="wrap">
         <a class="brand"
            href="{% url 'core:home' %}"
-           aria-label="{% trans 'Voisinternet, accueil' %}">
+           aria-label="{% trans 'lesgrandsvoisins.com, accueil' %}">
           {% include "core/partials/logo_mark.html" %}
           {% include "core/partials/wordmark.html" %}
         </a>
@@ -106,7 +106,7 @@
           </nav>
         </div>
         <div class="foot-bottom">
-          <span>{% trans "Voisinter.net" %}</span>
+          <span>{% trans "lesgrandsvoisins.com" %}</span>
           <a target="_new"
              href="https://github.com/lesgrandsvoisins"
              rel="noreferrer">GitHub</a>

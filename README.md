@@ -1,6 +1,6 @@
-# Voisinternet
+# lesgrandsvoisins.com
 
-*Ôtez-vous de leur nuage.* Site de voisinter.net, porté par Les Grands Voisins.
+*Ôtez-vous de leur nuage.* Site de lesgrandsvoisins.com, porté par Les Grands Voisins.
 
 Django 6, gabarits serveur et htmx (servi localement). Le site fonctionne sans
 JavaScript ; htmx ne fait qu'éviter les rechargements de page.
@@ -19,8 +19,8 @@ entrée là suffit.
 | nous Voyons | `/nous-voyons/` | l'association, la transparence |
 | vous Voyez | `/vous-voyez/` | l'annuaire : qui fait partie de la communauté |
 | ils et elles Voient | `/ils-et-elles-voient/` | dons et partenaires |
-| notre Voie | voies.voisinter.net | le guide (BookStack) |
-| nos Voix | voix.voisinter.net | le blog (Ghost) |
+| notre Voie | guide.lesgrandsvoisins.com | le guide (BookStack) |
+| nos Voix | blog.lesgrandsvoisins.com | le blog (Ghost) |
 
 ## L'annuaire : « vous Voyez »
 
@@ -83,9 +83,10 @@ la case « apparaît publiquement » est cochée, avec son accord.
 2. `python manage.py migrate && python manage.py collectstatic`
 3. Service systemd : `deploy/voisinternet.service` (gunicorn, 2 processus).
 4. Caddy : `deploy/Caddyfile` sert les fichiers statiques, assure HTTPS et HSTS,
-   pose une politique de sécurité du contenu stricte, et redirige
-   voisinternet.fr, .com et .org vers voisinter.net en gardant le chemin.
-   Remplacer `auth.example.org` par l'adresse de votre Keycloak.
+   pose une politique de sécurité du contenu stricte, et redirige les anciens
+   domaines (voisinter.net, voisinternet.fr, .com et .org) vers
+   lesgrandsvoisins.com en gardant le chemin. Remplacer `auth.example.org`
+   par l'adresse de votre Keycloak.
 
 SQLite suffit à cette échelle : la sauvegarde est un seul fichier,
 `var/db.sqlite3`. Définir `POSTGRES_DB` (et installer `psycopg`) pour passer à
@@ -95,8 +96,8 @@ PostgreSQL.
 
 Créer un client `voisinternet` (confidentiel, flux standard) dans le royaume
 des Grands Voisins, avec pour adresse de redirection
-`https://voisinter.net/oidc/callback/` et pour adresse après déconnexion
-`https://voisinter.net/`. Renseigner `KEYCLOAK_REALM_URL`, `OIDC_RP_CLIENT_ID`
+`https://lesgrandsvoisins.com/oidc/callback/` et pour adresse après déconnexion
+`https://lesgrandsvoisins.com/`. Renseigner `KEYCLOAK_REALM_URL`, `OIDC_RP_CLIENT_ID`
 et `OIDC_RP_CLIENT_SECRET`. Sans ces variables, la connexion nominative est
 simplement masquée.
 

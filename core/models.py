@@ -100,7 +100,7 @@ class Service(models.Model):
 
 class Account(models.Model):
     """
-    Un compte Voisinternet : soit rattaché à un compte Grands Voisins (user),
+    Un compte lesgrandsvoisins.com : soit rattaché à un compte Grands Voisins (user),
     soit anonyme, retrouvable par un numéro dont seule l'empreinte est conservée.
     """
     user = models.OneToOneField(

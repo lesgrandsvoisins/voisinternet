@@ -32,6 +32,13 @@ def create_homepage(apps, schema_editor):
         defaults={"hostname": "localhost", "root_page": homepage},
     )
 
+    # HomePage.objects.create() ci-dessus pose la page directement au chemin
+    # de l'ancienne page supprimée, sans passer par add_child() : le
+    # numchild de Root (mis à jour par le delete() de treebeard) n'est donc
+    # pas réincrémenté. On répare l'arbre pour que les futurs add_child()
+    # (ex. traductions) calculent le bon chemin.
+    Page.fix_tree()
+
 
 def remove_homepage(apps, schema_editor):
     from cms.models import HomePage

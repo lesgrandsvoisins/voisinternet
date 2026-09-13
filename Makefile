@@ -17,12 +17,12 @@ rollout:
 	git pull
 	make install
 	make setup
-	make makemigrations
 	make migrate
 	make fixtures-load
 	make collectstatic
 
-# rsync -a staticfiles/ /var/www/voisinter-django/static
+# 	make makemigrations
+# 	rsync -a staticfiles/ /var/www/voisinter-django/static
 
 venv: ## Crée l'environnement virtuel .venv
 	python3 -m venv .venv
@@ -39,13 +39,13 @@ makemigrations: ## Génère les migrations manquantes
 	$(LOADENV) $(PYTHON) manage.py makemigrations
 
 fixtures-load: ## Charge les données d'exemple (services, publics, guide)
-	for i in core.audience core.guidebook core.servicecategory core.service core.account core.shortcut core.membership core.directorysector core.directoryentry core.entrysubscription core.event ; do \
+	for i in auth.group auth.user core.audience core.guidebook core.servicecategory core.service core.account core.shortcut core.membership core.directorysector core.directoryentry core.entrysubscription core.event ; do \
 		echo $$i; \
 		$(LOADENV) $(PYTHON) manage.py loaddata core/fixtures/$$i.json ; \
 	done
 
 fixtures-dump: ## Charge les données d'exemple (services, publics, guide)
-	for i in core.audience core.guidebook core.servicecategory core.service core.account core.shortcut core.membership core.directorysector core.directoryentry core.entrysubscription core.event ; do \
+	for i in auth.group auth.user core.audience core.guidebook core.servicecategory core.service core.account core.shortcut core.membership core.directorysector core.directoryentry core.entrysubscription core.event ; do \
 		echo $$i; \
 		$(LOADENV) $(PYTHON) manage.py dumpdata $$i >core/fixtures/$$i.json ; \
 	done

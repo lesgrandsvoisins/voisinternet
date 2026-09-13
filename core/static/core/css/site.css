@@ -178,6 +178,12 @@ a {
   align-items: center;
 }
 
+.mega>.wrap {
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
 .brand {
   display: flex;
   align-items: center;

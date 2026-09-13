@@ -24,7 +24,7 @@
   </head>
   <body>
     <a class="skip" href="#contenu">{% trans "Aller au contenu" %}</a>
-  <!-- HEADER -->
+    <!-- HEADER -->
     <header class="top">
       <div class="wrap">
         <a class="brand"
@@ -56,60 +56,64 @@
                x-transition:leave-start="mega-leave-start"
                x-transition:leave-end="mega-leave-end">
             <div class="wrap">
-              <ul class="menu-flat">
-                {% for group in header_groups %}
+              {% for group in header_groups %}
+                <ul class="menu-flat">
                   {% for item in group.items %}
-                    <li><a href="{{ item.href }}" aria-label="{{ item.entry.aria }}"{% if item.current %} aria-current="page"{% endif %}>{{ item.entry.title }}</a></li>
+                    <li>
+                      <a href="{{ item.href }}"
+                         aria-label="{{ item.entry.aria }}"
+                         {% if item.current %}aria-current="page"{% endif %}>{{ item.entry.title }}</a>
+                    </li>
                   {% endfor %}
                   {% if not forloop.last %}<li class="menu-sep" role="separator" aria-hidden="true"></li>{% endif %}
-                {% endfor %}
-              </ul>
+                </ul>
+              {% endfor %}
             </div>
           </nav>
         </div>
-    {% include "core/partials/lang_switcher.html" %}
-    {% include "core/partials/account_widget.html" %}
-  </div>
-</header>
-<!-- MAIN -->
-<main id="contenu">
-  {% block content %}
-  {% endblock content %}
-</main>
-<!-- FOOTER -->
-<footer class="foot-wrap">
-  <div class="wrap">
-    <div class="foot">
-      <div>
-        {% include "core/partials/wordmark.html" with domain=True %}
-        <p>{% trans "Porté par Les Grands Voisins, à Fontenay-aux-Roses et dans le 14ᵉ arrondissement de Paris." %}</p>
-        <p>
-          {% trans "Seulement deux cookies techniques : votre session et la protection des formulaires. Aucun traceur, rien n'est chargé depuis un tiers." %}
-        </p>
+        {% include "core/partials/lang_switcher.html" %}
+        {% include "core/partials/account_widget.html" %}
       </div>
-      <nav class="foot-nav" aria-label="{% trans 'Plan du site' %}">
-        {% for group in conj_groups %}
-          <ul>
-            {% for item in group.items %}
-              <li>
-                <a target="_new"
-                   href="{{ item.href }}"
-                   aria-label="{{ item.entry.aria }}">{{ item.entry.title }}</a>
-              </li>
+    </header>
+    <!-- MAIN -->
+    <main id="contenu">
+      {% block content %}
+      {% endblock content %}
+    </main>
+    <!-- FOOTER -->
+    <footer class="foot-wrap">
+      <div class="wrap">
+        <div class="foot">
+          <div>
+            {% include "core/partials/wordmark.html" with domain=True %}
+            <p>{% trans "Porté par Les Grands Voisins, à Fontenay-aux-Roses et dans le 14ᵉ arrondissement de Paris." %}</p>
+            <p>
+              {% trans "Seulement deux cookies techniques : votre session et la protection des formulaires. Aucun traceur, rien n'est chargé depuis un tiers." %}
+            </p>
+          </div>
+          <nav class="foot-nav" aria-label="{% trans 'Plan du site' %}">
+            {% for group in conj_groups %}
+              <ul>
+                {% for item in group.items %}
+                  <li>
+                    <a target="_new"
+                       href="{{ item.href }}"
+                       aria-label="{{ item.entry.aria }}">{{ item.entry.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
             {% endfor %}
-          </ul>
-        {% endfor %}
-      </nav>
-    </div>
-    <div class="foot-bottom">
-      <span>{% trans "Voisinter.net" %}</span>
-      <a target="_new"
-         href="https://github.com/lesgrandsvoisins"
-         rel="noreferrer">GitHub</a>
-      <a target="_new" href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>
-    </div>
-  </div>
-</footer>
-{% include "core/partials/toasts.html" %}
-</body>
+          </nav>
+        </div>
+        <div class="foot-bottom">
+          <span>{% trans "Voisinter.net" %}</span>
+          <a target="_new"
+             href="https://github.com/lesgrandsvoisins"
+             rel="noreferrer">GitHub</a>
+          <a target="_new" href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>
+        </div>
+      </div>
+    </footer>
+    {% include "core/partials/toasts.html" %}
+  </body>
 </html>

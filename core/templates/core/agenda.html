@@ -18,6 +18,17 @@
           {% for event in upcoming_events %}
             <li class="event-row">
               <div class="event-date-time-title">
+                <div class="event-title-location">
+                  <div class="event-title">{{ event.title }}</div>
+                  {% if event.location or event.online_url %}
+                    <p class="event-where">
+                      {% if event.location %}{{ event.location }}{% endif %}
+                      {% if event.online_url %}
+                        — <a href="{{ event.online_url }}" target="_new">{% trans "En ligne" %}</a>
+                      {% endif %}
+                    </p>
+                  {% endif %}
+                </div>
                 <div class="event-date-time">
                   <div class="event-date" aria-hidden="true">
                     <div class="event-date-month">{{ event.start|date:"M" }}</div>
@@ -30,20 +41,11 @@
                   </div>
                   <time class="sr-only" datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>
                 </div>
-                <div class="event-title">{{ event.title }}</div>
               </div>
               <div class="event-media">
-                {% if event.description %}<div class="markdown muted">{{ event.description|markdown }}</div>{% endif %}
                 {% if event.photo %}<img class="event-thumb" src="{{ event.photo.url }}" alt="">{% endif %}
+                {% if event.description %}<div class="markdown muted">{{ event.description|markdown }}</div>{% endif %}
               </div>
-              {% if event.location or event.online_url %}
-                <p class="event-where">
-                  {% if event.location %}{{ event.location }}{% endif %}
-                  {% if event.online_url %}
-                    — <a href="{{ event.online_url }}" target="_new">{% trans "En ligne" %}</a>
-                  {% endif %}
-                </p>
-              {% endif %}
             </li>
           {% endfor %}
         </ul>

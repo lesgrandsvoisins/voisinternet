@@ -1,4 +1,4 @@
-{% load i18n %}<div class="page-head">
+{% load i18n %}<div class="page-head{% if accent %} accent-{{ accent }}{% endif %}">
   <div class="wrap">
     <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
       <ol>
@@ -7,7 +7,10 @@
         <li aria-current="page">{{ item.entry.title }}</li>
       </ol>
     </nav>
-    <h1>{{ item.entry.title }}</h1>
+    <div class="page-head-top">
+      {% if icon_url %}<img class="page-head-icon" src="{{ icon_url }}" alt="">{% endif %}
+      <h1>{{ item.entry.title }}</h1>
+    </div>
     {% if lead %}<p class="lead">{{ lead }}</p>{% endif %}
   </div>
 </div>

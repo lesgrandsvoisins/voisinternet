@@ -23,6 +23,12 @@
   --group-association: #3B6EA5;
   --group-reperes: #7A5C99;
   --group-poles: #2E8B8B;
+  --accent-terracotta: #B4602E;
+  --accent-plum: #9C3568;
+  --accent-indigo: #47539E;
+  --accent-teal: #2E8B8B;
+  --accent-moss: #6B7A2E;
+  --accent-gold: #C9971F;
   --serif: "Charter", "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
   color-scheme: light;
@@ -53,6 +59,12 @@
     --group-association: #6FA8DC;
     --group-reperes: #A67FD9;
     --group-poles: #4FB3B3;
+    --accent-terracotta: #E0955E;
+    --accent-plum: #D67AA8;
+    --accent-indigo: #8B97D6;
+    --accent-teal: #4FB3B3;
+    --accent-moss: #A4B85E;
+    --accent-gold: #E0B84A;
     color-scheme: dark;
   }
 }
@@ -81,6 +93,12 @@
   --group-association: #6FA8DC;
   --group-reperes: #A67FD9;
   --group-poles: #4FB3B3;
+  --accent-terracotta: #E0955E;
+  --accent-plum: #D67AA8;
+  --accent-indigo: #8B97D6;
+  --accent-teal: #4FB3B3;
+  --accent-moss: #A4B85E;
+  --accent-gold: #E0B84A;
   color-scheme: dark;
 }
 
@@ -1227,6 +1245,28 @@ blockquote p {
 .page-head {
   border-bottom: 1px solid var(--line);
   padding: 2.75rem 0 2rem
+}
+
+/* Pôles : un accent (couleur choisie par la fiche Wagtail) distingue le pôle courant. */
+.page-head.accent-terracotta { border-bottom: 3px solid var(--accent-terracotta) }
+.page-head.accent-plum { border-bottom: 3px solid var(--accent-plum) }
+.page-head.accent-indigo { border-bottom: 3px solid var(--accent-indigo) }
+.page-head.accent-teal { border-bottom: 3px solid var(--accent-teal) }
+.page-head.accent-moss { border-bottom: 3px solid var(--accent-moss) }
+.page-head.accent-gold { border-bottom: 3px solid var(--accent-gold) }
+
+.page-head-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem
+}
+
+.page-head-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 10px;
+  object-fit: cover;
+  flex: none
 }
 
 .breadcrumb {

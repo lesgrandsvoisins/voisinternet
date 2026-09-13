@@ -13,19 +13,12 @@ from django.views.decorators.http import require_POST
 
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
 from .forms import DirectoryEntryForm
-from .ghost import latest_posts, posts_by_tag
+from .ghost import latest_posts
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectorySector, Donor, EntrySubscription, Event, GuideBook,
     Membership, Service, Shortcut, format_number,
 )
-
-# Étiquettes Ghost associées à chaque pôle (à ajuster depuis l'administration du blog si besoin).
-BLOG_TAGS = {
-    "civisme": "cooperations",
-    "arts_plastiques": "[arts,arts-plastiques]",
-    "numerique": "digital",
-}
 
 # Chapeau de présentation pour chaque page intermédiaire (une par groupe du menu).
 GROUP_PAGE_INTROS = {
@@ -224,18 +217,6 @@ def contributions(request):
         "donors": Donor.objects.filter(public=True),
         "donation_services": donation_services,
     })
-
-
-def civisme(request):
-    return render(request, "core/civisme.html", {"posts": posts_by_tag(BLOG_TAGS["civisme"])})
-
-
-def arts_plastiques(request):
-    return render(request, "core/arts-plastiques.html", {"posts": posts_by_tag(BLOG_TAGS["arts_plastiques"])})
-
-
-def numerique(request):
-    return render(request, "core/numerique.html", {"posts": posts_by_tag(BLOG_TAGS["numerique"])})
 
 
 def agenda(request):

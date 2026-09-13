@@ -213,3 +213,6 @@ WAGTAIL_SITE_NAME = "Voisinternet"
 WAGTAILADMIN_BASE_URL = env("DJANGO_BASE_URL", f"http://{DJANGO_IP}:{DJANGO_PORT}")
 WAGTAIL_I18N_ENABLED = True
 WAGTAIL_CONTENT_LANGUAGES = LANGUAGES
+# SVG en plus des formats matriciels par défaut (avif/gif/jpg/jpeg/png/webp) :
+# utile pour des icônes vectorielles (ex. cms.PolePage.icon).
+WAGTAILIMAGES_EXTENSIONS = ["avif", "gif", "jpg", "jpeg", "png", "webp", "svg"]

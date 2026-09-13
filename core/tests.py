@@ -21,12 +21,20 @@ class PagesTests(Base):
         # Un raccourci crée un compte : nécessaire pour que « raccourcis » et « groupes » répondent 200.
         self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]))
         for name in ["home", "account", "raccourcis", "groupes", "agenda", "contact", "contributions",
-                     "grandsvoisins", "annuaire", "civisme", "arts_plastiques", "numerique",
-                     "activites", "poles", "a_propos"]:
+                     "grandsvoisins", "annuaire", "activites", "poles", "a_propos"]:
             with self.subTest(page=name):
                 response = self.client.get(reverse(f"core:{name}"))
                 self.assertEqual(response.status_code, 200)
                 self.assertContains(response, 'id="main-menu-panel"')  # le menu principal est présent
+
+    def test_pole_pages_render(self):
+        # Pages « pôles » (civisme, arts-plastiques, numérique) : gérées par Wagtail,
+        # donc sans nom d'URL Django à inverser (voir cms.PolePage et core/menu.py).
+        for path in ["/fr/civisme/", "/fr/arts-plastiques/", "/fr/numerique/"]:
+            with self.subTest(path=path):
+                response = self.client.get(path)
+                self.assertEqual(response.status_code, 200)
+                self.assertContains(response, 'id="main-menu-panel"')
 
     def test_header_says_se_connecter_for_new_visitor(self):
         response = self.client.get(reverse("core:home"))

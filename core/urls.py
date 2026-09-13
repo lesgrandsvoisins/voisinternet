@@ -33,7 +33,4 @@ urlpatterns = [
     path("raccourcis/<slug:slug>/raccourci/<str:direction>/", views.reorder_shortcut, name="reorder_shortcut"),
     path("groupes/<slug:slug>/adherer/", views.toggle_membership, name="toggle_membership"),
     path("groupes/<slug:slug>/adherer/<str:direction>/", views.reorder_membership, name="reorder_membership"),
-    path("civisme/", views.civisme, name="civisme"),
-    path("arts-plastiques/", views.arts_plastiques, name="arts_plastiques"),
-    path("numerique/", views.numerique, name="numerique"),
 ]

@@ -1,0 +1,53 @@
+{% extends "core/base.html" %}
+{% load i18n wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}{{ page.title }} — Voisinternet{% endblock %}
+
+{% block content %}
+  {% if page.icon %}{% image page.icon fill-96x96 preserve-svg as icon_img %}{% endif %}
+  <div class="page-head accent-{{ page.accent }}">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+        <ol>
+          <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+          <li aria-current="page">{{ page.title }}</li>
+        </ol>
+      </nav>
+      <div class="page-head-top">
+        {% if icon_img %}<img class="page-head-icon" src="{{ icon_img.url }}" alt="">{% endif %}
+        <h1>{{ page.title }}</h1>
+      </div>
+      {% if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
+    </div>
+  </div>
+  {% if page.cards %}
+    <div class="wrap page cols">
+      {% for block in page.cards %}
+        <section class="card">
+          <h2>{{ block.value.title }}</h2>
+          {{ block.value.text }}
+        </section>
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% if posts %}
+    <div class="wrap page">
+      <section aria-labelledby="posts-title">
+        <div class="split">
+          <h2 id="posts-title">{% trans "Derniers articles" %}</h2>
+        </div>
+        <ul class="posts">
+          {% for post in posts %}
+            <li>
+              <a href="{{ post.url }}" target="_new">
+                <h3>{{ post.title }}</h3>
+                {% if post.excerpt %}<p>{{ post.excerpt }}</p>{% endif %}
+                {% if post.published_at %}<time datetime="{{ post.published_at|date:'c' }}">{{ post.published_at|date:"j F Y" }}</time>{% endif %}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    </div>
+  {% endif %}
+{% endblock %}

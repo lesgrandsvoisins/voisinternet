@@ -10,7 +10,16 @@ def create_homepage(apps, schema_editor):
 
     from cms.models import HomePage
 
-    Page.objects.filter(depth=2).delete()
+    # Pas de Page.objects.filter(depth=2).delete() : le collecteur de Django
+    # vérifie alors la table de CHAQUE sous-classe de Page connue du code
+    # *actuel* (cms.models important toujours la même version), y compris
+    # celles créées par des migrations cms plus récentes que celle-ci — sur
+    # une base neuve, ces tables n'existent pas encore à ce point de
+    # l'historique et la suppression échoue. Le SQL direct évite le
+    # collecteur ; sûr ici car la page par défaut de Wagtail n'a jamais de
+    # ligne dans une table de sous-classe.
+    with schema_editor.connection.cursor() as cursor:
+        cursor.execute("DELETE FROM wagtailcore_page WHERE depth = 2")
 
     content_type, __ = ContentType.objects.get_or_create(
         model="homepage", app_label="cms"
@@ -41,9 +50,16 @@ def create_homepage(apps, schema_editor):
 
 
 def remove_homepage(apps, schema_editor):
-    from cms.models import HomePage
-
-    HomePage.objects.filter(slug="home").delete()
+    # Même remarque : éviter le collecteur de Django (cf. create_homepage).
+    # Ici la ligne supprimée a bien une ligne fille dans cms_homepage : on
+    # la retire explicitement (pas de cascade en base, faite normalement
+    # par le collecteur qu'on contourne).
+    with schema_editor.connection.cursor() as cursor:
+        cursor.execute(
+            "DELETE FROM cms_homepage WHERE page_ptr_id IN "
+            "(SELECT id FROM wagtailcore_page WHERE depth = 2 AND slug = 'home')"
+        )
+        cursor.execute("DELETE FROM wagtailcore_page WHERE depth = 2 AND slug = 'home'")
 
 
 class Migration(migrations.Migration):

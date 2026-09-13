@@ -6,7 +6,7 @@ from dataclasses import dataclass
 
 from django.conf import settings
 from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import get_language, gettext_lazy as _
 
 
 @dataclass(frozen=True)
@@ -15,7 +15,7 @@ class Entry:
     title: str
     short: str
     detail: str
-    target: str  # nom d'URL Django, ou « setting:NOM » pour une adresse externe
+    target: str  # nom d'URL Django, « setting:NOM » ou « path:/chemin/ » (page Wagtail à URL fixe)
     group: str
 
     @property
@@ -26,6 +26,11 @@ class Entry:
 def entry_href(entry):
     if entry.target.startswith("setting:"):
         return getattr(settings, entry.target.split(":", 1)[1])
+    if entry.target.startswith("path:"):
+        # Pages Wagtail : pas de nom d'URL Django à inverser, juste le
+        # chemin (fixe, indépendant de la langue) préfixé par la langue
+        # active — comme le ferait i18n_patterns pour une URL nommée.
+        return f"/{get_language()}{entry.target.split(':', 1)[1]}"
     return reverse(entry.target)
 
 
@@ -121,7 +126,7 @@ ENTRIES = [
         _("Civisme"),
         _("Profession d'empathie nationale, prix d'excellence en service public et en travail social"),
         _("s'engager pour l'intérêt général, entre voisins"),
-        "core:civisme",
+        "path:/civisme/",
         "poles",
     ),
     Entry(
@@ -129,7 +134,7 @@ ENTRIES = [
         _("Arts Plastiques"),
         _("Galléries d'art dans des lieux insolites et soutien aux artistes"),
         _("transformer tout lieu en galerie d'art hybride"),
-        "core:arts_plastiques",
+        "path:/arts-plastiques/",
         "poles",
     ),
     Entry(
@@ -137,7 +142,7 @@ ENTRIES = [
         _("Numérique"),
         _("Salles de sociabilité numérique et Voisinternet"),
         _("matériel reconditionné et compétences partagées"),
-        "core:numerique",
+        "path:/numerique/",
         "poles",
     ),
 ]

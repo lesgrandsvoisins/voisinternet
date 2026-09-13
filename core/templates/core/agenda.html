@@ -6,15 +6,25 @@
 {% include "core/partials/page_head.html" with item=conj.agenda lead=page_lead %}
 <div class="wrap page">
   <section aria-labelledby="upcoming-title">
-    <div class="split">
+    {% comment %} 
+     <div class="split">
       <h2 id="upcoming-title">{% trans "Prochains évènements" %}</h2>
-    </div>
+    </div> 
+    {% endcomment %}
     {% if upcoming_events %}
     <ul class="event-list">
       {% for event in upcoming_events %}
       <li class="event-row">
+        <div class="event-date" aria-hidden="true">
+          <div class="event-date-month">{{ event.start|date:"M" }}</div>
+          <div class="event-date-day">{{ event.start|date:"j" }}</div>
+          <div class="event-date-weekday">{{ event.start|date:"D" }}</div>
+          <div class="event-date-time">
+            {{ event.start|date:"H:i" }}{% if event.end %}–{{ event.end|date:"H:i" }}{% endif %}
+          </div>
+        </div>
+        <time class="sr-only" datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>
         <div class="event-media">
-          {% if event.photo %}<img class="event-thumb" src="{{ event.photo.url }}" alt="">{% endif %}
           <div>
             <strong>{{ event.title }}</strong>
             {% if event.description %}<div class="markdown muted">{{ event.description|markdown }}</div>{% endif %}
@@ -25,16 +35,8 @@
             </p>
             {% endif %}
           </div>
+          {% if event.photo %}<img class="event-thumb" src="{{ event.photo.url }}" alt="">{% endif %}
         </div>
-        <div class="event-date" aria-hidden="true">
-          <div class="event-date-month">{{ event.start|date:"M" }}</div>
-          <div class="event-date-day">{{ event.start|date:"j" }}</div>
-          <div class="event-date-weekday">{{ event.start|date:"D" }}</div>
-          <div class="event-date-time">
-            {{ event.start|date:"H:i" }}{% if event.end %}–{{ event.end|date:"H:i" }}{% endif %}
-          </div>
-        </div>
-        <time class="sr-only" datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>
       </li>
       {% endfor %}
     </ul>

@@ -1516,7 +1516,14 @@ blockquote p {
 .event-where {
   margin: .35rem 0 0;
   color: var(--ink-soft);
-  font-size: .92rem
+  font-size: .92rem;
+  width: 100%;
+}
+
+.event-title {
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
 }
 
 .event-date {

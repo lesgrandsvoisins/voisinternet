@@ -30,7 +30,7 @@
                   </div>
                   <time class="sr-only" datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>
                 </div>
-                <strong>{{ event.title }}</strong>
+                <div class="event-title">{{ event.title }}</div>
               </div>
               <div class="event-media">
                 {% if event.description %}<div class="markdown muted">{{ event.description|markdown }}</div>{% endif %}

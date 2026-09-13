@@ -57,6 +57,19 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "cms",
+    "wagtail.contrib.forms",
+    "wagtail.embeds",
+    "wagtail.sites",
+    "wagtail.users",
+    "wagtail.snippets",
+    "wagtail.documents",
+    "wagtail.images",
+    "wagtail.search",
+    "wagtail.admin",
+    "wagtail",
+    "modelcluster",
+    "taggit",
     "core",
 ]
 if OIDC_ENABLED:
@@ -191,3 +204,9 @@ GUIDE_URL = env("VOISINTERNET_GUIDE_URL", "https://wiki.grandsvoisins.org/")
 GHOST_URL = env("GHOST_URL", BLOG_URL)
 GHOST_CONTENT_KEY = env("GHOST_CONTENT_KEY", "")
 CONTACT_EMAIL = env("VOISINTERNET_CONTACT_EMAIL", "contact@voisinter.net")
+
+# --- Wagtail : pages de contenu gérées depuis /cms/ (indépendant de l'admin Django en /admin/).
+WAGTAIL_SITE_NAME = "Voisinternet"
+WAGTAILADMIN_BASE_URL = env("DJANGO_BASE_URL", f"http://{DJANGO_IP}:{DJANGO_PORT}")
+WAGTAIL_I18N_ENABLED = True
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES

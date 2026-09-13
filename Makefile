@@ -4,7 +4,7 @@ LANGS  := en es ar ko
 # Charge .env dans le shell de la recette, sans réinterpréter les caractères
 # spéciaux qu'il peut contenir (voir DJANGO_SECRET_KEY).
 LOADENV = export $$(grep -v '^\#' .env 2>/dev/null | xargs -d '\n');
-LOADENV2 = eval "$$(grep -v '^\#\|^ *\t*$$' .env 2>/dev/null | sed -e 's/^/export /')"
+# LOADENV2 = eval "$$(grep -v '^\#\|^ *\t*$$' .env 2>/dev/null | sed -e 's/^/export /')"
 
 
 .DEFAULT_GOAL := help

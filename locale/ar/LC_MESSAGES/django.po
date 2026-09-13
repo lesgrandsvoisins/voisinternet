@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-12 16:10+0200\n"
+"POT-Creation-Date: 2026-09-13 11:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
 
 #: core/accounts.py:48 core/accounts.py:53
 #, python-format
@@ -72,7 +73,7 @@ msgstr "الهويات التي تنتمي إليها، فردية أو جماع
 msgid "un particulier, une association, une entreprise…"
 msgstr "فرد، جمعية، شركة…"
 
-#: core/menu.py:65 core/models.py:354
+#: core/menu.py:65 core/models.py:355
 msgid "Association"
 msgstr "الجمعية"
 
@@ -381,8 +382,7 @@ msgid ""
 "Lien vers une vidéo (YouTube, PeerTube…) : affiché en lien, jamais intégré "
 "en cadre."
 msgstr ""
-"رابط لفيديو (YouTube، PeerTube…): يُعرض كرابط فقط، ولا يُضمَّن أبدًا في "
-"إطار."
+"رابط لفيديو (YouTube، PeerTube…): يُعرض كرابط فقط، ولا يُضمَّن أبدًا في إطار."
 
 #: core/models.py:237
 msgid "courriel"
@@ -428,7 +428,7 @@ msgstr "نص زر الدعوة إلى اتخاذ إجراء"
 msgid "lien de l'appel à l'action"
 msgstr "رابط الدعوة إلى اتخاذ إجراء"
 
-#: core/models.py:252 core/models.py:359
+#: core/models.py:252 core/models.py:360
 msgid "apparaît publiquement"
 msgstr "يظهر علنًا"
 
@@ -519,39 +519,39 @@ msgstr "مساهمة مالية"
 msgid "contributions financières"
 msgstr "مساهمات مالية"
 
-#: core/models.py:350
+#: core/models.py:351
 msgid "Particulier"
 msgstr "فرد"
 
-#: core/models.py:351
+#: core/models.py:352
 msgid "Entreprise"
 msgstr "شركة"
 
-#: core/models.py:352
+#: core/models.py:353
 msgid "Fondation"
 msgstr "مؤسسة"
 
-#: core/models.py:353
+#: core/models.py:354
 msgid "Collectivité"
 msgstr "هيئة عامة"
 
-#: core/models.py:356
+#: core/models.py:357
 msgid "nom affiché"
 msgstr "الاسم المعروض"
 
-#: core/models.py:357
+#: core/models.py:358
 msgid "type"
 msgstr "النوع"
 
-#: core/models.py:360
+#: core/models.py:361
 msgid "Uniquement avec le consentement explicite du donateur (RGPD)."
 msgstr "فقط بموافقة صريحة من المتبرع (وفق اللائحة العامة لحماية البيانات)."
 
-#: core/models.py:362
+#: core/models.py:363
 msgid "soutien depuis"
 msgstr "يدعم منذ"
 
-#: core/models.py:366
+#: core/models.py:367
 msgid "donateur"
 msgstr "متبرع"
 
@@ -559,15 +559,13 @@ msgstr "متبرع"
 msgid "mon Compte — Voisinternet"
 msgstr "حسابي — Voisinternet"
 
-#: core/templates/core/account.html:7
-#: core/templates/core/fiche_modifier.html:7
+#: core/templates/core/account.html:7 core/templates/core/fiche_modifier.html:7
 #: core/templates/core/group_page.html:7 core/templates/core/mes_fiches.html:7
 #: core/templates/core/partials/page_head.html:3
 msgid "Fil d’Ariane"
 msgstr "مسار التنقل"
 
-#: core/templates/core/account.html:9
-#: core/templates/core/fiche_modifier.html:9
+#: core/templates/core/account.html:9 core/templates/core/fiche_modifier.html:9
 #: core/templates/core/group_page.html:9 core/templates/core/mes_fiches.html:9
 #: core/templates/core/partials/page_head.html:5
 msgid "Accueil"
@@ -602,8 +600,8 @@ msgstr "هناك حساب مجهول مفتوح على هذا الجهاز"
 
 #: core/templates/core/account.html:30
 msgid ""
-"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
-" ensuite supprimé."
+"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera "
+"ensuite supprimé."
 msgstr "هل ترغب في ربط اختصاراته بحسابك؟ سيتم حذف الحساب المجهول بعد ذلك."
 
 #: core/templates/core/account.html:31
@@ -623,7 +621,7 @@ msgid "Mes fiches dans l'annuaire"
 msgstr "بطاقاتي في الدليل"
 
 #: core/templates/core/account.html:48
-#: core/templates/core/partials/account_widget.html:73
+#: core/templates/core/partials/account_panel_body.html:50
 msgid "Se déconnecter"
 msgstr "تسجيل الخروج"
 
@@ -632,7 +630,7 @@ msgid "Rattacher à mon compte Grands Voisins"
 msgstr "الربط بحساب Grands Voisins الخاص بي"
 
 #: core/templates/core/account.html:51
-#: core/templates/core/partials/account_widget.html:80
+#: core/templates/core/partials/account_panel_body.html:57
 msgid "Fermer ce compte sur cet appareil"
 msgstr "إغلاق هذا الحساب على هذا الجهاز"
 
@@ -698,7 +696,7 @@ msgstr ""
 "رقم من 16 خانة، بلا اسم ولا بريد إلكتروني. تدوّنه، ويكفي لاستعادة اختصاراتك."
 
 #: core/templates/core/account.html:101
-#: core/templates/core/partials/account_widget.html:42
+#: core/templates/core/partials/account_panel_body.html:19
 msgid "Créer un compte anonyme"
 msgstr "إنشاء حساب مجهول"
 
@@ -758,8 +756,8 @@ msgid ""
 "Écrivez-nous à <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. "
 "Un voisin vous répond, pas un robot."
 msgstr ""
-"راسلنا على <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. سيردّ"
-" عليك جار، لا روبوت."
+"راسلنا على <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. سيردّ "
+"عليك جار، لا روبوت."
 
 #: core/templates/core/agenda.html:24
 msgid "Prochains évènements"
@@ -920,8 +918,8 @@ msgid ""
 "Seulement deux cookies techniques : votre session et la protection des "
 "formulaires. Aucun traceur, rien n'est chargé depuis un tiers."
 msgstr ""
-"فقط ملفا تعريف ارتباط تقنيان: جلستك وحماية النماذج. لا متتبعات، ولا شيء "
-"يُحمَّل من طرف ثالث."
+"فقط ملفا تعريف ارتباط تقنيان: جلستك وحماية النماذج. لا متتبعات، ولا شيء يُحمَّل "
+"من طرف ثالث."
 
 #: core/templates/core/base.html:87
 msgid "Plan du site"
@@ -950,9 +948,9 @@ msgid ""
 "Annette Monod. L'édition 2025 s'est tenue à l'association France Amérique-"
 "Latine."
 msgstr ""
-"حدث سنوي، يُقام في 2 مارس من كل عام منذ 2025، تكريمًا لفالنتين فرانسي. يكافئ"
-" التميز في العمل الاجتماعي من خلال جائزة أنيت مونو. أُقيمت نسخة 2025 في "
-"جمعية France Amérique-Latine."
+"حدث سنوي، يُقام في 2 مارس من كل عام منذ 2025، تكريمًا لفالنتين فرانسي. يكافئ "
+"التميز في العمل الاجتماعي من خلال جائزة أنيت مونو. أُقيمت نسخة 2025 في جمعية "
+"France Amérique-Latine."
 
 #: core/templates/core/contact.html:3
 msgid "Contact — Voisinternet"
@@ -971,13 +969,11 @@ msgstr "عبر البريد الإلكتروني"
 #: core/templates/core/contact.html:10
 #, python-format
 msgid ""
-"Écrivez-nous directement à <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Nous répondons en "
-"quelques jours."
+"Écrivez-nous directement à <a href=\"mailto:"
+"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. Nous répondons en quelques jours."
 msgstr ""
-"راسلونا مباشرة على <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. نرد خلال أيام "
-"قليلة."
+"راسلونا مباشرة على <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</"
+"a>. نرد خلال أيام قليلة."
 
 #: core/templates/core/contact.html:13
 msgid "Aux Conseils des Voisins"
@@ -1024,12 +1020,12 @@ msgstr "تقديم الوقت"
 #, python-format
 msgid ""
 "Animer un atelier, relire le guide, dépanner un voisin, ou simplement être "
-"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+"présent : chacun donne le temps qu'il veut. Écrivez-nous à <a href=\"mailto:"
+"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 msgstr ""
-"إدارة ورشة عمل، مراجعة الدليل، مساعدة جار، أو مجرد الحضور: كل شخص يمنح الوقت"
-" الذي يريده. راسلنا على <a "
-"href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+"إدارة ورشة عمل، مراجعة الدليل، مساعدة جار، أو مجرد الحضور: كل شخص يمنح الوقت "
+"الذي يريده. راسلنا على <a href=\"mailto:"
+"%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 
 #: core/templates/core/contributions.html:10
 msgid "Faire un don financier"
@@ -1103,8 +1099,8 @@ msgstr "Grands Voisins: الجمعية — Voisinternet"
 
 #: core/templates/core/grandsvoisins.html:5
 msgid ""
-"Voisinternet est un programme porté par l'association coopérative Les Grands"
-" Voisins : une conscience collective à laquelle chacun contribue. Nous "
+"Voisinternet est un programme porté par l'association coopérative Les Grands "
+"Voisins : une conscience collective à laquelle chacun contribue. Nous "
 "demandons votre confiance : voici de quoi la vérifier."
 msgstr ""
 "Voisinternet برنامج تديره الجمعية التعاونية Les Grands Voisins: وعي جماعي "
@@ -1220,8 +1216,8 @@ msgstr "اخرج من سحابتهم."
 
 #: core/templates/core/home.html:11
 msgid ""
-"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un"
-" voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
+"Vos courriels, vos photos et vos agendas peuvent vivre chez vous, ou chez un "
+"voisin de confiance. Voisinternet vous montre comment, et des voisins vous "
 "accompagnent."
 msgstr ""
 "يمكن لرسائلك الإلكترونية وصورك وتقويمك أن تعيش في منزلك، أو عند جار موثوق. "
@@ -1309,8 +1305,7 @@ msgstr "الخدمات"
 msgid ""
 "Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « mon "
 "Compte », même sans compte nominatif."
-msgstr ""
-"أضف ما يهمّك منها. ستنضم إلى اختصاراتك في «حسابي»، حتى دون حساب باسمك."
+msgstr "أضف ما يهمّك منها. ستنضم إلى اختصاراتك في «حسابي»، حتى دون حساب باسمك."
 
 #: core/templates/core/home.html:93
 msgid "Tous les services, avec ce que chacun conserve"
@@ -1321,7 +1316,7 @@ msgid "D'où vient notre devise"
 msgstr "من أين جاء شعارنا"
 
 #: core/templates/core/home.html:102
-msgid "« Ôte-toi de mon soleil. »"
+msgid "«&nbsp;Ôte-toi de mon soleil.&nbsp;»"
 msgstr "«ابتعد عن شمسي.»"
 
 #: core/templates/core/home.html:105
@@ -1338,9 +1333,8 @@ msgid ""
 "faire de l'ombre. Nous l'avons mis au pluriel : <strong>ôtez-vous de leur "
 "nuage</strong>, et gardez votre part de soleil."
 msgstr ""
-"لم يطلب الفيلسوف من الرجل الأقوى شيئًا، سوى أن يكفّ عن حجب الضوء عنه. "
-"وضعناها بصيغة الجمع: <strong>اخرجوا من سحابتهم</strong>، واحتفظوا بنصيبكم من"
-" الشمس."
+"لم يطلب الفيلسوف من الرجل الأقوى شيئًا، سوى أن يكفّ عن حجب الضوء عنه. وضعناها "
+"بصيغة الجمع: <strong>اخرجوا من سحابتهم</strong>، واحتفظوا بنصيبكم من الشمس."
 
 #: core/templates/core/home.html:113
 msgid "Le guide et le blog"
@@ -1372,8 +1366,8 @@ msgid ""
 "Elles ne deviennent visibles de tous qu'une fois « apparaît publiquement » "
 "coché — c'est votre consentement explicite."
 msgstr ""
-"أنشئ وأدر بطاقاتك الخاصة في الدليل: أشخاص أو هيئات. لا تصبح مرئية للجميع إلا"
-" بعد تحديد «تظهر للعامة» — وهذا يمثل موافقتك الصريحة."
+"أنشئ وأدر بطاقاتك الخاصة في الدليل: أشخاص أو هيئات. لا تصبح مرئية للجميع إلا "
+"بعد تحديد «تظهر للعامة» — وهذا يمثل موافقتك الصريحة."
 
 #: core/templates/core/mes_fiches.html:30
 msgid "Publique"
@@ -1427,8 +1421,8 @@ msgid ""
 "Inscrivez-vous sur <a href=\"https://gdvoisins.com\" "
 "target=\"_new\">gdvoisins.com</a>."
 msgstr ""
-"إعادة تأهيل الحواسيب وتطوير المهارات الرقمية. سجّل عبر <a "
-"href=\"https://gdvoisins.com\" target=\"_new\">gdvoisins.com</a>."
+"إعادة تأهيل الحواسيب وتطوير المهارات الرقمية. سجّل عبر <a href=\"https://"
+"gdvoisins.com\" target=\"_new\">gdvoisins.com</a>."
 
 #: core/templates/core/numerique.html:13
 msgid "Paris le Nuage"
@@ -1443,30 +1437,30 @@ msgstr ""
 "استبدال خدمات عمالقة الويب بخوادم منزلية صغيرة، منخفضة استهلاك الطاقة، "
 "لملفاتك وصورك. هذا بالضبط ما يقترحه Voisinternet."
 
-#: core/templates/core/partials/account_widget.html:16
+#: core/templates/core/partials/account_panel_body.html:7
+msgid "se Connecter ou Créer son compte"
+msgstr "تسجيل الدخول أو إنشاء حساب"
+
+#: core/templates/core/partials/account_panel_body.html:28
+msgid "Paramètres"
+msgstr "الإعدادات"
+
+#: core/templates/core/partials/account_panel_body.html:43
+msgid "Aucun service ajouté pour l'instant."
+msgstr "لم تتم إضافة أي خدمة حتى الآن."
+
+#: core/templates/core/partials/account_widget.html:14
 #, python-format
 msgid "Mon compte : %(account_sub)s"
 msgstr "حسابي: %(account_sub)s"
 
-#: core/templates/core/partials/account_widget.html:17
+#: core/templates/core/partials/account_widget.html:15
 msgid "mon Compte"
 msgstr "حسابي"
 
-#: core/templates/core/partials/account_widget.html:26
+#: core/templates/core/partials/account_widget.html:24
 msgid "Options de mon compte"
 msgstr "خيارات حسابي"
-
-#: core/templates/core/partials/account_widget.html:30
-msgid "se Connecter ou Créer son compte"
-msgstr "تسجيل الدخول أو إنشاء حساب"
-
-#: core/templates/core/partials/account_widget.html:51
-msgid "Paramètres"
-msgstr "الإعدادات"
-
-#: core/templates/core/partials/account_widget.html:66
-msgid "Aucun service ajouté pour l'instant."
-msgstr "لم تتم إضافة أي خدمة حتى الآن."
 
 #: core/templates/core/partials/entry_form_fields.html:7
 msgid ""
@@ -1630,8 +1624,7 @@ msgid "Mes raccourcis — Voisinternet"
 msgstr "اختصاراتي — Voisinternet"
 
 #: core/templates/core/raccourcis.html:5
-msgid ""
-"Les services que vous avez choisis, à ajouter ou retirer à tout moment."
+msgid "Les services que vous avez choisis, à ajouter ou retirer à tout moment."
 msgstr "الخدمات التي اخترتها، للإضافة أو الإزالة في أي وقت."
 
 #: core/templates/core/raccourcis.html:19

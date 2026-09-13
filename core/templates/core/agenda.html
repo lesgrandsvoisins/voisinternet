@@ -4,29 +4,37 @@
 {% block content %}
 {% trans "Le rendez-vous collectif des Grands Voisins : décider ensemble, en présence ou à distance." as page_lead %}
 {% include "core/partials/page_head.html" with item=conj.agenda lead=page_lead %}
-<div class="wrap page cols">
-    {% comment %}
-     <section aria-labelledby="upcoming-title">
+<div class="wrap page">
+  <section aria-labelledby="upcoming-title">
     <div class="split">
       <h2 id="upcoming-title">{% trans "Prochains évènements" %}</h2>
-    </div> 
-    {% endcomment %}
+    </div>
     {% if upcoming_events %}
-    <ul class="docs">
+    <ul class="event-list">
       {% for event in upcoming_events %}
-      <li>
+      <li class="event-row">
         <div class="event-media">
           {% if event.photo %}<img class="event-thumb" src="{{ event.photo.url }}" alt="">{% endif %}
           <div>
             <strong>{{ event.title }}</strong>
             {% if event.description %}<div class="markdown muted">{{ event.description|markdown }}</div>{% endif %}
+            {% if event.location or event.online_url %}
+            <p class="event-where">
+              {% if event.location %}{{ event.location }}{% endif %}
+              {% if event.online_url %} — <a href="{{ event.online_url }}" target="_new">{% trans "En ligne" %}</a>{% endif %}
+            </p>
+            {% endif %}
           </div>
         </div>
-        <span>
-          <time datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>
-          {% if event.location %} — {{ event.location }}{% endif %}
-          {% if event.online_url %} — <a href="{{ event.online_url }}" target="_new">{% trans "En ligne" %}</a>{% endif %}
-        </span>
+        <div class="event-date" aria-hidden="true">
+          <div class="event-date-month">{{ event.start|date:"M" }}</div>
+          <div class="event-date-day">{{ event.start|date:"j" }}</div>
+          <div class="event-date-weekday">{{ event.start|date:"D" }}</div>
+          <div class="event-date-time">
+            {{ event.start|date:"H:i" }}{% if event.end %}–{{ event.end|date:"H:i" }}{% endif %}
+          </div>
+        </div>
+        <time class="sr-only" datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>
       </li>
       {% endfor %}
     </ul>

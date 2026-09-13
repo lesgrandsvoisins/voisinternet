@@ -1463,15 +1463,27 @@ blockquote p {
   display: flex;
   gap: .75rem;
   align-items: flex-start;
-  min-width: 0
+  min-width: 0;
+  width: 100%;
 }
 
 .event-thumb {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 5rem;
+  height: 5rem;
   border-radius: 10px;
   object-fit: cover;
-  flex: none
+  flex: none;
+  margin: 0.5rem;
+  float: right;
+}
+
+.event-date-time-title {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 /* Prochains évènements : une carte façon éphéméride, à déchirer, pour le rendez-vous d'un coup d'œil. */
@@ -1488,7 +1500,9 @@ blockquote p {
   justify-content: space-between;
   gap: 1rem;
   padding: 1.1rem 0;
-  border-bottom: 1px solid var(--line)
+  border-bottom: 1px solid var(--line);
+  width: 100%;
+
 }
 
 .event-row:first-child {

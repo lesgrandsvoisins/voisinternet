@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n lang_switcher %}
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <html lang="{{ LANGUAGE_CODE }}"
@@ -71,7 +71,7 @@
             </div>
           </nav>
         </div>
-        {% include "core/partials/lang_switcher.html" %}
+        {% lang_switcher %}
         {% include "core/partials/account_widget.html" %}
       </div>
     </header>

@@ -1,14 +1,28 @@
 {% load i18n %}
-<form action="{% url 'set_language' %}" method="post" class="lang-switcher">
-  {% csrf_token %}
-  <input type="hidden" name="next" value="{{ request.get_full_path }}">
-  <label for="lang-select" class="sr-only">{% trans "Langue" %}</label>
-  {% get_current_language as CURRENT_LANGUAGE %}
-  {% get_language_info_list for LANGUAGES as available_languages %}
-  <select id="lang-select" name="language" onchange="this.form.submit()">
-    {% for lang in available_languages %}
-    <option value="{{ lang.code }}"{% if lang.code == CURRENT_LANGUAGE %} selected{% endif %}>{{ lang.name_local }}</option>
-    {% endfor %}
-  </select>
-  <noscript><button class="lang-switcher-go" type="submit">{% trans "Changer" %}</button></noscript>
-</form>
+{% if direct_links %}
+  <form class="lang-switcher" onsubmit="return false;">
+    <label for="lang-select" class="sr-only">{% trans "Langue" %}</label>
+    <select id="lang-select" onchange="if (this.value) { window.location.href = this.value; }">
+      {% for lang in languages %}
+        <option value="{{ lang.url }}"{% if lang.code == current_language %} selected{% endif %}>{{ lang.name_local }}</option>
+      {% endfor %}
+    </select>
+    <noscript>
+      <ul class="lang-switcher-links">
+        {% for lang in languages %}<li><a href="{{ lang.url }}">{{ lang.name_local }}</a></li>{% endfor %}
+      </ul>
+    </noscript>
+  </form>
+{% else %}
+  <form action="{% url 'set_language' %}" method="post" class="lang-switcher">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <label for="lang-select" class="sr-only">{% trans "Langue" %}</label>
+    <select id="lang-select" name="language" onchange="this.form.submit()">
+      {% for lang in languages %}
+        <option value="{{ lang.code }}"{% if lang.code == current_language %} selected{% endif %}>{{ lang.name_local }}</option>
+      {% endfor %}
+    </select>
+    <noscript><button class="lang-switcher-go" type="submit">{% trans "Changer" %}</button></noscript>
+  </form>
+{% endif %}

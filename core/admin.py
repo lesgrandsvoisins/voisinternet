@@ -2,7 +2,8 @@ from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 from .models import (
-    Account, Audience, Contribution, DirectoryEntry, DirectorySector, Donor, EntrySubscription, Event, GuideBook,
+    Account, Audience, Contribution, DirectoryEntry, DirectoryEntryPhoto, DirectorySector, Donor, EntrySubscription,
+    Event, GuideBook,
     Membership, Service, ServiceCategory, Shortcut,
 )
 
@@ -92,6 +93,11 @@ class DirectorySectorAdmin(TranslationAdmin):
     search_fields = ["name"]
 
 
+class DirectoryEntryPhotoInline(admin.TabularInline):
+    model = DirectoryEntryPhoto
+    extra = 1
+
+
 @admin.register(DirectoryEntry)
 class DirectoryEntryAdmin(TranslationAdmin):
     list_display = ["name", "kind", "sector", "owner", "city", "public", "order"]
@@ -101,10 +107,11 @@ class DirectoryEntryAdmin(TranslationAdmin):
     search_fields = ["name", "description", "city"]
     autocomplete_fields = ["sector"]
     filter_horizontal = ["audiences"]
+    inlines = [DirectoryEntryPhotoInline]
     fieldsets = [
         (None, {"fields": ["name", "slug", "kind", "sector", "audiences", "owner", "public", "order"]}),
         ("Présentation", {"fields": ["title", "tagline", "description"]}),
-        ("Médias", {"fields": ["logo", "photo_promo", "photo_structure", "photo_lieu", "video_url"]}),
+        ("Médias", {"fields": ["logo", "photo_promo", "video_url"]}),
         ("Coordonnées", {"fields": ["email", "phone", "website"]}),
         ("Localisation", {"fields": ["address", "city", "country", "latitude", "longitude"]}),
         ("Appel à l'action", {"fields": ["cta_intro", "cta_label", "cta_link"]}),

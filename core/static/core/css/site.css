@@ -979,6 +979,40 @@ section.block {
   border-radius: 14px
 }
 
+.directory-entry {
+  max-width: 46rem;
+  display: flex;
+  flex-direction: column;
+  gap: .9rem
+}
+
+.directory-entry .hero {
+  width: 100%;
+  max-height: 26rem;
+  object-fit: cover;
+  border-radius: 14px;
+  background: var(--sky)
+}
+
+.directory-entry .gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem
+}
+
+.directory-entry .gallery img {
+  width: 8rem;
+  height: 6rem;
+  object-fit: cover;
+  border-radius: 10px
+}
+
+.directory-entry .tagline {
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 1.1rem
+}
+
 .retention {
   margin-top: .4rem;
   font-size: .9rem

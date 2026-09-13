@@ -4,7 +4,7 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from .accounts import SESSION_KEY
-from .models import Account, Audience, Donor, Service, Shortcut, format_number
+from .models import Account, Audience, DirectoryEntry, DirectorySector, Donor, Service, Shortcut, format_number
 
 
 @override_settings(CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}})
@@ -213,3 +213,26 @@ class AudienceTests(Base):
 
     def test_unknown_directory_sector_is_404(self):
         self.assertEqual(self.client.get(reverse("core:annuaire_pour", args=["inconnu"])).status_code, 404)
+
+    def test_directory_entry_detail_page(self):
+        sector = DirectorySector.objects.create(name="Civisme", slug="civisme")
+        entry = DirectoryEntry.objects.create(
+            name="Ada Matus", slug="ada-matus", sector=sector,
+            tagline="Autrice Compositrice", description="Un groupe de soutien culturel.",
+            public=True,
+        )
+        response = self.client.get(reverse("core:entry_detail", args=[entry.slug]))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Ada Matus")
+        self.assertContains(response, "Autrice Compositrice")
+        self.assertContains(response, reverse("core:toggle_subscription", args=[entry.slug]))
+
+    def test_non_public_directory_entry_detail_is_404(self):
+        entry = DirectoryEntry.objects.create(name="Fiche privée", slug="fiche-privee", public=False)
+        response = self.client.get(reverse("core:entry_detail", args=[entry.slug]))
+        self.assertEqual(response.status_code, 404)
+
+    def test_directory_list_links_to_entry_detail(self):
+        entry = DirectoryEntry.objects.create(name="Ada Matus", slug="ada-matus", public=True)
+        response = self.client.get(reverse("core:annuaire"))
+        self.assertContains(response, reverse("core:entry_detail", args=[entry.slug]))

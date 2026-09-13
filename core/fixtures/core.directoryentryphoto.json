@@ -1,0 +1,82 @@
+[
+  {
+    "model": "core.directoryentryphoto",
+    "pk": 1,
+    "fields": {
+      "entry": 11,
+      "image": "annuaire/photos/cantine-le-monde-bouge-1.jpg",
+      "caption": "",
+      "order": 1
+    }
+  },
+  {
+    "model": "core.directoryentryphoto",
+    "pk": 2,
+    "fields": {
+      "entry": 15,
+      "image": "annuaire/photos/citizen-d-1.png",
+      "caption": "",
+      "order": 1
+    }
+  },
+  {
+    "model": "core.directoryentryphoto",
+    "pk": 3,
+    "fields": {
+      "entry": 17,
+      "image": "annuaire/photos/diep-nguyen-illustratrice-graphiste-portraitiste-1.jpg",
+      "caption": "Des chats heureux gardés par Diep",
+      "order": 1
+    }
+  },
+  {
+    "model": "core.directoryentryphoto",
+    "pk": 4,
+    "fields": {
+      "entry": 17,
+      "image": "annuaire/photos/diep-nguyen-illustratrice-graphiste-portraitiste-2.jpg",
+      "caption": "Garde des chats",
+      "order": 2
+    }
+  },
+  {
+    "model": "core.directoryentryphoto",
+    "pk": 5,
+    "fields": {
+      "entry": 25,
+      "image": "annuaire/photos/ilayda-elis-artiste-plasticienne-1.jpeg",
+      "caption": "",
+      "order": 1
+    }
+  },
+  {
+    "model": "core.directoryentryphoto",
+    "pk": 6,
+    "fields": {
+      "entry": 36,
+      "image": "annuaire/photos/les-simones-coop-1.png",
+      "caption": "",
+      "order": 1
+    }
+  },
+  {
+    "model": "core.directoryentryphoto",
+    "pk": 7,
+    "fields": {
+      "entry": 50,
+      "image": "annuaire/photos/shugafashion-1.jpg",
+      "caption": "",
+      "order": 1
+    }
+  },
+  {
+    "model": "core.directoryentryphoto",
+    "pk": 8,
+    "fields": {
+      "entry": 50,
+      "image": "annuaire/photos/shugafashion-2.jpg",
+      "caption": "",
+      "order": 2
+    }
+  }
+]

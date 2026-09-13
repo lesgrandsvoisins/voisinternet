@@ -1,1 +1,44 @@
-[]
+[
+  {
+    "model": "core.directorysector",
+    "pk": 1,
+    "fields": {
+      "name": "Civisme",
+      "name_fr": "Civisme",
+      "name_en": "Civic Engagement",
+      "name_es": "Compromiso cívico",
+      "name_ar": "الالتزام المدني",
+      "name_ko": "시민 참여",
+      "slug": "civisme",
+      "order": 0
+    }
+  },
+  {
+    "model": "core.directorysector",
+    "pk": 2,
+    "fields": {
+      "name": "Arts plastiques",
+      "name_fr": "Arts plastiques",
+      "name_en": "Visual Arts",
+      "name_es": "Artes plásticas",
+      "name_ar": "الفنون التشكيلية",
+      "name_ko": "조형 예술",
+      "slug": "arts-plastiques",
+      "order": 10
+    }
+  },
+  {
+    "model": "core.directorysector",
+    "pk": 3,
+    "fields": {
+      "name": "Numérique",
+      "name_fr": "Numérique",
+      "name_en": "Digital",
+      "name_es": "Digital",
+      "name_ar": "الرقمي",
+      "name_ko": "디지털",
+      "slug": "numerique",
+      "order": 20
+    }
+  }
+]

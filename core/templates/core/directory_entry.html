@@ -1,0 +1,67 @@
+{% extends "core/base.html" %}
+{% load i18n markdown_filters %}
+{% block title %}{{ entry.name }} — Annuaire — Voisinternet{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+      <ol>
+        <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+        <li><a href="{% url 'core:annuaire' %}">{% trans "Annuaire" %}</a></li>
+        {% if entry.sector %}<li><a href="{% url 'core:annuaire_pour' entry.sector.slug %}">{{ entry.sector.name }}</a></li>{% endif %}
+        <li aria-current="page">{{ entry.name }}</li>
+      </ol>
+    </nav>
+    <h1>{{ entry.name }}</h1>
+    {% if entry.tagline %}<p class="lead">{{ entry.tagline }}</p>{% endif %}
+  </div>
+</div>
+<div class="wrap page">
+  <article class="directory-entry">
+    {% if entry.photos %}
+    <img class="hero" src="{{ entry.photos.0.url }}" alt="">
+    {% if entry.photos|length > 1 %}
+    <div class="gallery">
+      {% for photo in entry.photos|slice:"1:" %}<img src="{{ photo.url }}" alt="">{% endfor %}
+    </div>
+    {% endif %}
+    {% endif %}
+
+    <p class="chips-inline">
+      <span class="chip">{{ entry.get_kind_display }}</span>
+      {% if entry.sector %}<span class="chip">{{ entry.sector.name }}</span>{% endif %}
+      {% for a in entry.audiences.all %}<span class="chip">{{ a.name }}</span>{% endfor %}
+    </p>
+
+    {% if entry.title %}<p class="tagline">{{ entry.title }}</p>{% endif %}
+    {% if entry.description %}<div class="markdown">{{ entry.description|markdown }}</div>{% endif %}
+
+    {% if entry.city or entry.address %}
+    <p>{% if entry.address %}{{ entry.address }}{% if entry.city %}, {% endif %}{% endif %}{{ entry.city }}{% if entry.country %}, {{ entry.country }}{% endif %}</p>
+    {% endif %}
+    {% if entry.video_url %}<p><a href="{{ entry.video_url }}" target="_new">{% trans "Vidéo" %}</a></p>{% endif %}
+    {% if entry.website or entry.email or entry.phone %}
+    <p class="pair">
+      {% if entry.website %}<a href="{{ entry.website }}" target="_new">{% trans "Site" %}</a>{% endif %}
+      {% if entry.email %}<a href="mailto:{{ entry.email }}">{{ entry.email }}</a>{% endif %}
+      {% if entry.phone %}<span>{{ entry.phone }}</span>{% endif %}
+    </p>
+    {% endif %}
+    {% if entry.cta_link %}
+    <p>{% if entry.cta_intro %}{{ entry.cta_intro }} {% endif %}<a class="btn btn-sun" href="{{ entry.cta_link }}">{{ entry.cta_label|default:_("En savoir plus") }}</a></p>
+    {% endif %}
+
+    <form method="post" action="{% url 'core:toggle_subscription' entry.slug %}">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ request.get_full_path }}">
+      {% if subscribed %}
+      <button class="sub-btn subscribed" type="submit">{% trans "Abonné·e ✓" %}</button>
+      {% else %}
+      <button class="sub-btn" type="submit">{% trans "S'abonner" %}</button>
+      {% endif %}
+    </form>
+
+    <p class="muted"><a href="{% url 'core:annuaire' %}">{% trans "← Retour à l’annuaire" %}</a></p>
+  </article>
+</div>
+{% endblock %}

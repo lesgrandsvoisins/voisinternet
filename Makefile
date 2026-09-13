@@ -4,6 +4,8 @@ LANGS  := en es ar ko
 # Charge .env dans le shell de la recette, sans réinterpréter les caractères
 # spéciaux qu'il peut contenir (voir DJANGO_SECRET_KEY).
 LOADENV = export $$(grep -v '^\#' .env 2>/dev/null | xargs -d '\n');
+LOADENV2 = eval "$$(grep -v '^\#\|^ *\t*$$' .env 2>/dev/null | sed -e 's/^/export /')"
+
 
 .DEFAULT_GOAL := help
 
@@ -39,13 +41,13 @@ makemigrations: ## Génère les migrations manquantes
 	$(LOADENV) $(PYTHON) manage.py makemigrations
 
 fixtures-load: ## Charge les données d'exemple (services, publics, guide)
-	for i in auth.group auth.user core.audience core.guidebook core.servicecategory core.service core.account core.shortcut core.membership core.directorysector core.directoryentry core.entrysubscription core.event ; do \
+	for i in auth.group auth.user core.audience core.guidebook core.servicecategory core.service core.account core.shortcut core.membership core.directorysector core.directoryentry core.directoryentryphoto core.entrysubscription core.event ; do \
 		echo $$i; \
 		$(LOADENV) $(PYTHON) manage.py loaddata core/fixtures/$$i.json ; \
 	done
 
 fixtures-dump: ## Charge les données d'exemple (services, publics, guide)
-	for i in auth.group auth.user core.audience core.guidebook core.servicecategory core.service core.account core.shortcut core.membership core.directorysector core.directoryentry core.entrysubscription core.event ; do \
+	for i in auth.group auth.user core.audience core.guidebook core.servicecategory core.service core.account core.shortcut core.membership core.directorysector core.directoryentry core.directoryentryphoto core.entrysubscription core.event ; do \
 		echo $$i; \
 		$(LOADENV) $(PYTHON) manage.py dumpdata $$i >core/fixtures/$$i.json ; \
 	done

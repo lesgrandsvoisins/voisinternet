@@ -4,3 +4,4 @@ staticfiles/
 __pycache__/
 *.pyc
 .venv/
+wwwlesgrandsvoisinscom.json

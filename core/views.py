@@ -141,6 +141,16 @@ def annuaire(request, secteur=None):
     })
 
 
+def entry_detail(request, slug):
+    entry = get_object_or_404(DirectoryEntry, slug=slug, public=True)
+    acc = current_account(request)
+    subscribed = acc.entrysubscription_set.filter(entry=entry).exists() if acc else False
+    return render(request, "core/directory_entry.html", {
+        "entry": entry,
+        "subscribed": subscribed,
+    })
+
+
 def mes_fiches(request):
     acc = current_account(request, create=True)
     if request.method == "POST":

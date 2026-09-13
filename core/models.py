@@ -227,8 +227,6 @@ class DirectoryEntry(models.Model):
 
     logo = models.ImageField(_("logo"), upload_to="annuaire/logos/", blank=True, default="")
     photo_promo = models.ImageField(_("photo promotionnelle"), upload_to="annuaire/photos/", blank=True, default="")
-    photo_structure = models.ImageField(_("photo de la structure"), upload_to="annuaire/photos/", blank=True, default="")
-    photo_lieu = models.ImageField(_("photo du lieu"), upload_to="annuaire/photos/", blank=True, default="")
     video_url = models.URLField(
         _("vidéo promotionnelle"), blank=True, default="",
         help_text=_("Lien vers une vidéo (YouTube, PeerTube…) : affiché en lien, jamais intégré en cadre."),
@@ -264,7 +262,27 @@ class DirectoryEntry(models.Model):
 
     @property
     def photos(self):
-        return [p for p in (self.photo_promo, self.photo_lieu, self.photo_structure) if p]
+        gallery = [p.image for p in self.gallery_photos.all()]
+        return ([self.photo_promo] if self.photo_promo else []) + gallery
+
+
+class DirectoryEntryPhoto(models.Model):
+    """
+    Une photo supplémentaire d'une fiche de l'annuaire (galerie), en plus de la photo
+    promotionnelle : une fiche peut en avoir un nombre quelconque, avec une légende.
+    """
+    entry = models.ForeignKey(DirectoryEntry, on_delete=models.CASCADE, related_name="gallery_photos")
+    image = models.ImageField(_("photo"), upload_to="annuaire/photos/")
+    caption = models.CharField(_("légende"), max_length=200, blank=True, default="")
+    order = models.PositiveSmallIntegerField(_("ordre"), default=0)
+
+    class Meta:
+        ordering = ["order", "pk"]
+        verbose_name = _("photo de l'annuaire")
+        verbose_name_plural = _("photos de l'annuaire")
+
+    def __str__(self):
+        return self.caption or f"Photo de {self.entry}"
 
 
 class EntrySubscription(models.Model):

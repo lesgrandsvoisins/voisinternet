@@ -54,7 +54,7 @@ superuser: ## Crée un compte administrateur
 	$(LOADENV) $(PYTHON) manage.py createsuperuser
 
 run: ## Lance le serveur de développement
-	$(LOADENV) $(PYTHON) manage.py runserver 192.168.123.2:8091
+	$(LOADENV) $(PYTHON) manage.py runserver $$DJANGO_SERVER:$$DJANGO_PORT
 
 test: ## Lance les tests
 	$(LOADENV) $(PYTHON) manage.py test core

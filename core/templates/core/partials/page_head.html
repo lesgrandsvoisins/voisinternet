@@ -3,7 +3,7 @@
     <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
       <ol>
         <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
-        <li>{{ item.group_caption }}</li>
+        {% comment %} <li>{{ item.group_caption }}</li> {% endcomment %}
         <li aria-current="page">{{ item.entry.title }}</li>
       </ol>
     </nav>

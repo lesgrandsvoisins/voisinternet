@@ -5,24 +5,12 @@
 {% trans "Le rendez-vous collectif des Grands Voisins : décider ensemble, en présence ou à distance." as page_lead %}
 {% include "core/partials/page_head.html" with item=conj.agenda lead=page_lead %}
 <div class="wrap page cols">
-  <section class="card">
-    <h2>{% trans "Les Conseils des Voisins" %}</h2>
-    <p>{% trans "Un rendez-vous périodique et ouvert à tous, pour décider ensemble et construire les valeurs du voisinage. Chaque séance se tient en deux temps identiques, pour que chacun trouve son horaire." %}</p>
-  </section>
-  <section class="card">
-    <h2>{% trans "Deux séances, un seul ordre du jour" %}</h2>
-    <p>{% blocktrans %}De 13h à 14h45, ou de 18h à 19h45 : même agenda, deux horaires. En présentiel ou en ligne sur <a href="https://meet.lesgrandsvoisins.com" target="_new">meet.lesgrandsvoisins.com</a>, sur inscription.{% endblocktrans %}</p>
-  </section>
-  <section class="card">
-    <h2>{% trans "Poser une question" %}</h2>
-    <p>{% blocktrans %}Écrivez-nous à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>. Un voisin vous répond, pas un robot.{% endblocktrans %}</p>
-  </section>
-</div>
-<div class="wrap page">
-  <section aria-labelledby="upcoming-title">
+    {% comment %}
+     <section aria-labelledby="upcoming-title">
     <div class="split">
       <h2 id="upcoming-title">{% trans "Prochains évènements" %}</h2>
-    </div>
+    </div> 
+    {% endcomment %}
     {% if upcoming_events %}
     <ul class="docs">
       {% for event in upcoming_events %}
@@ -46,6 +34,23 @@
     <p class="intro">{% trans "Aucun évènement à venir pour l'instant." %}</p>
     {% endif %}
   </section>
+</div>
+<div class="wrap page cols">
+  <section class="card">
+    <h2>{% trans "Les Conseils des Voisins" %}</h2>
+    <p>{% trans "Un rendez-vous périodique et ouvert à tous, pour décider ensemble et construire les valeurs du voisinage. Chaque séance se tient en deux temps identiques, pour que chacun trouve son horaire." %}</p>
+  </section>
+  <section class="card">
+    <h2>{% trans "Deux séances, un seul ordre du jour" %}</h2>
+    <p>{% blocktrans %}De 13h à 14h45, ou de 18h à 19h45 : même agenda, deux horaires. En présentiel ou en ligne sur <a href="https://meet.lesgrandsvoisins.com" target="_new">meet.lesgrandsvoisins.com</a>, sur inscription.{% endblocktrans %}</p>
+  </section>
+  <section class="card">
+    <h2>{% trans "Poser une question" %}</h2>
+    <p>{% blocktrans %}Écrivez-nous à <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>. Un voisin vous répond, pas un robot.{% endblocktrans %}</p>
+  </section>
+</div>
+<div class="wrap page">
+
 
   {% if past_events %}
   <section aria-labelledby="past-title">

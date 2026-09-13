@@ -32,6 +32,11 @@ class StandardPage(Page):
     parent_page_types = ["cms.HomePage", "cms.StandardPage", "cms.PolePage"]
     subpage_types = ["cms.StandardPage"]
 
+    def get_pole_ancestor(self):
+        """Le PolePage ancêtre le plus proche, le cas échéant (couleur/icône à reprendre dans le fil d'Ariane)."""
+        ancestor = self.get_ancestors().type(PolePage).order_by("-depth").first()
+        return ancestor.specific if ancestor else None
+
 
 class CardBlock(blocks.StructBlock):
     """Une carte éditoriale (titre + texte enrichi) : réutilisée par plusieurs types de page."""

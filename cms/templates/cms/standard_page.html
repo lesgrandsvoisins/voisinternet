@@ -1,12 +1,33 @@
 {% extends "core/base.html" %}
-{% load wagtailcore_tags %}
+{% load i18n wagtailcore_tags wagtailimages_tags %}
 
-{% block title %}{{ page.title }}{% endblock %}
+{% block title %}{{ page.title }} — Voisinternet{% endblock %}
 
 {% block content %}
+  {% with pole=page.get_pole_ancestor %}
+    {% if pole.icon %}{% image pole.icon fill-96x96 preserve-svg as icon_img %}{% endif %}
+    <div class="page-head{% if pole.accent %} accent-{{ pole.accent }}{% endif %}">
+      <div class="wrap">
+        <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+          <ol>
+            <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+            {% for ancestor in page.get_ancestors %}
+              {% if ancestor.depth > 2 %}
+                <li><a href="{{ ancestor.url }}">{{ ancestor.title }}</a></li>
+              {% endif %}
+            {% endfor %}
+            <li aria-current="page">{{ page.title }}</li>
+          </ol>
+        </nav>
+        <div class="page-head-top">
+          {% if icon_img %}<img class="page-head-icon" src="{{ icon_img.url }}" alt="">{% endif %}
+          <h1>{{ page.title }}</h1>
+        </div>
+      </div>
+    </div>
+  {% endwith %}
   <section class="block">
     <div class="wrap">
-      <h1>{{ page.title }}</h1>
       {{ page.body|richtext }}
     </div>
   </section>

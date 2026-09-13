@@ -302,16 +302,33 @@ class EntrySubscription(models.Model):
 
 
 class Event(models.Model):
-    """Un évènement de l'agenda (conseil des voisins, atelier…)."""
+    """
+    Un évènement de l'agenda (conseil des voisins, atelier…).
+
+    Une même rencontre importée d'une source externe (OpenAgenda…) peut avoir
+    plusieurs séances (même ordre du jour, horaires différents) : ce sont
+    alors plusieurs Event partageant le même source_uid.
+    """
     title = models.CharField(_("titre"), max_length=140)
-    slug = models.SlugField(unique=True)
+    # Pas unique : plusieurs séances d'un même évènement source partagent le même titre.
+    slug = models.SlugField(_("slug"))
     description = models.TextField(_("description"), blank=True, default="")
     start = models.DateTimeField(_("début"))
     end = models.DateTimeField(_("fin"), null=True, blank=True)
     location = models.CharField(_("lieu"), max_length=200, blank=True, default="")
+    latitude = models.DecimalField(_("latitude"), max_digits=9, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(_("longitude"), max_digits=9, decimal_places=6, null=True, blank=True)
     online_url = models.URLField(
         _("lien en ligne"), blank=True, default="",
         help_text=_("Pour une participation à distance (visioconférence…)."),
+    )
+    source_url = models.URLField(
+        _("lien source"), blank=True, default="",
+        help_text=_("Page de l'évènement sur l'agenda source (OpenAgenda…)."),
+    )
+    source_uid = models.CharField(
+        _("identifiant source"), max_length=64, blank=True, default="",
+        help_text=_("Identifiant de l'évènement dans l'agenda source, pour réimporter sans dupliquer."),
     )
     public = models.BooleanField(_("publié"), default=True)
 

@@ -206,7 +206,7 @@ class DirectoryEntry(models.Model):
         ("collectif", _("Collectif")),
     ]
     name = models.CharField(_("nom"), max_length=120)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, max_length=120)
     kind = models.CharField(_("individuel ou collectif"), max_length=20, choices=KINDS, default="individuel")
     sector = models.ForeignKey(
         DirectorySector, null=True, blank=True, on_delete=models.SET_NULL,

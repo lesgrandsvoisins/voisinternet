@@ -1,5 +1,5 @@
 """
-Réglages de Voisinternet.
+Réglages de lesgrandsvoisins.com.
 
 Tout ce qui dépend de l'installation passe par des variables d'environnement
 (voir .env.example). Aucune dépendance à un service tiers : pas de CDN,
@@ -195,7 +195,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_REFERRER_POLICY = "same-origin"
 X_FRAME_OPTIONS = "DENY"
 
-# --- Voisinternet
+# --- lesgrandsvoisins.com
 # Sert à calculer l'empreinte des numéros de compte anonymes.
 # Ne JAMAIS la changer une fois des comptes créés : ils deviendraient introuvables.
 ANON_ACCOUNT_PEPPER = env("VOISINTERNET_ANON_PEPPER", SECRET_KEY)
@@ -209,7 +209,7 @@ GHOST_CONTENT_KEY = env("GHOST_CONTENT_KEY", "")
 CONTACT_EMAIL = env("VOISINTERNET_CONTACT_EMAIL", "contact@lesgrandsvoisins.com")
 
 # --- Wagtail : pages de contenu gérées depuis /cms/ (indépendant de l'admin Django en /admin/).
-WAGTAIL_SITE_NAME = "Voisinternet"
+WAGTAIL_SITE_NAME = "lesgrandsvoisins.com"
 WAGTAILADMIN_BASE_URL = env("DJANGO_BASE_URL", f"http://{DJANGO_IP}:{DJANGO_PORT}")
 WAGTAIL_I18N_ENABLED = True
 WAGTAIL_CONTENT_LANGUAGES = LANGUAGES

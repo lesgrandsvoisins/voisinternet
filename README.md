@@ -19,7 +19,7 @@ entrée là suffit.
 | nous Voyons | `/nous-voyons/` | l'association, la transparence |
 | vous Voyez | `/vous-voyez/` | l'annuaire : qui fait partie de la communauté |
 | ils et elles Voient | `/ils-et-elles-voient/` | dons et partenaires |
-| notre Voie | guide.lesgrandsvoisins.com | le guide (BookStack) |
+| notre Voie | wiki.grandsvoisins.org | le guide (BookStack) |
 | nos Voix | blog.lesgrandsvoisins.com | le blog (Ghost) |
 
 ## L'annuaire : « vous Voyez »

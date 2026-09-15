@@ -29,6 +29,9 @@
   --accent-teal: #2E8B8B;
   --accent-moss: #6B7A2E;
   --accent-gold: #C9971F;
+  /* Voile posé sur une photo de fond (page-head d'un article de blog) : même teinte que
+     --sky, translucide, pour que le texte (--ink) reste lisible par-dessus. */
+  --page-head-overlay: rgba(234, 242, 247, .82);
   --serif: "Charter", "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
   color-scheme: light;
@@ -65,6 +68,7 @@
     --accent-teal: #4FB3B3;
     --accent-moss: #A4B85E;
     --accent-gold: #E0B84A;
+    --page-head-overlay: rgba(15, 27, 36, .78);
     color-scheme: dark;
   }
 }
@@ -99,6 +103,7 @@
   --accent-teal: #4FB3B3;
   --accent-moss: #A4B85E;
   --accent-gold: #E0B84A;
+  --page-head-overlay: rgba(15, 27, 36, .78);
   color-scheme: dark;
 }
 
@@ -1463,6 +1468,26 @@ blockquote p {
   }
 }
 
+/* Même chose quand les images se suivent sans paragraphe autour (c'est ainsi que
+   l'éditeur riche de Wagtail les insère lui-même, à la différence d'une galerie Ghost
+   convertie depuis du Markdown, toujours enveloppée d'un <p> — voir les règles ci-dessus). */
+.blog-post .markdown img:has(+ img),
+.blog-post .markdown img + img {
+  display: inline-block;
+  width: calc(33.333% - .8rem);
+  height: 11rem;
+  max-height: none;
+  margin: .3rem;
+  object-fit: cover
+}
+
+@media (max-width: 40rem) {
+  .blog-post .markdown img:has(+ img),
+  .blog-post .markdown img + img {
+    width: calc(50% - .8rem)
+  }
+}
+
 /* Lightbox (site.js) : ouvre les photos d'un article en plein écran, avec navigation
    entre toutes les images de l'article. Sans JS, ce sont de simples images. */
 .lightbox-trigger {
@@ -1567,6 +1592,15 @@ blockquote p {
 .page-head {
   border-bottom: 1px solid var(--line);
   padding: 2.75rem 0 2rem
+}
+
+/* Article de blog avec image de une : celle-ci en fond du bandeau, avec un voile
+   (--page-head-overlay) qui s'assombrit ou s'éclaircit selon le thème pour que le
+   titre (--ink) reste lisible — l'image elle-même est posée en style inline (voir
+   blog_post_page.html), cette règle ne fixe que son cadrage. */
+.page-head.blog {
+  background-size: cover;
+  background-position: center
 }
 
 /* Pôles : un accent (couleur choisie par la fiche Wagtail) distingue le pôle courant. */

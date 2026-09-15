@@ -4,7 +4,8 @@
 {% block title %}{{ page.title }} — {{ SITE_NAME }}{% endblock %}
 
 {% block content %}
-  <div class="page-head">
+  {% if page.featured_image %}{% image page.featured_image fill-1600x500 as hero_bg %}{% endif %}
+  <div class="page-head blog"{% if hero_bg %} style="background-image: linear-gradient(var(--page-head-overlay), var(--page-head-overlay)), url('{{ hero_bg.url }}')"{% endif %}>
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
         <ol>
@@ -21,10 +22,6 @@
   </div>
   <div class="wrap page">
     <article class="blog-post">
-      {% if page.featured_image %}
-        {% image page.featured_image width-900 as hero %}
-        <img class="hero" src="{{ hero.url }}" alt="">
-      {% endif %}
       <div class="markdown">{{ body_page|richtext }}</div>
       {% if total_pages > 1 %}
         <nav class="pagination" aria-label="{% trans "Pages de l’article" %}">

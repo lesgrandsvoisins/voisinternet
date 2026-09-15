@@ -42,6 +42,13 @@
     }
 
     openNextChooser() {
+      // window.ModalWorkflow() force-removes the previous "body > .modal" node to make
+      // room for the new one, cutting Bootstrap's own fade-out short — its
+      // "hidden.bs.modal" handler (which removes the .modal-backdrop div) then never
+      // fires, so the backdrop is orphaned and stacks up, blocking clicks, one per photo
+      // added. Nothing else ever removes it, so we must.
+      document.querySelectorAll(".modal-backdrop").forEach((el) => el.remove());
+
       const config = this.getChooserConfig();
       this.workflow = window.ModalWorkflow({
         url: config.url,

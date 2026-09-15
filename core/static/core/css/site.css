@@ -1732,6 +1732,46 @@ blockquote p {
   background: var(--sky)
 }
 
+.wysiwyg-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin-bottom: .5rem
+}
+
+.wysiwyg-toolbar button {
+  font: inherit;
+  font-size: .85rem;
+  padding: .35rem .65rem;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer
+}
+
+.wysiwyg-toolbar button:hover {
+  background: var(--hover)
+}
+
+.wysiwyg-editor {
+  min-height: 6rem;
+  padding: .6rem .8rem;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: var(--sky);
+  color: var(--ink)
+}
+
+.wysiwyg-editor:focus {
+  border-color: var(--ink);
+  outline: none
+}
+
+.wysiwyg-editor :is(ul, ol) {
+  padding-inline-start: 1.4rem
+}
+
 .form-row .errorlist {
   list-style: none;
   padding: 0;

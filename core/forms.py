@@ -47,6 +47,9 @@ class DirectoryEntryForm(forms.ModelForm):
             "hx-target": "#description-preview",
             "hx-swap": "innerHTML",
             "hx-params": "description_fr,csrfmiddlewaretoken",
+            # Accroche l'éditeur enrichi (site.js) : dégradation propre sans JS, le champ
+            # reste alors un simple texte Markdown/HTML.
+            "data-wysiwyg": "1",
         })
 
     @property

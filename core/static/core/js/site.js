@@ -20,7 +20,98 @@
     });
   }
 
+  // Éditeur de description enrichi (fiches de l'annuaire) : surcouche visuelle d'un
+  // <textarea> Markdown/HTML classique, qui reste la source de vérité soumise au serveur.
+  // Sans JavaScript, le textarea et son aperçu Markdown restent affichés tels quels.
+  var WYSIWYG_TAGS = ["p", "br", "hr", "strong", "em", "b", "i", "u", "s", "del",
+    "a", "ul", "ol", "li", "blockquote", "h1", "h2", "h3", "h4", "h5", "h6"];
+  var WYSIWYG_ATTRS = { a: ["href", "title"] };
+
+  var WYSIWYG_BLOCK_TAGS = ["p", "ul", "ol", "li", "blockquote", "h1", "h2", "h3", "h4", "h5", "h6"];
+
+  function sanitizeWysiwyg(root) {
+    // Ne garde que les balises/attributs acceptés côté serveur (voir markdown_filters.py) :
+    // ce que la personne voit dans l'éditeur doit correspondre à ce qui sera enregistré.
+    root.querySelectorAll("*").forEach(function (el) {
+      var tag = el.tagName.toLowerCase();
+      if (WYSIWYG_TAGS.indexOf(tag) === -1) {
+        while (el.firstChild) el.parentNode.insertBefore(el.firstChild, el);
+        el.remove();
+        return;
+      }
+      var allowed = WYSIWYG_ATTRS[tag] || [];
+      Array.from(el.attributes).forEach(function (attr) {
+        if (allowed.indexOf(attr.name) === -1) el.removeAttribute(attr.name);
+      });
+    });
+    // Chrome imbrique parfois une liste (ou un titre/une citation) dans le <p> en cours :
+    // nesting invalide qu'un navigateur tolère en édition mais que le HTML n'autorise pas
+    // (le serveur le corrigerait de son côté en laissant des <p></p> vides autour).
+    root.querySelectorAll("p").forEach(function (p) {
+      var hasBlockChild = Array.from(p.children).some(function (c) {
+        return WYSIWYG_BLOCK_TAGS.indexOf(c.tagName.toLowerCase()) !== -1;
+      });
+      if (hasBlockChild) {
+        while (p.firstChild) p.parentNode.insertBefore(p.firstChild, p);
+        p.remove();
+      }
+    });
+  }
+
+  function armWysiwyg() {
+    document.querySelectorAll("textarea[data-wysiwyg]").forEach(function (textarea) {
+      if (textarea.dataset.wysiwygArmed) return;
+      textarea.dataset.wysiwygArmed = "1";
+
+      var wrap = textarea.closest(".wysiwyg");
+      var toolbar = wrap.querySelector(".wysiwyg-toolbar");
+      var editor = wrap.querySelector(".wysiwyg-editor");
+      var fallback = wrap.parentElement.querySelector(".markdown-fallback");
+      var preview = fallback ? fallback.querySelector(".markdown-preview") : null;
+
+      document.execCommand("defaultParagraphSeparator", false, "p");
+      editor.innerHTML = (preview && preview.innerHTML.trim()) ? preview.innerHTML : "<p><br></p>";
+      sanitizeWysiwyg(editor);
+
+      function sync() {
+        sanitizeWysiwyg(editor);
+        var text = editor.textContent.trim();
+        textarea.value = text ? editor.innerHTML : "";
+        textarea.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+
+      editor.addEventListener("input", sync);
+      editor.addEventListener("blur", sync);
+      editor.addEventListener("paste", function (e) {
+        e.preventDefault();
+        var text = (e.clipboardData || window.clipboardData).getData("text/plain");
+        document.execCommand("insertText", false, text);
+      });
+
+      toolbar.querySelectorAll("button[data-cmd]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          editor.focus();
+          var cmd = btn.dataset.cmd;
+          if (cmd === "link") {
+            var url = window.prompt("Adresse du lien (https://…) :", "https://");
+            if (url) document.execCommand("createLink", false, url);
+          } else {
+            document.execCommand(cmd, false, btn.dataset.value || null);
+          }
+          sync();
+        });
+      });
+
+      textarea.hidden = true;
+      toolbar.hidden = false;
+      editor.hidden = false;
+      if (fallback) fallback.hidden = true;
+    });
+  }
+
   // Le menu principal et le widget du compte (en-tête) sont gérés par Alpine.js (voir base.html).
   document.addEventListener("DOMContentLoaded", armToasts);
   document.addEventListener("htmx:afterSettle", armToasts);
+  document.addEventListener("DOMContentLoaded", armWysiwyg);
+  document.addEventListener("htmx:afterSettle", armWysiwyg);
 })();

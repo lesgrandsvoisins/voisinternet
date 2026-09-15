@@ -1,7 +1,7 @@
 {% extends "core/base.html" %}
 {% load i18n wagtailcore_tags wagtailimages_tags %}
 
-{% block title %}{{ page.title }} — lesgrandsvoisins.com{% endblock %}
+{% block title %}{{ page.title }} — {{ SITE_NAME }}{% endblock %}
 
 {% block content %}
   {% with pole=page.get_pole_ancestor %}

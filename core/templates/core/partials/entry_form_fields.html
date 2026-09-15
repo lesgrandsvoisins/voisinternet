@@ -7,13 +7,30 @@
     {% for field in group.fields %}
     <div class="form-row">
       {{ field.label_tag }}
-      {{ field }}
       {% if field.name == "description_fr" %}
-      <p class="help">{% trans "Markdown ou HTML acceptés : **gras**, _italique_, [lien](https://…), listes avec « - »." %}</p>
-      <p class="preview-label">{% trans "Aperçu" %}</p>
-      <div id="description-preview" class="markdown-preview">{{ form.instance.description_fr|default:""|markdown }}</div>
-      {% elif field.help_text %}
-      <p class="help">{{ field.help_text }}</p>
+      <div class="wysiwyg">
+        <div class="wysiwyg-toolbar" hidden>
+          <button type="button" data-cmd="bold">{% trans "Gras" %}</button>
+          <button type="button" data-cmd="italic">{% trans "Italique" %}</button>
+          <button type="button" data-cmd="formatBlock" data-value="&lt;h2&gt;">{% trans "Titre" %}</button>
+          <button type="button" data-cmd="formatBlock" data-value="&lt;blockquote&gt;">{% trans "Citation" %}</button>
+          <button type="button" data-cmd="insertUnorderedList">{% trans "Liste à puces" %}</button>
+          <button type="button" data-cmd="insertOrderedList">{% trans "Liste numérotée" %}</button>
+          <button type="button" data-cmd="formatBlock" data-value="&lt;p&gt;">{% trans "Normal" %}</button>
+          <button type="button" data-cmd="link">{% trans "Lien" %}</button>
+          <button type="button" data-cmd="unlink">{% trans "Retirer le lien" %}</button>
+        </div>
+        {{ field }}
+        <div class="wysiwyg-editor" contenteditable="true" role="textbox" aria-multiline="true" aria-label="{{ field.label }}" hidden></div>
+      </div>
+      <div class="markdown-fallback">
+        <p class="help">{% trans "Markdown ou HTML acceptés : **gras**, _italique_, [lien](https://…), listes avec « - »." %}</p>
+        <p class="preview-label">{% trans "Aperçu" %}</p>
+        <div id="description-preview" class="markdown-preview">{{ form.instance.description_fr|default:""|markdown }}</div>
+      </div>
+      {% else %}
+      {{ field }}
+      {% if field.help_text %}<p class="help">{{ field.help_text }}</p>{% endif %}
       {% endif %}
       {{ field.errors }}
     </div>

@@ -6,6 +6,8 @@ from django.urls import reverse
 from .accounts import account_label, current_account
 from .menu import ENTRIES, GROUP_PAGES, GROUPS, entry_href
 
+from django.contrib.sites.shortcuts import get_current_site
+
 
 def site(request):
     match = getattr(request, "resolver_match", None)
@@ -51,4 +53,5 @@ def site(request):
         "BLOG_URL": settings.BLOG_URL,
         "GUIDE_URL": settings.GUIDE_URL,
         "CONTACT_EMAIL": settings.CONTACT_EMAIL,
+        "SITE_NAME": get_current_site(request).name,
     }

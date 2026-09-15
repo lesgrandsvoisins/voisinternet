@@ -155,7 +155,7 @@ a {
 }
 
 .wrap {
-  /* max-width: 1120px; */
+  max-width: 1120px;
   margin: 0 auto;
   padding: 0 1.25rem
 }
@@ -208,6 +208,7 @@ a {
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+  max-width: unset;
 }
 
 .mega>.wrap {

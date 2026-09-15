@@ -60,23 +60,19 @@ fixtures-dump: ## Charge les données d'exemple (services, publics, guide)
 		$(LOADENV) $(PYTHON) manage.py dumpdata $$i >core/fixtures/$$i.json ; \
 	done
 
-# Ordre important pour cms-load : locale/images/documents avant les pages (FK), pages
-# avant le site et les sous-classes cms.* (héritage multi-tables sur wagtailcore.page).
-CMS_FIXTURES := wagtailcore.locale wagtailimages.image wagtaildocs.document wagtailcore.page \
-                wagtailcore.site cms.homepage cms.standardpage cms.polepage cms.contactpage \
-                cms.associationpage cms.donationpage
+# Un seul fichier plutôt qu'un par modèle (contrairement à fixtures-load/-dump) : Page et
+# Revision se référencent mutuellement (latest_revision_id / page_ptr_id), et loaddata ne
+# vérifie les clés étrangères qu'une fois tout le fichier passé en base — les charger
+# séparément échouerait sur ce cycle.
+CMS_FIXTURES := wagtailcore.locale wagtailcore.site wagtailcore.page wagtailcore.revision \
+                wagtailimages.image wagtaildocs.document cms.homepage cms.standardpage \
+                cms.polepage cms.contactpage cms.associationpage cms.donationpage
 
-cms-load: ## Charge l'arbre de pages Wagtail (cms/fixtures) ; les fichiers médias (var/media) se restaurent à part
-	for i in $(CMS_FIXTURES) ; do \
-		echo $$i; \
-		$(LOADENV) $(PYTHON) manage.py loaddata cms/fixtures/$$i.json ; \
-	done
+cms-load: ## Charge l'arbre de pages Wagtail (cms/fixtures/cms.json) ; les fichiers médias (var/media) se restaurent à part
+	$(LOADENV) $(PYTHON) manage.py loaddata cms/fixtures/cms.json
 
-cms-dump: ## Sauvegarde l'arbre de pages Wagtail (cms/fixtures) ; pensez à sauvegarder var/media à part
-	for i in $(CMS_FIXTURES) ; do \
-		echo $$i; \
-		$(LOADENV) $(PYTHON) manage.py dumpdata $$i >cms/fixtures/$$i.json ; \
-	done
+cms-dump: ## Sauvegarde l'arbre de pages Wagtail (cms/fixtures/cms.json) ; pensez à sauvegarder var/media à part
+	$(LOADENV) $(PYTHON) manage.py dumpdata $(CMS_FIXTURES) --indent 2 >cms/fixtures/cms.json
 
 superuser: ## Crée un compte administrateur
 	$(LOADENV) $(PYTHON) manage.py createsuperuser

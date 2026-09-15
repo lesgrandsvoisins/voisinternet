@@ -275,9 +275,9 @@ a {
   font-size: .8rem
 }
 
-.account-panel {
+/* .account-panel {
   position: relative
-}
+} */
 
 .account[aria-expanded="true"] {
   background: var(--hover)

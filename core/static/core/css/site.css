@@ -2382,3 +2382,13 @@ img.right {
     grid-template-columns: 1fr
   }
 }
+
+@media print {
+  wagtail-userbar,
+  div.menu {
+    display: none;
+  }
+  img, div.gallery {
+    break-inside: avoid;
+  }
+}

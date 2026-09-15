@@ -1,3 +1,5 @@
+import re
+
 from django.core.paginator import Paginator
 from django.db import models
 from django.utils import timezone
@@ -230,14 +232,26 @@ class BlogPostPage(Page):
         "wagtailimages.Image", verbose_name=_("image de une"),
         null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
     )
-    body = RichTextField(_("texte"), blank=True, default="")
+    # "pagebreak" plutôt que "hr" (cms/wagtail_hooks.py) : même bouton natif « ligne
+    # horizontale », mais qui produit <hr class="pagebreak"/> — un <hr> nu venu d'ailleurs
+    # (contenu collé…) n'est alors jamais pris à tort pour un saut de page.
+    body = RichTextField(
+        _("texte"), blank=True, default="",
+        features=["bold", "italic", "h2", "h3", "h4", "ol", "ul", "link", "document-link", "image", "embed", "pagebreak"],
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel("date"),
         FieldPanel("author_name"),
         FieldPanel("excerpt"),
         FieldPanel("featured_image"),
-        FieldPanel("body"),
+        FieldPanel(
+            "body",
+            help_text=_(
+                "La ligne horizontale de la barre d'outils sert de saut de page : "
+                "l'article se lit alors en plusieurs pages plutôt qu'en un seul bloc."
+            ),
+        ),
     ]
 
     search_fields = Page.search_fields + [
@@ -248,3 +262,20 @@ class BlogPostPage(Page):
 
     parent_page_types = ["cms.BlogIndexPage"]
     subpage_types = []
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        # « Saut de page » : la ligne horizontale (fonctionnalité standard de l'éditeur
+        # riche de Wagtail, pas de bouton personnalisé à construire — voir
+        # cms/wagtail_hooks.py) coupe l'article. Seul le marqueur explicite compte : un
+        # <hr> nu venu d'ailleurs (contenu collé, ancien import…) reste une simple ligne.
+        pages = re.split(r'<hr class="pagebreak"\s*/?>', self.body) if self.body else [""]
+        try:
+            page_number = int(request.GET.get("page", 1))
+        except ValueError:
+            page_number = 1
+        page_number = max(1, min(page_number, len(pages)))
+        context["body_page"] = pages[page_number - 1]
+        context["page_number"] = page_number
+        context["total_pages"] = len(pages)
+        return context

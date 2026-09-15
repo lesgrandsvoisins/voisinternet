@@ -1435,6 +1435,98 @@ blockquote p {
   border-radius: 10px
 }
 
+/* Une galerie Ghost, une fois exportée en Markdown, n'est plus qu'une suite de
+   paragraphes contenant chacun une seule image : on la repère par cette forme (deux
+   paragraphes-image consécutifs ou plus) pour l'afficher en grille plutôt qu'empilée
+   sur plusieurs écrans de haut. Une image isolée garde l'affichage large ci-dessus. */
+.blog-post .markdown p:has(> img:only-child):has(+ p > img:only-child),
+.blog-post .markdown p:has(> img:only-child) + p:has(> img:only-child) {
+  display: inline-block;
+  width: calc(33.333% - .8rem);
+  margin: .3rem;
+  vertical-align: top
+}
+
+.blog-post .markdown p:has(> img:only-child):has(+ p > img:only-child) img,
+.blog-post .markdown p:has(> img:only-child) + p:has(> img:only-child) img {
+  width: 100%;
+  height: 11rem;
+  max-height: none;
+  margin: 0;
+  object-fit: cover
+}
+
+@media (max-width: 40rem) {
+  .blog-post .markdown p:has(> img:only-child):has(+ p > img:only-child),
+  .blog-post .markdown p:has(> img:only-child) + p:has(> img:only-child) {
+    width: calc(50% - .8rem)
+  }
+}
+
+/* Lightbox (site.js) : ouvre les photos d'un article en plein écran, avec navigation
+   entre toutes les images de l'article. Sans JS, ce sont de simples images. */
+.lightbox-trigger {
+  cursor: zoom-in
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100
+}
+
+.lightbox[hidden] {
+  display: none
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  background: rgba(255, 255, 255, .1);
+  border: 0;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: .6rem 1rem;
+  border-radius: 8px
+}
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: rgba(255, 255, 255, .25)
+}
+
+.lightbox-close {
+  top: 1rem;
+  inset-inline-end: 1rem
+}
+
+.lightbox-prev {
+  inset-inline-start: 1rem;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
+.lightbox-next {
+  inset-inline-end: 1rem;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
 .books {
   display: grid;
   gap: .6rem

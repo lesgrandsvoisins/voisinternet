@@ -168,6 +168,79 @@
     });
   }
 
+  // Lightbox pour les photos d'un article de blog : sans JS, ce sont de simples images
+  // dans le texte, cliquables uniquement vers elles-mêmes (aucune fonctionnalité perdue).
+  var lightboxEl = null;
+  var lightboxImages = [];
+  var lightboxIndex = 0;
+
+  function buildLightbox() {
+    if (lightboxEl) return lightboxEl;
+    var el = document.createElement("div");
+    el.className = "lightbox";
+    el.hidden = true;
+    el.innerHTML =
+      '<button type="button" class="lightbox-close" aria-label="Fermer">×</button>' +
+      '<button type="button" class="lightbox-prev" aria-label="Image précédente">‹</button>' +
+      '<img class="lightbox-img" alt="">' +
+      '<button type="button" class="lightbox-next" aria-label="Image suivante">›</button>';
+    document.body.appendChild(el);
+    lightboxEl = el;
+    return el;
+  }
+
+  function showLightboxImage() {
+    var multiple = lightboxImages.length > 1;
+    lightboxEl.querySelector(".lightbox-img").src = lightboxImages[lightboxIndex].src;
+    lightboxEl.querySelector(".lightbox-prev").hidden = !multiple;
+    lightboxEl.querySelector(".lightbox-next").hidden = !multiple;
+  }
+
+  function openLightbox(images, index) {
+    var el = buildLightbox();
+    lightboxImages = images;
+    lightboxIndex = index;
+    showLightboxImage();
+    el.hidden = false;
+    el.querySelector(".lightbox-close").focus();
+  }
+
+  function closeLightbox() {
+    if (!lightboxEl) return;
+    lightboxEl.hidden = true;
+  }
+
+  function stepLightbox(delta) {
+    lightboxIndex = (lightboxIndex + delta + lightboxImages.length) % lightboxImages.length;
+    showLightboxImage();
+  }
+
+  function armLightbox() {
+    document.querySelectorAll(".blog-post .markdown").forEach(function (container) {
+      if (container.dataset.lightboxArmed) return;
+      container.dataset.lightboxArmed = "1";
+      var images = Array.from(container.querySelectorAll("img"));
+      images.forEach(function (img, index) {
+        img.classList.add("lightbox-trigger");
+        img.addEventListener("click", function () { openLightbox(images, index); });
+      });
+    });
+  }
+
+  document.addEventListener("click", function (e) {
+    if (!lightboxEl || lightboxEl.hidden) return;
+    if (e.target.closest(".lightbox-close") || e.target === lightboxEl) closeLightbox();
+    else if (e.target.closest(".lightbox-prev")) stepLightbox(-1);
+    else if (e.target.closest(".lightbox-next")) stepLightbox(1);
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (!lightboxEl || lightboxEl.hidden) return;
+    if (e.key === "Escape") closeLightbox();
+    else if (e.key === "ArrowLeft") stepLightbox(-1);
+    else if (e.key === "ArrowRight") stepLightbox(1);
+  });
+
   // Le menu principal et le widget du compte (en-tête) sont gérés par Alpine.js (voir base.html).
   document.addEventListener("DOMContentLoaded", armToasts);
   document.addEventListener("htmx:afterSettle", armToasts);
@@ -175,4 +248,6 @@
   document.addEventListener("htmx:afterSettle", armWysiwyg);
   document.addEventListener("DOMContentLoaded", armDragReorder);
   document.addEventListener("htmx:afterSettle", armDragReorder);
+  document.addEventListener("DOMContentLoaded", armLightbox);
+  document.addEventListener("htmx:afterSettle", armLightbox);
 })();

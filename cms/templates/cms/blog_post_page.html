@@ -25,7 +25,22 @@
         {% image page.featured_image width-900 as hero %}
         <img class="hero" src="{{ hero.url }}" alt="">
       {% endif %}
-      <div class="markdown">{{ page.body|richtext }}</div>
+      <div class="markdown">{{ body_page|richtext }}</div>
+      {% if total_pages > 1 %}
+        <nav class="pagination" aria-label="{% trans "Pages de l’article" %}">
+          {% if page_number > 1 %}
+            <a href="?page={{ page_number|add:"-1" }}">{% trans "← Page précédente" %}</a>
+          {% else %}
+            <span></span>
+          {% endif %}
+          <span class="muted">{% blocktrans %}Page {{ page_number }} sur {{ total_pages }}{% endblocktrans %}</span>
+          {% if page_number < total_pages %}
+            <a href="?page={{ page_number|add:"1" }}">{% trans "Page suivante →" %}</a>
+          {% else %}
+            <span></span>
+          {% endif %}
+        </nav>
+      {% endif %}
     </article>
     <p class="muted"><a href="{{ page.get_parent.url }}">{% trans "← Retour au blog" %}</a></p>
   </div>

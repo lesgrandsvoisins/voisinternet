@@ -72,6 +72,16 @@ def rewrite_media_paths(html):
     return html
 
 
+def self_close_void_tags(html):
+    """
+    bleach (via markdown_filter) rend <img ...> et <br> sans les refermer : valide en
+    HTML5 et très bien affiché sur le site, mais l'éditeur riche de Wagtail (Draftail)
+    exige des balises vides fermées (<img .../>) pour relire le texte en édition — sinon
+    « Unmatched tags » à l'ouverture de l'article dans l'admin.
+    """
+    return re.sub(r"<(img|br)((?:\s+[^<>]*)?)(?<!/)>", r"<\1\2/>", html)
+
+
 class Command(BaseCommand):
     help = "Importe les articles de l'export Ghost (deploy/ghost-export) dans le blog Wagtail."
 
@@ -99,7 +109,7 @@ class Command(BaseCommand):
                 author_name=author_name,
                 excerpt=make_excerpt(frontmatter),
                 featured_image=self.get_featured_image(frontmatter.get("featured_image", "")),
-                body=rewrite_media_paths(markdown_filter(body_md)),
+                body=self_close_void_tags(rewrite_media_paths(markdown_filter(body_md))),
             )
             blog_index.add_child(instance=page)
             page.save_revision().publish()

@@ -3,6 +3,14 @@ title: A la Mémoire de Valentin FRANCY
 published_at: 2024-03-02T20:14:04.000+01:00
 reading_time: 2
 excerpt: L’association Les Grands Voisins se joint à l’association d’utilité publique Le Souvenir Français et à l’association Polaris 14 pour  exprimer nos condoléances et commémorer l’honneur de Valentin FRANCY. Cette tragédie nous apporte des leçons. Son honneur nous apporte inspiration.
+ghost_id: 65e37a101eecddd6a9392ff7
+ghost_uuid: 8a793ad4-0075-4467-a978-1b69204c7f2d
+created_at: 2024-03-02T19:12:16.000Z
+updated_at: 2026-07-07T13:20:02.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: L’association Les Grands Voisins se joint à l’association d’utilité publique Le Souvenir Français et à l’association Polaris 14 pour  exprimer nos condoléances et commémorer l’honneur de Valentin FRANCY. Cette tragédie nous apporte des leçons. Son honneur nous apporte inspiration.
 slug: a-la-memoire-de-valentin-francy
 featured_image: ./images/2024/03/index.jpg
 ---

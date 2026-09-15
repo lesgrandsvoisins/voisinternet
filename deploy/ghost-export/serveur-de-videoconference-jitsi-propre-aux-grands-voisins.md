@@ -12,6 +12,14 @@ excerpt: |
   https://jitsi.lesgrandsvoisins.com/mannchri
 
   Vous voulez votre propre salle, vous lui donnez simplement un nom, et c’est à vous ! Soit vous ajoutez la chaine de caractères que vous voulez après le « / » pour inv
+ghost_id: 64d49448351ba739a4d7b407
+ghost_uuid: 7f0c3310-7e4f-4a30-b255-f811efeec4aa
+created_at: 2023-04-29T15:16:25.000Z
+updated_at: 2026-07-07T13:27:06.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: serveur-de-videoconference-jitsi-propre-aux-grands-voisins
 featured_image: ./images/2023/04/viseo.png
 ---

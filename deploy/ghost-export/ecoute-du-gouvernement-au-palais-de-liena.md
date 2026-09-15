@@ -8,6 +8,14 @@ excerpt: |
   « Faire tiers-lieux » au siège du Conseil économique, social et environnemental organisé par le nouveau GIP France Tiers Lieux. Nous y avons écouté un discours riche et nuancé de la Secrétaire d’état de l’économie sociale et solidaire et de la vie associative, Marléne Schiappa (anciennement Ministre déléguée de la citoyenneté) que voici:
 
   FAIRE TIERS-LIEUX AU CESE - YouTube : Discours de Marlène 
+ghost_id: 64d49448351ba739a4d7b402
+ghost_uuid: ebca75aa-c57e-45d4-82bf-825fc830049f
+created_at: 2023-04-29T14:48:25.000Z
+updated_at: 2026-07-07T13:23:48.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: ecoute-du-gouvernement-au-palais-de-liena
 featured_image: ./images/2023/04/secretaire-etat-pme-faire-tiers-lieu-IMG_20221020_142108.jpg
 ---

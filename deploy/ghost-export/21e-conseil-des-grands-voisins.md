@@ -19,6 +19,14 @@ excerpt: |
    3. Communication
 
   Nous parlerions des sujets précis en lien avec la mémoire de Valentin FRANCY, le numériq
+ghost_id: 662ba7e87bdeea93666a3a6c
+ghost_uuid: 2fc83957-726e-46d8-b93d-435dce1a04e3
+created_at: 2024-04-26T13:11:04.000Z
+updated_at: 2026-07-07T13:19:54.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: 21e-conseil-des-grands-voisins
 featured_image: ./images/2024/04/invite-20240428-conseildesgv-10h00a11h30.png
 ---

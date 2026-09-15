@@ -22,6 +22,14 @@ excerpt: |
    * de même pour nous, n’enregistrez éventuellement que le chat
 
   pour l’accueil, le confort et la sécurit
+ghost_id: 64d49448351ba739a4d7b3ef
+ghost_uuid: b73e60fb-61b8-4ee7-b4e9-696508f1899c
+created_at: 2023-04-26T07:38:38.000Z
+updated_at: 2026-07-07T13:24:48.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: 12e-conseil-des-voisins
 featured_image: ./images/2023/04/conseil-voisins-chezpapa-IMG_20220421_191433.jpg
 ---

@@ -11,6 +11,14 @@ excerpt: |
   Candidat au directoire
 
   @nazachri , un sans papier refugié, est présenté au directoire et rencontra procha
+ghost_id: 64d49448351ba739a4d7b415
+ghost_uuid: c3d6848f-088b-4b7b-8272-cb5a53c079b4
+created_at: 2023-04-29T16:26:11.000Z
+updated_at: 2026-07-07T13:27:33.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: candidat-au-directoire-des-grands-voisins
 featured_image: ./images/2023/04/farid-IMG_20200903_085231-2.jpg
 ---

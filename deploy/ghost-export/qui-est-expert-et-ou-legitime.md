@@ -10,6 +10,14 @@ excerpt: |
   Chris Mann: Mêmes questions pour vous Eric. quels acteurs sont « légltimes? » Quelles places pour l’inclusion et pour l’excluslon dans de tels efforts? Quels acteurs inattendus pouvons-nous attendre (la question n’est pas évidente)? Estee un nouveau métier ?
 
   Eric Pliez Chris Mann je dirai hybridation culturelle et
+ghost_id: 64d49448351ba739a4d7b3ff
+ghost_uuid: c1af58c5-33fa-486b-b2e1-fbac60963a00
+created_at: 2023-04-29T14:36:38.000Z
+updated_at: 2026-07-07T13:28:48.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: qui-est-expert-et-ou-legitime
 featured_image: ./images/2023/04/facebook-ericpliez.png
 ---

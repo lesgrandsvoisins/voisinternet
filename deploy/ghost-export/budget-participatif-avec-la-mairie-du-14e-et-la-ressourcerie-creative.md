@@ -3,6 +3,14 @@ title: Budget Participatif avec la Mairie du 14e et la Ressourcerie créative
 published_at: 2022-05-14T08:16:00.000+02:00
 reading_time: 7
 excerpt: Budget Participatif Paris Les Grands Voisins de par La Ressourcerie Créative et Chris Mann proposent un Budget Participatif à la Ville de Paris pour votes à partir de septembre 2022.
+ghost_id: 64d49448351ba739a4d7b3f9
+ghost_uuid: 1ad9ab49-f1a2-4e3c-b756-1817178fe376
+created_at: 2023-04-27T06:13:36.000Z
+updated_at: 2026-07-07T13:24:40.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: Budget Participatif Paris Les Grands Voisins de par La Ressourcerie Créative et Chris Mann proposent un Budget Participatif à la Ville de Paris pour votes à partir de septembre 2022.
 slug: budget-participatif-avec-la-mairie-du-14e-et-la-ressourcerie-creative
 featured_image: ./images/2023/04/IMG_20220523_185931.jpg
 ---

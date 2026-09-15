@@ -3,6 +3,14 @@ title: Bonne année 2023 !
 published_at: 2023-01-11T16:55:00.000+01:00
 reading_time: 3
 excerpt: L’incident qui opposait un ancien cheminot et une communauté kurde dans le 10e arrondissement de Paris renforce le besoin aujourd’hui plus que jamais le besoin de la proposition Les Grands Voisins. A quoi pouvons-nous nous attacher ? Comment se mêlent les idées identitaires et de nous-mêmes individuellement et des communautés dans lesquelles nous nous engageons ? Comme dans un jardin, Les Grands Voisins est aujourd’hui une association qui se veut être terrain où des réponses toutes différentes p
+ghost_id: 64d49448351ba739a4d7b404
+ghost_uuid: adafd090-93b3-4882-8360-27659fc2746e
+created_at: 2023-04-29T14:52:51.000Z
+updated_at: 2026-07-07T13:23:24.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: bonne-annee-2023
 featured_image: ./images/2023/04/annee-2023.jpg
 ---

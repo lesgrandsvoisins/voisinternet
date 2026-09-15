@@ -3,6 +3,14 @@ title: Manifeste des Grands Voisins
 published_at: 2023-04-02T09:53:00.000+02:00
 reading_time: 1
 excerpt: Version du 2 avril 2022 du manifeste des Grands Voisins composé en 2017 avec plus de cent personnes sur un période d'un mois. 
+ghost_id: 64d49448351ba739a4d7b3e2
+ghost_uuid: 21556742-07cb-4e17-b7f5-0971549a5c5f
+created_at: 2023-04-25T07:52:30.000Z
+updated_at: 2026-07-07T13:22:54.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: Version du 2 avril 2022 du manifeste des Grands Voisins composé en 2017 avec plus de cent personnes sur un période d'un mois. 
 slug: manifeste-2023
 featured_image: ./images/2023/04/manifeste-edit.svg
 ---

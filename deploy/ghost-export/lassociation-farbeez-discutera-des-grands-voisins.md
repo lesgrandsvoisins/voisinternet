@@ -6,6 +6,14 @@ excerpt: |
   L’association Farbeez considère ce mardi 14 septembre 2021 de 19h30 à 21h dans l’espace alternative les Simonnes à Bagneux et lors d’une réunion hybride du savoir-faire LesGrandsVoisins.com la possibilité de porter un test du concept LesGrandsVoisins. Le but du jeu serait de voir sur une échelle de démarrage comment les dispositifs et la charte les Grands Voisins peuvent déjà être utiles à un réseau principalement constitué d’indépendants du secteur du bien-être.
 
   Subject: Réunion FARBEEZ aux Si
+ghost_id: 64d49448351ba739a4d7b409
+ghost_uuid: 13f94675-96e6-4b79-bfa4-d5333288f23d
+created_at: 2023-04-29T15:25:39.000Z
+updated_at: 2026-07-07T13:26:34.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: lassociation-farbeez-discutera-des-grands-voisins
 featured_image: ./images/2023/04/Clipboard-Image--2-.jpg
 ---

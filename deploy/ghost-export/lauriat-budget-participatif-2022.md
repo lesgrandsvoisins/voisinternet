@@ -3,6 +3,14 @@ title: Lauréat au Budget participatif avec la Mairie du 14e
 published_at: 2022-10-18T00:00:00.000+02:00
 reading_time: 2
 excerpt: Très bonne nouvelle, nous avons remporté le budget participatif pour « le numérique créatif des Grands Voisins », soit une salle de sociabilité numérique.
+ghost_id: 64d49448351ba739a4d7b3fe
+ghost_uuid: 3f9b6e20-2572-4928-9b45-8199aa487792
+created_at: 2023-04-29T14:28:10.000Z
+updated_at: 2026-07-07T13:23:55.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: Très bonne nouvelle, nous avons remporté le budget participatif pour « le numérique créatif des Grands Voisins », soit une salle de sociabilité numérique.
 slug: lauriat-budget-participatif-2022
 featured_image: ./images/2023/04/voter-la-ressourcie-creative.jpg
 ---

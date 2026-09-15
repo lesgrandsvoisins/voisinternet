@@ -18,6 +18,14 @@ excerpt: |
 
    * Lancement des Popup Expos (www.popup-expos.com)
    * Lancement de la salle de sociabilité numérique (www.resdigita.com)
+ghost_id: 64d49448351ba739a4d7b3eb
+ghost_uuid: 463a3ef2-ce5d-4318-93e6-9057bbc303d1
+created_at: 2023-04-26T07:02:16.000Z
+updated_at: 2026-07-07T13:23:01.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: 16e-conseil-des-voisins
 featured_image: ./images/2023/04/THIS_ONE_CONSEIL_DES_VOISINS_IMG_20230225_164035--1-.jpg
 ---

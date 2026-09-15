@@ -8,6 +8,14 @@ excerpt: |
   J’étais impliqué dans Les Grands Voisins installés dans l’ancien hôpital Saint Vincent de Paul (près du Jardin de Luxembourg à Paris) de 2016 à 2019. En 2017, j’ai édité les contributions d’une centaine de voisins sur un mois dans ma version du Manifeste des Grands Voisins: soit la base de LesGrandsVoisins.com.
 
   LesGrandsVoisins.com propose un mécanisme de partage de bien
+ghost_id: 64d49448351ba739a4d7b40e
+ghost_uuid: fbd0d26f-8c3c-4294-b170-3437b8cf5c80
+created_at: 2023-04-29T15:42:33.000Z
+updated_at: 2026-07-07T13:25:28.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: a-propos-de-lesgrandsvoisins-com
 featured_image: ./images/2023/04/miseenrelation-2.svg
 ---

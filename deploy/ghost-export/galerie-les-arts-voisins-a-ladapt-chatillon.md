@@ -16,6 +16,14 @@ excerpt: |
   Promotion de la santé et sensibilisation
 
   Les expos peuvent être conçues pour sensibiliser le public sur l
+ghost_id: 6953f5c132773070cc11a133
+ghost_uuid: 343950eb-d0ab-43fe-bb4e-c1dc17e0c34e
+created_at: 2025-12-30T15:54:41.000Z
+updated_at: 2026-07-07T13:18:29.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: galerie-les-arts-voisins-a-ladapt-chatillon
 featured_image: ./images/2026/01/ladapt-hall.jpg
 ---

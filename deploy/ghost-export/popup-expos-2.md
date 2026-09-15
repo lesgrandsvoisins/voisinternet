@@ -17,6 +17,14 @@ excerpt: |
   Pour et par les artistes
 
   Faites-vous connaître près de chez vous et développez vo
+ghost_id: 64d49448351ba739a4d7b3fc
+ghost_uuid: 9605dfcf-99c1-40ce-9a4a-1f0c6e7138fd
+created_at: 2023-04-28T06:02:41.000Z
+updated_at: 2026-07-07T13:23:17.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: popup-expos-2
 featured_image: ./images/2023/04/air_art_resto_cafe_popupos_expos-1.png
 ---

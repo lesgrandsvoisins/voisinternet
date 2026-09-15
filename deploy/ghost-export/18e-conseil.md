@@ -5,6 +5,13 @@ reading_time: 6
 excerpt: |
   Votes prises : (1) Nouveaux comptes en banque. (2) Articulation de notre intérêt général.
   Infos partagées : Appel à dons, Observatoire, Reproche éventuel Conseil de Paris.
+ghost_id: 64d49448351ba739a4d7b434
+ghost_uuid: 42f44eba-2948-4e18-8d2e-074753af9d96
+created_at: 2023-05-12T07:00:24.000Z
+updated_at: 2026-07-07T13:21:16.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
 slug: 18e-conseil
 featured_image: ./images/2023/06/IMG_20230606_212013.jpg
 ---

@@ -25,6 +25,14 @@ excerpt: |
   Voici un video du making of:
 
   La Guinguette de la Ressourcerie Créati
+ghost_id: 64d49448351ba739a4d7b410
+ghost_uuid: b395d866-1eda-4159-bb0e-fc68af30f3db
+created_at: 2023-04-29T15:48:55.000Z
+updated_at: 2026-07-07T13:24:25.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: la-guinguette-de-la-fete-de-la-musique-et-tts-les-jeudis-vendredis-et-samedis-a-la-fete-nationale
 featured_image: ./images/2023/04/guinguette_Large.original.jpg
 ---

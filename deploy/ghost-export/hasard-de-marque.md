@@ -8,6 +8,14 @@ excerpt: |
   J’ai déposé les noms de domaine .com et .fr suite aux débats concernant le manifeste. J’ai trouvé personnellement que les acteurs délégués par la Mairie du 14e commençaient à tirer la couverture vers eux au détriment d’un esprit de gouvernance de la « saison 1 ».
 
   Puis quelque temps après, j’ai déposé la marque. Par hasard, la marque est tombé le même jour qu’un dépôt par Yes We Camp. Quel hasard ! Le fait que nous soyons deux détenteurs de marque, je pense, fait que nou
+ghost_id: 64d49448351ba739a4d7b3e7
+ghost_uuid: 241b4fda-31e3-409a-83d5-38c684043c75
+created_at: 2023-04-26T06:31:08.000Z
+updated_at: 2026-07-07T13:28:03.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: hasard-de-marque
 featured_image: ./images/2023/04/marque-deposee.svg
 ---

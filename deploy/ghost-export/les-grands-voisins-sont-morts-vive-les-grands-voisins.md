@@ -13,6 +13,14 @@ excerpt: |
    4. Grand public
 
   L’hôpital abandonné Saint Vincent de Paul a matérialisé ce lieu, dont les effets sont visibles sur lesgrandsvoisins.org (lesgrandsvoisins.org n’a pas d’affiliation avec lesgrandsvoisins.com 1). Lors de cette expérience, en tant que locataire des Grands Voisins, j’ai participé dans un atelier de production d’une manifeste des Gra
+ghost_id: 64d49448351ba739a4d7b3e6
+ghost_uuid: 4f24b21d-e328-4939-ba97-a34b74dc3f8f
+created_at: 2023-04-26T06:24:19.000Z
+updated_at: 2026-07-07T13:27:55.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: les-grands-voisins-sont-morts-vive-les-grands-voisins
 featured_image: ./images/2023/04/lesgrandsvoisins-sainvincentdepaul-line-IMG_20200904_203630.jpg
 ---

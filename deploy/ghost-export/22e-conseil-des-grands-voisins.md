@@ -18,6 +18,14 @@ excerpt: |
    3. Communication
 
   Nous avons le plaisir de vous inviter à participer au 22ème Conseil des Grands Voisins, une rencontre incontournable pour tous ceux qui souhaitent s'inve
+ghost_id: 665475c176b5bae194565b6e
+ghost_uuid: 6e00e3a9-b4a6-4bc8-afd9-4aa502dfcd3c
+created_at: 2024-05-27T12:00:01.000Z
+updated_at: 2026-07-07T13:19:38.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: 22e-conseil-des-grands-voisins
 featured_image: ./images/2024/06/flyer-20240530-22econseil-v7.inkscape.svg
 ---

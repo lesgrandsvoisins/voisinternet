@@ -9,6 +9,14 @@ excerpt: |
 
   Animer des moments de socialisation le lundi de 16h à 19h
   Une fois que vous avez appris l’approche, vous pouvez le reproduire ailleurs. Nous av
+ghost_id: 64d49448351ba739a4d7b43a
+ghost_uuid: ba823c5f-fca9-4913-a40d-e5839115db37
+created_at: 2023-06-30T15:11:15.000Z
+updated_at: 2026-07-07T13:20:52.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: numerique-creatif-des-grands-voisins
 featured_image: ./images/2023/07/robert-talking-computer-tree.jpg
 ---

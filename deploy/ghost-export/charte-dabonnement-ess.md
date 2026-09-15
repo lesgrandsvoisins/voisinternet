@@ -3,6 +3,14 @@ title: Charte d'abonnement ESS
 published_at: 2021-12-03T00:00:00.000+01:00
 reading_time: 3
 excerpt: Ceci est une ébauche de la charte d'abonnement pour les structures ESS
+ghost_id: 64d49448351ba739a4d7b400
+ghost_uuid: 41ea2759-c26f-4dd1-bacc-ead9069452e4
+created_at: 2023-04-29T14:41:07.000Z
+updated_at: 2026-07-07T13:25:34.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: Ceci est une ébauche de la charte d'abonnement pour les structures ESS
 slug: charte-dabonnement-ess
 featured_image: ./images/2023/04/notalgie.svg
 ---

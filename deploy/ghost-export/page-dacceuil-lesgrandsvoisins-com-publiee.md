@@ -6,6 +6,14 @@ excerpt: |
   Le site web lesgrandsvoisins.com 1 est maintenant ouvert pour informer le public de notre existence et comporte un appel à s’inscrire à la liste de diffusion depuis le 16 août 2021. La partie « services » est cachée pour l’instant et le manifeste est mis en avant. C’est suite à ma décision qu’il est maintenant temps de partager l’information sur le projet.
 
   L’enjeu en communication actuellement est de raconter une histoire engageante à l’image de Les Grands Voisins (ou des Grands Voisins): le « 
+ghost_id: 64d49448351ba739a4d7b416
+ghost_uuid: 6031a4ee-91f3-4b6f-a26c-3ca81fb2b32e
+created_at: 2023-04-29T17:17:09.000Z
+updated_at: 2026-07-07T13:26:59.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: page-dacceuil-lesgrandsvoisins-com-publiee
 featured_image: ./images/2023/04/lesgrandsvoisins-screencopy-1.gif
 ---

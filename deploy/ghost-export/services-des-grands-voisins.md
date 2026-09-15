@@ -3,6 +3,14 @@ title: Services des Grands Voisins
 published_at: 2021-08-26T00:00:00.000+02:00
 reading_time: 2
 excerpt: Ceci est une proposition des services de l'époque.
+ghost_id: 64d49448351ba739a4d7b406
+ghost_uuid: 3f770c5c-0c8c-4234-af15-fc6feb58eee8
+created_at: 2023-04-29T15:11:51.000Z
+updated_at: 2026-07-07T13:26:42.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: Ceci est une proposition des services de l'époque.
 slug: services-des-grands-voisins
 featured_image: ./images/2023/04/digital-writing.jpg
 ---

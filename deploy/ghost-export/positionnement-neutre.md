@@ -3,6 +3,14 @@ title: Suite Inclusiv'Day et suites
 published_at: 2023-05-23T12:41:00.000+02:00
 reading_time: 5
 excerpt: Comment être d'intérêt général, vraiment ? Peu après notre déclaration, nous faillons peut-être déjà. C'est un cadeau pour nous apprendre !
+ghost_id: 64d49448351ba739a4d7b437
+ghost_uuid: d830d7ce-0124-4484-ab5c-c1b53c7897be
+created_at: 2023-05-23T09:46:19.000Z
+updated_at: 2026-07-07T13:21:24.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: Comment être d'intérêt général, vraiment ? Peu après notre déclaration, nous faillons peut-être déjà. C'est un cadeau pour nous apprendre !
 slug: positionnement-neutre
 featured_image: ./images/2023/08/darrieussecq-genevieve-hands.png
 ---

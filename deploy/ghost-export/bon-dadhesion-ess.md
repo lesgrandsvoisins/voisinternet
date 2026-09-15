@@ -3,6 +3,14 @@ title: Bon d'adhésion ESS
 published_at: 2021-11-16T00:00:00.000+01:00
 reading_time: 1
 excerpt: Proposition de conditions d'dhésion ESS aux Grands Voisins.
+ghost_id: 64d49448351ba739a4d7b401
+ghost_uuid: 756037dc-e356-43bd-a814-67bb60bff3f8
+created_at: 2023-04-29T14:44:16.000Z
+updated_at: 2026-07-07T13:25:43.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: Proposition de conditions d'dhésion ESS aux Grands Voisins.
 slug: bon-dadhesion-ess
 featured_image: ./images/2023/04/etrevoisin-1.svg
 ---

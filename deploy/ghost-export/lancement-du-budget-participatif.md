@@ -8,6 +8,14 @@ excerpt: |
   Nous avons pu échanger sur les 3 aspects de votre projet :
 
    * Du matériel informatique pour proposer des ateliers d'accessibilité numérique, qui soit pliable comme l'espace de la Ressourcerie dédié est polyvalent. Il servirait aussi pour éventuellement faire des ateliers dans d'autres structures (Table des Matières, Moulin à Café ?). Ce matériel pourrait éventuelleme
+ghost_id: 64d49448351ba739a4d7b417
+ghost_uuid: 36c08e26-2f00-4231-add0-37869a02eeca
+created_at: 2023-04-29T21:45:36.000Z
+updated_at: 2026-07-07T13:21:53.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: lancement-du-budget-participatif
 featured_image: ./images/2023/04/claudie-jacquline-chris-paris-hotel-de-ville.jpeg
 ---

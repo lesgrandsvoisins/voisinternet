@@ -12,6 +12,14 @@ excerpt: |
   + des sans ordinateurs fixes aux équipés du nec plus ultra ;
   + des hébergés ou migrants aux propriétaires ou entreprises du 14e ;
   + des salariés ou non-salariés aux patrons du 14e ;
+ghost_id: 64d49448351ba739a4d7b439
+ghost_uuid: af545fb6-ec64-4a23-a4d1-84e414b548fa
+created_at: 2023-06-29T19:04:04.000Z
+updated_at: 2026-07-07T13:21:08.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: salle-de-sociabilite-numerique
 featured_image: ./images/2023/07/maisondesmedicenslarge.jpg
 ---

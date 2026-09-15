@@ -3,6 +3,14 @@ title: Inclusiv'Day au CNIT 10 mai
 published_at: 2023-04-26T11:39:15.000+02:00
 reading_time: 2
 excerpt: Le 10 mai 2023 à Paris La Défense Arena, venez nous rendre visite ainsi que d'autres acteurs autour du handicap et de la réalisation. Sur notre stand, nous aurions de l'art, le livre de Caroline et des démonstrations de nos axes digital et artistiques. L'organisateur parle d’un riche programme éditorial (management & stratégie RSE, emploi inclusif, achats responsables, innovations sociales, accessibilité numérique, actualités handicap, ateliers de sensibilisation) des conférences thématiques, de
+ghost_id: 64d49448351ba739a4d7b3f7
+ghost_uuid: d1b4a24d-e847-4f93-9c49-250703ef72cc
+created_at: 2023-04-26T09:36:54.000Z
+updated_at: 2026-07-07T13:22:23.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: nous-a-inclusivday-cnit-10-mai-2023
 featured_image: ./images/2023/04/lesgrandsvoisins-inclusivday.png
 ---

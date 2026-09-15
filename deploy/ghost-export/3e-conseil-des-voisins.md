@@ -24,6 +24,14 @@ excerpt: |
   Monnaie-temps, très mal véçue. Cela a accentué les inégalités.
 
   Des logiques néo-l
+ghost_id: 64d49448351ba739a4d7b3f3
+ghost_uuid: 01e07341-ead8-46b0-a60f-3c3ecf9ff6c5
+created_at: 2023-04-26T08:07:24.000Z
+updated_at: 2026-07-07T13:28:33.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: 3e-conseil-des-voisins
 featured_image: ./images/2023/04/fete-style.jpg
 ---

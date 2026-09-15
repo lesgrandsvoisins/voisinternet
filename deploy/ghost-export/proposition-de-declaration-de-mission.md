@@ -14,6 +14,14 @@ excerpt: |
   Les engagements
 
   Chaque voisin et voisi
+ghost_id: 64d49448351ba739a4d7b3e3
+ghost_uuid: 429abf72-5dd1-40e3-b8ac-88f9dd285f85
+created_at: 2023-04-25T12:07:24.000Z
+updated_at: 2026-09-05T07:05:03.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: proposition-de-declaration-de-mission
 featured_image: ./images/2023/04/eiffeltour-phare-montpar.jpg
 ---

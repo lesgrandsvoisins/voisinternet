@@ -15,6 +15,14 @@ excerpt: |
   Télécharger le fichier .ics
 
   La vie de la famille Arakaki Arakaki est un exemple de lutte multi-générationnelle depuis l'époque des guerres sino-japonaises pour la colon
+ghost_id: 67eac4f729a04879b784f3bb
+ghost_uuid: 396e25ff-1e87-4c23-86a9-b6369a621fba
+created_at: 2025-03-31T16:38:15.000Z
+updated_at: 2026-07-07T13:18:36.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: hommage-a-arakaki-dim-6-avril-a-houilles
 featured_image: ./images/2025/03/cheval-3.jpeg
 ---

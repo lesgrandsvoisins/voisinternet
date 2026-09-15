@@ -3,6 +3,14 @@ title: Point d'avancements en mars 2022
 published_at: 2022-02-08T00:00:00.000+01:00
 reading_time: 2
 excerpt: En octobre 2021, un responsable des anciens Grands Voisins de Sain-Vincent-de-Paul a remis en question le projet et ma capacité d’être au service du projet. J’en étais sensible. La communication reprend après ma résolution d’être imparfaitement au service des Grands Voisins C.O.M.
+ghost_id: 64d49448351ba739a4d7b414
+ghost_uuid: 57179928-8971-4897-8547-17af6c77da66
+created_at: 2023-04-29T16:09:24.000Z
+updated_at: 2026-07-07T13:25:12.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: En octobre 2021, un responsable des anciens Grands Voisins de Sain-Vincent-de-Paul a remis en question le projet et ma capacité d’être au service du projet. J’en étais sensible. La communication reprend après ma résolution d’être imparfaitement au service des Grands Voisins C.O.M.
 slug: points-avancement-mars-2022
 featured_image: ./images/2023/04/montpar202208.jpg
 ---

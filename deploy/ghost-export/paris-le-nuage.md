@@ -8,6 +8,14 @@ excerpt: |
   Paris le nuage invite 75 acteurs — associations, artistes, artisans, professionnels, entreprises et particuliers — à installer des casiers électroniques derrière leurs box fibre. Ces serveurs libres et basse consommation offrent une alternative locale et transparente aux GAFAM pour le backup, l’accès aux photos et plus encore.
 
   Avoir un serveur libre chez soi ou au travail renforce l’électro-littérisme de tous. Ce projet débute av
+ghost_id: 67a1da71756d0c27429ab7d0
+ghost_uuid: e0864455-8111-4477-bc0b-d8764e351cef
+created_at: 2025-02-04T09:14:25.000Z
+updated_at: 2026-09-05T07:01:50.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: paris-le-nuage
 featured_image: ./images/2025/02/outils.jpeg
 ---

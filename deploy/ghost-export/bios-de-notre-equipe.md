@@ -19,6 +19,14 @@ excerpt: |
   Chris the Disruptor
 
   Constantly innovating, fulfilling idealistic and philosophical 
+ghost_id: 64d49448351ba739a4d7b405
+ghost_uuid: 60deb607-db62-48cd-9280-8e7736f079b4
+created_at: 2023-04-29T15:07:35.000Z
+updated_at: 2026-07-07T13:28:10.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: bios-de-notre-equipe
 featured_image: ./images/2023/04/kelsey-bienvenue.jpg
 ---

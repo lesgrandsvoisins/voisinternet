@@ -3,6 +3,14 @@ title: Thoughts about Creative Commons CC-BY-NC-SA (EN)
 published_at: 2023-05-11T08:40:34.000+02:00
 reading_time: 6
 excerpt: Article about terms and conditions around storytelling incorporating photography as creative process including projection (not to say "publication") in the storytelling process. 
+ghost_id: 64d49448351ba739a4d7b433
+ghost_uuid: 0559e7db-1c85-4d47-ad18-dfc46059edc7
+created_at: 2023-05-11T06:01:54.000Z
+updated_at: 2026-07-07T13:21:33.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: Article about terms and conditions around storytelling incorporating photography as creative process including projection (not to say "publication") in the storytelling process. 
 slug: baldart-article
 featured_image: ./images/2023/05/gillles-clement.PNG
 ---

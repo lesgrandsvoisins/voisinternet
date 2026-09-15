@@ -11,6 +11,14 @@ excerpt: |
   Dons
   
   Les Grands Voisins reçoit des donations déductibles des
+ghost_id: 64d49448351ba739a4d7b3f8
+ghost_uuid: 955d0abf-2ad9-491e-90de-e67291f90780
+created_at: 2023-04-26T09:46:18.000Z
+updated_at: 2026-07-07T13:22:15.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: fun-d-raising
 featured_image: ./images/2023/04/appel-a-funs-01.svg
 ---

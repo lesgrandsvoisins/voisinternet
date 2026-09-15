@@ -3,6 +3,14 @@ title: Organisation du Village TIH à Inclusiv’Day
 published_at: 2023-04-28T00:00:00.000+02:00
 reading_time: 1
 excerpt: Nous sommes en preparation de comment nous coordonner pour le salon TIH. Post en élaboration.
+ghost_id: 64d49448351ba739a4d7b411
+ghost_uuid: 4a467531-e484-4ff2-9afd-8a04bb8bf4ef
+created_at: 2023-04-29T15:55:35.000Z
+updated_at: 2026-07-07T13:22:09.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: Nous sommes en preparation de comment nous coordonner pour le salon TIH. Post en élaboration.
 slug: organisation-du-village-tih-a-inclusivday
 featured_image: ./images/2023/04/window-washer-klusion-IMG_20211216_102008.jpg
 ---

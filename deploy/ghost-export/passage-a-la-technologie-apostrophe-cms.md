@@ -6,6 +6,14 @@ excerpt: |
   Nous avons mis en place la technologie Apostrophe CMS sur le site www.lesgrandsvoisins.com. Cela nous permet de modifier le contenu à travers le site web. @poekels a pu prendre la main et trouve bien pratique pour nos besoins. Cela nous permet une parfaite maîtrise de l’aspect design de notre site tout en rendant la maîtrise des messages transmis aux éditeurs.
 
   ApostropheCMS nous a contacté pour mettre en valeur notre utilisation de leur technologie. J’avais pris soin dans mon choix d’eux car je
+ghost_id: 64d49448351ba739a4d7b408
+ghost_uuid: dbfebd0d-7753-4e20-a9a5-77efc1e6c974
+created_at: 2023-04-29T15:20:52.000Z
+updated_at: 2026-09-05T07:05:34.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: passage-a-la-technologie-apostrophe-cms
 featured_image: ./images/2023/04/mael-computer-IMG_20220902_180102.jpg
 ---

@@ -12,6 +12,14 @@ excerpt: |
   et aux Simones 1 17 bis rue Blanchard 92220 BAGNEUX
 
   avec une technologie qui amène les personnes à distance dans la salle, et les gens dans la salle à distance (merci de prendre connaissance de ses particularités
+ghost_id: 64d49448351ba739a4d7b40c
+ghost_uuid: 2017b089-0197-44af-b0cf-2998086b00c1
+created_at: 2023-04-29T15:33:32.000Z
+updated_at: 2026-09-05T07:03:28.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: merc-27-oct-21-19h30-a-21h-les-grands-voisins-a-bagneux-et-en-viseo
 featured_image: ./images/2023/04/prep-2021-10-27.jpeg
 ---

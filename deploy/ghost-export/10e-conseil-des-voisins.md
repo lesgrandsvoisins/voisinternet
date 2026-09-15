@@ -26,6 +26,14 @@ excerpt: |
   Nous avions beaucoup parlé et je n’ai pas pris énormément de notes.
 
   Il s’avère que la communication est une priorité. Comment faisons-nous pour cultiver un rapport avec les voisins. @gayclau a
+ghost_id: 64d49448351ba739a4d7b3f1
+ghost_uuid: d2d9404c-7426-4173-badc-618e14f69a97
+created_at: 2023-04-26T07:48:18.000Z
+updated_at: 2026-07-07T13:25:03.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: 10e-conseil-des-voisins
 featured_image: ./images/2023/04/10e-conseil-montparnasse.jpeg
 ---

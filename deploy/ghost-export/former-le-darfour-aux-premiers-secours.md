@@ -10,6 +10,14 @@ excerpt: |
   lien
 
   Voici une liste de vidéos Youtube sur le sujet des premiers secours :
+ghost_id: 677bd67e2e92053cf6a2125b
+ghost_uuid: 4c62b1fd-7be7-40ee-9255-b6ba0ca78dee
+created_at: 2025-01-06T13:11:26.000Z
+updated_at: 2026-07-07T13:19:06.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: former-le-darfour-aux-premiers-secours
 featured_image: ./images/2025/01/DSC08819.JPG
 ---

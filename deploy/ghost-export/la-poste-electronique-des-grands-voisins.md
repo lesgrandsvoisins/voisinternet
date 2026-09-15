@@ -8,6 +8,14 @@ excerpt: |
   Si vous utiliser un tiers tel que gmail, hotmail, etc…, nous livrons le message directement à votre gestionnaire de courriel. De notre côté, nous en sommes autonomes.
 
   Cela nous a pris de l’effort pour être connu par l’internet entier comme une poste électronique responsable. Il y avai
+ghost_id: 64d49448351ba739a4d7b40d
+ghost_uuid: 75a2d12c-846b-404f-bbe3-3ea684633c54
+created_at: 2023-04-29T15:39:34.000Z
+updated_at: 2026-07-07T13:25:50.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: la-poste-electronique-des-grands-voisins
 featured_image: ./images/2023/04/email-setup.png
 ---

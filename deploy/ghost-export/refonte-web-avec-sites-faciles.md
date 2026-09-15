@@ -3,6 +3,14 @@ title: Refonte web avec Sites Faciles
 published_at: 2024-05-06T07:01:00.000+02:00
 reading_time: 1
 excerpt: La DINUM a eu la grâce de publier son moteur CMS pour numerique.gouv.fr sur github. Nous nous donnons comme mission de pouvoir rendre le bénéfice de ce moteur aux acteurs privés
+ghost_id: 6735918c2e92053cf6a211ef
+ghost_uuid: 86ae5ceb-d14e-4245-8c50-d5fef0e7b0b0
+created_at: 2024-11-14T05:58:36.000Z
+updated_at: 2026-07-07T13:19:45.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: La DINUM a eu la grâce de publier son moteur CMS pour numerique.gouv.fr sur github. Nous nous donnons comme mission de pouvoir rendre le bénéfice de ce moteur aux acteurs privés
 slug: refonte-web-avec-sites-faciles
 featured_image: ./images/2024/11/screencopywww.max-800x600.jpg
 ---

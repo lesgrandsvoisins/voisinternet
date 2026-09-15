@@ -8,6 +8,14 @@ excerpt: |
   Lors du Conseil ven. 18 mars à 18h (2022) à la Ressourcerie créative (14e) et en ligne, nous avions vu les Travaux proposées février 2022 / Pistes d’activités et le Budget participatif Paris.fr “Le numérique créatif” avec la Ressourcerie créative et la Mairie du 14e et d’autres. Nous avions parlé de ma propre activité maintenant visible sur mann.fr 1 et celle projeté par LesGrandsVoisins.com comme vu par les tiers.
 
   En attendant la Gazette #9, vous pouvez vous référer à la 
+ghost_id: 64d49448351ba739a4d7b3f0
+ghost_uuid: 7497543e-76a5-4395-9705-83a4457d8eba
+created_at: 2023-04-26T07:44:50.000Z
+updated_at: 2026-09-05T07:02:22.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: 11e-conseil-des-voisins
 featured_image: ./images/2023/04/atelier-ressourcerie_creative.original.jpg
 ---

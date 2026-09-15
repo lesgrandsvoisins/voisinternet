@@ -3,6 +3,14 @@ title: Intérêt général
 published_at: 2023-04-29T14:05:24.000+02:00
 reading_time: 3
 excerpt: Article en cours d'élaboration. Nous sommes un organisme d'intérêt général habilité à délivrer des reçus fiscaux aux donateurs individus (art. 200 CGI) et aux organisations (art. 238 bis) permettant des réductions d'impôt de 66% et 60% respectivement de vos dons.
+ghost_id: 64d49448351ba739a4d7b3fd
+ghost_uuid: c4d8658a-574f-4158-bfcd-321a6aec39a9
+created_at: 2023-04-29T09:52:20.000Z
+updated_at: 2026-09-05T07:03:59.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: Article en cours d'élaboration. Nous sommes un organisme d'intérêt général habilité à délivrer des reçus fiscaux aux donateurs individus (art. 200 CGI) et aux organisations (art. 238 bis) permettant des réductions d'impôt de 66% et 60% respectivement de vos dons.
 slug: notre-qualite-dinteret-general
 featured_image: ./images/2023/04/interetgendons.png
 ---

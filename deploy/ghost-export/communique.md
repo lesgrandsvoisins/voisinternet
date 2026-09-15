@@ -3,6 +3,14 @@ title: Communiqué
 published_at: 2023-07-17T13:56:57.000+02:00
 reading_time: 1
 excerpt: Proposition de communiqué pour la  Délégation permanente de la République Islamique de Mauritanie à l’UNESCO à l’occaison du retour des Etats Unis par l’artiste Mohamed Maël Aïnine Sidi Ethmane.
+ghost_id: 64d49448351ba739a4d7b43c
+ghost_uuid: 2668fd42-6f41-4620-8576-93565afe1308
+created_at: 2023-07-17T11:47:07.000Z
+updated_at: 2026-07-07T13:20:44.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: Proposition de communiqué pour la  Délégation permanente de la République Islamique de Mauritanie à l’UNESCO à l’occaison du retour des Etats Unis par l’artiste Mohamed Maël Aïnine Sidi Ethmane.
 slug: communique
 featured_image: ./images/2023/07/Flag_of_UNESCO.svg.png
 ---

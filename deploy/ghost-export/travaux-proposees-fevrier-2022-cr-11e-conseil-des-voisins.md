@@ -16,6 +16,14 @@ excerpt: |
   Le projet de commerce électronique consiste en la création d’un site web partagé et utilisable par les Voisins.
 
   En antic
+ghost_id: 64d49448351ba739a4d7b40f
+ghost_uuid: 72d8ad6c-d609-47bd-86a6-3c0080107b85
+created_at: 2023-04-29T15:46:46.000Z
+updated_at: 2026-07-07T13:25:20.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: travaux-proposees-fevrier-2022-cr-11e-conseil-des-voisins
 featured_image: ./images/2023/04/team-tree-2.jpg
 ---

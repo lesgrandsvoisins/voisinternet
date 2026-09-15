@@ -14,6 +14,14 @@ excerpt: |
    2. Un prévisionnel est à établir avant d'engager la commande de 3000 euros auprès d'Osorus (Popup Expos)
    3. Une dette de 1000 euros au Bureau du Créateur est à accorder en priorité avant l'engagement financier pour Osorus (Popup Expos)
    4. Le Conseil prend note de la plainte de Chris 
+ghost_id: 64e5fdbd9801ae4ec2c36775
+ghost_uuid: e920aaec-afed-4127-9356-ed47e1c1904e
+created_at: 2023-08-23T12:38:21.000Z
+updated_at: 2026-07-07T13:20:38.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: 19e-conseil-des-voisins
 featured_image: ./images/2023/08/midi-meeting--Large-.jpg
 ---

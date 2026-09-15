@@ -35,6 +35,14 @@ excerpt: |
   en ligne à
   https://jitsi.lesgrandsvoisins.com/farbeez
   (merci de tester votre équipement dès m
+ghost_id: 64d49448351ba739a4d7b3f5
+ghost_uuid: e82f45d3-2a86-4cf8-8c92-29e4acefa3f6
+created_at: 2023-04-26T08:17:43.000Z
+updated_at: 2026-07-07T13:25:58.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: 9e-conseil-des-voisins
 featured_image: ./images/2023/04/lesgrandsvoisinscom-sketchnotes-large.png
 ---

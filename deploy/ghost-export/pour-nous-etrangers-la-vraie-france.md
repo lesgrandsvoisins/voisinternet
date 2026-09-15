@@ -12,6 +12,14 @@ excerpt: |
   Édition 2025
 
   Cette année, la journée « Profession d’Empathie Nationale » se déroulera à l’association France Amérique-Latine (à ne p
+ghost_id: 67ae0257756d0c27429ab7e3
+ghost_uuid: 4515c9d4-5d71-4def-b6d5-6a748f457428
+created_at: 2025-02-13T14:31:51.000Z
+updated_at: 2026-07-07T13:18:44.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: pour-nous-etrangers-la-vraie-france
 featured_image: ./images/2025/02/profession-empathie-nationale-white.png
 ---

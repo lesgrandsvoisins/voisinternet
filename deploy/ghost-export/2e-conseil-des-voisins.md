@@ -16,6 +16,14 @@ excerpt: |
   The departure of the Grands Voisins will be postponed.
 
   Rehabilitation on "Le Village des Grands Voisins". The purpose of this effort was to involve the residents (marginalized people who need shelter and food) more. Some would have seen this as a personal attack, a desire to take power, to reject the other. This ended with the inner circle of the Big Neig
+ghost_id: 64d49448351ba739a4d7b3f2
+ghost_uuid: 805d72ee-6bb8-46f9-9c93-b78d1be5a765
+created_at: 2023-04-26T08:01:31.000Z
+updated_at: 2026-07-07T13:28:41.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: 2e-conseil-des-voisins
 featured_image: ./images/2023/04/1e-conseil-des-voisins.jpeg
 ---

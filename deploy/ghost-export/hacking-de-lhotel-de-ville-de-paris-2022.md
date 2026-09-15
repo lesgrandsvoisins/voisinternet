@@ -7,6 +7,14 @@ excerpt: |
 
    * Audrey Pulvar, Adjointe à la maire de Parie pour l’Economie sociale et solidaire puis les circuits courts
    * Abracadapain - un sa
+ghost_id: 64d49448351ba739a4d7b403
+ghost_uuid: 982c4441-03d0-4707-a5fe-0077ff6db149
+created_at: 2023-04-29T14:50:38.000Z
+updated_at: 2026-07-07T13:24:02.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: hacking-de-lhotel-de-ville-de-paris-2022
 featured_image: ./images/2023/04/hacking-hotel-de-ville-2022.jpeg
 ---

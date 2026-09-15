@@ -6,6 +6,14 @@ excerpt: |
   La journée du 10 mai 2023, l'INCLUSIV'DAY s'est déroulée à la Défense, el Manhattan de PARIS avec la présence de deux ministres du government Macron. J'y avais un stand pour LesGrandsVoisins.com.
 
   La France a enfin reconnu mon côté « Mejedhoob » RQTH ayant moi-même un pet au casque qui risque de dégainer sur la politique extérieure de mon paye si mes droits, en tant qu'ambassadeur auto-proclamé de l'art contempoain de Mauritanie en occident n'est pas reconnu et respecté par l'Etat Mauritanien.
+ghost_id: 64d49448351ba739a4d7b43b
+ghost_uuid: 524133df-1bc3-4829-98ac-80df01a4b793
+created_at: 2023-07-04T14:43:05.000Z
+updated_at: 2026-07-07T13:21:00.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: post-it
 featured_image: ./images/2023/08/darrieusec-inclusivday-2023--Large-.png
 ---

@@ -12,6 +12,13 @@ excerpt: |
   3. Des questions administratives
 
   Compte-rendu version 2023-05-04-01
+ghost_id: 64d49448351ba739a4d7b3f6
+ghost_uuid: 5d39dea0-53f7-4b10-b72c-4e12d510b172
+created_at: 2023-04-26T09:33:22.000Z
+updated_at: 2026-07-07T13:21:40.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
 slug: 17e-conseil
 featured_image: ./images/2023/05/photo-20230503-conseildesvoisins.jpg
 ---

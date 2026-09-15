@@ -12,6 +12,14 @@ excerpt: |
 
    1. Création de l’association par le fait de renommer l’association Quatrième Oeil et de son hébergement chez Caroline LHOMME dans le 14e. Cela nous donne une personalité morale. Hovik Hovnikyan est pressenti pour remplacer Jean-Baptiste en Trésorier. Les termes des mandataires sont par périodes de quatre ans.
    2. La poursuite du budget participatif proposé par la Mairie du 14e en collaboration a
+ghost_id: 64d49448351ba739a4d7b3ee
+ghost_uuid: 0ac366b7-c2cf-47b8-933e-247a49a77ef9
+created_at: 2023-04-26T07:31:40.000Z
+updated_at: 2026-07-07T13:24:09.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: 13e-conseil-des-voisins
 featured_image: ./images/2023/04/13e-conseil-lesgv.jpeg
 ---

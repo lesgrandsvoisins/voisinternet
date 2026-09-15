@@ -12,6 +12,14 @@ excerpt: |
    3. le mentorat à la création d’entreprise
 
   Linklusion engage un programme « TIH-Booster » avec 
+ghost_id: 64d49448351ba739a4d7b3e4
+ghost_uuid: 8a543c15-039f-475c-87a0-980c21f30859
+created_at: 2023-04-25T12:09:25.000Z
+updated_at: 2026-07-07T13:27:23.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: hup-linklusion-sont-operationnels
 featured_image: ./images/2023/04/sunrise-linklusion-IMG_20211202_165300.jpg
 ---

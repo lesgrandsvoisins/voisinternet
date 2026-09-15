@@ -9,6 +9,14 @@ excerpt: |
   http://www.crif.org/fr/actualites/rescapée-du-vel-dhiv-«-je-navais-quune-idée-méchapper-»/32096
 
   Annette a beaucoup travaillé en plus qu’au Val d’Hiv pourtant.
+ghost_id: 64d49448351ba739a4d7b3e8
+ghost_uuid: 0e11c8ac-8676-4cc2-8f36-9dc4b600ca8b
+created_at: 2023-04-26T06:35:49.000Z
+updated_at: 2026-07-07T13:27:40.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: reconnaissances-avec-le-livre-lange-du-vel-dhiv
 featured_image: ./images/2023/04/lange-du-vel-div.jpg
 ---

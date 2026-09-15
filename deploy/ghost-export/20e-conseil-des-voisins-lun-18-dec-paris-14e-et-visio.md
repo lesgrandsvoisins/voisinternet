@@ -14,6 +14,14 @@ excerpt: |
   https://meet.lesgrandsvoisins.com (merci de lire les indications à l'avance)
 
   Un sujet principal de débat sera notre participation au mémorial de Valentin FRANCY le 2 mars 2024, potentiellement conjointement avec Le Souvenir Français. M. FRANCY, un étudiant de 21 
+ghost_id: 656c3b4d62fbb60bab2063e2
+ghost_uuid: b07c09ce-28a7-42c9-8213-ff6a6765cd42
+created_at: 2023-12-03T08:24:44.000Z
+updated_at: 2026-09-05T07:06:06.000Z
+ghost_type: post
+ghost_status: published
+ghost_visibility: public
+custom_excerpt: null
 slug: 20e-conseil-des-voisins-lun-18-dec-paris-14e-et-visio
 featured_image: ./images/2023/12/2023-12-flyer-20e-conseil.png
 ---

@@ -63,6 +63,15 @@
       </form>
       {% if account and entry.owner_id == account.id %}
       <a class="sub-btn" href="{% url 'core:fiche_modifier' entry.slug %}">{% trans "Modifier" %}</a>
+      <form method="post" action="{% url 'core:toggle_publication' entry.slug %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        {% if entry.visibility == "public" %}
+        <button class="sub-btn" type="submit">{% trans "Dépublier" %}</button>
+        {% else %}
+        <button class="sub-btn" type="submit">{% trans "Publier" %}</button>
+        {% endif %}
+      </form>
       {% endif %}
     </div>
 

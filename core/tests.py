@@ -229,7 +229,7 @@ class AudienceTests(Base):
         entry = DirectoryEntry.objects.create(
             name="Ada Matus", slug="ada-matus", sector=sector,
             tagline="Autrice Compositrice", description="Un groupe de soutien culturel.",
-            public=True,
+            visibility=DirectoryEntry.VISIBILITY_PUBLIC,
         )
         response = self.client.get(reverse("core:entry_detail", args=[entry.slug]))
         self.assertEqual(response.status_code, 200)
@@ -237,12 +237,68 @@ class AudienceTests(Base):
         self.assertContains(response, "Autrice Compositrice")
         self.assertContains(response, reverse("core:toggle_subscription", args=[entry.slug]))
 
-    def test_non_public_directory_entry_detail_is_404(self):
-        entry = DirectoryEntry.objects.create(name="Fiche privée", slug="fiche-privee", public=False)
+    def test_draft_directory_entry_detail_is_404(self):
+        entry = DirectoryEntry.objects.create(
+            name="Fiche privée", slug="fiche-privee", visibility=DirectoryEntry.VISIBILITY_DRAFT,
+        )
         response = self.client.get(reverse("core:entry_detail", args=[entry.slug]))
         self.assertEqual(response.status_code, 404)
 
+    def test_protected_directory_entry_requires_an_account(self):
+        entry = DirectoryEntry.objects.create(
+            name="Fiche protégée", slug="fiche-protegee", visibility=DirectoryEntry.VISIBILITY_PROTECTED,
+        )
+        anonymous_response = self.client.get(reverse("core:entry_detail", args=[entry.slug]))
+        self.assertEqual(anonymous_response.status_code, 404)
+        self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]))  # crée un compte
+        response = self.client.get(reverse("core:entry_detail", args=[entry.slug]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_protected_directory_entry_absent_from_listing(self):
+        entry = DirectoryEntry.objects.create(
+            name="Fiche protégée", slug="fiche-protegee", visibility=DirectoryEntry.VISIBILITY_PROTECTED,
+        )
+        response = self.client.get(reverse("core:annuaire"))
+        self.assertNotContains(response, reverse("core:entry_detail", args=[entry.slug]))
+
+    def test_owner_can_preview_their_own_draft(self):
+        acc = Account.objects.create()
+        entry = DirectoryEntry.objects.create(
+            name="Fiche privée", slug="fiche-privee", visibility=DirectoryEntry.VISIBILITY_DRAFT, owner=acc,
+        )
+        session = self.client.session
+        session[SESSION_KEY] = acc.pk
+        session.save()
+        response = self.client.get(reverse("core:entry_detail", args=[entry.slug]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_owner_can_toggle_publication(self):
+        acc = Account.objects.create()
+        entry = DirectoryEntry.objects.create(
+            name="Fiche à publier", slug="fiche-a-publier", visibility=DirectoryEntry.VISIBILITY_DRAFT, owner=acc,
+        )
+        session = self.client.session
+        session[SESSION_KEY] = acc.pk
+        session.save()
+        self.client.post(reverse("core:toggle_publication", args=[entry.slug]))
+        entry.refresh_from_db()
+        self.assertEqual(entry.visibility, DirectoryEntry.VISIBILITY_PUBLIC)
+        self.client.post(reverse("core:toggle_publication", args=[entry.slug]))
+        entry.refresh_from_db()
+        self.assertEqual(entry.visibility, DirectoryEntry.VISIBILITY_DRAFT)
+
+    def test_non_owner_cannot_toggle_publication(self):
+        entry = DirectoryEntry.objects.create(
+            name="Fiche protégée", slug="fiche-a-proteger", visibility=DirectoryEntry.VISIBILITY_DRAFT,
+        )
+        response = self.client.post(reverse("core:toggle_publication", args=[entry.slug]))
+        self.assertEqual(response.status_code, 404)
+        entry.refresh_from_db()
+        self.assertEqual(entry.visibility, DirectoryEntry.VISIBILITY_DRAFT)
+
     def test_directory_list_links_to_entry_detail(self):
-        entry = DirectoryEntry.objects.create(name="Ada Matus", slug="ada-matus", public=True)
+        entry = DirectoryEntry.objects.create(
+            name="Ada Matus", slug="ada-matus", visibility=DirectoryEntry.VISIBILITY_PUBLIC,
+        )
         response = self.client.get(reverse("core:annuaire"))
         self.assertContains(response, reverse("core:entry_detail", args=[entry.slug]))

@@ -100,20 +100,20 @@ class DirectoryEntryPhotoInline(admin.TabularInline):
 
 @admin.register(DirectoryEntry)
 class DirectoryEntryAdmin(TranslationAdmin):
-    list_display = ["name", "kind", "sector", "owner", "city", "public", "order"]
-    list_filter = ["kind", "sector", "public"]
-    list_editable = ["public", "order"]
+    list_display = ["name", "kind", "sector", "owner", "city", "visibility", "order"]
+    list_filter = ["kind", "sector", "visibility"]
+    list_editable = ["visibility", "order"]
     prepopulated_fields = {"slug": ["name"]}
     search_fields = ["name", "description", "city"]
     autocomplete_fields = ["sector"]
     filter_horizontal = ["audiences"]
     inlines = [DirectoryEntryPhotoInline]
     fieldsets = [
-        (None, {"fields": ["name", "slug", "kind", "sector", "audiences", "owner", "public", "order"]}),
+        (None, {"fields": ["name", "slug", "kind", "sector", "audiences", "owner", "visibility", "order"]}),
         ("Présentation", {"fields": ["title", "tagline", "description"]}),
         ("Médias", {"fields": ["logo", "photo_promo", "video_url"]}),
         ("Coordonnées", {"fields": ["email", "phone", "website"]}),
-        ("Localisation", {"fields": ["address", "city", "country", "latitude", "longitude"]}),
+        ("Localisation", {"fields": ["address", "postal_code", "city", "region", "country", "latitude", "longitude"]}),
         ("Appel à l'action", {"fields": ["cta_intro", "cta_label", "cta_link"]}),
     ]
 

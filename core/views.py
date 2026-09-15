@@ -119,7 +119,7 @@ def groupes(request):
 
 
 def annuaire(request, secteur=None):
-    entries = DirectoryEntry.objects.filter(public=True)
+    entries = DirectoryEntry.objects.filter(visibility=DirectoryEntry.VISIBILITY_PUBLIC)
     current = None
     if secteur:
         current = get_object_or_404(DirectorySector, slug=secteur)
@@ -134,9 +134,24 @@ def annuaire(request, secteur=None):
     })
 
 
+def _check_entry_visible(entry, acc):
+    """
+    Non publié : réservé au propriétaire. Brouillon protégé : réservé aux comptes
+    (nommés ou anonymes), absent de l'annuaire. Publié : ouvert à tout le monde.
+    """
+    is_owner = acc is not None and entry.owner_id == acc.id
+    if is_owner:
+        return
+    if entry.visibility == DirectoryEntry.VISIBILITY_DRAFT:
+        raise Http404
+    if entry.visibility == DirectoryEntry.VISIBILITY_PROTECTED and acc is None:
+        raise Http404
+
+
 def entry_detail(request, slug):
-    entry = get_object_or_404(DirectoryEntry, slug=slug, public=True)
+    entry = get_object_or_404(DirectoryEntry, slug=slug)
     acc = current_account(request)
+    _check_entry_visible(entry, acc)
     subscribed = acc.entrysubscription_set.filter(entry=entry).exists() if acc else False
     return render(request, "core/directory_entry.html", {
         "entry": entry,
@@ -196,8 +211,9 @@ def fiche_supprimer(request, slug):
 
 @require_POST
 def toggle_subscription(request, slug):
-    entry = get_object_or_404(DirectoryEntry, slug=slug, public=True)
+    entry = get_object_or_404(DirectoryEntry, slug=slug)
     acc = current_account(request, create=True)
+    _check_entry_visible(entry, acc)
     sub = EntrySubscription.objects.filter(account=acc, entry=entry).first()
     if sub:
         sub.delete()
@@ -207,6 +223,22 @@ def toggle_subscription(request, slug):
         text = _("Abonné à « %(name)s ».") % {"name": entry.name}
     messages.success(request, text)
     return redirect(_safe_next(request, reverse("core:annuaire")))
+
+
+@require_POST
+def toggle_publication(request, slug):
+    acc = current_account(request)
+    entry = get_object_or_404(DirectoryEntry, slug=slug, owner=acc) if acc else None
+    if entry is None:
+        raise Http404
+    if entry.visibility == DirectoryEntry.VISIBILITY_PUBLIC:
+        entry.visibility = DirectoryEntry.VISIBILITY_DRAFT
+        messages.success(request, _("Fiche dépubliée."))
+    else:
+        entry.visibility = DirectoryEntry.VISIBILITY_PUBLIC
+        messages.success(request, _("Fiche publiée."))
+    entry.save(update_fields=["visibility"])
+    return redirect(_safe_next(request, reverse("core:entry_detail", args=[entry.slug])))
 
 
 def agenda(request):

@@ -15,11 +15,14 @@ _OTHER_LANGUAGES = ["en", "es", "ar", "ko"]
 # Regroupement des champs par onglet dans le formulaire (côté template) : purement
 # présentationnel, sans effet sur la validation.
 _FIELD_GROUPS = [
-    (_("Général"), ["name_fr", "kind", "sector", "audiences", "title_fr", "tagline_fr", "description_fr"]),
+    (_("Général"), ["name_fr", "description_fr", "website"]),
     (_("Photos et médias"), ["logo", "photo_promo", "video_url"]),
-    (_("Contact et localisation"),
-     ["email", "phone", "website", "address", "city", "country", "latitude", "longitude"]),
-    (_("Mise en avant"), ["cta_intro_fr", "cta_label_fr", "cta_link", "public"]),
+    (_("Publication"), ["visibility"]),
+    (_("Catégories"), ["kind", "sector", "audiences", "title_fr", "tagline_fr"]),
+    (_("Mise en avant"), ["cta_intro_fr", "cta_label_fr", "cta_link"]),
+    (_("Contact"), ["email", "phone"]),
+    (_("Adresse"), ["country", "region", "city", "postal_code", "address"]),
+    (_("Avancé"), ["latitude", "longitude"]),
 ]
 
 
@@ -39,6 +42,7 @@ class DirectoryEntryForm(forms.ModelForm):
         # modeltranslation rend tous les champs par langue non-obligatoires en base : on
         # réimpose ici que le nom (en français) reste requis pour créer une fiche.
         self.fields["name_fr"].required = True
+        self.fields["tagline_fr"].label = _("Description courte")
         # Aperçu en direct du Markdown pendant la saisie (dégradation propre sans JS :
         # le champ reste un simple texte, la description s'enregistre normalement).
         self.fields["description_fr"].widget.attrs.update({

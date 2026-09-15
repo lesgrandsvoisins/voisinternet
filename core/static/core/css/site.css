@@ -1598,6 +1598,74 @@ blockquote p {
   margin: 0
 }
 
+/* Menu déroulant natif (<details>/<summary>), sans JavaScript : la personne peut
+   toujours consulter, modifier ou supprimer sa fiche sans que ça dépende du JS. */
+.entry-menu {
+  position: relative;
+  width: 100%
+}
+
+.entry-menu-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--ink);
+  list-style: none
+}
+
+.entry-menu-btn::-webkit-details-marker {
+  display: none
+}
+
+.entry-menu-btn::after {
+  content: "▾";
+  font-size: .75em;
+  color: var(--ink-soft)
+}
+
+.entry-menu[open] .entry-menu-btn::after {
+  content: "▴"
+}
+
+.entry-menu-panel {
+  position: absolute;
+  top: 100%;
+  inset-inline-start: 0;
+  z-index: 10;
+  display: grid;
+  gap: .2rem;
+  min-width: 12rem;
+  margin-top: .4rem;
+  padding: .5rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .15)
+}
+
+.entry-menu-panel form {
+  margin: 0
+}
+
+.entry-menu-panel a,
+.entry-menu-panel .link-btn {
+  display: block;
+  width: 100%;
+  padding: .35rem .5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  text-align: start;
+  color: var(--ink)
+}
+
+.entry-menu-panel a:hover,
+.entry-menu-panel .link-btn:hover {
+  background: var(--hover);
+  color: var(--ink)
+}
+
 .link-btn {
   font: inherit;
   color: var(--ink-soft);
@@ -1616,6 +1684,10 @@ blockquote p {
   display: grid;
   gap: 1.1rem;
   /* max-width: 40rem */
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.5rem
 }
 
 /* Onglets en CSS pur (input radio + label), sans JavaScript : sans CSS, tous les champs
@@ -1623,6 +1695,7 @@ blockquote p {
 .tabs {
   display: flex;
   flex-wrap: wrap;
+  gap: .3rem;
   border-bottom: 2px solid var(--line);
   margin-bottom: 1.1rem
 }
@@ -1640,11 +1713,15 @@ blockquote p {
   font-weight: 600;
   padding: .6rem 1rem;
   margin-bottom: -2px;
+  border: 1px solid var(--line);
   border-bottom: 2px solid transparent;
+  border-radius: 8px 8px 0 0;
+  background: var(--sky);
   color: var(--ink-soft)
 }
 
 .tabs-label:hover {
+  background: var(--hover);
   color: var(--ink)
 }
 
@@ -1653,6 +1730,8 @@ blockquote p {
 }
 
 .tabs-input:checked + .tabs-label {
+  background: var(--sun-soft);
+  border-color: var(--sun);
   color: var(--ink);
   border-bottom-color: var(--sun)
 }

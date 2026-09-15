@@ -56,8 +56,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "",
-      "public": true,
-      "order": 0
+      "order": 0,
+      "visibility": "public"
     }
   },
   {
@@ -117,8 +117,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.linkedin.com/company/a-good-solution/?originalSubdomain=fr",
-      "public": true,
-      "order": 10
+      "order": 10,
+      "visibility": "public"
     }
   },
   {
@@ -178,8 +178,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.youtube.com/@Alain.Gorich/videos",
-      "public": true,
-      "order": 20
+      "order": 20,
+      "visibility": "public"
     }
   },
   {
@@ -239,8 +239,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.amadougaye.fr/?ref=blog.lesgrandsvoisins.com",
-      "public": true,
-      "order": 30
+      "order": 30,
+      "visibility": "public"
     }
   },
   {
@@ -300,8 +300,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.instagram.com/andreapoppea/",
-      "public": true,
-      "order": 40
+      "order": 40,
+      "visibility": "public"
     }
   },
   {
@@ -361,8 +361,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://arcessentiel.org/",
-      "public": true,
-      "order": 50
+      "order": 50,
+      "visibility": "public"
     }
   },
   {
@@ -422,8 +422,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.banyatour.fr/?ref=blog.lesgrandsvoisins.com",
-      "public": true,
-      "order": 60
+      "order": 60,
+      "visibility": "public"
     }
   },
   {
@@ -483,8 +483,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://auckland.academia.edu/DenisdeCastro?ref=blog.lesgrandsvoisins.com",
-      "public": true,
-      "order": 70
+      "order": 70,
+      "visibility": "public"
     }
   },
   {
@@ -544,8 +544,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "",
-      "public": true,
-      "order": 80
+      "order": 80,
+      "visibility": "public"
     }
   },
   {
@@ -605,8 +605,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://breastfreedom.com/?ref=blog.lesgrandsvoisins.com",
-      "public": true,
-      "order": 90
+      "order": 90,
+      "visibility": "public"
     }
   },
   {
@@ -666,8 +666,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://cantinebouge.fr/",
-      "public": true,
-      "order": 100
+      "order": 100,
+      "visibility": "public"
     }
   },
   {
@@ -727,8 +727,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "",
-      "public": true,
-      "order": 110
+      "order": 110,
+      "visibility": "public"
     }
   },
   {
@@ -788,8 +788,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.linkedin.com/in/caroline-lhomme/?ref=blog.lesgrandsvoisins.com",
-      "public": true,
-      "order": 120
+      "order": 120,
+      "visibility": "public"
     }
   },
   {
@@ -849,8 +849,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://youtu.be/gHOGXDzThKU?si=Vqo2vtMkIeDQrPjn",
-      "public": true,
-      "order": 130
+      "order": 130,
+      "visibility": "public"
     }
   },
   {
@@ -910,8 +910,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.onomad.club/",
-      "public": true,
-      "order": 140
+      "order": 140,
+      "visibility": "public"
     }
   },
   {
@@ -971,8 +971,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "",
-      "public": true,
-      "order": 150
+      "order": 150,
+      "visibility": "public"
     }
   },
   {
@@ -1032,8 +1032,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "",
-      "public": true,
-      "order": 160
+      "order": 160,
+      "visibility": "public"
     }
   },
   {
@@ -1093,8 +1093,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.francemali.org/",
-      "public": true,
-      "order": 170
+      "order": 170,
+      "visibility": "public"
     }
   },
   {
@@ -1154,8 +1154,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.instagram.com/francesco59rivoli/",
-      "public": true,
-      "order": 180
+      "order": 180,
+      "visibility": "public"
     }
   },
   {
@@ -1215,8 +1215,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "",
-      "public": true,
-      "order": 190
+      "order": 190,
+      "visibility": "public"
     }
   },
   {
@@ -1276,8 +1276,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.handi-tcap.fr",
-      "public": true,
-      "order": 200
+      "order": 200,
+      "visibility": "public"
     }
   },
   {
@@ -1337,8 +1337,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.henryroy.com/?ref=blog.lesgrandsvoisins.com",
-      "public": true,
-      "order": 210
+      "order": 210,
+      "visibility": "public"
     }
   },
   {
@@ -1398,8 +1398,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://hmz-digital.fr/pages/about/?ref=blog.lesgrandsvoisins.com",
-      "public": true,
-      "order": 220
+      "order": 220,
+      "visibility": "public"
     }
   },
   {
@@ -1459,8 +1459,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "",
-      "public": true,
-      "order": 230
+      "order": 230,
+      "visibility": "public"
     }
   },
   {
@@ -1520,8 +1520,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.instagram.com/amphor_art/",
-      "public": true,
-      "order": 240
+      "order": 240,
+      "visibility": "public"
     }
   },
   {
@@ -1581,8 +1581,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.facebook.com/informatruck/",
-      "public": true,
-      "order": 250
+      "order": 250,
+      "visibility": "public"
     }
   },
   {
@@ -1642,8 +1642,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.inolib.com/?ref=blog.lesgrandsvoisins.com",
-      "public": true,
-      "order": 260
+      "order": 260,
+      "visibility": "public"
     }
   },
   {
@@ -1703,8 +1703,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://youtube.com/embed/ebvhd0TLkfY",
-      "public": true,
-      "order": 270
+      "order": 270,
+      "visibility": "public"
     }
   },
   {
@@ -1764,8 +1764,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.facebook.com/KaceKode/about/?ref=page_internal&locale=fr_FR",
-      "public": true,
-      "order": 280
+      "order": 280,
+      "visibility": "public"
     }
   },
   {
@@ -1825,8 +1825,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.instagram.com/k_sweetheart_choeur_de_coreen/",
-      "public": true,
-      "order": 290
+      "order": 290,
+      "visibility": "public"
     }
   },
   {
@@ -1886,8 +1886,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "",
-      "public": true,
-      "order": 300
+      "order": 300,
+      "visibility": "public"
     }
   },
   {
@@ -1947,8 +1947,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.laressourceriecreative.com",
-      "public": true,
-      "order": 310
+      "order": 310,
+      "visibility": "public"
     }
   },
   {
@@ -2008,8 +2008,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.lebureauducreateur.fr/?ref=blog.lesgrandsvoisins.com",
-      "public": true,
-      "order": 320
+      "order": 320,
+      "visibility": "public"
     }
   },
   {
@@ -2069,8 +2069,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.lechiffon.fr",
-      "public": true,
-      "order": 330
+      "order": 330,
+      "visibility": "public"
     }
   },
   {
@@ -2130,8 +2130,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.guidedujeuvideo.com",
-      "public": true,
-      "order": 340
+      "order": 340,
+      "visibility": "public"
     }
   },
   {
@@ -2191,8 +2191,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "",
-      "public": true,
-      "order": 350
+      "order": 350,
+      "visibility": "public"
     }
   },
   {
@@ -2252,8 +2252,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.linkedin.com/pulse/la-kle-une-nouvelle-%25C3%25A9cologie-humaine-et-engag%25C3%25A9e-lucas-benavenuto-3hmbe/",
-      "public": true,
-      "order": 360
+      "order": 360,
+      "visibility": "public"
     }
   },
   {
@@ -2313,8 +2313,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "",
-      "public": true,
-      "order": 370
+      "order": 370,
+      "visibility": "public"
     }
   },
   {
@@ -2374,8 +2374,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.maelanc.com",
-      "public": true,
-      "order": 380
+      "order": 380,
+      "visibility": "public"
     }
   },
   {
@@ -2435,8 +2435,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "",
-      "public": true,
-      "order": 390
+      "order": 390,
+      "visibility": "public"
     }
   },
   {
@@ -2496,8 +2496,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.instagram.com/janjic.podcast/",
-      "public": true,
-      "order": 400
+      "order": 400,
+      "visibility": "public"
     }
   },
   {
@@ -2557,8 +2557,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.linkedin.com/in/morad-elhamdouni/?ref=blog.lesgrandsvoisins.com",
-      "public": true,
-      "order": 410
+      "order": 410,
+      "visibility": "public"
     }
   },
   {
@@ -2618,8 +2618,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.duhec.art",
-      "public": true,
-      "order": 420
+      "order": 420,
+      "visibility": "public"
     }
   },
   {
@@ -2679,8 +2679,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.p-um.net/fr/home",
-      "public": true,
-      "order": 430
+      "order": 430,
+      "visibility": "public"
     }
   },
   {
@@ -2740,8 +2740,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.lensculture.com/robert-baldridge?ref=blog.lesgrandsvoisins.com",
-      "public": true,
-      "order": 440
+      "order": 440,
+      "visibility": "public"
     }
   },
   {
@@ -2801,8 +2801,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "",
-      "public": true,
-      "order": 450
+      "order": 450,
+      "visibility": "public"
     }
   },
   {
@@ -2862,8 +2862,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "",
-      "public": true,
-      "order": 460
+      "order": 460,
+      "visibility": "public"
     }
   },
   {
@@ -2923,8 +2923,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.cotizup.com/@akrab-salama-paris/pour-akrab-26ans",
-      "public": true,
-      "order": 470
+      "order": 470,
+      "visibility": "public"
     }
   },
   {
@@ -2984,8 +2984,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://sceaux-lagazette.fr/",
-      "public": true,
-      "order": 480
+      "order": 480,
+      "visibility": "public"
     }
   },
   {
@@ -3045,8 +3045,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "",
-      "public": true,
-      "order": 490
+      "order": 490,
+      "visibility": "public"
     }
   },
   {
@@ -3106,8 +3106,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.lesgrandsvoisins.com/fr/annuaire/mamansob-culture-arts-et-culture-au-tchad/",
-      "public": true,
-      "order": 500
+      "order": 500,
+      "visibility": "public"
     }
   },
   {
@@ -3167,8 +3167,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://wakaconseil.com",
-      "public": true,
-      "order": 510
+      "order": 510,
+      "visibility": "public"
     }
   },
   {
@@ -3228,8 +3228,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.weezem.com",
-      "public": true,
-      "order": 520
+      "order": 520,
+      "visibility": "public"
     }
   },
   {
@@ -3289,8 +3289,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "",
-      "public": true,
-      "order": 530
+      "order": 530,
+      "visibility": "public"
     }
   },
   {
@@ -3350,8 +3350,8 @@
       "cta_label_ar": null,
       "cta_label_ko": null,
       "cta_link": "https://www.youtube.com/@youssoufbass2046",
-      "public": true,
-      "order": 540
+      "order": 540,
+      "visibility": "public"
     }
   }
 ]

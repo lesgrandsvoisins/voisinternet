@@ -199,7 +199,7 @@ class DirectoryEntry(models.Model):
     """
     Une page de l'annuaire (« vous Voyez ») : une personne ou une structure de la communauté.
     Comme pour les donateurs, la page n'apparaît publiquement qu'avec le consentement explicite
-    de la personne ou de la structure concernée.
+    de la personne ou de la structure concernée (voir `visibility`).
     """
     KINDS = [
         ("individuel", _("Individuel")),
@@ -236,9 +236,32 @@ class DirectoryEntry(models.Model):
     phone = models.CharField(_("téléphone"), max_length=30, blank=True, default="")
     website = models.URLField(_("site ou lien"), blank=True, default="")
 
-    address = models.CharField(_("adresse"), max_length=200, blank=True, default="")
+    COUNTRIES = [
+        ("France", _("France")),
+        ("Belgique", _("Belgique")),
+        ("Suisse", _("Suisse")),
+        ("Luxembourg", _("Luxembourg")),
+        ("Allemagne", _("Allemagne")),
+        ("Espagne", _("Espagne")),
+        ("Italie", _("Italie")),
+        ("Portugal", _("Portugal")),
+        ("Royaume-Uni", _("Royaume-Uni")),
+        ("Maroc", _("Maroc")),
+        ("Algérie", _("Algérie")),
+        ("Tunisie", _("Tunisie")),
+        ("Sénégal", _("Sénégal")),
+        ("Côte d'Ivoire", _("Côte d'Ivoire")),
+        ("Canada", _("Canada")),
+        ("Autre", _("Autre")),
+    ]
+    country = models.CharField(_("pays"), max_length=100, choices=COUNTRIES, blank=True, default="France")
+    region = models.CharField(_("région"), max_length=100, blank=True, default="")
     city = models.CharField(_("ville"), max_length=100, blank=True, default="")
-    country = models.CharField(_("pays"), max_length=100, blank=True, default="")
+    postal_code = models.CharField(_("code postal"), max_length=20, blank=True, default="")
+    address = models.CharField(
+        _("adresse"), max_length=200, blank=True, default="",
+        help_text=_("Numéro, type et nom de voie : « 12, rue de la Paix »."),
+    )
     latitude = models.DecimalField(_("latitude"), max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(_("longitude"), max_digits=9, decimal_places=6, null=True, blank=True)
 
@@ -246,9 +269,21 @@ class DirectoryEntry(models.Model):
     cta_label = models.CharField(_("texte du bouton d'appel à l'action"), max_length=60, blank=True, default="")
     cta_link = models.URLField(_("lien de l'appel à l'action"), blank=True, default="")
 
-    public = models.BooleanField(
-        _("apparaît publiquement"), default=False,
-        help_text=_("Uniquement avec le consentement explicite de la personne ou de la structure (RGPD)."),
+    VISIBILITY_PUBLIC = "public"
+    VISIBILITY_PROTECTED = "protected"
+    VISIBILITY_DRAFT = "draft"
+    VISIBILITY_CHOICES = [
+        (VISIBILITY_PUBLIC, _("Publié")),
+        (VISIBILITY_PROTECTED, _("Brouillon protégé")),
+        (VISIBILITY_DRAFT, _("Non publié")),
+    ]
+    visibility = models.CharField(
+        _("visibilité"), max_length=20, choices=VISIBILITY_CHOICES, default=VISIBILITY_DRAFT,
+        help_text=_(
+            "Publié : visible de tout le monde et référencé dans l'annuaire. Brouillon protégé : "
+            "absent de l'annuaire, visible uniquement par les personnes ayant un compte sur le site. "
+            "Non publié : visible uniquement par vous."
+        ),
     )
     order = models.PositiveSmallIntegerField(_("ordre"), default=0)
 

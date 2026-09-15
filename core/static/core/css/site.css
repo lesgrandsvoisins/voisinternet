@@ -207,6 +207,7 @@ a {
   min-height: 4.25rem;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .mega>.wrap {

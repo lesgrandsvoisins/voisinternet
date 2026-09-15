@@ -11,7 +11,7 @@ LOADENV = export $$(grep -v '^\#' .env 2>/dev/null | xargs -d '\n');
 
 .PHONY: help venv install setup migrate makemigrations fixtures superuser \
         run test shell messages compilemessages collectstatic clean \
-        fixtures-load fixtures-dump cms-load cms-dump
+        fixtures-load fixtures-dump cms-load cms-dump blog-import
 
 help: ## Affiche cette aide
 	@grep -E '^[a-zA-Z_-]+:.*## ' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'
@@ -73,6 +73,9 @@ cms-load: ## Charge l'arbre de pages Wagtail (cms/fixtures/cms.json) ; les fichi
 
 cms-dump: ## Sauvegarde l'arbre de pages Wagtail (cms/fixtures/cms.json) ; pensez à sauvegarder var/media à part
 	$(LOADENV) $(PYTHON) manage.py dumpdata $(CMS_FIXTURES) --indent 2 >cms/fixtures/cms.json
+
+blog-import: ## Importe les articles de deploy/ghost-export dans le blog (idempotent)
+	$(LOADENV) $(PYTHON) manage.py import_ghost_posts
 
 superuser: ## Crée un compte administrateur
 	$(LOADENV) $(PYTHON) manage.py createsuperuser

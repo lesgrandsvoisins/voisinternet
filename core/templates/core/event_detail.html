@@ -1,0 +1,37 @@
+{% extends "core/base.html" %}
+{% load i18n markdown_filters %}
+{% block title %}{{ event.title }} — {% trans "Agenda" %} — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+      <ol>
+        <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+        <li><a href="{% url 'core:agenda' %}">{% trans "Agenda" %}</a></li>
+        <li aria-current="page">{{ event.title }}</li>
+      </ol>
+    </nav>
+    <h1>{{ event.title }}</h1>
+    <p class="lead">
+      <time datetime="{{ event.start|date:'c' }}">{{ event.start|date:"l j F Y, H:i" }}</time>{% if event.end %} – {{ event.end|date:"H:i" }}{% endif %}
+    </p>
+  </div>
+</div>
+<div class="wrap page">
+  <article class="blog-post">
+    {% if event.photo %}<img class="hero" src="{{ event.photo.url }}" alt="">{% endif %}
+    {% if event.location or event.online_url %}
+    <p class="pair">
+      {% if event.location %}<span>{{ event.location }}</span>{% endif %}
+      {% if event.online_url %}<a href="{{ event.online_url }}" target="_new">{% trans "Participer en ligne" %}</a>{% endif %}
+      {% if event.source_url %}<a href="{{ event.source_url }}" target="_new">{% trans "Page source" %}</a>{% endif %}
+    </p>
+    {% endif %}
+    {% if event.description %}<div class="markdown">{{ event.description|markdown }}</div>{% endif %}
+    <div class="actions">
+      <a class="btn btn-sun" href="{% url 'core:event_ics' event.pk %}">{% trans "Ajouter à mon calendrier" %}</a>
+    </div>
+  </article>
+  <p class="muted"><a href="{% url 'core:agenda' %}">{% trans "← Retour à l’agenda" %}</a></p>
+</div>
+{% endblock %}

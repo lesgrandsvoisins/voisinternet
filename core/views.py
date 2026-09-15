@@ -103,7 +103,9 @@ def raccourcis(request):
         return redirect("core:account")
     shortcuts = acc.shortcut_set.select_related("service").order_by("position", "service__order", "service__name")
     shortcut_ids = set(shortcuts.values_list("service_id", flat=True))
-    available_services = Service.objects.filter(active=True).exclude(pk__in=shortcut_ids).order_by("order", "name")
+    # Reste dans la liste une fois ajouté (bouton « Ajouté », qui permet de le retirer) :
+    # la carte ne doit pas disparaître d'un coup sous le pointeur au moment du clic.
+    available_services = Service.objects.filter(active=True).order_by("order", "name")
     return render(request, "core/raccourcis.html", {
         "account": acc,
         "shortcuts": shortcuts,
@@ -271,6 +273,20 @@ def agenda(request):
     })
 
 
+def event_detail(request, pk):
+    event = get_object_or_404(Event, pk=pk, public=True)
+    return render(request, "core/event_detail.html", {"event": event})
+
+
+def event_ics(request, pk):
+    from .ics import event_to_ics
+
+    event = get_object_or_404(Event, pk=pk, public=True)
+    response = HttpResponse(event_to_ics(event, request), content_type="text/calendar; charset=utf-8")
+    response["Content-Disposition"] = f'attachment; filename="{event.slug or "evenement"}.ics"'
+    return response
+
+
 def group_page(request, key):
     caption = dict(GROUPS).get(key)
     if caption is None:
@@ -357,7 +373,7 @@ def toggle_shortcut(request, slug):
         account = current_account(request)
         shortcut_ids = set(account.shortcut_set.values_list("service_id", flat=True)) if account else set()
         shortcuts = account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name") if account else []
-        available_services = Service.objects.filter(active=True).exclude(pk__in=shortcut_ids).order_by("order", "name")
+        available_services = Service.objects.filter(active=True).order_by("order", "name")
         return render(request, "core/partials/shortcut_response.html", {
             "service": service,
             "added": added,

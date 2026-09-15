@@ -1676,75 +1676,61 @@ blockquote p {
   color: var(--ink-soft)
 }
 
-.event-media {
-  display: flex;
-  gap: .75rem;
-  /* align-items: flex-start; */
-  min-width: 0;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.event-thumb {
-  width: 5rem;
-  height: 5rem;
-  border-radius: 10px;
-  object-fit: cover;
-  flex: none;
-  margin: 0.5rem;
-  float: right;
-}
-
-.event-date-time-title {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: flex-start;
-  justify-content: space-between;
-  width: 100%;
-}
-
-/* Prochains évènements : une carte façon éphéméride, à déchirer, pour le rendez-vous d'un coup d'œil. */
-.event-list {
+/* Prochains évènements : une carte par évènement, avec une éphéméride à déchirer pour
+   repérer la date d'un coup d'œil — mise en page identique, qu'il y ait une photo,
+   une description, les deux ou ni l'une ni l'autre. */
+.agenda-list {
   list-style: none;
   margin: 1.5rem 0 0;
-  padding: 0
+  padding: 0;
+  display: grid;
+  gap: 1rem
 }
 
-.event-row {
+.agenda-card {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.1rem 0;
-  border-bottom: 1px solid var(--line);
-  width: 100%;
-
+  gap: 1.1rem;
+  align-items: flex-start;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.1rem 1.3rem
 }
 
-.event-row:first-child {
-  padding-top: 0
+.agenda-body {
+  flex: 1;
+  min-width: 0
 }
 
-.event-media {
-  flex: 1 1 260px;
+.agenda-body h3 {
+  margin: 0 0 .3rem;
+  font-size: 1.15rem
 }
 
-.event-where {
-  margin: .35rem 0 0;
+.agenda-where {
+  margin: 0 0 .5rem;
   color: var(--ink-soft);
-  font-size: .92rem;
-  width: 100%;
+  font-size: .92rem
 }
 
-.event-title {
-  font-weight: bold;
-  font-size: larger;
+.agenda-excerpt {
+  margin: 0 0 .6rem
 }
 
-.event-date {
+.agenda-actions {
+  margin: 0;
+  font-size: .9rem
+}
+
+.agenda-thumb {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 10px;
+  object-fit: cover;
+  flex: none
+}
+
+.agenda-date {
   flex: none;
   width: 4.75rem;
   border-radius: 10px;
@@ -1752,11 +1738,15 @@ blockquote p {
   background: var(--paper);
   border: 1px solid var(--line);
   box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
-  text-align: center
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  display: block
 }
 
-.event-date-month {
+.agenda-date-month {
   position: relative;
+  display: block;
   background: var(--sun);
   color: #1C2A35;
   font-size: .68rem;
@@ -1767,8 +1757,8 @@ blockquote p {
 }
 
 /* Les encoches « perforées » reprennent le fond de la page pour l'effet déchiré. */
-.event-date-month::before,
-.event-date-month::after {
+.agenda-date-month::before,
+.agenda-date-month::after {
   content: "";
   position: absolute;
   bottom: -5px;
@@ -1778,15 +1768,16 @@ blockquote p {
   background: var(--sky)
 }
 
-.event-date-month::before {
+.agenda-date-month::before {
   left: -5px
 }
 
-.event-date-month::after {
+.agenda-date-month::after {
   right: -5px
 }
 
-.event-date-day {
+.agenda-date-day {
+  display: block;
   font-family: var(--serif);
   font-weight: 700;
   font-size: 1.9rem;
@@ -1795,7 +1786,8 @@ blockquote p {
   color: var(--ink)
 }
 
-.event-date-weekday {
+.agenda-date-weekday {
+  display: block;
   font-size: .68rem;
   text-transform: uppercase;
   letter-spacing: .03em;
@@ -1803,11 +1795,24 @@ blockquote p {
   padding-bottom: .4rem
 }
 
-.event-date-time {
+.agenda-date-hours {
+  display: block;
   border-top: 1px dashed var(--line);
   font-size: .7rem;
   color: var(--ink-soft);
   padding: .3rem 0
+}
+
+@media (max-width: 34rem) {
+  .agenda-card {
+    flex-wrap: wrap
+  }
+
+  .agenda-thumb {
+    order: 3;
+    width: 100%;
+    height: 10rem
+  }
 }
 
 .docs form {

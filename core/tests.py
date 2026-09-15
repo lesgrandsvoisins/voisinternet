@@ -2,9 +2,12 @@ from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.test import TestCase, override_settings
 from django.urls import reverse
+from django.utils import timezone
 
 from .accounts import SESSION_KEY
-from .models import Account, Audience, DirectoryEntry, DirectorySector, Donor, Membership, Service, Shortcut, format_number
+from .models import (
+    Account, Audience, DirectoryEntry, DirectorySector, Donor, Event, Membership, Service, Shortcut, format_number,
+)
 
 
 @override_settings(CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}})
@@ -218,6 +221,37 @@ class DonorPrivacyTests(TestCase):
         response = self.client.get("/fr/contributions/")
         self.assertContains(response, "Voisine généreuse")
         self.assertNotContains(response, "Donateur discret")
+
+
+class AgendaTests(Base):
+    def test_event_detail_page(self):
+        event = Event.objects.create(
+            title="Atelier vélo", slug="atelier-velo",
+            start=timezone.now(), location="Ressourcerie créative",
+            description="Réparons nos vélos ensemble.",
+        )
+        response = self.client.get(reverse("core:event_detail", args=[event.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Atelier vélo")
+        self.assertContains(response, reverse("core:event_ics", args=[event.pk]))
+
+    def test_non_public_event_detail_is_404(self):
+        event = Event.objects.create(title="Réunion privée", slug="reunion-privee", start=timezone.now(), public=False)
+        response = self.client.get(reverse("core:event_detail", args=[event.pk]))
+        self.assertEqual(response.status_code, 404)
+
+    def test_event_ics_download(self):
+        event = Event.objects.create(
+            title="Atelier vélo", slug="atelier-velo",
+            start=timezone.now(), end=timezone.now(), location="Ressourcerie créative",
+        )
+        response = self.client.get(reverse("core:event_ics", args=[event.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], "text/calendar; charset=utf-8")
+        content = response.content.decode()
+        self.assertIn("BEGIN:VEVENT", content)
+        self.assertIn("SUMMARY:Atelier vélo", content)
+        self.assertIn("LOCATION:Ressourcerie créative", content)
 
 
 class AudienceTests(Base):

@@ -88,6 +88,14 @@ class Service(models.Model):
     )
     featured = models.BooleanField(_("mis en avant"), default=False)
     active = models.BooleanField(_("proposé"), default=True)
+    requires_approval = models.BooleanField(
+        _("nécessite une validation"), default=False,
+        help_text=_(
+            "Une intervention d'un administrateur est nécessaire avant que le service ne soit actif pour la "
+            "personne (ex. création manuelle d'une boîte courriel) : le raccourci reste « en attente » jusqu'à "
+            "validation (groupe « Administration »)."
+        ),
+    )
     order = models.PositiveSmallIntegerField(_("ordre"), default=0)
 
     class Meta:
@@ -154,7 +162,16 @@ class Shortcut(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     position = models.PositiveIntegerField(_("ordre personnel"), default=0)
+    # Faux tant qu'un administrateur (groupe « Administration ») n'a pas validé
+    # l'activation, uniquement pour les services qui le demandent (Service.requires_approval) ;
+    # vrai d'emblée pour tous les autres — voir Shortcut.save().
+    approved = models.BooleanField(_("validé"), default=True)
     created = models.DateTimeField(default=timezone.now, editable=False)
+
+    def save(self, *args, **kwargs):
+        if self._state.adding and self.service.requires_approval:
+            self.approved = False
+        super().save(*args, **kwargs)
 
     class Meta:
         constraints = [models.UniqueConstraint(fields=["account", "service"], name="unique_shortcut")]
@@ -285,6 +302,10 @@ class DirectoryEntry(models.Model):
             "Non publié : visible uniquement par vous."
         ),
     )
+    # Demander « Publié » ne suffit pas à rendre la fiche publique : il faut aussi
+    # qu'un administrateur (groupe « Administration ») l'ait validée — voir
+    # core.views.toggle_publication et _check_entry_visible.
+    approved = models.BooleanField(_("validée par l'administration"), default=False)
     order = models.PositiveSmallIntegerField(_("ordre"), default=0)
 
     class Meta:

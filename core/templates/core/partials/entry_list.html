@@ -5,7 +5,7 @@
     <details class="entry-menu" name="entry-menu">
       <summary class="entry-menu-btn">{{ entry.name }}</summary>
       <div class="entry-menu-panel">
-        <a href="{% url 'core:entry_detail' entry.slug %}">{{ entry.get_visibility_display }}</a>
+        <a href="{% url 'core:entry_detail' entry.slug %}">{% if entry.visibility == "public" and not entry.approved %}{% trans "En attente de validation" %}{% else %}{{ entry.get_visibility_display }}{% endif %}</a>
         <a href="{% url 'core:fiche_modifier' entry.slug %}">{% trans "Modifier" %}</a>
         <form method="post" action="{% url 'core:fiche_supprimer' entry.slug %}" onsubmit="return confirm('{% trans "Supprimer cette fiche ?" %}');">{% csrf_token %}<button class="link-btn" type="submit">{% trans "Supprimer" %}</button></form>
       </div>

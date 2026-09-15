@@ -16,6 +16,7 @@
               {% else %}
                 {{ service.name }}
               {% endif %}
+              {% if not shortcut.approved %}<span class="chip">{% trans "En attente de validation" %}</span>{% endif %}
             </h3>
             <p>{{ service.summary }}</p>
           </div>

@@ -29,7 +29,9 @@ _FIELD_GROUPS = [
 class DirectoryEntryForm(forms.ModelForm):
     class Meta:
         model = DirectoryEntry
-        exclude = ["owner", "slug", "order"] + _TRANSLATED_FIELDS + [
+        # "approved" (validation du groupe « Administration ») n'est jamais éditable ici :
+        # sinon la personne pourrait se publier elle-même sans validation.
+        exclude = ["owner", "slug", "order", "approved"] + _TRANSLATED_FIELDS + [
             f"{field}_{lang}" for field in _TRANSLATED_FIELDS for lang in _OTHER_LANGUAGES
         ]
 

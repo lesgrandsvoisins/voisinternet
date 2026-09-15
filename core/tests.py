@@ -213,6 +213,33 @@ class LinkingTests(Base):
         self.assertFalse(Account.objects.filter(user__isnull=True).exists())
 
 
+class ServiceApprovalTests(Base):
+    def test_shortcut_for_approval_required_service_starts_unapproved(self):
+        # roundcube-webmail (fixture) demande une validation : création manuelle d'une
+        # boîte courriel par un administrateur avant que le service ne soit actif.
+        self.assertTrue(self.service.requires_approval)
+        self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]))
+        shortcut = Shortcut.objects.get(service=self.service)
+        self.assertFalse(shortcut.approved)
+
+    def test_shortcut_for_ordinary_service_is_approved_immediately(self):
+        ordinary = Service.objects.get(slug="gv-je")
+        self.assertFalse(ordinary.requires_approval)
+        self.client.post(reverse("core:toggle_shortcut", args=[ordinary.slug]))
+        shortcut = Shortcut.objects.get(service=ordinary)
+        self.assertTrue(shortcut.approved)
+
+    def test_administration_group_can_change_shortcut_and_directoryentry(self):
+        from django.contrib.auth.models import Group
+
+        group = Group.objects.get(name="Administration")
+        codenames = set(group.permissions.values_list("codename", flat=True))
+        self.assertEqual(
+            codenames,
+            {"view_shortcut", "change_shortcut", "view_directoryentry", "change_directoryentry"},
+        )
+
+
 class DonorPrivacyTests(TestCase):
     def test_only_consenting_donors_are_listed(self):
         Donor.objects.create(name="Voisine généreuse", public=True)
@@ -298,7 +325,7 @@ class AudienceTests(Base):
         entry = DirectoryEntry.objects.create(
             name="Ada Matus", slug="ada-matus", sector=sector,
             tagline="Autrice Compositrice", description="Un groupe de soutien culturel.",
-            visibility=DirectoryEntry.VISIBILITY_PUBLIC,
+            visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
         )
         response = self.client.get(reverse("core:entry_detail", args=[entry.slug]))
         self.assertEqual(response.status_code, 200)
@@ -352,6 +379,8 @@ class AudienceTests(Base):
         self.client.post(reverse("core:toggle_publication", args=[entry.slug]))
         entry.refresh_from_db()
         self.assertEqual(entry.visibility, DirectoryEntry.VISIBILITY_PUBLIC)
+        # En attente de validation par le groupe « Administration » : pas encore publique.
+        self.assertFalse(entry.approved)
         self.client.post(reverse("core:toggle_publication", args=[entry.slug]))
         entry.refresh_from_db()
         self.assertEqual(entry.visibility, DirectoryEntry.VISIBILITY_DRAFT)
@@ -367,7 +396,24 @@ class AudienceTests(Base):
 
     def test_directory_list_links_to_entry_detail(self):
         entry = DirectoryEntry.objects.create(
-            name="Ada Matus", slug="ada-matus", visibility=DirectoryEntry.VISIBILITY_PUBLIC,
+            name="Ada Matus", slug="ada-matus", visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
         )
         response = self.client.get(reverse("core:annuaire"))
         self.assertContains(response, reverse("core:entry_detail", args=[entry.slug]))
+
+    def test_pending_public_directory_entry_is_hidden_until_approved(self):
+        acc = Account.objects.create()
+        entry = DirectoryEntry.objects.create(
+            name="Fiche en attente", slug="fiche-en-attente", owner=acc,
+            visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=False,
+        )
+        response = self.client.get(reverse("core:entry_detail", args=[entry.slug]))
+        self.assertEqual(response.status_code, 404)
+        listing = self.client.get(reverse("core:annuaire"))
+        self.assertNotContains(listing, reverse("core:entry_detail", args=[entry.slug]))
+        # Le propriétaire, lui, peut toujours prévisualiser sa fiche en attente.
+        session = self.client.session
+        session[SESSION_KEY] = acc.pk
+        session.save()
+        owner_response = self.client.get(reverse("core:entry_detail", args=[entry.slug]))
+        self.assertEqual(owner_response.status_code, 200)

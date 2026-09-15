@@ -87,7 +87,7 @@ def search(request):
         pages = list(Page.objects.live().search(query)[:20])
         entries = list(DirectoryEntry.objects.filter(
             Q(name__icontains=query) | Q(tagline__icontains=query) | Q(description__icontains=query),
-            visibility=DirectoryEntry.VISIBILITY_PUBLIC,
+            visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
         )[:20])
         events = list(Event.objects.filter(
             Q(title__icontains=query) | Q(description__icontains=query) | Q(location__icontains=query),
@@ -171,7 +171,7 @@ def annuaire(request, secteur=None):
     entries = cache.get(cache_key)
     if entries is None:
         qs = DirectoryEntry.objects.filter(
-            visibility=DirectoryEntry.VISIBILITY_PUBLIC,
+            visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
         ).select_related("sector").prefetch_related("audiences", "gallery_photos").order_by("name")
         if current:
             qs = qs.filter(sector=current)
@@ -191,7 +191,9 @@ def annuaire(request, secteur=None):
 def _check_entry_visible(entry, acc):
     """
     Non publié : réservé au propriétaire. Brouillon protégé : réservé aux comptes
-    (nommés ou anonymes), absent de l'annuaire. Publié : ouvert à tout le monde.
+    (nommés ou anonymes), absent de l'annuaire. Publié : ouvert à tout le monde, mais
+    seulement une fois validé par le groupe « Administration » (sinon réservé au
+    propriétaire, comme si la fiche était encore non publiée).
     """
     is_owner = acc is not None and entry.owner_id == acc.id
     if is_owner:
@@ -199,6 +201,8 @@ def _check_entry_visible(entry, acc):
     if entry.visibility == DirectoryEntry.VISIBILITY_DRAFT:
         raise Http404
     if entry.visibility == DirectoryEntry.VISIBILITY_PROTECTED and acc is None:
+        raise Http404
+    if entry.visibility == DirectoryEntry.VISIBILITY_PUBLIC and not entry.approved:
         raise Http404
 
 
@@ -295,12 +299,18 @@ def toggle_publication(request, slug):
     if entry is None:
         raise Http404
     if entry.visibility == DirectoryEntry.VISIBILITY_PUBLIC:
+        was_approved = entry.approved
         entry.visibility = DirectoryEntry.VISIBILITY_DRAFT
-        messages.success(request, _("Fiche dépubliée."))
+        entry.approved = False
+        messages.success(request, _("Fiche dépubliée.") if was_approved else _("Demande de publication annulée."))
     else:
         entry.visibility = DirectoryEntry.VISIBILITY_PUBLIC
-        messages.success(request, _("Fiche publiée."))
-    entry.save(update_fields=["visibility"])
+        entry.approved = False
+        messages.success(
+            request,
+            _("Fiche envoyée pour validation : elle sera publique une fois validée par un administrateur."),
+        )
+    entry.save(update_fields=["visibility", "approved"])
     return redirect(_safe_next(request, reverse("core:entry_detail", args=[entry.slug])))
 
 
@@ -400,9 +410,16 @@ def toggle_shortcut(request, slug):
         added = False
         text = _("« %(name)s » retiré de vos raccourcis.") % {"name": service.name}
     else:
-        Shortcut.objects.create(account=account, service=service, position=account.shortcut_set.count())
+        new_shortcut = Shortcut.objects.create(
+            account=account, service=service, position=account.shortcut_set.count(),
+        )
         added = True
-        text = _("« %(name)s » ajouté à vos raccourcis.") % {"name": service.name}
+        if new_shortcut.approved:
+            text = _("« %(name)s » ajouté à vos raccourcis.") % {"name": service.name}
+        else:
+            text = _(
+                "« %(name)s » ajouté à vos raccourcis, en attente de validation par un administrateur."
+            ) % {"name": service.name}
 
     new_number = None
     if not had_account and account.is_anonymous_only:

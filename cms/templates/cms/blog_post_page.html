@@ -44,6 +44,32 @@
         </nav>
       {% endif %}
     </article>
+
+    {% if related_posts %}
+      <section class="related-posts no-print" aria-labelledby="related-posts-title">
+        <h2 id="related-posts-title">{% trans "À lire aussi" %}</h2>
+        <ul class="blog-list">
+          {% for post in related_posts %}
+            <li class="blog-list-item">
+              <a href="{{ post.url }}">
+                {% if post.featured_image %}
+                  {% image post.featured_image fill-320x240 as thumb %}
+                  <img class="blog-list-thumb" src="{{ thumb.url }}" alt="">
+                {% endif %}
+                <div class="blog-list-body">
+                  <h3>{{ post.title }}</h3>
+                  {% if post.excerpt %}<p class="blog-list-excerpt">{{ post.excerpt }}</p>{% endif %}
+                  <p class="blog-list-meta">
+                    <time datetime="{{ post.date|date:'c' }}">{{ post.date|date:"j F Y" }}</time>
+                  </p>
+                </div>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
     <p class="muted"><a href="{{ page.get_parent.url }}">{% trans "← Retour au blog" %}</a></p>
   </div>
 {% endblock %}

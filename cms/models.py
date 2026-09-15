@@ -285,4 +285,10 @@ class BlogPostPage(Page):
         context["body_page"] = pages[page_number - 1]
         context["page_number"] = page_number
         context["total_pages"] = len(pages)
+        # « À lire aussi » : les articles n'ayant pas d'étiquette (contrairement aux
+        # billets Ghost importés), on propose simplement les plus récents autres
+        # articles plutôt qu'une vraie parenté par sujet.
+        context["related_posts"] = (
+            BlogPostPage.objects.live().exclude(pk=self.pk).order_by("-date")[:3]
+        )
         return context

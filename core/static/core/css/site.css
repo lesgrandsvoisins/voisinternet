@@ -1332,6 +1332,14 @@ blockquote p {
   gap: 1.1rem
 }
 
+.related-posts {
+  margin: 2.5rem 0
+}
+
+.related-posts .blog-list {
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr))
+}
+
 .blog-list-item {
   background: var(--paper);
   border: 1px solid var(--line);

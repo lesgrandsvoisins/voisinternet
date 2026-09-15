@@ -62,6 +62,7 @@
                     <li>
                       <a href="{{ item.href }}"
                          aria-label="{{ item.entry.aria }}"
+                         target="{{ item.entry.htmltarget }}"
                          {% if item.current %}aria-current="page"{% endif %}>{{ item.entry.title }}</a>
                     </li>
                   {% endfor %}

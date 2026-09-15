@@ -17,6 +17,7 @@ class Entry:
     detail: str
     target: str  # nom d'URL Django, « setting:NOM » ou « path:/chemin/ » (page Wagtail à URL fixe)
     group: str
+    htmltarget: str
 
     @property
     def aria(self):
@@ -56,6 +57,7 @@ ENTRIES = [
         _("se connecter, créer un compte, retrouver mes raccourcis"),
         "core:raccourcis",
         "compte",
+        "_self",
     ),
     Entry(
         "groupes",
@@ -64,6 +66,7 @@ ENTRIES = [
         _("un particulier, une association, une entreprise…"),
         "core:groupes",
         "compte",
+        "_self",
     ),
     Entry(
         "grandsvoisins",
@@ -72,6 +75,7 @@ ENTRIES = [
         _("statuts, gouvernance, comptes : tout est public"),
         "path:/grandsvoisins/",
         "association",
+        "_self",
     ),
     Entry(
         "grandzine",
@@ -80,6 +84,7 @@ ENTRIES = [
         _("les nouvelles et les tribunes des adhérents"),
         "setting:BLOG_URL",
         "association",
+        "_new",
     ),
     Entry(
         "contact",
@@ -88,6 +93,7 @@ ENTRIES = [
         _("un voisin vous répond, pas un robot"),
         "path:/contact/",
         "association",
+        "_self",
     ),
     Entry(
         "contributions",
@@ -96,6 +102,7 @@ ENTRIES = [
         _("donner du temps, faire un don — à titre personnel ou associatif — ou donner du matériel"),
         "path:/contributions/",
         "association",
+        "_self",
     ),
     Entry(
         "agenda",
@@ -104,6 +111,7 @@ ENTRIES = [
         _("les conseils des voisins, deux séances pour un même ordre du jour"),
         "core:agenda",
         "reperes",
+        "_self",
     ),
     Entry(
         "annuaire",
@@ -112,6 +120,7 @@ ENTRIES = [
         _("un particulier, une association, une entreprise…"),
         "core:annuaire",
         "reperes",
+        "_self",
     ),
     Entry(
         "wiki",
@@ -120,6 +129,7 @@ ENTRIES = [
         _("pas à pas, du premier serveur aux sauvegardes"),
         "setting:GUIDE_URL",
         "reperes",
+        "_new",
     ),
     Entry(
         "civisme",
@@ -128,6 +138,7 @@ ENTRIES = [
         _("s'engager pour l'intérêt général, entre voisins et associations"),
         "path:/civisme/",
         "poles",
+        "_self",
     ),
     Entry(
         "arts_plastiques",
@@ -136,6 +147,7 @@ ENTRIES = [
         _("transformer tout lieu en galerie d'art hybride"),
         "path:/arts-plastiques/",
         "poles",
+        "_self",
     ),
     Entry(
         "numerique",
@@ -144,5 +156,6 @@ ENTRIES = [
         _("matériel reconditionné et compétences partagées, pour les particuliers comme pour les associations"),
         "path:/numerique/",
         "poles",
+        "_self",
     ),
 ]

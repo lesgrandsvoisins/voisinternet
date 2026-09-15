@@ -1,9 +1,10 @@
 {% extends "core/base.html" %}
-{% load i18n wagtailcore_tags %}
+{% load cache i18n wagtailcore_tags %}
 
 {% block title %}{{ page.title }} — {{ SITE_NAME }}{% endblock %}
 
 {% block content %}
+  {% cache 86400 cms_page_content page.pk page.last_published_at %}
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -26,4 +27,5 @@
       {% endfor %}
     </div>
   {% endif %}
+  {% endcache %}
 {% endblock %}

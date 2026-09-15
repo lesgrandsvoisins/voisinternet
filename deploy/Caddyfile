@@ -3,7 +3,9 @@ lesgrandsvoisins.com, www.lesgrandsvoisins.com {
 
 	handle_path /static/* {
 		root * /srv/voisinternet/staticfiles
-		header Cache-Control "public, max-age=604800"
+		# Noms de fichiers hachés (ManifestStaticFilesStorage) : le contenu change,
+		# le nom change avec, jamais de version périmée à craindre sur un an.
+		header Cache-Control "public, max-age=31536000, immutable"
 		file_server
 	}
 

@@ -127,11 +127,24 @@ def groupes(request):
 
 
 def annuaire(request, secteur=None):
-    entries = DirectoryEntry.objects.filter(visibility=DirectoryEntry.VISIBILITY_PUBLIC).order_by('name')
     current = None
     if secteur:
         current = get_object_or_404(DirectorySector, slug=secteur)
-        entries = entries.filter(sector=current)
+
+    # Liste publique, identique pour tout le monde (l'abonnement de la personne qui
+    # regarde est calculé à part, ci-dessous) : on la met en cache un moment plutôt que
+    # de la recalculer à chaque visite, comme pour les articles du blog (core/ghost.py).
+    cache_key = f"annuaire:entries:{secteur or 'all'}"
+    entries = cache.get(cache_key)
+    if entries is None:
+        qs = DirectoryEntry.objects.filter(
+            visibility=DirectoryEntry.VISIBILITY_PUBLIC,
+        ).select_related("sector").prefetch_related("audiences", "gallery_photos").order_by("name")
+        if current:
+            qs = qs.filter(sector=current)
+        entries = list(qs)
+        cache.set(cache_key, entries, 300)
+
     acc = current_account(request)
     subscribed_ids = set(acc.entrysubscription_set.values_list("entry_id", flat=True)) if acc else set()
     return render(request, "core/annuaire.html", {

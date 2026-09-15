@@ -1,0 +1,48 @@
+---
+title: Bios de notre équipe
+published_at: 2021-05-15T00:00:00.000+02:00
+reading_time: 1
+excerpt: Nous avions à écrire des résumés courts pour notre équipe.
+
+
+Chris le Perturbateur
+
+A la recherche d’innovation constante, à la satisfaction des objectifs philosophiques et idéalistiques, Chris emploie la technologie et l’inguinité pour l’amélioration du sort de tous.
+
+
+Kelsy la Cadre Sup’
+
+Avec sa clarté d’esprit et ce goût pour l’adminsitratif, , Kelsy maintien le sens d’organisation au sein de notre équipe.
+
+
+Chris the Disruptor
+
+Constantly innovating, fulfilling idealistic and philosophical 
+slug: bios-de-notre-equipe
+---
+
+Nous avions à écrire des résumés courts pour notre équipe.
+
+## Chris le Perturbateur
+
+![image](https://com.grandsvoisins.com/uploads/default/original/1X/dcd4bddf52fb113d6cb1c7e7817014ec75c5033d.png)
+
+A la recherche d’innovation constante, à la satisfaction des objectifs philosophiques et idéalistiques, Chris emploie la technologie et l’inguinité pour l’amélioration du sort de tous.
+
+## Kelsy la Cadre Sup’
+
+![image](https://com.grandsvoisins.com/uploads/default/original/1X/e635a22ef94ed1321b6bbbe17f89291c1d8ba731.png)
+
+Avec sa clarté d’esprit et ce goût pour l’adminsitratif, , Kelsy maintien le sens d’organisation au sein de notre équipe.
+
+## Chris the Disruptor
+
+![image](https://com.grandsvoisins.com/uploads/default/original/1X/dcd4bddf52fb113d6cb1c7e7817014ec75c5033d.png)
+
+Constantly innovating, fulfilling idealistic and philosophical goal uses technologie and ingenuity to make the work a better place, to make our neighborhood better.
+
+## Kelsy the Executive
+
+![image](https://com.grandsvoisins.com/uploads/default/original/1X/e635a22ef94ed1321b6bbbe17f89291c1d8ba731.png)
+
+With clarity of mind and a propensity to leave form unfulfilled, Kelsey maintains the organization of our team.

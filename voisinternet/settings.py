@@ -179,6 +179,22 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATIC_ROOT = env("DJANGO_STATIC_ROOT", str(BASE_DIR / "staticfiles"))
 
+# Nom de fichier haché (site.a1b2c3.css) : change à chaque contenu différent, donc Caddy
+# peut mettre le CSS/JS en cache très longtemps (voir deploy/Caddyfile) sans jamais servir
+# une version périmée après un déploiement. Seulement en production : le hachage exige
+# d'avoir lancé `collectstatic` au préalable, ce qu'on ne fait pas avant chaque test/dev.
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": (
+            "django.contrib.staticfiles.storage.ManifestStaticFilesStorage" if not DEBUG
+            else "django.contrib.staticfiles.storage.StaticFilesStorage"
+        ),
+    },
+}
+
 # --- Fichiers envoyés depuis l'administration (icônes de service).
 MEDIA_URL = "media/"
 MEDIA_ROOT = env("DJANGO_MEDIA_ROOT", str(BASE_DIR / "var" / "media"))

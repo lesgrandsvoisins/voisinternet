@@ -1,7 +1,9 @@
+from functools import lru_cache
 from urllib.parse import urlencode
 
 from django.conf import settings
 from django.urls import reverse
+from django.utils.translation import get_language
 
 from .accounts import account_label, current_account
 from .menu import ENTRIES, GROUP_PAGES, GROUPS, entry_href
@@ -9,9 +11,12 @@ from .menu import ENTRIES, GROUP_PAGES, GROUPS, entry_href
 from django.contrib.sites.shortcuts import get_current_site
 
 
-def site(request):
-    match = getattr(request, "resolver_match", None)
-    current = match.view_name if match else None
+@lru_cache(maxsize=256)
+def _menu_context(language_code, current):
+    # ENTRIES/GROUPS sont des données statiques (core/menu.py) : à langue et page active
+    # égales, ce calcul (reverse() compris) donne toujours le même résultat — inutile de
+    # le refaire à chaque requête. `language_code` n'est pas utilisé ici directement, mais
+    # fait partie de la clé du cache : entry_href()/reverse() dépendent de get_language().
     group_captions = dict(GROUPS)
     entries = [
         {"entry": e, "href": entry_href(e), "external": e.target.startswith("setting:"),
@@ -26,6 +31,13 @@ def site(request):
     # Le menu de l'en-tête n'affiche pas « mon compte » : ce groupe vit dans son propre
     # widget (haut à droite).
     header_groups = [g for g in groups if g["key"] != "compte"]
+    return entries, groups, header_groups
+
+
+def site(request):
+    match = getattr(request, "resolver_match", None)
+    current = match.view_name if match else None
+    entries, groups, header_groups = _menu_context(get_language(), current)
     account = current_account(request)
     account_shortcuts = []
     if account:

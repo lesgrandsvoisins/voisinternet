@@ -1,13 +1,15 @@
 {% extends "core/base.html" %}
-{% load wagtailcore_tags %}
+{% load cache wagtailcore_tags %}
 
 {% block title %}{{ page.title }}{% endblock %}
 
 {% block content %}
+  {% cache 86400 cms_page_content page.pk page.last_published_at %}
   <section class="block">
     <div class="wrap">
       <h1>{{ page.title }}</h1>
       {{ page.intro|richtext }}
     </div>
   </section>
+  {% endcache %}
 {% endblock %}

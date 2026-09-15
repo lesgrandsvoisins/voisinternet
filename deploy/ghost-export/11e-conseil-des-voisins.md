@@ -8,6 +8,7 @@ Lors du Conseil ven. 18 mars à 18h (2022) à la Ressourcerie créative (14e) et
 
 En attendant la Gazette #9, vous pouvez vous référer à la 
 slug: 11e-conseil-des-voisins
+featured_image: ./images/2023/04/atelier-ressourcerie_creative.original.jpg
 ---
 
 Paris. 18 mars 2022.

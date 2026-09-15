@@ -13,6 +13,7 @@ Les Grands Voisins est un concept sur quatre piliers:
 
 L’hôpital abandonné Saint Vincent de Paul a matérialisé ce lieu, dont les effets sont visibles sur lesgrandsvoisins.org (lesgrandsvoisins.org n’a pas d’affiliation avec lesgrandsvoisins.com 1). Lors de cette expérience, en tant que locataire des Grands Voisins, j’ai participé dans un atelier de production d’une manifeste des Gra
 slug: les-grands-voisins-sont-morts-vive-les-grands-voisins
+featured_image: ./images/2023/04/lesgrandsvoisins-sainvincentdepaul-line-IMG_20200904_203630.jpg
 ---
 
 Paris. 24 juillet 2021.

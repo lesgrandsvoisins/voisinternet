@@ -4,6 +4,7 @@ published_at: 2023-04-29T14:05:24.000+02:00
 reading_time: 3
 excerpt: Article en cours d'élaboration. Nous sommes un organisme d'intérêt général habilité à délivrer des reçus fiscaux aux donateurs individus (art. 200 CGI) et aux organisations (art. 238 bis) permettant des réductions d'impôt de 66% et 60% respectivement de vos dons.
 slug: notre-qualite-dinteret-general
+featured_image: ./images/2023/04/interetgendons.png
 ---
 
 Au sens de l'1.b, et accessoirement aussi de l'1.e et de l'1.f bis, de l'article 200 (dons des particuliers), et à l'1.a de l'article 238 bis (dons des entreprises) du code général des impôts, et selon la jurisprudence de la Cour de cassation du 9 février 2017 (2e chambre civile 16-12423 et 16-11483),  l'association coopérative Les Grands Voisins est un organisme d'intérêt général en capacité de délivrer des certificats Cerfa n. 11580\*03 qui permet aux individus de réduire leurs impôts de 66% du montant de leur don et aux entreprises de réduire de 60% de leur don. Notre qualification est établie par vote du 17e Conseil des voisins le 2 mai 2023 par la nature de nos activités et nos modes d'excercice ainsi justifiées ci-après.

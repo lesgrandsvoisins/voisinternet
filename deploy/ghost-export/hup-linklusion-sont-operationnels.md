@@ -12,6 +12,7 @@ La réunion du 10 août avec un référant ouvert sur trois pistes:
 
 Linklusion engage un programme « TIH-Booster » avec 
 slug: hup-linklusion-sont-operationnels
+featured_image: ./images/2023/04/sunrise-linklusion-IMG_20211202_165300.jpg
 ---
 
 Côté H’up, je bénéficie d’un programme Rebonds TIH en mentorat de crise avec un mentor pour préparer l’activité à venir avec divers moyens.

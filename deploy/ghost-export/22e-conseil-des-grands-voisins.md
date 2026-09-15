@@ -18,6 +18,7 @@ Ordre du jour :
 
 Nous avons le plaisir de vous inviter à participer au 22ème Conseil des Grands Voisins, une rencontre incontournable pour tous ceux qui souhaitent s'inve
 slug: 22e-conseil-des-grands-voisins
+featured_image: ./images/2024/06/flyer-20240530-22econseil-v7.inkscape.svg
 ---
 
 🌟 **Venez co-constuire un voisinage** 🌟

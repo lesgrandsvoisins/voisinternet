@@ -19,6 +19,7 @@ Ordre du jour :
 
 Nous parlerions des sujets précis en lien avec la mémoire de Valentin FRANCY, le numériq
 slug: 21e-conseil-des-grands-voisins
+featured_image: ./images/2024/04/invite-20240428-conseildesgv-10h00a11h30.png
 ---
 
 *Changeons le monde ensembles.*

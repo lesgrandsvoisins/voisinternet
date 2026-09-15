@@ -16,6 +16,7 @@ Le projet de commerce électronique consiste en la création d’un site web par
 
 En antic
 slug: travaux-proposees-fevrier-2022-cr-11e-conseil-des-voisins
+featured_image: ./images/2023/04/team-tree-2.jpg
 ---
 
 Nous proposons les axes de travaux suivants lors du [Conseil des Grands Voisins le 24 février 2022 de 17h30 à 19h 1](https://com.grandsvoisins.com/t/conseil-des-grands-voisins-le-24-fevrier-2022-de-17h30-a-19h/187).

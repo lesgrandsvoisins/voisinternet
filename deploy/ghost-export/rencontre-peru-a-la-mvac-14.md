@@ -13,6 +13,7 @@ Les deux événements se suivent et se complètent (pour les bilingues).
 
 Voici une conversation entre Chris (Président des Grands Voisins) et Léonard :
 slug: rencontre-peru-a-la-mvac-14
+featured_image: ./images/2025/01/IMG-20250106-WA0007.jpg
 ---
 
 ## **Confession de part, relève de preuve**

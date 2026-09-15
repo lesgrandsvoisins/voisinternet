@@ -4,6 +4,7 @@ published_at: 2023-04-02T09:53:00.000+02:00
 reading_time: 1
 excerpt: Version du 2 avril 2022 du manifeste des Grands Voisins composé en 2017 avec plus de cent personnes sur un période d'un mois. 
 slug: manifeste-2023
+featured_image: ./images/2023/04/manifeste-edit.svg
 ---
 
 Ce manifeste, imparfait, reflète les espérances, les souffrances et les incompréhensions de ceux qui l'ont insufflé. Les Grands Voisins sont nés à l'hôpital Saint-Vincent-de-Paul dans le 14e arrondissement à Paris, entre Port royal et les Catacombes. Nous sommes issus des failles dans le béton et dans les politiques publiques. Nous sommes au service de l'accueil de tous et croyons aux ponts entre utopie et réalité.

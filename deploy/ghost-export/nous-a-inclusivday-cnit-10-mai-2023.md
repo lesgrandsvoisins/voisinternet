@@ -4,6 +4,7 @@ published_at: 2023-04-26T11:39:15.000+02:00
 reading_time: 2
 excerpt: Le 10 mai 2023 à Paris La Défense Arena, venez nous rendre visite ainsi que d'autres acteurs autour du handicap et de la réalisation. Sur notre stand, nous aurions de l'art, le livre de Caroline et des démonstrations de nos axes digital et artistiques. L'organisateur parle d’un riche programme éditorial (management & stratégie RSE, emploi inclusif, achats responsables, innovations sociales, accessibilité numérique, actualités handicap, ateliers de sensibilisation) des conférences thématiques, de
 slug: nous-a-inclusivday-cnit-10-mai-2023
+featured_image: ./images/2023/04/lesgrandsvoisins-inclusivday.png
 ---
 
 Le 10 mai 2023 à Paris La Défense Arena, venez nous rendre visite ainsi que d'autres acteurs autour du handicap et de la réalisation. Sur notre stand, nous aurions de l'art, le livre de Caroline et des démonstrations de nos axes digital et artistiques. L'organisateur parle d’un riche programme éditorial (management &amp; stratégie RSE, emploi inclusif, achats responsables, innovations sociales, accessibilité numérique, actualités handicap, ateliers de sensibilisation) des conférences thématiques, des ateliers de formation, des séances de networking et des animations immersives.

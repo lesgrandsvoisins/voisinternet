@@ -13,6 +13,7 @@ Tous niveaux, tous âges, tous besoins sont les bienvenus :
 + des salariés ou non-salariés aux patrons du 14e ;
 
 slug: salle-de-sociabilite-numerique
+featured_image: ./images/2023/07/maisondesmedicenslarge.jpg
 ---
 
 Participez à ces ateliers conviviaux d’entraide numérique  

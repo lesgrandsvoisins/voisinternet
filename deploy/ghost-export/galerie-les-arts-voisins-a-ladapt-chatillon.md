@@ -16,6 +16,7 @@ Promotion de la santé et sensibilisation
 
 Les expos peuvent être conçues pour sensibiliser le public sur l
 slug: galerie-les-arts-voisins-a-ladapt-chatillon
+featured_image: ./images/2026/01/ladapt-hall.jpg
 ---
 
 Une gallérie d’art dans un lieu autre est sympathique et pour le lieu, et pour les artistes, et pour les patients, et pour les salariés, et pour l’ensemble des usagers.

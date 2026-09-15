@@ -16,6 +16,7 @@ The departure of the Grands Voisins will be postponed.
 
 Rehabilitation on "Le Village des Grands Voisins". The purpose of this effort was to involve the residents (marginalized people who need shelter and food) more. Some would have seen this as a personal attack, a desire to take power, to reject the other. This ended with the inner circle of the Big Neig
 slug: 2e-conseil-des-voisins
+featured_image: ./images/2023/04/1e-conseil-des-voisins.jpeg
 ---
 
 Le 3 avril 2020 ou 2020 à Paris de 11:00 à 12:30

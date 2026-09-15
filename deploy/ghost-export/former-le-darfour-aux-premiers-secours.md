@@ -10,6 +10,7 @@ lien
 
 Voici une liste de vidéos Youtube sur le sujet des premiers secours :
 slug: former-le-darfour-aux-premiers-secours
+featured_image: ./images/2025/01/DSC08819.JPG
 ---
 
 L'association Handicap France Soudan Darfour International propose un recueil de vidéos à la disposition du personnel sur place à Darfour pour pouvoir appliquer des prémiers secours nécessaires.

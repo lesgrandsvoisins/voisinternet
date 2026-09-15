@@ -4,6 +4,7 @@ published_at: 2022-02-08T00:00:00.000+01:00
 reading_time: 2
 excerpt: En octobre 2021, un responsable des anciens Grands Voisins de Sain-Vincent-de-Paul a remis en question le projet et ma capacité d’être au service du projet. J’en étais sensible. La communication reprend après ma résolution d’être imparfaitement au service des Grands Voisins C.O.M.
 slug: points-avancement-mars-2022
+featured_image: ./images/2023/04/montpar202208.jpg
 ---
 
 ## Avancement et idées participatifs

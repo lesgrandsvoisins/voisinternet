@@ -4,6 +4,7 @@ published_at: 2021-12-03T00:00:00.000+01:00
 reading_time: 3
 excerpt: Ceci est une ébauche de la charte d'abonnement pour les structures ESS
 slug: charte-dabonnement-ess
+featured_image: ./images/2023/04/notalgie.svg
 ---
 
 Voici les droits et devoirs des Voisins des Grands Voisins C.O.M. sur la base de la Mission des Grands Voisins de 2017

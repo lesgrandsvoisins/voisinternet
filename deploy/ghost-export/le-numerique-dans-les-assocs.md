@@ -6,6 +6,7 @@ excerpt: Quelle place le numérique dans les associations ? Comment adresser le 
 
 
 slug: le-numerique-dans-les-assocs
+featured_image: ./images/2023/09/numasso.jpg
 ---
 
 Quelle place le numérique dans les associations ? Comment adresser le GDPR (et est-ce que ça existe réellement) ? Pourquoi les listes de diffusion sont si chères (dans les deux sens du terme) ? Quel coût le gratuit ? Quel coût le libre ? Quels outils à abandonner ? Sauvetage ? Wordpress ou Wix ou Squarespace ? « Intelligence » artificielle ?

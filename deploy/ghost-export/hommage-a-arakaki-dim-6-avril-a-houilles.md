@@ -15,6 +15,7 @@ Télécharger le fichier .ics
 
 La vie de la famille Arakaki Arakaki est un exemple de lutte multi-générationnelle depuis l'époque des guerres sino-japonaises pour la colon
 slug: hommage-a-arakaki-dim-6-avril-a-houilles
+featured_image: ./images/2025/03/cheval-3.jpeg
 ---
 
 Félix Toshi Arakaki Ishikawa était artiste peintre et écrivain de renom habitant à Houilles en région parisienne. Le dimanche 6 avril entre midi et 18h, sa famille et ses proches vous invitent à sa maison atelière.

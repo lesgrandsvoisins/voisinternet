@@ -35,6 +35,7 @@ en ligne à
 https://jitsi.lesgrandsvoisins.com/farbeez
 (merci de tester votre équipement dès m
 slug: 9e-conseil-des-voisins
+featured_image: ./images/2023/04/lesgrandsvoisinscom-sketchnotes-large.png
 ---
 
 Merc. 27 oct. '21 19h30 Farbeez &amp; 20h15 Les Grands Voisins Bagneux et en viséo

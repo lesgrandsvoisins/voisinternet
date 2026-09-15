@@ -12,6 +12,7 @@ Nous avons acté :
 
 Compte-rendu version 2023-05-04-01
 slug: 17e-conseil
+featured_image: ./images/2023/05/photo-20230503-conseildesvoisins.jpg
 ---
 
 # Votes

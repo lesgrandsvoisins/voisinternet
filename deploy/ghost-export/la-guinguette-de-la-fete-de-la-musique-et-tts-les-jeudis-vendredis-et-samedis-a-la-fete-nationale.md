@@ -25,6 +25,7 @@ Voici un video du making of:
 
 La Guinguette de la Ressourcerie Créati
 slug: la-guinguette-de-la-fete-de-la-musique-et-tts-les-jeudis-vendredis-et-samedis-a-la-fete-nationale
+featured_image: ./images/2023/04/guinguette_Large.original.jpg
 ---
 
 Venez nombreuses et nombreux à la Guinguette du Square de Serment de Koufra juste à côté de la place d’Orléans !

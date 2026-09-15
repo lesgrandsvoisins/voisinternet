@@ -4,6 +4,7 @@ published_at: 2023-04-28T00:00:00.000+02:00
 reading_time: 1
 excerpt: Nous sommes en preparation de comment nous coordonner pour le salon TIH. Post en élaboration.
 slug: organisation-du-village-tih-a-inclusivday
+featured_image: ./images/2023/04/window-washer-klusion-IMG_20211216_102008.jpg
 ---
 
 ## Organisation entre TIH au Village TIH

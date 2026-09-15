@@ -4,6 +4,7 @@ published_at: 2017-04-25T00:00:00.000+02:00
 reading_time: 1
 excerpt: Mael est sans papier et vit aux Grands Voisins à Paris, l'un des plus gros projet d'occupation temporaire et sociale d'Europe ouvert fin 2015. En août 2016 le réalisateur Bastien Simon décide de lui prêter une petite caméra pour qu'à son tour il filme son quotidien sur le site et raconte son odyssée
 slug: les-ailes
+featured_image: ./images/2023/04/les-ailes-de-mael-bastien-simon-documentaire.webp
 ---
 
 Filmé par : Mael Aînine Nema Cherif

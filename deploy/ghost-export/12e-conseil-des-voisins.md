@@ -22,6 +22,7 @@ Si vous participez en visio:
 
 pour l’accueil, le confort et la sécurit
 slug: 12e-conseil-des-voisins
+featured_image: ./images/2023/04/conseil-voisins-chezpapa-IMG_20220421_191433.jpg
 ---
 
 Paris le 21 avril 2022.

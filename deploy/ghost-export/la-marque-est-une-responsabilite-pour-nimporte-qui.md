@@ -5,6 +5,7 @@ reading_time: 4
 excerpt: Qui est Grands Voisin qui veut bien l'être. Cette Marque bénéficie d'un double-dépoôt qui ouvre effectivement sa propriété à toutes et à tous. 
 [Version 2023-04-29-1]
 slug: la-marque-est-une-responsabilite-pour-nimporte-qui
+featured_image: ./images/2023/04/etrevoisin.svg
 ---
 
 J'ai été attaqué pour plusieurs raisons. Souvent, on m'accuse d'instiguer les agresseuses et les agresseurs. « Pour qui me prendrai-je ? » l'un peu penser. J'ai passé un bon moment à réfléchir à cette proposition sous formes différentes.

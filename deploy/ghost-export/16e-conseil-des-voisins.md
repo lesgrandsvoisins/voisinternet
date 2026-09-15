@@ -18,6 +18,7 @@ excerpt: Ordre du Jour
  * Lancement des Popup Expos (www.popup-expos.com)
  * Lancement de la salle de sociabilité numérique (www.resdigita.com)
 slug: 16e-conseil-des-voisins
+featured_image: ./images/2023/04/THIS_ONE_CONSEIL_DES_VOISINS_IMG_20230225_164035--1-.jpg
 ---
 
 ## Ordre du Jour

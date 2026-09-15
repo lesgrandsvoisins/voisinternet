@@ -2,15 +2,17 @@
 title: Appel à Funs
 published_at: 2023-04-26T11:52:58.000+02:00
 reading_time: 1
-excerpt: Nous, Les Grands Voisins, avons beaucoup à offrir. Privilégiez les services des entités Les Grands Voisins, mais aussi les membres de bureau aimeraient vous offrir avec vos donations quelques services en remerciement dans l'unique objectif de financer nos frais courants, notamment des sites, des expos et de la communication faits main / faits maison avec nos talents individuels ensemble: digital, arts, communication.
+excerpt: |
+  Nous, Les Grands Voisins, avons beaucoup à offrir. Privilégiez les services des entités Les Grands Voisins, mais aussi les membres de bureau aimeraient vous offrir avec vos donations quelques services en remerciement dans l'unique objectif de financer nos frais courants, notamment des sites, des expos et de la communication faits main / faits maison avec nos talents individuels ensemble: digital, arts, communication.
 
-Contactez-nous
+  Contactez-nous
 
 
-Dons
-
-Les Grands Voisins reçoit des donations déductibles des
+  Dons
+  
+  Les Grands Voisins reçoit des donations déductibles des
 slug: fun-d-raising
+featured_image: ./images/2023/04/appel-a-funs-01.svg
 ---
 
 Nous, Les Grands Voisins, avons beaucoup à offrir. Privilégiez les services des [entités Les Grands Voisins](https://www.lesgrandsvoisins.com/dir), mais aussi les membres de bureau aimeraient vous offrir avec vos donations quelques services en remerciement dans l'unique objectif de financer nos frais courants, notamment des sites, des expos et de la communication faits main / faits maison avec nos talents individuels ensemble: digital, arts, communication.

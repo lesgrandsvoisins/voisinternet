@@ -8,6 +8,7 @@ excerpt: Palais de l’Iéna à Paris, le 21 octobre 2022, nous étions invités
 
 FAIRE TIERS-LIEUX AU CESE - YouTube : Discours de Marlène 
 slug: ecoute-du-gouvernement-au-palais-de-liena
+featured_image: ./images/2023/04/secretaire-etat-pme-faire-tiers-lieu-IMG_20221020_142108.jpg
 ---
 
 Palais de l’Iéna à Paris, le 21 octobre 2022, nous étions invités pour la conclusion d’un évènement

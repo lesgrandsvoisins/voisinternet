@@ -8,6 +8,7 @@ Paris le nuage invite 75 acteurs — associations, artistes, artisans, professio
 
 Avoir un serveur libre chez soi ou au travail renforce l’électro-littérisme de tous. Ce projet débute av
 slug: paris-le-nuage
+featured_image: ./images/2025/02/outils.jpeg
 ---
 
 ### **Et si nous remplacions certains services GAFAM pour nous-mêmes ?**

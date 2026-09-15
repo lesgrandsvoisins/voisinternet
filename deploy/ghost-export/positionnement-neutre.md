@@ -4,6 +4,7 @@ published_at: 2023-05-23T12:41:00.000+02:00
 reading_time: 5
 excerpt: Comment être d'intérêt général, vraiment ? Peu après notre déclaration, nous faillons peut-être déjà. C'est un cadeau pour nous apprendre !
 slug: positionnement-neutre
+featured_image: ./images/2023/08/darrieussecq-genevieve-hands.png
 ---
 
 Madame la Maire du 14e arrondissement conseille de laisser tomber l'argumentaire dit « de responsabilité de la marque » Les Grands Voisins. J'avais utilisé l'argument le 25 mars 2023 sur l'ancien site Saint Vincent de Paul lorsque un cadre supérieur de l'association Aurore m'a publiquement snobé. Je n'étais pas en forme et l'article de blog à ce sujet était aussi écrit d'une posture défensive.

@@ -14,6 +14,7 @@ Les engagements
 
 Chaque voisin et voisi
 slug: proposition-de-declaration-de-mission
+featured_image: ./images/2023/04/eiffeltour-phare-montpar.jpg
 ---
 
 Nous, [Les Grands Voisins](https://mailing.lesgrandsvoisins.com/), déplorons le dédain, l’agression et l’ambiguïté dans ce monde aujourd’hui à tous les niveaux et proposons à la place des priorités tournées vers les vérités, vers les engagements et vers la subsidiarité et ceci dans le sens de [notre déclaration d’interdépendance](https://mailing.lesgrandsvoisins.com/t/declaration-dinterdependance/11).

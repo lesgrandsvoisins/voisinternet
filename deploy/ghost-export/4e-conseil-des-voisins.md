@@ -34,6 +34,7 @@ Ordre du jour
  * Outils pour partages
  * Manifeste
 slug: 4e-conseil-des-voisins
+featured_image: ./images/2023/04/jumping-man.jpg
 ---
 
 En ligne, le 2 mai 2020.

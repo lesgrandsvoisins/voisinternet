@@ -4,6 +4,7 @@ published_at: 2021-09-18T00:00:00.000+02:00
 reading_time: 5
 excerpt: Nous aimerions aussi dans notre IT mettre en place un principe d’équilibre entre l’autonomie et l’intégration. Nous sommes assez fiers de faire notre propre serveur de courriels. Nous aimons les logiciels libres. De plus, nous adhérons au Contrat pour le Web .
 slug: numerique-autonome-et-interdependante
+featured_image: ./images/2023/04/photo-ordi-video-keyboard.jpg
 ---
 
 Nous aimerions aussi dans notre IT mettre en place un principe d’équilibre entre l’autonomie et l’intégration. Nous sommes assez fiers de faire notre propre serveur de courriels. Nous aimons les logiciels libres. De plus, nous adhérons au [Contrat pour le Web](https://contractfortheweb.org/fr/) . La manière dont nous faisons est déjà ce que nous faisons.

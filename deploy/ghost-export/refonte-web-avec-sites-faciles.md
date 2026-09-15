@@ -4,6 +4,7 @@ published_at: 2024-05-06T07:01:00.000+02:00
 reading_time: 1
 excerpt: La DINUM a eu la grâce de publier son moteur CMS pour numerique.gouv.fr sur github. Nous nous donnons comme mission de pouvoir rendre le bénéfice de ce moteur aux acteurs privés
 slug: refonte-web-avec-sites-faciles
+featured_image: ./images/2024/11/screencopywww.max-800x600.jpg
 ---
 
 La DINUM a eu la grâce de publier son moteur CMS pour numerique.gouv.fr sur github. Nous nous donnons comme mission de pouvoir rendre le bénéfice de ce moteur aux acteurs privés par le fait de remplacer la charte graphique de l'Etat par une charte générique, des chartes génériques. Voici le lieu de notre travail:

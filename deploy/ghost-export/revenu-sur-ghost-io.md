@@ -4,6 +4,7 @@ published_at: 2023-04-24T11:58:56.000+02:00
 reading_time: 1
 excerpt: Nous utilisons le logiciel libre Ghost.io pour notre blog.
 slug: revenu-sur-ghost-io
+featured_image: ./images/2023/04/Clipboard-Image--3-.jpg
 ---
 
 Le web est étrange. Nous avons essayé les systèmes de contenu suivants :

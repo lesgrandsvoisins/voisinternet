@@ -8,6 +8,7 @@ Si vous utiliser un tiers tel que gmail, hotmail, etc…, nous livrons le messag
 
 Cela nous a pris de l’effort pour être connu par l’internet entier comme une poste électronique responsable. Il y avai
 slug: la-poste-electronique-des-grands-voisins
+featured_image: ./images/2023/04/email-setup.png
 ---
 
 Nous utilisons notre propre serveur public d’envoi de courriels. Cela nous permet de ne pas faire transiter nos messages par des intermediaries tels que gmail, mailchimp, mailjet, hotmail, yahoo ou bien d’autres.

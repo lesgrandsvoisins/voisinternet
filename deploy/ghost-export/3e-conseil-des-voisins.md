@@ -24,6 +24,7 @@ Monnaie-temps, très mal véçue. Cela a accentué les inégalités.
 
 Des logiques néo-l
 slug: 3e-conseil-des-voisins
+featured_image: ./images/2023/04/fete-style.jpg
 ---
 
 Le 16 avril 2020 de 16h à 17h30

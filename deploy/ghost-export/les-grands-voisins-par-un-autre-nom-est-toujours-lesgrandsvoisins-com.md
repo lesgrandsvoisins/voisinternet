@@ -8,6 +8,7 @@ Par contre, nous avons approuvé en Conseil des Voisins l'utilisation de ResDigi
 
 C'est un rappel comme quoi,
 slug: les-grands-voisins-par-un-autre-nom-est-toujours-lesgrandsvoisins-com
+featured_image: ./images/2023/04/lesgrandsvoisinscomcom.svg
 ---
 
 Les Grands Voisins est un beau nom et un bel titre. Par plusieurs tentatives, nous avions voulu proposer d'autres noms pour faire un peu plus branchés, un peu plus webs. Ces noms ont été lgvmail.com, gvois.org, lesgv.com, etc. Finalement, jusqu'à ce que nous décidons d'un nom de domaine autre que LesGrandsVoisins.com, nous sommes LesGrandsVoisins.com.

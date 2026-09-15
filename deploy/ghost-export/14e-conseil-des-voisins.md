@@ -6,6 +6,7 @@ excerpt: Paris le 14 novembre 2022.
 
 Beaucoup de choses très intéressantes se sont passées que vous pouvez voir dans la Gazette Voisine numéro 10 1. Nous avons parlé avec Pulvar qui soutien notre association. Nous avons remporté un budget participatif du 14e arrondissement de Paris avec la Ressourcerie Créative du 14e arrondissement. J’ai aussi pitché François Hollande. Dores et déjà notre infrastructure informatique fonctionne ! Le Conseil des Voisins peut désormais être là pour que vous puissiez inform
 slug: 14e-conseil-des-voisins
+featured_image: ./images/2023/04/ag-meeting-michel.jpg
 ---
 
 Paris le 14 novembre 2022.

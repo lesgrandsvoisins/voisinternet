@@ -26,6 +26,7 @@ Nous avions beaucoup parlé et je n’ai pas pris énormément de notes.
 
 Il s’avère que la communication est une priorité. Comment faisons-nous pour cultiver un rapport avec les voisins. @gayclau a
 slug: 10e-conseil-des-voisins
+featured_image: ./images/2023/04/10e-conseil-montparnasse.jpeg
 ---
 
 Paris. Le 24 février 2022.

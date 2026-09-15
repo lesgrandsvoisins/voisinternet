@@ -4,6 +4,7 @@ published_at: 2022-05-22T00:00:00.000+02:00
 reading_time: 4
 excerpt: Nous avons du pain sur la planche et avons lentement fait des progrès dont je suis très heureux de vous en faire part ici.
 slug: avancements-mai-2022
+featured_image: ./images/2023/04/IMG_20220519_220838.jpg
 ---
 
 Nous avons du pain sur la planche et avons lentement fait des progrès dont je suis très heureux de vous en faire part ici.

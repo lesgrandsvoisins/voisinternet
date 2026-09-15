@@ -6,6 +6,7 @@ excerpt: L’association Farbeez considère ce mardi 14 septembre 2021 de 19h30 
 
 Subject: Réunion FARBEEZ aux Si
 slug: lassociation-farbeez-discutera-des-grands-voisins
+featured_image: ./images/2023/04/Clipboard-Image--2-.jpg
 ---
 
 L’association Farbeez considère ce mardi 14 septembre 2021 de 19h30 à 21h dans l’espace alternative les Simonnes à Bagneux et lors d’une réunion hybride du savoir-faire [LesGrandsVoisins.com](http://lesgrandsvoisins.com/) la possibilité de porter un test du concept LesGrandsVoisins. Le but du jeu serait de voir sur une échelle de démarrage comment les dispositifs et la charte les Grands Voisins peuvent déjà être utiles à un réseau principalement constitué d’indépendants du secteur du bien-être.

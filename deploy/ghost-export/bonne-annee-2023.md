@@ -4,6 +4,7 @@ published_at: 2023-01-11T16:55:00.000+01:00
 reading_time: 3
 excerpt: L’incident qui opposait un ancien cheminot et une communauté kurde dans le 10e arrondissement de Paris renforce le besoin aujourd’hui plus que jamais le besoin de la proposition Les Grands Voisins. A quoi pouvons-nous nous attacher ? Comment se mêlent les idées identitaires et de nous-mêmes individuellement et des communautés dans lesquelles nous nous engageons ? Comme dans un jardin, Les Grands Voisins est aujourd’hui une association qui se veut être terrain où des réponses toutes différentes p
 slug: bonne-annee-2023
+featured_image: ./images/2023/04/annee-2023.jpg
 ---
 
 L’incident qui opposait un ancien cheminot et une communauté kurde dans le 10e arrondissement de Paris renforce le besoin aujourd’hui plus que jamais le besoin de la proposition Les Grands Voisins. A quoi pouvons-nous nous attacher ? Comment se mêlent les idées identitaires et de nous-mêmes individuellement et des communautés dans lesquelles nous nous engageons ? Comme dans un jardin, Les Grands Voisins est aujourd’hui une association qui se veut être terrain où des réponses toutes différentes peuvent s’épanouir comme des plantes différentes.

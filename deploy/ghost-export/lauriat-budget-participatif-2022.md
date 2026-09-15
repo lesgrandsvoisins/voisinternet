@@ -4,6 +4,7 @@ published_at: 2022-10-18T00:00:00.000+02:00
 reading_time: 2
 excerpt: Très bonne nouvelle, nous avons remporté le budget participatif pour « le numérique créatif des Grands Voisins », soit une salle de sociabilité numérique.
 slug: lauriat-budget-participatif-2022
+featured_image: ./images/2023/04/voter-la-ressourcie-creative.jpg
 ---
 
 Hôtel de ville de Paris, le 18 octobre 2022, les propositions gagnantes pour les budgets participatifs de Paris sont annoncés dont la ligne « Du matos pour les assoc » dont fait partie « [le Numérique créatif des Grands voisins 2](https://www.lesgrandsvoisins.com/fr/activites-des-grands-voisins/budget-participatif-de-paris/) » pour une salle de sociabilité numérique.

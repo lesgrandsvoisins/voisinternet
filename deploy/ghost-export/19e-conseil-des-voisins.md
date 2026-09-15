@@ -14,6 +14,7 @@ Les votes connexes aux conclusions sont toujours à venir.
  3. Une dette de 1000 euros au Bureau du Créateur est à accorder en priorité avant l'engagement financier pour Osorus (Popup Expos)
  4. Le Conseil prend note de la plainte de Chris 
 slug: 19e-conseil-des-voisins
+featured_image: ./images/2023/08/midi-meeting--Large-.jpg
 ---
 
 [Invitation au 19e Conseil des Voisins](https://www.lesgrandsvoisins.com/structure/conseils-des-voisins/19e-conseil/invitation/)

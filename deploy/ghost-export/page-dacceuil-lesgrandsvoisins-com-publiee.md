@@ -6,6 +6,7 @@ excerpt: Le site web lesgrandsvoisins.com 1 est maintenant ouvert pour informer 
 
 L’enjeu en communication actuellement est de raconter une histoire engageante à l’image de Les Grands Voisins (ou des Grands Voisins): le « 
 slug: page-dacceuil-lesgrandsvoisins-com-publiee
+featured_image: ./images/2023/04/lesgrandsvoisins-screencopy-1.gif
 ---
 
 Le site web [lesgrandsvoisins.com 1](https://www.lesgrandsvoisins.com/) est maintenant ouvert pour informer le public de notre existence et comporte un appel à s’inscrire à la liste de diffusion depuis le 16 août 2021. La partie « services » est cachée pour l’instant et le manifeste est mis en avant. C’est suite à ma décision qu’il est maintenant temps de partager l’information sur le projet.

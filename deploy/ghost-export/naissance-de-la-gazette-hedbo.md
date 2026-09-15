@@ -6,6 +6,7 @@ excerpt: Le 29 juillet 2021, nous avons envoyé notre premier newsletter de LesG
 
 Le site mailing.LesGrandsVoisins.com est une implémentation du logiciel « Discourse.org » avec pour objectif de composer et rendre disponible l
 slug: naissance-de-la-gazette-hedbo
+featured_image: ./images/2023/04/lemonde-2017.original-1.png
 ---
 
 Le 29 juillet 2021, nous avons envoyé notre premier newsletter de [LesGrandsVoisins.com](http://lesgrandsvoisins.com/). Dans cette gazette de [LesgrandsVoisins.com 1](http://lesgrandsvoisins.com/), nous avons promu les principes directeurs du manifeste et avons suivi notre informatique engagée. On y trouve particulièrement les nouvelles sur [LesGrandsVoisins.com](http://lesgrandsvoisins.com/) et les choses à venir. [**Vous pouvez vous y inscrire ici**](https://list.lesgrandsvoisins.com/subscription/form).

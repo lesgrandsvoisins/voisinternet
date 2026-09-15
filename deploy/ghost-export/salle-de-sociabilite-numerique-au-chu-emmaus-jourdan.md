@@ -4,6 +4,7 @@ published_at: 2024-09-09T20:21:22.000+02:00
 reading_time: 3
 excerpt: Ainsi a été le mot de lancement le 14 juin 2024 du numérique créatif des Grands Voisins au service du CHU Emmaüs Jourdan. En voici quelques photos :
 slug: salle-de-sociabilite-numerique-au-chu-emmaus-jourdan
+featured_image: ./images/2024/09/IMG-20240901-WA0005.jpg
 ---
 
 💡

@@ -19,6 +19,7 @@ Chris the Disruptor
 
 Constantly innovating, fulfilling idealistic and philosophical 
 slug: bios-de-notre-equipe
+featured_image: ./images/2023/04/kelsey-bienvenue.jpg
 ---
 
 Nous avions à écrire des résumés courts pour notre équipe.

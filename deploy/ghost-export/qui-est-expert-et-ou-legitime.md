@@ -10,6 +10,7 @@ Chris Mann: Mêmes questions pour vous Eric. quels acteurs sont « légltimes? �
 
 Eric Pliez Chris Mann je dirai hybridation culturelle et
 slug: qui-est-expert-et-ou-legitime
+featured_image: ./images/2023/04/facebook-ericpliez.png
 ---
 
 Ci-dessous est une échange que j’ai eu sur Facebook avec le Président d’Aurore, Eric Pilez, au sujet des Grands Voisins.

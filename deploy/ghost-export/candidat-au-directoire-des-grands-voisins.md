@@ -11,6 +11,7 @@ Candidat au directoire
 
 @nazachri , un sans papier refugié, est présenté au directoire et rencontra procha
 slug: candidat-au-directoire-des-grands-voisins
+featured_image: ./images/2023/04/farid-IMG_20200903_085231-2.jpg
 ---
 
 [@nazachri](https://forum.lesgrandsvoisins.com/u/nazachri), un sans papier refugié, a accepté l’invitation de [@mannchri](https://forum.lesgrandsvoisins.com/u/mannchri) et [@poekels](https://forum.lesgrandsvoisins.com/u/poekels) de participer dans les réunions de démarrage de Les Grands Voisins. C’est splendide !

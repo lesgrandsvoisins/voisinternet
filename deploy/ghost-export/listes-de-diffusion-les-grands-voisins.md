@@ -6,6 +6,7 @@ excerpt: Un service pour les voisins leur permettant de gérer des listes de dif
 
 Il s’agit peut-être de proposer un service ListMonk pour chaque organisation qui gère une série de listes de diffusion. De cette manière, chaque organisation dispos
 slug: listes-de-diffusion-les-grands-voisins
+featured_image: ./images/2023/04/mail-0tester-10.png
 ---
 
 Un service pour les voisins leur permettant de gérer des listes de diffusion me semble à propos. Les alternatives comme mailjet et mailchimp sont bien avancés, mais aussi présentent des problèmes de vie personnelle. Le fait d’utiliser des listes propres soit soient confiées à Les Grands Voisins me semble être une alternative viable.

@@ -4,6 +4,7 @@ published_at: 2020-05-09T00:00:00.000+02:00
 reading_time: 1
 excerpt: Voici les présentations de la Galerie les Arts Voisins en 2018-2019 et 2019-2020.
 slug: les-arts-voisins-2018-2020
+featured_image: ./images/2023/05/lesartsvoisins-ventesolidaire.png
 ---
 
 Nous venons de recevoir des présentations des saisons 2018 - 2019 et 2019 - 2020 de la Galerie Les Arts Voisins.

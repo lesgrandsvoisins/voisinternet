@@ -4,6 +4,7 @@ published_at: 2024-07-15T12:00:00.000+02:00
 reading_time: 6
 excerpt: Lettre ouverte à son excellence, Monsieur Mohamed Ould Cheikh Ghazouani, Président de la République Islamique de Mauritanie.
 slug: lettre-ouverte-a-son-excellence-monsieur-mohamed-ould-cheikh-ghazouani-president-de-la-republique-islamique-de-mauritanie
+featured_image: ./images/2024/11/IMG-20241111-WA0008.jpg
 ---
 
 Excellence, cher frère et parent…

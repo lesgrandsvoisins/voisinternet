@@ -6,6 +6,7 @@ excerpt: Participants enregistrés: Prinh-Viet de Weezem, @denisdecastro Denis d
 
 Chaque participant est invité à se prononcer sur sa vision pour les Grands Voisins. Les idées évoquées touchent aux communs; à une fédéralisation des efforts, des ressources et des acteurs associatifs, des compétences et savoir-faire; aux réseaux des artistes des pas-de-por
 slug: 15e-conseil-des-voisins
+featured_image: ./images/2023/04/photo-ordi-video-keyboard-1.jpg
 ---
 
 Participants enregistrés: Prinh-Viet de Weezem, [@denisdecastro](https://forum.lesgrandsvoisins.com/u/denisdecastro) Denis de Nouvelle-Zélande, [@lebureauducreateur](https://forum.lesgrandsvoisins.com/u/lebureauducreateur) Marine MESSNIER du Bureau du Créateur, Foreman Presta, Sviatlana Viarbitskya [@svetaverba](https://forum.lesgrandsvoisins.com/u/svetaverba), Mael ANC [@maelnemacherif](https://forum.lesgrandsvoisins.com/u/maelnemacherif)

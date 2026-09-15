@@ -6,6 +6,7 @@ excerpt: Nous avons mis en place la technologie Apostrophe CMS sur le site www.l
 
 ApostropheCMS nous a contacté pour mettre en valeur notre utilisation de leur technologie. J’avais pris soin dans mon choix d’eux car je
 slug: passage-a-la-technologie-apostrophe-cms
+featured_image: ./images/2023/04/mael-computer-IMG_20220902_180102.jpg
 ---
 
 Nous avons mis en place la technologie Apostrophe CMS sur le site [www.lesgrandsvoisins.com](https://www.lesgrandsvoisins.com). Cela nous permet de modifier le contenu à travers le site web. @poekels a pu prendre la main et trouve bien pratique pour nos besoins. Cela nous permet une parfaite maîtrise de l’aspect design de notre site tout en rendant la maîtrise des messages transmis aux éditeurs.

@@ -9,6 +9,7 @@ http://www.crif.org/fr/actualites/rescapée-du-vel-dhiv-«-je-navais-quune-idée
 
 Annette a beaucoup travaillé en plus qu’au Val d’Hiv pourtant.
 slug: reconnaissances-avec-le-livre-lange-du-vel-dhiv
+featured_image: ./images/2023/04/lange-du-vel-div.jpg
 ---
 
 William, Jean Baptiste et [@kelseypoe](https://forum.lesgrandsvoisins.com/etc/who/k/kelseypoe/fr.md) vont recevoir un exemplaire de la bibliographie d’[Annette Monod 1](https://www.huguenots.fr/2019/02/annette-monod-lange-du-vel-dhiv-de-drancy-et-des-camps-du-loiret-lettre-62/) [L’ange du Vel d’Hiv](https://www.amazon.fr/Annette-Monod-VeldHiv-Drancy-Loiret/dp/2356181318/) en reconnaissance de leurs contributions et intérêt dans le volet des services sociaux.  

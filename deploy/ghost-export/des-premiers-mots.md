@@ -12,6 +12,7 @@ Bonjour les Grands Voisins,
 
 Je suis ravi d’entendre parler de vous. je suis encore là aujourd’hui pour me connecter au monde de l’informatique, du numérique. L’atelier d’entraide 
 slug: des-premiers-mots
+featured_image: ./images/2023/10/IMG_20231030_164540--Large-.jpg
 ---
 
 Voici les premiers mots de Thimoté sur un ordinateur

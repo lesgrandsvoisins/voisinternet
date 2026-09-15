@@ -17,6 +17,7 @@ Pour et par les artistes
 
 Faites-vous connaître près de chez vous et développez vo
 slug: popup-expos-2
+featured_image: ./images/2023/04/air_art_resto_cafe_popupos_expos-1.png
 ---
 
 Objectifs:

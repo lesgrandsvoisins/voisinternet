@@ -4,6 +4,7 @@ published_at: 2021-08-26T00:00:00.000+02:00
 reading_time: 2
 excerpt: Ceci est une proposition des services de l'époque.
 slug: services-des-grands-voisins
+featured_image: ./images/2023/04/digital-writing.jpg
 ---
 
 Je publie les services sur

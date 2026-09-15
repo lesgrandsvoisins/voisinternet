@@ -4,6 +4,7 @@ published_at: 2021-11-16T00:00:00.000+01:00
 reading_time: 1
 excerpt: Proposition de conditions d'dhésion ESS aux Grands Voisins.
 slug: bon-dadhesion-ess
+featured_image: ./images/2023/04/etrevoisin-1.svg
 ---
 
 Entre

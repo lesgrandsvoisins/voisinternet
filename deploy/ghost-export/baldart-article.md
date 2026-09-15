@@ -4,6 +4,7 @@ published_at: 2023-05-11T08:40:34.000+02:00
 reading_time: 6
 excerpt: Article about terms and conditions around storytelling incorporating photography as creative process including projection (not to say "publication") in the storytelling process. 
 slug: baldart-article
+featured_image: ./images/2023/05/gillles-clement.PNG
 ---
 
 Robert Baldrige has been trotting the earth from a Quaker Center in an abandoned volcano in South America to the home to the Dali Lama for a half-century. At first, Robert's main medium was post cards. As I understand it, should you find yourself on the list, you would receive many postcards. Today, in the land of Instagram and WhatsApp, Robert is still the adolescent storyteller, and we all may be his parents. What did you learn at school today? What friends did you make? Hang in there, fellow Robert-parents, we are in for the ride of our lives!

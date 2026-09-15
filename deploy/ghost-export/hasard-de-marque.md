@@ -8,6 +8,7 @@ J’ai déposé les noms de domaine .com et .fr suite aux débats concernant le 
 
 Puis quelque temps après, j’ai déposé la marque. Par hasard, la marque est tombé le même jour qu’un dépôt par Yes We Camp. Quel hasard ! Le fait que nous soyons deux détenteurs de marque, je pense, fait que nou
 slug: hasard-de-marque
+featured_image: ./images/2023/04/marque-deposee.svg
 ---
 
 Paris. 29 juillet 2021.

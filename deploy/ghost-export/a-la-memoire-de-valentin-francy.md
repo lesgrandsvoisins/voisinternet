@@ -4,6 +4,7 @@ published_at: 2024-03-02T20:14:04.000+01:00
 reading_time: 2
 excerpt: L’association Les Grands Voisins se joint à l’association d’utilité publique Le Souvenir Français et à l’association Polaris 14 pour  exprimer nos condoléances et commémorer l’honneur de Valentin FRANCY. Cette tragédie nous apporte des leçons. Son honneur nous apporte inspiration.
 slug: a-la-memoire-de-valentin-francy
+featured_image: ./images/2024/03/index.jpg
 ---
 
 L’association Les Grands Voisins se joint à l’association d’utilité publique Le Souvenir Français et à l’association Polaris 14 pour  exprimer nos condoléances et commémorer l’honneur de Valentin FRANCY, mort assassiné de 18 coups de couteau le 2 mars 2023. Valentin FRANCY et son assassin étaient bénévoles dans plusieurs associations. Notre association a connu le bénévolat sporadique de l’assassin entre novembre 2022 et mars 2023.

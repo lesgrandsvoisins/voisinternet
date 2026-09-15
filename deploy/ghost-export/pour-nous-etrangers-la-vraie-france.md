@@ -12,6 +12,7 @@ La journée « Profession d’Empathie Nationale » est un événement annuel qu
 
 Cette année, la journée « Profession d’Empathie Nationale » se déroulera à l’association France Amérique-Latine (à ne p
 slug: pour-nous-etrangers-la-vraie-france
+featured_image: ./images/2025/02/profession-empathie-nationale-white.png
 ---
 
 > « A Mademoiselle Monod, qui représente pour nous, étrangers, la vraie France »  

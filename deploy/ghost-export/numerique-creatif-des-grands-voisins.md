@@ -9,6 +9,7 @@ Vous pouvez, par votre mécénat individuel ou collective, contribuer à rendre 
 Animer des moments de socialisation le lundi de 16h à 19h
 Une fois que vous avez appris l’approche, vous pouvez le reproduire ailleurs. Nous av
 slug: numerique-creatif-des-grands-voisins
+featured_image: ./images/2023/07/robert-talking-computer-tree.jpg
 ---
 
 **lauréat du Budget Participatif de Paris 14e 2022**

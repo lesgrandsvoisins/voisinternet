@@ -4,6 +4,7 @@ published_at: 2024-08-31T07:18:00.000+02:00
 reading_time: 1
 excerpt: Voici le compte-rendu des 23 et 24e Conseils des voisins.
 slug: 23-24-conseil-des-voisions
+featured_image: ./images/2024/11/image_processing20210312-28753-1a0pb9s.jpg
 ---
 
 Voici le compte-rendu des 23 et 24e Conseils des voisins.

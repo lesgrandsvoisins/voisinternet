@@ -8,6 +8,7 @@ J’étais impliqué dans Les Grands Voisins installés dans l’ancien hôpital
 
 LesGrandsVoisins.com propose un mécanisme de partage de bien
 slug: a-propos-de-lesgrandsvoisins-com
+featured_image: ./images/2023/04/miseenrelation-2.svg
 ---
 
 [LesGrandsVoisins.com](http://lesgrandsvoisins.com/) sommes des communautés ouvertes aux mondes partageant des biens communs depuis le numérique et au-delà.

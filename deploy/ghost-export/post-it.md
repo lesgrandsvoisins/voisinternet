@@ -8,6 +8,7 @@ La France a enfin reconnu mon côté « Mejedhoob » RQTH ayant moi-même un pet
 
 
 slug: post-it
+featured_image: ./images/2023/08/darrieusec-inclusivday-2023--Large-.png
 ---
 
 La journée du 10 mai 2023, l'INCLUSIV'DAY s'est déroulée à la Défense, el Manhattan de PARIS avec la présence de deux ministres du government Macron. J'y avais un stand pour LesGrandsVoisins.com.

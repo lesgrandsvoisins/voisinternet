@@ -153,15 +153,6 @@ a {
   color: inherit
 }
 
-img.left {
-    float: left;
-    margin: 0 2rem 2rem 0;
-}
-
-img.right {
-    float: right;
-    margin: 0 0 2rem 2rem;
-}
 
 :focus-visible {
   outline: 3px solid var(--sun);
@@ -1450,6 +1441,21 @@ blockquote p {
   border-radius: 10px
 }
 
+/* Tailles supplémentaires (cms/image_formats.py), en plus des formats natifs de
+   Wagtail (Pleine largeur, Aligné à gauche, Aligné à droite) : un plafond de largeur
+   plus étroit que la largeur de colonne par défaut ci-dessus. */
+.blog-post .markdown img.small {
+  max-width: 300px
+}
+
+.blog-post .markdown img.medium {
+  max-width: 500px
+}
+
+.blog-post .markdown img.large {
+  max-width: 750px
+}
+
 /* Une galerie Ghost, une fois exportée en Markdown, n'est plus qu'une suite de
    paragraphes contenant chacun une seule image : on la repère par cette forme (deux
    paragraphes-image consécutifs ou plus) pour l'afficher en grille plutôt qu'empilée
@@ -1468,7 +1474,8 @@ blockquote p {
   height: 11rem;
   max-height: none;
   margin: 0;
-  object-fit: cover
+  background: var(--stone);
+  object-fit: contain
 }
 
 @media (max-width: 40rem) {
@@ -1507,7 +1514,8 @@ blockquote p {
   height: 11rem;
   max-height: none;
   margin: .3rem;
-  object-fit: cover
+  background: var(--stone);
+  object-fit: contain
 }
 
 @media (max-width: 40rem) {
@@ -1525,70 +1533,6 @@ blockquote p {
     max-height: 20rem;
     margin: .3rem 0
   }
-}
-
-/* Lightbox (site.js) : ouvre les photos d'un article en plein écran, avec navigation
-   entre toutes les images de l'article. Sans JS, ce sont de simples images. */
-.lightbox-trigger {
-  cursor: zoom-in
-}
-
-.lightbox {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, .9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100
-}
-
-.lightbox[hidden] {
-  display: none
-}
-
-.lightbox-img {
-  max-width: 90vw;
-  max-height: 90vh;
-  object-fit: contain;
-  border-radius: 8px
-}
-
-.lightbox-close,
-.lightbox-prev,
-.lightbox-next {
-  position: absolute;
-  background: rgba(255, 255, 255, .1);
-  border: 0;
-  color: #fff;
-  font-size: 2rem;
-  line-height: 1;
-  cursor: pointer;
-  padding: .6rem 1rem;
-  border-radius: 8px
-}
-
-.lightbox-close:hover,
-.lightbox-prev:hover,
-.lightbox-next:hover {
-  background: rgba(255, 255, 255, .25)
-}
-
-.lightbox-close {
-  top: 1rem;
-  inset-inline-end: 1rem
-}
-
-.lightbox-prev {
-  inset-inline-start: 1rem;
-  top: 50%;
-  transform: translateY(-50%)
-}
-
-.lightbox-next {
-  inset-inline-end: 1rem;
-  top: 50%;
-  transform: translateY(-50%)
 }
 
 .books {
@@ -2138,6 +2082,16 @@ blockquote p {
 .tabs-input:checked + .tabs-label + .tabs-panel {
   display: grid;
   gap: 1.1rem
+}
+
+img.left {
+    float: left;
+    margin: 0 2rem 2rem 0;
+}
+
+img.right {
+    float: right;
+    margin: 0 0 2rem 2rem;
 }
 
 @media (max-width: 30rem) {

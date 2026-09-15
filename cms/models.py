@@ -232,14 +232,16 @@ class BlogPostPage(Page):
         "wagtailimages.Image", verbose_name=_("image de une"),
         null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
     )
-    # "pagebreak" plutôt que "hr" (cms/wagtail_hooks.py) : même bouton natif « ligne
-    # horizontale », mais qui produit <hr class="pagebreak"/> — un <hr> nu venu d'ailleurs
-    # (contenu collé…) n'est alors jamais pris à tort pour un saut de page.
+    # "divider" et "pagebreak" (cms/wagtail_hooks.py) : deux boutons distincts, au rendu
+    # identique (<hr/>) mais à l'effet différent — seul le second coupe l'article en
+    # plusieurs pages (get_context ci-dessous). "hr" (natif) n'est pas utilisé : Draftail
+    # n'expose sa ligne horizontale intégrée que comme un commutateur unique, incapable
+    # de porter à la fois un simple séparateur et un saut de page.
     body = RichTextField(
         _("texte"), blank=True, default="",
         features=[
             "bold", "italic", "h2", "h3", "h4", "ol", "ul", "link", "document-link", "image", "embed",
-            "pagebreak", "image-gallery",
+            "divider", "pagebreak", "image-gallery",
         ],
     )
 
@@ -251,8 +253,9 @@ class BlogPostPage(Page):
         FieldPanel(
             "body",
             help_text=_(
-                "La ligne horizontale de la barre d'outils sert de saut de page : "
-                "l'article se lit alors en plusieurs pages plutôt qu'en un seul bloc."
+                "Le bouton « Saut de page » de la barre d'outils coupe l'article : il se "
+                "lit alors en plusieurs pages plutôt qu'en un seul bloc. « Ligne "
+                "horizontale » est un simple séparateur visuel, sans effet sur la pagination."
             ),
         ),
     ]

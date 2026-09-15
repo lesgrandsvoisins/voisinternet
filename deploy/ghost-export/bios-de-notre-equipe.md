@@ -2,22 +2,23 @@
 title: Bios de notre équipe
 published_at: 2021-05-15T00:00:00.000+02:00
 reading_time: 1
-excerpt: Nous avions à écrire des résumés courts pour notre équipe.
+excerpt: |
+  Nous avions à écrire des résumés courts pour notre équipe.
 
 
-Chris le Perturbateur
+  Chris le Perturbateur
 
-A la recherche d’innovation constante, à la satisfaction des objectifs philosophiques et idéalistiques, Chris emploie la technologie et l’inguinité pour l’amélioration du sort de tous.
-
-
-Kelsy la Cadre Sup’
-
-Avec sa clarté d’esprit et ce goût pour l’adminsitratif, , Kelsy maintien le sens d’organisation au sein de notre équipe.
+  A la recherche d’innovation constante, à la satisfaction des objectifs philosophiques et idéalistiques, Chris emploie la technologie et l’inguinité pour l’amélioration du sort de tous.
 
 
-Chris the Disruptor
+  Kelsy la Cadre Sup’
 
-Constantly innovating, fulfilling idealistic and philosophical 
+  Avec sa clarté d’esprit et ce goût pour l’adminsitratif, , Kelsy maintien le sens d’organisation au sein de notre équipe.
+
+
+  Chris the Disruptor
+
+  Constantly innovating, fulfilling idealistic and philosophical 
 slug: bios-de-notre-equipe
 featured_image: ./images/2023/04/kelsey-bienvenue.jpg
 ---

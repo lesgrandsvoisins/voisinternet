@@ -2,27 +2,28 @@
 title: 3e Conseil des Voisins
 published_at: 2020-04-15T10:08:00.000+02:00
 reading_time: 3
-excerpt: Le 16 avril 2020 de 16h à 17h30
+excerpt: |
+  Le 16 avril 2020 de 16h à 17h30
 
-Présents:
+  Présents:
 
- * Sabine Arrondelle
- * Michael Muszlak
- * Chris Mann
- * Gabriele Santini
- * Madhi Mokhtari
- * Juan Marcos
+   * Sabine Arrondelle
+   * Michael Muszlak
+   * Chris Mann
+   * Gabriele Santini
+   * Madhi Mokhtari
+   * Juan Marcos
 
 
-Présentation de Juan Marcos
+  Présentation de Juan Marcos
 
-Juan prend la parole. Une identité est crée dans les 5 ans d'existence des GV. Ca a pris vite avec des petites personnes, des petites structures.
+  Juan prend la parole. Une identité est crée dans les 5 ans d'existence des GV. Ca a pris vite avec des petites personnes, des petites structures.
 
-Liens à favoriser entre les personnes qui ne se seraient pas .... (prs prencotées ???).
+  Liens à favoriser entre les personnes qui ne se seraient pas .... (prs prencotées ???).
 
-Monnaie-temps, très mal véçue. Cela a accentué les inégalités.
+  Monnaie-temps, très mal véçue. Cela a accentué les inégalités.
 
-Des logiques néo-l
+  Des logiques néo-l
 slug: 3e-conseil-des-voisins
 featured_image: ./images/2023/04/fete-style.jpg
 ---

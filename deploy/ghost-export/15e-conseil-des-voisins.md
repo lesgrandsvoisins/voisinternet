@@ -2,9 +2,10 @@
 title: 15e Conseil des Voisins
 published_at: 2022-12-15T00:00:00.000+01:00
 reading_time: 2
-excerpt: Participants enregistrés: Prinh-Viet de Weezem, @denisdecastro Denis de Nouvelle-Zélande, @lebureauducreateur Marine MESSNIER du Bureau du Créateur, Foreman Presta, Sviatlana Viarbitskya @svetaverba, Mael ANC @maelnemacherif
+excerpt: |
+  Participants enregistrés: Prinh-Viet de Weezem, @denisdecastro Denis de Nouvelle-Zélande, @lebureauducreateur Marine MESSNIER du Bureau du Créateur, Foreman Presta, Sviatlana Viarbitskya @svetaverba, Mael ANC @maelnemacherif
 
-Chaque participant est invité à se prononcer sur sa vision pour les Grands Voisins. Les idées évoquées touchent aux communs; à une fédéralisation des efforts, des ressources et des acteurs associatifs, des compétences et savoir-faire; aux réseaux des artistes des pas-de-por
+  Chaque participant est invité à se prononcer sur sa vision pour les Grands Voisins. Les idées évoquées touchent aux communs; à une fédéralisation des efforts, des ressources et des acteurs associatifs, des compétences et savoir-faire; aux réseaux des artistes des pas-de-por
 slug: 15e-conseil-des-voisins
 featured_image: ./images/2023/04/photo-ordi-video-keyboard-1.jpg
 ---

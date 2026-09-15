@@ -2,11 +2,12 @@
 title: 11e Conseil des Voisins
 published_at: 2022-04-18T00:00:00.000+02:00
 reading_time: 4
-excerpt: Paris. 18 mars 2022.
+excerpt: |
+  Paris. 18 mars 2022.
 
-Lors du Conseil ven. 18 mars à 18h (2022) à la Ressourcerie créative (14e) et en ligne, nous avions vu les Travaux proposées février 2022 / Pistes d’activités et le Budget participatif Paris.fr “Le numérique créatif” avec la Ressourcerie créative et la Mairie du 14e et d’autres. Nous avions parlé de ma propre activité maintenant visible sur mann.fr 1 et celle projeté par LesGrandsVoisins.com comme vu par les tiers.
+  Lors du Conseil ven. 18 mars à 18h (2022) à la Ressourcerie créative (14e) et en ligne, nous avions vu les Travaux proposées février 2022 / Pistes d’activités et le Budget participatif Paris.fr “Le numérique créatif” avec la Ressourcerie créative et la Mairie du 14e et d’autres. Nous avions parlé de ma propre activité maintenant visible sur mann.fr 1 et celle projeté par LesGrandsVoisins.com comme vu par les tiers.
 
-En attendant la Gazette #9, vous pouvez vous référer à la 
+  En attendant la Gazette #9, vous pouvez vous référer à la 
 slug: 11e-conseil-des-voisins
 featured_image: ./images/2023/04/atelier-ressourcerie_creative.original.jpg
 ---

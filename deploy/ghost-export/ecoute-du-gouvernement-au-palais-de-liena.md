@@ -2,11 +2,12 @@
 title: Ecoute du Gouvernement au Palais de l’Iéna
 published_at: 2022-10-21T00:00:00.000+02:00
 reading_time: 1
-excerpt: Palais de l’Iéna à Paris, le 21 octobre 2022, nous étions invités pour la conclusion d’un évènement
+excerpt: |
+  Palais de l’Iéna à Paris, le 21 octobre 2022, nous étions invités pour la conclusion d’un évènement
 
-« Faire tiers-lieux » au siège du Conseil économique, social et environnemental organisé par le nouveau GIP France Tiers Lieux. Nous y avons écouté un discours riche et nuancé de la Secrétaire d’état de l’économie sociale et solidaire et de la vie associative, Marléne Schiappa (anciennement Ministre déléguée de la citoyenneté) que voici:
+  « Faire tiers-lieux » au siège du Conseil économique, social et environnemental organisé par le nouveau GIP France Tiers Lieux. Nous y avons écouté un discours riche et nuancé de la Secrétaire d’état de l’économie sociale et solidaire et de la vie associative, Marléne Schiappa (anciennement Ministre déléguée de la citoyenneté) que voici:
 
-FAIRE TIERS-LIEUX AU CESE - YouTube : Discours de Marlène 
+  FAIRE TIERS-LIEUX AU CESE - YouTube : Discours de Marlène 
 slug: ecoute-du-gouvernement-au-palais-de-liena
 featured_image: ./images/2023/04/secretaire-etat-pme-faire-tiers-lieu-IMG_20221020_142108.jpg
 ---

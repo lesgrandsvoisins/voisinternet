@@ -2,15 +2,16 @@
 title: 17e Conseil des Voisins - 2 mai 2023 - CR
 published_at: 2023-05-02T17:35:00.000+02:00
 reading_time: 3
-excerpt: Nous avions eu le 17e Conseil des Voisins le 2 mai 2023. 
+excerpt: |
+  Nous avions eu le 17e Conseil des Voisins le 2 mai 2023.
 
-Nous avons acté :
+  Nous avons acté :
 
-1. Notre statut de coopératif et ses engagements
-2. Notre statut d'intérêt général et ses engagements
-3. Des questions administratives
+  1. Notre statut de coopératif et ses engagements
+  2. Notre statut d'intérêt général et ses engagements
+  3. Des questions administratives
 
-Compte-rendu version 2023-05-04-01
+  Compte-rendu version 2023-05-04-01
 slug: 17e-conseil
 featured_image: ./images/2023/05/photo-20230503-conseildesvoisins.jpg
 ---

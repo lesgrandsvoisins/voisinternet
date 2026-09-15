@@ -2,11 +2,12 @@
 title: Lancement du budget participatif
 published_at: 2023-04-28T15:30:00.000+02:00
 reading_time: 3
-excerpt: Je me permets de citer Pauline du Service Démocratie Locale de la Mairie du 14e qi a très bien résumé notre réunion comme suite:
+excerpt: |
+  Je me permets de citer Pauline du Service Démocratie Locale de la Mairie du 14e qi a très bien résumé notre réunion comme suite:
 
-Nous avons pu échanger sur les 3 aspects de votre projet :
+  Nous avons pu échanger sur les 3 aspects de votre projet :
 
- * Du matériel informatique pour proposer des ateliers d'accessibilité numérique, qui soit pliable comme l'espace de la Ressourcerie dédié est polyvalent. Il servirait aussi pour éventuellement faire des ateliers dans d'autres structures (Table des Matières, Moulin à Café ?). Ce matériel pourrait éventuelleme
+   * Du matériel informatique pour proposer des ateliers d'accessibilité numérique, qui soit pliable comme l'espace de la Ressourcerie dédié est polyvalent. Il servirait aussi pour éventuellement faire des ateliers dans d'autres structures (Table des Matières, Moulin à Café ?). Ce matériel pourrait éventuelleme
 slug: lancement-du-budget-participatif
 featured_image: ./images/2023/04/claudie-jacquline-chris-paris-hotel-de-ville.jpeg
 ---

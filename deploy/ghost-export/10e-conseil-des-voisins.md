@@ -2,29 +2,30 @@
 title: 10e Conseil des Voisins
 published_at: 2022-02-24T09:50:00.000+01:00
 reading_time: 2
-excerpt: Paris. Le 24 février 2022.
+excerpt: |
+  Paris. Le 24 février 2022.
 
-Il n’y a pas eu de facilitation graphique de la réunion ce jour. En présence, nous avions la présence de :
+  Il n’y a pas eu de facilitation graphique de la réunion ce jour. En présence, nous avions la présence de :
 
- * @gayclau
- * @lemephil
- * @chiothie
- * @philcaro
- * @mannchri
+   * @gayclau
+   * @lemephil
+   * @chiothie
+   * @philcaro
+   * @mannchri
 
-A distance, nous avions:
+  A distance, nous avions:
 
- * @quinsara
- * @espolore
- * @jeanbenj
- * @carevinc
- * @decadeni
- * @hovnhovi
+   * @quinsara
+   * @espolore
+   * @jeanbenj
+   * @carevinc
+   * @decadeni
+   * @hovnhovi
 
 
-Nous avions beaucoup parlé et je n’ai pas pris énormément de notes.
+  Nous avions beaucoup parlé et je n’ai pas pris énormément de notes.
 
-Il s’avère que la communication est une priorité. Comment faisons-nous pour cultiver un rapport avec les voisins. @gayclau a
+  Il s’avère que la communication est une priorité. Comment faisons-nous pour cultiver un rapport avec les voisins. @gayclau a
 slug: 10e-conseil-des-voisins
 featured_image: ./images/2023/04/10e-conseil-montparnasse.jpeg
 ---

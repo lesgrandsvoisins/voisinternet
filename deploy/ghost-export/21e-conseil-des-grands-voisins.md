@@ -2,22 +2,23 @@
 title: 21e Conseil des Grands Voisins
 published_at: 2024-04-26T15:14:14.000+02:00
 reading_time: 1
-excerpt: Changeons le monde ensembles.
+excerpt: |
+  Changeons le monde ensembles.
 
-Nous proposons notre 21e Conseil des Voisins le 28 avril à 10h dans le 14e arrondissement à Paris et en ligne sur meet.lesgrandsvoisins.com
+  Nous proposons notre 21e Conseil des Voisins le 28 avril à 10h dans le 14e arrondissement à Paris et en ligne sur meet.lesgrandsvoisins.com
 
-Chez Papa Montparnasse Vavin (RER B Port Royal ou Metro 4 Vavin)
-138 Boulevard du Montparnasse, 75014 Paris
+  Chez Papa Montparnasse Vavin (RER B Port Royal ou Metro 4 Vavin)
+  138 Boulevard du Montparnasse, 75014 Paris
 
-(lien Maps)
+  (lien Maps)
 
-Ordre du jour :
+  Ordre du jour :
 
- 1. Comptes annuels (faibles)
- 2. Activités : arts plastiques, numérique, civisme
- 3. Communication
+   1. Comptes annuels (faibles)
+   2. Activités : arts plastiques, numérique, civisme
+   3. Communication
 
-Nous parlerions des sujets précis en lien avec la mémoire de Valentin FRANCY, le numériq
+  Nous parlerions des sujets précis en lien avec la mémoire de Valentin FRANCY, le numériq
 slug: 21e-conseil-des-grands-voisins
 featured_image: ./images/2024/04/invite-20240428-conseildesgv-10h00a11h30.png
 ---

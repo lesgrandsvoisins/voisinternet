@@ -2,21 +2,22 @@
 title: 22e Conseil des Grands Voisins
 published_at: 2024-05-27T14:09:38.000+02:00
 reading_time: 1
-excerpt: 🌟 Venez co-constuire un voisinage 🌟
+excerpt: |
+  🌟 Venez co-constuire un voisinage 🌟
 
-animé, chic, vivant,partageant, équipé,ressourçant, respectueux,mondial, multiculturel,prospère, et de proximité.
+  animé, chic, vivant,partageant, équipé,ressourçant, respectueux,mondial, multiculturel,prospère, et de proximité.
 
- * Lundi le 10 juin de 19h45 à 21h25
- * Jeudi le 13 juin de 15h15 à 16h45
- * Samedi le le 15 juin de 10h15 à 11h45
+   * Lundi le 10 juin de 19h45 à 21h25
+   * Jeudi le 13 juin de 15h15 à 16h45
+   * Samedi le le 15 juin de 10h15 à 11h45
 
-Ordre du jour :
+  Ordre du jour :
 
- 1. Numérique
- 2. Éventuellement Civisme
- 3. Communication
+   1. Numérique
+   2. Éventuellement Civisme
+   3. Communication
 
-Nous avons le plaisir de vous inviter à participer au 22ème Conseil des Grands Voisins, une rencontre incontournable pour tous ceux qui souhaitent s'inve
+  Nous avons le plaisir de vous inviter à participer au 22ème Conseil des Grands Voisins, une rencontre incontournable pour tous ceux qui souhaitent s'inve
 slug: 22e-conseil-des-grands-voisins
 featured_image: ./images/2024/06/flyer-20240530-22econseil-v7.inkscape.svg
 ---

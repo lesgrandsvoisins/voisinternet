@@ -2,25 +2,26 @@
 title: 12e Conseil des Voisins
 published_at: 2022-04-21T09:43:00.000+02:00
 reading_time: 4
-excerpt: Paris le 21 avril 2022.
+excerpt: |
+  Paris le 21 avril 2022.
 
 
-Conseil #12 - Avril 2022
+  Conseil #12 - Avril 2022
 
-En présence
+  En présence
 
-Venez nous voir en personne
-Chez Papa 138 boulevard de Montparnasse 75014 Paris
-par le métro lignes 4 ou 6, station Raspail ou Bus 82 ou 91 arrêt Campagne Première, Bus 38 Port Royal, Bus 68 Vavin au sous-sol (marches tout de suite sur le droit en entrant)
+  Venez nous voir en personne
+  Chez Papa 138 boulevard de Montparnasse 75014 Paris
+  par le métro lignes 4 ou 6, station Raspail ou Bus 82 ou 91 arrêt Campagne Première, Bus 38 Port Royal, Bus 68 Vavin au sous-sol (marches tout de suite sur le droit en entrant)
 
-En visio
+  En visio
 
-Si vous participez en visio:
+  Si vous participez en visio:
 
- * mettez vos vidéo et audio svp
- * de même pour nous, n’enregistrez éventuellement que le chat
+   * mettez vos vidéo et audio svp
+   * de même pour nous, n’enregistrez éventuellement que le chat
 
-pour l’accueil, le confort et la sécurit
+  pour l’accueil, le confort et la sécurit
 slug: 12e-conseil-des-voisins
 featured_image: ./images/2023/04/conseil-voisins-chezpapa-IMG_20220421_191433.jpg
 ---

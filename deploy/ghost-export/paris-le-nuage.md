@@ -2,11 +2,12 @@
 title: Paris le Nuage
 published_at: 2025-02-04T10:15:58.000+01:00
 reading_time: 1
-excerpt: Et si nous remplacions certains services GAFAM pour nous-mêmes ?
+excerpt: |
+  Et si nous remplacions certains services GAFAM pour nous-mêmes ?
 
-Paris le nuage invite 75 acteurs — associations, artistes, artisans, professionnels, entreprises et particuliers — à installer des casiers électroniques derrière leurs box fibre. Ces serveurs libres et basse consommation offrent une alternative locale et transparente aux GAFAM pour le backup, l’accès aux photos et plus encore.
+  Paris le nuage invite 75 acteurs — associations, artistes, artisans, professionnels, entreprises et particuliers — à installer des casiers électroniques derrière leurs box fibre. Ces serveurs libres et basse consommation offrent une alternative locale et transparente aux GAFAM pour le backup, l’accès aux photos et plus encore.
 
-Avoir un serveur libre chez soi ou au travail renforce l’électro-littérisme de tous. Ce projet débute av
+  Avoir un serveur libre chez soi ou au travail renforce l’électro-littérisme de tous. Ce projet débute av
 slug: paris-le-nuage
 featured_image: ./images/2025/02/outils.jpeg
 ---

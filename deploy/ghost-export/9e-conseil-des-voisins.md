@@ -2,38 +2,39 @@
 title: 9e Conseil des Voisins
 published_at: 2021-10-27T00:00:00.000+02:00
 reading_time: 3
-excerpt: Merc. 27 oct. '21 19h30 Farbeez & 20h15 Les Grands Voisins Bagneux et en viséo
+excerpt: |
+  Merc. 27 oct. '21 19h30 Farbeez & 20h15 Les Grands Voisins Bagneux et en viséo
 
 
 
 
 
-Les Grands Voisins COM reunion du 27 10 2021
+  Les Grands Voisins COM reunion du 27 10 2021
 
 
-Les_Grands_Voisins_COM_-_reunion_du_27-10-2021.pdf
-1 MB
-
-
-
-download-circle
+  Les_Grands_Voisins_COM_-_reunion_du_27-10-2021.pdf
+  1 MB
 
 
 
+  download-circle
 
 
 
-Invitation
 
-Bonsoir,
 
-J'ai le grand plaisir de vous inviter à
-la réunion Farbeez & Les Grands Voisins
-ce mercredi 27 octobre 2021
-de 19h30 à 21h (Farbeez avant et Les Grands Voisins après 20h15)
-en ligne à
-https://jitsi.lesgrandsvoisins.com/farbeez
-(merci de tester votre équipement dès m
+
+  Invitation
+
+  Bonsoir,
+
+  J'ai le grand plaisir de vous inviter à
+  la réunion Farbeez & Les Grands Voisins
+  ce mercredi 27 octobre 2021
+  de 19h30 à 21h (Farbeez avant et Les Grands Voisins après 20h15)
+  en ligne à
+  https://jitsi.lesgrandsvoisins.com/farbeez
+  (merci de tester votre équipement dès m
 slug: 9e-conseil-des-voisins
 featured_image: ./images/2023/04/lesgrandsvoisinscom-sketchnotes-large.png
 ---

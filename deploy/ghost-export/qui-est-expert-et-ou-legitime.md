@@ -2,13 +2,14 @@
 title: Qui est expert et/ou légitime
 published_at: 2018-09-01T00:00:00.000+02:00
 reading_time: 1
-excerpt: Ci-dessous est une échange que j’ai eu sur Facebook avec le Président d’Aurore, Eric Pilez, au sujet des Grands Voisins.
+excerpt: |
+  Ci-dessous est une échange que j’ai eu sur Facebook avec le Président d’Aurore, Eric Pilez, au sujet des Grands Voisins.
 
-Eric Pliez: On peut exporter notre ingénierie GV si besoin !
+  Eric Pliez: On peut exporter notre ingénierie GV si besoin !
 
-Chris Mann: Mêmes questions pour vous Eric. quels acteurs sont « légltimes? » Quelles places pour l’inclusion et pour l’excluslon dans de tels efforts? Quels acteurs inattendus pouvons-nous attendre (la question n’est pas évidente)? Estee un nouveau métier ?
+  Chris Mann: Mêmes questions pour vous Eric. quels acteurs sont « légltimes? » Quelles places pour l’inclusion et pour l’excluslon dans de tels efforts? Quels acteurs inattendus pouvons-nous attendre (la question n’est pas évidente)? Estee un nouveau métier ?
 
-Eric Pliez Chris Mann je dirai hybridation culturelle et
+  Eric Pliez Chris Mann je dirai hybridation culturelle et
 slug: qui-est-expert-et-ou-legitime
 featured_image: ./images/2023/04/facebook-ericpliez.png
 ---

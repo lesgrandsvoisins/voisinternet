@@ -2,17 +2,18 @@
 title: 19e Conseil des Voisins
 published_at: 2023-08-23T14:40:50.000+02:00
 reading_time: 1
-excerpt: Invitation au 19e Conseil des Voisins
+excerpt: |
+  Invitation au 19e Conseil des Voisins
 
 
-Conclusions
+  Conclusions
 
-Les votes connexes aux conclusions sont toujours à venir.
+  Les votes connexes aux conclusions sont toujours à venir.
 
- 1. Nous actons la démission de Maël et donne pouvoir à Chris MANN pour faire les démarches connexes
- 2. Un prévisionnel est à établir avant d'engager la commande de 3000 euros auprès d'Osorus (Popup Expos)
- 3. Une dette de 1000 euros au Bureau du Créateur est à accorder en priorité avant l'engagement financier pour Osorus (Popup Expos)
- 4. Le Conseil prend note de la plainte de Chris 
+   1. Nous actons la démission de Maël et donne pouvoir à Chris MANN pour faire les démarches connexes
+   2. Un prévisionnel est à établir avant d'engager la commande de 3000 euros auprès d'Osorus (Popup Expos)
+   3. Une dette de 1000 euros au Bureau du Créateur est à accorder en priorité avant l'engagement financier pour Osorus (Popup Expos)
+   4. Le Conseil prend note de la plainte de Chris 
 slug: 19e-conseil-des-voisins
 featured_image: ./images/2023/08/midi-meeting--Large-.jpg
 ---

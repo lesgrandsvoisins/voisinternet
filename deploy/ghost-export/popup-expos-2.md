@@ -2,20 +2,21 @@
 title: Popup Expos
 published_at: 2023-01-13T00:00:00.000+01:00
 reading_time: 2
-excerpt: Objectifs:
+excerpt: |
+  Objectifs:
 
- * Favoriser une vie de quartier selon les principes des Grands Voisins
- * Inviter l’art dans le quotidien du grand public en cassant les idées reçues que l’art est réservé à une partie de la population
- * Créer une synergie entre le commerce et la culture
- * Mettre en lumière les artistes locaux et les aider à gagner en visibilité
- * Dynamiser l’économie locale
+   * Favoriser une vie de quartier selon les principes des Grands Voisins
+   * Inviter l’art dans le quotidien du grand public en cassant les idées reçues que l’art est réservé à une partie de la population
+   * Créer une synergie entre le commerce et la culture
+   * Mettre en lumière les artistes locaux et les aider à gagner en visibilité
+   * Dynamiser l’économie locale
 
-Par Le Bureau du Créateur et Mael ANC
+  Par Le Bureau du Créateur et Mael ANC
 
 
-Pour et par les artistes
+  Pour et par les artistes
 
-Faites-vous connaître près de chez vous et développez vo
+  Faites-vous connaître près de chez vous et développez vo
 slug: popup-expos-2
 featured_image: ./images/2023/04/air_art_resto_cafe_popupos_expos-1.png
 ---

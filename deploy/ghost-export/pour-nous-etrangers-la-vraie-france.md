@@ -2,15 +2,16 @@
 title: Profession d'Empathie Nationale
 published_at: 2025-02-14T14:53:32.000+01:00
 reading_time: 2
-excerpt: « A Mademoiselle Monod, qui représente pour nous, étrangers, la vraie France »
-Fiszel Zylberberg, Beaune-la-Rolonde, octobre 1941
+excerpt: |
+  « A Mademoiselle Monod, qui représente pour nous, étrangers, la vraie France »
+  Fiszel Zylberberg, Beaune-la-Rolonde, octobre 1941
 
-La journée « Profession d’Empathie Nationale » est un événement annuel qui se tient chaque 2 mars depuis 2025 en commémoration de Valentin Francy et en reconnaissance de l'excellence en travail social à travers le prix Annette Monod.
+  La journée « Profession d’Empathie Nationale » est un événement annuel qui se tient chaque 2 mars depuis 2025 en commémoration de Valentin Francy et en reconnaissance de l'excellence en travail social à travers le prix Annette Monod.
 
 
-Édition 2025
+  Édition 2025
 
-Cette année, la journée « Profession d’Empathie Nationale » se déroulera à l’association France Amérique-Latine (à ne p
+  Cette année, la journée « Profession d’Empathie Nationale » se déroulera à l’association France Amérique-Latine (à ne p
 slug: pour-nous-etrangers-la-vraie-france
 featured_image: ./images/2025/02/profession-empathie-nationale-white.png
 ---

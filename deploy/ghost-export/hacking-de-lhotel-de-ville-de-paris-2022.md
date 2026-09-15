@@ -2,10 +2,11 @@
 title: Hacking de l’hôtel de ville de Paris 2022
 published_at: 2022-09-21T00:00:00.000+02:00
 reading_time: 1
-excerpt: Hôtel de ville de Paris, le 21 Septembre 2022, Les Grands Voisins sont présentés comme structure de soutien lors du Hacking de l’hôtel de ville de Paris. Nous sommes représenté actviement par moi-même, Chris Mann, Ada Matus, et Jamila Oumahi avec Maël Cherif, François Poggi et Sviatslava Viarbitskya en soutien. A trois nous avons eu 41 rencontres programmés avec :
+excerpt: |
+  Hôtel de ville de Paris, le 21 Septembre 2022, Les Grands Voisins sont présentés comme structure de soutien lors du Hacking de l’hôtel de ville de Paris. Nous sommes représenté actviement par moi-même, Chris Mann, Ada Matus, et Jamila Oumahi avec Maël Cherif, François Poggi et Sviatslava Viarbitskya en soutien. A trois nous avons eu 41 rencontres programmés avec :
 
- * Audrey Pulvar, Adjointe à la maire de Parie pour l’Economie sociale et solidaire puis les circuits courts
- * Abracadapain - un sa
+   * Audrey Pulvar, Adjointe à la maire de Parie pour l’Economie sociale et solidaire puis les circuits courts
+   * Abracadapain - un sa
 slug: hacking-de-lhotel-de-ville-de-paris-2022
 featured_image: ./images/2023/04/hacking-hotel-de-ville-2022.jpeg
 ---

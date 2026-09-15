@@ -2,15 +2,16 @@
 title: 13e Conseil des Voisins
 published_at: 2022-08-25T00:00:00.000+02:00
 reading_time: 4
-excerpt: Paris, le 25 août 2022.
+excerpt: |
+  Paris, le 25 août 2022.
 
 
-Conclusions
+  Conclusions
 
-Les orientations suivantes ont été présentées et approuvées:
+  Les orientations suivantes ont été présentées et approuvées:
 
- 1. Création de l’association par le fait de renommer l’association Quatrième Oeil et de son hébergement chez Caroline LHOMME dans le 14e. Cela nous donne une personalité morale. Hovik Hovnikyan est pressenti pour remplacer Jean-Baptiste en Trésorier. Les termes des mandataires sont par périodes de quatre ans.
- 2. La poursuite du budget participatif proposé par la Mairie du 14e en collaboration a
+   1. Création de l’association par le fait de renommer l’association Quatrième Oeil et de son hébergement chez Caroline LHOMME dans le 14e. Cela nous donne une personalité morale. Hovik Hovnikyan est pressenti pour remplacer Jean-Baptiste en Trésorier. Les termes des mandataires sont par périodes de quatre ans.
+   2. La poursuite du budget participatif proposé par la Mairie du 14e en collaboration a
 slug: 13e-conseil-des-voisins
 featured_image: ./images/2023/04/13e-conseil-lesgv.jpeg
 ---

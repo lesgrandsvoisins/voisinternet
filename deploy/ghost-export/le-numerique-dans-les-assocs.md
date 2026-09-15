@@ -2,9 +2,8 @@
 title: Le numérique dans les assoc's ?
 published_at: 2023-09-20T11:00:34.000+02:00
 reading_time: 2
-excerpt: Quelle place le numérique dans les associations ? Comment adresser le GDPR (et est-ce que ça existe réellement) ? Pourquoi les listes de diffusion sont si chères  ? Quel coût le gratuit ? le libre ? Sauvetage ? Wordpress ou  ? « Intelligence » artificielle ?
-
-
+excerpt: |
+  Quelle place le numérique dans les associations ? Comment adresser le GDPR (et est-ce que ça existe réellement) ? Pourquoi les listes de diffusion sont si chères  ? Quel coût le gratuit ? le libre ? Sauvetage ? Wordpress ou  ? « Intelligence » artificielle ?
 slug: le-numerique-dans-les-assocs
 featured_image: ./images/2023/09/numasso.jpg
 ---

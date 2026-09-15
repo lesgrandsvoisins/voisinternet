@@ -2,18 +2,19 @@
 title: Hommage à Arakaki dim. 6 avril à Houilles !
 published_at: 2025-03-31T18:42:23.000+02:00
 reading_time: 2
-excerpt: Félix Toshi Arakaki Ishikawa était artiste peintre et écrivain de renom habitant à Houilles en région parisienne. Le dimanche 6 avril entre midi et 18h, sa famille et ses proches vous invitent à sa maison atelière.
+excerpt: |
+  Félix Toshi Arakaki Ishikawa était artiste peintre et écrivain de renom habitant à Houilles en région parisienne. Le dimanche 6 avril entre midi et 18h, sa famille et ses proches vous invitent à sa maison atelière.
 
-52 rue Hoche 78800 Houilles Carrière
-Gare Houilles Carrière, RER A, Train J
+  52 rue Hoche 78800 Houilles Carrière
+  Gare Houilles Carrière, RER A, Train J
 
-Événement sur OpenAgenda
+  Événement sur OpenAgenda
 
-S'inscrire
+  S'inscrire
 
-Télécharger le fichier .ics
+  Télécharger le fichier .ics
 
-La vie de la famille Arakaki Arakaki est un exemple de lutte multi-générationnelle depuis l'époque des guerres sino-japonaises pour la colon
+  La vie de la famille Arakaki Arakaki est un exemple de lutte multi-générationnelle depuis l'époque des guerres sino-japonaises pour la colon
 slug: hommage-a-arakaki-dim-6-avril-a-houilles
 featured_image: ./images/2025/03/cheval-3.jpeg
 ---

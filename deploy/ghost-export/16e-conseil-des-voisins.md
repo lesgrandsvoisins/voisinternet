@@ -2,21 +2,22 @@
 title: 16e Conseil des Voisins
 published_at: 2023-02-25T00:00:00.000+01:00
 reading_time: 12
-excerpt: Ordre du Jour
+excerpt: |
+  Ordre du Jour
 
->1. Se poser et se présenter
+  >1. Se poser et se présenter
 
->2. Actu de la communication (www.commentwowmaintenant.com)
+  >2. Actu de la communication (www.commentwowmaintenant.com)
 
- * Nouveau site web www.lesgrandsvoisins.com
- * Reconnaissance en tant que coopérative pour www.lgv.coop
- * Utilisation de agoodvillage.com en anglais
- * Utilisation de noms de domaine en terminaison .com (sauf lgv.coop)
+   * Nouveau site web www.lesgrandsvoisins.com
+   * Reconnaissance en tant que coopérative pour www.lgv.coop
+   * Utilisation de agoodvillage.com en anglais
+   * Utilisation de noms de domaine en terminaison .com (sauf lgv.coop)
 
->3. Actu sur les activités (www.communititude.com)
+  >3. Actu sur les activités (www.communititude.com)
 
- * Lancement des Popup Expos (www.popup-expos.com)
- * Lancement de la salle de sociabilité numérique (www.resdigita.com)
+   * Lancement des Popup Expos (www.popup-expos.com)
+   * Lancement de la salle de sociabilité numérique (www.resdigita.com)
 slug: 16e-conseil-des-voisins
 featured_image: ./images/2023/04/THIS_ONE_CONSEIL_DES_VOISINS_IMG_20230225_164035--1-.jpg
 ---

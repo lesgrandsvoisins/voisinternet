@@ -2,28 +2,29 @@
 title: La Guinguette de la Fête de la Musique et tts les jeudis, vendredis et samedis à la Fête nationale!
 published_at: 2022-06-10T00:00:00.000+02:00
 reading_time: 1
-excerpt: Venez nombreuses et nombreux à la Guinguette du Square de Serment de Koufra juste à côté de la place d’Orléans !
+excerpt: |
+  Venez nombreuses et nombreux à la Guinguette du Square de Serment de Koufra juste à côté de la place d’Orléans !
 
-Porte d’Orléans
+  Porte d’Orléans
 
- * Square du serment de Koufra -
-   7501 4 Paris
+   * Square du serment de Koufra -
+     7501 4 Paris
 
-Du 21 JUIN au 14 JUILLET
-Inauguration le mardi 21 juin : 17h - 00h
-Jeudi - Vendredi : 17h - 23h
-Samedi : 12h - 23h
+  Du 21 JUIN au 14 JUILLET
+  Inauguration le mardi 21 juin : 17h - 00h
+  Jeudi - Vendredi : 17h - 23h
+  Samedi : 12h - 23h
 
-PROGRAMME
-Buvette & Restauration
-Concerts & Scène ouverte
-Ateliers DIY et sensibilisation à la Transition Écologique
+  PROGRAMME
+  Buvette & Restauration
+  Concerts & Scène ouverte
+  Ateliers DIY et sensibilisation à la Transition Écologique
 
-Voici le flyer
+  Voici le flyer
 
-Voici un video du making of:
+  Voici un video du making of:
 
-La Guinguette de la Ressourcerie Créati
+  La Guinguette de la Ressourcerie Créati
 slug: la-guinguette-de-la-fete-de-la-musique-et-tts-les-jeudis-vendredis-et-samedis-a-la-fete-nationale
 featured_image: ./images/2023/04/guinguette_Large.original.jpg
 ---

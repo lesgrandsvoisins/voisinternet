@@ -2,16 +2,16 @@
 title: Salle de sociabilité numérique
 published_at: 2023-06-30T17:10:02.000+02:00
 reading_time: 4
-excerpt: 
-Participez à ces ateliers conviviaux d’entraide numérique
-pour vous-même ou pour votre organisation. Vous pouvez y avancer vos projets et vos savoir-faire aussi en aidant d’autres avec les leurs.
+excerpt: |
 
-Tous niveaux, tous âges, tous besoins sont les bienvenus :
-+ des craintifs du numérique aux ingénieurs informaticiens ;
-+ des sans ordinateurs fixes aux équipés du nec plus ultra ;
-+ des hébergés ou migrants aux propriétaires ou entreprises du 14e ;
-+ des salariés ou non-salariés aux patrons du 14e ;
+  Participez à ces ateliers conviviaux d’entraide numérique
+  pour vous-même ou pour votre organisation. Vous pouvez y avancer vos projets et vos savoir-faire aussi en aidant d’autres avec les leurs.
 
+  Tous niveaux, tous âges, tous besoins sont les bienvenus :
+  + des craintifs du numérique aux ingénieurs informaticiens ;
+  + des sans ordinateurs fixes aux équipés du nec plus ultra ;
+  + des hébergés ou migrants aux propriétaires ou entreprises du 14e ;
+  + des salariés ou non-salariés aux patrons du 14e ;
 slug: salle-de-sociabilite-numerique
 featured_image: ./images/2023/07/maisondesmedicenslarge.jpg
 ---

@@ -2,19 +2,20 @@
 title: Galerie Les Arts Voisins à LADAPT Châtillon
 published_at: 2025-12-30T17:25:47.000+01:00
 reading_time: 3
-excerpt: Une gallérie d’art dans un lieu autre est sympathique et pour le lieu, et pour les artistes, et pour les patients, et pour les salariés, et pour l’ensemble des usagers.
+excerpt: |
+  Une gallérie d’art dans un lieu autre est sympathique et pour le lieu, et pour les artistes, et pour les patients, et pour les salariés, et pour l’ensemble des usagers.
 
-Lier l’art
-avec la rééducation
+  Lier l’art
+  avec la rééducation
 
-Pour les usagers du CSR LADAPT Châtillon
+  Pour les usagers du CSR LADAPT Châtillon
 
-Animer le CSR LADAPT Châtillon en organisant une exposition peut avoir de nombreux avantages, à la fois pour l'hôpital et les patients.
+  Animer le CSR LADAPT Châtillon en organisant une exposition peut avoir de nombreux avantages, à la fois pour l'hôpital et les patients.
 
 
-Promotion de la santé et sensibilisation
+  Promotion de la santé et sensibilisation
 
-Les expos peuvent être conçues pour sensibiliser le public sur l
+  Les expos peuvent être conçues pour sensibiliser le public sur l
 slug: galerie-les-arts-voisins-a-ladapt-chatillon
 featured_image: ./images/2026/01/ladapt-hall.jpg
 ---

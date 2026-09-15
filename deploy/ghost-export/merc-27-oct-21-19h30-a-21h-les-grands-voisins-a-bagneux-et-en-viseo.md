@@ -2,15 +2,16 @@
 title: Merc. 27 oct. ‘21 19h30 à 21h Les Grands Voisins à Bagneux et en viseo
 published_at: 2021-10-21T00:00:00.000+02:00
 reading_time: 5
-excerpt: Bonjour les Voisins,
+excerpt: |
+  Bonjour les Voisins,
 
-J’ai le grand plaisir de vous inviter à la réunion Les Grands Voisins ce mercredi 27 octobre 2021 de 19h30 à 21h en ligne à https://jitsi.lesgrandsvoisins.com/farbeez 4
+  J’ai le grand plaisir de vous inviter à la réunion Les Grands Voisins ce mercredi 27 octobre 2021 de 19h30 à 21h en ligne à https://jitsi.lesgrandsvoisins.com/farbeez 4
 
-(merci de tester votre équipement dès maintenant si vous pouvez si vous participer par viseo)
+  (merci de tester votre équipement dès maintenant si vous pouvez si vous participer par viseo)
 
-et aux Simones 1 17 bis rue Blanchard 92220 BAGNEUX
+  et aux Simones 1 17 bis rue Blanchard 92220 BAGNEUX
 
-avec une technologie qui amène les personnes à distance dans la salle, et les gens dans la salle à distance (merci de prendre connaissance de ses particularités
+  avec une technologie qui amène les personnes à distance dans la salle, et les gens dans la salle à distance (merci de prendre connaissance de ses particularités
 slug: merc-27-oct-21-19h30-a-21h-les-grands-voisins-a-bagneux-et-en-viseo
 featured_image: ./images/2023/04/prep-2021-10-27.jpeg
 ---

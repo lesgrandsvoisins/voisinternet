@@ -2,9 +2,10 @@
 title: Page d’acceuil lesgrandsvoisins.com publiée
 published_at: 2021-08-21T00:00:00.000+02:00
 reading_time: 6
-excerpt: Le site web lesgrandsvoisins.com 1 est maintenant ouvert pour informer le public de notre existence et comporte un appel à s’inscrire à la liste de diffusion depuis le 16 août 2021. La partie « services » est cachée pour l’instant et le manifeste est mis en avant. C’est suite à ma décision qu’il est maintenant temps de partager l’information sur le projet.
+excerpt: |
+  Le site web lesgrandsvoisins.com 1 est maintenant ouvert pour informer le public de notre existence et comporte un appel à s’inscrire à la liste de diffusion depuis le 16 août 2021. La partie « services » est cachée pour l’instant et le manifeste est mis en avant. C’est suite à ma décision qu’il est maintenant temps de partager l’information sur le projet.
 
-L’enjeu en communication actuellement est de raconter une histoire engageante à l’image de Les Grands Voisins (ou des Grands Voisins): le « 
+  L’enjeu en communication actuellement est de raconter une histoire engageante à l’image de Les Grands Voisins (ou des Grands Voisins): le « 
 slug: page-dacceuil-lesgrandsvoisins-com-publiee
 featured_image: ./images/2023/04/lesgrandsvoisins-screencopy-1.gif
 ---

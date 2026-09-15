@@ -2,17 +2,18 @@
 title: 20e Conseil des Voisins lun. 18 déc. Paris 14e et Visio
 published_at: 2023-12-03T09:31:04.000+01:00
 reading_time: 1
-excerpt: Nous allons tenir notre 20e Conseil des voisins le 18 décembre 2023 de 19h à 21h.
+excerpt: |
+  Nous allons tenir notre 20e Conseil des voisins le 18 décembre 2023 de 19h à 21h.
 
-Accès en personne :
+  Accès en personne :
 
-Centre commercial « Le Square », au 93 ave du Gén. Leclerc 75014 Paris (Metro Alésia) 7e boutique sur la gauche.
+  Centre commercial « Le Square », au 93 ave du Gén. Leclerc 75014 Paris (Metro Alésia) 7e boutique sur la gauche.
 
-Accès en visio :
+  Accès en visio :
 
-https://meet.lesgrandsvoisins.com (merci de lire les indications à l'avance)
+  https://meet.lesgrandsvoisins.com (merci de lire les indications à l'avance)
 
-Un sujet principal de débat sera notre participation au mémorial de Valentin FRANCY le 2 mars 2024, potentiellement conjointement avec Le Souvenir Français. M. FRANCY, un étudiant de 21 
+  Un sujet principal de débat sera notre participation au mémorial de Valentin FRANCY le 2 mars 2024, potentiellement conjointement avec Le Souvenir Français. M. FRANCY, un étudiant de 21 
 slug: 20e-conseil-des-voisins-lun-18-dec-paris-14e-et-visio
 featured_image: ./images/2023/12/2023-12-flyer-20e-conseil.png
 ---

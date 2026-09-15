@@ -2,8 +2,9 @@
 title: La Marque Les Grands Voisins est une responsabilité pour n'importe qui
 published_at: 2023-04-28T07:43:21.000+02:00
 reading_time: 4
-excerpt: Qui est Grands Voisin qui veut bien l'être. Cette Marque bénéficie d'un double-dépoôt qui ouvre effectivement sa propriété à toutes et à tous. 
-[Version 2023-04-29-1]
+excerpt: |
+  Qui est Grands Voisin qui veut bien l'être. Cette Marque bénéficie d'un double-dépoôt qui ouvre effectivement sa propriété à toutes et à tous.
+  [Version 2023-04-29-1]
 slug: la-marque-est-une-responsabilite-pour-nimporte-qui
 featured_image: ./images/2023/04/etrevoisin.svg
 ---

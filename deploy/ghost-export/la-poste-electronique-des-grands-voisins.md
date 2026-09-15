@@ -2,11 +2,12 @@
 title: La poste électronique des Grands Voisins
 published_at: 2021-11-09T00:00:00.000+01:00
 reading_time: 4
-excerpt: Nous utilisons notre propre serveur public d’envoi de courriels. Cela nous permet de ne pas faire transiter nos messages par des intermediaries tels que gmail, mailchimp, mailjet, hotmail, yahoo ou bien d’autres.
+excerpt: |
+  Nous utilisons notre propre serveur public d’envoi de courriels. Cela nous permet de ne pas faire transiter nos messages par des intermediaries tels que gmail, mailchimp, mailjet, hotmail, yahoo ou bien d’autres.
 
-Si vous utiliser un tiers tel que gmail, hotmail, etc…, nous livrons le message directement à votre gestionnaire de courriel. De notre côté, nous en sommes autonomes.
+  Si vous utiliser un tiers tel que gmail, hotmail, etc…, nous livrons le message directement à votre gestionnaire de courriel. De notre côté, nous en sommes autonomes.
 
-Cela nous a pris de l’effort pour être connu par l’internet entier comme une poste électronique responsable. Il y avai
+  Cela nous a pris de l’effort pour être connu par l’internet entier comme une poste électronique responsable. Il y avai
 slug: la-poste-electronique-des-grands-voisins
 featured_image: ./images/2023/04/email-setup.png
 ---

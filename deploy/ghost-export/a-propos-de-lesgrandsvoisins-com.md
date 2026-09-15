@@ -2,11 +2,12 @@
 title: A propos de LesGrandsVoisins.com
 published_at: 2021-12-03T00:00:00.000+01:00
 reading_time: 1
-excerpt: LesGrandsVoisins.com sommes des communautés ouvertes aux mondes partageant des biens communs depuis le numérique et au-delà.
+excerpt: |
+  LesGrandsVoisins.com sommes des communautés ouvertes aux mondes partageant des biens communs depuis le numérique et au-delà.
 
-J’étais impliqué dans Les Grands Voisins installés dans l’ancien hôpital Saint Vincent de Paul (près du Jardin de Luxembourg à Paris) de 2016 à 2019. En 2017, j’ai édité les contributions d’une centaine de voisins sur un mois dans ma version du Manifeste des Grands Voisins: soit la base de LesGrandsVoisins.com.
+  J’étais impliqué dans Les Grands Voisins installés dans l’ancien hôpital Saint Vincent de Paul (près du Jardin de Luxembourg à Paris) de 2016 à 2019. En 2017, j’ai édité les contributions d’une centaine de voisins sur un mois dans ma version du Manifeste des Grands Voisins: soit la base de LesGrandsVoisins.com.
 
-LesGrandsVoisins.com propose un mécanisme de partage de bien
+  LesGrandsVoisins.com propose un mécanisme de partage de bien
 slug: a-propos-de-lesgrandsvoisins-com
 featured_image: ./images/2023/04/miseenrelation-2.svg
 ---

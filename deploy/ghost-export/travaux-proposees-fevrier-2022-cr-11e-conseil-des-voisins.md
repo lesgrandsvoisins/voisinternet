@@ -2,19 +2,20 @@
 title: Travaux proposées février 2022 (CR 11e Conseil des Voisins)
 published_at: 2022-02-03T00:00:00.000+01:00
 reading_time: 2
-excerpt: Nous proposons les axes de travaux suivants lors du Conseil des Grands Voisins le 24 février 2022 de 17h30 à 19h 1.
+excerpt: |
+  Nous proposons les axes de travaux suivants lors du Conseil des Grands Voisins le 24 février 2022 de 17h30 à 19h 1.
 
 
-Expos
+  Expos
 
-L’idée de ce projet est de faire des lieux commerciaux – les cafés, les restaurants, les coiffeurs, et même des boulangers – des lieux d’exposition d’art. Cela impliquerait une participation informelle entre les commerçants et les artistes.
+  L’idée de ce projet est de faire des lieux commerciaux – les cafés, les restaurants, les coiffeurs, et même des boulangers – des lieux d’exposition d’art. Cela impliquerait une participation informelle entre les commerçants et les artistes.
 
 
-eCommerce
+  eCommerce
 
-Le projet de commerce électronique consiste en la création d’un site web partagé et utilisable par les Voisins.
+  Le projet de commerce électronique consiste en la création d’un site web partagé et utilisable par les Voisins.
 
-En antic
+  En antic
 slug: travaux-proposees-fevrier-2022-cr-11e-conseil-des-voisins
 featured_image: ./images/2023/04/team-tree-2.jpg
 ---

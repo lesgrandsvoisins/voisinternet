@@ -2,17 +2,18 @@
 title: Proposition de déclaration de mission
 published_at: 2021-08-05T00:00:00.000+02:00
 reading_time: 1
-excerpt: Nous, Les Grands Voisins, déplorons le dédain, l’agression et l’ambiguïté dans ce monde aujourd’hui à tous les niveaux et proposons à la place des priorités tournées vers les vérités, vers les engagements et vers la subsidiarité et ceci dans le sens de notre déclaration d’interdépendance.
+excerpt: |
+  Nous, Les Grands Voisins, déplorons le dédain, l’agression et l’ambiguïté dans ce monde aujourd’hui à tous les niveaux et proposons à la place des priorités tournées vers les vérités, vers les engagements et vers la subsidiarité et ceci dans le sens de notre déclaration d’interdépendance.
 
 
-Les vérités
+  Les vérités
 
-Une recherche de vérité subjective est compatible avec la compréhension des vérités des autres. La richesse vient d’une diversité de vérités différentes.
+  Une recherche de vérité subjective est compatible avec la compréhension des vérités des autres. La richesse vient d’une diversité de vérités différentes.
 
 
-Les engagements
+  Les engagements
 
-Chaque voisin et voisi
+  Chaque voisin et voisi
 slug: proposition-de-declaration-de-mission
 featured_image: ./images/2023/04/eiffeltour-phare-montpar.jpg
 ---

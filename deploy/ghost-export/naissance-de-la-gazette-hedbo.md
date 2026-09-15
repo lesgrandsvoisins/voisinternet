@@ -2,9 +2,10 @@
 title: Naissance de la Gazette hedbo
 published_at: 2021-07-24T00:00:00.000+02:00
 reading_time: 3
-excerpt: Le 29 juillet 2021, nous avons envoyé notre premier newsletter de LesGrandsVoisins.com. Dans cette gazette de LesgrandsVoisins.com 1, nous avons promu les principes directeurs du manifeste et avons suivi notre informatique engagée. On y trouve particulièrement les nouvelles sur LesGrandsVoisins.com et les choses à venir. Vous pouvez vous y inscrire ici.
+excerpt: |
+  Le 29 juillet 2021, nous avons envoyé notre premier newsletter de LesGrandsVoisins.com. Dans cette gazette de LesgrandsVoisins.com 1, nous avons promu les principes directeurs du manifeste et avons suivi notre informatique engagée. On y trouve particulièrement les nouvelles sur LesGrandsVoisins.com et les choses à venir. Vous pouvez vous y inscrire ici.
 
-Le site mailing.LesGrandsVoisins.com est une implémentation du logiciel « Discourse.org » avec pour objectif de composer et rendre disponible l
+  Le site mailing.LesGrandsVoisins.com est une implémentation du logiciel « Discourse.org » avec pour objectif de composer et rendre disponible l
 slug: naissance-de-la-gazette-hedbo
 featured_image: ./images/2023/04/lemonde-2017.original-1.png
 ---

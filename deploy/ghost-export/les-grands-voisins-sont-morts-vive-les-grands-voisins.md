@@ -2,16 +2,17 @@
 title: Les Grands Voisins sont morts, vive Les Grands Voisins!
 published_at: 2021-07-21T00:00:00.000+02:00
 reading_time: 1
-excerpt: Paris. 24 juillet 2021.
+excerpt: |
+  Paris. 24 juillet 2021.
 
-Les Grands Voisins est un concept sur quatre piliers:
+  Les Grands Voisins est un concept sur quatre piliers:
 
- 1. Service public
- 2. Service social
- 3. Économie sociale et solidaire
- 4. Grand public
+   1. Service public
+   2. Service social
+   3. Économie sociale et solidaire
+   4. Grand public
 
-L’hôpital abandonné Saint Vincent de Paul a matérialisé ce lieu, dont les effets sont visibles sur lesgrandsvoisins.org (lesgrandsvoisins.org n’a pas d’affiliation avec lesgrandsvoisins.com 1). Lors de cette expérience, en tant que locataire des Grands Voisins, j’ai participé dans un atelier de production d’une manifeste des Gra
+  L’hôpital abandonné Saint Vincent de Paul a matérialisé ce lieu, dont les effets sont visibles sur lesgrandsvoisins.org (lesgrandsvoisins.org n’a pas d’affiliation avec lesgrandsvoisins.com 1). Lors de cette expérience, en tant que locataire des Grands Voisins, j’ai participé dans un atelier de production d’une manifeste des Gra
 slug: les-grands-voisins-sont-morts-vive-les-grands-voisins
 featured_image: ./images/2023/04/lesgrandsvoisins-sainvincentdepaul-line-IMG_20200904_203630.jpg
 ---

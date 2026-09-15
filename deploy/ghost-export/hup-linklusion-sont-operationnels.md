@@ -2,15 +2,16 @@
 title: H’up & Linklusion sont opérationnels
 published_at: 2021-07-31T00:00:00.000+02:00
 reading_time: 1
-excerpt: Côté H’up, je bénéficie d’un programme Rebonds TIH en mentorat de crise avec un mentor pour préparer l’activité à venir avec divers moyens.
+excerpt: |
+  Côté H’up, je bénéficie d’un programme Rebonds TIH en mentorat de crise avec un mentor pour préparer l’activité à venir avec divers moyens.
 
-La réunion du 10 août avec un référant ouvert sur trois pistes:
+  La réunion du 10 août avec un référant ouvert sur trois pistes:
 
- 1. l’accompagnement d’un(e) comptable pour la déclaration de cessation de paiements de l’activité photographique artisanale
- 2. l’investigation des questions juridiques avec un entretien un avocat
- 3. le mentorat à la création d’entreprise
+   1. l’accompagnement d’un(e) comptable pour la déclaration de cessation de paiements de l’activité photographique artisanale
+   2. l’investigation des questions juridiques avec un entretien un avocat
+   3. le mentorat à la création d’entreprise
 
-Linklusion engage un programme « TIH-Booster » avec 
+  Linklusion engage un programme « TIH-Booster » avec 
 slug: hup-linklusion-sont-operationnels
 featured_image: ./images/2023/04/sunrise-linklusion-IMG_20211202_165300.jpg
 ---

@@ -2,19 +2,20 @@
 title: 2e Conseil des Voisins
 published_at: 2020-04-03T10:03:00.000+02:00
 reading_time: 3
-excerpt: Le 3 avril 2020 ou 2020 à Paris de 11:00 à 12:30
+excerpt: |
+  Le 3 avril 2020 ou 2020 à Paris de 11:00 à 12:30
 
-Present:
+  Present:
 
- * Sabine Arrondelle
- * Michael Muszlak
- * Chris Mann
- * Gabriele Santini
- * ...
+   * Sabine Arrondelle
+   * Michael Muszlak
+   * Chris Mann
+   * Gabriele Santini
+   * ...
 
-The departure of the Grands Voisins will be postponed.
+  The departure of the Grands Voisins will be postponed.
 
-Rehabilitation on "Le Village des Grands Voisins". The purpose of this effort was to involve the residents (marginalized people who need shelter and food) more. Some would have seen this as a personal attack, a desire to take power, to reject the other. This ended with the inner circle of the Big Neig
+  Rehabilitation on "Le Village des Grands Voisins". The purpose of this effort was to involve the residents (marginalized people who need shelter and food) more. Some would have seen this as a personal attack, a desire to take power, to reject the other. This ended with the inner circle of the Big Neig
 slug: 2e-conseil-des-voisins
 featured_image: ./images/2023/04/1e-conseil-des-voisins.jpeg
 ---

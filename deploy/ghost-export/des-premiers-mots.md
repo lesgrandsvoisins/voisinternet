@@ -2,15 +2,16 @@
 title: Des premiers mots
 published_at: 2023-10-30T18:08:55.000+01:00
 reading_time: 1
-excerpt: Voici les premiers mots de Thimoté sur un ordinateur
+excerpt: |
+  Voici les premiers mots de Thimoté sur un ordinateur
 
-Salut mon ami comment vas-tu ? Si tout va bien, DIEU merci. Et les activités ça marche bien ou pas ? Cela  fait un bon moment qu’on ne se voit pas. J’espère qu’on se reverra très prochainement.
+  Salut mon ami comment vas-tu ? Si tout va bien, DIEU merci. Et les activités ça marche bien ou pas ? Cela  fait un bon moment qu’on ne se voit pas. J’espère qu’on se reverra très prochainement.
 
-Et Timothée revient deux semaines plus tard pour ajouter à l'article.
+  Et Timothée revient deux semaines plus tard pour ajouter à l'article.
 
-Bonjour les Grands Voisins,
+  Bonjour les Grands Voisins,
 
-Je suis ravi d’entendre parler de vous. je suis encore là aujourd’hui pour me connecter au monde de l’informatique, du numérique. L’atelier d’entraide 
+  Je suis ravi d’entendre parler de vous. je suis encore là aujourd’hui pour me connecter au monde de l’informatique, du numérique. L’atelier d’entraide 
 slug: des-premiers-mots
 featured_image: ./images/2023/10/IMG_20231030_164540--Large-.jpg
 ---

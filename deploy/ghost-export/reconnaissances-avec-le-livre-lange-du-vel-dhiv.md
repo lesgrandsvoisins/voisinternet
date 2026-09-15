@@ -2,12 +2,13 @@
 title: Reconnaissances avec le livre “L’ange du Vel d’Hiv”
 published_at: 2021-07-31T00:00:00.000+02:00
 reading_time: 1
-excerpt: William, Jean Baptiste et @kelseypoe vont recevoir un exemplaire de la bibliographie d’Annette Monod 1 L’ange du Vel d’Hiv en reconnaissance de leurs contributions et intérêt dans le volet des services sociaux.
-Cet article me semble intéressant.
+excerpt: |
+  William, Jean Baptiste et @kelseypoe vont recevoir un exemplaire de la bibliographie d’Annette Monod 1 L’ange du Vel d’Hiv en reconnaissance de leurs contributions et intérêt dans le volet des services sociaux.
+  Cet article me semble intéressant.
 
-http://www.crif.org/fr/actualites/rescapée-du-vel-dhiv-«-je-navais-quune-idée-méchapper-»/32096
+  http://www.crif.org/fr/actualites/rescapée-du-vel-dhiv-«-je-navais-quune-idée-méchapper-»/32096
 
-Annette a beaucoup travaillé en plus qu’au Val d’Hiv pourtant.
+  Annette a beaucoup travaillé en plus qu’au Val d’Hiv pourtant.
 slug: reconnaissances-avec-le-livre-lange-du-vel-dhiv
 featured_image: ./images/2023/04/lange-du-vel-div.jpg
 ---

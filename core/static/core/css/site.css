@@ -1473,6 +1473,14 @@ blockquote p {
   clear: both;
 }
 
+/* Une image seule insérée par l'éditeur natif (bouton « Image ») est toujours encadrée
+   d'un <p> vide de part et d'autre — artefact de Draft.js (chaque bloc atomique est
+   entouré de paragraphes vides, pour pouvoir y placer le curseur) : sans ceci, ça
+   laisserait un blanc visible au-dessus et en dessous de l'image. */
+.blog-post .markdown p:empty {
+  display: none
+}
+
 /* Plusieurs images qui se suivent (import Ghost ou éditeur natif) sont regroupées à
    l'affichage dans un <div class="gallery"> (cms/templatetags/gallery_filters.py,
    appliqué après la conversion du texte enrichi en HTML) plutôt que repérées ici en CSS

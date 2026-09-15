@@ -109,9 +109,70 @@
     });
   }
 
+  // Glisser-déposer sur les listes de raccourcis/groupes (core/partials/{shortcut,
+  // membership}_list.html) : complète les boutons ↑/↓, qui restent la seule façon de
+  // réordonner sans JavaScript.
+  function armDragReorder() {
+    document.querySelectorAll("[data-reorder]").forEach(function (list) {
+      if (list.dataset.dragArmed) return;
+      list.dataset.dragArmed = "1";
+
+      var dragging = null;
+
+      list.addEventListener("dragstart", function (e) {
+        var li = e.target.closest("li[data-slug]");
+        if (!li) return;
+        dragging = li;
+        li.classList.add("dragging");
+      });
+
+      list.addEventListener("dragend", function () {
+        if (dragging) dragging.classList.remove("dragging");
+        dragging = null;
+      });
+
+      list.addEventListener("dragover", function (e) {
+        var li = e.target.closest("li[data-slug]");
+        if (!dragging || !li || li === dragging) return;
+        e.preventDefault();
+        var rect = li.getBoundingClientRect();
+        var before = (e.clientY - rect.top) < rect.height / 2;
+        list.insertBefore(dragging, before ? li : li.nextSibling);
+      });
+
+      list.addEventListener("drop", function (e) {
+        e.preventDefault();
+        if (!dragging) return;
+
+        var order = Array.from(list.querySelectorAll(":scope > li[data-slug]")).map(function (li) {
+          return li.dataset.slug;
+        });
+        var csrfInput = list.querySelector("[name=csrfmiddlewaretoken]");
+        if (!csrfInput) return;
+
+        fetch(list.dataset.reorderUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-CSRFToken": csrfInput.value,
+          },
+          body: "order=" + encodeURIComponent(order.join(",")),
+        }).then(function (response) {
+          return response.text();
+        }).then(function (html) {
+          var target = list.closest("[id]");
+          if (target) target.innerHTML = html;
+          armDragReorder();
+        });
+      });
+    });
+  }
+
   // Le menu principal et le widget du compte (en-tête) sont gérés par Alpine.js (voir base.html).
   document.addEventListener("DOMContentLoaded", armToasts);
   document.addEventListener("htmx:afterSettle", armToasts);
   document.addEventListener("DOMContentLoaded", armWysiwyg);
   document.addEventListener("htmx:afterSettle", armWysiwyg);
+  document.addEventListener("DOMContentLoaded", armDragReorder);
+  document.addEventListener("htmx:afterSettle", armDragReorder);
 })();

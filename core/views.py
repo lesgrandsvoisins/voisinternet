@@ -410,6 +410,29 @@ def reorder_shortcut(request, slug, direction):
     return redirect("core:raccourcis")
 
 
+@require_POST
+def reorder_shortcuts(request):
+    """
+    Glisser-déposer (site.js) : reçoit l'ordre complet des slugs de service et réattribue
+    les positions en conséquence. Complète les boutons ↑/↓ de reorder_shortcut, qui restent
+    la seule façon de réordonner sans JavaScript.
+    """
+    account = current_account(request)
+    if account is None:
+        return HttpResponse(status=403)
+
+    shortcuts_by_slug = {sc.service.slug: sc for sc in account.shortcut_set.select_related("service")}
+    for position, slug in enumerate(request.POST.get("order", "").split(",")):
+        shortcut = shortcuts_by_slug.get(slug)
+        if shortcut and shortcut.position != position:
+            shortcut.position = position
+            shortcut.save(update_fields=["position"])
+
+    return render(request, "core/partials/shortcut_list.html", {
+        "shortcuts": account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name"),
+    })
+
+
 # --- Appartenances
 
 @require_POST
@@ -500,3 +523,22 @@ def reorder_membership(request, slug, direction):
         })
 
     return redirect("core:groupes")
+
+
+@require_POST
+def reorder_memberships(request):
+    """Glisser-déposer (site.js) : voir reorder_shortcuts, même principe pour les groupes."""
+    account = current_account(request)
+    if account is None:
+        return HttpResponse(status=403)
+
+    memberships_by_slug = {m.audience.slug: m for m in account.membership_set.select_related("audience")}
+    for position, slug in enumerate(request.POST.get("order", "").split(",")):
+        membership = memberships_by_slug.get(slug)
+        if membership and membership.position != position:
+            membership.position = position
+            membership.save(update_fields=["position"])
+
+    return render(request, "core/partials/membership_list.html", {
+        "memberships": account.membership_set.select_related("audience").order_by("position", "audience__order", "audience__name"),
+    })

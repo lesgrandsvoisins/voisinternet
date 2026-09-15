@@ -213,7 +213,7 @@ a {
 .mega>.wrap {
   display: flex;
   flex-wrap: wrap;
-
+  justify-content: center;
 }
 
 .brand {
@@ -297,6 +297,25 @@ a {
   padding: 1rem;
   margin-top: .55rem;
   z-index: 30
+}
+
+.account-menu-close {
+  position: absolute;
+  top: .5rem;
+  inset-inline-end: .5rem;
+  background: none;
+  border: 0;
+  color: var(--ink-soft);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: .25rem .45rem;
+  border-radius: 6px
+}
+
+.account-menu-close:hover {
+  background: var(--hover);
+  color: var(--ink)
 }
 
 .account-actions {
@@ -408,7 +427,8 @@ a {
   background: var(--paper);
   box-shadow: 0 16px 32px rgba(0, 0, 0, .1);
   max-height: calc(100vh - 4.5rem);
-  overflow-y: auto
+  overflow-y: auto;
+  text-align: center;
 }
 
 .mega-enter {
@@ -892,6 +912,14 @@ section.block {
    contrôles (monter, descendre, retirer) qui ont besoin de toute la largeur. */
 .svc-actions {
   grid-template-columns: 1fr
+}
+
+.svc-actions li[draggable="true"] {
+  cursor: grab
+}
+
+.svc-actions li.dragging {
+  opacity: .4
 }
 
 .svc li {

@@ -1,9 +1,9 @@
 {% load i18n %}
 {% if shortcuts %}
-  <ul class="svc svc-actions">
+  <ul class="svc svc-actions" data-reorder data-reorder-url="{% url 'core:reorder_shortcuts' %}">
     {% for shortcut in shortcuts %}
       {% with service=shortcut.service %}
-        <li>
+        <li data-slug="{{ service.slug }}" draggable="true">
           {% if service.icon %}
             <img class="svc-icon" src="{{ service.icon.url }}" alt="">
           {% else %}

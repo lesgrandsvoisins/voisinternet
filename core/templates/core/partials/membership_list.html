@@ -1,7 +1,7 @@
 {% load i18n %}{% if memberships %}
-<ul class="svc svc-actions">
+<ul class="svc svc-actions" data-reorder data-reorder-url="{% url 'core:reorder_memberships' %}">
   {% for membership in memberships %}{% with audience=membership.audience %}
-  <li>
+  <li data-slug="{{ audience.slug }}" draggable="true">
     <span class="led" aria-hidden="true"></span>
     <div><h3>{{ audience.name }}</h3><p>{{ audience.pitch }}</p></div>
     <div class="shortcut-tools">

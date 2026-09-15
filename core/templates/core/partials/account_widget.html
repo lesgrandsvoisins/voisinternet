@@ -22,6 +22,10 @@
        x-show="open"
        x-cloak
        aria-label="{% trans "Options de mon compte" %}">
+    <button type="button"
+            class="account-menu-close"
+            x-on:click="open = false"
+            aria-label="{% trans "Fermer" %}">×</button>
     {% include "core/partials/account_panel_body.html" %}
   </div>
 </div>

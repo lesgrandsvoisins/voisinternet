@@ -28,6 +28,8 @@ urlpatterns = [
     path("annuaire/<slug:slug>/publication/", views.toggle_publication, name="toggle_publication"),
     path("annuaire/<slug:slug>/raccourci/", views.toggle_shortcut, name="toggle_shortcut"),
     path("raccourcis/<slug:slug>/raccourci/<str:direction>/", views.reorder_shortcut, name="reorder_shortcut"),
+    path("raccourcis/glisser/", views.reorder_shortcuts, name="reorder_shortcuts"),
     path("groupes/<slug:slug>/adherer/", views.toggle_membership, name="toggle_membership"),
     path("groupes/<slug:slug>/adherer/<str:direction>/", views.reorder_membership, name="reorder_membership"),
+    path("groupes/glisser/", views.reorder_memberships, name="reorder_memberships"),
 ]

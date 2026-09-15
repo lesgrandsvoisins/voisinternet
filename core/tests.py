@@ -4,7 +4,7 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from .accounts import SESSION_KEY
-from .models import Account, Audience, DirectoryEntry, DirectorySector, Donor, Service, Shortcut, format_number
+from .models import Account, Audience, DirectoryEntry, DirectorySector, Donor, Membership, Service, Shortcut, format_number
 
 
 @override_settings(CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}})
@@ -155,6 +155,25 @@ class AnonymousAccountTests(Base):
         self.assertContains(response, "Descendre")
         self.assertNotContains(response, "302")
 
+    def test_reorder_shortcuts_drag_and_drop(self):
+        user = get_user_model().objects.create_user("user")
+        account = Account.objects.create(user=user)
+        service_two = Service.objects.create(name="Agenda", slug="agenda", summary="Agenda personnel.")
+        Shortcut.objects.create(account=account, service=self.service, position=10)
+        Shortcut.objects.create(account=account, service=service_two, position=20)
+
+        self.client.force_login(user)
+        response = self.client.post(
+            reverse("core:reorder_shortcuts"), {"order": f"agenda,{self.service.slug}"},
+        )
+        self.assertEqual(response.status_code, 200)
+        ordered = list(account.shortcut_set.order_by("position").values_list("service__slug", flat=True))
+        self.assertEqual(ordered, ["agenda", self.service.slug])
+
+    def test_reorder_shortcuts_requires_an_account(self):
+        response = self.client.post(reverse("core:reorder_shortcuts"), {"order": "agenda"})
+        self.assertEqual(response.status_code, 403)
+
     def test_htmx_toggle_returns_partial_with_out_of_band_updates(self):
         response = self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]), HTTP_HX_REQUEST="true")
         self.assertEqual(response.status_code, 200)
@@ -212,6 +231,22 @@ class AudienceTests(Base):
         response = self.client.get(reverse("core:groupes"))
         self.assertContains(response, Audience.objects.get(slug="associations").name)
         self.assertContains(response, 'class="add"')
+
+    def test_reorder_memberships_drag_and_drop(self):
+        user = get_user_model().objects.create_user("user")
+        account = Account.objects.create(user=user)
+        associations = Audience.objects.get(slug="associations")
+        other = Audience.objects.create(name="Un particulier", slug="particulier")
+        Membership.objects.create(account=account, audience=associations, position=10)
+        Membership.objects.create(account=account, audience=other, position=20)
+
+        self.client.force_login(user)
+        response = self.client.post(
+            reverse("core:reorder_memberships"), {"order": "particulier,associations"},
+        )
+        self.assertEqual(response.status_code, 200)
+        ordered = list(account.membership_set.order_by("position").values_list("audience__slug", flat=True))
+        self.assertEqual(ordered, ["particulier", "associations"])
 
     def test_partnership_audience_offers_no_join_button(self):
         # Aucune audience du fixture n'est un partenariat à ce jour : on en crée une pour

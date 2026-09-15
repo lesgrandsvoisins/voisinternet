@@ -27,6 +27,7 @@ urlpatterns = [
     path("annuaire/mes-fiches/<slug:slug>/modifier/", views.fiche_modifier, name="fiche_modifier"),
     path("annuaire/mes-fiches/<slug:slug>/supprimer/", views.fiche_supprimer, name="fiche_supprimer"),
     path("annuaire/<slug:slug>/", views.entry_detail, name="entry_detail"),
+    path("annuaire/<slug:slug>/revendiquer/", views.claim_entry_ownership, name="claim_entry_ownership"),
     path("annuaire/<slug:slug>/abonnement/", views.toggle_subscription, name="toggle_subscription"),
     path("annuaire/<slug:slug>/publication/", views.toggle_publication, name="toggle_publication"),
     path("annuaire/<slug:slug>/raccourci/", views.toggle_shortcut, name="toggle_shortcut"),

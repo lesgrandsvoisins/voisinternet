@@ -357,6 +357,38 @@ class EntrySubscription(models.Model):
         return f"{self.entry} ({self.account})"
 
 
+class OwnershipClaim(models.Model):
+    """
+    Une demande d'un compte nominatif pour devenir responsable d'une fiche de
+    l'annuaire qui n'en a pas encore (import, fiche créée par un administrateur…).
+    Validée par le groupe « Administration » — voir Meta.constraints et save().
+    """
+    entry = models.ForeignKey(DirectoryEntry, on_delete=models.CASCADE, related_name="ownership_claims")
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="ownership_claims")
+    created = models.DateTimeField(default=timezone.now, editable=False)
+    # None = en attente, True = validée (la fiche est transférée), False = refusée.
+    approved = models.BooleanField(_("validée"), null=True, default=None)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=["entry", "account"], name="unique_ownership_claim")]
+        ordering = ["-created"]
+        verbose_name = _("demande de responsabilité de fiche")
+        verbose_name_plural = _("demandes de responsabilité de fiche")
+
+    def __str__(self):
+        return f"{self.account} → {self.entry}"
+
+    def save(self, *args, **kwargs):
+        if self.approved and self.entry.owner_id is None:
+            self.entry.owner = self.account
+            self.entry.save(update_fields=["owner"])
+            # Les autres demandes en attente sur la même fiche n'ont plus lieu d'être.
+            OwnershipClaim.objects.filter(
+                entry=self.entry, approved__isnull=True,
+            ).exclude(pk=self.pk).update(approved=False)
+        super().save(*args, **kwargs)
+
+
 class Event(models.Model):
     """
     Un évènement de l'agenda (conseil des voisins, atelier…).

@@ -4,7 +4,7 @@ from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectoryEntryPhoto, DirectorySector, Donor, EntrySubscription,
     Event, GuideBook,
-    Membership, Service, ServiceCategory, Shortcut,
+    Membership, OwnershipClaim, Service, ServiceCategory, Shortcut,
 )
 
 admin.site.site_header = "lesgrandsvoisins.com"
@@ -145,6 +145,16 @@ class DirectoryEntryAdmin(TranslationAdmin):
 class EntrySubscriptionAdmin(admin.ModelAdmin):
     list_display = ["account", "entry", "created"]
     autocomplete_fields = ["entry"]
+
+
+@admin.register(OwnershipClaim)
+class OwnershipClaimAdmin(admin.ModelAdmin):
+    """Accessible au groupe « Administration » (core.migrations.0021) : passer
+    « validée » à Oui transfère la fiche (OwnershipClaim.save)."""
+    list_display = ["account", "entry", "created", "approved"]
+    list_filter = ["approved"]
+    list_editable = ["approved"]
+    autocomplete_fields = ["entry", "account"]
 
 
 @admin.register(Event)

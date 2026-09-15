@@ -6,7 +6,8 @@ from django.utils import timezone
 
 from .accounts import SESSION_KEY
 from .models import (
-    Account, Audience, DirectoryEntry, DirectorySector, Donor, Event, Membership, Service, Shortcut, format_number,
+    Account, Audience, DirectoryEntry, DirectorySector, Donor, Event, Membership, OwnershipClaim, Service, Shortcut,
+    format_number,
 )
 
 
@@ -236,8 +237,56 @@ class ServiceApprovalTests(Base):
         codenames = set(group.permissions.values_list("codename", flat=True))
         self.assertEqual(
             codenames,
-            {"view_shortcut", "change_shortcut", "view_directoryentry", "change_directoryentry"},
+            {
+                "view_shortcut", "change_shortcut", "view_directoryentry", "change_directoryentry",
+                "view_ownershipclaim", "change_ownershipclaim",
+            },
         )
+
+
+class OwnershipClaimTests(Base):
+    def test_anonymous_account_cannot_claim(self):
+        entry = DirectoryEntry.objects.create(name="Fiche libre", slug="fiche-libre")
+        response = self.client.post(reverse("core:claim_entry_ownership", args=[entry.slug]))
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(OwnershipClaim.objects.filter(entry=entry).exists())
+
+    def test_named_account_can_request_ownership_of_unowned_entry(self):
+        entry = DirectoryEntry.objects.create(
+            name="Fiche libre", slug="fiche-libre", visibility=DirectoryEntry.VISIBILITY_PROTECTED,
+        )
+        user = get_user_model().objects.create_user("voisine")
+        self.client.force_login(user)
+        response = self.client.post(reverse("core:claim_entry_ownership", args=[entry.slug]))
+        self.assertRedirects(response, reverse("core:entry_detail", args=[entry.slug]))
+        claim = OwnershipClaim.objects.get(entry=entry)
+        self.assertEqual(claim.account.user, user)
+        self.assertIsNone(claim.approved)
+        entry.refresh_from_db()
+        self.assertIsNone(entry.owner_id)  # pas encore validée
+
+    def test_cannot_claim_an_already_owned_entry(self):
+        owner = Account.objects.create()
+        entry = DirectoryEntry.objects.create(name="Fiche prise", slug="fiche-prise", owner=owner)
+        user = get_user_model().objects.create_user("voisine")
+        self.client.force_login(user)
+        response = self.client.post(reverse("core:claim_entry_ownership", args=[entry.slug]))
+        self.assertEqual(response.status_code, 404)
+
+    def test_approving_a_claim_transfers_ownership_and_rejects_others(self):
+        entry = DirectoryEntry.objects.create(name="Fiche libre", slug="fiche-libre")
+        acc1 = Account.objects.create(user=get_user_model().objects.create_user("voisine1"))
+        acc2 = Account.objects.create(user=get_user_model().objects.create_user("voisine2"))
+        claim1 = OwnershipClaim.objects.create(entry=entry, account=acc1)
+        claim2 = OwnershipClaim.objects.create(entry=entry, account=acc2)
+
+        claim1.approved = True
+        claim1.save()
+
+        entry.refresh_from_db()
+        self.assertEqual(entry.owner_id, acc1.id)
+        claim2.refresh_from_db()
+        self.assertFalse(claim2.approved)
 
 
 class DonorPrivacyTests(TestCase):

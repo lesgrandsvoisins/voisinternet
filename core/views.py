@@ -17,7 +17,7 @@ from .forms import DirectoryEntryForm
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntrySubscription, Event, GuideBook,
-    Membership, Service, Shortcut, format_number,
+    Membership, OwnershipClaim, Service, Shortcut, format_number,
 )
 
 # Chapeau de présentation pour chaque page intermédiaire (une par groupe du menu).
@@ -211,10 +211,34 @@ def entry_detail(request, slug):
     acc = current_account(request)
     _check_entry_visible(entry, acc)
     subscribed = acc.entrysubscription_set.filter(entry=entry).exists() if acc else False
+    my_claim = None
+    if request.user.is_authenticated and entry.owner_id is None:
+        my_claim = OwnershipClaim.objects.filter(entry=entry, account=acc).first()
     return render(request, "core/directory_entry.html", {
         "entry": entry,
         "subscribed": subscribed,
+        "my_claim": my_claim,
     })
+
+
+@require_POST
+@login_required
+def claim_entry_ownership(request, slug):
+    # Réservé aux comptes nominatifs (Keycloak) : @login_required exige une session
+    # Django authentifiée, qu'un compte anonyme ne peut jamais avoir.
+    entry = get_object_or_404(DirectoryEntry, slug=slug)
+    acc = current_account(request, create=True)
+    if entry.owner_id is not None:
+        raise Http404
+    __, created = OwnershipClaim.objects.get_or_create(entry=entry, account=acc)
+    if created:
+        messages.success(
+            request,
+            _("Demande envoyée : un administrateur va l'examiner avant de vous rendre responsable de cette fiche."),
+        )
+    else:
+        messages.info(request, _("Vous avez déjà demandé à être responsable de cette fiche."))
+    return redirect(reverse("core:entry_detail", args=[entry.slug]))
 
 
 def mes_fiches(request):

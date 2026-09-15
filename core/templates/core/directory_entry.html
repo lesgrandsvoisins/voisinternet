@@ -78,6 +78,18 @@
         {% endif %}
       </form>
       {% endif %}
+      {% if not entry.owner_id and request.user.is_authenticated %}
+        {% if my_claim is None %}
+        <form method="post" action="{% url 'core:claim_entry_ownership' entry.slug %}">
+          {% csrf_token %}
+          <button class="sub-btn" type="submit">{% trans "Demander à être responsable de cette fiche" %}</button>
+        </form>
+        {% elif my_claim.approved is None %}
+        <span class="chip">{% trans "Demande de responsabilité en attente de validation" %}</span>
+        {% elif not my_claim.approved %}
+        <span class="chip">{% trans "Demande de responsabilité refusée" %}</span>
+        {% endif %}
+      {% endif %}
     </div>
 
     <p class="muted"><a href="{% url 'core:annuaire' %}">{% trans "← Retour à l’annuaire" %}</a></p>

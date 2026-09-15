@@ -26,7 +26,7 @@
       courante s'affiche à l'écran (JS ou CSS ci-dessous), mais l'impression
       (core/static/core/css/site.css) les révèle toutes pour imprimer l'article entier.{% endcomment %}
       {% for page_html in body_pages %}
-        <div class="markdown"{% if not forloop.counter == page_number %} hidden{% endif %}>{{ page_html|richtext|gallery_grid }}</div>
+        <div class="markdown"{% if not forloop.counter == page_number %} hidden{% endif %}>{{ page_html|richtext|gallery_grid|image_captions }}</div>
       {% endfor %}
       {% if total_pages > 1 %}
         <nav class="pagination no-print" aria-label="{% trans "Pages de l’article" %}">

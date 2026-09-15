@@ -1495,8 +1495,13 @@ blockquote p {
   margin: 1.25rem 0
 }
 
-.blog-post .markdown .gallery img {
+.blog-post .markdown .gallery figure {
   width: calc(33.333% - .4rem);
+  margin: 0
+}
+
+.blog-post .markdown .gallery img {
+  width: 100%;
   height: 11rem;
   max-height: none;
   margin: 0;
@@ -1504,18 +1509,43 @@ blockquote p {
   object-fit: contain
 }
 
+.blog-post .markdown .gallery figcaption {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: .8rem;
+  margin-top: .3rem
+}
+
 @media (max-width: 40rem) {
-  .blog-post .markdown .gallery img {
+  .blog-post .markdown .gallery figure {
     width: calc(50% - .3rem)
   }
 }
 
 @media (max-width: 26rem) {
+  .blog-post .markdown .gallery figure {
+    width: 100%
+  }
+
   .blog-post .markdown .gallery img {
-    width: 100%;
     height: auto;
     max-height: 20rem
   }
+}
+
+/* Légende d'une image isolée (centrée, en galerie exclue) : le texte alternatif de
+   l'image, affiché dessous (cms/templatetags/gallery_filters.py, image_captions). Non
+   appliqué aux images alignées à gauche/droite (img.left/img.right ci-dessus), qui
+   flottent dans le texte — une légende y casserait la mise en page. */
+.blog-post .markdown figure.img-figure {
+  margin: 0
+}
+
+.blog-post .markdown figure.img-figure figcaption {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: .85rem;
+  margin: -.75rem 0 1.25rem
 }
 
 /* À l'impression, l'article se lit en entier plutôt qu'une seule page à la fois : toutes

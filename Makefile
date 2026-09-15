@@ -19,7 +19,6 @@ help: ## Affiche cette aide
 production:
 	git pull
 	make install
-	make setup
 	make migrate
 	make collectstatic
 

@@ -67,7 +67,7 @@ def _safe_next(request, fallback):
 # --- Pages
 
 def home(request):
-    from cms.models import BlogPostPage
+    from cms.models import BlogPostPage, PolePage
 
     return render(request, "core/home.html", {
         "services": Service.objects.filter(active=True)[:6],
@@ -75,6 +75,8 @@ def home(request):
         "books": GuideBook.objects.filter(published=True)[:4],
         "posts": BlogPostPage.objects.live().order_by("-date")[:3],
         "audiences": Audience.objects.all(),
+        "upcoming_events": Event.objects.filter(public=True, start__gte=timezone.now())[:2],
+        "poles": PolePage.objects.live().order_by("path"),
     })
 
 
@@ -208,8 +210,14 @@ def _check_entry_visible(entry, acc):
 
 def entry_detail(request, slug):
     entry = get_object_or_404(DirectoryEntry, slug=slug)
-    acc = current_account(request)
+    acc = current_account(request, create=request.user.is_authenticated)
     _check_entry_visible(entry, acc)
+    # Une demande lancée avant connexion (claim_entry_ownership) attend ici la session
+    # Keycloak qui vient de s'établir, pour se terminer d'elle-même.
+    if request.user.is_authenticated and request.session.get(PENDING_CLAIM_KEY) == slug:
+        del request.session[PENDING_CLAIM_KEY]
+        if entry.owner_id is None:
+            _create_ownership_claim(request, entry, acc)
     subscribed = acc.entrysubscription_set.filter(entry=entry).exists() if acc else False
     my_claim = None
     if request.user.is_authenticated and entry.owner_id is None:
@@ -221,15 +229,10 @@ def entry_detail(request, slug):
     })
 
 
-@require_POST
-@login_required
-def claim_entry_ownership(request, slug):
-    # Réservé aux comptes nominatifs (Keycloak) : @login_required exige une session
-    # Django authentifiée, qu'un compte anonyme ne peut jamais avoir.
-    entry = get_object_or_404(DirectoryEntry, slug=slug)
-    acc = current_account(request, create=True)
-    if entry.owner_id is not None:
-        raise Http404
+PENDING_CLAIM_KEY = "voisinternet_pending_ownership_claim"
+
+
+def _create_ownership_claim(request, entry, acc):
     __, created = OwnershipClaim.objects.get_or_create(entry=entry, account=acc)
     if created:
         messages.success(
@@ -238,6 +241,29 @@ def claim_entry_ownership(request, slug):
         )
     else:
         messages.info(request, _("Vous avez déjà demandé à être responsable de cette fiche."))
+
+
+@require_POST
+def claim_entry_ownership(request, slug):
+    # Réservé aux comptes nominatifs (Keycloak), mais pas besoin d'être déjà connecté
+    # pour LANCER la demande : sans session authentifiée, on la met de côté et on invite
+    # à se connecter — elle se termine d'elle-même au retour (voir entry_detail), une
+    # fois la session Keycloak établie.
+    entry = get_object_or_404(DirectoryEntry, slug=slug)
+    if entry.owner_id is not None:
+        raise Http404
+
+    if not request.user.is_authenticated:
+        if not settings.OIDC_ENABLED:
+            raise Http404
+        request.session[PENDING_CLAIM_KEY] = entry.slug
+        next_url = reverse("core:entry_detail", args=[entry.slug])
+        messages.info(request, _("Connectez-vous pour finaliser votre demande de responsabilité de cette fiche."))
+        login_url = f"{reverse('oidc_authentication_init')}?{urlencode({'next': next_url})}"
+        return redirect(login_url)
+
+    acc = current_account(request, create=True)
+    _create_ownership_claim(request, entry, acc)
     return redirect(reverse("core:entry_detail", args=[entry.slug]))
 
 

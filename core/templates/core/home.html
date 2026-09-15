@@ -1,8 +1,14 @@
 {% extends "core/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "lesgrandsvoisins.com — Ôtez-vous de leur nuage" %}{% endblock %}
+{% block title %}{% trans "lesgrandsvoisins.com — L'Autre est une chance" %}{% endblock %}
 {% block content %}
-  <section class="hero">
+  <section class="hero blob-bg">
+    <div class="blob-canvas" aria-hidden="true">
+      <span class="blob blob-a"></span>
+      <span class="blob blob-b"></span>
+      <span class="blob blob-c"></span>
+      <span class="blob blob-d"></span>
+    </div>
     <div class="wrap">
       <div class="hero-text">
         <h1>{% trans "L'Autre est une chance." %}</h1>
@@ -14,14 +20,67 @@
             {% trans "Extrait de notre déclaration de mission de 2017" %}<small>{% trans "" %}</small>
           </p>
           <div class="ctas">
-            <a class="btn btn-sun" href="{% url 'core:raccourcis' %}">{% trans "Voir les services" %}</a>
-            <a class="btn btn-line" href="{{ GUIDE_URL }}">{% trans "Lire le guide" %}</a>
+            <a class="btn btn-sun" href="{% url 'core:account' %}">{% trans "Créer ou rejoindre son compte" %}</a>
+            <a class="btn btn-line" href="{{ conj.annuaire.href }}">{% trans "Voir l'annuaire" %}</a>
           </div>
         </div>
       </div>
       {% include "core/partials/scene.html" %}
     </div>
   </section>
+  {% if upcoming_events %}
+    <section class="block" aria-labelledby="next-title">
+      <div class="wrap">
+        <h2 id="next-title">{% trans "Prochainement" %}</h2>
+        <ul class="agenda-list">
+          {% for event in upcoming_events %}
+            <li class="agenda-card">
+              <a class="agenda-date" href="{% url 'core:event_detail' event.pk %}" aria-hidden="true">
+                <span class="agenda-date-month">{{ event.start|date:"M" }}</span>
+                <span class="agenda-date-day">{{ event.start|date:"j" }}</span>
+                <span class="agenda-date-weekday">{{ event.start|date:"D" }}</span>
+                <span class="agenda-date-hours">
+                  {{ event.start|date:"H:i" }}{% if event.end %}–{{ event.end|date:"H:i" }}{% endif %}
+                </span>
+              </a>
+              <div class="agenda-body">
+                <h3><a href="{% url 'core:event_detail' event.pk %}">{{ event.title }}</a></h3>
+                <time class="sr-only" datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>
+                {% if event.location or event.online_url %}
+                  <p class="agenda-where">
+                    {{ event.location }}
+                    {% if event.online_url %}
+                      {% if event.location %}—{% endif %} <a href="{{ event.online_url }}" target="_new">{% trans "En ligne" %}</a>
+                    {% endif %}
+                  </p>
+                {% endif %}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+        <p class="note">
+          {% blocktrans %}Permanence chaque lundi de 12h à 19h30, en personne (93 av. du Général Leclerc, 75014 Paris — métro Alésia, Atelier de la Ressourcerie Créative) ou en ligne sur meet.lesgrandsvoisins.com.{% endblocktrans %}
+          <a href="{% url 'core:agenda' %}">{% trans "Tout l'agenda" %}</a>
+        </p>
+      </div>
+    </section>
+  {% endif %}
+  {% if poles %}
+    <section class="block" aria-labelledby="poles-title">
+      <div class="wrap">
+        <h2 id="poles-title">{% trans "Nos trois pôles" %}</h2>
+        <p class="intro">{% trans "Portés ensemble par les bénévoles, chacun avec sa couleur et ses rendez-vous." %}</p>
+        <div class="poles-grid">
+          {% for pole in poles %}
+            <a class="pole-card accent-{{ pole.accent }}" href="{{ pole.url }}">
+              <h3>{{ pole.title }}</h3>
+              <p>{{ pole.lead }}</p>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
   <section class="block" aria-labelledby="explore-title">
     <div class="wrap">
       <h2 id="explore-title">{% trans "Explorer le site" %}</h2>
@@ -58,7 +117,7 @@
   {% endif %}
   <section class="block" aria-labelledby="how-title">
     <div class="wrap">
-      <h2 id="how-title">{% trans "Comment ça marche" %}</h2>
+      <h2 id="how-title">{% trans "Le pôle Numérique, comment ça marche" %}</h2>
       <p class="intro">{% trans "Pas besoin d'être informaticien, ni d'un service technique. Il suffit d'un peu de curiosité et d'un voisin." %}</p>
       <ol class="steps">
         <li>
@@ -112,6 +171,20 @@
     </div>
   </section>
   {% endcomment %}
+  <section class="block" aria-labelledby="story-title">
+    <div class="wrap two two-even">
+      <div>
+        <h2 id="story-title">{% trans "D'où l'on vient" %}</h2>
+        <p>{% trans "Les Grands Voisins sont nés entre 2015 et 2017 à l'hôpital Saint-Vincent-de-Paul, dans le 14ᵉ arrondissement de Paris. Depuis, nous nous demandons si un lieu physique est encore nécessaire pour rester voisins." %}</p>
+        <a class="more" href="{{ conj.grandsvoisins.href }}">{% trans "Notre histoire et notre manifeste" %}</a>
+      </div>
+      <div>
+        <h2>{% trans "L'équipe" %}</h2>
+        <p>{% trans "Chris Mann (président), Sviatlana Viarbitskaya (trésorière) et Caroline Lhomme (vice-présidente) sont à votre service." %}</p>
+        <a class="more" href="{{ conj.grandsvoisins.href }}#le-bureau">{% trans "Rencontrer le bureau" %}</a>
+      </div>
+    </div>
+  </section>
   <section class="block" aria-label="{% trans 'Le guide et le blog' %}">
     <div class="wrap two two-even">
       <div>

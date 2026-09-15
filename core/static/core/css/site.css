@@ -1,4 +1,100 @@
-/* lesgrandsvoisins.com — feuille de style unique. Polices système : aucune requête vers un tiers. */
+/* lesgrandsvoisins.com — feuille de style unique. Polices auto-hébergées (aucune
+   requête vers un tiers, aucun CDN) : Fengardo Neue et Lack sont celles du logotype
+   officiel — licence MIT/OFL, voir Fengardo-Redux (github.com/loicsander/Fengardo-Redux)
+   et Font Squirrel — et Fira Sans (Mozilla, OFL) pour le texte courant, plus lisible sur
+   de longs paragraphes que Fengardo Neue, pensée pour l'affichage court.
+
+   Recompilés depuis Fengardo-Redux (sources UFO du dessinateur d'origine, Loïc Sander)
+   plutôt que le .woff du site en production : glyphes manquants corrigés, métadonnées
+   OS/2·head·name réparées (la graisse grasse portait le bit « Regular » au lieu de
+   « Bold », invisible ici — CSS fixe font-weight/font-style explicitement — mais bogue
+   probable en dehors du navigateur, impression ou LaTeX/fontspec par exemple, qui lisent
+   ces bits directement). L'italique de cette même source avait un « F » totalement
+   absent (glyphe présent mais non répertorié dans la table cmap) — corrigé en dupliquant
+   le « F » romain avec une légère inclinaison. Aucun gras italique n'existe nulle part
+   (le projet ne l'a jamais dessiné, cf. son readme) : approximé en inclinant tous les
+   glyphes du gras droit. Les mêmes fichiers, en .ttf autonome pour un usage hors site
+   (LaTeX…), sont dans deploy/fonts/fengardo-neue/. */
+@font-face {
+  font-family: "Fengardo Neue";
+  src: url("../fonts/FengardoNeue-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Fengardo Neue";
+  src: url("../fonts/FengardoNeue-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Fengardo Neue";
+  src: url("../fonts/FengardoNeue-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Fengardo Neue";
+  src: url("../fonts/FengardoNeue-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Lack";
+  src: url("../fonts/Lack-Regular.woff2") format("woff2"), url("../fonts/Lack-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Lack";
+  src: url("../fonts/lack-italic-webfont.woff2") format("woff2"), url("../fonts/lack-italic-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  src: url("../fonts/FiraSans-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  src: url("../fonts/FiraSans-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  src: url("../fonts/FiraSans-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  src: url("../fonts/FiraSans-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap
+}
+
 :root {
   --sky: #EAF2F7;
   --paper: #FFFFFF;
@@ -29,11 +125,31 @@
   --accent-teal: #2E8B8B;
   --accent-moss: #6B7A2E;
   --accent-gold: #C9971F;
+  /* Bleu du logotype (échantillonné dans le fichier officiel) : réservé au nom
+     lesgrandsvoisins.com et aux accents de marque, pas une couleur fonctionnelle
+     comme les --accent-* ci-dessus. */
+  --brand-blue: #345899;
   /* Voile posé sur une photo de fond (page-head d'un article de blog) : même teinte que
      --sky, translucide, pour que le texte (--ink) reste lisible par-dessus. */
   --page-head-overlay: rgba(234, 242, 247, .82);
   --serif: "Charter", "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
-  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+  --sans: "Fira Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+  /* Logotype et grands titres : le caractère du site — Fengardo Neue, tout en
+     capitales à l'origine, dégrade proprement en minuscules aussi. */
+  --display: "Fengardo Neue", var(--serif);
+  /* Accroches et signatures (« L'Autre est une chance », citations…) : l'italique
+     de Lack, qui accompagne Fengardo Neue sur le logotype officiel. */
+  --script: "Lack", var(--serif);
+  /* Palette du fond animé (voir .blob-bg, core/static/core/js/site.js) : reprise
+     d'une ancienne page d'accueil de l'association, plus vive/pastel que le reste
+     du site — n'est utilisée que là, jamais pour du texte ou des composants. */
+  --blob-1: #74b9ff;
+  --blob-2: #e84393;
+  --blob-3: #6c5ce7;
+  --blob-4: #00b894;
+  --blob-5: #fdcb6e;
+  --blob-6: #006266;
+  --blob-7: #1B1464;
   color-scheme: light;
 }
 
@@ -68,6 +184,7 @@
     --accent-teal: #4FB3B3;
     --accent-moss: #A4B85E;
     --accent-gold: #E0B84A;
+    --brand-blue: #8FB0E8;
     --page-head-overlay: rgba(15, 27, 36, .78);
     color-scheme: dark;
   }
@@ -103,6 +220,7 @@
   --accent-teal: #4FB3B3;
   --accent-moss: #A4B85E;
   --accent-gold: #E0B84A;
+  --brand-blue: #8FB0E8;
   --page-head-overlay: rgba(15, 27, 36, .78);
   color-scheme: dark;
 }
@@ -186,8 +304,9 @@ a {
 
 /* Logotype : lesgrandsvoisins.com */
 .word {
-  font-family: var(--serif);
-  font-size: clamp(1rem, 4.2vw, 1.45rem);
+  font-family: var(--display);
+  color: var(--brand-blue);
+  font-size: clamp(1.1rem, 4.6vw, 1.6rem);
   font-weight: 700;
   letter-spacing: -.01em;
   white-space: nowrap
@@ -552,10 +671,93 @@ a {
 }
 
 /* Héros */
+.hero {
+  position: relative;
+  overflow: hidden
+}
+
 .hero .wrap {
   padding-top: 3rem;
-  padding-bottom: 0
+  padding-bottom: 0;
+  position: relative;
+  z-index: 1
 }
+
+/* Fond animé (page d'accueil) : quelques grands cercles flous qui dérivent lentement et
+   se chevauchent — inspiré d'une ancienne page d'accueil de l'association (Proton.js,
+   un moteur de particules), réécrit ici en CSS pur (aucun script, aucune dépendance) :
+   une simple animation @keyframes, qui se désactive avec prefers-reduced-motion. */
+.blob-canvas {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: .3;
+  animation: blob-drift 30s ease-in-out infinite alternate
+}
+
+.blob-a { width: 24rem; height: 24rem; top: -8rem; left: -6rem; background: var(--blob-1); animation-duration: 26s }
+.blob-b { width: 19rem; height: 19rem; top: -2rem; right: -6rem; background: var(--blob-2); animation-duration: 32s; animation-delay: -8s }
+.blob-c { width: 17rem; height: 17rem; bottom: -9rem; left: 18%; background: var(--blob-4); animation-duration: 36s; animation-delay: -14s }
+.blob-d { width: 15rem; height: 15rem; bottom: -6rem; right: 12%; background: var(--blob-5); animation-duration: 29s; animation-delay: -4s }
+
+@keyframes blob-drift {
+  0% { transform: translate(0, 0) scale(1) }
+  50% { transform: translate(4%, -5%) scale(1.08) }
+  100% { transform: translate(-5%, 4%) scale(.95) }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none
+  }
+}
+
+/* Nos trois pôles (page d'accueil) */
+.poles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.25rem
+}
+
+.pole-card {
+  display: block;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--ink);
+  border-radius: 10px;
+  background: var(--paper);
+  text-decoration: none;
+  color: inherit
+}
+
+.pole-card:hover {
+  background: var(--hover)
+}
+
+.pole-card h3 {
+  margin: 0 0 .4rem;
+  font-family: var(--display)
+}
+
+.pole-card p {
+  margin: 0;
+  color: var(--ink-soft)
+}
+
+.pole-card.accent-terracotta { border-top-color: var(--accent-terracotta) }
+.pole-card.accent-plum { border-top-color: var(--accent-plum) }
+.pole-card.accent-indigo { border-top-color: var(--accent-indigo) }
+.pole-card.accent-teal { border-top-color: var(--accent-teal) }
+.pole-card.accent-moss { border-top-color: var(--accent-moss) }
+.pole-card.accent-gold { border-top-color: var(--accent-gold) }
 
 .hero-text {
   display: grid;
@@ -571,11 +773,11 @@ a {
 }
 
 .hero h1 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 700;
   font-size: clamp(2.4rem, 5.8vw, 4.6rem);
-  line-height: 1.02;
-  letter-spacing: -.02em;
+  line-height: 1.05;
+  letter-spacing: -.01em;
   margin: 0;
   max-width: 10ch
 }
@@ -622,7 +824,8 @@ a {
 }
 
 .signature {
-  font-family: var(--serif);
+  font-family: var(--script);
+  font-style: italic;
   font-size: 1.15rem;
   margin: 0
 }
@@ -1783,11 +1986,11 @@ blockquote p {
 }
 
 .page-head h1 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: clamp(2.1rem, 4.5vw, 3.2rem);
-  line-height: 1.08;
+  line-height: 1.1;
   margin: 0 0 .8rem;
-  letter-spacing: -.02em
+  letter-spacing: -.01em
 }
 
 .page-head .lead {

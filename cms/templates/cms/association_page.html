@@ -25,7 +25,7 @@
           {{ block.value.text }}
         </section>
       {% elif block.block_type == "board" %}
-        <section>
+        <section id="le-bureau">
           <h2>{% trans "Le bureau" %}</h2>
           <ul class="docs">
             {% for member in block.value %}

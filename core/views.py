@@ -13,7 +13,6 @@ from django.views.decorators.http import require_POST
 
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
 from .forms import DirectoryEntryForm
-from .ghost import latest_posts
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntrySubscription, Event, GuideBook,
@@ -67,11 +66,13 @@ def _safe_next(request, fallback):
 # --- Pages
 
 def home(request):
+    from cms.models import BlogPostPage
+
     return render(request, "core/home.html", {
         "services": Service.objects.filter(active=True)[:6],
         "shortcut_ids": _shortcut_ids(request),
         "books": GuideBook.objects.filter(published=True)[:4],
-        "posts": latest_posts(3),
+        "posts": BlogPostPage.objects.live().order_by("-date")[:3],
         "audiences": Audience.objects.all(),
     })
 

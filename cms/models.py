@@ -8,6 +8,7 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page
+from wagtail.search import index
 
 
 class HomePage(Page):
@@ -204,8 +205,13 @@ class BlogIndexPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        posts = BlogPostPage.objects.live().child_of(self).order_by("-date")
+        query = request.GET.get("q", "").strip()
+        posts = BlogPostPage.objects.live().child_of(self)
+        # Recherche plein texte (moteur intégré à Wagtail, base de données — aucune
+        # dépendance supplémentaire) plutôt que le tri chronologique habituel.
+        posts = posts.search(query) if query else posts.order_by("-date")
         context["posts"] = Paginator(posts, 10).get_page(request.GET.get("page"))
+        context["search_query"] = query
         return context
 
 
@@ -232,6 +238,12 @@ class BlogPostPage(Page):
         FieldPanel("excerpt"),
         FieldPanel("featured_image"),
         FieldPanel("body"),
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField("excerpt"),
+        index.SearchField("body"),
+        index.SearchField("author_name"),
     ]
 
     parent_page_types = ["cms.BlogIndexPage"]

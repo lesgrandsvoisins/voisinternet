@@ -143,9 +143,7 @@
               <li>
                 <a href="{{ post.url }}">
                   <h3>{{ post.title }}</h3>
-                  {% if post.published_at %}
-                    <time datetime="{{ post.published_at|date:'c' }}">{{ post.published_at|date:"j F Y" }}</time>
-                  {% endif %}
+                  <time datetime="{{ post.date|date:'c' }}">{{ post.date|date:"j F Y" }}</time>
                 </a>
               </li>
             {% endfor %}
@@ -153,7 +151,7 @@
         {% else %}
           <p class="intro">{% trans "Les derniers articles s'afficheront ici." %}</p>
         {% endif %}
-        <a class="more" target="_new" href="{{ BLOG_URL }}">{% trans "Tous les articles" %}</a>
+        <a class="more" href="{{ conj.grandzine.href }}">{% trans "Tous les articles" %}</a>
       </div>
     </div>
   </section>

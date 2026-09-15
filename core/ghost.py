@@ -32,16 +32,6 @@ def _fetch_posts(cache_key, params, limit):
     return posts
 
 
-def latest_posts(limit=3):
-    if not (settings.GHOST_URL and settings.GHOST_CONTENT_KEY):
-        return []
-    return _fetch_posts(
-        f"ghost:latest:{limit}",
-        {"key": settings.GHOST_CONTENT_KEY, "limit": limit, "fields": "title,url,published_at,excerpt"},
-        limit,
-    )
-
-
 def posts_by_tag(tag, limit=6):
     """Derniers articles portant une étiquette Ghost donnée (civisme, arts-plastiques, numerique…)."""
     if not (settings.GHOST_URL and settings.GHOST_CONTENT_KEY):

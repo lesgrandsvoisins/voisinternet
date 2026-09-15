@@ -1012,6 +1012,32 @@ section.block {
   display: block
 }
 
+/* Sans photo : le logo (ou, à défaut, l'initiale) occupe le même espace que la photo
+   des autres fiches, pour que la grille garde un rythme régulier. */
+.directory-card .hero-logo,
+.directory-card .hero-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sky);
+  text-decoration: none
+}
+
+.directory-card .hero-logo img {
+  max-width: 55%;
+  max-height: 55%;
+  object-fit: contain
+}
+
+.directory-card .hero-placeholder {
+  font-family: var(--serif);
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: var(--ink-soft)
+}
+
 .directory-card .gallery {
   display: flex;
   gap: .5rem;
@@ -1270,6 +1296,95 @@ blockquote p {
   color: var(--ink-soft)
 }
 
+.blog-list {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: grid;
+  gap: 1.1rem
+}
+
+.blog-list-item {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden
+}
+
+.blog-list-item a {
+  display: flex;
+  gap: 1.25rem;
+  text-decoration: none;
+  color: inherit
+}
+
+.blog-list-thumb {
+  width: 11rem;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  flex: none;
+  background: var(--sky)
+}
+
+.blog-list-body {
+  padding: 1.1rem 1.3rem 1.1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .4rem;
+  min-width: 0
+}
+
+/* Pas de vignette (article sans image de une) : le texte occupe toute la largeur. */
+.blog-list-body:first-child {
+  padding-inline-start: 1.3rem
+}
+
+.blog-list-body h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1.3
+}
+
+.blog-list-item:hover h3 {
+  text-decoration: underline;
+  text-decoration-color: var(--sun);
+  text-decoration-thickness: 2px
+}
+
+.blog-list-excerpt {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: .95rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden
+}
+
+.blog-list-meta {
+  margin: 0;
+  font-size: .85rem;
+  color: var(--ink-soft)
+}
+
+@media (max-width: 34rem) {
+  .blog-list-item a {
+    flex-direction: column
+  }
+
+  .blog-list-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9
+  }
+
+  .blog-list-body,
+  .blog-list-body:first-child {
+    padding: 1rem 1.1rem
+  }
+}
+
 .blog-search {
   display: flex;
   gap: .5rem;
@@ -1298,9 +1413,26 @@ blockquote p {
   margin-top: 1.5rem
 }
 
+.blog-post {
+  max-width: 46rem;
+  margin: 0 auto
+}
+
 .blog-post .hero {
   border-radius: 12px;
   margin-bottom: 1.5rem
+}
+
+/* Les photos venues du Markdown (import Ghost compris) s'affichent à leur résolution
+   d'origine : sans plafond, une galerie de photos de smartphone peut à elle seule
+   étirer la page sur des dizaines d'écrans de haut. */
+.blog-post .markdown img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 30rem;
+  margin: 1.25rem auto;
+  border-radius: 10px
 }
 
 .books {

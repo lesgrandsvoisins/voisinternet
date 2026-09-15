@@ -24,17 +24,21 @@
     </form>
 
     {% if posts %}
-      <ul class="posts">
+      <ul class="blog-list">
         {% for post in posts %}
-          <li>
+          <li class="blog-list-item">
             <a href="{{ post.url }}">
               {% if post.featured_image %}
-                {% image post.featured_image fill-160x160 as thumb %}
-                <img class="event-thumb" src="{{ thumb.url }}" alt="">
+                {% image post.featured_image fill-320x240 as thumb %}
+                <img class="blog-list-thumb" src="{{ thumb.url }}" alt="">
               {% endif %}
-              <h3>{{ post.title }}</h3>
-              {% if post.excerpt %}<p>{{ post.excerpt }}</p>{% endif %}
-              <time datetime="{{ post.date|date:'c' }}">{{ post.date|date:"j F Y" }}</time>{% if post.author_name %} — {{ post.author_name }}{% endif %}
+              <div class="blog-list-body">
+                <h3>{{ post.title }}</h3>
+                {% if post.excerpt %}<p class="blog-list-excerpt">{{ post.excerpt }}</p>{% endif %}
+                <p class="blog-list-meta">
+                  <time datetime="{{ post.date|date:'c' }}">{{ post.date|date:"j F Y" }}</time>{% if post.author_name %} — {{ post.author_name }}{% endif %}
+                </p>
+              </div>
             </a>
           </li>
         {% endfor %}

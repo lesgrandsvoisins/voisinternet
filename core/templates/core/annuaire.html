@@ -16,7 +16,13 @@
   <div class="directory">
     {% for entry in entries %}
     <article class="directory-card">
-      {% if entry.photos %}<a href="{% url 'core:entry_detail' entry.slug %}"><img class="hero" src="{{ entry.photos.0.url }}" alt=""></a>{% endif %}
+      {% if entry.photos %}
+        <a href="{% url 'core:entry_detail' entry.slug %}"><img class="hero" src="{{ entry.photos.0.url }}" alt=""></a>
+      {% elif entry.logo %}
+        <a class="hero-logo" href="{% url 'core:entry_detail' entry.slug %}"><img src="{{ entry.logo.url }}" alt=""></a>
+      {% else %}
+        <a class="hero-placeholder" href="{% url 'core:entry_detail' entry.slug %}" aria-hidden="true">{{ entry.name|slice:":1" }}</a>
+      {% endif %}
       {% if entry.photos|length > 1 %}
       <div class="gallery">
         {% for photo in entry.photos|slice:"1:" %}<a href="{% url 'core:entry_detail' entry.slug %}"><img src="{{ photo.url }}" alt=""></a>{% endfor %}

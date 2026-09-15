@@ -22,9 +22,14 @@
   </div>
   <div class="wrap page">
     <article class="blog-post">
-      <div class="markdown">{{ body_page|richtext }}</div>
+      {% comment %}Chaque page de l'article est présente dans le HTML : seule la page
+      courante s'affiche à l'écran (JS ou CSS ci-dessous), mais l'impression
+      (core/static/core/css/site.css) les révèle toutes pour imprimer l'article entier.{% endcomment %}
+      {% for page_html in body_pages %}
+        <div class="markdown"{% if not forloop.counter == page_number %} hidden{% endif %}>{{ page_html|richtext }}</div>
+      {% endfor %}
       {% if total_pages > 1 %}
-        <nav class="pagination" aria-label="{% trans "Pages de l’article" %}">
+        <nav class="pagination no-print" aria-label="{% trans "Pages de l’article" %}">
           {% if page_number > 1 %}
             <a href="?page={{ page_number|add:"-1" }}">{% trans "← Page précédente" %}</a>
           {% else %}

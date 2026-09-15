@@ -271,16 +271,17 @@ class BlogPostPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        # « Saut de page » : la ligne horizontale (fonctionnalité standard de l'éditeur
-        # riche de Wagtail, pas de bouton personnalisé à construire — voir
-        # cms/wagtail_hooks.py) coupe l'article. Seul le marqueur explicite compte : un
-        # <hr> nu venu d'ailleurs (contenu collé, ancien import…) reste une simple ligne.
+        # « Saut de page » : bouton dédié de l'éditeur riche (cms/wagtail_hooks.py), qui
+        # coupe l'article en plusieurs pages à l'écran. Toutes les pages sont tout de
+        # même transmises au template (body_pages) : à l'impression, l'article s'imprime
+        # en entier plutôt qu'une seule page à la fois (core/static/core/css/site.css).
         pages = re.split(r'<hr class="pagebreak"\s*/?>', self.body) if self.body else [""]
         try:
             page_number = int(request.GET.get("page", 1))
         except ValueError:
             page_number = 1
         page_number = max(1, min(page_number, len(pages)))
+        context["body_pages"] = pages
         context["body_page"] = pages[page_number - 1]
         context["page_number"] = page_number
         context["total_pages"] = len(pages)

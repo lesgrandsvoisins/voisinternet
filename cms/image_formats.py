@@ -18,25 +18,25 @@ from django.utils.translation import gettext_lazy as _
 
 from wagtail.images.formats import Format, register_image_format
 
-register_image_format(Format("small", _("Petite"), "richtext-image small", "width-400"))
-register_image_format(Format("medium", _("Moyenne"), "richtext-image medium", "width-700"))
-register_image_format(Format("large", _("Grande"), "richtext-image large", "width-1000"))
+register_image_format(Format("small", _("Petite"), "richtext-image small", "max-160x160"))
+register_image_format(Format("medium", _("Moyenne"), "richtext-image medium", "max-320x320"))
+register_image_format(Format("large", _("Grande"), "richtext-image large", "max-720x720"))
 
 register_image_format(
-    Format("left-small", _("Petite, à gauche"), "richtext-image left small", "width-400")
+    Format("left-small", _("Petite, à gauche"), "richtext-image left small", "max-160x160")
 )
 register_image_format(
-    Format("left-medium", _("Moyenne, à gauche"), "richtext-image left medium", "width-700")
+    Format("left-medium", _("Moyenne, à gauche"), "richtext-image left medium", "max-320x320")
 )
 register_image_format(
-    Format("left-large", _("Grande, à gauche"), "richtext-image left large", "width-1000")
+    Format("left-large", _("Grande, à gauche"), "richtext-image left large", "max-720x720")
 )
 register_image_format(
-    Format("right-small", _("Petite, à droite"), "richtext-image right small", "width-400")
+    Format("right-small", _("Petite, à droite"), "richtext-image right small", "max-160x160")
 )
 register_image_format(
-    Format("right-medium", _("Moyenne, à droite"), "richtext-image right medium", "width-700")
+    Format("right-medium", _("Moyenne, à droite"), "richtext-image right medium", "max-320x320")
 )
 register_image_format(
-    Format("right-large", _("Grande, à droite"), "richtext-image right large", "width-1000")
+    Format("right-large", _("Grande, à droite"), "richtext-image right large", "max-720x720")
 )

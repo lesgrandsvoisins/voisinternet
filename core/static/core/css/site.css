@@ -1445,15 +1445,32 @@ blockquote p {
    Wagtail (Pleine largeur, Aligné à gauche, Aligné à droite) : un plafond de largeur
    plus étroit que la largeur de colonne par défaut ci-dessus. */
 .blog-post .markdown img.small {
-  max-width: 300px
+  max-width: 160px;
+  max-height: 160px
 }
 
 .blog-post .markdown img.medium {
-  max-width: 500px
+  max-width: 360px;
+  max-height: 360px
 }
 
 .blog-post .markdown img.large {
-  max-width: 750px
+  max-width: 720px;
+  max-height: 720px
+}
+
+.blog-post .markdown img.left {
+    float: left;
+    margin: 0 2rem 2rem 0;
+}
+
+.blog-post .markdown img.right {
+    float: right;
+    margin: 0 0 2rem 2rem;
+}
+
+.blog-post .markdown hr {
+  clear: both;
 }
 
 /* Plusieurs images qui se suivent (import Ghost ou éditeur natif) sont regroupées à
@@ -1504,6 +1521,72 @@ blockquote p {
   .blog-post .markdown[hidden] {
     display: block !important
   }
+}
+
+/* Lightbox (site.js) : ouvre les photos d'un article en plein écran, avec navigation
+   entre toutes les images de l'article. Sans JS, ce sont de simples images. Désactivé
+   dans la prévisualisation de l'admin (site.js, armLightbox) pour ne pas gêner la
+   modification des images. */
+.lightbox-trigger {
+  cursor: zoom-in
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100
+}
+
+.lightbox[hidden] {
+  display: none
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  background: rgba(255, 255, 255, .1);
+  border: 0;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: .6rem 1rem;
+  border-radius: 8px
+}
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: rgba(255, 255, 255, .25)
+}
+
+.lightbox-close {
+  top: 1rem;
+  inset-inline-end: 1rem
+}
+
+.lightbox-prev {
+  inset-inline-start: 1rem;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
+.lightbox-next {
+  inset-inline-end: 1rem;
+  top: 50%;
+  transform: translateY(-50%)
 }
 
 .books {
@@ -2055,16 +2138,6 @@ blockquote p {
   gap: 1.1rem
 }
 
-img.left {
-    float: left;
-    margin: 0 2rem 2rem 0;
-}
-
-img.right {
-    float: right;
-    margin: 0 0 2rem 2rem;
-}
-
 @media (max-width: 30rem) {
   .tabs-label {
     padding: .6rem .6rem;
@@ -2385,7 +2458,10 @@ img.right {
 
 @media print {
   wagtail-userbar,
-  div.menu {
+  div.menu,
+  form.lang-switcher,
+  div.account-panel,
+  nav.foot-nav {
     display: none;
   }
   img, div.gallery {

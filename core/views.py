@@ -79,10 +79,18 @@ def home(request):
 def account(request):
     new_number = request.session.pop(NEW_NUMBER_KEY, None)
     acc = current_account(request)
+    shortcuts = acc.shortcut_set.select_related("service").order_by(
+        "position", "service__order", "service__name",
+    ) if acc else []
+    memberships = acc.membership_set.select_related("audience").order_by(
+        "position", "audience__order", "audience__name",
+    ) if acc else []
     return render(request, "core/account.html", {
         "account": acc,
         "account_contributions": acc.contributions.all() if acc else [],
-        "owned_entries": acc.directory_entries.all() if acc else [],
+        "shortcuts": shortcuts,
+        "memberships": memberships,
+        "owned_entries": acc.directory_entries.order_by("name") if acc else [],
         "new_number": format_number(new_number) if new_number else None,
         "pending": pending_anonymous_account(request),
     })
@@ -119,7 +127,7 @@ def groupes(request):
 
 
 def annuaire(request, secteur=None):
-    entries = DirectoryEntry.objects.filter(visibility=DirectoryEntry.VISIBILITY_PUBLIC)
+    entries = DirectoryEntry.objects.filter(visibility=DirectoryEntry.VISIBILITY_PUBLIC).order_by('name')
     current = None
     if secteur:
         current = get_object_or_404(DirectorySector, slug=secteur)

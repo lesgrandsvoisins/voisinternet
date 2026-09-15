@@ -38,11 +38,6 @@
       <h2 id="sc-title">{% trans "Mon compte" %}</h2>
       <p class="muted">{% if user.is_authenticated %}{% trans "Connecté" %}{% if user.first_name %} : {{ user.first_name }}{% endif %}{% else %}{% trans "Compte anonyme" %}{% endif %}</p>
     </div>
-    <ul class="svc">
-      <li><strong><a href="{% url 'core:raccourcis' %}">{% trans "Mes raccourcis" %}</strong></a></li>
-      <li><strong><a href="{% url 'core:groupes' %}">{% trans "Mes groupes" %}</strong></a></li>
-      <li><strong><a href="{% url 'core:mes_fiches' %}">{% trans "Mes fiches dans l'annuaire" %}</strong></a></li>
-    </ul>
     <div class="actions">
       {% if user.is_authenticated %}
         {% if OIDC_ENABLED %}<form method="post" action="{% url 'oidc_logout' %}">{% csrf_token %}<button class="btn btn-line" type="submit">{% trans "Se déconnecter" %}</button></form>{% endif %}
@@ -51,6 +46,34 @@
         <form method="post" action="{% url 'core:forget_anonymous' %}">{% csrf_token %}<button class="btn btn-line" type="submit">{% trans "Fermer ce compte sur cet appareil" %}</button></form>
       {% endif %}
     </div>
+  </section>
+
+  <section aria-labelledby="sc2-title">
+    <div class="split">
+      <h2 id="sc2-title">{% trans "Mes raccourcis" %}</h2>
+      <p class="muted"><a href="{% url 'core:raccourcis' %}#available-services">{% trans "Ajouter un raccourci" %}</a></p>
+    </div>
+    <div id="shortcuts-list">
+      {% include "core/partials/shortcut_list.html" %}
+    </div>
+  </section>
+
+  <section aria-labelledby="mb2-title">
+    <div class="split">
+      <h2 id="mb2-title">{% trans "Mes groupes" %}</h2>
+      <p class="muted"><a href="{% url 'core:groupes' %}#available-groups">{% trans "Rejoindre un groupe" %}</a></p>
+    </div>
+    <div id="memberships-list">
+      {% include "core/partials/membership_list.html" %}
+    </div>
+  </section>
+
+  <section aria-labelledby="fiches2-title">
+    <div class="split">
+      <h2 id="fiches2-title">{% trans "Mes fiches dans l'annuaire" %}</h2>
+      <p class="muted"><a href="{% url 'core:mes_fiches' %}">{% trans "Créer une fiche" %}</a></p>
+    </div>
+    {% include "core/partials/entry_list.html" with entries=owned_entries %}
   </section>
 
   {% if user.is_authenticated %}

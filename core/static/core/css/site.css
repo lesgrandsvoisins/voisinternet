@@ -155,7 +155,7 @@ a {
 }
 
 .wrap {
-  max-width: 1120px;
+  /* max-width: 1120px; */
   margin: 0 auto;
   padding: 0 1.25rem
 }
@@ -231,7 +231,8 @@ a {
 }
 
 .menu-btn,
-.account {
+.account,
+.lang-switcher select {
   font: inherit;
   color: var(--ink);
   background: none;
@@ -246,7 +247,28 @@ a {
 }
 
 .menu-btn:hover,
-.account:hover {
+.account:hover,
+.lang-switcher select:hover {
+  background: var(--hover)
+}
+
+.lang-switcher {
+  display: flex;
+  align-items: center
+}
+
+.lang-switcher-go {
+  font: inherit;
+  color: var(--ink);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: .45rem .8rem;
+  margin-inline-start: .5rem
+}
+
+.lang-switcher-go:hover {
   background: var(--hover)
 }
 
@@ -259,7 +281,6 @@ a {
   align-items: flex-start;
   gap: 0;
   line-height: 1.2;
-  padding: .35rem .85rem;
   position: relative;
   list-style: none;
   cursor: pointer

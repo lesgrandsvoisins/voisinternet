@@ -153,6 +153,16 @@ a {
   color: inherit
 }
 
+img.left {
+    float: left;
+    margin: 0 2rem 2rem 0;
+}
+
+img.right {
+    float: right;
+    margin: 0 0 2rem 2rem;
+}
+
 :focus-visible {
   outline: 3px solid var(--sun);
   outline-offset: 3px;
@@ -1468,11 +1478,30 @@ blockquote p {
   }
 }
 
+@media (max-width: 26rem) {
+  .blog-post .markdown p:has(> img:only-child):has(+ p > img:only-child),
+  .blog-post .markdown p:has(> img:only-child) + p:has(> img:only-child) {
+    width: 100%;
+    margin: .3rem 0
+  }
+}
+
 /* Même chose quand les images se suivent sans paragraphe autour (c'est ainsi que
-   l'éditeur riche de Wagtail les insère lui-même, à la différence d'une galerie Ghost
-   convertie depuis du Markdown, toujours enveloppée d'un <p> — voir les règles ci-dessus). */
-.blog-post .markdown img:has(+ img),
-.blog-post .markdown img + img {
+   l'éditeur riche de Wagtail les insère lui-même — bouton « Image » ou « Galerie de
+   photos », cms/static/cms/js/draftail_gallery.js — à la différence d'une galerie Ghost
+   convertie depuis du Markdown, toujours enveloppée d'un <p> non vide, voir ci-dessus).
+   Entre deux blocs image insérés ainsi, Draft.js glisse toujours un <p> vide (nécessaire
+   à l'édition, pour pouvoir placer le curseur entre les deux) : une image isolée en a
+   un aussi de part et d'autre, donc il ne suffit pas à distinguer une galerie d'une
+   image seule — d'où les deux sélecteurs ci-dessous (l'un attrape toutes les images
+   sauf la dernière de la suite, l'autre toutes sauf la première ; ensemble, les deux
+   couvrent une suite de n'importe quelle longueur). */
+.blog-post .markdown p:empty {
+  display: none
+}
+
+.blog-post .markdown img:has(+ p:empty + img),
+.blog-post .markdown img:has(+ p:empty + img) + p:empty + img {
   display: inline-block;
   width: calc(33.333% - .8rem);
   height: 11rem;
@@ -1482,9 +1511,19 @@ blockquote p {
 }
 
 @media (max-width: 40rem) {
-  .blog-post .markdown img:has(+ img),
-  .blog-post .markdown img + img {
+  .blog-post .markdown img:has(+ p:empty + img),
+  .blog-post .markdown img:has(+ p:empty + img) + p:empty + img {
     width: calc(50% - .8rem)
+  }
+}
+
+@media (max-width: 26rem) {
+  .blog-post .markdown img:has(+ p:empty + img),
+  .blog-post .markdown img:has(+ p:empty + img) + p:empty + img {
+    width: 100%;
+    height: auto;
+    max-height: 20rem;
+    margin: .3rem 0
   }
 }
 

@@ -19,9 +19,9 @@
         {% endif %}
       </div>
       {% if service.pk in shortcut_ids %}
-        {% include "core/partials/shortcut_button.html" with added=True target_id="#available-services" swap="innerHTML" %}
+        {% include "core/partials/shortcut_button.html" with added=True %}
       {% else %}
-        {% include "core/partials/shortcut_button.html" with added=False target_id="#available-services" swap="innerHTML" %}
+        {% include "core/partials/shortcut_button.html" with added=False %}
       {% endif %}
     </li>
   {% empty %}

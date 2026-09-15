@@ -1,4 +1,6 @@
+from django.core.paginator import Paginator
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from wagtail import blocks
@@ -17,7 +19,10 @@ class HomePage(Page):
         FieldPanel("intro"),
     ]
 
-    subpage_types = ["cms.StandardPage", "cms.PolePage", "cms.ContactPage", "cms.AssociationPage", "cms.DonationPage"]
+    subpage_types = [
+        "cms.StandardPage", "cms.PolePage", "cms.ContactPage", "cms.AssociationPage", "cms.DonationPage",
+        "cms.BlogIndexPage",
+    ]
 
 
 class StandardPage(Page):
@@ -183,3 +188,51 @@ class DonationPage(Page):
         ).order_by("order", "name")
         context["donors"] = Donor.objects.filter(public=True)
         return context
+
+
+class BlogIndexPage(Page):
+    """Page d'index du blog : liste les BlogPostPage placés dessous, du plus récent au plus ancien."""
+
+    intro = RichTextField(_("introduction"), blank=True, default="")
+
+    content_panels = Page.content_panels + [
+        FieldPanel("intro"),
+    ]
+
+    parent_page_types = ["cms.HomePage"]
+    subpage_types = ["cms.BlogPostPage"]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        posts = BlogPostPage.objects.live().child_of(self).order_by("-date")
+        context["posts"] = Paginator(posts, 10).get_page(request.GET.get("page"))
+        return context
+
+
+class BlogPostPage(Page):
+    """
+    Un article de blog : texte enrichi, chapeau, image de une et auteur. La
+    date affichée (`date`) est distincte de la date de publication Wagtail —
+    elle peut être antérieure, notamment pour les articles repris de l'ancien
+    blog Ghost.
+    """
+
+    date = models.DateTimeField(_("date de publication"), default=timezone.now)
+    author_name = models.CharField(_("auteur"), max_length=140, blank=True, default="")
+    excerpt = models.CharField(_("chapeau"), max_length=300, blank=True, default="")
+    featured_image = models.ForeignKey(
+        "wagtailimages.Image", verbose_name=_("image de une"),
+        null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+    )
+    body = RichTextField(_("texte"), blank=True, default="")
+
+    content_panels = Page.content_panels + [
+        FieldPanel("date"),
+        FieldPanel("author_name"),
+        FieldPanel("excerpt"),
+        FieldPanel("featured_image"),
+        FieldPanel("body"),
+    ]
+
+    parent_page_types = ["cms.BlogIndexPage"]
+    subpage_types = []

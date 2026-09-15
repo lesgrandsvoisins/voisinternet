@@ -42,7 +42,7 @@
                       aria-label="{% blocktrans with name=service.name %}Descendre {{ name }}{% endblocktrans %}"
                       {% if forloop.last %}disabled{% endif %}>↓</button>
             </form>
-            {% include "core/partials/shortcut_button.html" with added=True target_id="#shortcuts-list" swap="innerHTML" %}
+            {% include "core/partials/shortcut_button.html" with added=True %}
           </div>
         </li>
       {% endwith %}

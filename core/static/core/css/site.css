@@ -1456,21 +1456,22 @@ blockquote p {
   max-width: 750px
 }
 
-/* Une galerie Ghost, une fois exportée en Markdown, n'est plus qu'une suite de
-   paragraphes contenant chacun une seule image : on la repère par cette forme (deux
-   paragraphes-image consécutifs ou plus) pour l'afficher en grille plutôt qu'empilée
-   sur plusieurs écrans de haut. Une image isolée garde l'affichage large ci-dessus. */
-.blog-post .markdown p:has(> img:only-child):has(+ p > img:only-child),
-.blog-post .markdown p:has(> img:only-child) + p:has(> img:only-child) {
-  display: inline-block;
-  width: calc(33.333% - .8rem);
-  margin: .3rem;
-  vertical-align: top
+/* Plusieurs images qui se suivent (import Ghost ou éditeur natif) sont regroupées à
+   l'affichage dans un <div class="gallery"> (cms/templatetags/gallery_filters.py,
+   appliqué après la conversion du texte enrichi en HTML) plutôt que repérées ici en CSS
+   pur : plus simple à faire tenir en grille responsive, et le "clear" ci-dessous évite
+   qu'une image alignée à gauche/droite juste avant (img.left/img.right) ne vienne
+   chevaucher la galerie. Une image isolée n'est jamais concernée. */
+.blog-post .markdown .gallery {
+  clear: both;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin: 1.25rem 0
 }
 
-.blog-post .markdown p:has(> img:only-child):has(+ p > img:only-child) img,
-.blog-post .markdown p:has(> img:only-child) + p:has(> img:only-child) img {
-  width: 100%;
+.blog-post .markdown .gallery img {
+  width: calc(33.333% - .4rem);
   height: 11rem;
   max-height: none;
   margin: 0;
@@ -1479,59 +1480,29 @@ blockquote p {
 }
 
 @media (max-width: 40rem) {
-  .blog-post .markdown p:has(> img:only-child):has(+ p > img:only-child),
-  .blog-post .markdown p:has(> img:only-child) + p:has(> img:only-child) {
-    width: calc(50% - .8rem)
+  .blog-post .markdown .gallery img {
+    width: calc(50% - .3rem)
   }
 }
 
 @media (max-width: 26rem) {
-  .blog-post .markdown p:has(> img:only-child):has(+ p > img:only-child),
-  .blog-post .markdown p:has(> img:only-child) + p:has(> img:only-child) {
-    width: 100%;
-    margin: .3rem 0
-  }
-}
-
-/* Même chose quand les images se suivent sans paragraphe autour (c'est ainsi que
-   l'éditeur riche de Wagtail les insère lui-même — bouton « Image » ou « Galerie de
-   photos », cms/static/cms/js/draftail_gallery.js — à la différence d'une galerie Ghost
-   convertie depuis du Markdown, toujours enveloppée d'un <p> non vide, voir ci-dessus).
-   Entre deux blocs image insérés ainsi, Draft.js glisse toujours un <p> vide (nécessaire
-   à l'édition, pour pouvoir placer le curseur entre les deux) : une image isolée en a
-   un aussi de part et d'autre, donc il ne suffit pas à distinguer une galerie d'une
-   image seule — d'où les deux sélecteurs ci-dessous (l'un attrape toutes les images
-   sauf la dernière de la suite, l'autre toutes sauf la première ; ensemble, les deux
-   couvrent une suite de n'importe quelle longueur). */
-.blog-post .markdown p:empty {
-  display: none
-}
-
-.blog-post .markdown img:has(+ p:empty + img),
-.blog-post .markdown img:has(+ p:empty + img) + p:empty + img {
-  display: inline-block;
-  width: calc(33.333% - .8rem);
-  height: 11rem;
-  max-height: none;
-  margin: .3rem;
-  background: var(--stone);
-  object-fit: contain
-}
-
-@media (max-width: 40rem) {
-  .blog-post .markdown img:has(+ p:empty + img),
-  .blog-post .markdown img:has(+ p:empty + img) + p:empty + img {
-    width: calc(50% - .8rem)
-  }
-}
-
-@media (max-width: 26rem) {
-  .blog-post .markdown img:has(+ p:empty + img),
-  .blog-post .markdown img:has(+ p:empty + img) + p:empty + img {
+  .blog-post .markdown .gallery img {
     width: 100%;
     height: auto;
-    max-height: 20rem;
-    margin: .3rem 0
+    max-height: 20rem
+  }
+}
+
+/* À l'impression, l'article se lit en entier plutôt qu'une seule page à la fois : toutes
+   les pages (cms/templates/cms/blog_post_page.html, body_pages) sont déjà dans le HTML,
+   seule la page courante est visible à l'écran (attribut "hidden"). */
+@media print {
+  .no-print {
+    display: none
+  }
+
+  .blog-post .markdown[hidden] {
+    display: block !important
   }
 }
 

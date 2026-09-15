@@ -1,5 +1,5 @@
 {% extends "core/base.html" %}
-{% load i18n wagtailcore_tags wagtailimages_tags %}
+{% load i18n wagtailcore_tags wagtailimages_tags gallery_filters %}
 
 {% block title %}{{ page.title }} — {{ SITE_NAME }}{% endblock %}
 
@@ -26,7 +26,7 @@
       courante s'affiche à l'écran (JS ou CSS ci-dessous), mais l'impression
       (core/static/core/css/site.css) les révèle toutes pour imprimer l'article entier.{% endcomment %}
       {% for page_html in body_pages %}
-        <div class="markdown"{% if not forloop.counter == page_number %} hidden{% endif %}>{{ page_html|richtext }}</div>
+        <div class="markdown"{% if not forloop.counter == page_number %} hidden{% endif %}>{{ page_html|richtext|gallery_grid }}</div>
       {% endfor %}
       {% if total_pages > 1 %}
         <nav class="pagination no-print" aria-label="{% trans "Pages de l’article" %}">

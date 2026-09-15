@@ -245,11 +245,31 @@ class ServiceApprovalTests(Base):
 
 
 class OwnershipClaimTests(Base):
-    def test_anonymous_account_cannot_claim(self):
-        entry = DirectoryEntry.objects.create(name="Fiche libre", slug="fiche-libre")
+    @override_settings(OIDC_ENABLED=True)
+    def test_anonymous_visitor_is_sent_to_login_and_claim_completes_on_return(self):
+        entry = DirectoryEntry.objects.create(
+            name="Fiche libre", slug="fiche-libre", visibility=DirectoryEntry.VISIBILITY_PROTECTED,
+        )
         response = self.client.post(reverse("core:claim_entry_ownership", args=[entry.slug]))
         self.assertEqual(response.status_code, 302)
+        self.assertIn("/oidc/authenticate/", response.url)
         self.assertFalse(OwnershipClaim.objects.filter(entry=entry).exists())
+        self.assertEqual(self.client.session.get("voisinternet_pending_ownership_claim"), entry.slug)
+
+        # De retour après une connexion Keycloak réussie (simulée par force_login) : la
+        # demande, mise de côté, se termine d'elle-même à la prochaine visite de la fiche.
+        user = get_user_model().objects.create_user("voisine")
+        self.client.force_login(user)
+        self.client.get(reverse("core:entry_detail", args=[entry.slug]))
+        claim = OwnershipClaim.objects.get(entry=entry)
+        self.assertEqual(claim.account.user, user)
+        self.assertNotIn("voisinternet_pending_ownership_claim", self.client.session)
+
+    def test_anonymous_visitor_gets_404_when_oidc_disabled(self):
+        with override_settings(OIDC_ENABLED=False):
+            entry = DirectoryEntry.objects.create(name="Fiche libre", slug="fiche-libre")
+            response = self.client.post(reverse("core:claim_entry_ownership", args=[entry.slug]))
+            self.assertEqual(response.status_code, 404)
 
     def test_named_account_can_request_ownership_of_unowned_entry(self):
         entry = DirectoryEntry.objects.create(

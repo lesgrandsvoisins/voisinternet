@@ -4,20 +4,8 @@ published_at: 2025-12-30T17:25:47.000+01:00
 reading_time: 3
 excerpt: Une gallérie d’art dans un lieu autre est sympathique et pour le lieu, et pour les artistes, et pour les patients, et pour les salariés, et pour l’ensemble des usagers.
 
-
-
-
-
-
-
 Lier l’art
 avec la rééducation
-
-
-
-
-
-
 
 Pour les usagers du CSR LADAPT Châtillon
 
@@ -34,7 +22,7 @@ Une gallérie d’art dans un lieu autre est sympathique et pour le lieu, et pou
 
 ## Lier l’art avec la rééducation
 
-![](https://blog.lesgrandsvoisins.com/content/images/2025/12/logo-ladapt-iledefrance-1.png)
+![](./images/2025/12/logo-ladapt-iledefrance-1.png)
 
 ## Pour les usagers du CSR LADAPT Châtillon
 
@@ -60,7 +48,7 @@ En offrant des activités culturelles et artistiques en plus des soins médicaux
 
 * * *
 
-![](https://blog.lesgrandsvoisins.com/content/images/2025/12/lesartsvoisins-200-200.svg)
+![](./images/2025/12/lesartsvoisins-200-200.svg)
 
 ## Pour les artistes et artisans d’art
 
@@ -82,7 +70,7 @@ Bien qu’il y ait une prise de risque dont une partie est malheureusement assum
 
 * * *
 
-![](https://blog.lesgrandsvoisins.com/content/images/2025/12/ladapt-hall.jpg)
+![](./images/2025/12/ladapt-hall.jpg)
 
 ## Pourquoi pas ?
 
@@ -107,22 +95,22 @@ art-2026-01-09-arstvoisins-a-ladapt-chatillon.pdf
 \
 397 KB
 \
-download-circle](https://blog.lesgrandsvoisins.com/content/files/2026/01/art-2026-01-09-arstvoisins-a-ladapt-chatillon.pdf "Download")
+download-circle](./files/2026/01/art-2026-01-09-arstvoisins-a-ladapt-chatillon.pdf "Download")
 
-![](https://blog.lesgrandsvoisins.com/content/images/2026/01/DSC00294.JPG)
+![](./images/2026/01/DSC00294.JPG)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2026/01/DSC00295.JPG)
+![](./images/2026/01/DSC00295.JPG)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2026/01/DSC00296.JPG)
+![](./images/2026/01/DSC00296.JPG)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2026/01/DSC00297.JPG)
+![](./images/2026/01/DSC00297.JPG)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2026/01/DSC00298.JPG)
+![](./images/2026/01/DSC00298.JPG)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2026/01/DSC00299.JPG)
+![](./images/2026/01/DSC00299.JPG)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2026/01/DSC00300.JPG)
+![](./images/2026/01/DSC00300.JPG)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2026/01/DSC00301.JPG)
+![](./images/2026/01/DSC00301.JPG)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2026/01/DSC00302.JPG)
+![](./images/2026/01/DSC00302.JPG)

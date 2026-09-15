@@ -18,7 +18,7 @@ Nous avons voté une prise de position forte au 17e Conseil des Voisins pour nou
 
 Pas plus tard que le 10 mai, déjà nous sommes testés sur les points 1 et 3 de par la visite de Madame la Ministre déléguée au Handicap, Geneviève Darrieussecq à Inclusiv'Day.
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/darrieussecq-genevieve.jpg)
+![](./images/2023/05/darrieussecq-genevieve.jpg)
 
 Maël Aïnine Néma Chérif pour Les Grands Voisins avec Madame la Ministre Déléguée au Handicap, Geneviève Darrieussecq 
 
@@ -30,7 +30,7 @@ La discussion à avoir pour Les Grands Voisins avec Mme. la Ministre Déléguée
 
 Comme toute Grande Voisine et tout Grand Voisin, Maël A.N.C. et la Caravane CECAI ont des projets louables, mais Les Grands Voisins ne peuvent pas soutenir directement ou indirectement aucune des initiatives. Soutenir une initiative porte automatiquement préjudice, à mon sens, à toutes les initiatives que nous ne soutenons pas. Malheureusement, cette tendance a une historique dans les Grands Voisins.
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/image-17.png)
+![](./images/2023/05/image-17.png)
 
 Une initiative « Village des Grands Voisins » en avril 2019 
 
@@ -40,7 +40,7 @@ Notre défi est grand. L'intérêt général aurait besoin d'un comité de contr
 
 Mon autre vice-président me pose une question par rapport à un projet accessoire que nous avions avec Maël – le [web fait main fait maison](https://web.resdigita.com/) – qui était conçu pour financer notre présence à Inclusiv'Day. (A savoir que l'avance nous permettant à aller à Inclusv'Day venait de Maël.) L'observation de Caroline était que ce projet aurait pu enfreindre la condition 2 d'intérêt général. Chapeau Caroline !
 
-[![](https://blog.lesgrandsvoisins.com/content/images/2023/05/image-20.png)](https://web.lesgrandsvoisins.com)
+[![](./images/2023/05/image-20.png)](https://web.lesgrandsvoisins.com)
 
 Mon erreur probable de proposer en kermesse les activités bénévoles pour le bénéfice des Grands Voisins
 
@@ -50,13 +50,13 @@ Il n'y auraient peut-être pas de problème à mon sens que les acteurs se reven
 
 Je dis que je suis lauréat, car il s'agit d'une activité de bénévolat qui m'est personnelle sur le site Saint Vincent de Paul, à une église depuis 2016 et au sein d'une resourcerie à Arcueil. C'est une chose que j'aime faire: équiper et animer des salles de sociabilité numérique. On y aborde d'abord la sociabilité et après le numérique afin de déstigmatiser le numérique. C'est vraiment splendide pour moi et pour beaucoup. Pourtant, effectivement, c'est mon kiffe, mon kiffe perso.
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/image-18.png)
+![](./images/2023/05/image-18.png)
 
 La Mairie du 14e en avril 2022 lors de la considération du numérique créatif des Grands Voisins
 
 Entre le 13 et le 17 mars 2023 a eu lieu le Conseil de Paris. Un débat a eu lieu qui a, à mon sens, contrarié les conditions du budget participatif du 14e arrondissement. En parallèle depuis des années, il y aurait, je pense, une activité contre moi au sujet de la marque Les Grands Voisins. Le débat au Conseil de Paris semble avoir placé la Mairie du 14e et/ou la Mairie de Paris dans un effort probable de certains pour « tuer la marque » (je site un membre du bureau de l'association France Tiers Lieux qui donne une bonne caractérisation de la mouvance contre les Grands Voisins telle qu'ici). La délibération signée par Madame la Maire de Paris (Mme. HILDAGO) avait effectivement redirigé (je pense, d'après ce que je vois et les débats) le financement du numérique créatif des Grands Voisins à un projet différent. (Le projet différent aurait été l'agrandissement de l'atelier de la Resourcerie Créative, lorsque le projet « [le numérique créatif des Grands Voisins](https://blog.lesgrandsvoisins.com/lancement-du-budget-participatif/) » concernant entre autres [l'adaptation d'un atelier existant de la Ressourcerie Créative dans une approche](https://blog.lesgrandsvoisins.com/budget-participatif-avec-la-mairie-du-14e-et-la-ressourcerie-creative/) spécifique.)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/image-19.png)
+![](./images/2023/05/image-19.png)
 
 Extrait du Conseil de Paris
 

@@ -215,4 +215,4 @@ scan-2020-04-03-lesgrandsvoisinsfr.pdf
 \
 206 KB
 \
-download-circle](https://blog.lesgrandsvoisins.com/content/files/2023/04/scan-2020-04-03-lesgrandsvoisinsfr.pdf "Download")
+download-circle](./files/2023/04/scan-2020-04-03-lesgrandsvoisinsfr.pdf "Download")

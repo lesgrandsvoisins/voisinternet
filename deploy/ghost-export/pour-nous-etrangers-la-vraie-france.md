@@ -52,9 +52,9 @@ profession-empathie-nationale-ed2025-v2.pdf
 \
 8 MB
 \
-download-circle](https://blog.lesgrandsvoisins.com/content/files/2025/02/profession-empathie-nationale-ed2025-v2.pdf "Download")
+download-circle](./files/2025/02/profession-empathie-nationale-ed2025-v2.pdf "Download")
 
 Renseignements: Chris Mann 07 81 81 18 11 [chris@lesgrandsvoisins.com]()  
 Dossier presse : [www.lesgrandsvoisins.com/civisme/empathie](https://www.lesgrandsvoisins.com/civisme/empathie)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2025/02/image.png)
+![](./images/2025/02/image.png)

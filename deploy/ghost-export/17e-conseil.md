@@ -30,7 +30,7 @@ intergen.pdf
 \
 1 MB
 \
-download-circle](https://blog.lesgrandsvoisins.com/content/files/2023/05/intergen.pdf "Download")
+download-circle](./files/2023/05/intergen.pdf "Download")
 
 ## Déclaration et statut d'association coopérative
 
@@ -46,7 +46,7 @@ coop-statut-agrement.pdf
 \
 144 KB
 \
-download-circle](https://blog.lesgrandsvoisins.com/content/files/2023/05/coop-statut-agrement.pdf "Download")
+download-circle](./files/2023/05/coop-statut-agrement.pdf "Download")
 
 ## Ouverture de compte courant au Crédit Agricole
 
@@ -72,7 +72,7 @@ Ont exprimé leurs voix dans la semaine après la séance : Mael ANC, Caroline L
 
 # Invitation
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/image.png)
+![](./images/2023/05/image.png)
 
 Les Grands Voisins 17e Conseil des voisins mardi le 2 mai 2023 20h45 meet.lesgrandsvoisins.com
 

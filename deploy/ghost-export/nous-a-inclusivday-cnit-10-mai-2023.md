@@ -22,9 +22,9 @@ Inscrivez-vous et participez à Inclusiv’Day le 10 mai 2023 à Paris La Défen
 \
 Le 10 mai 2023 à Paris La Défense Arena, venez nous rendre visite ainsi que d’autres acteurs autour du handicap et de la réalisation. Sur notre stand, nous aurions de l’art, le livre de Caroline et des démonstrations de nos axes digital et artistiques. L’organisateur parle d’un riche programme
 \
-![](https://blog.lesgrandsvoisins.com/content/images/size/w256h256/2023/04/lesgrandsvoisinscom-carre-transparent-01.png)Les Grands VoisinsChris Mann
+![](./images/size/w256h256/2023/04/lesgrandsvoisinscom-carre-transparent-01.png)Les Grands VoisinsChris Mann
 \
-![](https://blog.lesgrandsvoisins.com/content/images/2023/04/lesgrandsvoisins-inclusivday.png)](https://blog.lesgrandsvoisins.com/nous-a-inclusivday-cnit-10-mai-2023/)
+![](./images/2023/04/lesgrandsvoisins-inclusivday.png)](https://blog.lesgrandsvoisins.com/nous-a-inclusivday-cnit-10-mai-2023/)
 
 0 € de notre objectif de 650 € pour le financement de notre participation Inclusiv'Day, merci de penser à acheter nos services ou [effectuer un don](https://www.lesgrandsvoisins.com/dons) s'il vous plaît.
 

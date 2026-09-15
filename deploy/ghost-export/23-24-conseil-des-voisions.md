@@ -14,12 +14,12 @@ compta-2023-doc-20240831-v02-lesgrandsvoisins-ag-2024.pdf
 \
 315 KB
 \
-download-circle](https://blog.lesgrandsvoisins.com/content/files/2024/11/compta-2023-doc-20240831-v02-lesgrandsvoisins-ag-2024.pdf "Download")
+download-circle](./files/2024/11/compta-2023-doc-20240831-v02-lesgrandsvoisins-ag-2024.pdf "Download")
 
-![](https://blog.lesgrandsvoisins.com/content/images/2024/11/IMG_20241015_195950.jpg)
+![](./images/2024/11/IMG_20241015_195950.jpg)
 
 24 Conseil des Voisins
 
-![](https://blog.lesgrandsvoisins.com/content/images/2024/11/IMG_20240828_193318--1-.jpg)
+![](./images/2024/11/IMG_20240828_193318--1-.jpg)
 
 23e Conseil des Voisins

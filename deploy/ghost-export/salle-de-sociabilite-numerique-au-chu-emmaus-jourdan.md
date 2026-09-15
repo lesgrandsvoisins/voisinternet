@@ -13,23 +13,23 @@ L'objectif est une expérimentation pour trouver une approche peu intrusive pour
 
 Ainsi a été le mot de lancement le 14 juin 2024 du numérique créatif des Grands Voisins au service du CHU Emmaüs Jourdan. En voici quelques photos :
 
-![](https://blog.lesgrandsvoisins.com/content/images/2024/09/IMG-20240901-WA0005-1.jpg)
+![](./images/2024/09/IMG-20240901-WA0005-1.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2024/09/IMG_20240621_171356.jpg)
+![](./images/2024/09/IMG_20240621_171356.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2024/09/IMG_20240628_170323.jpg)
+![](./images/2024/09/IMG_20240628_170323.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2024/09/IMG_20240628_170533.jpg)
+![](./images/2024/09/IMG_20240628_170533.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2024/09/IMG_20240731_143229.jpg)
+![](./images/2024/09/IMG_20240731_143229.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2024/09/IMG_20240724_165034--2-.jpg)
+![](./images/2024/09/IMG_20240724_165034--2-.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2024/09/IMG_20240731_142322--1-.jpg)
+![](./images/2024/09/IMG_20240731_142322--1-.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2024/09/salle-troisusagers.jpg)
+![](./images/2024/09/salle-troisusagers.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2024/09/appsalman.png)
+![](./images/2024/09/appsalman.png)
 
 Gallérie photos de la sociabilité numérique Emmaüs Jourdan par Les Grands Voisins
 
@@ -39,7 +39,7 @@ Un premier accord pour citer Emmaüs Solidarité CHU Jourdan dans ce projet et p
 
 La réunion de démarrage a eu lieu en début mars. Les premiers achats et livraisons de matériaux ont lieu en fin mars. Les candidats initiaux de salles ont été soit à l'extérieur du bureau des travailleurs sociaux au deuxième étage, soit dans un petit bureau au rez-de-chaussée. En début juin, nous étions toujours fixés sur un petit bureau au rez-de-chausée avec un espace de sociabilité à l'extérieur. Le 21 juin, nous n'avions toujours pas les clefs, et nous avions opté pour une salle plus grande dont nous pouvions avoir les clefs plus tôt. Voici l'affiche validée au sujet du lancement de la salle de sociabilité numérique.
 
-![](https://blog.lesgrandsvoisins.com/content/images/2024/09/affiche-socnum-chujourdan-emmaus.png)
+![](./images/2024/09/affiche-socnum-chujourdan-emmaus.png)
 
 Document de lancement de la sociabilité numérique au CHU Emmaüs du 16 juillet 2024
 

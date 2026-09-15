@@ -17,13 +17,13 @@ N'importe qui peut être Grand Voisin. Je suis n'importe qui. Donc, je peux êtr
 
 Il se trouve que j'ai édité une version d'un document « Manifeste » des Grands Voisins : un document avec des contributions de plus de cent personnes sur deux grands ateliers sur un mois en 2017. Tout de suite à cette élaboration du Manifeste, et dans un contexte de mutation de culture de management du lieu Saint-Vincent-de-Paul, j'ai monté et ai annoncé sur les voies de communication internes un wiki en français, en arabe et en anglais de débat sur le site web du nom de domaine de mon dépôt wiki.lesgrandsvoisins.com.  Sous trois mois, le wiki a été cyber-attaqué.
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/04/notalgie.png)
+![](./images/2023/04/notalgie.png)
 
 Les Grands Voisins "La cité rêvée" (ancien lieu) : Mairie, Services sociaux, E.S.S. : structures + Grand public
 
 Plus d'une année passe. Le 19 février 2019, je me reveille avec une impulsion de déposer la marque « Les Grands Voisins ». Il n'il y a avait jamais eu de discussion avec qui que ce soit sur le sujet de la marque Les Grands Voisins. Je n'y ai pas pensé la veille, de même le jour après avoir déposé la marque. Trois mois plus tard, je reçois la confirmation de l'INPI et je vérifie si une autre personne ne l'aurait pas déposée entretemps. Il se trouve que le Consortium a déposé effectivement la même marque (sauf avec un logo) en collectif le même jour que moi. Un employé de l'INPI me déclare que dans ces 42 ans à l'INPI, il n'a jamais vu ce cas. Nous avons tous les deux – le Consortium et moi-même – les mêmes droits dans un régime de simultanéité de la marque (régime jusqu'à une réforme de décembre 2019). Moi et le Consortium sont voisins.
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/04/marque-deposee.png)
+![](./images/2023/04/marque-deposee.png)
 
 Marque déposée en même temps : mêmes droits pour les déposants. Plusieurs activités "Grands Voisins" POSSIBLE
 
@@ -35,7 +35,7 @@ Il y a une belle juxtaposition d'idées dans la Marque. Tout d'abord, lorsque l'
 
 Pour ma part, je suis légitime uniquement par ma qualité de n'importe qui. Je suis légitime car je ne suis pas illégitime.
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/04/aujourdhui-orig-1.png)
+![](./images/2023/04/aujourdhui-orig-1.png)
 
 Aujourd'hui ce concept n'a plus besoin d'un lieu immobilier
 

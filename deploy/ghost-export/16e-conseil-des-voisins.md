@@ -343,7 +343,7 @@ Conseil des Grands Voisins Samedi le 25 fév. Paris 18e, 16h à 17h15, ancien ma
 
 Les Grands Voisins Town Hall meeting Sat Feb 25 in Paris (18th) and distance from 4PM to 5:15 PM Paris time. Wonderful place. We strive for diversity and accountability. Signup and info here: [https://www.lgv.coop/fr/coop/inscription](https://www.lgv.coop/fr/coop/inscription)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/04/conseil-16e-tati-interieurbackandfront-1.jpg)
+![](./images/2023/04/conseil-16e-tati-interieurbackandfront-1.jpg)
 
 ## Logistique
 

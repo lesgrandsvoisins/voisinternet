@@ -14,12 +14,12 @@ lesartsvoisins-2019-2020.pdf
 \
 10 MB
 \
-download-circle](https://blog.lesgrandsvoisins.com/content/files/2023/05/lesartsvoisins-2019-2020.pdf "Download")
+download-circle](./files/2023/05/lesartsvoisins-2019-2020.pdf "Download")
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/image-4.png)
+![](./images/2023/05/image-4.png)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/image-5.png)
+![](./images/2023/05/image-5.png)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/image-6.png)
+![](./images/2023/05/image-6.png)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/image-7.png)
+![](./images/2023/05/image-7.png)

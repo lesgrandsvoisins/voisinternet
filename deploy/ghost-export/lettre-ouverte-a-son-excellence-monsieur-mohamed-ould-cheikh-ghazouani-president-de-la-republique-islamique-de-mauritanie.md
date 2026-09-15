@@ -41,15 +41,15 @@ J’ai bien d’autres idées encore, j'ai une vision politique pour notre pays,
 Excellence,  
         Je vous prie de faire un referendum pour le drapeau de la 3e République et demande à tous ceux qui liront cette lettre ouverte et qui se retrouvent dans l’esthétique divine de ce nouveau drapeau de bien vouloir me faire un retour. Ce drapeau représente un croissant blanc tel un linceul en hommage à tous nos mort fussent-ils martyrs ou résistants entre autres. Et Salam le 6e nom d’Allah avec son accent rouge qui symbolise cette goutte de sang si métissé qui coule dans nos veines ainsi renforçant notre fraternité, notre solidarité et notre parenté.  
 
-![](https://blog.lesgrandsvoisins.com/content/images/2024/11/image.png)
+![](./images/2024/11/image.png)
 
 Première république de la Mauretanie
 
-![](https://blog.lesgrandsvoisins.com/content/images/2024/11/image-1.png)
+![](./images/2024/11/image-1.png)
 
 Deuxième république de la Mauretanie
 
-![](https://blog.lesgrandsvoisins.com/content/images/2024/11/image-2.png)
+![](./images/2024/11/image-2.png)
 
 Troisième république de la Mauretanie
 

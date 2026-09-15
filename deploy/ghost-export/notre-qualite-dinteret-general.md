@@ -49,4 +49,4 @@ Tout d'abord, la décision ou non d'être membre des Grands Voisins, et donc de 
 
 Notre manifeste déclare "L'inclusion et l'exclusion, toutes les deux, peuvent nous éloigner de l'autre qui est une chance." Notre définition même est la notion de Voisins. Par définition, on est toutes et tous voisins ! [leer más sobre 1win](https://1win-argentina-official.live/) [1Win Moldova](https://1winmd.lol/)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/04/image-2.png)
+![](./images/2023/04/image-2.png)

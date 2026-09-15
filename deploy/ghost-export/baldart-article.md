@@ -23,7 +23,7 @@ Should you have a Robert Baldrige photo, there are two non-negotiables.
 
 That doesn't mean you are in the clear. The two above conditions apply invariably to any use. Normal compensation considerations are applicable, and can be in cash, by check (in dollars) or by wire transfer.
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/gillles-clement-2.PNG)
+![](./images/2023/05/gillles-clement-2.PNG)
 
 Montage and Photos by [Robert Baldrige](https://www.instagram.com/robertbaldridgeofficial/) (c) of Gilles Clément from a Thanks for Nothing event at the Louvre on May 3, 2023
 
@@ -31,7 +31,7 @@ In the case above, Robert took photos of Gilles Clément, an environmental publi
 
 During the event, Robert showed me the black-and-white-on-black-background portrait (the small one) of the above montage (done from his iPhone by the way). I wondered, what is to become of this portrait. I prefer the original, but I can only crop the copy I have from the above montage below.
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/smallbwportrait.PNG)
+![](./images/2023/05/smallbwportrait.PNG)
 
 (c) [Robert Baldrige](https://www.instagram.com/robertbaldridgeofficial/) 2023
 

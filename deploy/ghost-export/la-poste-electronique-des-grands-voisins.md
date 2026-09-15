@@ -79,7 +79,7 @@ Pour configurer le courriel:
 - Service SMTP : port 587 sur STARTTLS. Si vous devez prendre en charge d’anciens clients de messagerie avec SMTP sur SSL (port 465), veuillez consulter notre tutoriel : Activer le service SMTPS (SMTP sur SSL, port 465).
 - Adresses des serveurs CalDAV et CardDAV : [SOGo](https://mail.lesgrandsvoisins.com/SOGo/dav/)&lt;adresse email complète&gt;
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/04/image-1.png)
+![](./images/2023/04/image-1.png)
 
 Pour des détails sur les contacts, les calendriers et d’autres clients (je pense) en anglais:
 

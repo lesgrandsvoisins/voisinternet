@@ -39,7 +39,7 @@ slug: 9e-conseil-des-voisins
 
 Merc. 27 oct. '21 19h30 Farbeez &amp; 20h15 Les Grands Voisins Bagneux et en viséo
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/04/Les_Grands_Voisins_COM_-_reunion_du_27-10-2021.jpg)
+![](./images/2023/04/Les_Grands_Voisins_COM_-_reunion_du_27-10-2021.jpg)
 
 [Les Grands Voisins COM reunion du 27 10 2021
 \
@@ -47,7 +47,7 @@ Les\_Grands\_Voisins\_COM\_-\_reunion\_du\_27-10-2021.pdf
 \
 1 MB
 \
-download-circle](https://blog.lesgrandsvoisins.com/content/files/2023/04/Les_Grands_Voisins_COM_-_reunion_du_27-10-2021.pdf "Download")
+download-circle](./files/2023/04/Les_Grands_Voisins_COM_-_reunion_du_27-10-2021.pdf "Download")
 
 ## Invitation
 

@@ -20,27 +20,27 @@ Voici la page sur notre site internet :
 \
 Budget Participatif Paris Les Grands Voisins de par La Ressourcerie Créative et Chris Mann proposent un Budget Participatif à la Ville de Paris pour votes à partir de septembre 2022.
 \
-![](https://blog.lesgrandsvoisins.com/content/images/size/w256h256/2023/04/lesgrandsvoisinscom-carre-transparent-01.png)Les Grands VoisinsChris Mann
+![](./images/size/w256h256/2023/04/lesgrandsvoisinscom-carre-transparent-01.png)Les Grands VoisinsChris Mann
 \
-![](https://blog.lesgrandsvoisins.com/content/images/2023/04/maisondesmedicens_-large-.jpg)](https://blog.lesgrandsvoisins.com/budget-participatif-avec-la-mairie-du-14e-et-la-ressourcerie-creative/)
+![](./images/2023/04/maisondesmedicens_-large-.jpg)](https://blog.lesgrandsvoisins.com/budget-participatif-avec-la-mairie-du-14e-et-la-ressourcerie-creative/)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/acparis100nowsocialcomputer.jpg)
+![](./images/2023/05/acparis100nowsocialcomputer.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/sociabilite-numerique-IMG_20190304_180803886.jpg)
+![](./images/2023/05/sociabilite-numerique-IMG_20190304_180803886.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/sociabilite-numerique-IMG_20190321_163013536.jpg)
+![](./images/2023/05/sociabilite-numerique-IMG_20190321_163013536.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/sociabilite-numerique-IMG_20190411_141643162.jpg)
+![](./images/2023/05/sociabilite-numerique-IMG_20190411_141643162.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/sociabilite-numerique-IMG_20200115_164840772.jpg)
+![](./images/2023/05/sociabilite-numerique-IMG_20200115_164840772.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/sociabilite-numerique-IMG_20200130_154341409.jpg)
+![](./images/2023/05/sociabilite-numerique-IMG_20200130_154341409.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/sociabilite-numerique-IMG_20200221_205326365.jpg)
+![](./images/2023/05/sociabilite-numerique-IMG_20200221_205326365.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/sociabilite-numerique-IMG_20200306_155857004.jpg)
+![](./images/2023/05/sociabilite-numerique-IMG_20200306_155857004.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/video-rig-IMG_20200730_164741.jpg)
+![](./images/2023/05/video-rig-IMG_20200730_164741.jpg)
 
 Photos en lien avec la salle de sociabilité numérique
 

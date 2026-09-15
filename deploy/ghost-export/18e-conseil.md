@@ -99,9 +99,9 @@ Le CR du 17e Conseil des Voisins est ici:
 \
 Nous avions eu le 17e Conseil des Voisins le 2 mai 2023. Nous avons acté : 1. Notre statut de coopératif et ses engagements2. Notre statut d’intérêt général et ses engagements3. Des questions administratives Compte-rendu version 2023-05-04-01
 \
-![](https://blog.lesgrandsvoisins.com/content/images/size/w256h256/2023/05/logosquare2.png)Les Grands VoisinsChris Mann
+![](./images/size/w256h256/2023/05/logosquare2.png)Les Grands VoisinsChris Mann
 \
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/photo-20230503-conseildesvoisins.jpg)](https://blog.lesgrandsvoisins.com/17e-conseil/)
+![](./images/2023/05/photo-20230503-conseildesvoisins.jpg)](https://blog.lesgrandsvoisins.com/17e-conseil/)
 
 Les autres conseils des voisins sont ici:
 
@@ -109,9 +109,9 @@ Les autres conseils des voisins sont ici:
 \
 Chacun peut autant contribuer de son identité à ses différentes communautés, autant que chacun puisse en enrichir son identité.
 \
-![](https://blog.lesgrandsvoisins.com/content/images/size/w256h256/2023/05/logosquare2.png)Les Grands VoisinsChris Mann
+![](./images/size/w256h256/2023/05/logosquare2.png)Les Grands VoisinsChris Mann
 \
-![](https://blog.lesgrandsvoisins.com/content/images/2023/04/logosquare2-2.png)](https://blog.lesgrandsvoisins.com/cooperations/)
+![](./images/2023/04/logosquare2-2.png)](https://blog.lesgrandsvoisins.com/cooperations/)
 
 De tête, je pense que nous allons traiter au moins les sujets suivants:
 

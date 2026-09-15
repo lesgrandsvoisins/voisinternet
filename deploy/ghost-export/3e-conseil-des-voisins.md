@@ -195,4 +195,4 @@ meet-2020-04-08-to2020-04-18-les\_grands\_voisins.PDF
 \
 657 KB
 \
-download-circle](https://blog.lesgrandsvoisins.com/content/files/2023/04/meet-2020-04-08-to2020-04-18-les_grands_voisins.PDF "Download")
+download-circle](./files/2023/04/meet-2020-04-08-to2020-04-18-les_grands_voisins.PDF "Download")

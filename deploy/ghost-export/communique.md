@@ -16,15 +16,15 @@ Proposition de communiqué pour la  Délégation permanente de la République I
 
 > La Délégation permanente de la République Islamique de Mauritanie à l'UNESCO
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/07/image.png)
+![](./images/2023/07/image.png)
 
 > félicite avec gratitude les États Unis d’Amérique
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/07/image-1.png)
+![](./images/2023/07/image-1.png)
 
 > de leur retour historique à L’UNESCO
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/07/image-2.png)
+![](./images/2023/07/image-2.png)
 
 > Nous sommes fiers et conquis par l’excellent truchement politique de bon aloi de la Directrice Générale de l’UNESCO, Madame Audrey Azouley, qui a dignement conduit la réussite de cet évènement majeur dans l’histoire de notre organisation onusienne.
 

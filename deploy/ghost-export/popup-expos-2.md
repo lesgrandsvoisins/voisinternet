@@ -29,7 +29,7 @@ Objectifs:
 
 Par [Le Bureau du Créateur](https://www.lebureauducreateur.fr/) et [Mael ANC](https://www.maelanc.com/)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/04/dalle-art-ordi.png)
+![](./images/2023/04/dalle-art-ordi.png)
 
 Artiste tableau et artiste ordi
 
@@ -49,7 +49,7 @@ Créez des opportunités de ventes
 
 [Vous y inscrire](https://www.lesgrandsvoisins.com/art/popup)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/04/dalle-haircutter-art.png)
+![](./images/2023/04/dalle-haircutter-art.png)
 
 Une coiffuse avec l'art
 

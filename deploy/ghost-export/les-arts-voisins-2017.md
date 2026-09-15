@@ -14,12 +14,12 @@ lesartsvoisins-2017.pdf
 \
 4 MB
 \
-download-circle](https://blog.lesgrandsvoisins.com/content/files/2023/05/lesartsvoisins-2017.pdf "Download")
+download-circle](./files/2023/05/lesartsvoisins-2017.pdf "Download")
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/image-1.png)
+![](./images/2023/05/image-1.png)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/image-2.png)
+![](./images/2023/05/image-2.png)
 
 [ММС-Плюс приложение](https://mmc-plus.ru/)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/05/image-3.png)
+![](./images/2023/05/image-3.png)

@@ -26,6 +26,6 @@ Et Timothée revient deux semaines plus tard pour ajouter à l'article.
 
 > Ne dit-on pas que l’analphabète du 21 siècle n’est plus celui qui n’a jamais été a l’école mais c’est celui qui n’a pas de notion en informatique.
 
-![](https://blog.lesgrandsvoisins.com/content/images/2023/11/IMG_20231113_173841_2--Large-.jpg)
+![](./images/2023/11/IMG_20231113_173841_2--Large-.jpg)
 
 Timothée revient et tappe tout seul

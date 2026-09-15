@@ -32,16 +32,16 @@ La vie de la famille Arakaki Arakaki est un exemple de lutte multi-générationn
 
 Possibilité de se retrouver directement chez l'artiste dès midi, ou de se retrouver à la Gare Houilles Carrières à 12h30 pour être amenés à l'atelier de l'artiste.
 
-![](https://blog.lesgrandsvoisins.com/content/images/2025/03/fan-sword.jpeg)
+![](./images/2025/03/fan-sword.jpeg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2025/03/femme-enfant.jpeg)
+![](./images/2025/03/femme-enfant.jpeg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2025/03/femmes-filles.jpg)
+![](./images/2025/03/femmes-filles.jpg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2025/03/projet-affiche.jpeg)
+![](./images/2025/03/projet-affiche.jpeg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2025/03/tambour.jpeg)
+![](./images/2025/03/tambour.jpeg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2025/03/WhatsApp-Image-2025-03-08-at-20.14.30.jpeg)
+![](./images/2025/03/WhatsApp-Image-2025-03-08-at-20.14.30.jpeg)
 
-![](https://blog.lesgrandsvoisins.com/content/images/2025/03/cheval-4.jpeg)
+![](./images/2025/03/cheval-4.jpeg)

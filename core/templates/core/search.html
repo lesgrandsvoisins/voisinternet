@@ -1,0 +1,82 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Recherche" %}{% if query %} — {{ query }}{% endif %} — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+        <ol>
+          <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+          <li aria-current="page">{% trans "Recherche" %}</li>
+        </ol>
+      </nav>
+      <h1>{% trans "Recherche" %}</h1>
+    </div>
+  </div>
+  <div class="wrap page">
+    <form class="blog-search" method="get" action="{% url 'core:search' %}" role="search">
+      <label for="search-q" class="sr-only">{% trans "Rechercher sur le site" %}</label>
+      <input id="search-q" type="search" name="q" value="{{ query }}" placeholder="{% trans "Rechercher…" %}" autofocus>
+      <button class="btn btn-line" type="submit">{% trans "Rechercher" %}</button>
+    </form>
+
+    {% if not query %}
+      <p class="muted">{% trans "Tapez un mot-clé pour chercher dans les pages du site, l'annuaire, l'agenda et les services." %}</p>
+    {% elif not total %}
+      <p class="muted">{% blocktrans %}Aucun résultat pour « {{ query }} ».{% endblocktrans %}</p>
+    {% else %}
+      {% if pages %}
+        <section class="search-section">
+          <h2>{% trans "Pages" %}</h2>
+          <ul class="search-results">
+            {% for page in pages %}
+              <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endif %}
+
+      {% if entries %}
+        <section class="search-section">
+          <h2>{% trans "Annuaire" %}</h2>
+          <ul class="search-results">
+            {% for entry in entries %}
+              <li>
+                <a href="{% url 'core:entry_detail' entry.slug %}">{{ entry.name }}</a>
+                {% if entry.tagline %}<span class="muted"> — {{ entry.tagline }}</span>{% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endif %}
+
+      {% if events %}
+        <section class="search-section">
+          <h2>{% trans "Agenda" %}</h2>
+          <ul class="search-results">
+            {% for event in events %}
+              <li>
+                <a href="{% url 'core:event_detail' event.pk %}">{{ event.title }}</a>
+                <span class="muted"> — {{ event.start|date:"j F Y" }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endif %}
+
+      {% if services %}
+        <section class="search-section">
+          <h2>{% trans "Services" %}</h2>
+          <ul class="search-results">
+            {% for service in services %}
+              <li>
+                <a href="{% url 'core:raccourcis' %}">{{ service.name }}</a>
+                <span class="muted"> — {{ service.summary }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endblock %}

@@ -259,6 +259,28 @@ a {
   background: var(--hover)
 }
 
+/* Recherche du site, dans la barre du menu du haut (core/templates/core/base.html). */
+.site-search {
+  display: flex;
+  gap: .4rem;
+  align-items: center
+}
+
+.site-search input {
+  font: inherit;
+  width: 11rem;
+  padding: .45rem .7rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--sky);
+  color: var(--ink)
+}
+
+.site-search input:focus {
+  border-color: var(--ink);
+  outline: none
+}
+
 .lang-switcher {
   display: flex;
   align-items: center
@@ -1410,6 +1432,23 @@ blockquote p {
 .blog-search input:focus {
   border-color: var(--ink);
   outline: none
+}
+
+.search-section {
+  margin-bottom: 2rem
+}
+
+.search-section h2 {
+  font-size: 1.1rem;
+  margin-bottom: .5rem
+}
+
+.search-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: .5rem
 }
 
 .pagination {

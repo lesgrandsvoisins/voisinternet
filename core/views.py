@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
+from django.db.models import Q
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -74,6 +75,35 @@ def home(request):
         "books": GuideBook.objects.filter(published=True)[:4],
         "posts": BlogPostPage.objects.live().order_by("-date")[:3],
         "audiences": Audience.objects.all(),
+    })
+
+
+def search(request):
+    query = request.GET.get("q", "").strip()
+    pages = entries = events = services = []
+    if query:
+        from wagtail.models import Page
+
+        pages = list(Page.objects.live().search(query)[:20])
+        entries = list(DirectoryEntry.objects.filter(
+            Q(name__icontains=query) | Q(tagline__icontains=query) | Q(description__icontains=query),
+            visibility=DirectoryEntry.VISIBILITY_PUBLIC,
+        )[:20])
+        events = list(Event.objects.filter(
+            Q(title__icontains=query) | Q(description__icontains=query) | Q(location__icontains=query),
+            public=True,
+        )[:20])
+        services = list(Service.objects.filter(
+            Q(name__icontains=query) | Q(summary__icontains=query) | Q(description__icontains=query),
+            active=True,
+        )[:20])
+    return render(request, "core/search.html", {
+        "query": query,
+        "pages": pages,
+        "entries": entries,
+        "events": events,
+        "services": services,
+        "total": len(pages) + len(entries) + len(events) + len(services),
     })
 
 
@@ -201,7 +231,16 @@ def mes_fiches(request):
             messages.success(request, _("Fiche créée."))
             return redirect("core:mes_fiches")
     else:
-        form = DirectoryEntryForm()
+        # Pré-remplir une nouvelle fiche avec ce que Keycloak sait déjà de la personne
+        # (nom, courriel), pour un compte nominatif — lui évite de les retaper alors
+        # qu'elle vient de se connecter avec. Rien à pré-remplir pour un compte anonyme.
+        initial = {}
+        if acc.user_id:
+            if acc.user.get_full_name():
+                initial["name_fr"] = acc.user.get_full_name()
+            if acc.user.email:
+                initial["email"] = acc.user.email
+        form = DirectoryEntryForm(initial=initial)
     return render(request, "core/mes_fiches.html", {
         "entries": acc.directory_entries.order_by("name"),
         "form": form,

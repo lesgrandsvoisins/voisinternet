@@ -7,6 +7,7 @@ app_name = "core"
 urlpatterns = [
     path("", views.home, name="home"),
     path("account/", views.account, name="account"),
+    path("recherche/", views.search, name="search"),
     path("account/anonyme/creer/", views.create_anonymous, name="create_anonymous"),
     path("account/anonyme/retrouver/", views.recover_anonymous, name="recover_anonymous"),
     path("account/anonyme/oublier/", views.forget_anonymous, name="forget_anonymous"),

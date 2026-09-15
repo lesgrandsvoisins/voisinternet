@@ -72,6 +72,15 @@
             </div>
           </nav>
         </div>
+        <form class="site-search" method="get" action="{% url 'core:search' %}" role="search">
+          <label for="site-search-q" class="sr-only">{% trans "Rechercher sur le site" %}</label>
+          <input id="site-search-q"
+                 type="search"
+                 name="q"
+                 value="{{ request.GET.q }}"
+                 placeholder="{% trans "Rechercher…" %}">
+          <button type="submit" class="menu-btn">{% trans "Rechercher" %}</button>
+        </form>
         {% lang_switcher %}
         {% include "core/partials/account_widget.html" %}
       </div>

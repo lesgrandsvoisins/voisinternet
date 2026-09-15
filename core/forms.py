@@ -1,5 +1,6 @@
 from django import forms
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 
 from .models import DirectoryEntry
 
@@ -10,6 +11,16 @@ from .models import DirectoryEntry
 # ferait doublon avec son propre « _fr ».
 _TRANSLATED_FIELDS = ["name", "title", "tagline", "description", "cta_intro", "cta_label"]
 _OTHER_LANGUAGES = ["en", "es", "ar", "ko"]
+
+# Regroupement des champs par onglet dans le formulaire (côté template) : purement
+# présentationnel, sans effet sur la validation.
+_FIELD_GROUPS = [
+    (_("Général"), ["name_fr", "kind", "sector", "audiences", "title_fr", "tagline_fr", "description_fr"]),
+    (_("Photos et médias"), ["logo", "photo_promo", "video_url"]),
+    (_("Contact et localisation"),
+     ["email", "phone", "website", "address", "city", "country", "latitude", "longitude"]),
+    (_("Mise en avant"), ["cta_intro_fr", "cta_label_fr", "cta_link", "public"]),
+]
 
 
 class DirectoryEntryForm(forms.ModelForm):
@@ -37,3 +48,19 @@ class DirectoryEntryForm(forms.ModelForm):
             "hx-swap": "innerHTML",
             "hx-params": "description_fr,csrfmiddlewaretoken",
         })
+
+    @property
+    def fieldsets(self):
+        """
+        Les champs du formulaire regroupés par onglet (voir _FIELD_GROUPS), avec l'onglet
+        actif : le premier contenant une erreur s'il y en a, sinon le premier de la liste.
+        """
+        groups = [
+            {"label": label, "fields": [self[name] for name in names if name in self.fields],
+             "has_error": any(self[name].errors for name in names if name in self.fields)}
+            for label, names in _FIELD_GROUPS
+        ]
+        active = next((i for i, g in enumerate(groups) if g["has_error"]), 0)
+        for i, group in enumerate(groups):
+            group["active"] = i == active
+        return groups

@@ -16,10 +16,10 @@
   <div class="directory">
     {% for entry in entries %}
     <article class="directory-card">
-      {% if entry.photos %}<img class="hero" src="{{ entry.photos.0.url }}" alt="">{% endif %}
+      {% if entry.photos %}<a href="{% url 'core:entry_detail' entry.slug %}"><img class="hero" src="{{ entry.photos.0.url }}" alt=""></a>{% endif %}
       {% if entry.photos|length > 1 %}
       <div class="gallery">
-        {% for photo in entry.photos|slice:"1:" %}<img src="{{ photo.url }}" alt="">{% endfor %}
+        {% for photo in entry.photos|slice:"1:" %}<a href="{% url 'core:entry_detail' entry.slug %}"><img src="{{ photo.url }}" alt=""></a>{% endfor %}
       </div>
       {% endif %}
       <div class="body">

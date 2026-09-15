@@ -1615,7 +1615,70 @@ blockquote p {
 .entry-form {
   display: grid;
   gap: 1.1rem;
-  max-width: 40rem
+  /* max-width: 40rem */
+}
+
+/* Onglets en CSS pur (input radio + label), sans JavaScript : sans CSS, tous les champs
+   restent visibles et accessibles (dégradation propre). */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 2px solid var(--line);
+  margin-bottom: 1.1rem
+}
+
+.tabs-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none
+}
+
+.tabs-label {
+  order: 1;
+  flex: none;
+  cursor: pointer;
+  font-weight: 600;
+  padding: .6rem 1rem;
+  margin-bottom: -2px;
+  border-bottom: 2px solid transparent;
+  color: var(--ink-soft)
+}
+
+.tabs-label:hover {
+  color: var(--ink)
+}
+
+.tabs-label.has-error {
+  color: var(--danger)
+}
+
+.tabs-input:checked + .tabs-label {
+  color: var(--ink);
+  border-bottom-color: var(--sun)
+}
+
+.tabs-input:focus-visible + .tabs-label {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px
+}
+
+.tabs-panel {
+  order: 2;
+  flex: 0 0 100%;
+  display: none;
+  padding-top: 1.1rem
+}
+
+.tabs-input:checked + .tabs-label + .tabs-panel {
+  display: grid;
+  gap: 1.1rem
+}
+
+@media (max-width: 30rem) {
+  .tabs-label {
+    padding: .6rem .6rem;
+    font-size: .9rem
+  }
 }
 
 .form-row label {

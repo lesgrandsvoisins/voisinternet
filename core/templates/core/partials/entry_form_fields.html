@@ -1,15 +1,23 @@
 {% load i18n markdown_filters %}{% if form.non_field_errors %}<ul class="errorlist">{{ form.non_field_errors }}</ul>{% endif %}
-{% for field in form %}
-<div class="form-row">
-  {{ field.label_tag }}
-  {{ field }}
-  {% if field.name == "description_fr" %}
-  <p class="help">{% trans "Markdown ou HTML acceptés : **gras**, _italique_, [lien](https://…), listes avec « - »." %}</p>
-  <p class="preview-label">{% trans "Aperçu" %}</p>
-  <div id="description-preview" class="markdown-preview">{{ form.instance.description_fr|default:""|markdown }}</div>
-  {% elif field.help_text %}
-  <p class="help">{{ field.help_text }}</p>
-  {% endif %}
-  {{ field.errors }}
+<div class="tabs" role="group" aria-label="{% trans "Sections du formulaire" %}">
+  {% for group in form.fieldsets %}
+  <input type="radio" name="fiche-tab" id="fiche-tab-{{ forloop.counter }}" class="tabs-input" {% if group.active %}checked{% endif %}>
+  <label for="fiche-tab-{{ forloop.counter }}" class="tabs-label{% if group.has_error %} has-error{% endif %}">{{ group.label }}</label>
+  <div class="tabs-panel">
+    {% for field in group.fields %}
+    <div class="form-row">
+      {{ field.label_tag }}
+      {{ field }}
+      {% if field.name == "description_fr" %}
+      <p class="help">{% trans "Markdown ou HTML acceptés : **gras**, _italique_, [lien](https://…), listes avec « - »." %}</p>
+      <p class="preview-label">{% trans "Aperçu" %}</p>
+      <div id="description-preview" class="markdown-preview">{{ form.instance.description_fr|default:""|markdown }}</div>
+      {% elif field.help_text %}
+      <p class="help">{{ field.help_text }}</p>
+      {% endif %}
+      {{ field.errors }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
 </div>
-{% endfor %}

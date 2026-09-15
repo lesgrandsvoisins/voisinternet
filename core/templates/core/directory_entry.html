@@ -51,15 +51,20 @@
     <p>{% if entry.cta_intro %}{{ entry.cta_intro }} {% endif %}<a class="btn btn-sun" href="{{ entry.cta_link }}">{{ entry.cta_label|default:_("En savoir plus") }}</a></p>
     {% endif %}
 
-    <form method="post" action="{% url 'core:toggle_subscription' entry.slug %}">
-      {% csrf_token %}
-      <input type="hidden" name="next" value="{{ request.get_full_path }}">
-      {% if subscribed %}
-      <button class="sub-btn subscribed" type="submit">{% trans "Abonné·e ✓" %}</button>
-      {% else %}
-      <button class="sub-btn" type="submit">{% trans "S'abonner" %}</button>
+    <div class="actions">
+      <form method="post" action="{% url 'core:toggle_subscription' entry.slug %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        {% if subscribed %}
+        <button class="sub-btn subscribed" type="submit">{% trans "Abonné·e ✓" %}</button>
+        {% else %}
+        <button class="sub-btn" type="submit">{% trans "S'abonner" %}</button>
+        {% endif %}
+      </form>
+      {% if account and entry.owner_id == account.id %}
+      <a class="sub-btn" href="{% url 'core:fiche_modifier' entry.slug %}">{% trans "Modifier" %}</a>
       {% endif %}
-    </form>
+    </div>
 
     <p class="muted"><a href="{% url 'core:annuaire' %}">{% trans "← Retour à l’annuaire" %}</a></p>
   </article>

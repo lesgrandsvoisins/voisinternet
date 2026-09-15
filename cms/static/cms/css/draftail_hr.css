@@ -1,0 +1,18 @@
+/* Distingue visuellement les deux <hr/> de l'éditeur (draftail_hr.js) : un saut de page
+   doit se voir au premier coup d'œil, pour ne pas être confondu avec un simple
+   séparateur — les deux produisent pourtant le même <hr/> une fois publiés. */
+.Draftail-hr--pagebreak {
+  border-top-style: dashed;
+  border-top-width: 2px;
+}
+
+.Draftail-hr--pagebreak::after {
+  content: "Saut de page";
+  display: block;
+  width: fit-content;
+  margin: -0.7em auto 0;
+  padding: 0 .5em;
+  background: #fff;
+  color: #666;
+  font-size: .75rem;
+}

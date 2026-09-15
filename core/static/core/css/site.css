@@ -534,7 +534,8 @@ a {
   grid-template-columns: 1fr 1fr;
   gap: 2.5rem;
   align-items: end;
-  margin-bottom: 1.5rem
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
 }
 
 .hero-text .signature {

@@ -92,6 +92,22 @@ SQLite suffit à cette échelle : la sauvegarde est un seul fichier,
 `var/db.sqlite3`. Définir `POSTGRES_DB` (et installer `psycopg`) pour passer à
 PostgreSQL.
 
+### Export et import des pages Wagtail
+
+`make cms-dump` exporte tout l'arbre de pages Wagtail (`cms/`) — page
+d'accueil, pôles, contact, association, dons, leurs traductions, le site et
+les locales — dans `cms/fixtures/cms.json`. `make cms-load` le recharge.
+
+Un seul fichier plutôt qu'un par modèle (contrairement à
+`fixtures-load`/`fixtures-dump`, qui couvrent l'app `core`) : une page et sa
+révision se référencent mutuellement, et `loaddata` ne vérifie les clés
+étrangères qu'une fois tout le fichier chargé — les charger séparément
+échouerait sur ce cycle.
+
+Les fichiers médias (`var/media`, logos et photos de l'annuaire compris)
+restent à sauvegarder à part : la fixture ne contient que les métadonnées des
+images et documents, pas les fichiers eux-mêmes.
+
 ### Keycloak
 
 Créer un client `voisinternet` (confidentiel, flux standard) dans le royaume

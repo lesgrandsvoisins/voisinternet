@@ -237,7 +237,10 @@ class BlogPostPage(Page):
     # (contenu collé…) n'est alors jamais pris à tort pour un saut de page.
     body = RichTextField(
         _("texte"), blank=True, default="",
-        features=["bold", "italic", "h2", "h3", "h4", "ol", "ul", "link", "document-link", "image", "embed", "pagebreak"],
+        features=[
+            "bold", "italic", "h2", "h3", "h4", "ol", "ul", "link", "document-link", "image", "embed",
+            "pagebreak", "image-gallery",
+        ],
     )
 
     content_panels = Page.content_panels + [

@@ -40,7 +40,7 @@ venv: ## Crée l'environnement virtuel .venv
 install: ## Installe les dépendances dans .venv
 	$(PYTHON) -m pip install -r requirements.txt
 
-setup: venv install migrate fixtures ## Première installation : venv, dépendances, migrations, données d'exemple
+setup: venv install migrate fixtures-load ## Première installation : venv, dépendances, migrations, données d'exemple
 
 migrate: ## Applique les migrations
 	$(LOADENV) $(PYTHON) manage.py migrate
@@ -54,7 +54,7 @@ fixtures-load: ## Charge les données d'exemple (services, publics, guide)
 		$(LOADENV) $(PYTHON) manage.py loaddata core/fixtures/$$i.json ; \
 	done
 
-fixtures-dump: ## Charge les données d'exemple (services, publics, guide)
+fixtures-dump: ## Sauvegarde les données d'exemple (services, publics, guide)
 	for i in auth.group auth.user core.audience core.guidebook core.servicecategory core.service core.account core.shortcut core.membership core.directorysector core.directoryentry core.directoryentryphoto core.entrysubscription core.event ; do \
 		echo $$i; \
 		$(LOADENV) $(PYTHON) manage.py dumpdata $$i >core/fixtures/$$i.json ; \

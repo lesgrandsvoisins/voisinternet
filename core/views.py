@@ -120,6 +120,7 @@ def tag_detail(request, slug):
     tag = get_object_or_404(Tag, slug=slug)
     entries = tag.directory_entries.filter(visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True)
     services = tag.services.filter(active=True)
+    events = tag.events.filter(public=True, start__gte=timezone.now()).order_by("start")
     from cms.models import BlogPostPage, PolePage, ProjectPage
 
     posts = BlogPostPage.objects.live().filter(tags=tag).order_by("-date")
@@ -129,10 +130,13 @@ def tag_detail(request, slug):
         "tag": tag,
         "entries": entries,
         "services": services,
+        "events": events,
         "posts": posts,
         "poles": poles,
         "projects": projects,
-        "total": entries.count() + services.count() + posts.count() + poles.count() + projects.count(),
+        "total": (
+            entries.count() + services.count() + events.count() + posts.count() + poles.count() + projects.count()
+        ),
     })
 
 

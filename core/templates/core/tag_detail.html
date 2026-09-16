@@ -48,6 +48,20 @@
       </section>
     {% endif %}
 
+    {% if events %}
+      <section class="search-section">
+        <h2>{% trans "Agenda" %}</h2>
+        <ul class="search-results">
+          {% for event in events %}
+            <li>
+              <a href="{% url 'core:event_detail' event.pk %}">{{ event.title }}</a>
+              <span class="muted"> — {{ event.start|date:"j F Y" }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
     {% if entries %}
       <section class="search-section">
         <h2>{% trans "Annuaire" %}</h2>

@@ -175,3 +175,4 @@ class EventAdmin(TranslationAdmin):
     prepopulated_fields = {"slug": ["title"]}
     search_fields = ["title", "description"]
     date_hierarchy = "start"
+    filter_horizontal = ["tags"]

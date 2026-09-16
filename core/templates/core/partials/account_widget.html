@@ -8,7 +8,7 @@
   <button type="button"
           class="account"
           id="account"
-          x-on:click="open = true"
+          x-on:click="open = !open"
           x-bind:aria-expanded="open.toString()"
           aria-controls="account-menu"
           aria-label="{% blocktrans %}Mon compte : {{ account_sub }}{% endblocktrans %}"

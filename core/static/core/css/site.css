@@ -755,6 +755,16 @@ a {
   mix-blend-mode: multiply
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  /* randomizeBlobs() (site.js) change top/left juste après le chargement : sans
+     transition, les taches sautaient instantanément de leur position CSS par défaut à
+     leur position aléatoire. Pas de transition pour prefers-reduced-motion : le
+     déplacement y reste instantané, comme avant. */
+  .blob {
+    transition: top 1.1s ease-out, left 1.1s ease-out;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .blob {
     mix-blend-mode: screen;

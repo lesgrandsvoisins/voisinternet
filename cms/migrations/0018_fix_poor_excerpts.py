@@ -51,14 +51,19 @@ NEW_EXCERPTS = {
 
 
 def update_excerpts(apps, schema_editor):
-    from cms.models import BlogPostPage
+    # Modèle historique (pas cms.models.BlogPostPage) : ses colonnes reflètent l'état de
+    # la base à ce point précis de l'historique, contrairement au modèle actuel, qui
+    # casserait sur une base neuve dès qu'un champ est ajouté après cette migration.
+    # save_revision().publish() (machinerie Wagtail complète) n'est donc pas disponible
+    # ici — une simple sauvegarde suffit pour ce correctif ponctuel de contenu.
+    BlogPostPage = apps.get_model("cms", "BlogPostPage")
 
     for slug, excerpt in NEW_EXCERPTS.items():
         page = BlogPostPage.objects.filter(slug=slug).first()
         if page is None:
             continue
         page.excerpt = excerpt[:300]
-        page.save_revision().publish()
+        page.save()
 
 
 def noop(apps, schema_editor):

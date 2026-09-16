@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-16 11:28+0200\n"
+"POT-Creation-Date: 2026-09-16 11:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,7 @@ msgstr ""
 msgid "titre"
 msgstr "title"
 
-#: cms/models.py:55 cms/models.py:360
+#: cms/models.py:55 cms/models.py:361
 msgid "texte"
 msgstr ""
 
@@ -166,8 +166,8 @@ msgstr ""
 msgid "Étiquette Ghost dont les derniers articles apparaissent en bas de page."
 msgstr ""
 
-#: cms/models.py:132 cms/models.py:193 cms/models.py:369 core/models.py:89
-#: core/models.py:213 core/models.py:255 core/models.py:457
+#: cms/models.py:132 cms/models.py:193 cms/models.py:370 core/models.py:89
+#: core/models.py:213 core/models.py:255 core/models.py:458
 msgid "étiquettes"
 msgstr ""
 
@@ -185,7 +185,7 @@ msgstr ""
 msgid "lieu"
 msgstr "location"
 
-#: cms/models.py:190 cms/models.py:351
+#: cms/models.py:190 cms/models.py:352
 #, fuzzy
 #| msgid "page de l'annuaire"
 msgid "image de une"
@@ -217,7 +217,11 @@ msgstr "Association's bylaws"
 msgid "auteur"
 msgstr "donor"
 
-#: cms/models.py:380
+#: cms/models.py:350 core/models.py:90 core/models.py:457
+msgid "mis en avant"
+msgstr "featured"
+
+#: cms/models.py:382
 msgid ""
 "Le bouton « Saut de page » de la barre d'outils coupe l'article : il se lit "
 "alors en plusieurs pages plutôt qu'en un seul bloc. « Ligne horizontale » "
@@ -519,7 +523,7 @@ msgstr "the identities you belong to, individual or collective"
 msgid "un particulier, une association, une entreprise…"
 msgstr "an individual, an association, a business…"
 
-#: core/menu.py:73 core/models.py:519
+#: core/menu.py:73 core/models.py:520
 msgid "Association"
 msgstr "Association"
 
@@ -730,10 +734,6 @@ msgstr "category"
 #: core/models.py:87
 msgid "Laisser vide si le service s'adresse à tout le monde."
 msgstr "Leave empty if the service is for everyone."
-
-#: core/models.py:90
-msgid "mis en avant"
-msgstr "featured"
 
 #: core/models.py:91
 msgid "proposé"
@@ -971,7 +971,7 @@ msgstr ""
 msgid "Canada"
 msgstr ""
 
-#: core/models.py:306 core/models.py:479
+#: core/models.py:306 core/models.py:480
 msgid "Autre"
 msgstr "Other"
 
@@ -1136,75 +1136,75 @@ msgstr ""
 msgid "publié"
 msgstr "published"
 
-#: core/models.py:461
+#: core/models.py:462
 msgid "évènement"
 msgstr "event"
 
-#: core/models.py:462
+#: core/models.py:463
 msgid "évènements"
 msgstr "events"
 
-#: core/models.py:482
+#: core/models.py:483
 msgid "montant"
 msgstr "amount"
 
-#: core/models.py:483
+#: core/models.py:484
 msgid "moyen"
 msgstr "method"
 
-#: core/models.py:484
+#: core/models.py:485
 msgid "date"
 msgstr "date"
 
-#: core/models.py:485
+#: core/models.py:486
 msgid "note"
 msgstr "note"
 
-#: core/models.py:489
+#: core/models.py:490
 msgid "contribution financière"
 msgstr "financial contribution"
 
-#: core/models.py:490
+#: core/models.py:491
 msgid "contributions financières"
 msgstr "financial contributions"
 
-#: core/models.py:515
+#: core/models.py:516
 msgid "Particulier"
 msgstr "Individual"
 
-#: core/models.py:516
+#: core/models.py:517
 msgid "Entreprise"
 msgstr "Company"
 
-#: core/models.py:517
+#: core/models.py:518
 msgid "Fondation"
 msgstr "Foundation"
 
-#: core/models.py:518
+#: core/models.py:519
 msgid "Collectivité"
 msgstr "Local authority"
 
-#: core/models.py:521
+#: core/models.py:522
 msgid "nom affiché"
 msgstr "displayed name"
 
-#: core/models.py:522
+#: core/models.py:523
 msgid "type"
 msgstr "type"
 
-#: core/models.py:524
+#: core/models.py:525
 msgid "apparaît publiquement"
 msgstr "appears publicly"
 
-#: core/models.py:525
+#: core/models.py:526
 msgid "Uniquement avec le consentement explicite du donateur (RGPD)."
 msgstr "Only with the donor's explicit consent (GDPR)."
 
-#: core/models.py:527
+#: core/models.py:528
 msgid "soutien depuis"
 msgstr "supporting since"
 
-#: core/models.py:531
+#: core/models.py:532
 msgid "donateur"
 msgstr "donor"
 
@@ -1477,12 +1477,6 @@ msgid "Les fiches apparaîtront ici, avec l'accord de chacun."
 msgstr "Entries will appear here, with everyone's consent."
 
 #: core/templates/core/base.html:16 core/templates/core/home.html:17
-#, fuzzy
-#| msgid ""
-#| "Les Grands Voisins sont nés entre 2015 et 2017 à l'hôpital Saint-Vincent-"
-#| "de-Paul, dans le 14ᵉ arrondissement de Paris, entre Port-Royal et les "
-#| "Catacombes. Depuis, nous nous demandons si un lieu physique est encore "
-#| "nécessaire pour rester voisins."
 msgid ""
 "Les Grands Voisins sont nés à l'hôpital Saint-Vincent-de-Paul dans le 14e "
 "arrondissement à Paris, entre Port royal et les Catacombes. Nous sommes "
@@ -1490,10 +1484,11 @@ msgid ""
 "sommes au service de l'accueil de tous et croyons aux ponts entre utopie et "
 "réalité."
 msgstr ""
-"Les Grands Voisins was born between 2015 and 2017 at the Saint-Vincent-de-"
-"Paul hospital, in the 14th arrondissement of Paris, between Port-Royal and "
-"the Catacombs. Since then, we've wondered whether a physical place is even "
-"necessary to stay neighbors."
+"Les Grands Voisins was born at the Saint-Vincent-de-Paul hospital in the "
+"14th arrondissement of Paris, between Port-Royal and the Catacombs. We "
+"came out of the cracks — in the concrete, and in public policy. We exist "
+"to welcome everyone, and we believe in building bridges between utopia "
+"and reality."
 
 #: core/templates/core/base.html:26
 msgid "Aller au contenu"

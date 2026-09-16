@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-16 11:28+0200\n"
+"POT-Creation-Date: 2026-09-16 11:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,7 @@ msgstr ""
 msgid "titre"
 msgstr "제목"
 
-#: cms/models.py:55 cms/models.py:360
+#: cms/models.py:55 cms/models.py:361
 msgid "texte"
 msgstr ""
 
@@ -166,8 +166,8 @@ msgstr ""
 msgid "Étiquette Ghost dont les derniers articles apparaissent en bas de page."
 msgstr ""
 
-#: cms/models.py:132 cms/models.py:193 cms/models.py:369 core/models.py:89
-#: core/models.py:213 core/models.py:255 core/models.py:457
+#: cms/models.py:132 cms/models.py:193 cms/models.py:370 core/models.py:89
+#: core/models.py:213 core/models.py:255 core/models.py:458
 msgid "étiquettes"
 msgstr ""
 
@@ -185,7 +185,7 @@ msgstr ""
 msgid "lieu"
 msgstr "장소"
 
-#: cms/models.py:190 cms/models.py:351
+#: cms/models.py:190 cms/models.py:352
 #, fuzzy
 #| msgid "page de l'annuaire"
 msgid "image de une"
@@ -217,7 +217,11 @@ msgstr "협회 정관"
 msgid "auteur"
 msgstr "후원자"
 
-#: cms/models.py:380
+#: cms/models.py:350 core/models.py:90 core/models.py:457
+msgid "mis en avant"
+msgstr "추천"
+
+#: cms/models.py:382
 msgid ""
 "Le bouton « Saut de page » de la barre d'outils coupe l'article : il se lit "
 "alors en plusieurs pages plutôt qu'en un seul bloc. « Ligne horizontale » "
@@ -519,7 +523,7 @@ msgstr "당신이 속한 정체성, 개인 또는 단체"
 msgid "un particulier, une association, une entreprise…"
 msgstr "개인, 협회, 기업…"
 
-#: core/menu.py:73 core/models.py:519
+#: core/menu.py:73 core/models.py:520
 msgid "Association"
 msgstr "협회"
 
@@ -729,10 +733,6 @@ msgstr "카테고리"
 #: core/models.py:87
 msgid "Laisser vide si le service s'adresse à tout le monde."
 msgstr "모든 사용자를 위한 서비스라면 비워 두세요."
-
-#: core/models.py:90
-msgid "mis en avant"
-msgstr "추천"
 
 #: core/models.py:91
 msgid "proposé"
@@ -969,7 +969,7 @@ msgstr ""
 msgid "Canada"
 msgstr ""
 
-#: core/models.py:306 core/models.py:479
+#: core/models.py:306 core/models.py:480
 msgid "Autre"
 msgstr "기타"
 
@@ -1134,75 +1134,75 @@ msgstr ""
 msgid "publié"
 msgstr "게시됨"
 
-#: core/models.py:461
+#: core/models.py:462
 msgid "évènement"
 msgstr "행사"
 
-#: core/models.py:462
+#: core/models.py:463
 msgid "évènements"
 msgstr "행사"
 
-#: core/models.py:482
+#: core/models.py:483
 msgid "montant"
 msgstr "금액"
 
-#: core/models.py:483
+#: core/models.py:484
 msgid "moyen"
 msgstr "방법"
 
-#: core/models.py:484
+#: core/models.py:485
 msgid "date"
 msgstr "날짜"
 
-#: core/models.py:485
+#: core/models.py:486
 msgid "note"
 msgstr "메모"
 
-#: core/models.py:489
+#: core/models.py:490
 msgid "contribution financière"
 msgstr "재정 기여"
 
-#: core/models.py:490
+#: core/models.py:491
 msgid "contributions financières"
 msgstr "재정 기여"
 
-#: core/models.py:515
+#: core/models.py:516
 msgid "Particulier"
 msgstr "개인"
 
-#: core/models.py:516
+#: core/models.py:517
 msgid "Entreprise"
 msgstr "기업"
 
-#: core/models.py:517
+#: core/models.py:518
 msgid "Fondation"
 msgstr "재단"
 
-#: core/models.py:518
+#: core/models.py:519
 msgid "Collectivité"
 msgstr "지자체"
 
-#: core/models.py:521
+#: core/models.py:522
 msgid "nom affiché"
 msgstr "표시 이름"
 
-#: core/models.py:522
+#: core/models.py:523
 msgid "type"
 msgstr "유형"
 
-#: core/models.py:524
+#: core/models.py:525
 msgid "apparaît publiquement"
 msgstr "공개적으로 표시됨"
 
-#: core/models.py:525
+#: core/models.py:526
 msgid "Uniquement avec le consentement explicite du donateur (RGPD)."
 msgstr "기부자의 명시적 동의가 있는 경우에만(GDPR)."
 
-#: core/models.py:527
+#: core/models.py:528
 msgid "soutien depuis"
 msgstr "후원 시작일"
 
-#: core/models.py:531
+#: core/models.py:532
 msgid "donateur"
 msgstr "후원자"
 
@@ -1467,12 +1467,6 @@ msgid "Les fiches apparaîtront ici, avec l'accord de chacun."
 msgstr "각자의 동의를 받아 항목이 여기에 표시됩니다."
 
 #: core/templates/core/base.html:16 core/templates/core/home.html:17
-#, fuzzy
-#| msgid ""
-#| "Les Grands Voisins sont nés entre 2015 et 2017 à l'hôpital Saint-Vincent-"
-#| "de-Paul, dans le 14ᵉ arrondissement de Paris, entre Port-Royal et les "
-#| "Catacombes. Depuis, nous nous demandons si un lieu physique est encore "
-#| "nécessaire pour rester voisins."
 msgid ""
 "Les Grands Voisins sont nés à l'hôpital Saint-Vincent-de-Paul dans le 14e "
 "arrondissement à Paris, entre Port royal et les Catacombes. Nous sommes "
@@ -1480,9 +1474,10 @@ msgid ""
 "sommes au service de l'accueil de tous et croyons aux ponts entre utopie et "
 "réalité."
 msgstr ""
-"Les Grands Voisins는 2015년부터 2017년 사이 파리 14구, 포르루아얄과 카타콤 사"
-"이에 위치한 생뱅상드폴 병원에서 탄생했습니다. 그 이후로 우리는 이웃으로 남기 "
-"위해 물리적 장소가 정말 필요한지 자문해 왔습니다."
+"Les Grands Voisins는 파리 14구, 포르루아얄과 카타콤 사이에 위치한 생뱅상드폴 "
+"병원에서 탄생했습니다. 우리는 콘크리트의 균열과 공공 정책의 틈새에서 "
+"태어났습니다. 우리는 모두를 환대하는 데 힘쓰며, 유토피아와 현실 사이의 "
+"다리를 믿습니다."
 
 #: core/templates/core/base.html:26
 msgid "Aller au contenu"

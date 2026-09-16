@@ -2,6 +2,27 @@
 (function () {
   "use strict";
 
+  // Pas de gestionnaire inline (onchange="…") : bloqué par la CSP de production
+  // (deploy/Caddyfile, script-src 'self' sans 'unsafe-inline') — le sélecteur changeait
+  // de valeur visuellement mais ne naviguait jamais nulle part.
+  function armLangSwitcher() {
+    var select = document.getElementById("lang-select");
+    if (!select || select.dataset.armed) return;
+    select.dataset.armed = "1";
+    var form = select.closest("form");
+    var direct = form && form.hasAttribute("data-lang-switcher-direct");
+    select.addEventListener("change", function () {
+      if (direct) {
+        if (select.value) window.location.href = select.value;
+      } else if (form) {
+        form.submit();
+      }
+    });
+    if (direct && form) {
+      form.addEventListener("submit", function (e) { e.preventDefault(); });
+    }
+  }
+
   function armToasts() {
     document.querySelectorAll(".toast").forEach(function (toast) {
       if (toast.dataset.armed) return;
@@ -266,5 +287,7 @@
   document.addEventListener("htmx:afterSettle", armDragReorder);
   document.addEventListener("DOMContentLoaded", armLightbox);
   document.addEventListener("htmx:afterSettle", armLightbox);
+  document.addEventListener("DOMContentLoaded", armLangSwitcher);
+  document.addEventListener("htmx:afterSettle", armLangSwitcher);
   document.addEventListener("DOMContentLoaded", randomizeBlobs);
 })();

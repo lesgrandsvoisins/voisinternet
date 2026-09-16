@@ -488,6 +488,28 @@ class MesEvenementsTests(Base):
         acc = Account.objects.get(user=user)
         self.assertIn(event, acc.managed_events.all())
 
+    def test_event_form_follows_the_active_browsing_language(self):
+        # Contrairement à DirectoryEntryForm (toujours _fr) : un évènement se crée/modifie
+        # dans la langue qu'on est en train de parcourir.
+        from django.utils import translation
+
+        # LocaleMiddleware active "en" pour la durée de la requête (préfixe d'URL) mais ne
+        # la redésactive jamais après coup : sans ce cleanup, "en" reste la langue active
+        # pour tout le reste du processus de test (reverse() dans les tests suivants se
+        # mettrait alors à générer des URL /en/... au lieu de /fr/...).
+        self.addCleanup(translation.deactivate_all)
+
+        user = get_user_model().objects.create_user("voisine-en")
+        self.client.force_login(user)
+        response = self.client.post("/en/agenda/mes-evenements/", {
+            "title_en": "Bike workshop", "start": "2026-10-01 10:00:00",
+            "description_en": "", "location_en": "", "online_url": "", "tags": [],
+        })
+        self.assertRedirects(response, "/en/agenda/mes-evenements/")
+        event = Event.objects.get(title_en="Bike workshop")
+        acc = Account.objects.get(user=user)
+        self.assertIn(event, acc.managed_events.all())
+
     def test_only_a_manager_can_edit_or_delete_their_event(self):
         owner = get_user_model().objects.create_user("voisine")
         other = get_user_model().objects.create_user("autre")

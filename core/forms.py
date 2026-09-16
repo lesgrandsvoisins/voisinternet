@@ -77,6 +77,7 @@ class DirectoryEntryForm(forms.ModelForm):
 
 
 _EVENT_TRANSLATED_FIELDS = ["title", "description", "location"]
+_EVENT_LANGUAGES = ["fr", "en", "es", "ar", "ko"]
 
 
 class EventForm(forms.ModelForm):
@@ -86,16 +87,25 @@ class EventForm(forms.ModelForm):
         # self-service reste réservé à ses responsables tant que le groupe
         # « Administration » (core:administration) ne l'a pas publié. "managers" non plus
         # (ajouté via le parcours de demande, pas ici — voir claim_event_management).
-        exclude = [
-            "slug", "public", "featured", "managers", "source_url", "source_uid",
-        ] + _EVENT_TRANSLATED_FIELDS + [
-            f"{field}_{lang}" for field in _EVENT_TRANSLATED_FIELDS for lang in ["en", "es", "ar", "ko"]
-        ]
+        # Contrairement à DirectoryEntryForm (toujours _fr, quelle que soit la langue de
+        # navigation) : seuls les champs "nus" (title/description/location) sont exclus
+        # ici, pas les variantes par langue — __init__ ne garde que celle de la langue
+        # active, pour créer/modifier un évènement dans la langue qu'on est en train de
+        # parcourir plutôt que toujours en français.
+        exclude = ["slug", "public", "featured", "managers", "source_url", "source_uid"] + _EVENT_TRANSLATED_FIELDS
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        from django.utils.translation import get_language
+
+        lang = get_language() if get_language() in _EVENT_LANGUAGES else "fr"
         for field in _EVENT_TRANSLATED_FIELDS:
-            fr_field = f"{field}_fr"
-            if fr_field in self.fields:
-                self.fields[fr_field].label = self.fields[fr_field].label.replace(" [fr]", "")
-        self.fields["title_fr"].required = True
+            for other_lang in _EVENT_LANGUAGES:
+                lang_field = f"{field}_{other_lang}"
+                if lang_field not in self.fields:
+                    continue
+                if other_lang == lang:
+                    self.fields[lang_field].label = self.fields[lang_field].label.replace(f" [{lang}]", "")
+                else:
+                    del self.fields[lang_field]
+        self.fields[f"title_{lang}"].required = True

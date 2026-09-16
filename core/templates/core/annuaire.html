@@ -31,7 +31,7 @@
       <div class="body">
         <div class="logo-row">
           {% if entry.logo %}<img class="svc-icon" src="{{ entry.logo.url }}" alt="">{% else %}<span class="led" aria-hidden="true"></span>{% endif %}
-          <h3><a href="{% url 'core:entry_detail' entry.slug %}">{{ entry.name }}</a></h3>
+          <h2><a href="{% url 'core:entry_detail' entry.slug %}">{{ entry.name }}</a></h2>
         </div>
         {% if entry.title %}<p>{{ entry.title }}</p>{% elif entry.sector %}<p>{{ entry.sector.name }}</p>{% endif %}
         {% if entry.tagline %}<p class="tagline">{{ entry.tagline }}</p>{% endif %}

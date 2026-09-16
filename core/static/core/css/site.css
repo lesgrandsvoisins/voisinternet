@@ -2065,6 +2065,28 @@ blockquote p {
   margin: -.75rem 0 1.25rem
 }
 
+/* Vidéo intégrée (bouton « embed » du texte enrichi : YouTube, Vimeo…). Wagtail enveloppe
+   l'iframe du fournisseur dans <div class="responsive-object" style="padding-bottom:…">
+   (wagtailembeds/embed_frontend.html) pour fixer le ratio via le padding, mais sans cette
+   règle l'iframe garde sa taille native (~200×113 pour YouTube) au lieu de remplir le
+   cadre ainsi créé. */
+.responsive-object {
+  position: relative;
+  height: 0;
+  margin: 1.25rem 0;
+}
+
+.responsive-object iframe,
+.responsive-object object,
+.responsive-object embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* À l'impression, l'article se lit en entier plutôt qu'une seule page à la fois : toutes
    les pages (cms/templates/cms/blog_post_page.html, body_pages) sont déjà dans le HTML,
    seule la page courante est visible à l'écran (attribut "hidden"). */

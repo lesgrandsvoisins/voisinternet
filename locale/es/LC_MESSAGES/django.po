@@ -296,14 +296,12 @@ msgid "Pages"
 msgstr ""
 
 #: cms/templates/cms/blog_index_page.html:49
-#, fuzzy
-#| msgid "Président"
 msgid "← Précédent"
-msgstr "Presidente"
+msgstr "← Anterior"
 
 #: cms/templates/cms/blog_index_page.html:52
 msgid "Suivant →"
-msgstr ""
+msgstr "Siguiente →"
 
 #: cms/templates/cms/blog_index_page.html:58
 #, fuzzy
@@ -325,7 +323,7 @@ msgstr "páginas del directorio"
 
 #: cms/templates/cms/blog_post_page.html:35
 msgid "← Page précédente"
-msgstr ""
+msgstr "← Página anterior"
 
 #: cms/templates/cms/blog_post_page.html:39
 #, python-format
@@ -334,7 +332,7 @@ msgstr ""
 
 #: cms/templates/cms/blog_post_page.html:41
 msgid "Page suivante →"
-msgstr ""
+msgstr "Página siguiente →"
 
 #: cms/templates/cms/blog_post_page.html:51
 msgid "À lire aussi"

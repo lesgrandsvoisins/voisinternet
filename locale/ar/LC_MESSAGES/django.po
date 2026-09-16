@@ -297,14 +297,12 @@ msgid "Pages"
 msgstr ""
 
 #: cms/templates/cms/blog_index_page.html:49
-#, fuzzy
-#| msgid "Président"
 msgid "← Précédent"
-msgstr "الرئيس"
+msgstr "← السابق"
 
 #: cms/templates/cms/blog_index_page.html:52
 msgid "Suivant →"
-msgstr ""
+msgstr "التالي →"
 
 #: cms/templates/cms/blog_index_page.html:58
 #, fuzzy
@@ -326,7 +324,7 @@ msgstr "صفحات الدليل"
 
 #: cms/templates/cms/blog_post_page.html:35
 msgid "← Page précédente"
-msgstr ""
+msgstr "← الصفحة السابقة"
 
 #: cms/templates/cms/blog_post_page.html:39
 #, python-format
@@ -335,7 +333,7 @@ msgstr ""
 
 #: cms/templates/cms/blog_post_page.html:41
 msgid "Page suivante →"
-msgstr ""
+msgstr "الصفحة التالية →"
 
 #: cms/templates/cms/blog_post_page.html:51
 msgid "À lire aussi"

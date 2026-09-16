@@ -17,7 +17,7 @@ from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
-from .forms import DirectoryEntryForm
+from .forms import DirectoryEntryForm, EventForm
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntrySubscription, Event,
@@ -205,6 +205,7 @@ def account(request):
         "shortcuts": shortcuts,
         "memberships": memberships,
         "owned_entries": acc.directory_entries.order_by("name") if acc else [],
+        "managed_events": acc.managed_events.order_by("-start") if acc else [],
         "new_number": format_number(new_number) if new_number else None,
         "pending": pending_anonymous_account(request),
         "is_administration": _is_administration(request.user),
@@ -458,14 +459,19 @@ PENDING_EVENT_MANAGEMENT_KEY = "voisinternet_pending_event_management_request"
 
 
 def event_detail(request, pk):
-    event = get_object_or_404(Event, pk=pk, public=True)
+    event = get_object_or_404(Event, pk=pk)
     acc = current_account(request, create=request.user.is_authenticated)
+    is_manager = acc is not None and event.managers.filter(pk=acc.pk).exists()
+    # Un évènement non publié reste réservé à ses responsables (self-service, en attente
+    # de publication par le groupe « Administration ») — comme une fiche d'annuaire non
+    # publiée reste réservée à son propriétaire (_check_entry_visible).
+    if not event.public and not is_manager:
+        raise Http404
     # Une demande lancée avant connexion (claim_event_management) attend ici la session
     # Keycloak qui vient de s'établir, pour se terminer d'elle-même.
     if request.user.is_authenticated and request.session.get(PENDING_EVENT_MANAGEMENT_KEY) == event.pk:
         del request.session[PENDING_EVENT_MANAGEMENT_KEY]
         _create_event_management_request(request, event, acc)
-    is_manager = acc is not None and event.managers.filter(pk=acc.pk).exists()
     my_management_request = None
     if request.user.is_authenticated and not is_manager:
         my_management_request = EventManagementRequest.objects.filter(event=event, account=acc).first()
@@ -506,6 +512,59 @@ def claim_event_management(request, pk):
     acc = current_account(request, create=True)
     _create_event_management_request(request, event, acc)
     return redirect(reverse("core:event_detail", args=[event.pk]))
+
+
+def mes_evenements(request):
+    acc = current_account(request, create=True)
+    if request.method == "POST":
+        form = EventForm(request.POST, request.FILES)
+        if form.is_valid():
+            event = form.save(commit=False)
+            base_slug = slugify(event.title) or "evenement"
+            slug = base_slug
+            suffix = 1
+            while Event.objects.filter(slug=slug).exists():
+                suffix += 1
+                slug = f"{base_slug}-{suffix}"
+            event.slug = slug
+            event.public = False
+            event.save()
+            form.save_m2m()
+            event.managers.add(acc)
+            messages.success(request, _("Évènement créé : il reste réservé à ses responsables tant que le "
+                                         "groupe « Administration » ne l'a pas publié."))
+            return redirect("core:mes_evenements")
+    else:
+        form = EventForm()
+    return render(request, "core/mes_evenements.html", {
+        "events": acc.managed_events.order_by("-start"),
+        "form": form,
+    })
+
+
+def evenement_modifier(request, pk):
+    acc = current_account(request)
+    event = get_object_or_404(Event, pk=pk, managers=acc) if acc else None
+    if event is None:
+        return redirect("core:mes_evenements")
+    if request.method == "POST":
+        form = EventForm(request.POST, request.FILES, instance=event)
+        if form.is_valid():
+            form.save()
+            messages.success(request, _("Évènement mis à jour."))
+            return redirect("core:mes_evenements")
+    else:
+        form = EventForm(instance=event)
+    return render(request, "core/evenement_modifier.html", {"form": form, "event": event})
+
+
+@require_POST
+def evenement_supprimer(request, pk):
+    acc = current_account(request)
+    if acc:
+        acc.managed_events.filter(pk=pk).delete()
+        messages.success(request, _("Évènement supprimé."))
+    return redirect("core:mes_evenements")
 
 
 def event_ics(request, pk):

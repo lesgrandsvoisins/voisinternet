@@ -434,6 +434,14 @@ class AgendaTests(Base):
         response = self.client.get(reverse("core:event_detail", args=[event.pk]))
         self.assertEqual(response.status_code, 404)
 
+    def test_non_public_event_detail_is_visible_to_its_manager(self):
+        event = Event.objects.create(title="Réunion privée", slug="reunion-privee", start=timezone.now(), public=False)
+        user = get_user_model().objects.create_user("voisine")
+        event.managers.add(Account.objects.create(user=user))
+        self.client.force_login(user)
+        response = self.client.get(reverse("core:event_detail", args=[event.pk]))
+        self.assertEqual(response.status_code, 200)
+
     def test_event_ics_download(self):
         event = Event.objects.create(
             title="Atelier vélo", slug="atelier-velo",
@@ -446,6 +454,46 @@ class AgendaTests(Base):
         self.assertIn("BEGIN:VEVENT", content)
         self.assertIn("SUMMARY:Atelier vélo", content)
         self.assertIn("LOCATION:Ressourcerie créative", content)
+
+
+class MesEvenementsTests(Base):
+    def test_creating_an_event_makes_the_account_a_manager_and_stays_unpublished(self):
+        user = get_user_model().objects.create_user("voisine")
+        self.client.force_login(user)
+        response = self.client.post(reverse("core:mes_evenements"), {
+            "title_fr": "Atelier vélo", "start": "2026-10-01 10:00:00",
+            "description_fr": "", "location_fr": "", "online_url": "", "tags": [],
+        })
+        self.assertRedirects(response, reverse("core:mes_evenements"))
+        event = Event.objects.get(title="Atelier vélo")
+        self.assertFalse(event.public)
+        acc = Account.objects.get(user=user)
+        self.assertIn(event, acc.managed_events.all())
+
+    def test_only_a_manager_can_edit_or_delete_their_event(self):
+        owner = get_user_model().objects.create_user("voisine")
+        other = get_user_model().objects.create_user("autre")
+        event = Event.objects.create(title="Atelier vélo", slug="atelier-velo", start=timezone.now(), public=False)
+        event.managers.add(Account.objects.create(user=owner))
+        Account.objects.create(user=other)
+
+        self.client.force_login(other)
+        response = self.client.get(reverse("core:evenement_modifier", args=[event.pk]))
+        self.assertEqual(response.status_code, 404)  # même comportement que fiche_modifier
+        self.client.post(reverse("core:evenement_supprimer", args=[event.pk]))
+        event.refresh_from_db()  # toujours là : la suppression n'a rien trouvé pour ce compte
+
+        self.client.force_login(owner)
+        response = self.client.post(reverse("core:evenement_modifier", args=[event.pk]), {
+            "title_fr": "Atelier vélo (mis à jour)", "start": "2026-10-01 10:00:00",
+            "description_fr": "", "location_fr": "", "online_url": "", "tags": [],
+        })
+        self.assertRedirects(response, reverse("core:mes_evenements"))
+        event.refresh_from_db()
+        self.assertEqual(event.title, "Atelier vélo (mis à jour)")
+
+        self.client.post(reverse("core:evenement_supprimer", args=[event.pk]))
+        self.assertFalse(Event.objects.filter(pk=event.pk).exists())
 
 
 class AudienceTests(Base):

@@ -2,7 +2,7 @@ from django import forms
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
-from .models import DirectoryEntry
+from .models import DirectoryEntry, Event
 
 # Le formulaire d'auto-gestion n'édite que le français (champ « _fr », toujours le même
 # quelle que soit la langue de navigation de la personne) : les autres langues restent
@@ -74,3 +74,28 @@ class DirectoryEntryForm(forms.ModelForm):
         for i, group in enumerate(groups):
             group["active"] = i == active
         return groups
+
+
+_EVENT_TRANSLATED_FIELDS = ["title", "description", "location"]
+
+
+class EventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        # "public"/"featured" ne sont jamais éditables ici : un évènement créé en
+        # self-service reste réservé à ses responsables tant que le groupe
+        # « Administration » (core:administration) ne l'a pas publié. "managers" non plus
+        # (ajouté via le parcours de demande, pas ici — voir claim_event_management).
+        exclude = [
+            "slug", "public", "featured", "managers", "source_url", "source_uid",
+        ] + _EVENT_TRANSLATED_FIELDS + [
+            f"{field}_{lang}" for field in _EVENT_TRANSLATED_FIELDS for lang in ["en", "es", "ar", "ko"]
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in _EVENT_TRANSLATED_FIELDS:
+            fr_field = f"{field}_fr"
+            if fr_field in self.fields:
+                self.fields[fr_field].label = self.fields[fr_field].label.replace(" [fr]", "")
+        self.fields["title_fr"].required = True

@@ -1,0 +1,37 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Mes évènements — lesgrandsvoisins.com" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+      <ol>
+        <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+        <li><a href="{% url 'core:agenda' %}">{{ conj.agenda.entry.title }}</a></li>
+        <li aria-current="page">{% trans "Mes évènements" %}</li>
+      </ol>
+    </nav>
+    <h1>{% trans "Mes évènements" %}</h1>
+    <p class="lead">{% trans "Créez et gérez vos évènements dans l'agenda. Ils restent réservés à leurs responsables tant que le groupe « Administration » ne les a pas publiés." %}</p>
+  </div>
+</div>
+<div class="wrap page">
+  <section aria-labelledby="events-title">
+    <div class="split">
+      <h2 id="events-title">{% trans "Mes évènements" %}</h2>
+    </div>
+    {% include "core/partials/my_event_list.html" %}
+  </section>
+
+  <section aria-labelledby="new-title">
+    <div class="split">
+      <h2 id="new-title">{% trans "Créer un évènement" %}</h2>
+    </div>
+    <form class="entry-form" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% include "core/partials/event_form_fields.html" %}
+      <button class="btn btn-sun" type="submit">{% trans "Créer l'évènement" %}</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% blocktrans with title=event.title %}Modifier « {{ title }} » — {{ SITE_NAME }}{% endblocktrans %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+      <ol>
+        <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+        <li><a href="{% url 'core:agenda' %}">{{ conj.agenda.entry.title }}</a></li>
+        <li><a href="{% url 'core:mes_evenements' %}">{% trans "Mes évènements" %}</a></li>
+        <li aria-current="page">{{ event.title }}</li>
+      </ol>
+    </nav>
+    <h1>{% blocktrans with title=event.title %}Modifier « {{ title }} »{% endblocktrans %}</h1>
+  </div>
+</div>
+<div class="wrap page">
+  <section aria-labelledby="edit-title">
+    <div class="split">
+      <h2 id="edit-title">{% trans "Mon évènement" %}</h2>
+      <p class="muted"><a href="{% url 'core:mes_evenements' %}">{% trans "← Mes évènements" %}</a></p>
+    </div>
+    <form class="entry-form" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% include "core/partials/event_form_fields.html" %}
+      <button class="btn btn-sun" type="submit">{% trans "Enregistrer" %}</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

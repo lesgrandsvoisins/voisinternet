@@ -77,6 +77,14 @@
     {% include "core/partials/entry_list.html" with entries=owned_entries %}
   </section>
 
+  <section aria-labelledby="events2-title">
+    <div class="split">
+      <h2 id="events2-title">{% trans "Mes évènements dans l'agenda" %}</h2>
+      <p class="muted"><a href="{% url 'core:mes_evenements' %}">{% trans "Créer un évènement" %}</a></p>
+    </div>
+    {% include "core/partials/my_event_list.html" with events=managed_events %}
+  </section>
+
   {% if user.is_authenticated %}
   <section aria-labelledby="profile-title">
     <div class="split">

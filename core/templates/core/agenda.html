@@ -7,6 +7,7 @@
   {% trans "Le rendez-vous collectif des Grands Voisins : décider ensemble, en présence ou à distance." as page_lead %}
   {% include "core/partials/page_head.html" with item=conj.agenda lead=page_lead %}
   <div class="wrap page">
+    <p class="muted"><a href="{% url 'core:mes_evenements' %}">{% trans "Gérer mes évènements" %}</a></p>
     <section aria-labelledby="upcoming-title">
       {% comment %}
      <div class="split">

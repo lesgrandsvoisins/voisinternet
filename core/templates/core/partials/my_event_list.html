@@ -1,0 +1,18 @@
+{% load i18n %}{% if events %}
+<ul class="docs">
+  {% for event in events %}
+  <li>
+    <details class="entry-menu" name="event-menu">
+      <summary class="entry-menu-btn">{{ event.title }}</summary>
+      <div class="entry-menu-panel">
+        <a href="{% url 'core:event_detail' event.pk %}">{% if event.public %}{% trans "Publié" %}{% else %}{% trans "En attente de publication" %}{% endif %}</a>
+        <a href="{% url 'core:evenement_modifier' event.pk %}">{% trans "Modifier" %}</a>
+        <form method="post" action="{% url 'core:evenement_supprimer' event.pk %}" onsubmit="return confirm('{% trans "Supprimer cet évènement ?" %}');">{% csrf_token %}<button class="link-btn" type="submit">{% trans "Supprimer" %}</button></form>
+      </div>
+    </details>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="intro">{% trans "Vous ne gérez pas encore d'évènement dans l'agenda." %}</p>
+{% endif %}

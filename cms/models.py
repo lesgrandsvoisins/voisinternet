@@ -337,6 +337,36 @@ def excerpt_from_body(html, max_length=280):
     return ""
 
 
+@register_snippet
+class Author(TranslatableMixin, models.Model):
+    """
+    Autrice ou auteur d'articles de blog — une entité éditoriale indépendante des
+    comptes (core.Account) : une même personne peut n'avoir aucun compte sur le site, en
+    avoir plusieurs (nominatif et anonymes), ou à l'inverse une même « voix » éditoriale
+    (ex. un collectif) peut regrouper plusieurs personnes. Pas de lien vers Account, donc
+    — juste un profil affiché sur les articles, choisi librement par qui publie.
+    """
+    name = models.CharField(_("nom"), max_length=140)
+    bio = models.TextField(_("biographie"), blank=True, default="")
+    photo = models.ForeignKey(
+        "wagtailimages.Image", verbose_name=_("photo"),
+        null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+    )
+
+    panels = [
+        FieldPanel("name"),
+        FieldPanel("bio"),
+        FieldPanel("photo"),
+    ]
+
+    class Meta(TranslatableMixin.Meta):
+        verbose_name = _("auteur·ice")
+        verbose_name_plural = _("auteur·ices")
+
+    def __str__(self):
+        return self.name
+
+
 class BlogPostPage(Page):
     """
     Un article de blog : texte enrichi, chapeau, image de une et auteur. La
@@ -346,7 +376,10 @@ class BlogPostPage(Page):
     """
 
     date = models.DateTimeField(_("date de publication"), default=timezone.now)
-    author_name = models.CharField(_("auteur"), max_length=140, blank=True, default="")
+    author = models.ForeignKey(
+        Author, verbose_name=_("auteur·ice"),
+        null=True, blank=True, on_delete=models.SET_NULL, related_name="blog_posts",
+    )
     excerpt = models.CharField(_("chapeau"), max_length=300, blank=True, default="")
     featured = models.BooleanField(_("mis en avant"), default=False)
     featured_image = models.ForeignKey(
@@ -372,7 +405,7 @@ class BlogPostPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel("date"),
-        FieldPanel("author_name"),
+        FieldPanel("author"),
         FieldPanel("excerpt"),
         FieldPanel("featured"),
         FieldPanel("featured_image"),
@@ -390,7 +423,6 @@ class BlogPostPage(Page):
     search_fields = Page.search_fields + [
         index.SearchField("excerpt"),
         index.SearchField("body"),
-        index.SearchField("author_name"),
     ]
 
     parent_page_types = ["cms.BlogIndexPage"]

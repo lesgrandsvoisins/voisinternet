@@ -29,7 +29,7 @@ class ServiceCategoryAdmin(TranslationAdmin):
 
 
 @admin.register(Tag)
-class TagAdmin(admin.ModelAdmin):
+class TagAdmin(TranslationAdmin):
     list_display = ["name"]
     prepopulated_fields = {"slug": ["name"]}
     search_fields = ["name"]

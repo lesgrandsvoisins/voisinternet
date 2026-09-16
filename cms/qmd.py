@@ -259,7 +259,7 @@ def export_blogpost_qmd(page, media_files=None):
         "key": str(page.translation_key),
         "lang": page.locale.language_code,
         "date": page.date.isoformat(),
-        "author": page.author_name,
+        "author": page.author.name if page.author_id else "",
         "excerpt": page.excerpt,
         "slug": page.slug,
         "featured": page.featured,
@@ -415,7 +415,15 @@ def import_blogpost_qmd(text):
     page.title = front.get("title") or page.title or front.get("slug") or ""
     page.slug = front.get("slug") or slugify(page.title)
     page.date = _parse_date(front.get("date"))
-    page.author_name = front.get("author") or ""
+    author_name = front.get("author") or ""
+    if author_name:
+        from .models import Author
+
+        page.author = Author.objects.filter(name=author_name, locale=locale).first() or Author.objects.create(
+            name=author_name, locale=locale,
+        )
+    else:
+        page.author = None
     page.excerpt = (front.get("excerpt") or "")[:300]
     page.featured = bool(front.get("featured", False))
     body_html = _restore_wagtail_embeds(markdown_filter(body_md))

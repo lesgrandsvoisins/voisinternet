@@ -100,13 +100,14 @@ class Command(BaseCommand):
 
             author_ids = authors_by_post_id.get(frontmatter.get("ghost_id"), [])
             author_name = ", ".join(users_by_id[a] for a in author_ids if a in users_by_id)
+            author = self.get_author(author_name) if author_name else None
 
             page = BlogPostPage(
                 title=frontmatter["title"],
                 draft_title=frontmatter["title"],
                 slug=slug,
                 date=parse_datetime(frontmatter["published_at"]),
-                author_name=author_name,
+                author=author,
                 excerpt=make_excerpt(frontmatter),
                 featured_image=self.get_featured_image(frontmatter.get("featured_image", "")),
                 body=self_close_void_tags(rewrite_media_paths(markdown_filter(body_md))),
@@ -132,6 +133,15 @@ class Command(BaseCommand):
         for pa in data["posts_authors"]:
             authors_by_post_id.setdefault(pa["post_id"], []).append(pa["author_id"])
         return authors_by_post_id, users_by_id
+
+    def get_author(self, name):
+        from wagtail.models import Locale
+
+        from cms.models import Author
+
+        return Author.objects.filter(name=name, locale=Locale.get_default()).first() or Author.objects.create(
+            name=name, locale=Locale.get_default(),
+        )
 
     def get_featured_image(self, relative_path):
         if not relative_path:

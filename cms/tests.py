@@ -10,7 +10,7 @@ from django.urls import reverse
 from django.utils import timezone
 from wagtail.models import Locale
 
-from .models import BlogIndexPage, BlogPostPage
+from .models import Author, BlogIndexPage, BlogPostPage
 from .qmd import export_blogpost_qmd, import_blogpost_qmd
 
 # PNG 1x1 valide (Wagtail traite réellement le fichier — génère des renditions — donc un
@@ -31,9 +31,10 @@ class QmdRoundTripTests(TestCase):
     def setUp(self):
         self.fr = Locale.objects.get(language_code="fr")
         self.blog_index = BlogIndexPage.objects.get(locale=self.fr)
+        author = Author.objects.create(name="Voisine", locale=self.fr)
         self.page = BlogPostPage(
             title="Article de test", slug="article-de-test", date=timezone.now(),
-            author_name="Voisine", excerpt="Un chapeau.",
+            author=author, excerpt="Un chapeau.",
             body="<p>Un <strong>paragraphe</strong> avec une <a href=\"https://example.org\">source</a>.</p>",
         )
         self.blog_index.add_child(instance=self.page)

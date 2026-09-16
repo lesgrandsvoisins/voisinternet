@@ -2,7 +2,8 @@
         <ul class="agenda-list">
           {% for event in events %}
             <li class="agenda-card{% if event.featured %} feat{% endif %}">
-              <div class="agenda-body">
+              {% comment %} 
+               <div class="agenda-body">
                 <h2><a href="{% url 'core:event_detail' event.pk %}">{{ event.title }}</a></h2>
                 <time class="sr-only" datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>
                 <div class="markdown muted agenda-excerpt">
@@ -33,8 +34,10 @@
                     </svg>
                   </a>
                 </p>
-              </div>
+              </div> 
+              {% endcomment %}
               <a class="agenda-date" href="{% url 'core:event_detail' event.pk %}" aria-hidden="true">
+                <div>
                 <span class="agenda-date-year">{{ event.start|date:"Y" }}</span>
                 <span class="agenda-date-weekday">{{ event.start|date:"l" }}</span>
                 <span class="agenda-date-day">{{ event.start|date:"j" }}</span>
@@ -50,6 +53,8 @@
                     {% endif %}
                   </p>
                 {% endif %}
+                </div>
+                <h2>{{ event.title }}</h2>
                 {% if event.photo %}
                   <img class="agenda-thumb" src="{{ event.photo.url }}" alt="">
                 {% endif %}

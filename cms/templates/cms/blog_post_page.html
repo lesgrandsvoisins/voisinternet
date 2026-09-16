@@ -16,7 +16,7 @@
       </nav>
       <h1>{{ page.title }}</h1>
       <p class="muted">
-        <time datetime="{{ page.date|date:'c' }}">{{ page.date|date:"j F Y" }}</time>{% if page.author_name %} — {{ page.author_name }}{% endif %}
+        <time datetime="{{ page.date|date:'c' }}">{{ page.date|date:"j F Y" }}</time>{% if page.author %} — {{ page.author.name }}{% endif %}
       </p>
     </div>
   </div>

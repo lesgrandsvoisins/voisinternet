@@ -36,7 +36,7 @@
                 <h2>{{ post.title }}</h2>
                 {% if post.get_excerpt %}<p class="blog-list-excerpt">{{ post.get_excerpt }}</p>{% endif %}
                 <p class="blog-list-meta">
-                  <time datetime="{{ post.date|date:'c' }}">{{ post.date|date:"j F Y" }}</time>{% if post.author_name %} — {{ post.author_name }}{% endif %}
+                  <time datetime="{{ post.date|date:'c' }}">{{ post.date|date:"j F Y" }}</time>{% if post.author %} — {{ post.author.name }}{% endif %}
                 </p>
               </div>
             </a>

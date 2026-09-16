@@ -1,7 +1,7 @@
 from modeltranslation.translator import TranslationOptions, translator
 
 from .models import (
-    Audience, Contribution, DirectoryEntry, DirectorySector, Donor, Event, GuideBook, Service, ServiceCategory,
+    Audience, Contribution, DirectoryEntry, DirectorySector, Donor, Event, GuideBook, Service, ServiceCategory, Tag,
 )
 
 
@@ -10,6 +10,10 @@ class AudienceTranslationOptions(TranslationOptions):
 
 
 class ServiceCategoryTranslationOptions(TranslationOptions):
+    fields = ("name",)
+
+
+class TagTranslationOptions(TranslationOptions):
     fields = ("name",)
 
 
@@ -43,6 +47,7 @@ class DonorTranslationOptions(TranslationOptions):
 
 translator.register(Audience, AudienceTranslationOptions)
 translator.register(ServiceCategory, ServiceCategoryTranslationOptions)
+translator.register(Tag, TagTranslationOptions)
 translator.register(Service, ServiceTranslationOptions)
 translator.register(GuideBook, GuideBookTranslationOptions)
 translator.register(DirectorySector, DirectorySectorTranslationOptions)

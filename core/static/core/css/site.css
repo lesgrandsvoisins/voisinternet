@@ -1172,6 +1172,27 @@ a.chip-tag:hover {
   background: var(--hover)
 }
 
+/* Un .btn (ex. .btn-sun) posé dans un .pair ne doit pas hériter du style "pastille" des
+   liens simples ci-dessus : .pair a lui imposerait un fond clair (--paper) qui, en thème
+   sombre, rend illisible le texte fixe #1C2A35 de .btn-sun. */
+.pair a.btn {
+  font-size: 1rem;
+  padding: .7rem 1.15rem;
+  border-width: 2px;
+  background: transparent
+}
+
+.pair a.btn-sun {
+  border-color: var(--sun);
+  background: var(--sun);
+  color: #1C2A35
+}
+
+.pair a.btn-sun:hover {
+  background: var(--sun);
+  filter: brightness(1.05)
+}
+
 /* Services */
 .svc {
   list-style: none;

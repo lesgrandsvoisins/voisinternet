@@ -58,7 +58,7 @@
                 {% endif %}
                 <div class="blog-list-body">
                   <h3>{{ post.title }}</h3>
-                  {% if post.excerpt %}<p class="blog-list-excerpt">{{ post.excerpt }}</p>{% endif %}
+                  {% if post.get_excerpt %}<p class="blog-list-excerpt">{{ post.get_excerpt }}</p>{% endif %}
                   <p class="blog-list-meta">
                     <time datetime="{{ post.date|date:'c' }}">{{ post.date|date:"j F Y" }}</time>
                   </p>

@@ -1,5 +1,5 @@
 {% extends "core/base.html" %}
-{% load i18n %}
+{% load i18n wagtailimages_tags %}
 {% block title %}{% trans "Recherche" %}{% if query %} — {{ query }}{% endif %} — {{ SITE_NAME }}{% endblock %}
 {% block content %}
   <div class="page-head">
@@ -28,9 +28,20 @@
       {% if pages %}
         <section class="search-section">
           <h2>{% trans "Pages" %}</h2>
-          <ul class="search-results">
+          <ul class="blog-list">
             {% for page in pages %}
-              <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+              <li class="blog-list-item">
+                <a href="{{ page.url }}">
+                  {% if page.search_image %}
+                    {% image page.search_image fill-320x240 as thumb %}
+                    <img class="blog-list-thumb" src="{{ thumb.url }}" alt="">
+                  {% endif %}
+                  <div class="blog-list-body">
+                    <h3>{{ page.title }}</h3>
+                    {% if page.search_lead %}<p class="blog-list-excerpt">{{ page.search_lead }}</p>{% endif %}
+                  </div>
+                </a>
+              </li>
             {% endfor %}
           </ul>
         </section>
@@ -39,11 +50,20 @@
       {% if entries %}
         <section class="search-section">
           <h2>{% trans "Annuaire" %}</h2>
-          <ul class="search-results">
+          <ul class="blog-list">
             {% for entry in entries %}
-              <li>
-                <a href="{% url 'core:entry_detail' entry.slug %}">{{ entry.name }}</a>
-                {% if entry.tagline %}<span class="muted"> — {{ entry.tagline }}</span>{% endif %}
+              <li class="blog-list-item">
+                <a href="{% url 'core:entry_detail' entry.slug %}">
+                  {% if entry.photos %}
+                    <img class="blog-list-thumb" src="{{ entry.photos.0.url }}" alt="">
+                  {% elif entry.logo %}
+                    <img class="blog-list-thumb icon" src="{{ entry.logo.url }}" alt="">
+                  {% endif %}
+                  <div class="blog-list-body">
+                    <h3>{{ entry.name }}</h3>
+                    {% if entry.search_lead %}<p class="blog-list-excerpt">{{ entry.search_lead }}</p>{% endif %}
+                  </div>
+                </a>
               </li>
             {% endfor %}
           </ul>
@@ -53,11 +73,17 @@
       {% if events %}
         <section class="search-section">
           <h2>{% trans "Agenda" %}</h2>
-          <ul class="search-results">
+          <ul class="blog-list">
             {% for event in events %}
-              <li>
-                <a href="{% url 'core:event_detail' event.pk %}">{{ event.title }}</a>
-                <span class="muted"> — {{ event.start|date:"j F Y" }}</span>
+              <li class="blog-list-item">
+                <a href="{% url 'core:event_detail' event.pk %}">
+                  {% if event.photo %}<img class="blog-list-thumb" src="{{ event.photo.url }}" alt="">{% endif %}
+                  <div class="blog-list-body">
+                    <h3>{{ event.title }}</h3>
+                    {% if event.search_lead %}<p class="blog-list-excerpt">{{ event.search_lead }}</p>{% endif %}
+                    <p class="blog-list-meta"><time datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y" }}</time></p>
+                  </div>
+                </a>
               </li>
             {% endfor %}
           </ul>
@@ -67,11 +93,16 @@
       {% if services %}
         <section class="search-section">
           <h2>{% trans "Services" %}</h2>
-          <ul class="search-results">
+          <ul class="blog-list">
             {% for service in services %}
-              <li>
-                <a href="{% url 'core:raccourcis' %}">{{ service.name }}</a>
-                <span class="muted"> — {{ service.summary }}</span>
+              <li class="blog-list-item">
+                <a href="{% url 'core:raccourcis' %}">
+                  {% if service.icon %}<img class="blog-list-thumb icon" src="{{ service.icon.url }}" alt="">{% endif %}
+                  <div class="blog-list-body">
+                    <h3>{{ service.name }}</h3>
+                    <p class="blog-list-excerpt">{{ service.summary }}</p>
+                  </div>
+                </a>
               </li>
             {% endfor %}
           </ul>

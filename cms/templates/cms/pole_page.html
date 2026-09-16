@@ -51,12 +51,21 @@
     <div class="wrap page">
       <section aria-labelledby="pole-posts-title">
         <h2 id="pole-posts-title">{% trans "Sur le blog" %}</h2>
-        <ul class="posts">
+        <ul class="blog-list">
           {% for post in pole_posts %}
-            <li>
+            <li class="blog-list-item">
               <a href="{{ post.url }}">
-                <h3>{{ post.title }}</h3>
-                <time datetime="{{ post.date|date:'c' }}">{{ post.date|date:"j F Y" }}</time>
+                {% if post.featured_image %}
+                  {% image post.featured_image fill-320x240 as thumb %}
+                  <img class="blog-list-thumb" src="{{ thumb.url }}" alt="">
+                {% endif %}
+                <div class="blog-list-body">
+                  <h3>{{ post.title }}</h3>
+                  {% if post.get_excerpt %}<p class="blog-list-excerpt">{{ post.get_excerpt }}</p>{% endif %}
+                  <p class="blog-list-meta">
+                    <time datetime="{{ post.date|date:'c' }}">{{ post.date|date:"j F Y" }}</time>
+                  </p>
+                </div>
               </a>
             </li>
           {% endfor %}

@@ -1,3 +1,4 @@
+import re
 from urllib.parse import urlencode
 
 from django.conf import settings
@@ -82,21 +83,65 @@ def home(request):
     })
 
 
+def _text_lead(html_or_text, max_length=200):
+    """Un texte d'ouverture à défaut d'en avoir un : les premiers mots d'un champ plus
+    long (corps de page, description…), balises HTML retirées s'il y en a."""
+    if not html_or_text:
+        return ""
+    text = re.sub(r"<[^>]+>", " ", str(html_or_text))
+    text = re.sub(r"\s+", " ", text).strip()
+    if not text:
+        return ""
+    if len(text) > max_length:
+        text = text[:max_length].rsplit(" ", 1)[0] + "…"
+    return text
+
+
+def _page_search_lead(page):
+    for attr in ("lead", "intro", "excerpt", "search_description"):
+        value = getattr(page, attr, "")
+        if value:
+            return _text_lead(value)
+    return _text_lead(getattr(page, "body", ""))
+
+
+def _page_search_image(page):
+    for attr in ("featured_image", "icon"):
+        image = getattr(page, attr, None)
+        if image:
+            return image
+    return None
+
+
 def search(request):
     query = request.GET.get("q", "").strip()
     pages = entries = events = services = []
     if query:
         from wagtail.models import Page
 
-        pages = list(Page.objects.live().search(query)[:20])
+        # .search() renvoie des Page génériques (pas de .specific() sur ses résultats) :
+        # on récupère les instances spécifiques à part, en gardant l'ordre de pertinence.
+        found = list(Page.objects.live().search(query)[:20])
+        specific_by_id = {p.pk: p for p in Page.objects.specific().filter(pk__in=[p.pk for p in found])}
+        pages = [specific_by_id[p.pk] for p in found if p.pk in specific_by_id]
+        for page in pages:
+            page.search_lead = _page_search_lead(page)
+            page.search_image = _page_search_image(page)
+
         entries = list(DirectoryEntry.objects.filter(
             Q(name__icontains=query) | Q(tagline__icontains=query) | Q(description__icontains=query),
             visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
         )[:20])
+        for entry in entries:
+            entry.search_lead = entry.tagline or _text_lead(entry.description)
+
         events = list(Event.objects.filter(
             Q(title__icontains=query) | Q(description__icontains=query) | Q(location__icontains=query),
             public=True,
         )[:20])
+        for event in events:
+            event.search_lead = _text_lead(event.description) or event.location
+
         services = list(Service.objects.filter(
             Q(name__icontains=query) | Q(summary__icontains=query) | Q(description__icontains=query),
             active=True,

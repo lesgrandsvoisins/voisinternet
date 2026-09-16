@@ -1,4 +1,5 @@
 import re
+from html import unescape
 
 from django.core.paginator import Paginator
 from django.db import models
@@ -298,6 +299,27 @@ class BlogIndexPage(Page):
         return context
 
 
+_EXCERPT_BLOCK_RE = re.compile(r"<(?:p|li|h[1-6]|blockquote)[^>]*>(.*?)</(?:p|li|h[1-6]|blockquote)>", re.S)
+
+
+def excerpt_from_body(html, max_length=280):
+    """
+    Un chapeau à défaut d'en avoir un (BlogPostPage.get_excerpt) : le premier passage du
+    corps d'au moins 40 caractères, pas juste le tout premier fragment — souvent une simple
+    date, une salutation ou un titre de section peu représentatif de l'article.
+    """
+    if not html:
+        return ""
+    for block in _EXCERPT_BLOCK_RE.findall(html):
+        text = re.sub(r"<[^>]+>", "", block)
+        text = re.sub(r"\s+", " ", unescape(text)).strip()
+        if len(text) >= 40:
+            if len(text) > max_length:
+                text = text[:max_length].rsplit(" ", 1)[0] + "…"
+            return text
+    return ""
+
+
 class BlogPostPage(Page):
     """
     Un article de blog : texte enrichi, chapeau, image de une et auteur. La
@@ -354,6 +376,9 @@ class BlogPostPage(Page):
 
     parent_page_types = ["cms.BlogIndexPage"]
     subpage_types = []
+
+    def get_excerpt(self):
+        return self.excerpt or excerpt_from_body(self.body)
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)

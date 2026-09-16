@@ -26,7 +26,7 @@
     {% if posts %}
       <ul class="blog-list">
         {% for post in posts %}
-          <li class="blog-list-item">
+          <li class="blog-list-item{% if post.featured %} feat{% endif %}">
             <a href="{{ post.url }}">
               {% if post.featured_image %}
                 {% image post.featured_image fill-320x240 as thumb %}

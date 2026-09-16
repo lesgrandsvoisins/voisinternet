@@ -1701,6 +1701,11 @@ blockquote p {
   border-bottom: 1px solid var(--line)
 }
 
+.posts li.feat {
+  background: var(--sun-soft);
+  padding: 0 .75rem
+}
+
 .posts a {
   display: block;
   text-decoration: none;
@@ -1746,6 +1751,10 @@ blockquote p {
   border: 1px solid var(--line);
   border-radius: 14px;
   overflow: hidden
+}
+
+.blog-list-item.feat {
+  background: var(--sun-soft)
 }
 
 .blog-list-item a {
@@ -2356,6 +2365,10 @@ blockquote p {
   padding: 1.1rem 1.3rem;
   flex-wrap: wrap;
   flex-direction: row-reverse;
+}
+
+.agenda-card.feat {
+  background: var(--sun-soft)
 }
 
 .agenda-body {

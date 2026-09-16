@@ -1,7 +1,7 @@
 {% load i18n markdown_filters %}
         <ul class="agenda-list">
           {% for event in events %}
-            <li class="agenda-card">
+            <li class="agenda-card{% if event.featured %} feat{% endif %}">
               <div class="agenda-body">
                 <h2><a href="{% url 'core:event_detail' event.pk %}">{{ event.title }}</a></h2>
                 <time class="sr-only" datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>

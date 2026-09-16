@@ -454,6 +454,7 @@ class Event(models.Model):
         help_text=_("Identifiant de l'évènement dans l'agenda source, pour réimporter sans dupliquer."),
     )
     public = models.BooleanField(_("publié"), default=True)
+    featured = models.BooleanField(_("mis en avant"), default=False)
     tags = models.ManyToManyField("Tag", blank=True, related_name="events", verbose_name=_("étiquettes"))
 
     class Meta:

@@ -347,6 +347,7 @@ class BlogPostPage(Page):
     date = models.DateTimeField(_("date de publication"), default=timezone.now)
     author_name = models.CharField(_("auteur"), max_length=140, blank=True, default="")
     excerpt = models.CharField(_("chapeau"), max_length=300, blank=True, default="")
+    featured = models.BooleanField(_("mis en avant"), default=False)
     featured_image = models.ForeignKey(
         "wagtailimages.Image", verbose_name=_("image de une"),
         null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
@@ -372,6 +373,7 @@ class BlogPostPage(Page):
         FieldPanel("date"),
         FieldPanel("author_name"),
         FieldPanel("excerpt"),
+        FieldPanel("featured"),
         FieldPanel("featured_image"),
         FieldPanel("tags"),
         FieldPanel(

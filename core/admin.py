@@ -169,9 +169,9 @@ class OwnershipClaimAdmin(admin.ModelAdmin):
 
 @admin.register(Event)
 class EventAdmin(TranslationAdmin):
-    list_display = ["title", "start", "end", "location", "public"]
-    list_filter = ["public"]
-    list_editable = ["public"]
+    list_display = ["title", "start", "end", "location", "public", "featured"]
+    list_filter = ["public", "featured"]
+    list_editable = ["public", "featured"]
     prepopulated_fields = {"slug": ["title"]}
     search_fields = ["title", "description"]
     date_hierarchy = "start"

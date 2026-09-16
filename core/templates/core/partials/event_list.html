@@ -20,8 +20,18 @@
                 {% if event.description %}
                   <div class="markdown muted agenda-excerpt">{{ event.description|markdown }}</div>
                 {% endif %}<p class="agenda-actions">
-                  <a href="{{ event.google_calendar_url }}" target="_new">{% trans "Ajouter à Google Agenda" %}</a>
-                  <a href="{% url 'core:event_ics' event.pk %}">{% trans "Ajouter à mon calendrier (.ics)" %}</a>
+                  <a class="icon-btn" href="{{ event.google_calendar_url }}" target="_new" aria-label="{% trans "Ajouter à Google Agenda" %}" title="{% trans "Ajouter à Google Agenda" %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                      <!-- Icon downloaded from https://icon-sets.iconify.design/mdi/calendar-plus/ -->
+                      <path fill="currentColor" d="M19 19V8H5v11zM16 1h2v2h1a2 2 0 0 1 2 2v14c0 1.11-.89 2-2 2H5a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8zm-5 8.5h2v3h3v2h-3v3h-2v-3H8v-2h3z" />
+                    </svg>
+                  </a>
+                  <a class="icon-btn" href="{% url 'core:event_ics' event.pk %}" aria-label="{% trans "Ajouter à mon calendrier (.ics)" %}" title="{% trans "Ajouter à mon calendrier (.ics)" %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                      <!-- Icon downloaded from https://icon-sets.iconify.design/mdi/calendar-export/ -->
+                      <path fill="currentColor" d="m12 22l4-4h-3v-6h-2v6H8zm7-19h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h3l-2-2H5V8h14v11h-1l-2 2h3c1.11 0 2-.89 2-2V5a2 2 0 0 0-2-2" />
+                    </svg>
+                  </a>
                 </p>
               </div>
               <a class="agenda-date" href="{% url 'core:event_detail' event.pk %}" aria-hidden="true">

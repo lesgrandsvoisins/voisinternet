@@ -2394,6 +2394,29 @@ blockquote p {
   margin: 0
 }
 
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  flex-shrink: 0
+}
+
+.icon-btn:hover {
+  background: var(--sun-soft);
+  border-color: var(--sun)
+}
+
+.icon-btn svg {
+  width: 1.2rem;
+  height: 1.2rem
+}
+
 .docs li,
 .donors li {
   display: flex;

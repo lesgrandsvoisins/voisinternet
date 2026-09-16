@@ -1,7 +1,10 @@
+import base64
 from io import BytesIO
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
+from django.core.files.base import ContentFile
+from django.core.files.images import ImageFile
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
@@ -9,6 +12,12 @@ from wagtail.models import Locale
 
 from .models import BlogIndexPage, BlogPostPage
 from .qmd import export_blogpost_qmd, import_blogpost_qmd
+
+# PNG 1x1 valide (Wagtail traite réellement le fichier — génère des renditions — donc un
+# contenu bidon ferait échouer Image.objects.create/get_rendition dans les tests).
+_PNG_1X1 = base64.b64decode(
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+)
 
 
 def _grant_wagtail_admin_access(user):
@@ -75,6 +84,45 @@ class QmdRoundTripTests(TestCase):
         self.assertEqual(translated.translation_key, self.page.translation_key)
         self.assertEqual(translated.locale, en)
         self.assertIn("translated paragraph", translated.body)
+
+    def test_wagtail_image_embed_round_trips_as_a_managed_embed(self):
+        from wagtail.images.models import Image
+
+        image = Image.objects.create(title="Photo", file=ImageFile(BytesIO(_PNG_1X1), name="photo.png"))
+        self.page.body = f'<embed embedtype="image" id="{image.pk}" format="fullwidth" alt="Une photo"/>'
+        self.page.save_revision().publish()
+
+        qmd = export_blogpost_qmd(self.page)
+        self.assertIn(f'"wagtail-image:{image.pk}:fullwidth"', qmd)
+
+        imported = import_blogpost_qmd(qmd)
+        self.assertIn(f'<embed embedtype="image" id="{image.pk}"', imported.body)
+        self.assertIn('alt="Une photo"', imported.body)
+        self.assertIn('format="fullwidth"', imported.body)
+
+    def test_document_link_round_trips_as_a_managed_link(self):
+        from wagtail.documents.models import Document
+
+        document = Document.objects.create(title="Compte-rendu", file=ContentFile(b"contenu", name="cr.pdf"))
+        self.page.body = f'<p>Voir le <a linktype="document" id="{document.pk}">compte-rendu</a>.</p>'
+        self.page.save_revision().publish()
+
+        qmd = export_blogpost_qmd(self.page)
+        self.assertIn(f'"wagtail-document:{document.pk}"', qmd)
+
+        imported = import_blogpost_qmd(qmd)
+        self.assertIn(f'<a linktype="document" id="{document.pk}">compte-rendu</a>', imported.body)
+
+    def test_page_link_round_trips_as_a_managed_link(self):
+        target = self.blog_index.get_parent()  # HomePage : forcément déjà là (seed)
+        self.page.body = f'<p>Voir <a linktype="page" id="{target.pk}">l\'accueil</a>.</p>'
+        self.page.save_revision().publish()
+
+        qmd = export_blogpost_qmd(self.page)
+        self.assertIn(f'"wagtail-page:{target.pk}"', qmd)
+
+        imported = import_blogpost_qmd(qmd)
+        self.assertIn(f'<a linktype="page" id="{target.pk}">l\'accueil</a>', imported.body)
 
     def test_divider_and_pagebreak_round_trip(self):
         self.page.body = '<p>Avant</p><hr><p>Milieu</p><hr class="pagebreak"><p>Après</p>'
@@ -149,3 +197,48 @@ class QmdAdminViewsTests(TestCase):
         # Importé depuis l'écran de `self.page`, mais le fichier porte la clé de `other`.
         response = self.client.post(reverse("blog_qmd_import", args=[self.page.pk]), {"qmd_file": upload})
         self.assertRedirects(response, reverse("wagtailadmin_pages:edit", args=[other.pk]), fetch_redirect_response=False)
+
+    def test_export_import_buttons_appear_in_the_page_listing(self):
+        # Superuser (pas juste wagtailadmin.access_admin) : la vue de listing exige en
+        # plus les permissions Wagtail par page (voir GroupPagePermission), hors sujet ici.
+        admin_user = get_user_model().objects.create_superuser("admin3", "admin3@example.com", "pass12345")
+        admin_user.groups.add(Group.objects.get(name="Administration"))
+        self.client.force_login(admin_user)
+
+        response = self.client.get(reverse("wagtailadmin_explore", args=[self.blog_index.pk]))
+        self.assertContains(response, reverse("blog_qmd_export", args=[self.page.pk]))
+        self.assertContains(response, reverse("blog_qmd_import", args=[self.page.pk]))
+
+    def test_export_zip_requires_administration_group(self):
+        user = get_user_model().objects.create_user("voisine2")
+        _grant_wagtail_admin_access(user)
+        self.client.force_login(user)
+        self.assertRedirects(
+            self.client.get(reverse("blog_qmd_export_zip")), reverse("wagtailadmin_home"),
+        )
+
+    def test_export_zip_bundles_every_article_and_its_media(self):
+        import zipfile
+
+        from wagtail.images.models import Image
+
+        image = Image.objects.create(title="Photo", file=ImageFile(BytesIO(_PNG_1X1), name="photo.png"))
+        self.page.body = f'<embed embedtype="image" id="{image.pk}" format="fullwidth" alt="Une photo"/>'
+        self.page.save_revision().publish()
+
+        admin_user = get_user_model().objects.create_user("admin4")
+        admin_user.groups.add(Group.objects.get(name="Administration"))
+        _grant_wagtail_admin_access(admin_user)
+        self.client.force_login(admin_user)
+
+        response = self.client.get(reverse("blog_qmd_export_zip"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], "application/zip")
+        zf = zipfile.ZipFile(BytesIO(response.content))
+        names = zf.namelist()
+        self.assertIn("fr/article.qmd", names)
+        self.assertTrue(any(n.startswith(f"media/images/{image.pk}-") for n in names))
+        # Le .qmd du zip référence bien un chemin local (pas une URL) pour cette image.
+        qmd_in_zip = zf.read("fr/article.qmd").decode()
+        self.assertIn(f'(media/images/{image.pk}-', qmd_in_zip)
+        self.assertIn(f'"wagtail-image:{image.pk}:fullwidth"', qmd_in_zip)

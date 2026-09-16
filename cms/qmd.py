@@ -24,10 +24,13 @@ simple <img> figé. Sans cet identifiant (image/document déjà supprimé, ou co
 la main dans l'éditeur Quarto), l'URL absolue reste utilisée telle quelle.
 """
 import re
+import zipfile
 from datetime import date as date_cls
 from datetime import datetime as datetime_cls
 from html import escape
 from html.parser import HTMLParser
+from io import BytesIO
+from pathlib import Path
 
 import yaml
 from django.utils import timezone
@@ -81,6 +84,35 @@ def _resolve_page_url(page_id):
     return page.full_url or ""
 
 
+def _collect_image_file(image_id, media_files):
+    """Mode zip (export_blog_zip) : au lieu d'une URL vers le site, copie le fichier de
+    l'image dans le zip et renvoie un chemin local. Le marqueur wagtail-image:ID (posé à
+    côté, pas dans le chemin) suffit à l'import pour reconstruire l'embed quel que soit ce
+    chemin — voir _restore_wagtail_embeds, qui ignore complètement l'URL/le chemin."""
+    from wagtail.images.models import Image
+
+    try:
+        image = Image.objects.get(pk=image_id)
+        rendition = image.get_rendition("width-1600")
+    except (Image.DoesNotExist, ValueError, TypeError):
+        return None
+    arcname = f"media/images/{image_id}-{Path(rendition.file.name).name}"
+    media_files[arcname] = rendition.file
+    return arcname
+
+
+def _collect_document_file(document_id, media_files):
+    from wagtail.documents.models import Document
+
+    try:
+        document = Document.objects.get(pk=document_id)
+    except (Document.DoesNotExist, ValueError, TypeError):
+        return None
+    arcname = f"media/documents/{document_id}-{Path(document.file.name).name}"
+    media_files[arcname] = document.file
+    return arcname
+
+
 def _self_close_void_tags(html):
     """Même besoin que cms/management/commands/import_ghost_posts.py::self_close_void_tags :
     Draftail (l'éditeur riche de Wagtail) exige <img .../> et <br/> fermés pour relire un
@@ -100,12 +132,16 @@ class _HTMLToMarkdown(HTMLParser):
     perdus par expand_db_html — voir _resolve_*_url ci-dessus et le docstring du module.
     """
 
-    def __init__(self):
+    def __init__(self, media_files=None):
         super().__init__(convert_charrefs=True)
         self.out = []
         self.list_stack = []
         self.link_href = None
         self.link_title_marker = None
+        # None (défaut) : URL absolues vers le site (export_blogpost_qmd). Un dict : mode
+        # zip (export_blog_zip) — les images/documents Wagtail sont copiés dans ce dict
+        # (chemin -> fichier) et référencés par un chemin local plutôt qu'une URL.
+        self.media_files = media_files
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -139,7 +175,8 @@ class _HTMLToMarkdown(HTMLParser):
         elif tag == "a":
             linktype, link_id = attrs.get("linktype"), attrs.get("id")
             if linktype == "document" and link_id:
-                self.link_href = _resolve_document_url(link_id)
+                collected = _collect_document_file(link_id, self.media_files) if self.media_files is not None else None
+                self.link_href = collected or _resolve_document_url(link_id)
                 self.link_title_marker = f"wagtail-document:{link_id}"
             elif linktype == "page" and link_id:
                 self.link_href = _resolve_page_url(link_id)
@@ -154,7 +191,9 @@ class _HTMLToMarkdown(HTMLParser):
         elif tag == "embed" and attrs.get("embedtype") == "image" and attrs.get("id"):
             self._ensure_blank_line()
             marker = f"wagtail-image:{attrs['id']}:{attrs.get('format', '')}"
-            self.out.append(f'![{attrs.get("alt", "")}]({_resolve_image_url(attrs["id"])} "{marker}")\n\n')
+            collected = _collect_image_file(attrs["id"], self.media_files) if self.media_files is not None else None
+            url = collected or _resolve_image_url(attrs["id"])
+            self.out.append(f'![{attrs.get("alt", "")}]({url} "{marker}")\n\n')
         elif tag == "embed":
             # embedtype="image" traité ci-dessus ; les autres (embedtype="media", vidéos
             # oEmbed…) sont rares dans ce blog — on garde au moins l'URL brute plutôt que
@@ -204,9 +243,15 @@ class _HTMLToMarkdown(HTMLParser):
         return re.sub(r"\n{3,}", "\n\n", text).strip() + "\n"
 
 
-def export_blogpost_qmd(page):
-    """Sérialise un BlogPostPage (une langue) en texte .qmd."""
-    converter = _HTMLToMarkdown()
+def export_blogpost_qmd(page, media_files=None):
+    """
+    Sérialise un BlogPostPage (une langue) en texte .qmd. `media_files=None` (défaut,
+    utilisé par les boutons individuels et export_blog_qmd) : images/documents Wagtail
+    référencés par une URL absolue vers le site. `media_files` un dict : mode zip
+    (export_blog_zip) — ils sont copiés dedans (chemin -> fichier) et référencés par un
+    chemin local à la place.
+    """
+    converter = _HTMLToMarkdown(media_files=media_files)
     converter.feed(page.body)
 
     front = {
@@ -222,10 +267,48 @@ def export_blogpost_qmd(page):
         "url": page.full_url,
     }
     if page.featured_image_id:
-        front["featured_image"] = _absolute_url(page.featured_image.get_rendition("width-1600").url)
+        if media_files is not None:
+            front["featured_image"] = _collect_image_file(page.featured_image_id, media_files)
+        else:
+            front["featured_image"] = _absolute_url(page.featured_image.get_rendition("width-1600").url)
 
     frontmatter = yaml.safe_dump(front, allow_unicode=True, sort_keys=False, default_flow_style=False)
     return f"---\n{frontmatter}---\n\n{converter.result()}"
+
+
+def export_blog_zip():
+    """
+    Zip complet du blog : un .qmd par (article × langue), sous <langue>/<slug>.qmd, plus
+    les images et documents Wagtail réellement référencés, sous media/ (dédupliqués par
+    identifiant, un même média peut être partagé par plusieurs articles). Les liens vers
+    d'autres pages internes (linktype="page") restent des URL absolues vers le site — pas
+    de réécriture vers un autre .qmd du zip, même si sa cible s'y trouve aussi.
+    """
+    buffer = BytesIO()
+    with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED) as zf:
+        written_media = set()
+        seen_slugs = {}
+        for page in BlogPostPage.objects.select_related("locale").order_by("locale__language_code", "slug"):
+            media_files = {}
+            qmd = export_blogpost_qmd(page, media_files=media_files)
+
+            lang = page.locale.language_code
+            base_name = page.slug or f"article-{page.pk}"
+            count = seen_slugs.get((lang, base_name), 0)
+            seen_slugs[(lang, base_name)] = count + 1
+            name = base_name if count == 0 else f"{base_name}-{count}"
+            zf.writestr(f"{lang}/{name}.qmd", qmd)
+
+            for arcname, file_field in media_files.items():
+                if arcname in written_media:
+                    continue
+                written_media.add(arcname)
+                file_field.open("rb")
+                try:
+                    zf.writestr(arcname, file_field.read())
+                finally:
+                    file_field.close()
+    return buffer.getvalue()
 
 
 class _RestoreWagtailEmbeds(HTMLParser):

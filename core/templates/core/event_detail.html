@@ -32,7 +32,8 @@
     <p class="chips-inline">{% for t in event.tags.all %}<a class="chip chip-tag" href="{% url 'core:tag_detail' t.slug %}">#{{ t.name }}</a>{% endfor %}</p>
     {% endif %}
     <div class="actions">
-      <a class="btn btn-sun" href="{% url 'core:event_ics' event.pk %}">{% trans "Ajouter à mon calendrier" %}</a>
+      <a class="btn btn-sun" href="{{ event.google_calendar_url }}" target="_new">{% trans "Ajouter à Google Agenda" %}</a>
+      <a class="btn btn-sun" href="{% url 'core:event_ics' event.pk %}">{% trans "Ajouter à mon calendrier (.ics)" %}</a>
     </div>
   </article>
   <p class="muted"><a href="{% url 'core:agenda' %}">{% trans "← Retour à l’agenda" %}</a></p>

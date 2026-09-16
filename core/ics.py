@@ -19,14 +19,17 @@ def _escape(value):
 
 def _fold(line):
     # RFC 5545 : une ligne de plus de 75 octets doit être repliée, la suite démarrant
-    # par une espace. Coupe naïvement par caractère : largement suffisant ici (titres et
-    # descriptions courtes), pas besoin de gérer les limites d'octets UTF-8 au caractère près.
+    # par une espace. Découpe caractère par caractère (pas d'octet coupé en deux) en
+    # s'arrêtant dès que la part atteint 75 octets, pour rester valide avec des accents.
     if len(line.encode("utf-8")) <= 75:
         return line
     parts = []
     while len(line.encode("utf-8")) > 75:
-        parts.append(line[:74])
-        line = " " + line[74:]
+        cut = 74
+        while len(line[:cut].encode("utf-8")) > 75:
+            cut -= 1
+        parts.append(line[:cut])
+        line = " " + line[cut:]
     parts.append(line)
     return "\r\n".join(parts)
 
@@ -62,3 +65,24 @@ def event_to_ics(event, request):
     lines.append(f"URL:{url}")
     lines += ["END:VEVENT", "END:VCALENDAR"]
     return "\r\n".join(lines) + "\r\n"
+
+
+def event_google_calendar_url(event):
+    """
+    Lien "Ajouter à Google Agenda" (calendar.google.com/render) : contrairement au
+    fichier .ics ci-dessus, Google Agenda ne propose pas d'ouvrir/importer un .ics
+    en un clic, donc ce lien direct est le seul moyen simple d'y ajouter l'évènement.
+    """
+    from urllib.parse import urlencode
+
+    params = {
+        "action": "TEMPLATE",
+        "text": event.title,
+        "dates": f"{_dt(event.start)}/{_dt(event.end or event.start)}",
+    }
+    location = event.location or event.online_url
+    if location:
+        params["location"] = location
+    if event.description:
+        params["details"] = strip_tags(markdown_filter(event.description)).strip()
+    return "https://calendar.google.com/calendar/render?" + urlencode(params)

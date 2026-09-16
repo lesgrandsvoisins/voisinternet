@@ -464,6 +464,11 @@ class Event(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def google_calendar_url(self):
+        from .ics import event_google_calendar_url
+        return event_google_calendar_url(self)
+
 
 class Contribution(models.Model):
     """Une contribution financière enregistrée pour un compte (adhésion, don ponctuel…)."""

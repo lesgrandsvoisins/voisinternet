@@ -20,7 +20,8 @@
                 {% if event.description %}
                   <div class="markdown muted agenda-excerpt">{{ event.description|markdown }}</div>
                 {% endif %}<p class="agenda-actions">
-                  <a href="{% url 'core:event_ics' event.pk %}">{% trans "Ajouter à mon calendrier" %}</a>
+                  <a href="{{ event.google_calendar_url }}" target="_new">{% trans "Ajouter à Google Agenda" %}</a>
+                  <a href="{% url 'core:event_ics' event.pk %}">{% trans "Ajouter à mon calendrier (.ics)" %}</a>
                 </p>
               </div>
               <a class="agenda-date" href="{% url 'core:event_detail' event.pk %}" aria-hidden="true">

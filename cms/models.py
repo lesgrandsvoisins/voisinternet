@@ -455,9 +455,20 @@ class Announcement(models.Model):
     publish_end = models.DateField(_("date de fin"), null=True, blank=True)
     active = models.BooleanField(_("actif"), default=True)
 
+    # Un FieldPanel("title") ordinaire ne montrerait que la langue active de l'admin : les
+    # champs _fr/_en/… (modeltranslation, cms/translation.py) sont exposés un par un pour
+    # que chaque langue reste éditable depuis ce même formulaire.
     panels = [
-        FieldPanel("title"),
-        FieldPanel("text"),
+        FieldPanel("title_fr"),
+        FieldPanel("text_fr"),
+        FieldPanel("title_en"),
+        FieldPanel("text_en"),
+        FieldPanel("title_es"),
+        FieldPanel("text_es"),
+        FieldPanel("title_ar"),
+        FieldPanel("text_ar"),
+        FieldPanel("title_ko"),
+        FieldPanel("text_ko"),
         FieldPanel("image"),
         FieldPanel("page"),
         FieldPanel("publish_start"),

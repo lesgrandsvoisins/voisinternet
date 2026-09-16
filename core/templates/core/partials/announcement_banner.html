@@ -1,0 +1,26 @@
+{% load i18n wagtailimages_tags %}
+{% if announcement %}
+<div class="announcement-banner"
+     x-data="{ dismissed: false }"
+     x-init="dismissed = (localStorage.getItem('voisinternet-announcement-dismissed') === '{{ announcement.pk }}')"
+     x-show="!dismissed"
+     x-cloak>
+  <div class="wrap">
+    {% if announcement.image %}
+      {% image announcement.image fill-96x96 as thumb %}
+      <img class="announcement-banner-image" src="{{ thumb.url }}" alt="">
+    {% endif %}
+    <div class="announcement-banner-body">
+      <strong>{{ announcement.title }}</strong>
+      {% if announcement.text %}<p>{{ announcement.text }}</p>{% endif %}
+    </div>
+    {% if announcement.page %}
+      <a class="btn btn-sun" href="{{ announcement.page.url }}">{% trans "En savoir plus" %}</a>
+    {% endif %}
+    <button type="button"
+            class="announcement-banner-close"
+            x-on:click="dismissed = true; localStorage.setItem('voisinternet-announcement-dismissed', '{{ announcement.pk }}')"
+            aria-label="{% trans "Fermer ce bandeau" %}">×</button>
+  </div>
+</div>
+{% endif %}

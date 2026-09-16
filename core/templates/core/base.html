@@ -79,7 +79,7 @@
                  name="q"
                  value="{{ request.GET.q }}"
                  placeholder="{% trans "Rechercher…" %}">
-          <button type="submit" class="menu-btn">{% trans "Rechercher" %}</button>
+          {% comment %} <button type="submit" class="menu-btn">{% trans "Rechercher" %}</button> {% endcomment %}
         </form>
         {% lang_switcher %}
         {% include "core/partials/account_widget.html" %}

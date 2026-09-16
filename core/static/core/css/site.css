@@ -689,10 +689,10 @@ a {
   z-index: 1
 }
 
-/* Fond animé (page d'accueil) : quelques grands cercles flous qui dérivent lentement et
-   se chevauchent — inspiré d'une ancienne page d'accueil de l'association (Proton.js,
-   un moteur de particules), réécrit ici en CSS pur (aucun script, aucune dépendance) :
-   une simple animation @keyframes, qui se désactive avec prefers-reduced-motion. */
+/* Fond de la page d'accueil : quelques grands cercles à contour net qui se chevauchent —
+   inspiré d'une ancienne page d'accueil de l'association (Proton.js, un moteur de
+   particules animées), repris ici en CSS pur, statique (aucun script, aucune dépendance,
+   pas d'animation à interrompre pour prefers-reduced-motion). */
 .blob-canvas {
   position: absolute;
   top: 0;
@@ -710,10 +710,9 @@ a {
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(45px);
+  border: 3px solid var(--ink);
   opacity: .55;
-  mix-blend-mode: multiply;
-  animation: blob-drift 22s ease-in-out infinite alternate
+  mix-blend-mode: multiply
 }
 
 @media (prefers-color-scheme: dark) {
@@ -728,22 +727,10 @@ a {
   opacity: .4
 }
 
-.blob-a { width: 20rem; height: 20rem; top: -4rem; left: 4%; background: var(--blob-1); animation-duration: 19s }
-.blob-b { width: 17rem; height: 17rem; top: -6rem; left: 22%; background: var(--blob-2); animation-duration: 24s; animation-delay: -6s }
-.blob-c { width: 16rem; height: 16rem; top: 6rem; right: 22%; background: var(--blob-4); animation-duration: 27s; animation-delay: -11s }
-.blob-d { width: 14rem; height: 14rem; top: -2rem; right: 4%; background: var(--blob-5); animation-duration: 21s; animation-delay: -3s }
-
-@keyframes blob-drift {
-  0% { transform: translate(0, 0) scale(1) }
-  50% { transform: translate(6%, 8%) scale(1.15) }
-  100% { transform: translate(-8%, 5%) scale(.9) }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .blob {
-    animation: none
-  }
-}
+.blob-a { width: 20rem; height: 20rem; top: -4rem; left: 4%; background: var(--blob-1) }
+.blob-b { width: 17rem; height: 17rem; top: -6rem; left: 22%; background: var(--blob-2) }
+.blob-c { width: 16rem; height: 16rem; top: 6rem; right: 22%; background: var(--blob-4) }
+.blob-d { width: 14rem; height: 14rem; top: -2rem; right: 4%; background: var(--blob-5) }
 
 /* Nos trois pôles (page d'accueil) */
 .poles-grid {

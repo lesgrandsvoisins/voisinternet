@@ -19,7 +19,7 @@ from .forms import DirectoryEntryForm
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntrySubscription, Event, GuideBook,
-    Membership, OwnershipClaim, Service, Shortcut, format_number,
+    Membership, OwnershipClaim, Service, Shortcut, Tag, format_number,
 )
 
 # Chapeau de présentation pour chaque page intermédiaire (une par groupe du menu).
@@ -108,6 +108,31 @@ def search(request):
         "events": events,
         "services": services,
         "total": len(pages) + len(entries) + len(events) + len(services),
+    })
+
+
+def tag_list(request):
+    tags = Tag.objects.all()
+    return render(request, "core/tag_list.html", {"tags": tags})
+
+
+def tag_detail(request, slug):
+    tag = get_object_or_404(Tag, slug=slug)
+    entries = tag.directory_entries.filter(visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True)
+    services = tag.services.filter(active=True)
+    from cms.models import BlogPostPage, PolePage, ProjectPage
+
+    posts = BlogPostPage.objects.live().filter(tags=tag).order_by("-date")
+    poles = PolePage.objects.live().filter(tags=tag)
+    projects = ProjectPage.objects.live().filter(tags=tag)
+    return render(request, "core/tag_detail.html", {
+        "tag": tag,
+        "entries": entries,
+        "services": services,
+        "posts": posts,
+        "poles": poles,
+        "projects": projects,
+        "total": entries.count() + services.count() + posts.count() + poles.count() + projects.count(),
     })
 
 

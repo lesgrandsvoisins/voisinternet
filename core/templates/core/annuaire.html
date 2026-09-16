@@ -38,6 +38,9 @@
         {% if entry.audiences.all %}
         <p class="chips-inline">{% for a in entry.audiences.all %}<span class="chip">{{ a.name }}</span>{% endfor %}</p>
         {% endif %}
+        {% if entry.tags.all %}
+        <p class="chips-inline">{% for t in entry.tags.all %}<a class="chip chip-tag" href="{% url 'core:tag_detail' t.slug %}">#{{ t.name }}</a>{% endfor %}</p>
+        {% endif %}
         <p><a href="{% url 'core:entry_detail' entry.slug %}">{% trans "Voir la fiche" %}</a></p>
         <form method="post" action="{% url 'core:toggle_subscription' entry.slug %}">
           {% csrf_token %}

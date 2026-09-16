@@ -9,6 +9,7 @@ from wagtail import blocks
 from wagtail.admin.panels import FieldPanel
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.fields import RichTextField, StreamField
+from wagtail.images.blocks import ImageChooserBlock
 from wagtail.models import Page
 from wagtail.search import index
 
@@ -75,6 +76,30 @@ class TransparencyDocumentBlock(blocks.StructBlock):
         label = _("document")
 
 
+class TestimonialBlock(blocks.StructBlock):
+    """Un témoignage (cms.ProjectPage) : une citation et qui l'a dite."""
+
+    quote = blocks.TextBlock(label=_("citation"))
+    author = blocks.CharBlock(label=_("auteur·rice"), required=False)
+
+    class Meta:
+        icon = "openquote"
+        label = _("témoignage")
+
+
+class ProjectGalleryBlock(blocks.StructBlock):
+    """Une galerie de photos (cms.ProjectPage), affichée en grille — même principe que
+    core/static/core/css/site.css pour le blog, mais construite explicitement ici
+    plutôt que détectée dans du texte enrichi."""
+
+    caption = blocks.CharBlock(label=_("légende"), required=False)
+    images = blocks.ListBlock(ImageChooserBlock(), label=_("photos"))
+
+    class Meta:
+        icon = "image"
+        label = _("galerie")
+
+
 class PolePage(Page):
     """
     Une page de pôle (civisme, arts plastiques, numérique…) : un chapeau, des
@@ -101,6 +126,9 @@ class PolePage(Page):
         _("étiquette du blog"), max_length=100, blank=True, default="",
         help_text=_("Étiquette Ghost dont les derniers articles apparaissent en bas de page."),
     )
+    # Étiquettes internes (core.Tag, partagées avec l'annuaire, les services et le blog
+    # interne) : distinct de ghost_tag ci-dessus, qui ne concerne que l'ancien blog Ghost.
+    tags = models.ManyToManyField("core.Tag", blank=True, related_name="poles", verbose_name=_("étiquettes"))
     cards = StreamField([("card", CardBlock())], blank=True)
 
     content_panels = Page.content_panels + [
@@ -108,18 +136,71 @@ class PolePage(Page):
         FieldPanel("accent"),
         FieldPanel("icon"),
         FieldPanel("ghost_tag"),
+        FieldPanel("tags"),
         FieldPanel("cards"),
     ]
 
     parent_page_types = ["cms.HomePage"]
-    subpage_types = ["cms.StandardPage"]
+    subpage_types = ["cms.StandardPage", "cms.ProjectPage"]
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         from core.ghost import posts_by_tag
 
         context["posts"] = posts_by_tag(self.ghost_tag) if self.ghost_tag else []
+        context["projects"] = ProjectPage.objects.live().child_of(self).order_by("-date_start")
+        # Articles du blog interne partageant une étiquette (core.Tag) avec ce pôle.
+        pole_tag_ids = list(self.tags.values_list("pk", flat=True))
+        context["pole_posts"] = (
+            BlogPostPage.objects.live().filter(tags__in=pole_tag_ids).distinct().order_by("-date")[:6]
+            if pole_tag_ids else BlogPostPage.objects.none()
+        )
         return context
+
+
+class ProjectPage(Page):
+    """
+    Un évènement ou projet marquant, présenté en détail sous un pôle (galerie, lieu,
+    témoignages…) — plus riche qu'une simple entrée d'agenda (core.Event), pour les
+    réalisations qui méritent leur propre page (ex. la Profession d'Empathie Nationale).
+    """
+
+    lead = models.CharField(_("chapeau"), max_length=240, blank=True, default="")
+    date_start = models.DateField(_("date de début"), null=True, blank=True)
+    date_end = models.DateField(_("date de fin"), null=True, blank=True)
+    location = models.CharField(_("lieu"), max_length=200, blank=True, default="")
+    featured_image = models.ForeignKey(
+        "wagtailimages.Image", verbose_name=_("image de une"),
+        null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+    )
+    tags = models.ManyToManyField("core.Tag", blank=True, related_name="projects", verbose_name=_("étiquettes"))
+    body = StreamField(
+        [
+            ("card", CardBlock()),
+            ("testimonial", TestimonialBlock()),
+            ("gallery", ProjectGalleryBlock()),
+            ("documents", blocks.ListBlock(TransparencyDocumentBlock(), label=_("documents"))),
+        ],
+        blank=True,
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel("lead"),
+        FieldPanel("date_start"),
+        FieldPanel("date_end"),
+        FieldPanel("location"),
+        FieldPanel("featured_image"),
+        FieldPanel("tags"),
+        FieldPanel("body"),
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField("lead"),
+        index.SearchField("location"),
+    ]
+
+    parent_page_types = ["cms.PolePage"]
+    subpage_types = []
 
 
 class ContactPage(Page):
@@ -244,12 +325,17 @@ class BlogPostPage(Page):
             "divider", "pagebreak", "image-gallery",
         ],
     )
+    # Étiquettes partagées avec l'annuaire et les services (core.Tag) : une seule liste
+    # de mots-clés pour tout le site (core.views.tag_detail), plutôt qu'un système de
+    # tags par section.
+    tags = models.ManyToManyField("core.Tag", blank=True, related_name="blog_posts", verbose_name=_("étiquettes"))
 
     content_panels = Page.content_panels + [
         FieldPanel("date"),
         FieldPanel("author_name"),
         FieldPanel("excerpt"),
         FieldPanel("featured_image"),
+        FieldPanel("tags"),
         FieldPanel(
             "body",
             help_text=_(
@@ -285,10 +371,19 @@ class BlogPostPage(Page):
         context["body_page"] = pages[page_number - 1]
         context["page_number"] = page_number
         context["total_pages"] = len(pages)
-        # « À lire aussi » : les articles n'ayant pas d'étiquette (contrairement aux
-        # billets Ghost importés), on propose simplement les plus récents autres
-        # articles plutôt qu'une vraie parenté par sujet.
-        context["related_posts"] = (
-            BlogPostPage.objects.live().exclude(pk=self.pk).order_by("-date")[:3]
-        )
+        # « À lire aussi » : par étiquette commune (core.Tag) quand il y en a, sinon les
+        # plus récents autres articles (billets Ghost importés sans étiquette, par ex).
+        my_tag_ids = list(self.tags.values_list("pk", flat=True))
+        related = BlogPostPage.objects.none()
+        if my_tag_ids:
+            related = (
+                BlogPostPage.objects.live().exclude(pk=self.pk)
+                .filter(tags__in=my_tag_ids).distinct().order_by("-date")
+            )
+        related_posts = list(related[:3])
+        if len(related_posts) < 3:
+            seen_ids = {p.pk for p in related_posts} | {self.pk}
+            extra = BlogPostPage.objects.live().exclude(pk__in=seen_ids).order_by("-date")
+            related_posts += list(extra[: 3 - len(related_posts)])
+        context["related_posts"] = related_posts
         return context

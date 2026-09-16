@@ -1,0 +1,79 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}#{{ tag.name }} — {% trans "Étiquettes" %} — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+        <ol>
+          <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+          <li><a href="{% url 'core:tag_list' %}">{% trans "Étiquettes" %}</a></li>
+          <li aria-current="page">#{{ tag.name }}</li>
+        </ol>
+      </nav>
+      <h1>#{{ tag.name }}</h1>
+    </div>
+  </div>
+  <div class="wrap page">
+    {% if not total %}
+      <p class="intro">{% trans "Rien n'est encore étiqueté ainsi." %}</p>
+    {% endif %}
+
+    {% if poles %}
+      <section class="search-section">
+        <h2>{% trans "Pôles" %}</h2>
+        <ul class="search-results">
+          {% for pole in poles %}<li><a href="{{ pole.url }}">{{ pole.title }}</a></li>{% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
+    {% if projects %}
+      <section class="search-section">
+        <h2>{% trans "Projets et évènements" %}</h2>
+        <ul class="search-results">
+          {% for project in projects %}<li><a href="{{ project.url }}">{{ project.title }}</a></li>{% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
+    {% if posts %}
+      <section class="search-section">
+        <h2>{% trans "Blog" %}</h2>
+        <ul class="search-results">
+          {% for post in posts %}
+            <li><a href="{{ post.url }}">{{ post.title }}</a> <span class="muted">— {{ post.date|date:"j F Y" }}</span></li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
+    {% if entries %}
+      <section class="search-section">
+        <h2>{% trans "Annuaire" %}</h2>
+        <ul class="search-results">
+          {% for entry in entries %}
+            <li>
+              <a href="{% url 'core:entry_detail' entry.slug %}">{{ entry.name }}</a>
+              {% if entry.tagline %}<span class="muted"> — {{ entry.tagline }}</span>{% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
+    {% if services %}
+      <section class="search-section">
+        <h2>{% trans "Services" %}</h2>
+        <ul class="search-results">
+          {% for service in services %}
+            <li>
+              <a href="{% url 'core:raccourcis' %}">{{ service.name }}</a>
+              <span class="muted"> — {{ service.summary }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+  </div>
+{% endblock %}

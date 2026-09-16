@@ -86,6 +86,7 @@ class Service(models.Model):
         Audience, blank=True, related_name="services", verbose_name=_("publics"),
         help_text=_("Laisser vide si le service s'adresse à tout le monde."),
     )
+    tags = models.ManyToManyField("Tag", blank=True, related_name="services", verbose_name=_("étiquettes"))
     featured = models.BooleanField(_("mis en avant"), default=False)
     active = models.BooleanField(_("proposé"), default=True)
     requires_approval = models.BooleanField(
@@ -197,6 +198,24 @@ class Membership(models.Model):
         return f"{self.audience} ({self.account})"
 
 
+class Tag(models.Model):
+    """
+    Étiquette libre, partagée entre l'annuaire, les services et le blog (cms.BlogPostPage,
+    cms.ProjectPage) : une seule liste de mots-clés pour tout le site, réunie sur une page
+    par étiquette (core.views.tag_detail) plutôt qu'un système par section.
+    """
+    name = models.CharField(_("nom"), max_length=60, unique=True)
+    slug = models.SlugField(unique=True, max_length=60)
+
+    class Meta:
+        ordering = ["name"]
+        verbose_name = _("étiquette")
+        verbose_name_plural = _("étiquettes")
+
+    def __str__(self):
+        return self.name
+
+
 class DirectorySector(models.Model):
     """Secteur d'activité de l'annuaire (civisme, arts plastiques…), à la manière de gdvoisins.com."""
     name = models.CharField(_("nom"), max_length=80)
@@ -232,6 +251,21 @@ class DirectoryEntry(models.Model):
     audiences = models.ManyToManyField(
         Audience, blank=True, related_name="directory_entries", verbose_name=_("publics"),
         help_text=_("Laisser vide si la fiche s'adresse à tout le monde."),
+    )
+    tags = models.ManyToManyField("Tag", blank=True, related_name="directory_entries", verbose_name=_("étiquettes"))
+
+    LAYOUT_CHOICES = [
+        ("classique", _("Classique")),
+        ("carte", _("Carte de visite")),
+        ("magazine", _("Magazine")),
+        ("minimal", _("Minimal")),
+        ("vitrine", _("Vitrine")),
+        ("profil", _("Profil")),
+        ("affiche", _("Affiche")),
+    ]
+    layout = models.CharField(
+        _("présentation"), max_length=20, choices=LAYOUT_CHOICES, default="classique",
+        help_text=_("L'habillage visuel de votre fiche : choisissez celui qui vous ressemble le plus."),
     )
 
     owner = models.ForeignKey(

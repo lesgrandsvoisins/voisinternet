@@ -305,11 +305,17 @@ a {
 /* Logotype : lesgrandsvoisins.com */
 .word {
   font-family: var(--display);
-  color: var(--brand-blue);
   font-size: clamp(1.1rem, 4.6vw, 1.6rem);
   font-weight: 700;
   letter-spacing: -.01em;
   white-space: nowrap
+}
+
+/* --brand-blue n'a un contraste suffisant (WCAG AA) que sur le fond clair de l'en-tête
+   (--sky) : sur le fond sombre du pied de page (--ink), le mot-symbole garde la couleur
+   de texte ambiante (--sky), déjà lisible (12,9:1 contre 2,1:1 avec le bleu de marque). */
+.brand .word {
+  color: var(--brand-blue)
 }
 
 .w-vois {
@@ -689,7 +695,13 @@ a {
    une simple animation @keyframes, qui se désactive avec prefers-reduced-motion. */
 .blob-canvas {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* Limité à la bande du haut (texte + CTA), pas toute la hauteur du héros (qui inclut
+     l'illustration de scene.html, plus bas, opaque) — sinon la moitié des taches se
+     retrouve cachée derrière elle, invisible. */
+  height: 32rem;
   overflow: hidden;
   pointer-events: none;
   z-index: 0
@@ -698,20 +710,33 @@ a {
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(70px);
-  opacity: .3;
-  animation: blob-drift 30s ease-in-out infinite alternate
+  filter: blur(45px);
+  opacity: .55;
+  mix-blend-mode: multiply;
+  animation: blob-drift 22s ease-in-out infinite alternate
 }
 
-.blob-a { width: 24rem; height: 24rem; top: -8rem; left: -6rem; background: var(--blob-1); animation-duration: 26s }
-.blob-b { width: 19rem; height: 19rem; top: -2rem; right: -6rem; background: var(--blob-2); animation-duration: 32s; animation-delay: -8s }
-.blob-c { width: 17rem; height: 17rem; bottom: -9rem; left: 18%; background: var(--blob-4); animation-duration: 36s; animation-delay: -14s }
-.blob-d { width: 15rem; height: 15rem; bottom: -6rem; right: 12%; background: var(--blob-5); animation-duration: 29s; animation-delay: -4s }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .blob {
+    mix-blend-mode: screen;
+    opacity: .4
+  }
+}
+
+:root[data-theme="dark"] .blob {
+  mix-blend-mode: screen;
+  opacity: .4
+}
+
+.blob-a { width: 20rem; height: 20rem; top: -4rem; left: 4%; background: var(--blob-1); animation-duration: 19s }
+.blob-b { width: 17rem; height: 17rem; top: -6rem; left: 22%; background: var(--blob-2); animation-duration: 24s; animation-delay: -6s }
+.blob-c { width: 16rem; height: 16rem; top: 6rem; right: 22%; background: var(--blob-4); animation-duration: 27s; animation-delay: -11s }
+.blob-d { width: 14rem; height: 14rem; top: -2rem; right: 4%; background: var(--blob-5); animation-duration: 21s; animation-delay: -3s }
 
 @keyframes blob-drift {
   0% { transform: translate(0, 0) scale(1) }
-  50% { transform: translate(4%, -5%) scale(1.08) }
-  100% { transform: translate(-5%, 4%) scale(.95) }
+  50% { transform: translate(6%, 8%) scale(1.15) }
+  100% { transform: translate(-8%, 5%) scale(.9) }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -978,6 +1003,18 @@ section.block {
   border-radius: 999px;
   padding: .2rem .7rem;
   color: var(--ink-soft)
+}
+
+/* Étiquettes (core.Tag, core:tag_detail) : mêmes chips, mais cliquables et distinguées
+   par la couleur d'accent plutôt que le style « secteur/public » ci-dessus. */
+a.chip-tag {
+  border-color: var(--accent-teal);
+  color: var(--accent-teal);
+  text-decoration: none
+}
+
+a.chip-tag:hover {
+  background: var(--hover)
 }
 
 .markdown :first-child {
@@ -1353,6 +1390,138 @@ section.block {
   font-size: 1.1rem
 }
 
+/* Sept habillages au choix de l'auteur·rice d'une fiche (core.DirectoryEntry.layout,
+   core.forms.DirectoryEntryForm) : même structure HTML (directory_entry.html), CSS
+   seule — pas de gabarit séparé par habillage. « classique » est le rendu par défaut
+   ci-dessus, sans règle supplémentaire. */
+.skin-carte {
+  max-width: 26rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--paper);
+  align-items: center;
+  text-align: center
+}
+
+.skin-carte .hero {
+  width: 9rem;
+  height: 9rem;
+  max-height: none;
+  border-radius: 50%;
+  object-fit: cover
+}
+
+.skin-carte .chips-inline {
+  justify-content: center
+}
+
+.skin-carte .markdown,
+.skin-carte .pair {
+  text-align: left
+}
+
+.skin-magazine {
+  max-width: 54rem
+}
+
+.skin-magazine .hero {
+  max-height: 34rem;
+  border-radius: 4px
+}
+
+.skin-magazine .tagline {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 2rem
+}
+
+.skin-minimal {
+  max-width: 38rem;
+  gap: 1.5rem
+}
+
+.skin-minimal .hero,
+.skin-minimal .gallery {
+  display: none
+}
+
+.skin-minimal .chip {
+  border: none;
+  padding: 0;
+  margin-inline-end: .8rem
+}
+
+.skin-vitrine .hero {
+  order: 2
+}
+
+.skin-vitrine .gallery {
+  order: 1;
+  gap: .4rem
+}
+
+.skin-vitrine .gallery img {
+  width: 11rem;
+  height: 8.5rem
+}
+
+.skin-profil {
+  max-width: 34rem;
+  margin: 0 auto;
+  align-items: center;
+  text-align: center
+}
+
+.skin-profil .hero {
+  width: 10rem;
+  height: 10rem;
+  max-height: none;
+  border-radius: 50%;
+  object-fit: cover
+}
+
+.skin-profil .markdown,
+.skin-profil .pair,
+.skin-profil .actions {
+  align-self: stretch;
+  text-align: left
+}
+
+.skin-affiche {
+  background: var(--ink);
+  color: var(--sky);
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  align-items: center;
+  text-align: center
+}
+
+.skin-affiche .tagline {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 2.2rem;
+  color: var(--sky)
+}
+
+.skin-affiche .markdown,
+.skin-affiche .pair,
+.skin-affiche .actions {
+  align-self: stretch;
+  text-align: left;
+  color: var(--sky)
+}
+
+.skin-affiche a {
+  color: var(--sky)
+}
+
+.skin-affiche .chip {
+  border-color: var(--sky);
+  color: var(--sky)
+}
+
 .retention {
   margin-top: .4rem;
   font-size: .9rem
@@ -1457,6 +1626,27 @@ blockquote {
 
 blockquote p {
   margin: 0
+}
+
+/* Témoignage (cms.ProjectPage, TestimonialBlock) : une citation dans le corps d'un
+   article, pas la grande citation d'accroche de la page d'accueil ci-dessus. */
+.testimonial {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.4;
+  letter-spacing: normal;
+  border-left: 3px solid var(--line);
+  padding-left: 1.2rem;
+  margin: 1.5rem 0
+}
+
+.testimonial footer {
+  margin-top: .5rem;
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: .95rem;
+  color: var(--ink-soft)
 }
 
 .quote figcaption {

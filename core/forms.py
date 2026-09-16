@@ -17,8 +17,9 @@ _OTHER_LANGUAGES = ["en", "es", "ar", "ko"]
 _FIELD_GROUPS = [
     (_("Général"), ["name_fr", "description_fr", "website"]),
     (_("Photos et médias"), ["logo", "photo_promo", "video_url"]),
+    (_("Présentation"), ["layout"]),
     (_("Publication"), ["visibility"]),
-    (_("Catégories"), ["kind", "sector", "audiences", "title_fr", "tagline_fr"]),
+    (_("Catégories"), ["kind", "sector", "tags", "audiences", "title_fr", "tagline_fr"]),
     (_("Mise en avant"), ["cta_intro_fr", "cta_label_fr", "cta_link"]),
     (_("Contact"), ["email", "phone"]),
     (_("Adresse"), ["country", "region", "city", "postal_code", "address"]),

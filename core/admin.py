@@ -4,7 +4,7 @@ from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectoryEntryPhoto, DirectorySector, Donor, EntrySubscription,
     Event, GuideBook,
-    Membership, OwnershipClaim, Service, ServiceCategory, Shortcut,
+    Membership, OwnershipClaim, Service, ServiceCategory, Shortcut, Tag,
 )
 
 admin.site.site_header = "lesgrandsvoisins.com"
@@ -28,11 +28,18 @@ class ServiceCategoryAdmin(TranslationAdmin):
     search_fields = ["name"]
 
 
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ["name"]
+    prepopulated_fields = {"slug": ["name"]}
+    search_fields = ["name"]
+
+
 @admin.register(Service)
 class ServiceAdmin(TranslationAdmin):
     list_display = ["name", "summary", "category", "featured", "active", "requires_approval", "order"]
     list_filter = ["category", "requires_approval"]
-    filter_horizontal = ["audiences"]
+    filter_horizontal = ["audiences", "tags"]
     list_editable = ["featured", "active", "order"]
     prepopulated_fields = {"slug": ["name"]}
     search_fields = ["name", "summary"]
@@ -127,11 +134,14 @@ class DirectoryEntryAdmin(TranslationAdmin):
     prepopulated_fields = {"slug": ["name"]}
     search_fields = ["name", "description", "city"]
     autocomplete_fields = ["sector"]
-    filter_horizontal = ["audiences"]
+    filter_horizontal = ["audiences", "tags"]
     inlines = [DirectoryEntryPhotoInline]
     fieldsets = [
         (None, {
-            "fields": ["name", "slug", "kind", "sector", "audiences", "owner", "visibility", "approved", "order"],
+            "fields": [
+                "name", "slug", "kind", "sector", "tags", "audiences", "owner", "visibility", "approved", "layout",
+                "order",
+            ],
         }),
         ("Présentation", {"fields": ["title", "tagline", "description"]}),
         ("Médias", {"fields": ["logo", "photo_promo", "video_url"]}),

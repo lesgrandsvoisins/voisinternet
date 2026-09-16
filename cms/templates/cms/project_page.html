@@ -1,0 +1,67 @@
+{% extends "core/base.html" %}
+{% load i18n wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}{{ page.title }} — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+  {% if page.featured_image %}{% image page.featured_image fill-1600x500 as hero_bg %}{% endif %}
+  <div class="page-head{% if page.get_parent.specific.accent %} accent-{{ page.get_parent.specific.accent }}{% endif %}"{% if hero_bg %} style="background-image: linear-gradient(var(--page-head-overlay), var(--page-head-overlay)), url('{{ hero_bg.url }}')"{% endif %}>
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+        <ol>
+          <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+          <li><a href="{{ page.get_parent.url }}">{{ page.get_parent.title }}</a></li>
+          <li aria-current="page">{{ page.title }}</li>
+        </ol>
+      </nav>
+      <h1>{{ page.title }}</h1>
+      {% if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
+      <p class="muted">
+        {% if page.date_start %}
+          <time datetime="{{ page.date_start|date:'c' }}">{{ page.date_start|date:"j F Y" }}</time>{% if page.date_end and page.date_end != page.date_start %} – <time datetime="{{ page.date_end|date:'c' }}">{{ page.date_end|date:"j F Y" }}</time>{% endif %}
+        {% endif %}
+        {% if page.location %}{% if page.date_start %} — {% endif %}{{ page.location }}{% endif %}
+      </p>
+    </div>
+  </div>
+  <div class="wrap page">
+    <article class="project-page">
+      {% for block in page.body %}
+        {% if block.block_type == "card" %}
+          <section class="card">
+            <h2>{{ block.value.title }}</h2>
+            {{ block.value.text }}
+          </section>
+        {% elif block.block_type == "testimonial" %}
+          <blockquote class="testimonial">
+            <p>{{ block.value.quote }}</p>
+            {% if block.value.author %}<footer>— {{ block.value.author }}</footer>{% endif %}
+          </blockquote>
+        {% elif block.block_type == "gallery" %}
+          <figure class="gallery">
+            {% for img in block.value.images %}
+              {% image img fill-500x375 as gallery_img %}
+              <img src="{{ gallery_img.url }}" alt="">
+            {% endfor %}
+            {% if block.value.caption %}<figcaption>{{ block.value.caption }}</figcaption>{% endif %}
+          </figure>
+        {% elif block.block_type == "documents" %}
+          <section>
+            <h2>{% trans "Documents" %}</h2>
+            <ul class="docs">
+              {% for item in block.value %}
+                <li>
+                  <strong>{{ item.label }}</strong>
+                  {% if item.document %}
+                    <span><a href="{{ item.document.url }}">{% trans "Télécharger" %}</a></span>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </section>
+        {% endif %}
+      {% endfor %}
+    </article>
+    <p class="muted"><a href="{{ page.get_parent.url }}">{% blocktrans with pole=page.get_parent.title %}← Retour à {{ pole }}{% endblocktrans %}</a></p>
+  </div>
+{% endblock %}

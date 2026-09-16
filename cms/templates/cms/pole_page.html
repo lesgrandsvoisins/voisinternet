@@ -32,6 +32,38 @@
     </div>
   {% endif %}
   {% endcache %}
+  {% if projects %}
+    <div class="wrap page">
+      <section aria-labelledby="projects-title">
+        <h2 id="projects-title">{% trans "Projets et évènements" %}</h2>
+        <div class="poles-grid">
+          {% for project in projects %}
+            <a class="pole-card accent-{{ page.accent }}" href="{{ project.url }}">
+              <h3>{{ project.title }}</h3>
+              {% if project.lead %}<p>{{ project.lead }}</p>{% endif %}
+            </a>
+          {% endfor %}
+        </div>
+      </section>
+    </div>
+  {% endif %}
+  {% if pole_posts %}
+    <div class="wrap page">
+      <section aria-labelledby="pole-posts-title">
+        <h2 id="pole-posts-title">{% trans "Sur le blog" %}</h2>
+        <ul class="posts">
+          {% for post in pole_posts %}
+            <li>
+              <a href="{{ post.url }}">
+                <h3>{{ post.title }}</h3>
+                <time datetime="{{ post.date|date:'c' }}">{{ post.date|date:"j F Y" }}</time>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    </div>
+  {% endif %}
   {% if posts %}
     <div class="wrap page">
       <section aria-labelledby="posts-title">

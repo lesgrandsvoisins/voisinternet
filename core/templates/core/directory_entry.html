@@ -17,7 +17,7 @@
   </div>
 </div>
 <div class="wrap page">
-  <article class="directory-entry">
+  <article class="directory-entry skin-{{ entry.layout }}">
     {% if entry.photos %}
     <img class="hero" src="{{ entry.photos.0.url }}" alt="">
     {% if entry.photos|length > 1 %}
@@ -31,6 +31,7 @@
       <span class="chip">{{ entry.get_kind_display }}</span>
       {% if entry.sector %}<span class="chip">{{ entry.sector.name }}</span>{% endif %}
       {% for a in entry.audiences.all %}<span class="chip">{{ a.name }}</span>{% endfor %}
+      {% for t in entry.tags.all %}<a class="chip chip-tag" href="{% url 'core:tag_detail' t.slug %}">#{{ t.name }}</a>{% endfor %}
     </p>
 
     {% if entry.title %}<p class="tagline">{{ entry.title }}</p>{% endif %}

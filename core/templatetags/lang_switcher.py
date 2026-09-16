@@ -19,6 +19,10 @@ def lang_switcher(context):
 
     Ailleurs (pages « core »), l'URL est la même dans toutes les langues :
     on garde le mécanisme générique `set_language` (préfixe + redirection).
+
+    Le sélecteur liste toujours toutes les langues (settings.LANGUAGES), même sans
+    traduction publiée : faute de traduction, le lien renvoie à l'accueil dans la langue
+    choisie plutôt que de faire disparaître l'option.
     """
     request = context["request"]
     current_language = get_language()
@@ -33,11 +37,9 @@ def lang_switcher(context):
                 translation = (
                     page.get_translations().filter(locale__language_code=code, live=True).first()
                 )
-                if translation is None:
-                    continue
-                url = translation.url
+                url = translation.url if translation is not None else None
             if url is None:
-                continue
+                url = f"/{code}/"
             info = get_language_info(code)
             languages.append({"code": code, "name_local": info["name_local"], "url": url})
         return {"languages": languages, "current_language": current_language, "direct_links": True}

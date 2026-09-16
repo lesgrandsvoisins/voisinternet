@@ -11,7 +11,7 @@ LOADENV = export $$(grep -v '^\#' .env 2>/dev/null | xargs -d '\n');
 
 .PHONY: help venv install setup migrate makemigrations fixtures superuser \
         run test shell messages compilemessages collectstatic clean \
-        fixtures-load fixtures-dump cms-load cms-dump blog-import
+        fixtures-load fixtures-dump cms-load cms-dump blog-import qmd-export qmd-import
 
 help: ## Affiche cette aide
 	@grep -E '^[a-zA-Z_-]+:.*## ' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'
@@ -75,6 +75,12 @@ cms-dump: ## Sauvegarde l'arbre de pages Wagtail (cms/fixtures/cms.json) ; pense
 
 blog-import: ## Importe les articles de deploy/ghost-export dans le blog (idempotent)
 	$(LOADENV) $(PYTHON) manage.py import_ghost_posts
+
+qmd-export: ## Exporte un article en .qmd : make qmd-export SLUG=mon-article [LANG=fr] [OUT=chemin.qmd]
+	$(LOADENV) $(PYTHON) manage.py export_blog_qmd $(SLUG) --lang=$(or $(LANG),fr) $(if $(OUT),--out=$(OUT))
+
+qmd-import: ## Importe/met à jour un article depuis un .qmd : make qmd-import FILE=mon-article.qmd
+	$(LOADENV) $(PYTHON) manage.py import_blog_qmd $(FILE)
 
 superuser: ## Crée un compte administrateur
 	$(LOADENV) $(PYTHON) manage.py createsuperuser

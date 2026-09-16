@@ -1,4 +1,4 @@
-{% load i18n %}<svg class="scene" viewBox="0 18 720 382" role="img" aria-label="{% trans "Une rue de quartier au soleil : café, galerie, théâtre et salle de concert, restaurant, salon de thé, centre social, atelier d'art et hôpital, reliés entre eux ; un nuage s'éloigne." %}">
+{% load i18n %}<svg class="scene" viewBox="0 18 720 382" role="img" aria-label="{% trans "Une rue de quartier au soleil : café, galerie, théâtre et salle de concert, restaurant, salon de thé, centre social, atelier d'art et hôpital, reliés entre eux, avec sur leurs toits de petits drapeaux représentant les langues du site ; un nuage s'éloigne." %}">
 <circle cx="92" cy="70" r="42" fill="var(--sun)"/>
 <g class="cloud" fill="var(--cloud)"><circle cx="455" cy="62" r="27"/><circle cx="490" cy="50" r="35"/><circle cx="527" cy="66" r="24"/><rect x="428" y="64" width="124" height="26" rx="13"/></g>
 <polygon points="8,182 20,154 88,154 100,182" fill="var(--zinc)"/>
@@ -18,6 +18,11 @@
 <rect x="16" y="306" width="76" height="46" fill="var(--win)"/>
 <rect x="22" y="355" width="16" height="3" fill="var(--ink-soft)"/><rect x="29" y="357" width="2" height="9" fill="var(--ink-soft)"/>
 <rect x="64" y="355" width="16" height="3" fill="var(--ink-soft)"/><rect x="71" y="357" width="2" height="9" fill="var(--ink-soft)"/>
+<!-- Drapeaux (langues du site) : France et Sénégal, francophones -->
+<line x1="35" y1="154" x2="35" y2="132" stroke="var(--ink)" stroke-width="1.5"/>
+<rect x="35" y="132" width="5" height="10" fill="#2B4C9B"/><rect x="40" y="132" width="6" height="10" fill="#FFFFFF"/><rect x="46" y="132" width="5" height="10" fill="#D23B30"/>
+<line x1="70" y1="154" x2="70" y2="132" stroke="var(--ink)" stroke-width="1.5"/>
+<rect x="71" y="132" width="16" height="3" fill="#00853F"/><rect x="71" y="135" width="16" height="4" fill="#FDEF42"/><rect x="71" y="139" width="16" height="3" fill="#E31B23"/>
 <rect x="101" y="160" width="102" height="7" fill="var(--zinc)"/>
 <rect x="104" y="166" width="96" height="186" fill="var(--stone-2)"/>
 <rect x="117.5" y="183.3" width="14" height="24" fill="var(--win)"/>
@@ -32,6 +37,15 @@
 <rect x="120" y="306" width="15" height="20" fill="var(--sun)" stroke="var(--ink)" stroke-width="2"/>
 <rect x="145" y="306" width="15" height="20" fill="var(--led)" stroke="var(--ink)" stroke-width="2"/>
 <rect x="170" y="306" width="15" height="20" fill="var(--zinc)" stroke="var(--ink)" stroke-width="2"/>
+<!-- Drapeaux (langues du site) : États-Unis et Royaume-Uni, anglophones -->
+<line x1="130" y1="160" x2="130" y2="138" stroke="var(--ink)" stroke-width="1.5"/>
+<rect x="131" y="138" width="18" height="10" fill="#B22234"/>
+<rect x="131" y="140" width="18" height="1.5" fill="#FFFFFF"/><rect x="131" y="143.5" width="18" height="1.5" fill="#FFFFFF"/><rect x="131" y="147" width="18" height="1.5" fill="#FFFFFF"/>
+<rect x="131" y="138" width="7" height="5" fill="#3C3B6E"/>
+<line x1="170" y1="160" x2="170" y2="138" stroke="var(--ink)" stroke-width="1.5"/>
+<rect x="171" y="138" width="16" height="10" fill="#012169"/>
+<rect x="171" y="141.5" width="16" height="3" fill="#FFFFFF"/><rect x="177.5" y="138" width="3" height="10" fill="#FFFFFF"/>
+<rect x="171" y="142.3" width="16" height="1.4" fill="#C8102E"/><rect x="178.3" y="138" width="1.4" height="10" fill="#C8102E"/>
 <polygon points="202,142 268.0,108 334,142" fill="var(--stone-2)" stroke="var(--zinc)" stroke-width="3"/>
 <circle cx="268.0" cy="130" r="7" fill="var(--zinc)"/>
 <rect x="204" y="142" width="128" height="210" fill="var(--stone)"/>
@@ -81,9 +95,12 @@
 <polygon points="439.0,290 452.2,290 452.2,305 436.6,305" fill="var(--zinc)"/>
 <polygon points="469.0,290 483.4,290 483.4,305 467.8,305" fill="var(--zinc)"/>
 <rect x="432" y="306" width="56" height="46" fill="var(--win)"/>
+<!-- Drapeaux (langues du site) : Espagne et Mexique, hispanophones -->
+<line x1="440" y1="192" x2="440" y2="170" stroke="var(--ink)" stroke-width="1.5"/>
+<rect x="441" y="170" width="16" height="2.5" fill="#AA151B"/><rect x="441" y="172.5" width="16" height="5" fill="#F1BF00"/><rect x="441" y="177.5" width="16" height="2.5" fill="#AA151B"/>
+<line x1="470" y1="192" x2="470" y2="170" stroke="var(--ink)" stroke-width="1.5"/>
+<rect x="471" y="170" width="5" height="10" fill="#006847"/><rect x="476" y="170" width="6" height="10" fill="#FFFFFF"/><rect x="482" y="170" width="5" height="10" fill="#CE1126"/>
 <polygon points="500,174 512,146 588,146 600,174" fill="var(--zinc)"/>
-<line x1="580" y1="146" x2="580" y2="112" stroke="var(--ink)" stroke-width="2"/>
-<rect x="581" y="112" width="8" height="14" fill="#2B4C9B"/><rect x="589" y="112" width="8" height="14" fill="#FFFFFF"/><rect x="597" y="112" width="8" height="14" fill="#D23B30"/>
 <rect x="500" y="174" width="100" height="178" fill="var(--stone-2)"/>
 <rect x="509.6" y="188.7" width="13" height="24" fill="var(--win)"/>
 <rect x="532.2" y="188.7" width="13" height="24" fill="var(--win)"/>
@@ -106,6 +123,11 @@
 <text x="630.0" y="282.1" text-anchor="middle" font-family="Charter,'Bitstream Charter',Georgia,serif" font-size="10" font-weight="700" fill="var(--ink)">{% trans "Atelier" %}</text>
 <rect x="610" y="294" width="40" height="58" fill="var(--paper)" stroke="var(--zinc)" stroke-width="2"/>
 <path d="M619 334 q-6 -10 0 -18 h8 q6 8 0 18 Z" fill="var(--led)"/><path d="M634 334 q-4 -14 2 -24 h4 q6 10 2 24 Z" fill="var(--sun)"/>
+<!-- Drapeaux (langues du site) : Maroc et Tunisie, arabophones -->
+<line x1="615" y1="200" x2="615" y2="180" stroke="var(--ink)" stroke-width="1.5"/>
+<rect x="616" y="180" width="14" height="9" fill="#C1272D"/><rect x="620" y="183" width="6" height="3" fill="#006233"/>
+<line x1="640" y1="200" x2="640" y2="180" stroke="var(--ink)" stroke-width="1.5"/>
+<rect x="641" y="180" width="14" height="9" fill="#E70013"/><circle cx="648" cy="184.5" r="3" fill="#FFFFFF"/>
 <rect x="657" y="112" width="62" height="7" fill="var(--zinc)"/>
 <rect x="660" y="118" width="56" height="234" fill="var(--paper)" stroke="var(--line)"/>
 <rect x="674" y="128" width="28" height="28" rx="4" fill="#2B5FA8"/><text x="688" y="149" text-anchor="middle" font-family="system-ui,sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">H</text>
@@ -119,6 +141,10 @@
 <rect x="693.3" y="262.0" width="12" height="20" fill="var(--win)"/>
 <rect x="666" y="298" width="44" height="6" fill="var(--zinc)"/>
 <rect x="674" y="304" width="28" height="48" fill="var(--win)"/>
+<!-- Drapeau (langue du site) : Corée du Sud, coréanophone -->
+<line x1="690" y1="112" x2="690" y2="92" stroke="var(--ink)" stroke-width="1.5"/>
+<rect x="691" y="92" width="16" height="10" fill="#FFFFFF"/>
+<path d="M695,97 A4,4 0 0 1 703,97 Z" fill="#CD2E3A"/><path d="M695,97 A4,4 0 0 0 703,97 Z" fill="#0047A0"/>
 <rect x="0" y="352" width="720" height="18" fill="var(--stone-2)"/>
 <rect x="0" y="370" width="720" height="4" fill="var(--zinc)"/>
 <rect x="0" y="374" width="720" height="26" fill="var(--zinc-dark)"/>

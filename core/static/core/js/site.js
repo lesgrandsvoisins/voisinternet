@@ -245,6 +245,18 @@
     else if (e.key === "ArrowRight") stepLightbox(1);
   });
 
+  // Fond de la page d'accueil (site.css, .blob-bg) : une position différente à chaque
+  // chargement de la page. Dégradation propre sans JS : les positions fixes de site.css
+  // s'appliquent alors, tout aussi valables, juste toujours les mêmes.
+  function randomizeBlobs() {
+    document.querySelectorAll(".blob").forEach(function (blob) {
+      blob.style.top = (Math.random() * 70 - 10).toFixed(1) + "%";
+      blob.style.left = (Math.random() * 90 - 5).toFixed(1) + "%";
+      blob.style.right = "auto";
+      blob.style.bottom = "auto";
+    });
+  }
+
   // Le menu principal et le widget du compte (en-tête) sont gérés par Alpine.js (voir base.html).
   document.addEventListener("DOMContentLoaded", armToasts);
   document.addEventListener("htmx:afterSettle", armToasts);
@@ -254,4 +266,5 @@
   document.addEventListener("htmx:afterSettle", armDragReorder);
   document.addEventListener("DOMContentLoaded", armLightbox);
   document.addEventListener("htmx:afterSettle", armLightbox);
+  document.addEventListener("DOMContentLoaded", randomizeBlobs);
 })();

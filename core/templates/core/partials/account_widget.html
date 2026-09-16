@@ -12,7 +12,7 @@
           x-bind:aria-expanded="open.toString()"
           aria-controls="account-menu"
           aria-label="{% blocktrans %}Mon compte : {{ account_sub }}{% endblocktrans %}"
-          onclick="javascript:if(typeof doubleclicked === 'undefined'){doubleclicked=false} else if (!doubleclicked){doubleclicked=true}else{location.href='{% url 'core:account' %}';}">
+          onclick="javascript:if(typeof doubleclicked === 'undefined'){=fadoubleclickedlse} else if (!doubleclicked){doubleclicked=true; open=false;}else{location.href='{% url 'core:account' %}';}">
     <b>{% trans "mon Compte" %}</b>
     {% comment %} <small>{{ account_sub }}</small> {% endcomment %}
   </button>

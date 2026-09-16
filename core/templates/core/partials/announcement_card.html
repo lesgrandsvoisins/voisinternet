@@ -1,0 +1,20 @@
+{% load i18n wagtailimages_tags %}
+{% if announcement %}
+<section class="block" aria-labelledby="announcement-title">
+  <div class="wrap">
+    <div class="card card-sun announcement-card">
+      {% if announcement.image %}
+        {% image announcement.image fill-160x160 as thumb %}
+        <img class="announcement-card-image" src="{{ thumb.url }}" alt="">
+      {% endif %}
+      <div>
+        <h2 id="announcement-title">{{ announcement.title }}</h2>
+        {% if announcement.text %}<p>{{ announcement.text }}</p>{% endif %}
+        {% if announcement.page %}
+          <a class="btn btn-sun" href="{{ announcement.page.url }}">{% trans "En savoir plus" %}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}

@@ -130,3 +130,8 @@ Les passages entre crochets dans les gabarits (`[À compléter]`,
 `[document à publier]`) attendent un contenu réel : ateliers, dépôt de
 matériel, documents de l'association, modalités de don, et, pour chaque
 service, ce que l'association conserve en tant qu'hébergeur.
+
+## Développeur notes
+
+Format du filtre date:  
+https://docs.djangoproject.com/en/6.1/ref/templates/builtins/#std-templatefilter-date

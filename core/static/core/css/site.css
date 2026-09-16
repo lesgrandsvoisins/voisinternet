@@ -2293,6 +2293,21 @@ blockquote p {
   border-color: var(--sun)
 }
 
+.announcement-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.announcement-card-image {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 .number code {
   font-family: ui-monospace, Menlo, Consolas, monospace;
   font-size: clamp(1.3rem, 4vw, 2rem);

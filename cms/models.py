@@ -11,7 +11,7 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail.models import Page
+from wagtail.models import Locale, Page, TranslatableMixin
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
@@ -434,11 +434,15 @@ class BlogPostPage(Page):
 
 
 @register_snippet
-class Announcement(models.Model):
+class Announcement(TranslatableMixin, models.Model):
     """
     Bandeau affiché en haut de toutes les pages (core/templates/core/base.html) pendant
     une période donnée, pour mettre en avant une information ponctuelle (fermeture
-    exceptionnelle, évènement majeur…). Un seul bandeau actif à la fois — voir current().
+    exceptionnelle, évènement majeur…). Un seul bandeau actif à la fois par langue — voir
+    current(). Traduit à la manière des pages Wagtail (TranslatableMixin) plutôt que par
+    modeltranslation : une ligne par langue, avec le bouton « Traduire » de Wagtail
+    (wagtail.contrib.simple_translation) pour créer les autres langues à partir du
+    français.
     """
     title = models.CharField(_("titre"), max_length=140)
     text = models.CharField(_("texte"), max_length=300, blank=True, default="")
@@ -455,20 +459,9 @@ class Announcement(models.Model):
     publish_end = models.DateField(_("date de fin"), null=True, blank=True)
     active = models.BooleanField(_("actif"), default=True)
 
-    # Un FieldPanel("title") ordinaire ne montrerait que la langue active de l'admin : les
-    # champs _fr/_en/… (modeltranslation, cms/translation.py) sont exposés un par un pour
-    # que chaque langue reste éditable depuis ce même formulaire.
     panels = [
-        FieldPanel("title_fr"),
-        FieldPanel("text_fr"),
-        FieldPanel("title_en"),
-        FieldPanel("text_en"),
-        FieldPanel("title_es"),
-        FieldPanel("text_es"),
-        FieldPanel("title_ar"),
-        FieldPanel("text_ar"),
-        FieldPanel("title_ko"),
-        FieldPanel("text_ko"),
+        FieldPanel("title"),
+        FieldPanel("text"),
         FieldPanel("image"),
         FieldPanel("page"),
         FieldPanel("publish_start"),
@@ -476,7 +469,7 @@ class Announcement(models.Model):
         FieldPanel("active"),
     ]
 
-    class Meta:
+    class Meta(TranslatableMixin.Meta):
         verbose_name = _("bandeau d'annonce")
         verbose_name_plural = _("bandeaux d'annonce")
 
@@ -487,7 +480,7 @@ class Announcement(models.Model):
     def current(cls):
         today = timezone.now().date()
         return (
-            cls.objects.filter(active=True)
+            cls.objects.filter(locale=Locale.get_active(), active=True)
             .filter(models.Q(publish_start__isnull=True) | models.Q(publish_start__lte=today))
             .filter(models.Q(publish_end__isnull=True) | models.Q(publish_end__gte=today))
             .order_by("-publish_start", "-pk")

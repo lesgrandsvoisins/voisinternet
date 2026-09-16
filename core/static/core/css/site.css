@@ -327,8 +327,9 @@ a {
   border-bottom: 1px solid var(--line);
   background: var(--sky);
   position: sticky;
+  /* position: fixed; */
   top: 0;
-  z-index: 20
+  z-index: 200
 }
 
 .top>.wrap {

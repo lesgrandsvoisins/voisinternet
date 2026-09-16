@@ -79,22 +79,34 @@
                   {% if not forloop.last %}<li class="menu-sep" role="separator" aria-hidden="true"></li>{% endif %}
                 </ul>
               {% endfor %}
+              <ul class="menu-flat">
+                <li>
+                  <form class="site-search"
+                        method="get"
+                        action="{% url 'core:search' %}"
+                        role="search">
+                    <label for="site-search-q" class="sr-only">{% trans "Rechercher sur le site" %}</label>
+                    <input id="site-search-q"
+                           type="search"
+                           name="q"
+                           value="{{ request.GET.q }}"
+                           placeholder="{% trans "Rechercher…" %}">
+                    {% comment %} <button type="submit" class="menu-btn">{% trans "Rechercher" %}</button> {% endcomment %}
+                  </form>
+                </li>
+                <li>{% lang_switcher %}</li>
+                <li><div style="display: flex;flex-direction: column;">
+  <div>
+    <span class="word">GdVoisins</span><span class="V">.com</span>
+  </div>
+  <div>Par l'association Les Grands Voisins</div>
+</div>
+</li>
+              </ul>
             </div>
           </nav>
         </div>
-        <form class="site-search"
-              method="get"
-              action="{% url 'core:search' %}"
-              role="search">
-          <label for="site-search-q" class="sr-only">{% trans "Rechercher sur le site" %}</label>
-          <input id="site-search-q"
-                 type="search"
-                 name="q"
-                 value="{{ request.GET.q }}"
-                 placeholder="{% trans "Rechercher…" %}">
-          {% comment %} <button type="submit" class="menu-btn">{% trans "Rechercher" %}</button> {% endcomment %}
-        </form>
-        {% lang_switcher %}
+        
         {% include "core/partials/account_widget.html" %}
       </div>
     </header>

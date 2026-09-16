@@ -47,6 +47,63 @@
       </section>
     </div>
   {% endif %}
+  {% if pole_events %}
+    <div class="wrap page">
+      <section aria-labelledby="pole-events-title">
+        <h2 id="pole-events-title">{% trans "Sur l'agenda" %}</h2>
+        <ul class="agenda-list">
+          {% for event in pole_events %}
+            <li class="agenda-card">
+              <a class="agenda-date" href="{% url 'core:event_detail' event.pk %}" aria-hidden="true">
+                <span class="agenda-date-month">{{ event.start|date:"M" }}</span>
+                <span class="agenda-date-day">{{ event.start|date:"j" }}</span>
+                <span class="agenda-date-weekday">{{ event.start|date:"D" }}</span>
+                <span class="agenda-date-hours">
+                  {{ event.start|date:"H:i" }}{% if event.end %}–{{ event.end|date:"H:i" }}{% endif %}
+                </span>
+              </a>
+              <div class="agenda-body">
+                <h3><a href="{% url 'core:event_detail' event.pk %}">{{ event.title }}</a></h3>
+                <time class="sr-only" datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>
+                {% if event.location or event.online_url %}
+                  <p class="agenda-where">
+                    {{ event.location }}
+                    {% if event.online_url %}
+                      {% if event.location %}—{% endif %} <a href="{{ event.online_url }}" target="_new">{% trans "En ligne" %}</a>
+                    {% endif %}
+                  </p>
+                {% endif %}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    </div>
+  {% endif %}
+  {% if pole_entries %}
+    <div class="wrap page">
+      <section aria-labelledby="pole-entries-title">
+        <h2 id="pole-entries-title">{% trans "Dans l'annuaire" %}</h2>
+        <ul class="blog-list">
+          {% for entry in pole_entries %}
+            <li class="blog-list-item">
+              <a href="{% url 'core:entry_detail' entry.slug %}">
+                {% if entry.photos %}
+                  <img class="blog-list-thumb" src="{{ entry.photos.0.url }}" alt="">
+                {% elif entry.logo %}
+                  <img class="blog-list-thumb icon" src="{{ entry.logo.url }}" alt="">
+                {% endif %}
+                <div class="blog-list-body">
+                  <h3>{{ entry.name }}</h3>
+                  {% if entry.tagline %}<p class="blog-list-excerpt">{{ entry.tagline }}</p>{% endif %}
+                </div>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    </div>
+  {% endif %}
   {% if pole_posts %}
     <div class="wrap page">
       <section aria-labelledby="pole-posts-title">

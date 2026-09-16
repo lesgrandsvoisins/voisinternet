@@ -146,15 +146,31 @@ class PolePage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+        from django.utils import timezone
+
         from core.ghost import posts_by_tag
+        from core.models import DirectoryEntry, Event
 
         context["posts"] = posts_by_tag(self.ghost_tag) if self.ghost_tag else []
         context["projects"] = ProjectPage.objects.live().child_of(self).order_by("-date_start")
-        # Articles du blog interne partageant une étiquette (core.Tag) avec ce pôle.
+        # Articles du blog interne, fiches de l'annuaire et évènements de l'agenda
+        # partageant une étiquette (core.Tag) avec ce pôle — vide si le pôle n'a
+        # lui-même aucune étiquette (voir gabarit : chaque section reste masquée si vide).
         pole_tag_ids = list(self.tags.values_list("pk", flat=True))
         context["pole_posts"] = (
             BlogPostPage.objects.live().filter(tags__in=pole_tag_ids).distinct().order_by("-date")[:6]
             if pole_tag_ids else BlogPostPage.objects.none()
+        )
+        context["pole_entries"] = (
+            DirectoryEntry.objects.filter(
+                tags__in=pole_tag_ids, visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
+            ).distinct().order_by("name")[:6]
+            if pole_tag_ids else DirectoryEntry.objects.none()
+        )
+        context["pole_events"] = (
+            Event.objects.filter(tags__in=pole_tag_ids, public=True, start__gte=timezone.now())
+            .distinct().order_by("start")[:6]
+            if pole_tag_ids else Event.objects.none()
         )
         return context
 

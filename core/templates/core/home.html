@@ -32,6 +32,8 @@
     <section class="block" aria-labelledby="next-title">
       <div class="wrap">
         <h2 id="next-title">{% trans "Prochainement" %}</h2>
+        {% include "core/partials/event_list.html" with events=upcoming_events %}
+{% comment %} 
         <ul class="agenda-list">
           {% for event in upcoming_events %}
             <li class="agenda-card">
@@ -57,7 +59,8 @@
               </div>
             </li>
           {% endfor %}
-        </ul>
+        </ul> 
+{% endcomment %}
         <p class="note">
           {% blocktrans %}Permanence chaque lundi de 12h à 19h30, en personne (93 av. du Général Leclerc, 75014 Paris — métro Alésia, Atelier de la Ressourcerie Créative) ou en ligne sur meet.lesgrandsvoisins.com.{% endblocktrans %}
           <a href="{% url 'core:agenda' %}">{% trans "Tout l'agenda" %}</a>

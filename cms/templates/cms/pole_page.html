@@ -51,6 +51,8 @@
     <div class="wrap page">
       <section aria-labelledby="pole-events-title">
         <h2 id="pole-events-title">{% trans "Sur l'agenda" %}</h2>
+        {% include "core/partials/event_list.html" with events=pole_events %}
+{% comment %} 
         <ul class="agenda-list">
           {% for event in pole_events %}
             <li class="agenda-card">
@@ -76,7 +78,7 @@
               </div>
             </li>
           {% endfor %}
-        </ul>
+        </ul> {% endcomment %}
       </section>
     </div>
   {% endif %}

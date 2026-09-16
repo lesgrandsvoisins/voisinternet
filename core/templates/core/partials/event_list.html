@@ -1,0 +1,48 @@
+{% load i18n markdown_filters %}
+        <ul class="agenda-list">
+          {% for event in events %}
+            <li class="agenda-card">
+              <div class="agenda-body">
+                <h2><a href="{% url 'core:event_detail' event.pk %}">{{ event.title }}</a></h2>
+                <time class="sr-only" datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>
+                <div class="markdown muted agenda-excerpt">
+                  {{ event.start|date:"l" }} {{ event.start|date:"j" }} 
+                  {{ event.start|date:"F" }}
+                  {{ event.start|date:"Y" }}
+                  {{ event.start|date:"H:i" }}{% if event.end %} - {{ event.end|date:"H:i" }}{% endif %}
+                {% if event.location or event.online_url %}
+                    {{ event.location }}
+                    {% if event.online_url %}
+                      {% if event.location %}—{% endif %} <a href="{{ event.online_url }}" target="_new">{% trans "En ligne" %}</a>
+                    {% endif %}
+                {% endif %}
+                </div>
+                {% if event.description %}
+                  <div class="markdown muted agenda-excerpt">{{ event.description|markdown }}</div>
+                {% endif %}<p class="agenda-actions">
+                  <a href="{% url 'core:event_ics' event.pk %}">{% trans "Ajouter à mon calendrier" %}</a>
+                </p>
+              </div>
+              <a class="agenda-date" href="{% url 'core:event_detail' event.pk %}" aria-hidden="true">
+                <span class="agenda-date-year">{{ event.start|date:"Y" }}</span>
+                <span class="agenda-date-weekday">{{ event.start|date:"l" }}</span>
+                <span class="agenda-date-day">{{ event.start|date:"j" }}</span>
+                <span class="agenda-date-month">{{ event.start|date:"N" }}</span>
+                <span class="agenda-date-hours">
+                  {{ event.start|date:"H:i" }}{% if event.end %} - {{ event.end|date:"H:i" }}{% endif %}
+                </span>
+                {% if event.location or event.online_url %}
+                  <p class="agenda-where">
+                    {{ event.location }}
+                    {% if event.online_url %}
+                      {% if event.location %}—{% endif %} <a href="{{ event.online_url }}" target="_new">{% trans "En ligne" %}</a>
+                    {% endif %}
+                  </p>
+                {% endif %}
+                {% if event.photo %}
+                  <img class="agenda-thumb" src="{{ event.photo.url }}" alt="">
+                {% endif %}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>

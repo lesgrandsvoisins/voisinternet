@@ -2353,12 +2353,14 @@ blockquote p {
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 14px;
-  padding: 1.1rem 1.3rem
+  padding: 1.1rem 1.3rem;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
 }
 
 .agenda-body {
   flex: 1;
-  min-width: 0
+  min-width: 15rem;
 }
 
 .agenda-body h3 {
@@ -2382,8 +2384,8 @@ blockquote p {
 }
 
 .agenda-thumb {
-  width: 6rem;
-  height: 6rem;
+  width: 15rem;
+  height: 15rem;
   border-radius: 10px;
   object-fit: cover;
   flex: none
@@ -2391,7 +2393,8 @@ blockquote p {
 
 .agenda-date {
   flex: none;
-  width: 4.75rem;
+  width: 15rem;
+  /* width: 4.75rem; */
   border-radius: 10px;
   overflow: hidden;
   background: var(--paper);
@@ -2403,63 +2406,80 @@ blockquote p {
   display: block
 }
 
-.agenda-date-month {
+.agenda-date-year {
   position: relative;
   display: block;
   background: var(--sun);
-  color: #1C2A35;
-  font-size: .68rem;
+  color: var(--paper);
+  /* font-size: .8rem; */
+  /* font-weight: 700; */
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  padding-top: .3rem;
+}
+.agenda-date-weekday {
+  position: relative;
+  display: block;
+  background: var(--sun);
+  color: var(--paper);
+  /* color: #1C2A35; */
+  font-size: 1.2rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .04em;
-  padding: .3rem 0
+  padding-bottom: .3rem;
 }
-
 /* Les encoches « perforées » reprennent le fond de la page pour l'effet déchiré. */
-.agenda-date-month::before,
-.agenda-date-month::after {
+
+.agenda-date-year::before,
+.agenda-date-year::after {
   content: "";
   position: absolute;
-  bottom: -5px;
-  width: 10px;
-  height: 10px;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
-  background: var(--sky)
+  background: var(--sky);
+  top: 0.75rem;
+  z-index: 100;
 }
 
-.agenda-date-month::before {
-  left: -5px
+.agenda-date-year::before {
+  margin-left: 0.75rem;
+  left: -0rem
 }
 
-.agenda-date-month::after {
-  right: -5px
+.agenda-date-year::after {
+  margin-right: 0.75rem;
+  right: -0rem
 }
 
 .agenda-date-day {
   display: block;
   font-family: var(--serif);
   font-weight: 700;
-  font-size: 1.9rem;
+  font-size: 2.5rem;
   line-height: 1;
   padding: .5rem 0 .1rem;
   color: var(--ink)
 }
 
-.agenda-date-weekday {
+.agenda-date-month {
   display: block;
-  font-size: .68rem;
   text-transform: uppercase;
   letter-spacing: .03em;
   color: var(--ink-soft);
-  padding-bottom: .4rem
+  padding-bottom: .4rem;
+  font-weight: bold;
+  /* font-size: .68rem; */
 }
 
 .agenda-date-hours {
   display: block;
   border-top: 1px dashed var(--line);
-  font-size: .7rem;
+  /* font-size: .7rem; */
   color: var(--ink-soft);
-  padding: .3rem 0
+  padding: .3rem 0;
+  font-weight: bold;
 }
 
 @media (max-width: 34rem) {

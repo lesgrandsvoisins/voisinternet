@@ -42,7 +42,17 @@
                   x-on:click="open = !open"
                   x-bind:aria-expanded="open.toString()"
                   aria-controls="main-menu-panel">
-            <span class="label">{% trans "Menu" %}</span>
+            {% comment %} <span class="label">{% trans "Menu" %}</span> {% endcomment %}
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="24px"
+                 height="24px"
+                 viewBox="0 0 24 24"
+                 alt="Menu"
+                 title="Menu ">
+              <!-- Icon downloaded from https://icon-sets.iconify.design/mdi/hamburger-menu/ -->
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path fill="var(--ink)" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" />
+            </svg>
           </button>
           <nav class="mega"
                id="main-menu-panel"
@@ -72,7 +82,10 @@
             </div>
           </nav>
         </div>
-        <form class="site-search" method="get" action="{% url 'core:search' %}" role="search">
+        <form class="site-search"
+              method="get"
+              action="{% url 'core:search' %}"
+              role="search">
           <label for="site-search-q" class="sr-only">{% trans "Rechercher sur le site" %}</label>
           <input id="site-search-q"
                  type="search"

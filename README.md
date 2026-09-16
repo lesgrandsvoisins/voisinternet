@@ -135,3 +135,5 @@ service, ce que l'association conserve en tant qu'hébergeur.
 
 Format du filtre date:  
 https://docs.djangoproject.com/en/6.1/ref/templates/builtins/#std-templatefilter-date
+
+https://icon-sets.iconify.design/mdi/

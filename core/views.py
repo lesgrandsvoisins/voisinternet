@@ -79,7 +79,7 @@ def home(request):
         "books": GuideBook.objects.filter(published=True)[:4],
         "posts": BlogPostPage.objects.live().order_by("-date")[:3],
         "audiences": Audience.objects.all(),
-        "upcoming_events": Event.objects.filter(public=True, start__gte=timezone.now())[:2],
+        "upcoming_events": Event.objects.filter(public=True, start__gte=timezone.now()).order_by('-featured','-start')[:3],
         "poles": PolePage.objects.live().order_by("path"),
     })
 

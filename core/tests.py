@@ -6,8 +6,8 @@ from django.utils import timezone
 
 from .accounts import SESSION_KEY
 from .models import (
-    Account, Audience, DirectoryEntry, DirectorySector, Donor, Event, Membership, OwnershipClaim, Service, Shortcut,
-    format_number,
+    Account, Audience, DirectoryEntry, DirectorySector, Donor, Event, EventManagementRequest, Membership,
+    OwnershipClaim, Service, Shortcut, format_number,
 )
 
 
@@ -240,6 +240,7 @@ class ServiceApprovalTests(Base):
             {
                 "view_shortcut", "change_shortcut", "view_directoryentry", "change_directoryentry",
                 "view_ownershipclaim", "change_ownershipclaim",
+                "view_event", "change_event", "view_eventmanagementrequest", "change_eventmanagementrequest",
             },
         )
 
@@ -307,6 +308,103 @@ class OwnershipClaimTests(Base):
         self.assertEqual(entry.owner_id, acc1.id)
         claim2.refresh_from_db()
         self.assertFalse(claim2.approved)
+
+
+class EventManagementRequestTests(Base):
+    @override_settings(OIDC_ENABLED=True)
+    def test_anonymous_visitor_is_sent_to_login_and_request_completes_on_return(self):
+        event = Event.objects.create(title="Atelier vélo", slug="atelier-velo", start=timezone.now())
+        response = self.client.post(reverse("core:claim_event_management", args=[event.pk]))
+        self.assertEqual(response.status_code, 302)
+        self.assertIn("/oidc/authenticate/", response.url)
+        self.assertFalse(EventManagementRequest.objects.filter(event=event).exists())
+        self.assertEqual(self.client.session.get("voisinternet_pending_event_management_request"), event.pk)
+
+        # De retour après une connexion Keycloak réussie (simulée par force_login) : la
+        # demande, mise de côté, se termine d'elle-même à la prochaine visite de l'évènement.
+        user = get_user_model().objects.create_user("voisine")
+        self.client.force_login(user)
+        self.client.get(reverse("core:event_detail", args=[event.pk]))
+        req = EventManagementRequest.objects.get(event=event)
+        self.assertEqual(req.account.user, user)
+        self.assertNotIn("voisinternet_pending_event_management_request", self.client.session)
+
+    def test_anonymous_visitor_gets_404_when_oidc_disabled(self):
+        with override_settings(OIDC_ENABLED=False):
+            event = Event.objects.create(title="Atelier vélo", slug="atelier-velo", start=timezone.now())
+            response = self.client.post(reverse("core:claim_event_management", args=[event.pk]))
+            self.assertEqual(response.status_code, 404)
+
+    def test_named_account_can_request_management(self):
+        event = Event.objects.create(title="Atelier vélo", slug="atelier-velo", start=timezone.now())
+        user = get_user_model().objects.create_user("voisine")
+        self.client.force_login(user)
+        response = self.client.post(reverse("core:claim_event_management", args=[event.pk]))
+        self.assertRedirects(response, reverse("core:event_detail", args=[event.pk]))
+        req = EventManagementRequest.objects.get(event=event)
+        self.assertEqual(req.account.user, user)
+        self.assertIsNone(req.approved)
+
+    def test_approving_a_request_adds_manager_without_rejecting_others(self):
+        # Contrairement à OwnershipClaim (un seul propriétaire), Event.managers accepte
+        # plusieurs comptes : valider une demande ne doit pas rejeter les autres.
+        event = Event.objects.create(title="Atelier vélo", slug="atelier-velo", start=timezone.now())
+        acc1 = Account.objects.create(user=get_user_model().objects.create_user("voisine1"))
+        acc2 = Account.objects.create(user=get_user_model().objects.create_user("voisine2"))
+        req1 = EventManagementRequest.objects.create(event=event, account=acc1)
+        req2 = EventManagementRequest.objects.create(event=event, account=acc2)
+
+        req1.approved = True
+        req1.save()
+
+        self.assertIn(acc1, event.managers.all())
+        req2.refresh_from_db()
+        self.assertIsNone(req2.approved)
+
+
+class AdministrationTests(Base):
+    def test_anonymous_visitor_gets_403(self):
+        response = self.client.get(reverse("core:administration"))
+        self.assertEqual(response.status_code, 403)
+
+    def test_ordinary_user_gets_403(self):
+        user = get_user_model().objects.create_user("voisine")
+        self.client.force_login(user)
+        response = self.client.get(reverse("core:administration"))
+        self.assertEqual(response.status_code, 403)
+
+    def test_administration_group_member_can_review_claim(self):
+        from django.contrib.auth.models import Group
+
+        entry = DirectoryEntry.objects.create(name="Fiche libre", slug="fiche-libre")
+        acc = Account.objects.create(user=get_user_model().objects.create_user("voisine"))
+        claim = OwnershipClaim.objects.create(entry=entry, account=acc)
+
+        admin_user = get_user_model().objects.create_user("admin")
+        admin_user.groups.add(Group.objects.get(name="Administration"))
+        self.client.force_login(admin_user)
+
+        response = self.client.get(reverse("core:administration"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Fiche libre")
+
+        self.client.post(reverse("core:administration_review_claim", args=[claim.pk]), {"decision": "approve"})
+        claim.refresh_from_db()
+        self.assertTrue(claim.approved)
+        entry.refresh_from_db()
+        self.assertEqual(entry.owner_id, acc.id)
+
+    def test_administration_group_member_can_toggle_event(self):
+        from django.contrib.auth.models import Group
+
+        event = Event.objects.create(title="Atelier vélo", slug="atelier-velo", start=timezone.now(), public=True)
+        admin_user = get_user_model().objects.create_user("admin")
+        admin_user.groups.add(Group.objects.get(name="Administration"))
+        self.client.force_login(admin_user)
+
+        self.client.post(reverse("core:administration_toggle_event", args=[event.pk]), {"field": "featured"})
+        event.refresh_from_db()
+        self.assertTrue(event.featured)
 
 
 class DonorPrivacyTests(TestCase):

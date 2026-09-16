@@ -13,6 +13,7 @@ from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.models import Page
 from wagtail.search import index
+from wagtail.snippets.models import register_snippet
 
 
 class HomePage(Page):
@@ -430,3 +431,54 @@ class BlogPostPage(Page):
             related_posts += list(extra[: 3 - len(related_posts)])
         context["related_posts"] = related_posts
         return context
+
+
+@register_snippet
+class Announcement(models.Model):
+    """
+    Bandeau affiché en haut de toutes les pages (core/templates/core/base.html) pendant
+    une période donnée, pour mettre en avant une information ponctuelle (fermeture
+    exceptionnelle, évènement majeur…). Un seul bandeau actif à la fois — voir current().
+    """
+    title = models.CharField(_("titre"), max_length=140)
+    text = models.CharField(_("texte"), max_length=300, blank=True, default="")
+    image = models.ForeignKey(
+        "wagtailimages.Image", verbose_name=_("image"),
+        null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+    )
+    page = models.ForeignKey(
+        "wagtailcore.Page", verbose_name=_("page liée"),
+        null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+        help_text=_("Le bandeau pointe vers cette page."),
+    )
+    publish_start = models.DateField(_("date de début"), null=True, blank=True)
+    publish_end = models.DateField(_("date de fin"), null=True, blank=True)
+    active = models.BooleanField(_("actif"), default=True)
+
+    panels = [
+        FieldPanel("title"),
+        FieldPanel("text"),
+        FieldPanel("image"),
+        FieldPanel("page"),
+        FieldPanel("publish_start"),
+        FieldPanel("publish_end"),
+        FieldPanel("active"),
+    ]
+
+    class Meta:
+        verbose_name = _("bandeau d'annonce")
+        verbose_name_plural = _("bandeaux d'annonce")
+
+    def __str__(self):
+        return self.title
+
+    @classmethod
+    def current(cls):
+        today = timezone.now().date()
+        return (
+            cls.objects.filter(active=True)
+            .filter(models.Q(publish_start__isnull=True) | models.Q(publish_start__lte=today))
+            .filter(models.Q(publish_end__isnull=True) | models.Q(publish_end__gte=today))
+            .order_by("-publish_start", "-pk")
+            .first()
+        )

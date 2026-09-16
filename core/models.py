@@ -456,6 +456,10 @@ class Event(models.Model):
     public = models.BooleanField(_("publié"), default=True)
     featured = models.BooleanField(_("mis en avant"), default=False)
     tags = models.ManyToManyField("Tag", blank=True, related_name="events", verbose_name=_("étiquettes"))
+    managers = models.ManyToManyField(
+        Account, blank=True, related_name="managed_events", verbose_name=_("responsables"),
+        help_text=_("Comptes autorisés à gérer cet évènement, en plus du groupe « Administration »."),
+    )
 
     class Meta:
         ordering = ["start"]
@@ -469,6 +473,34 @@ class Event(models.Model):
     def google_calendar_url(self):
         from .ics import event_google_calendar_url
         return event_google_calendar_url(self)
+
+
+class EventManagementRequest(models.Model):
+    """
+    Une demande d'un compte nominatif pour devenir responsable (Event.managers) d'un
+    évènement. Validée par le groupe « Administration » — voir save(). Contrairement à
+    OwnershipClaim, plusieurs demandes peuvent être validées pour un même évènement
+    (Event.managers est multiple), donc valider l'une n'en rejette pas les autres.
+    """
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="management_requests")
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="event_management_requests")
+    created = models.DateTimeField(default=timezone.now, editable=False)
+    # None = en attente, True = validée (le compte est ajouté aux responsables), False = refusée.
+    approved = models.BooleanField(_("validée"), null=True, default=None)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=["event", "account"], name="unique_event_management_request")]
+        ordering = ["-created"]
+        verbose_name = _("demande de gestion d'évènement")
+        verbose_name_plural = _("demandes de gestion d'évènement")
+
+    def __str__(self):
+        return f"{self.account} → {self.event}"
+
+    def save(self, *args, **kwargs):
+        if self.approved:
+            self.event.managers.add(self.account)
+        super().save(*args, **kwargs)
 
 
 class Contribution(models.Model):

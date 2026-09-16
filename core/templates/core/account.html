@@ -39,6 +39,7 @@
       <p class="muted">{% if user.is_authenticated %}{% trans "Connecté" %}{% if user.first_name %} : {{ user.first_name }}{% endif %}{% else %}{% trans "Compte anonyme" %}{% endif %}</p>
     </div>
     <div class="actions">
+      {% if is_administration %}<a class="btn btn-line" href="{% url 'core:administration' %}">{% trans "Administration" %}</a>{% endif %}
       {% if user.is_authenticated %}
         {% if OIDC_ENABLED %}<form method="post" action="{% url 'oidc_logout' %}">{% csrf_token %}<button class="btn btn-line" type="submit">{% trans "Se déconnecter" %}</button></form>{% endif %}
       {% else %}

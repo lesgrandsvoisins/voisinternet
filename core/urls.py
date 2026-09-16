@@ -19,6 +19,7 @@ urlpatterns = [
     path("agenda/", views.agenda, name="agenda"),
     path("agenda/<int:pk>/", views.event_detail, name="event_detail"),
     path("agenda/<int:pk>/ics/", views.event_ics, name="event_ics"),
+    path("agenda/<int:pk>/gerer/", views.claim_event_management, name="claim_event_management"),
     path("activites/", views.group_page, {"key": "reperes"}, name="activites"),
     path("poles/", views.group_page, {"key": "poles"}, name="poles"),
     path("a-propos/", views.group_page, {"key": "association"}, name="a_propos"),
@@ -38,4 +39,17 @@ urlpatterns = [
     path("groupes/<slug:slug>/adherer/", views.toggle_membership, name="toggle_membership"),
     path("groupes/<slug:slug>/adherer/<str:direction>/", views.reorder_membership, name="reorder_membership"),
     path("groupes/glisser/", views.reorder_memberships, name="reorder_memberships"),
+    path("administration/", views.administration, name="administration"),
+    path(
+        "administration/fiches/<int:pk>/",
+        views.administration_review_claim, name="administration_review_claim",
+    ),
+    path(
+        "administration/evenements/<int:pk>/demande/",
+        views.administration_review_event_request, name="administration_review_event_request",
+    ),
+    path(
+        "administration/evenements/<int:pk>/bascule/",
+        views.administration_toggle_event, name="administration_toggle_event",
+    ),
 ]

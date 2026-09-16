@@ -34,6 +34,22 @@
     <div class="actions">
       <a class="btn btn-sun" href="{{ event.google_calendar_url }}" target="_new">{% trans "Ajouter à Google Agenda" %}</a>
       <a class="btn btn-sun" href="{% url 'core:event_ics' event.pk %}">{% trans "Ajouter à mon calendrier (.ics)" %}</a>
+      {% if not is_manager %}
+        {% if request.user.is_authenticated or OIDC_ENABLED %}
+          {# Pas besoin d'être déjà connecté·e pour lancer la demande : elle attend la
+             connexion Keycloak et se termine toute seule au retour (core:event_detail). #}
+          {% if my_management_request is None %}
+          <form method="post" action="{% url 'core:claim_event_management' event.pk %}">
+            {% csrf_token %}
+            <button class="sub-btn" type="submit">{% trans "Demander à gérer cet évènement" %}</button>
+          </form>
+          {% elif my_management_request.approved is None %}
+          <span class="chip">{% trans "Demande de gestion en attente de validation" %}</span>
+          {% elif not my_management_request.approved %}
+          <span class="chip">{% trans "Demande de gestion refusée" %}</span>
+          {% endif %}
+        {% endif %}
+      {% endif %}
     </div>
   </article>
   <p class="muted"><a href="{% url 'core:agenda' %}">{% trans "← Retour à l’agenda" %}</a></p>

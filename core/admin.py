@@ -3,7 +3,7 @@ from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectoryEntryPhoto, DirectorySector, Donor, EntrySubscription,
-    Event, GuideBook,
+    Event, EventManagementRequest, GuideBook,
     Membership, OwnershipClaim, Service, ServiceCategory, Shortcut, Tag,
 )
 
@@ -175,4 +175,14 @@ class EventAdmin(TranslationAdmin):
     prepopulated_fields = {"slug": ["title"]}
     search_fields = ["title", "description"]
     date_hierarchy = "start"
-    filter_horizontal = ["tags"]
+    filter_horizontal = ["tags", "managers"]
+
+
+@admin.register(EventManagementRequest)
+class EventManagementRequestAdmin(admin.ModelAdmin):
+    """Accessible au groupe « Administration » (core.migrations.0027) : passer
+    « validée » à Oui ajoute le compte à Event.managers (EventManagementRequest.save)."""
+    list_display = ["account", "event", "created", "approved"]
+    list_filter = ["approved"]
+    list_editable = ["approved"]
+    autocomplete_fields = ["event", "account"]

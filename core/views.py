@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
+from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -19,8 +20,8 @@ from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anon
 from .forms import DirectoryEntryForm
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
-    Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntrySubscription, Event, GuideBook,
-    Membership, OwnershipClaim, Service, Shortcut, Tag, format_number,
+    Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntrySubscription, Event,
+    EventManagementRequest, GuideBook, Membership, OwnershipClaim, Service, Shortcut, Tag, format_number,
 )
 
 # Chapeau de présentation pour chaque page intermédiaire (une par groupe du menu).
@@ -185,6 +186,10 @@ def tag_detail(request, slug):
     })
 
 
+def _is_administration(user):
+    return user.is_authenticated and user.groups.filter(name="Administration").exists()
+
+
 def account(request):
     new_number = request.session.pop(NEW_NUMBER_KEY, None)
     acc = current_account(request)
@@ -202,6 +207,7 @@ def account(request):
         "owned_entries": acc.directory_entries.order_by("name") if acc else [],
         "new_number": format_number(new_number) if new_number else None,
         "pending": pending_anonymous_account(request),
+        "is_administration": _is_administration(request.user),
     })
 
 
@@ -448,9 +454,58 @@ def agenda(request):
     })
 
 
+PENDING_EVENT_MANAGEMENT_KEY = "voisinternet_pending_event_management_request"
+
+
 def event_detail(request, pk):
     event = get_object_or_404(Event, pk=pk, public=True)
-    return render(request, "core/event_detail.html", {"event": event})
+    acc = current_account(request, create=request.user.is_authenticated)
+    # Une demande lancée avant connexion (claim_event_management) attend ici la session
+    # Keycloak qui vient de s'établir, pour se terminer d'elle-même.
+    if request.user.is_authenticated and request.session.get(PENDING_EVENT_MANAGEMENT_KEY) == event.pk:
+        del request.session[PENDING_EVENT_MANAGEMENT_KEY]
+        _create_event_management_request(request, event, acc)
+    is_manager = acc is not None and event.managers.filter(pk=acc.pk).exists()
+    my_management_request = None
+    if request.user.is_authenticated and not is_manager:
+        my_management_request = EventManagementRequest.objects.filter(event=event, account=acc).first()
+    return render(request, "core/event_detail.html", {
+        "event": event,
+        "is_manager": is_manager,
+        "my_management_request": my_management_request,
+    })
+
+
+def _create_event_management_request(request, event, acc):
+    __, created = EventManagementRequest.objects.get_or_create(event=event, account=acc)
+    if created:
+        messages.success(
+            request,
+            _("Demande envoyée : un administrateur va l'examiner avant de vous rendre responsable de cet évènement."),
+        )
+    else:
+        messages.info(request, _("Vous avez déjà demandé à gérer cet évènement."))
+
+
+@require_POST
+def claim_event_management(request, pk):
+    # Même logique que claim_entry_ownership : pas besoin d'être déjà connecté pour
+    # LANCER la demande — sans session authentifiée, on la met de côté et on invite à se
+    # connecter, elle se termine d'elle-même au retour (voir event_detail).
+    event = get_object_or_404(Event, pk=pk, public=True)
+
+    if not request.user.is_authenticated:
+        if not settings.OIDC_ENABLED:
+            raise Http404
+        request.session[PENDING_EVENT_MANAGEMENT_KEY] = event.pk
+        next_url = reverse("core:event_detail", args=[event.pk])
+        messages.info(request, _("Connectez-vous pour finaliser votre demande de gestion de cet évènement."))
+        login_url = f"{reverse('oidc_authentication_init')}?{urlencode({'next': next_url})}"
+        return redirect(login_url)
+
+    acc = current_account(request, create=True)
+    _create_event_management_request(request, event, acc)
+    return redirect(reverse("core:event_detail", args=[event.pk]))
 
 
 def event_ics(request, pk):
@@ -754,3 +809,54 @@ def reorder_memberships(request):
     return render(request, "core/partials/membership_list.html", {
         "memberships": account.membership_set.select_related("audience").order_by("position", "audience__order", "audience__name"),
     })
+
+
+def administration(request):
+    """
+    Tableau de bord réservé au groupe « Administration » (core.migrations.0019, 0028) :
+    validation des demandes de responsabilité de fiche et de gestion d'évènement, et
+    bascule rapide de la publication/mise en avant des évènements — sans donner accès à
+    l'admin Django (qui exige is_staff, jamais attribué automatiquement à ce groupe).
+    """
+    if not _is_administration(request.user):
+        raise PermissionDenied
+    return render(request, "core/administration.html", {
+        "pending_claims": OwnershipClaim.objects.filter(approved__isnull=True).select_related("entry", "account"),
+        "pending_event_requests": EventManagementRequest.objects.filter(
+            approved__isnull=True,
+        ).select_related("event", "account"),
+        "events": Event.objects.order_by("-start"),
+    })
+
+
+@require_POST
+def administration_review_claim(request, pk):
+    if not _is_administration(request.user):
+        raise PermissionDenied
+    claim = get_object_or_404(OwnershipClaim, pk=pk, approved__isnull=True)
+    claim.approved = request.POST.get("decision") == "approve"
+    claim.save()
+    return redirect("core:administration")
+
+
+@require_POST
+def administration_review_event_request(request, pk):
+    if not _is_administration(request.user):
+        raise PermissionDenied
+    event_request = get_object_or_404(EventManagementRequest, pk=pk, approved__isnull=True)
+    event_request.approved = request.POST.get("decision") == "approve"
+    event_request.save()
+    return redirect("core:administration")
+
+
+@require_POST
+def administration_toggle_event(request, pk):
+    if not _is_administration(request.user):
+        raise PermissionDenied
+    field = request.POST.get("field")
+    if field not in ("public", "featured"):
+        raise Http404
+    event = get_object_or_404(Event, pk=pk)
+    setattr(event, field, not getattr(event, field))
+    event.save(update_fields=[field])
+    return redirect("core:administration")

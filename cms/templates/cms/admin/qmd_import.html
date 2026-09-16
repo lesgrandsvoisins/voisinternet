@@ -1,0 +1,22 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n %}
+{% block titletag %}{% trans "Importer un .qmd" %}{% endblock %}
+{% block content %}
+  {% include "wagtailadmin/shared/header.html" with title=view_title subtitle=page.title icon="upload" %}
+  <div class="nice-padding">
+    <p>{% trans "Remplace le titre, le texte et les métadonnées de cet article à partir d'un fichier .qmd. Si le fichier porte la clé d'un autre article, c'est cet autre article qui sera créé ou mis à jour à la place." %}</p>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <ul class="fields">
+        <li>
+          <label for="qmd_file">{% trans "Fichier .qmd" %}</label>
+          <input type="file" id="qmd_file" name="qmd_file" accept=".qmd,text/markdown" required>
+        </li>
+        <li>
+          <input type="submit" value="{% trans "Importer" %}" class="button">
+          <a href="{% url 'wagtailadmin_pages:edit' page.pk %}" class="button button-secondary">{% trans "Annuler" %}</a>
+        </li>
+      </ul>
+    </form>
+  </div>
+{% endblock %}

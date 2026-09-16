@@ -479,6 +479,8 @@ def event_detail(request, pk):
         "event": event,
         "is_manager": is_manager,
         "my_management_request": my_management_request,
+        "previous_event": Event.objects.filter(public=True, start__lt=event.start).order_by("-start").first(),
+        "next_event": Event.objects.filter(public=True, start__gt=event.start).order_by("start").first(),
     })
 
 

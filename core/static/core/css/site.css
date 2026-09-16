@@ -2481,6 +2481,51 @@ blockquote p {
   background: var(--sun-soft)
 }
 
+/* Navigation évènement précédent/suivant (core/templates/core/event_detail.html) */
+.event-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.event-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  max-width: 48%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.event-nav-next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.event-nav-label {
+  font-size: .8rem;
+  color: var(--ink-soft);
+}
+
+.event-nav-title {
+  font-weight: 600;
+  font-family: var(--serif);
+}
+
+.event-nav-link:hover .event-nav-title {
+  text-decoration: underline;
+  text-decoration-color: var(--sun);
+  text-decoration-thickness: 2px;
+}
+
+@media (max-width: 30rem) {
+  .event-nav-link {
+    max-width: 100%
+  }
+}
+
 .agenda-body {
   flex: 1;
   min-width: 15rem;

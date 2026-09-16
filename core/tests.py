@@ -442,6 +442,24 @@ class AgendaTests(Base):
         response = self.client.get(reverse("core:event_detail", args=[event.pk]))
         self.assertEqual(response.status_code, 200)
 
+    def test_event_detail_links_to_previous_and_next_public_events(self):
+        now = timezone.now()
+        earlier = Event.objects.create(title="Atelier précédent", slug="atelier-precedent", start=now - timezone.timedelta(days=2))
+        current = Event.objects.create(title="Atelier courant", slug="atelier-courant", start=now)
+        later = Event.objects.create(title="Atelier suivant", slug="atelier-suivant", start=now + timezone.timedelta(days=2))
+        hidden = Event.objects.create(
+            title="Atelier caché", slug="atelier-cache", start=now + timezone.timedelta(days=1), public=False,
+        )
+
+        response = self.client.get(reverse("core:event_detail", args=[current.pk]))
+        self.assertEqual(response.context["previous_event"], earlier)
+        self.assertEqual(response.context["next_event"], later)
+        self.assertContains(response, "Atelier précédent")
+        self.assertContains(response, "Atelier suivant")
+        self.assertNotContains(response, "Atelier caché")
+        self.assertContains(response, reverse("core:event_detail", args=[earlier.pk]))
+        self.assertContains(response, reverse("core:event_detail", args=[later.pk]))
+
     def test_event_ics_download(self):
         event = Event.objects.create(
             title="Atelier vélo", slug="atelier-velo",

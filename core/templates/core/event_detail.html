@@ -62,6 +62,22 @@
       {% endif %}
     </div>
   </article>
+  {% if previous_event or next_event %}
+  <nav class="event-nav" aria-label="{% trans "Navigation entre évènements" %}">
+    {% if previous_event %}
+    <a class="event-nav-link event-nav-prev" href="{% url 'core:event_detail' previous_event.pk %}">
+      <span class="event-nav-label">{% trans "← Évènement précédent" %}</span>
+      <span class="event-nav-title">{{ previous_event.title }}</span>
+    </a>
+    {% else %}<span></span>{% endif %}
+    {% if next_event %}
+    <a class="event-nav-link event-nav-next" href="{% url 'core:event_detail' next_event.pk %}">
+      <span class="event-nav-label">{% trans "Évènement suivant →" %}</span>
+      <span class="event-nav-title">{{ next_event.title }}</span>
+    </a>
+    {% else %}<span></span>{% endif %}
+  </nav>
+  {% endif %}
   <p class="muted"><a href="{% url 'core:agenda' %}">{% trans "← Retour à l’agenda" %}</a></p>
 </div>
 {% endblock %}

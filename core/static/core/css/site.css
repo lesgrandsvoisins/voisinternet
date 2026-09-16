@@ -2711,6 +2711,18 @@ blockquote p {
   padding-inline-start: 1.4rem
 }
 
+.form-photo-current {
+  display: block;
+  max-width: 12rem;
+  max-height: 8rem;
+  object-fit: contain;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  padding: .3rem;
+  margin-bottom: .5rem
+}
+
 .form-row .errorlist {
   list-style: none;
   padding: 0;

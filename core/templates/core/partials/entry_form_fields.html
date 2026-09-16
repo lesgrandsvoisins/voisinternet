@@ -28,6 +28,12 @@
         <p class="preview-label">{% trans "Aperçu" %}</p>
         <div id="description-preview" class="markdown-preview">{{ form.instance.description_fr|default:""|markdown }}</div>
       </div>
+      {% elif field.name == "logo" or field.name == "photo_promo" %}
+      {% if field.value %}
+      <img class="form-photo-current" src="{{ field.value.url }}" alt="">
+      {% endif %}
+      {{ field }}
+      {% if field.help_text %}<p class="help">{{ field.help_text }}</p>{% endif %}
       {% else %}
       {{ field }}
       {% if field.help_text %}<p class="help">{{ field.help_text }}</p>{% endif %}

@@ -297,6 +297,35 @@ class ContentPage(Page):
     parent_page_types = ["cms.PolePage"]
     subpage_types = []
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        # « Saut de page » (bouton dédié de l'éditeur riche, cms/wagtail_hooks.py) :
+        # même principe que BlogPostPage.get_context, mais body est un StreamField —
+        # seul un <hr class="pagebreak"> à l'intérieur d'un bloc "prose" coupe la page ;
+        # un bloc "callout" reste toujours entier sur une seule page (jamais scindé).
+        body_pages = [[]]
+        for block in self.body:
+            if block.block_type == "prose":
+                fragments = re.split(r'<hr class="pagebreak"\s*/?>', block.value.source)
+                for i, fragment in enumerate(fragments):
+                    if i > 0:
+                        body_pages.append([])
+                    if fragment.strip():
+                        body_pages[-1].append({"type": "prose", "html": fragment})
+            else:
+                body_pages[-1].append({"type": block.block_type, "block": block})
+        body_pages = [p for p in body_pages if p] or [[]]
+
+        try:
+            page_number = int(request.GET.get("page", 1))
+        except ValueError:
+            page_number = 1
+        page_number = max(1, min(page_number, len(body_pages)))
+        context["body_pages"] = body_pages
+        context["page_number"] = page_number
+        context["total_pages"] = len(body_pages)
+        return context
+
 
 class ContactPage(Page):
     """Page de contact : un chapeau et des cartes éditoriales (courriel, agenda…)."""

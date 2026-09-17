@@ -4,16 +4,22 @@
 {% block title %}{{ page.title }} — {{ SITE_NAME }}{% endblock %}
 
 {% block content %}
-  {% if page.featured_image %}{% image page.featured_image fill-1600x500 as hero_bg %}{% endif %}
-  <div class="page-head{% if page.get_parent.specific.accent %} accent-{{ page.get_parent.specific.accent }}{% endif %}"{% if hero_bg %} style="background-image: linear-gradient(var(--page-head-overlay), var(--page-head-overlay)), url('{{ hero_bg.url }}')"{% endif %}>
-    <div class="wrap">
-      <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
-        <ol>
-          <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
-          <li><a href="{{ page.get_parent.url }}">{{ page.get_parent.title }}</a></li>
-          <li aria-current="page">{{ page.title }}</li>
-        </ol>
-      </nav>
+  <div class="wrap page">
+    <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+      <ol>
+        <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+        <li><a href="{{ page.get_parent.url }}">{{ page.get_parent.title }}</a></li>
+        <li aria-current="page">{{ page.title }}</li>
+      </ol>
+    </nav>
+    {% comment %}Le panneau « papier » commence au titre (cf. core/static/core/css/
+    site.css:.content-page) : image de une, titre, chapeau et date/auteur en font
+    partie, pas seulement le corps de l'article.{% endcomment %}
+    <article class="content-page{% if page.get_parent.specific.accent %} accent-{{ page.get_parent.specific.accent }}{% endif %}">
+      {% if page.featured_image %}
+        {% image page.featured_image fill-1600x500 as hero_img %}
+        <img class="content-page-hero" src="{{ hero_img.url }}" alt="">
+      {% endif %}
       <h1>{{ page.title }}</h1>
       {% if page.excerpt %}<p class="lead">{{ page.excerpt }}</p>{% endif %}
       {% if page.date or page.author %}
@@ -22,20 +28,43 @@
           {% if page.author %}{% if page.date %} — {% endif %}{{ page.author.name }}{% endif %}
         </p>
       {% endif %}
-    </div>
-  </div>
-  <div class="wrap page">
-    <article class="content-page">
-      {% for block in page.body %}
-        {% if block.block_type == "prose" %}
-          <div class="markdown">{{ block.value }}</div>
-        {% elif block.block_type == "callout" %}
-          <aside class="callout callout-{{ block.value.type }}">
-            {% if block.value.title %}<p class="callout-title">{{ block.value.title }}</p>{% endif %}
-            {{ block.value.text }}
-          </aside>
-        {% endif %}
+      {% if page.tags.all %}
+        <p class="chips-inline">
+          {% for t in page.tags.all %}<a class="chip chip-tag" href="{% url 'core:tag_detail' t.slug %}">#{{ t.name }}</a>{% endfor %}
+        </p>
+      {% endif %}
+      {% comment %}Chaque page est présente dans le HTML : seule la page courante
+      s'affiche à l'écran, mais l'impression (core/static/core/css/site.css) les révèle
+      toutes pour imprimer la page entière — même principe que blog_post_page.html.{% endcomment %}
+      {% for body_page in body_pages %}
+        <div class="markdown"{% if not forloop.counter == page_number %} hidden{% endif %}>
+          {% for item in body_page %}
+            {% if item.type == "prose" %}
+              {{ item.html|richtext }}
+            {% elif item.type == "callout" %}
+              <aside class="callout callout-{{ item.block.value.type }}">
+                {% if item.block.value.title %}<p class="callout-title">{{ item.block.value.title }}</p>{% endif %}
+                {{ item.block.value.text }}
+              </aside>
+            {% endif %}
+          {% endfor %}
+        </div>
       {% endfor %}
+      {% if total_pages > 1 %}
+        <nav class="pagination no-print" aria-label="{% trans "Pages de la page" %}">
+          {% if page_number > 1 %}
+            <a href="?page={{ page_number|add:"-1" }}">{% trans "← Page précédente" %}</a>
+          {% else %}
+            <span></span>
+          {% endif %}
+          <span class="muted">{% blocktrans %}Page {{ page_number }} sur {{ total_pages }}{% endblocktrans %}</span>
+          {% if page_number < total_pages %}
+            <a href="?page={{ page_number|add:"1" }}">{% trans "Page suivante →" %}</a>
+          {% else %}
+            <span></span>
+          {% endif %}
+        </nav>
+      {% endif %}
     </article>
     <p class="muted"><a href="{{ page.get_parent.url }}">{% blocktrans with pole=page.get_parent.title %}← Retour à {{ pole }}{% endblocktrans %}</a></p>
   </div>

@@ -1,3 +1,5 @@
+import re
+
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.test import TestCase, override_settings
@@ -114,6 +116,34 @@ class ContentPageQmdTests(Base):
         self.assertContains(response, 'class="callout callout-tip"')
         self.assertContains(response, "Astuce")
         self.assertContains(response, "Contenu du callout.")
+
+    def test_content_page_paginates_on_pagebreak(self):
+        page = ContentPage(
+            title="Page paginée", slug="page-paginee", live=True,
+            body=[
+                {"type": "prose", "value": '<p>Début.</p><hr class="pagebreak"><p>Suite.</p>'},
+                {"type": "callout", "value": {"type": "note", "title": "", "text": "<p>Un callout.</p>"}},
+            ],
+        )
+        self.pole.add_child(instance=page)
+
+        response = self.client.get(page.url)
+        # Les deux pages sont présentes dans le HTML (pour l'impression complète, comme
+        # BlogPostPage), seule la 2e est masquée à l'écran via l'attribut "hidden".
+        divs = re.findall(r'<div class="markdown"( hidden)?>(.*?)</div>', response.content.decode(), re.S)
+        self.assertEqual(len(divs), 2)
+        self.assertEqual(divs[0][0], "")
+        self.assertIn("Début.", divs[0][1])
+        self.assertEqual(divs[1][0], " hidden")
+        self.assertIn("Suite.", divs[1][1])
+        self.assertIn("Un callout.", divs[1][1])  # le callout reste entier sur la 2e page, jamais scindé
+        self.assertContains(response, "Page 1 sur 2")
+
+        response = self.client.get(page.url, {"page": 2})
+        divs = re.findall(r'<div class="markdown"( hidden)?>(.*?)</div>', response.content.decode(), re.S)
+        self.assertEqual(divs[0][0], " hidden")
+        self.assertEqual(divs[1][0], "")
+        self.assertContains(response, "Page 2 sur 2")
 
     def test_qmd_round_trip_is_isomorphic(self):
         # Callout multi-paragraphes, tableau, et note de bas de page dont la définition

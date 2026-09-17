@@ -2240,7 +2240,8 @@ blockquote p {
     display: none
   }
 
-  .blog-post .markdown[hidden] {
+  .blog-post .markdown[hidden],
+  .content-page .markdown[hidden] {
     display: block !important
   }
 }
@@ -2471,10 +2472,45 @@ blockquote p {
   border-color: var(--sun)
 }
 
-/* Encarts (cms.CalloutBlock, cms.ContentPage) : isomorphes aux 5 callouts natifs de
-   Quarto (::: {.callout-...}), voir cms/qmd.py. */
-.callout {
+/* Panneau « papier » de l'article cms.ContentPage : commence au titre (image de une,
+   titre, chapeau, date/auteur en font partie), distinct du fond de page (--sky) —
+   liseré de couleur du pôle en haut, même principe que .pole-card ci-dessous. */
+.content-page {
   background: var(--paper);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--ink);
+  border-radius: 18px;
+  padding: 2rem 2.5rem;
+  margin-top: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06)
+}
+
+.content-page.accent-terracotta { border-top-color: var(--accent-terracotta) }
+.content-page.accent-plum { border-top-color: var(--accent-plum) }
+.content-page.accent-indigo { border-top-color: var(--accent-indigo) }
+.content-page.accent-teal { border-top-color: var(--accent-teal) }
+.content-page.accent-moss { border-top-color: var(--accent-moss) }
+.content-page.accent-gold { border-top-color: var(--accent-gold) }
+
+.content-page-hero {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1.5rem
+}
+
+@media (max-width: 640px) {
+  .content-page {
+    padding: 1.5rem 1.25rem
+  }
+}
+
+/* Encarts (cms.CalloutBlock, cms.ContentPage) : isomorphes aux 5 callouts natifs de
+   Quarto (::: {.callout-...}), voir cms/qmd.py. Fond --sky (celui de la page, pas
+   --paper) pour rester lisibles une fois posés sur le panneau .content-page ci-dessus. */
+.callout {
+  background: var(--sky);
   border: 1px solid var(--line);
   border-inline-start: 4px solid var(--ink-soft);
   border-radius: 10px;

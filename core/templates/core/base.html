@@ -116,7 +116,7 @@
            href="{% url 'core:home' %}"
            aria-label="{% trans 'lesgrandsvoisins.com, accueil' %}">
           {% include "core/partials/logo_mark.html" %}
-          {% include "core/partials/wordmark.html" %}
+          {% comment %} {% include "core/partials/wordmark.html" %} {% endcomment %}
         </a>
         {% include "core/partials/account_widget.html" %}
       </div>

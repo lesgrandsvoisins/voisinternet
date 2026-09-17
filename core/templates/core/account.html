@@ -74,41 +74,45 @@
     </div>
   </section>
 
-  <section aria-labelledby="sc2-title">
-    <div class="split">
-      <h2 id="sc2-title">{% trans "Mes raccourcis" %}</h2>
-      <p class="muted"><a href="{% url 'core:raccourcis' %}#available-services">{% trans "Ajouter un raccourci" %}</a></p>
-    </div>
+  <details class="account-accordion" id="sc2-title">
+    <summary class="accordion-summary">
+      <h2>{% trans "Mes raccourcis" %}</h2>
+      <a class="accordion-manage" href="{% url 'core:raccourcis' %}#available-services" onclick="event.stopPropagation()">{% trans "Ajouter un raccourci" %}</a>
+    </summary>
     <div id="shortcuts-list">
       {% include "core/partials/shortcut_list.html" %}
     </div>
-  </section>
+  </details>
 
-  <section aria-labelledby="mb2-title">
-    <div class="split">
-      <h2 id="mb2-title">{% trans "Mes groupes" %}</h2>
-      <p class="muted"><a href="{% url 'core:groupes' %}#available-groups">{% trans "Rejoindre un groupe" %}</a></p>
-    </div>
+  <details class="account-accordion" id="mb2-title">
+    <summary class="accordion-summary">
+      <h2>{% trans "Mes groupes" %}</h2>
+      <a class="accordion-manage" href="{% url 'core:groupes' %}#available-groups" onclick="event.stopPropagation()">{% trans "Rejoindre un groupe" %}</a>
+    </summary>
     <div id="memberships-list">
       {% include "core/partials/membership_list.html" %}
     </div>
-  </section>
+  </details>
 
-  <section aria-labelledby="fiches2-title">
-    <div class="split">
-      <h2 id="fiches2-title">{% trans "Mes fiches dans l'annuaire" %}</h2>
-      <p class="muted"><a href="{% url 'core:mes_fiches' %}">{% trans "Créer une fiche" %}</a></p>
+  <details class="account-accordion" id="fiches2-title">
+    <summary class="accordion-summary">
+      <h2>{% trans "Mes fiches dans l'annuaire" %}</h2>
+      <a class="accordion-manage" href="{% url 'core:mes_fiches' %}" onclick="event.stopPropagation()">{% trans "Créer une fiche" %}</a>
+    </summary>
+    <div>
+      {% include "core/partials/entry_list.html" with entries=owned_entries %}
     </div>
-    {% include "core/partials/entry_list.html" with entries=owned_entries %}
-  </section>
+  </details>
 
-  <section aria-labelledby="events2-title">
-    <div class="split">
-      <h2 id="events2-title">{% trans "Mes évènements dans l'agenda" %}</h2>
-      <p class="muted"><a href="{% url 'core:mes_evenements' %}">{% trans "Créer un évènement" %}</a></p>
+  <details class="account-accordion" id="events2-title">
+    <summary class="accordion-summary">
+      <h2>{% trans "Mes évènements dans l'agenda" %}</h2>
+      <a class="accordion-manage" href="{% url 'core:mes_evenements' %}" onclick="event.stopPropagation()">{% trans "Créer un évènement" %}</a>
+    </summary>
+    <div>
+      {% include "core/partials/my_event_list.html" with events=managed_events %}
     </div>
-    {% include "core/partials/my_event_list.html" with events=managed_events %}
-  </section>
+  </details>
 
   {% if user.is_authenticated %}
   <section aria-labelledby="profile-title">
@@ -126,20 +130,22 @@
   </section>
   {% endif %}
 
-  <section aria-labelledby="fin-title">
-    <div class="split">
-      <h2 id="fin-title">{% trans "Mes contributions financières" %}</h2>
+  <details class="account-accordion" id="fin-title">
+    <summary class="accordion-summary">
+      <h2>{% trans "Mes contributions financières" %}</h2>
+    </summary>
+    <div>
+      {% if account_contributions %}
+      <ul class="docs">
+        {% for c in account_contributions %}
+        <li><strong>{{ c.get_kind_display }} — {{ c.amount }} €</strong><span>{{ c.get_method_display }}, {{ c.date }}{% if c.tax_deductible %}, {% trans "déductible fiscalement" %}{% endif %}{% if c.note %} — {{ c.note }}{% endif %}</span></li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="intro">{% trans "Aucune contribution enregistrée pour l'instant." %}</p>
+      {% endif %}
     </div>
-    {% if account_contributions %}
-    <ul class="docs">
-      {% for c in account_contributions %}
-      <li><strong>{{ c.get_kind_display }} — {{ c.amount }} €</strong><span>{{ c.get_method_display }}, {{ c.date }}{% if c.tax_deductible %}, {% trans "déductible fiscalement" %}{% endif %}{% if c.note %} — {{ c.note }}{% endif %}</span></li>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <p class="intro">{% trans "Aucune contribution enregistrée pour l'instant." %}</p>
-    {% endif %}
-  </section>
+  </details>
 
   {% else %}
   <div class="choices">

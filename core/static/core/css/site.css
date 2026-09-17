@@ -2508,6 +2508,53 @@ blockquote p {
   margin: 0
 }
 
+/* Accordéon des parties actives de mon Compte (core/templates/core/account.html) :
+   repliées par défaut, avec un lien de gestion dans l'en-tête qui échappe au bascule
+   (voir onclick="event.stopPropagation()") pour aller directement à la page dédiée
+   sans déplier la section. */
+.account-accordion {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0 1.25rem;
+  margin-bottom: 1rem
+}
+
+.accordion-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  cursor: pointer;
+  list-style: none
+}
+
+.accordion-summary::-webkit-details-marker {
+  display: none
+}
+
+.accordion-summary h2 {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: .5rem
+}
+
+.accordion-summary h2::before {
+  content: "▸";
+  font-size: .8em;
+  color: var(--ink-soft)
+}
+
+.account-accordion[open] .accordion-summary h2::before {
+  content: "▾"
+}
+
+.account-accordion>div {
+  padding-bottom: 1.25rem
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;

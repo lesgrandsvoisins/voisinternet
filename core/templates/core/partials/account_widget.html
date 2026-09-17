@@ -11,7 +11,7 @@
           x-bind:aria-expanded="open.toString()"
           aria-controls="account-menu"
           aria-label="{% blocktrans %}Mon compte : {{ account_sub }}{% endblocktrans %}"
-          notonclick="javascript:if(typeof doubleclicked === 'undefined'){doubleclicked=false} else if (!doubleclicked){doubleclicked=true;}else{location.href='{% url 'core:account' %}';}">
+          >
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
 	<!-- Icon downloaded from https://icon-sets.iconify.design/mdi/account-arrow-down-outline/ -->
 	<path d="M0 0h24v24H0z" fill="none" />

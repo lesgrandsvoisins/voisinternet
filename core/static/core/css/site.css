@@ -334,7 +334,7 @@ a {
 
 .top>.wrap {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
   align-items: center;
   gap: 1rem;
   min-height: 4.25rem;
@@ -621,7 +621,8 @@ div.menu {
   font-weight: 600
 }
 
-.account-shortcuts .gear {
+.account-shortcuts .gear,
+.gear {
   margin-inline-end: .35rem;
   display: inline;
 }
@@ -705,6 +706,11 @@ div.menu {
 .menu-flat li a:hover,
 .menu-flat li a[aria-current="page"] {
   background: var(--hover)
+}
+
+.menu-flat li form input,
+.menu-flat li form select {
+  margin: 0 auto;
 }
 
 .menu-sep {
@@ -3197,6 +3203,37 @@ blockquote p {
 }
 
 @media (max-width:680px) {
+  /* Sous ce seuil, le mot-symbole complet ne tient plus sur la même ligne que
+     le bouton menu et le compte : le logo passe sur sa propre ligne, centré,
+     plutôt que de forcer les boutons (et leurs icônes) à rétrécir dans une
+     grille trop étroite. Flexbox + un item à flex-basis:100% pour forcer le
+     retour à la ligne, plutôt que la grille utilisée au-delà de ce seuil :
+     une grille avec un item qui chevauche deux colonnes (le logo) répartit
+     l'espace entre colonnes de façon peu prévisible, au détriment du bouton
+     compte. */
+  .top>.wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: .4rem;
+    padding-block: .6rem;
+    min-height: 0;
+  }
+
+  div.menu {
+    order: 1;
+  }
+
+  .account-panel {
+    order: 2;
+  }
+
+  .brand {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: center;
+  }
+
   .conj {
     padding: 1.1rem .6rem .6rem
   }

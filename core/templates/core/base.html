@@ -15,9 +15,16 @@
     <meta name="description"
           content="{% block description %}{% blocktrans %}Les Grands Voisins sont nés à l'hôpital Saint-Vincent-de-Paul dans le 14e arrondissement à Paris, entre Port royal et les Catacombes. Nous sommes issus des failles dans le béton et dans les politiques publiques. Nous sommes au service de l'accueil de tous et croyons aux ponts entre utopie et réalité.{% endblocktrans %}{% endblock description %}">
     <link rel="icon" href="{% static 'core/favicon.ico' %}" sizes="any">
-    <link rel="icon" href="{% static 'core/favicon-16x16.png' %}" sizes="16x16" type="image/png">
-    <link rel="icon" href="{% static 'core/favicon-32x32.png' %}" sizes="32x32" type="image/png">
-    <link rel="apple-touch-icon" href="{% static 'core/apple-touch-icon.png' %}">
+    <link rel="icon"
+          href="{% static 'core/favicon-16x16.png' %}"
+          sizes="16x16"
+          type="image/png">
+    <link rel="icon"
+          href="{% static 'core/favicon-32x32.png' %}"
+          sizes="32x32"
+          type="image/png">
+    <link rel="apple-touch-icon"
+          href="{% static 'core/apple-touch-icon.png' %}">
     <link rel="stylesheet" href="{% static 'core/css/site.css' %}">
     <script src="{% static 'core/js/htmx.min.js' %}" defer></script>
     <script src="{% static 'core/js/alpine.min.js' %}" defer></script>
@@ -90,25 +97,27 @@
                   </form>
                 </li>
                 <li>{% lang_switcher %}</li>
-                <li><div style="display: flex;flex-direction: column;">
-  <div>
-    <span class="word">GdVoisins</span><span class="V">.com</span>
-  </div>
-  <div>Par l'association Les Grands Voisins</div>
-</div>
-</li>
+                <li><a href="{% url 'core:account' %}"><span class="gear" aria-hidden="true">⚙</span> {% trans "Compte" %}</a></li>
+                {% comment %} 
+                <li>
+                  <div style="display: flex;flex-direction: column;">
+                    <div>
+                      <span class="word">GdVoisins</span><span class="V">.com</span>
+                    </div>
+                    <div>Par l'association Les Grands Voisins</div>
+                  </div>
+                </li>
+                {% endcomment %}
               </ul>
             </div>
           </nav>
         </div>
-
         <a class="brand"
            href="{% url 'core:home' %}"
            aria-label="{% trans 'lesgrandsvoisins.com, accueil' %}">
           {% include "core/partials/logo_mark.html" %}
           {% include "core/partials/wordmark.html" %}
         </a>
-
         {% include "core/partials/account_widget.html" %}
       </div>
     </header>

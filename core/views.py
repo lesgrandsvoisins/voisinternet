@@ -17,7 +17,7 @@ from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
-from .forms import DirectoryEntryForm, EventForm
+from .forms import ContributionForm, DirectoryEntryForm, EventForm
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntrySubscription, Event,
@@ -213,7 +213,32 @@ def account(request):
         "new_number": format_number(new_number) if new_number else None,
         "pending": pending_anonymous_account(request),
         "is_administration": _is_administration(request.user),
+        "contribution_form": ContributionForm(),
     })
+
+
+@require_POST
+def faire_don(request):
+    acc = current_account(request, create=True)
+    form = ContributionForm(request.POST)
+    if form.is_valid():
+        amount = form.cleaned_data["amount"]
+        method = form.cleaned_data["method"]
+        date = form.cleaned_data["date"]
+        note = form.cleaned_data["note"]
+        kind = form.cleaned_data["kind"]
+        if kind in (ContributionForm.KIND_PLEDGE, ContributionForm.KIND_BOTH):
+            Contribution.objects.create(
+                account=acc, kind=Contribution.PLEDGE, amount=amount, method=method, date=date, note=note,
+            )
+        if kind in (ContributionForm.KIND_PAYMENT, ContributionForm.KIND_BOTH):
+            Contribution.objects.create(
+                account=acc, kind=Contribution.PAYMENT, amount=amount, method=method, date=date, note=note,
+            )
+        messages.success(request, _("Merci ! Votre contribution a été enregistrée."))
+    else:
+        messages.error(request, _("Le formulaire de don contient une erreur : montant ou date invalide."))
+    return redirect(f"{reverse('core:account')}#fin-title")
 
 
 def raccourcis(request):

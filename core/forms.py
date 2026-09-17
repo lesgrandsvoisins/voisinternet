@@ -1,8 +1,9 @@
 from django import forms
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from .models import DirectoryEntry, Event
+from .models import Contribution, DirectoryEntry, Event
 
 # Le formulaire d'auto-gestion n'édite que le français (champ « _fr », toujours le même
 # quelle que soit la langue de navigation de la personne) : les autres langues restent
@@ -109,3 +110,28 @@ class EventForm(forms.ModelForm):
                 else:
                     del self.fields[lang_field]
         self.fields[f"title_{lang}"].required = True
+
+
+class ContributionForm(forms.Form):
+    """
+    Auto-déclaration d'une contribution (voir views.faire_don) : une promesse et son
+    paiement restent deux enregistrements indépendants (voir Contribution), donc « les
+    deux » crée les deux à la fois plutôt qu'un seul enregistrement ambigu.
+    """
+    KIND_PLEDGE = Contribution.PLEDGE
+    KIND_PAYMENT = Contribution.PAYMENT
+    KIND_BOTH = "both"
+    KIND_CHOICES = [
+        (KIND_PLEDGE, _("Une promesse de don")),
+        (KIND_PAYMENT, _("Un paiement déjà effectué")),
+        (KIND_BOTH, _("Une promesse, réglée dans le même temps")),
+    ]
+    kind = forms.ChoiceField(
+        label=_("Type"), choices=KIND_CHOICES, widget=forms.RadioSelect, initial=KIND_PLEDGE,
+    )
+    amount = forms.DecimalField(label=_("Montant"), min_value=0.01, max_digits=8, decimal_places=2)
+    method = forms.ChoiceField(label=_("Moyen"), choices=Contribution.METHODS, initial="virement")
+    date = forms.DateField(
+        label=_("Date"), initial=timezone.localdate, widget=forms.DateInput(attrs={"type": "date"}),
+    )
+    note = forms.CharField(label=_("Note"), max_length=200, required=False)

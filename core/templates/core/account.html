@@ -135,6 +135,31 @@
       <h2>{% trans "Mes contributions financières" %}</h2>
     </summary>
     <div>
+      <form class="entry-form" method="post" action="{% url 'core:faire_don' %}">
+        {% csrf_token %}
+        <div class="form-row">
+          {{ contribution_form.kind.label_tag }}
+          {{ contribution_form.kind }}
+        </div>
+        <div class="form-row">
+          {{ contribution_form.amount.label_tag }}
+          {{ contribution_form.amount }} €
+        </div>
+        <div class="form-row">
+          {{ contribution_form.method.label_tag }}
+          {{ contribution_form.method }}
+        </div>
+        <div class="form-row">
+          {{ contribution_form.date.label_tag }}
+          {{ contribution_form.date }}
+        </div>
+        <div class="form-row">
+          {{ contribution_form.note.label_tag }}
+          {{ contribution_form.note }}
+        </div>
+        <button class="btn btn-sun" type="submit">{% trans "Faire un don" %}</button>
+      </form>
+
       {% if account_contributions %}
       <ul class="docs">
         {% for c in account_contributions %}

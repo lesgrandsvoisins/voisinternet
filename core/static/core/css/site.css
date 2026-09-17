@@ -1265,7 +1265,11 @@ a.chip-tag:hover {
 }
 
 .svc-actions li[draggable="true"] {
-  cursor: grab
+  cursor: grab;
+  /* Empêche le défilement tactile de préempter le geste avant que site.js
+     (armDragReorder, touchmove) n'ait la main — sinon le glisser tactile démarre en
+     saccades sur certains navigateurs mobiles. */
+  touch-action: none
 }
 
 .svc-actions li.dragging {

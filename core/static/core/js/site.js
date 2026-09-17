@@ -140,31 +140,14 @@
 
       var dragging = null;
 
-      list.addEventListener("dragstart", function (e) {
-        var li = e.target.closest("li[data-slug]");
-        if (!li) return;
-        dragging = li;
-        li.classList.add("dragging");
-      });
-
-      list.addEventListener("dragend", function () {
-        if (dragging) dragging.classList.remove("dragging");
-        dragging = null;
-      });
-
-      list.addEventListener("dragover", function (e) {
-        var li = e.target.closest("li[data-slug]");
-        if (!dragging || !li || li === dragging) return;
-        e.preventDefault();
+      function moveBefore(li, y) {
+        if (!dragging || !li || li === dragging || !list.contains(li)) return;
         var rect = li.getBoundingClientRect();
-        var before = (e.clientY - rect.top) < rect.height / 2;
+        var before = (y - rect.top) < rect.height / 2;
         list.insertBefore(dragging, before ? li : li.nextSibling);
-      });
+      }
 
-      list.addEventListener("drop", function (e) {
-        e.preventDefault();
-        if (!dragging) return;
-
+      function commitOrder() {
         var order = Array.from(list.querySelectorAll(":scope > li[data-slug]")).map(function (li) {
           return li.dataset.slug;
         });
@@ -185,6 +168,60 @@
           if (target) target.innerHTML = html;
           armDragReorder();
         });
+      }
+
+      // Souris (bureau) : API HTML5 Drag and Drop native.
+      list.addEventListener("dragstart", function (e) {
+        var li = e.target.closest("li[data-slug]");
+        if (!li) return;
+        dragging = li;
+        li.classList.add("dragging");
+      });
+
+      list.addEventListener("dragend", function () {
+        if (dragging) dragging.classList.remove("dragging");
+        dragging = null;
+      });
+
+      list.addEventListener("dragover", function (e) {
+        var li = e.target.closest("li[data-slug]");
+        if (!dragging || !li || li === dragging) return;
+        e.preventDefault();
+        moveBefore(li, e.clientY);
+      });
+
+      list.addEventListener("drop", function (e) {
+        e.preventDefault();
+        if (!dragging) return;
+        commitOrder();
+      });
+
+      // Écran tactile : l'API HTML5 Drag and Drop ci-dessus ne se déclenche jamais sur
+      // mobile (ni iOS Safari, ni Chrome Android) — on reproduit le même geste à la main
+      // avec les évènements touch*. touchstart ignore les éléments interactifs (boutons,
+      // liens) pour ne pas transformer un simple tap sur ↑/↓ ou "Ajouté" en glisser.
+      list.addEventListener("touchstart", function (e) {
+        if (e.target.closest("button, a, input")) return;
+        var li = e.target.closest("li[data-slug]");
+        if (!li) return;
+        dragging = li;
+        li.classList.add("dragging");
+      }, { passive: true });
+
+      list.addEventListener("touchmove", function (e) {
+        if (!dragging) return;
+        // Empêche le défilement de la page pendant le glisser : nécessite passive:false.
+        e.preventDefault();
+        var touch = e.touches[0];
+        var li = document.elementFromPoint(touch.clientX, touch.clientY);
+        moveBefore(li && li.closest("li[data-slug]"), touch.clientY);
+      }, { passive: false });
+
+      list.addEventListener("touchend", function () {
+        if (!dragging) return;
+        dragging.classList.remove("dragging");
+        dragging = null;
+        commitOrder();
       });
     });
   }

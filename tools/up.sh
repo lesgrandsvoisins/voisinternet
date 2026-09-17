@@ -5,7 +5,7 @@ if [ -f ".env" ]; then
 else
   echo "no .env"
 fi
-DJANGO_USER="voisinger-django"
+DJANGO_USER="voisinter-django"
 DJANGO_GROUP="services"
 DJANGO_ROOT="/var/voisinter/voisinter"
 

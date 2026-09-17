@@ -129,6 +129,7 @@ def home(request):
             visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
         ).select_related("sector").order_by("-pk")[:4],
         "agenda_calendar": _month_calendar(request),
+        "next_event": Event.objects.filter(public=True, start__gte=timezone.now()).order_by("start").first(),
     })
 
 

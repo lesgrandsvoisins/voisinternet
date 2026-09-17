@@ -879,6 +879,51 @@ div.menu {
   margin-bottom: 1.75rem
 }
 
+/* Rangée d'aperçus sous le héros (core/templates/core/home.html) : mêmes taille et
+   forme pour les trois, seule la couleur (les jetons --accent-* du pôle correspondant)
+   change — pour éviter la grille de boutons de tailles/formes disparates qu'on a
+   écartée, tout en donnant un aperçu du contenu récent sans alourdir le héros. */
+.hero-quicklinks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: .8rem;
+  margin: 1.5rem 0 0
+}
+
+.quicklink {
+  display: block;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--zinc);
+  border-radius: 10px;
+  padding: .8rem 1rem;
+  text-decoration: none;
+  color: var(--ink)
+}
+
+.quicklink:hover {
+  background: var(--hover)
+}
+
+.quicklink strong {
+  display: block;
+  font-family: var(--serif);
+  margin-bottom: .2rem
+}
+
+.quicklink span {
+  display: block;
+  font-size: .82rem;
+  color: var(--ink-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+.quicklink.accent-terracotta { border-top-color: var(--accent-terracotta) }
+.quicklink.accent-indigo { border-top-color: var(--accent-indigo) }
+.quicklink.accent-gold { border-top-color: var(--accent-gold) }
+
 .btn {
   display: inline-block;
   font: inherit;

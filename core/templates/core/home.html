@@ -20,7 +20,11 @@
             {% trans "Extrait de notre déclaration de mission de 2017" %}<small>{% trans "" %}</small>
           </p>
           <div class="ctas">
-            <a class="btn btn-sun" href="{% url 'core:account' %}">{% trans "Créer ou rejoindre son compte" %}</a>
+            {% if account %}
+              <a class="btn btn-sun" href="{% url 'core:account' %}">{% trans "Mon compte" %}</a>
+            {% else %}
+              <a class="btn btn-sun" href="{% url 'core:account' %}">{% trans "Créer ou rejoindre son compte" %}</a>
+            {% endif %}
             <a class="btn btn-line" href="{{ conj.annuaire.href }}">{% trans "Voir l'annuaire" %}</a>
           </div>
         </div>

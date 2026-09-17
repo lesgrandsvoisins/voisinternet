@@ -33,6 +33,19 @@
           {% for t in page.tags.all %}<a class="chip chip-tag" href="{% url 'core:tag_detail' t.slug %}">#{{ t.name }}</a>{% endfor %}
         </p>
       {% endif %}
+      {% if toc|length > 1 %}
+        {% comment %}Limité aux titres de la page actuellement affichée (voir
+        ContentPage.get_context) : un lien vers un titre d'une autre page, masquée à
+        l'écran, ne révélerait rien sans JavaScript.{% endcomment %}
+        <nav class="content-toc no-print" aria-label="{% trans "Sommaire" %}">
+          <p class="content-toc-title">{% trans "Sommaire" %}</p>
+          <ul>
+            {% for level, text, anchor in toc %}
+              <li class="content-toc-{{ level }}"><a href="#{{ anchor }}">{{ text }}</a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+      {% endif %}
       {% comment %}Chaque page est présente dans le HTML : seule la page courante
       s'affiche à l'écran, mais l'impression (core/static/core/css/site.css) les révèle
       toutes pour imprimer la page entière — même principe que blog_post_page.html.{% endcomment %}
@@ -66,6 +79,29 @@
         </nav>
       {% endif %}
     </article>
+
+    {% if related_pages %}
+      <section class="related-posts no-print" aria-labelledby="related-content-title">
+        <h2 id="related-content-title">{% trans "À lire aussi" %}</h2>
+        <ul class="blog-list">
+          {% for related in related_pages %}
+            <li class="blog-list-item">
+              <a href="{{ related.url }}">
+                {% if related.featured_image %}
+                  {% image related.featured_image fill-320x240 as thumb %}
+                  <img class="blog-list-thumb" src="{{ thumb.url }}" alt="">
+                {% endif %}
+                <div class="blog-list-body">
+                  <h3>{{ related.title }}</h3>
+                  {% if related.excerpt %}<p class="blog-list-excerpt">{{ related.excerpt }}</p>{% endif %}
+                </div>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
     <p class="muted"><a href="{{ page.get_parent.url }}">{% blocktrans with pole=page.get_parent.title %}← Retour à {{ pole }}{% endblocktrans %}</a></p>
   </div>
 {% endblock %}

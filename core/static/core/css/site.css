@@ -2492,6 +2492,38 @@ blockquote p {
 .content-page.accent-moss { border-top-color: var(--accent-moss) }
 .content-page.accent-gold { border-top-color: var(--accent-gold) }
 
+/* Sommaire (ContentPage.get_context, titres h2/h3/h4 du corps) : limité à la page
+   actuellement affichée quand l'article est paginé (saut de page). */
+.content-toc {
+  background: var(--sky);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem
+}
+
+.content-toc-title {
+  font-weight: 700;
+  margin: 0 0 .5rem
+}
+
+.content-toc ul {
+  margin: 0;
+  padding-inline-start: 1.2rem
+}
+
+.content-toc li {
+  margin: .15rem 0
+}
+
+.content-toc-h3 {
+  margin-inline-start: 1rem
+}
+
+.content-toc-h4 {
+  margin-inline-start: 2rem
+}
+
 .content-page-hero {
   width: 100%;
   max-height: 420px;

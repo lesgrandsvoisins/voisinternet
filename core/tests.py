@@ -12,7 +12,7 @@ from cms.qmd import export_contentpage_qmd, import_contentpage_qmd
 from .accounts import SESSION_KEY
 from .models import (
     Account, Audience, DirectoryEntry, DirectorySector, Donor, EntrySubscription, Event, EventInterest,
-    EventManagementRequest, Membership, OwnershipClaim, Service, Shortcut, format_number,
+    EventManagementRequest, Membership, OwnershipClaim, Service, Shortcut, Tag, format_number,
 )
 
 
@@ -144,6 +144,50 @@ class ContentPageQmdTests(Base):
         self.assertEqual(divs[0][0], " hidden")
         self.assertEqual(divs[1][0], "")
         self.assertContains(response, "Page 2 sur 2")
+
+    def test_content_page_toc_covers_current_page_only(self):
+        page = ContentPage(
+            title="Page à sommaire", slug="page-a-sommaire", live=True,
+            body=[
+                {
+                    "type": "prose",
+                    "value": (
+                        '<h2>Introduction</h2><p>Texte.</p>'
+                        '<h2>Introduction</h2>'  # doublon volontaire -> ancre dédupliquée
+                        '<hr class="pagebreak">'
+                        '<h2>Conclusion</h2>'
+                    ),
+                },
+            ],
+        )
+        self.pole.add_child(instance=page)
+
+        response = self.client.get(page.url)
+        content = response.content.decode()
+        self.assertIn('id="introduction"', content)
+        self.assertIn('id="introduction-1"', content)  # dédoublonnage
+        toc_nav = re.search(r'<nav class="content-toc[^"]*".*?</nav>', content, re.S)
+        self.assertIsNotNone(toc_nav)
+        self.assertIn('href="#introduction"', toc_nav.group())
+        self.assertNotIn("Conclusion", toc_nav.group())  # sur l'autre page, hors sommaire
+
+        response = self.client.get(page.url, {"page": 2})
+        content = response.content.decode()
+        # Une seule entrée sur la 2e page -> pas de sommaire affiché (toc|length > 1).
+        self.assertNotIn('class="content-toc', content)
+
+    def test_content_page_shows_related_content(self):
+        tag, _ = Tag.objects.get_or_create(slug="test-contenu-lie", defaults={"name": "Test contenu lié"})
+        page = ContentPage(title="Page A", slug="page-a", live=True, body=[])
+        self.pole.add_child(instance=page)
+        page.tags.set([tag])
+        other = ContentPage(title="Page B", slug="page-b", live=True, body=[])
+        self.pole.add_child(instance=other)
+        other.tags.set([tag])
+
+        response = self.client.get(page.url)
+        self.assertContains(response, "À lire aussi")
+        self.assertContains(response, "Page B")
 
     def test_qmd_round_trip_is_isomorphic(self):
         # Callout multi-paragraphes, tableau, et note de bas de page dont la définition

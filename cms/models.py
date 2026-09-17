@@ -4,6 +4,7 @@ from html import unescape
 from django.core.paginator import Paginator
 from django.db import models
 from django.utils import timezone
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from wagtail import blocks
@@ -255,6 +256,33 @@ class ProjectPage(Page):
     subpage_types = []
 
 
+_HEADING_RE = re.compile(r'<(h[234])>(.*?)</\1>', re.S)
+_TAG_RE = re.compile(r'<[^>]+>')
+
+
+def _add_heading_anchors(html, seen_slugs):
+    """
+    Ajoute un id= à chaque titre (h2/h3/h4) d'un fragment HTML de cms.ContentPage, pour
+    que le sommaire (ContentPage.get_context) puisse y créer des ancres. seen_slugs,
+    partagé entre tous les fragments d'une même page, évite les doublons entre deux
+    titres au même texte. Renvoie (html annoté, [(niveau, texte, ancre), ...]).
+    """
+    entries = []
+
+    def _replace(match):
+        level, inner = match.group(1), match.group(2)
+        text = _TAG_RE.sub("", inner).strip()
+        slug = slugify(text) or "section"
+        count = seen_slugs.get(slug, 0)
+        seen_slugs[slug] = count + 1
+        if count:
+            slug = f"{slug}-{count}"
+        entries.append((level, text, slug))
+        return f'<{level} id="{slug}">{inner}</{level}>'
+
+    return _HEADING_RE.sub(_replace, html), entries
+
+
 class ContentPage(Page):
     """
     Une page de contenu isomorphe avec Quarto (.qmd) : sous-page d'un pôle, dont les
@@ -303,18 +331,27 @@ class ContentPage(Page):
         # même principe que BlogPostPage.get_context, mais body est un StreamField —
         # seul un <hr class="pagebreak"> à l'intérieur d'un bloc "prose" coupe la page ;
         # un bloc "callout" reste toujours entier sur une seule page (jamais scindé).
+        # Les titres de chaque fragment reçoivent une ancre (_add_heading_anchors) au
+        # passage, pour le sommaire ci-dessous.
         body_pages = [[]]
+        page_headings = [[]]
+        seen_slugs = {}
         for block in self.body:
             if block.block_type == "prose":
                 fragments = re.split(r'<hr class="pagebreak"\s*/?>', block.value.source)
                 for i, fragment in enumerate(fragments):
                     if i > 0:
                         body_pages.append([])
+                        page_headings.append([])
                     if fragment.strip():
-                        body_pages[-1].append({"type": "prose", "html": fragment})
+                        html, headings = _add_heading_anchors(fragment, seen_slugs)
+                        body_pages[-1].append({"type": "prose", "html": html})
+                        page_headings[-1].extend(headings)
             else:
                 body_pages[-1].append({"type": block.block_type, "block": block})
-        body_pages = [p for p in body_pages if p] or [[]]
+        kept = [(p, h) for p, h in zip(body_pages, page_headings) if p]
+        body_pages = [p for p, _ in kept] or [[]]
+        page_headings = [h for _, h in kept] or [[]]
 
         try:
             page_number = int(request.GET.get("page", 1))
@@ -324,6 +361,30 @@ class ContentPage(Page):
         context["body_pages"] = body_pages
         context["page_number"] = page_number
         context["total_pages"] = len(body_pages)
+        # Sommaire limité aux titres de la page actuellement affichée : les autres
+        # pages sont masquées à l'écran (content_page.html), un lien d'ancrage vers un
+        # titre masqué ne révélerait rien sans JavaScript.
+        context["toc"] = page_headings[page_number - 1]
+
+        # « À lire aussi » : par étiquette commune (core.Tag) comme BlogPostPage, sinon
+        # d'autres pages du même pôle (ordre de l'arbre Wagtail, pas de date fiable ici
+        # puisque ContentPage.date est facultatif).
+        my_tag_ids = list(self.tags.values_list("pk", flat=True))
+        related = ContentPage.objects.none()
+        if my_tag_ids:
+            related = (
+                ContentPage.objects.live().exclude(pk=self.pk)
+                .filter(tags__in=my_tag_ids).distinct().order_by("title")
+            )
+        related_pages = list(related[:3])
+        if len(related_pages) < 3:
+            seen_ids = {p.pk for p in related_pages} | {self.pk}
+            extra = (
+                ContentPage.objects.live().child_of(self.get_parent())
+                .exclude(pk__in=seen_ids).order_by("path")
+            )
+            related_pages += list(extra[: 3 - len(related_pages)])
+        context["related_pages"] = related_pages
         return context
 
 

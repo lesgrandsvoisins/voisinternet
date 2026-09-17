@@ -14,9 +14,10 @@
     </title>
     <meta name="description"
           content="{% block description %}{% blocktrans %}Les Grands Voisins sont nés à l'hôpital Saint-Vincent-de-Paul dans le 14e arrondissement à Paris, entre Port royal et les Catacombes. Nous sommes issus des failles dans le béton et dans les politiques publiques. Nous sommes au service de l'accueil de tous et croyons aux ponts entre utopie et réalité.{% endblocktrans %}{% endblock description %}">
-    <link rel="icon"
-          href="{% static 'core/favicon.svg' %}"
-          type="image/svg+xml">
+    <link rel="icon" href="{% static 'core/favicon.ico' %}" sizes="any">
+    <link rel="icon" href="{% static 'core/favicon-16x16.png' %}" sizes="16x16" type="image/png">
+    <link rel="icon" href="{% static 'core/favicon-32x32.png' %}" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="{% static 'core/apple-touch-icon.png' %}">
     <link rel="stylesheet" href="{% static 'core/css/site.css' %}">
     <script src="{% static 'core/js/htmx.min.js' %}" defer></script>
     <script src="{% static 'core/js/alpine.min.js' %}" defer></script>

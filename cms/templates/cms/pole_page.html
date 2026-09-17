@@ -32,12 +32,12 @@
     </div>
   {% endif %}
   {% endcache %}
-  {% if page.slug == "numerique" %}
+  {% comment %} {% if page.slug == "numerique" %}
     <div class="wrap page pole-illustration">
       <div class="pole-illustration-lead">{% include "core/partials/sun_cloud.html" %}</div>
       {% include "core/partials/scene.html" %}
     </div>
-  {% endif %}
+  {% endif %} {% endcomment %}
   {% if projects %}
     <div class="wrap page">
       <section aria-labelledby="projects-title">

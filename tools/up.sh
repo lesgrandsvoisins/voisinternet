@@ -10,3 +10,4 @@ DJANGO_GROUP="services"
 DJANGO_ROOT="/var/voisinter/voisinter"
 
 sudo -u $DJANGO_USER -g $DJANGO_GROUP make -C $DJANGO_ROOT production
+sudo systemctl restart voisinter-django.service

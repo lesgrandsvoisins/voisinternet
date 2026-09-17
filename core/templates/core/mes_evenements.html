@@ -23,6 +23,13 @@
     {% include "core/partials/my_event_list.html" %}
   </section>
 
+  <section aria-labelledby="interests-title">
+    <div class="split">
+      <h2 id="interests-title">{% trans "Évènements qui m'intéressent" %}</h2>
+    </div>
+    {% include "core/partials/event_interest_list.html" %}
+  </section>
+
   <section aria-labelledby="new-title">
     <div class="split">
       <h2 id="new-title">{% trans "Créer un évènement" %}</h2>

@@ -6,8 +6,8 @@ from django.utils import timezone
 
 from .accounts import SESSION_KEY
 from .models import (
-    Account, Audience, DirectoryEntry, DirectorySector, Donor, Event, EventManagementRequest, Membership,
-    OwnershipClaim, Service, Shortcut, format_number,
+    Account, Audience, DirectoryEntry, DirectorySector, Donor, EntrySubscription, Event, EventInterest,
+    EventManagementRequest, Membership, OwnershipClaim, Service, Shortcut, format_number,
 )
 
 
@@ -245,6 +245,30 @@ class ServiceApprovalTests(Base):
         )
 
 
+class EntrySubscriptionNotifyTests(Base):
+    def test_notify_toggle_requires_an_existing_subscription(self):
+        entry = DirectoryEntry.objects.create(name="Fiche libre", slug="fiche-libre")
+        user = get_user_model().objects.create_user("voisine")
+        self.client.force_login(user)
+        response = self.client.post(reverse("core:toggle_subscription_notify", args=[entry.slug]))
+        self.assertEqual(response.status_code, 404)
+
+    def test_notify_toggle_flips_the_flag_and_shows_in_mes_fiches(self):
+        entry = DirectoryEntry.objects.create(
+            name="Fiche libre", slug="fiche-libre", visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
+        )
+        user = get_user_model().objects.create_user("voisine")
+        self.client.force_login(user)
+        self.client.post(reverse("core:toggle_subscription", args=[entry.slug]))
+
+        self.client.post(reverse("core:toggle_subscription_notify", args=[entry.slug]))
+        sub = EntrySubscription.objects.get(entry=entry)
+        self.assertTrue(sub.notify_email)
+
+        response = self.client.get(reverse("core:mes_fiches"))
+        self.assertContains(response, "Fiche libre")
+
+
 class OwnershipClaimTests(Base):
     @override_settings(OIDC_ENABLED=True)
     def test_anonymous_visitor_is_sent_to_login_and_claim_completes_on_return(self):
@@ -472,6 +496,37 @@ class AgendaTests(Base):
         self.assertIn("BEGIN:VEVENT", content)
         self.assertIn("SUMMARY:Atelier vélo", content)
         self.assertIn("LOCATION:Ressourcerie créative", content)
+
+    def test_event_interest_toggle_switches_level_then_removes(self):
+        event = Event.objects.create(title="Atelier vélo", slug="atelier-velo", start=timezone.now(), public=True)
+        user = get_user_model().objects.create_user("voisine")
+        self.client.force_login(user)
+
+        self.client.post(reverse("core:toggle_event_interest", args=[event.pk]), {"level": "interested"})
+        interest = EventInterest.objects.get(event=event)
+        self.assertEqual(interest.level, EventInterest.INTERESTED)
+
+        # Même compte, niveau différent : met à jour plutôt que de dupliquer.
+        self.client.post(reverse("core:toggle_event_interest", args=[event.pk]), {"level": "going"})
+        interest.refresh_from_db()
+        self.assertEqual(interest.level, EventInterest.GOING)
+
+        # Reposter le même niveau retire l'intérêt (bascule).
+        self.client.post(reverse("core:toggle_event_interest", args=[event.pk]), {"level": "going"})
+        self.assertFalse(EventInterest.objects.filter(event=event).exists())
+
+    def test_event_interest_notify_toggle_and_listing(self):
+        event = Event.objects.create(title="Atelier vélo", slug="atelier-velo", start=timezone.now(), public=True)
+        user = get_user_model().objects.create_user("voisine")
+        self.client.force_login(user)
+        self.client.post(reverse("core:toggle_event_interest", args=[event.pk]), {"level": "interested"})
+
+        self.client.post(reverse("core:toggle_event_interest_notify", args=[event.pk]))
+        interest = EventInterest.objects.get(event=event)
+        self.assertTrue(interest.notify_email)
+
+        response = self.client.get(reverse("core:mes_evenements"))
+        self.assertContains(response, "Atelier vélo")
 
 
 class MesEvenementsTests(Base):

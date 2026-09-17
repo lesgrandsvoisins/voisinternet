@@ -23,6 +23,13 @@
     {% include "core/partials/entry_list.html" %}
   </section>
 
+  <section aria-labelledby="subs-title">
+    <div class="split">
+      <h2 id="subs-title">{% trans "Fiches auxquelles je suis abonné·e" %}</h2>
+    </div>
+    {% include "core/partials/subscribed_entry_list.html" %}
+  </section>
+
   <section aria-labelledby="new-title">
     <div class="split">
       <h2 id="new-title">{% trans "Créer une fiche" %}</h2>

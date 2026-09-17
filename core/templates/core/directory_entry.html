@@ -56,12 +56,21 @@
       <form method="post" action="{% url 'core:toggle_subscription' entry.slug %}">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ request.get_full_path }}">
-        {% if subscribed %}
+        {% if my_subscription %}
         <button class="sub-btn subscribed" type="submit">{% trans "Abonné·e ✓" %}</button>
         {% else %}
         <button class="sub-btn" type="submit">{% trans "S'abonner" %}</button>
         {% endif %}
       </form>
+      {% if my_subscription %}
+      <form method="post" action="{% url 'core:toggle_subscription_notify' entry.slug %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <button class="sub-btn" type="submit">
+          {% if my_subscription.notify_email %}{% trans "Notifications par courriel ✓" %}{% else %}{% trans "Recevoir un courriel" %}{% endif %}
+        </button>
+      </form>
+      {% endif %}
       {% if account and entry.owner_id == account.id %}
       <a class="sub-btn" href="{% url 'core:fiche_modifier' entry.slug %}">{% trans "Modifier" %}</a>
       {% if entry.visibility == "public" and not entry.approved %}

@@ -44,6 +44,31 @@
           <path fill="currentColor" d="m12 22l4-4h-3v-6h-2v6H8zm7-19h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h3l-2-2H5V8h14v11h-1l-2 2h3c1.11 0 2-.89 2-2V5a2 2 0 0 0-2-2" />
         </svg>
       </a>
+      <form method="post" action="{% url 'core:toggle_event_interest' event.pk %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <input type="hidden" name="level" value="interested">
+        <button class="sub-btn{% if my_interest and my_interest.level == "interested" %} subscribed{% endif %}" type="submit">
+          {% if my_interest and my_interest.level == "interested" %}{% trans "Intéressé·e ✓" %}{% else %}{% trans "Ça m'intéresse" %}{% endif %}
+        </button>
+      </form>
+      <form method="post" action="{% url 'core:toggle_event_interest' event.pk %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <input type="hidden" name="level" value="going">
+        <button class="sub-btn{% if my_interest and my_interest.level == "going" %} subscribed{% endif %}" type="submit">
+          {% if my_interest and my_interest.level == "going" %}{% trans "J'y vais ✓" %}{% else %}{% trans "J'y vais" %}{% endif %}
+        </button>
+      </form>
+      {% if my_interest %}
+      <form method="post" action="{% url 'core:toggle_event_interest_notify' event.pk %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <button class="sub-btn" type="submit">
+          {% if my_interest.notify_email %}{% trans "Notifications par courriel ✓" %}{% else %}{% trans "Recevoir un courriel" %}{% endif %}
+        </button>
+      </form>
+      {% endif %}
       {% if not is_manager %}
         {% if request.user.is_authenticated or OIDC_ENABLED %}
           {# Pas besoin d'être déjà connecté·e pour lancer la demande : elle attend la

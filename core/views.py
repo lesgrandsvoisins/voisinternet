@@ -21,7 +21,8 @@ from .forms import DirectoryEntryForm, EventForm
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntrySubscription, Event,
-    EventManagementRequest, GuideBook, Membership, OwnershipClaim, Service, Shortcut, Tag, format_number,
+    EventInterest, EventManagementRequest, GuideBook, Membership, OwnershipClaim, Service, Shortcut, Tag,
+    format_number,
 )
 
 # Chapeau de présentation pour chaque page intermédiaire (une par groupe du menu).
@@ -301,13 +302,13 @@ def entry_detail(request, slug):
         del request.session[PENDING_CLAIM_KEY]
         if entry.owner_id is None:
             _create_ownership_claim(request, entry, acc)
-    subscribed = acc.entrysubscription_set.filter(entry=entry).exists() if acc else False
+    my_subscription = acc.entrysubscription_set.filter(entry=entry).first() if acc else None
     my_claim = None
     if request.user.is_authenticated and entry.owner_id is None:
         my_claim = OwnershipClaim.objects.filter(entry=entry, account=acc).first()
     return render(request, "core/directory_entry.html", {
         "entry": entry,
-        "subscribed": subscribed,
+        "my_subscription": my_subscription,
         "my_claim": my_claim,
     })
 
@@ -380,6 +381,7 @@ def mes_fiches(request):
         form = DirectoryEntryForm(initial=initial)
     return render(request, "core/mes_fiches.html", {
         "entries": acc.directory_entries.order_by("name"),
+        "subscriptions": acc.entrysubscription_set.select_related("entry").order_by("entry__name"),
         "form": form,
     })
 
@@ -423,6 +425,17 @@ def toggle_subscription(request, slug):
         text = _("Abonné à « %(name)s ».") % {"name": entry.name}
     messages.success(request, text)
     return redirect(_safe_next(request, reverse("core:annuaire")))
+
+
+@require_POST
+def toggle_subscription_notify(request, slug):
+    acc = current_account(request)
+    sub = EntrySubscription.objects.filter(account=acc, entry__slug=slug).first() if acc else None
+    if sub is None:
+        raise Http404
+    sub.notify_email = not sub.notify_email
+    sub.save(update_fields=["notify_email"])
+    return redirect(_safe_next(request, reverse("core:mes_fiches")))
 
 
 @require_POST
@@ -475,13 +488,47 @@ def event_detail(request, pk):
     my_management_request = None
     if request.user.is_authenticated and not is_manager:
         my_management_request = EventManagementRequest.objects.filter(event=event, account=acc).first()
+    my_interest = EventInterest.objects.filter(event=event, account=acc).first() if acc else None
     return render(request, "core/event_detail.html", {
         "event": event,
         "is_manager": is_manager,
         "my_management_request": my_management_request,
+        "my_interest": my_interest,
         "previous_event": Event.objects.filter(public=True, start__lt=event.start).order_by("-start").first(),
         "next_event": Event.objects.filter(public=True, start__gt=event.start).order_by("start").first(),
     })
+
+
+@require_POST
+def toggle_event_interest(request, pk):
+    event = get_object_or_404(Event, pk=pk, public=True)
+    acc = current_account(request, create=True)
+    level = request.POST.get("level") or EventInterest.INTERESTED
+    if level not in dict(EventInterest.LEVEL_CHOICES):
+        raise Http404
+    interest = EventInterest.objects.filter(account=acc, event=event).first()
+    if interest is None:
+        EventInterest.objects.create(account=acc, event=event, level=level)
+        messages.success(request, _("Intérêt enregistré pour « %(title)s ».") % {"title": event.title})
+    elif interest.level == level:
+        interest.delete()
+        messages.success(request, _("Intérêt retiré pour « %(title)s ».") % {"title": event.title})
+    else:
+        interest.level = level
+        interest.save(update_fields=["level"])
+        messages.success(request, _("Intention mise à jour pour « %(title)s ».") % {"title": event.title})
+    return redirect(_safe_next(request, reverse("core:event_detail", args=[event.pk])))
+
+
+@require_POST
+def toggle_event_interest_notify(request, pk):
+    acc = current_account(request)
+    interest = EventInterest.objects.filter(account=acc, event_id=pk).first() if acc else None
+    if interest is None:
+        raise Http404
+    interest.notify_email = not interest.notify_email
+    interest.save(update_fields=["notify_email"])
+    return redirect(_safe_next(request, reverse("core:mes_evenements")))
 
 
 def _create_event_management_request(request, event, acc):
@@ -540,6 +587,7 @@ def mes_evenements(request):
         form = EventForm()
     return render(request, "core/mes_evenements.html", {
         "events": acc.managed_events.order_by("-start"),
+        "interests": acc.event_interests.select_related("event").order_by("event__start"),
         "form": form,
     })
 

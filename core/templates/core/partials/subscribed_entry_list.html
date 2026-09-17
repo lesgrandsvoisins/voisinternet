@@ -1,0 +1,26 @@
+{% load i18n %}{% if subscriptions %}
+<ul class="docs">
+  {% for sub in subscriptions %}
+  <li>
+    <details class="entry-menu" name="subscription-menu">
+      <summary class="entry-menu-btn">{{ sub.entry.name }}</summary>
+      <div class="entry-menu-panel">
+        <a href="{% url 'core:entry_detail' sub.entry.slug %}">{% trans "Voir la fiche" %}</a>
+        <form method="post" action="{% url 'core:toggle_subscription_notify' sub.entry.slug %}">
+          {% csrf_token %}
+          <button class="link-btn" type="submit">
+            {% if sub.notify_email %}{% trans "Désactiver les notifications par courriel" %}{% else %}{% trans "Recevoir un courriel" %}{% endif %}
+          </button>
+        </form>
+        <form method="post" action="{% url 'core:toggle_subscription' sub.entry.slug %}" onsubmit="return confirm('{% trans "Se désabonner de cette fiche ?" %}');">
+          {% csrf_token %}
+          <button class="link-btn" type="submit">{% trans "Se désabonner" %}</button>
+        </form>
+      </div>
+    </details>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="intro">{% trans "Vous n'êtes abonné·e à aucune fiche pour l'instant." %}</p>
+{% endif %}

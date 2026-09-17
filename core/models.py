@@ -379,6 +379,9 @@ class EntrySubscription(models.Model):
     """Un compte qui suit la fiche d'une autre personne ou structure dans l'annuaire."""
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     entry = models.ForeignKey(DirectoryEntry, on_delete=models.CASCADE, related_name="subscriptions")
+    # Une qualité d'abonnement, en plus du simple suivi : reçoit ou non un courriel quand
+    # la fiche change. D'autres qualités pourront s'ajouter plus tard (ex. fréquence).
+    notify_email = models.BooleanField(_("notifications par courriel"), default=False)
     created = models.DateTimeField(default=timezone.now, editable=False)
 
     class Meta:
@@ -501,6 +504,34 @@ class EventManagementRequest(models.Model):
         if self.approved:
             self.event.managers.add(self.account)
         super().save(*args, **kwargs)
+
+
+class EventInterest(models.Model):
+    """
+    Un compte intéressé par un évènement de l'agenda, sans le gérer (voir Event.managers,
+    EventManagementRequest) — l'équivalent, côté agenda, d'EntrySubscription côté
+    annuaire : suivre plutôt qu'administrer.
+    """
+    INTERESTED = "interested"
+    GOING = "going"
+    LEVEL_CHOICES = [
+        (INTERESTED, _("Intéressé·e")),
+        (GOING, _("J'y vais")),
+    ]
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="event_interests")
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="interests")
+    level = models.CharField(_("intention"), max_length=20, choices=LEVEL_CHOICES, default=INTERESTED)
+    notify_email = models.BooleanField(_("notifications par courriel"), default=False)
+    created = models.DateTimeField(default=timezone.now, editable=False)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=["account", "event"], name="unique_event_interest")]
+        ordering = ["account", "event__start"]
+        verbose_name = _("intérêt pour un évènement")
+        verbose_name_plural = _("intérêts pour un évènement")
+
+    def __str__(self):
+        return f"{self.event} ({self.account})"
 
 
 class Contribution(models.Model):

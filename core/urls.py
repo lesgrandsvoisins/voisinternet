@@ -23,6 +23,11 @@ urlpatterns = [
     path("agenda/<int:pk>/", views.event_detail, name="event_detail"),
     path("agenda/<int:pk>/ics/", views.event_ics, name="event_ics"),
     path("agenda/<int:pk>/gerer/", views.claim_event_management, name="claim_event_management"),
+    path("agenda/<int:pk>/interet/", views.toggle_event_interest, name="toggle_event_interest"),
+    path(
+        "agenda/<int:pk>/interet/notifications/",
+        views.toggle_event_interest_notify, name="toggle_event_interest_notify",
+    ),
     path("activites/", views.group_page, {"key": "reperes"}, name="activites"),
     path("poles/", views.group_page, {"key": "poles"}, name="poles"),
     path("a-propos/", views.group_page, {"key": "association"}, name="a_propos"),
@@ -35,6 +40,10 @@ urlpatterns = [
     path("annuaire/<slug:slug>/", views.entry_detail, name="entry_detail"),
     path("annuaire/<slug:slug>/revendiquer/", views.claim_entry_ownership, name="claim_entry_ownership"),
     path("annuaire/<slug:slug>/abonnement/", views.toggle_subscription, name="toggle_subscription"),
+    path(
+        "annuaire/<slug:slug>/abonnement/notifications/",
+        views.toggle_subscription_notify, name="toggle_subscription_notify",
+    ),
     path("annuaire/<slug:slug>/publication/", views.toggle_publication, name="toggle_publication"),
     path("annuaire/<slug:slug>/raccourci/", views.toggle_shortcut, name="toggle_shortcut"),
     path(

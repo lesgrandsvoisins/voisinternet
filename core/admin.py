@@ -3,7 +3,7 @@ from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectoryEntryPhoto, DirectorySector, Donor, EntrySubscription,
-    Event, EventManagementRequest, GuideBook,
+    Event, EventInterest, EventManagementRequest, GuideBook,
     Membership, OwnershipClaim, Service, ServiceCategory, Shortcut, Tag,
 )
 
@@ -153,8 +153,16 @@ class DirectoryEntryAdmin(TranslationAdmin):
 
 @admin.register(EntrySubscription)
 class EntrySubscriptionAdmin(admin.ModelAdmin):
-    list_display = ["account", "entry", "created"]
+    list_display = ["account", "entry", "notify_email", "created"]
+    list_filter = ["notify_email"]
     autocomplete_fields = ["entry"]
+
+
+@admin.register(EventInterest)
+class EventInterestAdmin(admin.ModelAdmin):
+    list_display = ["account", "event", "level", "notify_email", "created"]
+    list_filter = ["level", "notify_email"]
+    autocomplete_fields = ["event"]
 
 
 @admin.register(OwnershipClaim)

@@ -1,0 +1,29 @@
+{% load i18n %}{% if interests %}
+<ul class="docs">
+  {% for interest in interests %}
+  <li>
+    <details class="entry-menu" name="interest-menu">
+      <summary class="entry-menu-btn">{{ interest.event.title }}</summary>
+      <div class="entry-menu-panel">
+        <a href="{% url 'core:event_detail' interest.event.pk %}">
+          {% if interest.level == "going" %}{% trans "J'y vais" %}{% else %}{% trans "Intéressé·e" %}{% endif %}
+        </a>
+        <form method="post" action="{% url 'core:toggle_event_interest_notify' interest.event.pk %}">
+          {% csrf_token %}
+          <button class="link-btn" type="submit">
+            {% if interest.notify_email %}{% trans "Désactiver les notifications par courriel" %}{% else %}{% trans "Recevoir un courriel" %}{% endif %}
+          </button>
+        </form>
+        <form method="post" action="{% url 'core:toggle_event_interest' interest.event.pk %}" onsubmit="return confirm('{% trans "Retirer votre intérêt pour cet évènement ?" %}');">
+          {% csrf_token %}
+          <input type="hidden" name="level" value="{{ interest.level }}">
+          <button class="link-btn" type="submit">{% trans "Retirer" %}</button>
+        </form>
+      </div>
+    </details>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="intro">{% trans "Aucun évènement suivi pour l'instant." %}</p>
+{% endif %}

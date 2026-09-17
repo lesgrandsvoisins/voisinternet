@@ -82,6 +82,9 @@ def home(request):
         "audiences": Audience.objects.all(),
         "upcoming_events": Event.objects.filter(public=True, start__gte=timezone.now()).order_by('-featured','start')[:3],
         "poles": PolePage.objects.live().order_by("path"),
+        "recent_entries": DirectoryEntry.objects.filter(
+            visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
+        ).select_related("sector").order_by("-pk")[:4],
     })
 
 

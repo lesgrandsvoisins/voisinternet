@@ -35,41 +35,17 @@
   {% include "core/partials/announcement_card.html" %}
   {% if upcoming_events %}
     <section class="block" aria-labelledby="next-title">
-      <div class="wrap">
-        <h2 id="next-title">{% trans "Prochainement" %}</h2>
-        {% include "core/partials/event_list.html" with events=upcoming_events %}
-{% comment %} 
-        <ul class="agenda-list">
-          {% for event in upcoming_events %}
-            <li class="agenda-card">
-              <a class="agenda-date" href="{% url 'core:event_detail' event.pk %}" aria-hidden="true">
-                <span class="agenda-date-month">{{ event.start|date:"M" }}</span>
-                <span class="agenda-date-day">{{ event.start|date:"j" }}</span>
-                <span class="agenda-date-weekday">{{ event.start|date:"D" }}</span>
-                <span class="agenda-date-hours">
-                  {{ event.start|date:"H:i" }}{% if event.end %}–{{ event.end|date:"H:i" }}{% endif %}
-                </span>
-              </a>
-              <div class="agenda-body">
-                <h3><a href="{% url 'core:event_detail' event.pk %}">{{ event.title }}</a></h3>
-                <time class="sr-only" datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>
-                {% if event.location or event.online_url %}
-                  <p class="agenda-where">
-                    {{ event.location }}
-                    {% if event.online_url %}
-                      {% if event.location %}—{% endif %} <a href="{{ event.online_url }}" target="_new">{% trans "En ligne" %}</a>
-                    {% endif %}
-                  </p>
-                {% endif %}
-              </div>
-            </li>
-          {% endfor %}
-        </ul> 
-{% endcomment %}
-        <p class="note">
-          {% blocktrans %}Permanence chaque lundi de 12h à 19h30, en personne (93 av. du Général Leclerc, 75014 Paris — métro Alésia, Atelier de la Ressourcerie Créative) ou en ligne sur meet.lesgrandsvoisins.com.{% endblocktrans %}
-          <a href="{% url 'core:agenda' %}">{% trans "Tout l'agenda" %}</a>
-        </p>
+      <div class="wrap two two-even">
+        <div>
+          <h2 id="next-title">{% trans "Prochainement" %}</h2>
+          <p class="intro">
+            {% blocktrans %}Permanence chaque lundi de 12h à 19h30, en personne (93 av. du Général Leclerc, 75014 Paris — métro Alésia, Atelier de la Ressourcerie Créative) ou en ligne sur meet.lesgrandsvoisins.com.{% endblocktrans %}
+          </p>
+          <a class="more" href="{% url 'core:agenda' %}">{% trans "Tout l'agenda" %}</a>
+        </div>
+        <div>
+          {% include "core/partials/event_list.html" with events=upcoming_events %}
+        </div>
       </div>
     </section>
   {% endif %}
@@ -89,31 +65,16 @@
       </div>
     </section>
   {% endif %}
-  <section class="block" aria-label="{% trans 'Le guide et le blog' %}">
+  <section class="block" aria-label="{% trans 'Le blog' %}">
     <div class="wrap two two-even">
       <div>
         <h2>
-          <span class="form"><span class="V">W</span>iki</span>
+          <span class="form"><span class="V">B</span>log</span>
         </h2>
-        {% if books %}
-          <ul class="books">
-            {% for book in books %}
-              <li>
-                <a href="{{ book.url }}"><strong>{{ book.title }}</strong>
-                  {% if book.summary %}<span>{{ book.summary }}</span>{% endif %}
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p class="intro">{% trans "Les livres du guide s'afficheront ici." %}</p>
-        {% endif %}
-        <a class="more" href="{{ GUIDE_URL }}">{% trans "Tout le guide" %}</a>
+        <p class="intro">{% trans "Les nouvelles de l'association et de ses voisins, publiées régulièrement." %}</p>
+        <a class="more" href="{{ conj.grandzine.href }}">{% trans "Tous les articles" %}</a>
       </div>
       <div>
-        <h2>
-          <span class="form"> <span class="V">B</span>log</span>
-        </h2>
         {% if posts %}
           <ul class="posts">
             {% for post in posts %}
@@ -128,8 +89,53 @@
         {% else %}
           <p class="intro">{% trans "Les derniers articles s'afficheront ici." %}</p>
         {% endif %}
-        <a class="more" href="{{ conj.grandzine.href }}">{% trans "Tous les articles" %}</a>
       </div>
+    </div>
+  </section>
+  <section class="block" aria-label="{% trans "L'annuaire" %}">
+    <div class="wrap two two-even">
+      <div>
+        {% include "core/partials/scene.html" %}
+        <h2>{% trans "Annuaire" %}</h2>
+        <p class="intro">{% trans "Qui fait partie de la communauté, et comment les joindre : personnes et structures, individuelles ou collectives, avec leur accord." %}</p>
+        <a class="more" href="{{ conj.annuaire.href }}">{% trans "Voir tout l'annuaire" %}</a>
+      </div>
+      <div>
+        {% if recent_entries %}
+          <ul class="books">
+            {% for entry in recent_entries %}
+              <li>
+                <a href="{% url 'core:entry_detail' entry.slug %}"><strong>{{ entry.name }}</strong>
+                  {% if entry.sector %}<span>{{ entry.sector.name }}</span>{% endif %}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="intro">{% trans "Les dernières fiches s'afficheront ici." %}</p>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+  <section class="block" aria-label="{% trans 'Le guide' %}">
+    <div class="wrap">
+      <h2>
+        <span class="form"><span class="V">W</span>iki</span>
+      </h2>
+      {% if books %}
+        <ul class="books">
+          {% for book in books %}
+            <li>
+              <a href="{{ book.url }}"><strong>{{ book.title }}</strong>
+                {% if book.summary %}<span>{{ book.summary }}</span>{% endif %}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="intro">{% trans "Les livres du guide s'afficheront ici." %}</p>
+      {% endif %}
+      <a class="more" href="{{ GUIDE_URL }}">{% trans "Tout le guide" %}</a>
     </div>
   </section>
   <section class="block" aria-labelledby="explore-title">
@@ -168,8 +174,13 @@
   {% endif %}
   <section class="block" aria-labelledby="how-title">
     <div class="wrap">
-      <h2 id="how-title">{% trans "Le pôle Numérique, comment ça marche" %}</h2>
-      <p class="intro">{% trans "Pas besoin d'être informaticien, ni d'un service technique. Il suffit d'un peu de curiosité et d'un voisin." %}</p>
+      <div class="how-lead">
+        {% include "core/partials/sun.html" %}
+        <div>
+          <h2 id="how-title">{% trans "Le pôle Numérique, comment ça marche" %}</h2>
+          <p class="intro">{% trans "Pas besoin d'être informaticien, ni d'un service technique. Il suffit d'un peu de curiosité et d'un voisin." %}</p>
+        </div>
+      </div>
       <ol class="steps">
         <li>
           <h3>{% trans "Choisissez vos services" %}</h3>

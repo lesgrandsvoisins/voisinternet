@@ -4,6 +4,9 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 from django.utils import timezone
 
+from cms.models import ContentPage, PolePage
+from cms.qmd import export_contentpage_qmd, import_contentpage_qmd
+
 from .accounts import SESSION_KEY
 from .models import (
     Account, Audience, DirectoryEntry, DirectorySector, Donor, EntrySubscription, Event, EventInterest,
@@ -74,6 +77,97 @@ class PagesTests(Base):
         self.assertIn('class="menu-sep"', panel)
         self.assertNotIn(reverse("core:activites"), panel)
         self.assertNotIn("Mes raccourcis", panel)
+
+
+class ContentPageQmdTests(Base):
+    def setUp(self):
+        super().setUp()
+        self.pole = PolePage.objects.get(slug="civisme")
+
+    def test_pole_lists_published_content_pages_as_cards(self):
+        page = ContentPage(
+            title="Astuces numériques", slug="astuces-numeriques", live=True,
+            excerpt="Un chapeau de carte.", body=[{"type": "prose", "value": "<p>Bonjour.</p>"}],
+        )
+        self.pole.add_child(instance=page)
+
+        response = self.client.get(self.pole.url)
+        self.assertContains(response, "Astuces numériques")
+        self.assertContains(response, "Un chapeau de carte.")
+        self.assertContains(response, 'class="pole-card')
+
+    def test_content_page_renders_prose_and_callout(self):
+        page = ContentPage(
+            title="Page de contenu", slug="page-de-contenu", live=True,
+            body=[
+                {"type": "prose", "value": "<p>Texte normal.</p>"},
+                {
+                    "type": "callout",
+                    "value": {"type": "tip", "title": "Astuce", "text": "<p>Contenu du callout.</p>"},
+                },
+            ],
+        )
+        self.pole.add_child(instance=page)
+
+        response = self.client.get(page.url)
+        self.assertContains(response, "Texte normal.")
+        self.assertContains(response, 'class="callout callout-tip"')
+        self.assertContains(response, "Astuce")
+        self.assertContains(response, "Contenu du callout.")
+
+    def test_qmd_round_trip_is_isomorphic(self):
+        # Callout multi-paragraphes, tableau, et note de bas de page dont la définition
+        # est séparée de sa référence — la convention Quarto/Pandoc habituelle.
+        qmd_text = """---
+title: Page de test qmd
+key: 11111111-1111-1111-1111-111111111111
+lang: fr
+pole: civisme
+slug: page-test-qmd
+---
+
+Texte d'introduction avec une note de bas de page[^1].
+
+| Colonne 1 | Colonne 2 |
+| --- | --- |
+| a | b |
+
+::: {.callout-note title="Astuce"}
+Premier paragraphe du callout.
+
+Second paragraphe du callout, avec **du gras**.
+:::
+
+Texte de conclusion.
+
+[^1]: Contenu de la note.
+"""
+        page = import_contentpage_qmd(qmd_text)
+        blocks = list(page.body)
+        # Un seul bloc "prose" avant le callout : texte d'intro et tableau ne sont
+        # séparés par aucun callout, donc restent un seul bloc continu.
+        self.assertEqual([b.block_type for b in blocks], ["prose", "callout", "prose"])
+        # Table et note de bas de page survivent dans ce premier bloc "prose".
+        self.assertIn("<table>", str(blocks[0].value))
+        self.assertIn("Colonne 1", str(blocks[0].value))
+        self.assertIn("footnote", str(blocks[0].value))
+        # Callout multi-paragraphes préservé comme un seul bloc, pas éclaté.
+        self.assertEqual(blocks[1].value["type"], "note")
+        self.assertEqual(blocks[1].value["title"], "Astuce")
+        self.assertIn("Premier paragraphe", str(blocks[1].value["text"]))
+        self.assertIn("Second paragraphe", str(blocks[1].value["text"]))
+
+        exported = export_contentpage_qmd(page)
+        self.assertIn('::: {.callout-note title="Astuce"}', exported)
+        self.assertIn("| Colonne 1 | Colonne 2 |", exported)
+        self.assertIn("[^1]: Contenu de la note.", exported)
+
+        reimported = import_contentpage_qmd(exported)
+        self.assertEqual(reimported.pk, page.pk)  # même clé de traduction -> mise à jour, pas doublon
+        reimported_blocks = list(reimported.body)
+        self.assertEqual([b.block_type for b in blocks], [b.block_type for b in reimported_blocks])
+        self.assertEqual(reimported_blocks[1].value["title"], "Astuce")
+        self.assertIn("Second paragraphe", str(reimported_blocks[1].value["text"]))
 
 
 class AnonymousAccountTests(Base):

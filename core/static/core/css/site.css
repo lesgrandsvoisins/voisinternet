@@ -1156,6 +1156,32 @@ a.chip-tag:hover {
   color: var(--ink-soft)
 }
 
+/* Tableaux et notes de bas de page : import .qmd d'une cms.ContentPage (cms/qmd.py),
+   extension "extra" de python-markdown — jamais saisis à la main dans Draftail. */
+.markdown table {
+  border-collapse: collapse;
+  width: 100%
+}
+
+.markdown th,
+.markdown td {
+  border: 1px solid var(--line);
+  padding: .5rem .75rem;
+  text-align: start
+}
+
+.markdown th {
+  background: var(--sky)
+}
+
+.markdown .footnote {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: .9em;
+  color: var(--ink-soft)
+}
+
 .aud-intro h2 {
   margin-bottom: .2rem
 }
@@ -2444,6 +2470,28 @@ blockquote p {
   background: var(--sun-soft);
   border-color: var(--sun)
 }
+
+/* Encarts (cms.CalloutBlock, cms.ContentPage) : isomorphes aux 5 callouts natifs de
+   Quarto (::: {.callout-...}), voir cms/qmd.py. */
+.callout {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-inline-start: 4px solid var(--ink-soft);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0
+}
+
+.callout-title {
+  font-weight: 700;
+  margin-bottom: .5rem
+}
+
+.callout-note { border-inline-start-color: var(--accent-indigo) }
+.callout-tip { border-inline-start-color: var(--accent-moss) }
+.callout-important { border-inline-start-color: var(--danger) }
+.callout-warning { border-inline-start-color: var(--sun) }
+.callout-caution { border-inline-start-color: var(--accent-terracotta) }
 
 /* Aperçu en tête de tableau de bord (core/templates/core/account.html) : quelques
    chiffres-clés, chacun un lien d'ancrage direct vers sa section détaillée plus bas. */

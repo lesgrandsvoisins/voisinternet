@@ -102,6 +102,37 @@ class ProjectGalleryBlock(blocks.StructBlock):
         label = _("galerie")
 
 
+CONTENT_RICHTEXT_FEATURES = [
+    "bold", "italic", "h2", "h3", "h4", "ol", "ul", "link", "document-link", "image", "embed",
+    "divider", "pagebreak", "image-gallery",
+]
+
+
+class CalloutBlock(blocks.StructBlock):
+    """
+    Un encart (::: {.callout-...} en Quarto) : type, titre facultatif, texte enrichi
+    pouvant porter plusieurs paragraphes — un StructBlock plutôt qu'une entité Draftail,
+    pour rester isomorphe avec un callout Quarto de plusieurs paragraphes/listes (voir
+    cms/qmd.py). Les cinq types correspondent aux callouts natifs de Quarto.
+    """
+
+    CALLOUT_CHOICES = [
+        ("note", _("Note")),
+        ("tip", _("Astuce")),
+        ("important", _("Important")),
+        ("warning", _("Avertissement")),
+        ("caution", _("Attention")),
+    ]
+
+    type = blocks.ChoiceBlock(choices=CALLOUT_CHOICES, default="note", label=_("type"))
+    title = blocks.CharBlock(label=_("titre"), required=False)
+    text = blocks.RichTextBlock(label=_("texte"), features=CONTENT_RICHTEXT_FEATURES)
+
+    class Meta:
+        icon = "help"
+        label = _("encart")
+
+
 class PolePage(Page):
     """
     Une page de pôle (civisme, arts plastiques, numérique…) : un chapeau, des
@@ -143,7 +174,7 @@ class PolePage(Page):
     ]
 
     parent_page_types = ["cms.HomePage"]
-    subpage_types = ["cms.StandardPage", "cms.ProjectPage"]
+    subpage_types = ["cms.StandardPage", "cms.ProjectPage", "cms.ContentPage"]
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
@@ -154,6 +185,9 @@ class PolePage(Page):
 
         context["posts"] = posts_by_tag(self.ghost_tag) if self.ghost_tag else []
         context["projects"] = ProjectPage.objects.live().child_of(self).order_by("-date_start")
+        # Cartes = sous-pages ContentPage publiées, dans l'ordre de l'arbre Wagtail
+        # (glisser-déposer dans l'admin) — voir cms/templates/cms/pole_page.html.
+        context["content_cards"] = ContentPage.objects.live().child_of(self).order_by("path")
         # Articles du blog interne, fiches de l'annuaire et évènements de l'agenda
         # partageant une étiquette (core.Tag) avec ce pôle — vide si le pôle n'a
         # lui-même aucune étiquette (voir gabarit : chaque section reste masquée si vide).
@@ -215,6 +249,49 @@ class ProjectPage(Page):
     search_fields = Page.search_fields + [
         index.SearchField("lead"),
         index.SearchField("location"),
+    ]
+
+    parent_page_types = ["cms.PolePage"]
+    subpage_types = []
+
+
+class ContentPage(Page):
+    """
+    Une page de contenu isomorphe avec Quarto (.qmd) : sous-page d'un pôle, dont les
+    instances publiées apparaissent comme des cartes sur la page de leur pôle (voir
+    PolePage.get_context et cms/templates/cms/pole_page.html). Calquée sur
+    BlogPostPage, mais body est un StreamField plutôt qu'un simple RichTextField : un
+    callout Quarto peut porter plusieurs paragraphes, ce qu'une seule entité de texte
+    enrichi ne peut pas représenter fidèlement (voir cms/qmd.py pour l'aller-retour
+    avec le fichier .qmd).
+    """
+
+    date = models.DateTimeField(_("date de publication"), null=True, blank=True)
+    author = models.ForeignKey(
+        "cms.Author", verbose_name=_("auteur·ice"),
+        null=True, blank=True, on_delete=models.SET_NULL, related_name="content_pages",
+    )
+    excerpt = models.CharField(_("chapeau"), max_length=300, blank=True, default="")
+    featured_image = models.ForeignKey(
+        "wagtailimages.Image", verbose_name=_("image de une"),
+        null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+    )
+    tags = models.ManyToManyField("core.Tag", blank=True, related_name="content_pages", verbose_name=_("étiquettes"))
+    body = StreamField(
+        [
+            ("prose", blocks.RichTextBlock(label=_("texte"), features=CONTENT_RICHTEXT_FEATURES)),
+            ("callout", CalloutBlock()),
+        ],
+        blank=True,
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel("date"),
+        FieldPanel("author"),
+        FieldPanel("excerpt"),
+        FieldPanel("featured_image"),
+        FieldPanel("tags"),
+        FieldPanel("body"),
     ]
 
     parent_page_types = ["cms.PolePage"]

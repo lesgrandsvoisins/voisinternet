@@ -38,6 +38,21 @@
       {% include "core/partials/scene.html" %}
     </div>
   {% endif %} {% endcomment %}
+  {% if content_cards %}
+    <div class="wrap page">
+      <section aria-labelledby="content-cards-title">
+        <h2 id="content-cards-title">{% trans "À découvrir" %}</h2>
+        <div class="poles-grid">
+          {% for card in content_cards %}
+            <a class="pole-card accent-{{ page.accent }}" href="{{ card.url }}">
+              <h3>{{ card.title }}</h3>
+              {% if card.excerpt %}<p>{{ card.excerpt }}</p>{% endif %}
+            </a>
+          {% endfor %}
+        </div>
+      </section>
+    </div>
+  {% endif %}
   {% if projects %}
     <div class="wrap page">
       <section aria-labelledby="projects-title">

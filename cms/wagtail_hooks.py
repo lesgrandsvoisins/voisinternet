@@ -22,8 +22,10 @@ from wagtail.admin.rich_text.converters.contentstate_models import Entity
 from wagtail.admin.rich_text.converters.html_to_contentstate import AtomicBlockEntityElementHandler
 from wagtail.admin.rich_text.editors.draftail import features as draftail_features
 
-from .models import BlogIndexPage, BlogPostPage
-from .qmd import export_blog_zip, export_blogpost_qmd, import_blogpost_qmd
+from .models import BlogIndexPage, BlogPostPage, ContentPage
+from .qmd import (
+    export_blog_zip, export_blogpost_qmd, export_contentpage_qmd, import_blogpost_qmd, import_contentpage_qmd,
+)
 
 
 class DividerHandler(AtomicBlockEntityElementHandler):
@@ -141,10 +143,10 @@ def _can_manage_qmd(user):
 @hooks.register("register_page_header_buttons")
 def qmd_header_buttons(page, user, view_name, next_url=None):
     """
-    Boutons « Exporter/Importer .qmd » sur l'écran d'édition d'un article de blog, et
-    « Exporter tout le blog (.zip) » sur celui d'une page d'index de blog (voir
-    cms/qmd.py) — pas sur les autres types de page, qui n'ont pas de body exportable de
-    la même façon.
+    Boutons « Exporter/Importer .qmd » sur l'écran d'édition d'un article de blog ou
+    d'une page de contenu, et « Exporter tout le blog (.zip) » sur celui d'une page
+    d'index de blog (voir cms/qmd.py) — pas sur les autres types de page, qui n'ont pas
+    de body exportable de la même façon.
     """
     specific = getattr(page, "specific", page)
     if not _can_manage_qmd(user):
@@ -159,6 +161,13 @@ def qmd_header_buttons(page, user, view_name, next_url=None):
     elif isinstance(specific, BlogIndexPage):
         yield wagtailadmin_widgets.Button(
             _("Exporter tout le blog (.zip)"), reverse("blog_qmd_export_zip"), icon_name="download", priority=70,
+        )
+    elif isinstance(specific, ContentPage):
+        yield wagtailadmin_widgets.Button(
+            _("Exporter .qmd"), reverse("content_qmd_export", args=[specific.pk]), icon_name="download", priority=70,
+        )
+        yield wagtailadmin_widgets.Button(
+            _("Importer .qmd"), reverse("content_qmd_import", args=[specific.pk]), icon_name="upload", priority=71,
         )
 
 
@@ -179,6 +188,13 @@ def qmd_listing_more_buttons(page, user, next_url=None):
     elif isinstance(specific, BlogIndexPage):
         yield wagtailadmin_widgets.Button(
             _("Exporter tout le blog (.zip)"), reverse("blog_qmd_export_zip"), icon_name="download", priority=70,
+        )
+    elif isinstance(specific, ContentPage):
+        yield wagtailadmin_widgets.Button(
+            _("Exporter .qmd"), reverse("content_qmd_export", args=[specific.pk]), icon_name="download", priority=70,
+        )
+        yield wagtailadmin_widgets.Button(
+            _("Importer .qmd"), reverse("content_qmd_import", args=[specific.pk]), icon_name="upload", priority=71,
         )
 
 
@@ -231,10 +247,53 @@ def qmd_import_view(request, pk):
     return render(request, "cms/admin/qmd_import.html", {"page": page, "view_title": _("Importer un .qmd")})
 
 
+def content_qmd_export_view(request, pk):
+    if not _can_manage_qmd(request.user):
+        raise PermissionDenied
+    page = get_object_or_404(ContentPage, pk=pk)
+    response = HttpResponse(export_contentpage_qmd(page), content_type="text/markdown; charset=utf-8")
+    response["Content-Disposition"] = f'attachment; filename="{page.slug}.qmd"'
+    return response
+
+
+def content_qmd_import_view(request, pk):
+    if not _can_manage_qmd(request.user):
+        raise PermissionDenied
+    page = get_object_or_404(ContentPage, pk=pk)
+
+    if request.method == "POST":
+        uploaded = request.FILES.get("qmd_file")
+        if not uploaded:
+            messages.error(request, _("Choisissez un fichier .qmd à importer."))
+        else:
+            try:
+                imported = import_contentpage_qmd(uploaded.read().decode("utf-8"))
+            except Exception as exc:
+                # Fichier fourni par la personne (contenu non fiable) : toute erreur de
+                # lecture doit rester un message, jamais une page 500.
+                messages.error(request, _("Échec de l'import : %(error)s") % {"error": exc})
+            else:
+                if imported.pk == page.pk:
+                    messages.success(request, _("Page mise à jour depuis le fichier .qmd."))
+                else:
+                    messages.warning(
+                        request,
+                        _(
+                            "Le fichier .qmd portait la clé d'une autre page : « %(title)s » a été "
+                            "créée ou mise à jour à la place de celle-ci."
+                        ) % {"title": imported.title},
+                    )
+                return redirect("wagtailadmin_pages:edit", imported.pk)
+
+    return render(request, "cms/admin/qmd_import.html", {"page": page, "view_title": _("Importer un .qmd")})
+
+
 @hooks.register("register_admin_urls")
 def register_qmd_admin_urls():
     return [
         path("blog-qmd/<int:pk>/export/", qmd_export_view, name="blog_qmd_export"),
         path("blog-qmd/<int:pk>/import/", qmd_import_view, name="blog_qmd_import"),
         path("blog-qmd/export-zip/", qmd_export_zip_view, name="blog_qmd_export_zip"),
+        path("content-qmd/<int:pk>/export/", content_qmd_export_view, name="content_qmd_export"),
+        path("content-qmd/<int:pk>/import/", content_qmd_import_view, name="content_qmd_import"),
     ]

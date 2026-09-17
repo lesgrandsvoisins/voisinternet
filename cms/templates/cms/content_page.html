@@ -1,0 +1,42 @@
+{% extends "core/base.html" %}
+{% load i18n wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}{{ page.title }} — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+  {% if page.featured_image %}{% image page.featured_image fill-1600x500 as hero_bg %}{% endif %}
+  <div class="page-head{% if page.get_parent.specific.accent %} accent-{{ page.get_parent.specific.accent }}{% endif %}"{% if hero_bg %} style="background-image: linear-gradient(var(--page-head-overlay), var(--page-head-overlay)), url('{{ hero_bg.url }}')"{% endif %}>
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+        <ol>
+          <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+          <li><a href="{{ page.get_parent.url }}">{{ page.get_parent.title }}</a></li>
+          <li aria-current="page">{{ page.title }}</li>
+        </ol>
+      </nav>
+      <h1>{{ page.title }}</h1>
+      {% if page.excerpt %}<p class="lead">{{ page.excerpt }}</p>{% endif %}
+      {% if page.date or page.author %}
+        <p class="muted">
+          {% if page.date %}<time datetime="{{ page.date|date:'c' }}">{{ page.date|date:"j F Y" }}</time>{% endif %}
+          {% if page.author %}{% if page.date %} — {% endif %}{{ page.author.name }}{% endif %}
+        </p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="wrap page">
+    <article class="content-page">
+      {% for block in page.body %}
+        {% if block.block_type == "prose" %}
+          <div class="markdown">{{ block.value }}</div>
+        {% elif block.block_type == "callout" %}
+          <aside class="callout callout-{{ block.value.type }}">
+            {% if block.value.title %}<p class="callout-title">{{ block.value.title }}</p>{% endif %}
+            {{ block.value.text }}
+          </aside>
+        {% endif %}
+      {% endfor %}
+    </article>
+    <p class="muted"><a href="{{ page.get_parent.url }}">{% blocktrans with pole=page.get_parent.title %}← Retour à {{ pole }}{% endblocktrans %}</a></p>
+  </div>
+{% endblock %}

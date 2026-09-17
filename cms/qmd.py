@@ -1,9 +1,18 @@
 """
-Export/import individuel d'un article de blog (cms.BlogPostPage) au format .qmd (Quarto
-Markdown) — un fichier par langue. Utilisé par les commandes de gestion
-export_blog_qmd/import_blog_qmd (cms/management/commands/) et par les boutons
+Export/import individuel d'un article de blog (cms.BlogPostPage) ou d'une page de
+contenu (cms.ContentPage) au format .qmd (Quarto Markdown) — un fichier par langue.
+Utilisé par les commandes de gestion export_blog_qmd/import_blog_qmd/
+export_content_qmd/import_content_qmd (cms/management/commands/) et par les boutons
 Exporter/Importer .qmd de l'écran d'édition Wagtail (cms/wagtail_hooks.py), pour éditer
 des articles avec des outils Quarto externes.
+
+Pour cms.ContentPage, l'isomorphisme avec Quarto va plus loin que pour le blog : les
+callouts (::: {.callout-...}), tableaux et notes de bas de page ont un équivalent exact
+dans les deux sens (voir cms.models.ContentPage/CalloutBlock, _split_content_blocks et
+_ContentHTMLToMarkdown ci-dessous). Limite assumée : ces deux derniers arrivent
+uniquement par import .qmd — Draftail (l'éditeur de texte enrichi Wagtail) n'a pas de
+bouton pour créer ou modifier un tableau ou une note de bas de page, donc l'aller-retour
+reste fidèle tant que personne ne retouche cette zone dans l'éditeur riche.
 
 Le frontmatter YAML porte `key` (BlogPostPage.translation_key, le même pour toutes les
 traductions d'un même article) et `lang` (le code de la locale) : c'est cette paire, pas
@@ -32,6 +41,8 @@ from html.parser import HTMLParser
 from io import BytesIO
 from pathlib import Path
 
+import bleach
+import markdown as md
 import yaml
 from django.utils import timezone
 from django.utils.dateparse import parse_date, parse_datetime
@@ -40,10 +51,137 @@ from wagtail.models import Locale, Page, Site
 
 from core.templatetags.markdown_filters import markdown_filter
 
-from .models import BlogIndexPage, BlogPostPage
+from .models import BlogIndexPage, BlogPostPage, ContentPage, PolePage
 
 FRONTMATTER_RE = re.compile(r"\A---\s*\n(.*?\n)---\s*\n?(.*)\Z", re.DOTALL)
 PAGEBREAK_SHORTCODE = "{{< pagebreak >}}"
+
+# Liste blanche bleach dédiée à l'import de cms.ContentPage : les mêmes balises que
+# core.templatetags.markdown_filters.markdown_filter (fiches de l'annuaire, contenu
+# saisi en libre-service) plus tableaux/notes de bas de page (extension "extra" de
+# python-markdown, voir _content_markdown_to_html) — jamais exposée aux comptes
+# ordinaires, réservée au chemin d'import .qmd (cms/wagtail_hooks.py::_can_manage_qmd).
+_CONTENT_ALLOWED_TAGS = [
+    "p", "br", "hr", "strong", "em", "b", "i", "u", "s", "del",
+    "a", "ul", "ol", "li", "blockquote", "code", "pre",
+    "h1", "h2", "h3", "h4", "h5", "h6",
+    "table", "thead", "tbody", "tr", "th", "td",
+    "img", "span", "sup", "div",
+]
+_CONTENT_ALLOWED_ATTRIBUTES = {
+    "a": ["href", "title", "rel", "id"],
+    "img": ["src", "alt", "title"],
+    "li": ["id"],
+    "sup": ["id"],
+    "*": ["class"],
+}
+_CONTENT_ALLOWED_PROTOCOLS = ["http", "https", "mailto"]
+
+# Callout Quarto : ::: {.callout-note} … ::: (pas de callouts imbriqués — voir
+# CalloutBlock, cms/models.py). Attribut title="…" facultatif, seule forme de titre
+# reconnue (pas de première ligne "## Titre" traitée spécialement, pour rester simple).
+_CALLOUT_OPEN_RE = re.compile(
+    r'^:::+\s*\{\.callout-(note|tip|important|warning|caution)(?:\s+title="([^"]*)")?\s*\}\s*$'
+)
+_FENCE_CLOSE_RE = re.compile(r'^:::+\s*$')
+
+
+def _content_markdown_to_html(text):
+    html = md.markdown(text, extensions=["extra", "sane_lists"])
+    return bleach.clean(
+        html, tags=_CONTENT_ALLOWED_TAGS, attributes=_CONTENT_ALLOWED_ATTRIBUTES,
+        protocols=_CONTENT_ALLOWED_PROTOCOLS, strip=True,
+    )
+
+
+_FOOTNOTE_DEF_RE = re.compile(r'^\[\^([^\]]+)\]:[ \t]?(.*)$')
+_FOOTNOTE_REF_RE = re.compile(r'\[\^([^\]]+)\](?!:)')
+
+
+def _extract_footnote_defs(body_md):
+    """
+    Extrait les définitions de notes de bas de page ([^id]: texte, avec ses lignes de
+    continuation indentées) de tout le document, où qu'elles soient : la convention
+    Quarto/Pandoc les place en fin de document, séparées de leur référence, alors que
+    le corps est ensuite découpé en blocs indépendants (_split_content_blocks
+    ci-dessous). Renvoie (texte sans les définitions, {id: bloc Markdown de la
+    définition}) — chaque segment ne se voit rattacher que les définitions qu'il
+    référence réellement (voir _split_content_blocks) : python-markdown rend sinon
+    toutes les définitions qu'on lui passe, y compris celles non référencées dans ce
+    segment précis, dupliquant leur rendu d'un bloc à l'autre.
+    """
+    lines = body_md.split("\n")
+    remaining = []
+    defs = {}
+    i = 0
+    while i < len(lines):
+        match = _FOOTNOTE_DEF_RE.match(lines[i])
+        if not match:
+            remaining.append(lines[i])
+            i += 1
+            continue
+        def_id = match.group(1)
+        def_lines = [lines[i]]
+        i += 1
+        while i < len(lines) and (not lines[i].strip() or lines[i].startswith((" ", "\t"))):
+            if not lines[i].strip() and (i + 1 >= len(lines) or not lines[i + 1].startswith((" ", "\t"))):
+                break
+            def_lines.append(lines[i])
+            i += 1
+        defs[def_id] = "\n".join(def_lines)
+    return "\n".join(remaining), defs
+
+
+def _split_content_blocks(body_md):
+    """
+    Découpe le Markdown d'une cms.ContentPage en blocs "prose"/"callout" pour son
+    StreamField body (voir cms.models.ContentPage), en reconnaissant les callouts
+    Quarto ci-dessus. Tout le reste (avant/après/entre deux callouts) devient un ou
+    plusieurs blocs "prose". Chaque segment est converti indépendamment par
+    _content_markdown_to_html puis _restore_wagtail_embeds, comme pour le blog — les
+    définitions de notes de bas de page (_extract_footnote_defs) sont rattachées à
+    chaque segment avant conversion, python-markdown n'émettant que celles qui y sont
+    effectivement référencées.
+    """
+    body_md = body_md.replace(PAGEBREAK_SHORTCODE, '<hr class="pagebreak">')
+    body_md, footnote_defs = _extract_footnote_defs(body_md)
+    lines = body_md.split("\n")
+    result = []
+    prose_lines = []
+
+    def _to_html(markdown_text):
+        used_ids = dict.fromkeys(_FOOTNOTE_REF_RE.findall(markdown_text))
+        defs_for_segment = "\n\n".join(footnote_defs[i] for i in used_ids if i in footnote_defs)
+        text = f"{markdown_text}\n\n{defs_for_segment}" if defs_for_segment else markdown_text
+        return _self_close_void_tags(_restore_wagtail_embeds(_content_markdown_to_html(text)))
+
+    def flush_prose():
+        text = "\n".join(prose_lines).strip("\n")
+        prose_lines.clear()
+        if text.strip():
+            result.append({"type": "prose", "value": _to_html(text)})
+
+    i = 0
+    while i < len(lines):
+        match = _CALLOUT_OPEN_RE.match(lines[i])
+        if match:
+            flush_prose()
+            callout_type, title = match.group(1), match.group(2) or ""
+            inner_lines = []
+            i += 1
+            while i < len(lines) and not _FENCE_CLOSE_RE.match(lines[i]):
+                inner_lines.append(lines[i])
+                i += 1
+            i += 1  # saute la ligne de fermeture ":::"
+            result.append({
+                "type": "callout",
+                "value": {"type": callout_type, "title": title, "text": _to_html("\n".join(inner_lines))},
+            })
+        else:
+            prose_lines.append(lines[i])
+            i += 1
+    flush_prose()
+    return result
 
 
 def _absolute_url(path):
@@ -243,6 +381,125 @@ class _HTMLToMarkdown(HTMLParser):
         return re.sub(r"\n{3,}", "\n\n", text).strip() + "\n"
 
 
+class _ContentHTMLToMarkdown(_HTMLToMarkdown):
+    """
+    Étend _HTMLToMarkdown avec les deux structures que produit l'extension "extra" de
+    python-markdown mais que BlogPostPage.body ne connaît pas : tableaux et notes de
+    bas de page (cms.ContentPage, voir son docstring dans cms/models.py). Capture le
+    Markdown d'une cellule de tableau ou d'une définition de note en substituant
+    temporairement self.out (_push_capture/_pop_capture) : les gestionnaires hérités
+    (gras, liens, images…) fonctionnent alors sans modification à l'intérieur.
+    """
+
+    def __init__(self, media_files=None):
+        super().__init__(media_files=media_files)
+        self._capture_stack = []
+        self._table = None
+        self._footnotes = None
+        self._footnote_ref = None
+        self._skip_depth = 0
+
+    def _push_capture(self):
+        self._capture_stack.append(self.out)
+        self.out = []
+
+    def _pop_capture(self):
+        captured = "".join(self.out).strip()
+        self.out = self._capture_stack.pop()
+        return captured
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if self._skip_depth:
+            self._skip_depth += 1
+            return
+        if tag == "table":
+            self._table = {"header": [], "rows": [], "in_head": False}
+            return
+        if self._table is not None:
+            if tag == "thead":
+                self._table["in_head"] = True
+                return
+            if tag == "tr":
+                self._table["current_row"] = []
+                return
+            if tag in ("th", "td"):
+                self._push_capture()
+                return
+        if tag == "div" and "footnote" in (attrs.get("class") or "").split():
+            self._footnotes = {"items": {}}
+            return
+        if self._footnotes is not None:
+            if tag == "hr":
+                return
+            if tag == "li":
+                self._footnotes["current_id"] = (attrs.get("id") or "").removeprefix("fn:")
+                self._push_capture()
+                return
+            if tag == "a" and "footnote-backref" in (attrs.get("class") or "").split():
+                self._skip_depth = 1
+                return
+        if tag == "sup" and (attrs.get("id") or "").startswith("fnref:"):
+            self._footnote_ref = attrs["id"].split(":", 1)[1]
+            self._skip_depth = 1
+            return
+        super().handle_starttag(tag, attrs)
+
+    def handle_endtag(self, tag):
+        if self._skip_depth:
+            self._skip_depth -= 1
+            if self._skip_depth == 0 and tag == "sup" and self._footnote_ref:
+                self.out.append(f"[^{self._footnote_ref}]")
+                self._footnote_ref = None
+            return
+        if self._table is not None:
+            if tag == "table":
+                self._ensure_blank_line()
+                self.out.append(self._render_table(self._table))
+                self._table = None
+                return
+            if tag == "thead":
+                self._table["in_head"] = False
+                return
+            if tag == "tr":
+                row = self._table.pop("current_row", [])
+                (self._table["header"] if self._table["in_head"] else self._table["rows"]).append(row)
+                return
+            if tag in ("th", "td"):
+                cell = self._pop_capture().replace("|", "\\|").replace("\n", " ")
+                self._table["current_row"].append(cell)
+                return
+        if self._footnotes is not None:
+            if tag == "li" and "current_id" in self._footnotes:
+                text = self._pop_capture()
+                self._footnotes["items"][self._footnotes.pop("current_id")] = text
+                return
+            if tag == "div" and "current_id" not in self._footnotes:
+                self._ensure_blank_line()
+                for fn_id, text in self._footnotes["items"].items():
+                    self.out.append(f"[^{fn_id}]: {text}\n\n")
+                self._footnotes = None
+                return
+        super().handle_endtag(tag)
+
+    def handle_data(self, data):
+        if self._skip_depth:
+            return
+        super().handle_data(data)
+
+    @staticmethod
+    def _render_table(table):
+        width = len(table["header"][0]) if table["header"] else (len(table["rows"][0]) if table["rows"] else 0)
+        header = table["header"][0] if table["header"] else [""] * width
+        lines = [
+            "| " + " | ".join(header) + " |",
+            "| " + " | ".join(["---"] * width) + " |",
+        ]
+        for row in table["rows"]:
+            lines.append("| " + " | ".join(row) + " |")
+        return "\n".join(lines) + "\n\n"
+
+
 def export_blogpost_qmd(page, media_files=None):
     """
     Sérialise un BlogPostPage (une langue) en texte .qmd. `media_files=None` (défaut,
@@ -309,6 +566,55 @@ def export_blog_zip():
                 finally:
                     file_field.close()
     return buffer.getvalue()
+
+
+def export_contentpage_qmd(page, media_files=None):
+    """
+    Sérialise une cms.ContentPage (une langue) en texte .qmd — même contrat
+    qu'export_blogpost_qmd (frontmatter key/lang, marqueurs wagtail-image/-document/
+    -page), mais parcourt les blocs de body (StreamField) plutôt qu'un RichTextField
+    plat : un bloc "prose" devient du Markdown normal, un bloc "callout" devient un div
+    Pandoc/Quarto (::: {.callout-...}), voir _ContentHTMLToMarkdown et
+    cms.models.ContentPage.
+    """
+    parts = []
+    for block in page.body:
+        converter = _ContentHTMLToMarkdown(media_files=media_files)
+        if block.block_type == "prose":
+            converter.feed(block.value.source)
+            parts.append(converter.result())
+        elif block.block_type == "callout":
+            converter.feed(block.value["text"].source)
+            fence_attrs = f'.callout-{block.value["type"]}'
+            if block.value["title"]:
+                fence_attrs += f' title="{block.value["title"]}"'
+            parts.append(f"::: {{{fence_attrs}}}\n{converter.result()}:::\n")
+    body_md = "\n".join(parts).strip() + "\n"
+
+    front = {
+        "title": page.title,
+        "key": str(page.translation_key),
+        "lang": page.locale.language_code,
+        "pole": page.get_parent().slug,
+        "slug": page.slug,
+        "url": page.full_url,
+    }
+    if page.date:
+        front["date"] = page.date.isoformat()
+    if page.author_id:
+        front["author"] = page.author.name
+    if page.excerpt:
+        front["excerpt"] = page.excerpt
+    if page.tags.exists():
+        front["tags"] = list(page.tags.order_by("name").values_list("name", flat=True))
+    if page.featured_image_id:
+        if media_files is not None:
+            front["featured_image"] = _collect_image_file(page.featured_image_id, media_files)
+        else:
+            front["featured_image"] = _absolute_url(page.featured_image.get_rendition("width-1600").url)
+
+    frontmatter = yaml.safe_dump(front, allow_unicode=True, sort_keys=False, default_flow_style=False)
+    return f"---\n{frontmatter}---\n\n{body_md}"
 
 
 class _RestoreWagtailEmbeds(HTMLParser):
@@ -435,6 +741,68 @@ def import_blogpost_qmd(text):
         if blog_index is None:
             raise ValueError(f"Aucune BlogIndexPage en langue « {lang} » pour y rattacher l'article.")
         blog_index.add_child(instance=page)
+    page.save_revision().publish()
+
+    tags = front.get("tags") or []
+    if tags:
+        from core.models import Tag
+
+        page.tags.set([Tag.objects.get_or_create(name=t, defaults={"slug": slugify(t)})[0] for t in tags])
+
+    return page
+
+
+def import_contentpage_qmd(text):
+    """
+    Crée ou met à jour une cms.ContentPage à partir d'un texte .qmd — même logique
+    d'identification (translation_key + lang) qu'import_blogpost_qmd. Le corps est
+    reconstruit en blocs "prose"/"callout" par _split_content_blocks. Pour une page
+    nouvelle, le frontmatter "pole" (slug de la cms.PolePage parente, tel qu'écrit par
+    export_contentpage_qmd) indique où la rattacher ; à défaut, le premier pôle trouvé
+    dans la langue cible est utilisé.
+    """
+    match = FRONTMATTER_RE.match(text)
+    if not match:
+        raise ValueError("Frontmatter YAML manquant (le fichier doit commencer par ---).")
+    front = yaml.safe_load(match.group(1)) or {}
+    body_md = match.group(2)
+
+    lang = front.get("lang") or "fr"
+    locale = Locale.objects.get(language_code=lang)
+    key = front.get("key")
+
+    page = ContentPage.objects.filter(translation_key=key, locale=locale).first() if key else None
+    if page is None:
+        sibling = (
+            ContentPage.objects.filter(translation_key=key).exclude(locale=locale).first() if key else None
+        )
+        page = sibling.copy_for_translation(locale, copy_parents=True) if sibling else ContentPage(locale=locale)
+        if key and not page.pk:
+            page.translation_key = key
+
+    page.title = front.get("title") or page.title or front.get("slug") or ""
+    page.slug = front.get("slug") or slugify(page.title)
+    page.date = _parse_date(front["date"]) if front.get("date") else None
+    author_name = front.get("author") or ""
+    if author_name:
+        from .models import Author
+
+        page.author = Author.objects.filter(name=author_name, locale=locale).first() or Author.objects.create(
+            name=author_name, locale=locale,
+        )
+    else:
+        page.author = None
+    page.excerpt = (front.get("excerpt") or "")[:300]
+    page.body = _split_content_blocks(body_md)
+
+    is_new = page.pk is None
+    if is_new:
+        poles = PolePage.objects.filter(locale=locale)
+        pole_slug = front.get("pole")
+        pole = poles.filter(slug=pole_slug).first() if pole_slug else poles.first()
+        if pole is None:
+            raise ValueError(f"Aucune PolePage en langue « {lang} » pour y rattacher la page.")
+        pole.add_child(instance=page)
     page.save_revision().publish()
 
     tags = front.get("tags") or []

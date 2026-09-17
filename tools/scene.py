@@ -4,7 +4,10 @@ Usage : python tools/scene.py  (réécrit core/templates/core/partials/scene.htm
 """
 from pathlib import Path
 W, H = 720, 400
-SERIF = "Charter,'Bitstream Charter',Georgia,serif"
+SERIF = "\"Lack\", \"Charter\", \"Bitstream Charter\", \"Sitka Text\", Cambria, Georgia, serif"
+SERIFFONTWEIGHT = "700"
+SERIFFONTSTYLE = "italic"
+SANSERIF = "\"Fira Sans\", system-ui, -apple-system, \"Segoe UI\", Roboto, \"Noto Sans\", sans-serif"
 out = []
 a = out.append
 
@@ -34,7 +37,7 @@ def cornice(x, w, top):
 def sign(x, w, y, text, size=12, bg="var(--sign-bg)", fg="var(--sun)", h=17):
     a(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="2" fill="{bg}"/>')
     a(f'<text x="{x+w/2}" y="{y+h/2+size*0.36:.1f}" text-anchor="middle" font-family="{SERIF}" '
-      f'font-size="{size}" font-weight="700" fill="{fg}">{text}</text>')
+      f'font-size="{size}" font-weight="{SERIFFONTWEIGHT}" font-style="{SERIFFONTSTYLE}" fill="{fg}">{text}</text>')
 
 def awning(x, w, y, c1, c2, stripes=6):
     a(f'<polygon points="{x+3},{y} {x+w-3},{y} {x+w+3},{y+15} {x-3},{y+15}" fill="{c1}"/>')
@@ -142,7 +145,7 @@ x, w, top = 660, 56, 118
 cornice(x, w, top)
 a(f'<rect x="{x}" y="{top}" width="{w}" height="{GROUND-top}" fill="var(--paper)" stroke="var(--line)"/>')
 a(f'<rect x="{x+14}" y="{top+10}" width="28" height="28" rx="4" fill="#2B5FA8"/>'
-  f'<text x="{x+28}" y="{top+31}" text-anchor="middle" font-family="system-ui,sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">H</text>')
+  f'<text x="{x+28}" y="{top+31}" text-anchor="middle" font-family="{SANSERIF}" font-size="20" font-weight="700" fill="#FFFFFF">H</text>')
 leds += windows(x, w, top+44, 292, 2, 4, lit=(1, 4), led=5, ww=12, wh=20)
 a(f'<rect x="{x+6}" y="298" width="{w-12}" height="6" fill="var(--zinc)"/>')
 a(f'<rect x="{x+14}" y="304" width="28" height="{GROUND-304}" fill="var(--win)"/>')

@@ -89,6 +89,49 @@
       </div>
     </section>
   {% endif %}
+  <section class="block" aria-label="{% trans 'Le guide et le blog' %}">
+    <div class="wrap two two-even">
+      <div>
+        <h2>
+          <span class="form"><span class="V">W</span>iki</span>
+        </h2>
+        {% if books %}
+          <ul class="books">
+            {% for book in books %}
+              <li>
+                <a href="{{ book.url }}"><strong>{{ book.title }}</strong>
+                  {% if book.summary %}<span>{{ book.summary }}</span>{% endif %}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="intro">{% trans "Les livres du guide s'afficheront ici." %}</p>
+        {% endif %}
+        <a class="more" href="{{ GUIDE_URL }}">{% trans "Tout le guide" %}</a>
+      </div>
+      <div>
+        <h2>
+          <span class="form"> <span class="V">B</span>log</span>
+        </h2>
+        {% if posts %}
+          <ul class="posts">
+            {% for post in posts %}
+              <li{% if post.featured %} class="feat"{% endif %}>
+                <a href="{{ post.url }}">
+                  <h3>{{ post.title }}</h3>
+                  <time datetime="{{ post.date|date:'c' }}">{{ post.date|date:"j F Y" }}</time>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="intro">{% trans "Les derniers articles s'afficheront ici." %}</p>
+        {% endif %}
+        <a class="more" href="{{ conj.grandzine.href }}">{% trans "Tous les articles" %}</a>
+      </div>
+    </div>
+  </section>
   <section class="block" aria-labelledby="explore-title">
     <div class="wrap">
       <h2 id="explore-title">{% trans "Explorer le site" %}</h2>
@@ -190,49 +233,6 @@
         <h2>{% trans "L'équipe" %}</h2>
         <p>{% trans "Chris Mann (président), Sviatlana Viarbitskaya (trésorière) et Caroline Lhomme (vice-présidente) sont à votre service." %}</p>
         <a class="more" href="{{ conj.grandsvoisins.href }}#le-bureau">{% trans "Rencontrer le bureau" %}</a>
-      </div>
-    </div>
-  </section>
-  <section class="block" aria-label="{% trans 'Le guide et le blog' %}">
-    <div class="wrap two two-even">
-      <div>
-        <h2>
-          <span class="form"><span class="V">W</span>iki</span>
-        </h2>
-        {% if books %}
-          <ul class="books">
-            {% for book in books %}
-              <li>
-                <a href="{{ book.url }}"><strong>{{ book.title }}</strong>
-                  {% if book.summary %}<span>{{ book.summary }}</span>{% endif %}
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p class="intro">{% trans "Les livres du guide s'afficheront ici." %}</p>
-        {% endif %}
-        <a class="more" href="{{ GUIDE_URL }}">{% trans "Tout le guide" %}</a>
-      </div>
-      <div>
-        <h2>
-          <span class="form"> <span class="V">B</span>log</span>
-        </h2>
-        {% if posts %}
-          <ul class="posts">
-            {% for post in posts %}
-              <li{% if post.featured %} class="feat"{% endif %}>
-                <a href="{{ post.url }}">
-                  <h3>{{ post.title }}</h3>
-                  <time datetime="{{ post.date|date:'c' }}">{{ post.date|date:"j F Y" }}</time>
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p class="intro">{% trans "Les derniers articles s'afficheront ici." %}</p>
-        {% endif %}
-        <a class="more" href="{{ conj.grandzine.href }}">{% trans "Tous les articles" %}</a>
       </div>
     </div>
   </section>

@@ -341,6 +341,12 @@ a {
   max-width: unset;
 }
 
+
+.top>.wrap>.wordmark {
+  display: flex;
+  flex-direction: column;
+}
+
 .mega>.wrap {
   display: flex;
   flex-wrap: wrap;
@@ -3220,17 +3226,22 @@ blockquote p {
     min-height: 0;
   }
 
-  div.menu {
+  .brand>.wordmark {
+    display: none;
+    flex-direction: column;
+  }
+
+  /* div.menu {
     order: 1;
   }
 
   .account-panel {
     order: 2;
-  }
+  } */
 
   .brand {
-    order: 3;
-    flex-basis: 100%;
+    /* order: 3;
+    flex-basis: 100%; */
     justify-content: center;
   }
 

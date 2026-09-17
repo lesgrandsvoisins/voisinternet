@@ -3,7 +3,9 @@
 {% block title %}{% trans "Mes raccourcis — lesgrandsvoisins.com" %}{% endblock %}
 {% block content %}
 {% trans "Les services que vous avez choisis, à ajouter ou retirer à tout moment." as page_lead %}
-{% include "core/partials/page_head.html" with item=conj.raccourcis lead=page_lead %}
+{% url 'core:account' as account_url %}
+{% trans "Mon compte" as account_title %}
+{% include "core/partials/page_head.html" with item=conj.raccourcis lead=page_lead parent_url=account_url parent_title=account_title %}
 <div class="wrap page">
   <section aria-labelledby="sc-title">
     <div class="split">

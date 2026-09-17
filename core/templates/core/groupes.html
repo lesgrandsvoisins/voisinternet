@@ -3,7 +3,9 @@
 {% block title %}{% trans "Mes groupes — lesgrandsvoisins.com" %}{% endblock %}
 {% block content %}
 {% trans "Les identités auxquelles vous adhérez, individuelles ou collectives." as page_lead %}
-{% include "core/partials/page_head.html" with item=conj.groupes lead=page_lead %}
+{% url 'core:account' as account_url %}
+{% trans "Mon compte" as account_title %}
+{% include "core/partials/page_head.html" with item=conj.groupes lead=page_lead parent_url=account_url parent_title=account_title %}
 <div class="wrap page">
   <section aria-labelledby="mb-title">
     <div class="split">

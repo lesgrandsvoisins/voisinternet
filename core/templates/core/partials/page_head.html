@@ -4,6 +4,7 @@
       <ol>
         <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
         {% comment %} <li>{{ item.group_caption }}</li> {% endcomment %}
+        {% if parent_url %}<li><a href="{{ parent_url }}">{{ parent_title }}</a></li>{% endif %}
         <li aria-current="page">{{ item.entry.title }}</li>
       </ol>
     </nav>

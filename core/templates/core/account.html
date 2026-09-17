@@ -33,6 +33,31 @@
   {% endif %}
 
   {% if user.is_authenticated or account %}
+  <section class="dashboard-summary" aria-label="{% trans "Aperçu de mon compte" %}">
+    <a class="stat-tile" href="#sc2-title">
+      <span class="stat-number">{{ shortcuts|length }}</span>
+      <span class="stat-label">{% trans "Raccourcis" %}</span>
+    </a>
+    <a class="stat-tile" href="#mb2-title">
+      <span class="stat-number">{{ memberships|length }}</span>
+      <span class="stat-label">{% trans "Groupes" %}</span>
+    </a>
+    <a class="stat-tile" href="#fiches2-title">
+      <span class="stat-number">{{ owned_entries|length }}</span>
+      <span class="stat-label">{% trans "Fiches annuaire" %}</span>
+    </a>
+    <a class="stat-tile" href="#events2-title">
+      <span class="stat-number">{{ managed_events|length }}</span>
+      <span class="stat-label">{% trans "Évènements" %}</span>
+    </a>
+    {% if user.is_authenticated %}
+    <a class="stat-tile" href="#fin-title">
+      <span class="stat-number">{{ account_contributions|length }}</span>
+      <span class="stat-label">{% trans "Contributions" %}</span>
+    </a>
+    {% endif %}
+  </section>
+
   <section aria-labelledby="sc-title">
     <div class="split">
       <h2 id="sc-title">{% trans "Mon compte" %}</h2>

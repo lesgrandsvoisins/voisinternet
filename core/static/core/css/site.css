@@ -2355,6 +2355,46 @@ blockquote p {
   border-color: var(--sun)
 }
 
+/* Aperçu en tête de tableau de bord (core/templates/core/account.html) : quelques
+   chiffres-clés, chacun un lien d'ancrage direct vers sa section détaillée plus bas. */
+.dashboard-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: .75rem;
+  margin: 1.5rem 0 2rem
+}
+
+.stat-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .2rem;
+  padding: 1.25rem 1rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  text-decoration: none;
+  color: inherit;
+  text-align: center
+}
+
+.stat-tile:hover {
+  background: var(--sun-soft);
+  border-color: var(--sun)
+}
+
+.stat-number {
+  font-family: var(--display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1
+}
+
+.stat-label {
+  font-size: .85rem;
+  color: var(--ink-soft)
+}
+
 .announcement-card {
   display: flex;
   align-items: center;

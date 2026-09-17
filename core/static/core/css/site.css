@@ -2611,6 +2611,105 @@ blockquote p {
   color: var(--ink-soft)
 }
 
+/* Calendrier mensuel de l'agenda sur la home (core/partials/agenda_calendar.html) :
+   navigation mois par mois en simples liens (?mois=AAAA-MM), sans JavaScript ; les
+   évènements du jour sont de petites icônes qui renvoient vers leur fiche. */
+.cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: .75rem
+}
+
+.cal-month-label {
+  text-transform: capitalize
+}
+
+.cal-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.1rem
+}
+
+.cal-nav-btn:hover {
+  background: var(--hover)
+}
+
+.cal {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px
+}
+
+.cal-head {
+  text-align: center;
+  font-size: .75rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  padding-bottom: .3rem
+}
+
+.cal-day {
+  min-height: 3.4rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: .25rem;
+  background: var(--paper)
+}
+
+.cal-day.out {
+  opacity: .35
+}
+
+.cal-day.today {
+  border-color: var(--sun);
+  border-width: 2px
+}
+
+.cal-day-num {
+  font-size: .78rem;
+  color: var(--ink-soft)
+}
+
+.cal-events {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-top: .2rem
+}
+
+.cal-event {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: var(--led);
+  display: block;
+  overflow: hidden
+}
+
+.cal-event img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover
+}
+
+@media (max-width:550px) {
+  .cal-day {
+    min-height: 2.6rem;
+    padding: .15rem
+  }
+
+  .cal-day-num {
+    font-size: .68rem
+  }
+}
+
 /* Prochains évènements : une carte par évènement, avec une éphéméride à déchirer pour
    repérer la date d'un coup d'œil — mise en page identique, qu'il y ait une photo,
    une description, les deux ou ni l'une ni l'autre. */

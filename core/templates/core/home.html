@@ -33,22 +33,20 @@
     </div>
   </section>
   {% include "core/partials/announcement_card.html" %}
-  {% if upcoming_events %}
-    <section class="block" aria-labelledby="next-title">
-      <div class="wrap two two-even">
-        <div>
-          <h2 id="next-title">{% trans "Prochainement" %}</h2>
-          <p class="intro">
-            {% blocktrans %}Permanence chaque lundi de 12h à 19h30, en personne (93 av. du Général Leclerc, 75014 Paris — métro Alésia, Atelier de la Ressourcerie Créative) ou en ligne sur meet.lesgrandsvoisins.com.{% endblocktrans %}
-          </p>
-          <a class="more" href="{% url 'core:agenda' %}">{% trans "Tout l'agenda" %}</a>
-        </div>
-        <div>
-          {% include "core/partials/event_list.html" with events=upcoming_events %}
-        </div>
+  <section class="block" aria-labelledby="next-title">
+    <div class="wrap two two-even">
+      <div>
+        <h2 id="next-title">{% trans "Prochainement" %}</h2>
+        <p class="intro">
+          {% blocktrans %}Permanence chaque lundi de 12h à 19h30, en personne (93 av. du Général Leclerc, 75014 Paris — métro Alésia, Atelier de la Ressourcerie Créative) ou en ligne sur meet.lesgrandsvoisins.com.{% endblocktrans %}
+        </p>
+        <a class="more" href="{% url 'core:agenda' %}">{% trans "Tout l'agenda" %}</a>
       </div>
-    </section>
-  {% endif %}
+      <div>
+        {% include "core/partials/agenda_calendar.html" %}
+      </div>
+    </div>
+  </section>
   {% if poles %}
     <section class="block" aria-labelledby="poles-title">
       <div class="wrap">

@@ -1,4 +1,6 @@
+import calendar
 import re
+from datetime import date, timedelta
 from urllib.parse import urlencode
 
 from django.conf import settings
@@ -69,6 +71,48 @@ def _safe_next(request, fallback):
     return fallback
 
 
+def _month_calendar(request):
+    """
+    Calendrier mensuel de l'agenda pour la home (voir home) : mois demandé via ?mois=
+    (AAAA-MM), semaines complètes du lundi au dimanche, y compris les jours des mois
+    voisins pour compléter la grille — sans évènement dessus, juste pour l'alignement.
+    """
+    today = timezone.localdate()
+    try:
+        year, month = (int(part) for part in request.GET.get("mois", "").split("-"))
+        first_of_month = date(year, month, 1)
+    except (TypeError, ValueError):
+        first_of_month = date(today.year, today.month, 1)
+
+    month_dates = list(calendar.Calendar(firstweekday=0).itermonthdates(first_of_month.year, first_of_month.month))
+    events_by_day = {}
+    for event in Event.objects.filter(
+        public=True, start__date__gte=month_dates[0], start__date__lte=month_dates[-1],
+    ).order_by("start"):
+        events_by_day.setdefault(event.start.date(), []).append(event)
+
+    weeks = [
+        [
+            {
+                "date": day,
+                "in_month": day.month == first_of_month.month,
+                "today": day == today,
+                "events": events_by_day.get(day, []),
+            }
+            for day in month_dates[i:i + 7]
+        ]
+        for i in range(0, len(month_dates), 7)
+    ]
+    previous_month = (first_of_month.replace(day=1) - timedelta(days=1)).replace(day=1)
+    next_month = (first_of_month.replace(day=28) + timedelta(days=4)).replace(day=1)
+    return {
+        "weeks": weeks,
+        "month_label": first_of_month,
+        "previous_month": previous_month.strftime("%Y-%m"),
+        "next_month": next_month.strftime("%Y-%m"),
+    }
+
+
 # --- Pages
 
 def home(request):
@@ -80,11 +124,11 @@ def home(request):
         "books": GuideBook.objects.filter(published=True)[:4],
         "posts": BlogPostPage.objects.live().order_by("-date")[:3],
         "audiences": Audience.objects.all(),
-        "upcoming_events": Event.objects.filter(public=True, start__gte=timezone.now()).order_by('-featured','start')[:3],
         "poles": PolePage.objects.live().order_by("path"),
         "recent_entries": DirectoryEntry.objects.filter(
             visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
         ).select_related("sector").order_by("-pk")[:4],
+        "agenda_calendar": _month_calendar(request),
     })
 
 

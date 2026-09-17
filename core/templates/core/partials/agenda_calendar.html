@@ -1,0 +1,25 @@
+{% load i18n %}
+<div class="cal-nav">
+  <a class="cal-nav-btn" href="?mois={{ agenda_calendar.previous_month }}#next-title" aria-label="{% trans "Mois précédent" %}">‹</a>
+  <strong class="cal-month-label">{{ agenda_calendar.month_label|date:"F Y" }}</strong>
+  <a class="cal-nav-btn" href="?mois={{ agenda_calendar.next_month }}#next-title" aria-label="{% trans "Mois suivant" %}">›</a>
+</div>
+<div class="cal">
+  {% for day in agenda_calendar.weeks.0 %}<div class="cal-head">{{ day.date|date:"D" }}</div>{% endfor %}
+  {% for week in agenda_calendar.weeks %}
+    {% for day in week %}
+    <div class="cal-day{% if not day.in_month %} out{% endif %}{% if day.today %} today{% endif %}">
+      <span class="cal-day-num">{{ day.date|date:"j" }}</span>
+      {% if day.events %}
+      <div class="cal-events">
+        {% for event in day.events %}
+        <a class="cal-event" href="{% url 'core:event_detail' event.pk %}" title="{{ event.title }}" aria-label="{{ event.title }}">
+          {% if event.photo %}<img src="{{ event.photo.url }}" alt="">{% endif %}
+        </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  {% endfor %}
+</div>

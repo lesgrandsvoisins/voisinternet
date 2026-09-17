@@ -76,6 +76,7 @@ class MembershipInline(admin.TabularInline):
 class ContributionInline(TranslationTabularInline):
     model = Contribution
     extra = 0
+    fields = ["kind", "amount", "method", "date", "tax_deductible", "note_fr"]
 
 
 @admin.register(Account)
@@ -94,6 +95,20 @@ class AccountAdmin(admin.ModelAdmin):
     @admin.display(description="appartenances")
     def membership_count(self, obj):
         return obj.membership_set.count()
+
+
+@admin.register(Contribution)
+class ContributionAdmin(TranslationAdmin):
+    """Vue d'ensemble de toutes les contributions, tous comptes confondus — l'inline
+    d'AccountAdmin ci-dessus reste pratique pour en ajouter une depuis une fiche compte,
+    mais ne permet pas de filtrer/rechercher à travers l'ensemble (ex. « toutes les
+    promesses non encore payées cette année », « tous les reçus fiscaux à établir »)."""
+    list_display = ["account", "kind", "amount", "method", "date", "tax_deductible"]
+    list_filter = ["kind", "method", "tax_deductible"]
+    list_editable = ["tax_deductible"]
+    date_hierarchy = "date"
+    search_fields = ["account__user__username", "account__user__first_name", "account__user__last_name", "note"]
+    autocomplete_fields = ["account"]
 
 
 @admin.register(GuideBook)

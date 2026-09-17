@@ -133,7 +133,7 @@
     {% if account_contributions %}
     <ul class="docs">
       {% for c in account_contributions %}
-      <li><strong>{{ c.amount }} €</strong><span>{{ c.get_method_display }}, {{ c.date }}{% if c.note %} — {{ c.note }}{% endif %}</span></li>
+      <li><strong>{{ c.get_kind_display }} — {{ c.amount }} €</strong><span>{{ c.get_method_display }}, {{ c.date }}{% if c.tax_deductible %}, {% trans "déductible fiscalement" %}{% endif %}{% if c.note %} — {{ c.note }}{% endif %}</span></li>
       {% endfor %}
     </ul>
     {% else %}

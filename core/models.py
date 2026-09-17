@@ -535,17 +535,36 @@ class EventInterest(models.Model):
 
 
 class Contribution(models.Model):
-    """Une contribution financière enregistrée pour un compte (adhésion, don ponctuel…)."""
+    """
+    Une contribution financière enregistrée pour un compte (adhésion, don ponctuel…) —
+    une promesse et son paiement effectif sont deux enregistrements indépendants (même
+    "kind" différent), pas liés entre eux : pas de suivi du solde restant dû d'une
+    promesse, juste deux états possibles d'une contribution.
+    """
+    PLEDGE = "pledge"
+    PAYMENT = "payment"
+    KIND_CHOICES = [
+        (PLEDGE, _("Promesse")),
+        (PAYMENT, _("Paiement")),
+    ]
     METHODS = [
         ("helloasso", "HelloAsso"),
         ("paypal", "PayPal"),
         ("stripe", "Stripe"),
+        ("especes", _("Espèces")),
+        ("cheque", _("Chèque")),
+        ("virement", _("Virement")),
         ("autre", _("Autre")),
     ]
     account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="contributions")
+    kind = models.CharField(_("type"), max_length=10, choices=KIND_CHOICES, default=PAYMENT)
     amount = models.DecimalField(_("montant"), max_digits=8, decimal_places=2)
     method = models.CharField(_("moyen"), max_length=20, choices=METHODS, default="helloasso")
     date = models.DateField(_("date"), default=timezone.localdate)
+    tax_deductible = models.BooleanField(
+        _("déduction fiscale"), default=False,
+        help_text=_("Éligible à un reçu fiscal (don à une association loi 1901)."),
+    )
     note = models.CharField(_("note"), max_length=200, blank=True, default="")
 
     class Meta:
@@ -554,7 +573,7 @@ class Contribution(models.Model):
         verbose_name_plural = _("contributions financières")
 
     def __str__(self):
-        return f"{self.amount} € ({self.account})"
+        return f"{self.get_kind_display()} de {self.amount} € ({self.account})"
 
 
 class GuideBook(models.Model):

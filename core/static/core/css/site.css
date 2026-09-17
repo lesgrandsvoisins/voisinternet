@@ -1285,6 +1285,31 @@ a.chip-tag:hover {
   background: var(--paper)
 }
 
+/* Colonne centrale (titre + description) : une piste "1fr" ne rétrécit pas sous sa
+   largeur de contenu par défaut (min-width: auto) — un nom de service un peu long
+   poussait toute la ligne plus large que l'écran au lieu de passer à la ligne. */
+.svc li > div {
+  min-width: 0
+}
+
+@media (max-width: 30rem) {
+  /* Sur petit écran, la 3e colonne (boutons ↑↓ ou "Ajouté") passe sous le titre plutôt
+     que de se serrer à côté : avec la colonne centrale déjà réduite au minimum, il ne
+     restait pas assez de place et le contenu débordait, illisible. */
+  .svc li {
+    grid-template-columns: auto 1fr;
+  }
+
+  .svc li > :last-child {
+    grid-column: 1 / -1;
+    justify-self: start
+  }
+
+  .shortcut-tools {
+    flex-wrap: wrap
+  }
+}
+
 .svc li.feat {
   background: var(--sun-soft)
 }

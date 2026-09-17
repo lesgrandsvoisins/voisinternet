@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   version="1.1"
+   id="Layer_1"
+   viewBox="0 0 24 24"
+   xml:space="preserve"
+   width="24"
+   height="24"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs6" />
+<g
+   id="g6"
+   transform="translate(-5.5128515)"><style id="icontools42">
+.icon-wrench-left {fill:#8b8b8b;}
+.icon-wrench-right {fill:#6f6f6f;}
+.icon-hammer-handle-left {fill:#e69824;}
+.icon-hammer-handle-right {fill:#dd5323;}
+.icon-hammer-top-left {fill:#444444;}
+.icon-hammer-top-right {fill:#282828;}
+.icon-box-left {fill:#3d6dfa;}
+.icon-box-right {fill:#2b3d7b;}
+
+.icon-wrench-left {var(--color-primary)}
+.icon-wrench-right {fill:#6f6f6f;}
+.icon-hammer-handle-left {fill:#e69824;}
+.icon-hammer-handle-right {fill:#dd5323;}
+.icon-hammer-top-left {fill:#444444;}
+.icon-hammer-top-right {fill:#282828;}
+.icon-box-left {fill:#3d6dfa;}
+.icon-box-right {fill:#2b3d7b;}
+   </style><path
+     style="stroke-width:0.046875" d="M 13.851516,0 V 3.8547188 H 11.240625 V 0 C 9.6335156,0.54417187 8.4762656,2.0638125 8.4762656,3.8547188 c 0,1.3912031 0.6984844,2.6188125 1.7634844,3.3528749 v 4.1312813 h 4.612781 V 7.2075937 C 15.917484,6.473625 16.616016,5.2459687 16.616016,3.8547188 16.616016,2.0638125 15.458672,0.54417187 13.851516,0 Z" id="wrench-left" class="icon-wrench-left" />
+<path
+     style="stroke-width:0.046875" d="m 13.851516,0 v 3.8547188 h -1.305422 v 7.4841092 h 2.30639 V 7.2075 C 15.917438,6.4735313 16.615969,5.245875 16.615969,3.854625 16.616016,2.0638125 15.458672,0.54417187 13.851516,0 Z" id="wrench-right" class="icon-wrench-right" /><rect x="20.859844" y="4.6716566"
+     style="stroke-width:0.046875" width="3.3312657" height="6.6667972" id="hammer-handle-left" class="icon-hammer-handle-left" /><rect x="22.525734" y="4.6716566"
+     style="stroke-width:0.046875" width="1.6656094" height="6.6667972" id="hammer-handle-right" class="icon-hammer-handle-right" /><path
+     style="stroke-width:0.046875" d="M 28.838719,5.269125 H 18.452766 V 0 h 6.749906 z" id="hammer-top-left" class="icon-hammer-top-left" /><path
+     style="stroke-width:0.046875" d="M 28.838719,5.269125 H 22.525547 V 0 h 2.677125 z" id="hammer-top-right" class="icon-hammer-top-right" /><path
+     style="stroke-width:0.046875" d="M 29.241703,24 H 5.784 V 10.556203 H 29.241656 V 24 Z" id="box-left" class="icon-box-left" /><path
+     style="stroke-width:0.046875" d="M 29.241703,24 H 17.512875 V 10.556203 h 11.728828 z" id="box-right" class="icon-box-right" /></g>
+</svg>

@@ -3187,6 +3187,12 @@ blockquote p {
     grid-template-columns: 1fr
   }
 
+
+  .brand>.wordmark {
+    display: none;
+  }
+
+
   .hero-text {
     gap: 1rem
   }
@@ -3208,7 +3214,7 @@ blockquote p {
   }
 }
 
-@media (max-width:680px) {
+@media (max-width:550px) {
   /* Sous ce seuil, le mot-symbole complet ne tient plus sur la même ligne que
      le bouton menu et le compte : le logo passe sur sa propre ligne, centré,
      plutôt que de forcer les boutons (et leurs icônes) à rétrécir dans une
@@ -3224,11 +3230,6 @@ blockquote p {
     row-gap: .4rem;
     padding-block: .6rem;
     min-height: 0;
-  }
-
-  .brand>.wordmark {
-    display: none;
-    flex-direction: column;
   }
 
   /* div.menu {

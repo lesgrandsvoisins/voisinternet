@@ -74,8 +74,11 @@ python manage.py test core
 ```
 
 L'administration (`/admin/`) permet aux bénévoles de gérer les services, les
-livres du guide et les donateurs. Un donateur n'apparaît publiquement que si
-la case « apparaît publiquement » est cochée, avec son accord.
+livres du guide, les donateurs et les contributions financières (adhésions,
+dons ponctuels ou promis, en espèces, chèque, virement ou via HelloAsso/PayPal/
+Stripe) rattachées à chaque compte, avec repérage des dons éligibles à un reçu
+fiscal. Un donateur n'apparaît publiquement que si la case « apparaît
+publiquement » est cochée, avec son accord.
 
 ## Production
 

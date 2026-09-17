@@ -28,12 +28,6 @@
     <!-- HEADER -->
     <header class="top">
       <div class="wrap">
-        <a class="brand"
-           href="{% url 'core:home' %}"
-           aria-label="{% trans 'lesgrandsvoisins.com, accueil' %}">
-          {% include "core/partials/logo_mark.html" %}
-          {% include "core/partials/wordmark.html" %}
-        </a>
         <div class="menu"
              x-data="{ open: false }"
              x-on:keydown.escape.window="open = false"
@@ -107,7 +101,14 @@
             </div>
           </nav>
         </div>
-        
+
+        <a class="brand"
+           href="{% url 'core:home' %}"
+           aria-label="{% trans 'lesgrandsvoisins.com, accueil' %}">
+          {% include "core/partials/logo_mark.html" %}
+          {% include "core/partials/wordmark.html" %}
+        </a>
+
         {% include "core/partials/account_widget.html" %}
       </div>
     </header>

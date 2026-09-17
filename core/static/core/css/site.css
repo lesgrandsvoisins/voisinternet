@@ -333,13 +333,11 @@ a {
 }
 
 .top>.wrap {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 1rem;
   min-height: 4.25rem;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
   max-width: unset;
 }
 
@@ -394,8 +392,18 @@ a {
   align-items: center;
   gap: .6rem;
   text-decoration: none;
-  margin-inline-end: auto;
-  margin-right: 3rem;
+  justify-self: center;
+  grid-column: 2;
+}
+
+div.menu {
+  justify-self: start;
+  grid-column: 1;
+}
+
+.account-panel {
+  justify-self: end;
+  grid-column: 3;
 }
 
 .mark {

@@ -1021,9 +1021,9 @@ def export_standardpage_qmd(page, media_files=None):
     """
     Sérialise une cms.StandardPage (une langue) en texte .qmd — même schéma
     d'identification (key/lang) que le blog/ContentPage, mais sans leurs champs
-    éditoriaux (auteur/date/étiquettes/image de une) : StandardPage n'a qu'un titre et
-    un corps. Depuis cms.0030_standardpage_body_streamfield, ce corps est un
-    StreamField (ContentStreamBlock, comme cms.ContentPage) plutôt qu'un simple texte
+    éditoriaux les plus riches (auteur/date/étiquettes) : StandardPage n'a qu'un titre,
+    un chapeau (excerpt) et un corps. Depuis cms.0030_standardpage_body_streamfield,
+    ce corps est un StreamField (ContentStreamBlock, comme cms.ContentPage) plutôt qu'un simple texte
     enrichi — _export_body_parts reconnaît donc les mêmes divs Pandoc/Quarto
     (callouts, citations en exergue, divs génériques imbriqués sur 3 niveaux) que pour
     ContentPage, au lieu de les laisser fuiter en texte brut dans l'éditeur. "parent"
@@ -1041,6 +1041,8 @@ def export_standardpage_qmd(page, media_files=None):
         "slug": page.slug,
         "url": page.full_url,
     }
+    if page.excerpt:
+        front["excerpt"] = page.excerpt
     if page.header_image_id:
         if media_files is not None:
             front["header_image"] = _collect_image_file(page.header_image_id, media_files)
@@ -1082,6 +1084,7 @@ def import_standardpage_qmd(text):
 
     page.title = front.get("title") or page.title or front.get("slug") or ""
     page.slug = front.get("slug") or slugify(page.title)
+    page.excerpt = (front.get("excerpt") or "")[:300]
     page.body = _split_content_blocks(body_md)
     page.legacy_meta = _import_legacy_meta(front)
 

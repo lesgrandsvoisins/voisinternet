@@ -265,6 +265,7 @@ class StandardPage(Page):
         "wagtailimages.Image", verbose_name=_("image d'en-tête"),
         null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
     )
+    excerpt = models.CharField(_("chapeau"), max_length=300, blank=True, default="")
     body = StreamField(ContentStreamBlock(), blank=True)
     # Passe-plat pour les métadonnées de frontmatter .qmd non reconnues par ce site (la
     # clé "legacy" — voir cms/qmd.py) : conservées telles quelles à l'aller-retour
@@ -276,6 +277,7 @@ class StandardPage(Page):
     legacy_meta = models.JSONField(blank=True, default=dict, editable=False)
 
     content_panels = Page.content_panels + [
+        FieldPanel("excerpt"),
         FieldPanel("body"),
         LegacyMetaPanel(),
     ]

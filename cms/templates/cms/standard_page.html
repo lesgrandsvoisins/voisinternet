@@ -25,6 +25,7 @@
           {% if icon_img %}<img class="page-head-icon" src="{{ icon_img.url }}" alt="">{% endif %}
           <h1>{{ page.title }}</h1>
         </div>
+        {% if page.excerpt %}<p class="lead">{{ page.excerpt }}</p>{% endif %}
       </div>
     </div>
   {% endwith %}

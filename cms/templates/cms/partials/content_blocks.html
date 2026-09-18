@@ -1,0 +1,27 @@
+{% load wagtailcore_tags content_block_filters %}
+{% comment %}
+Rendu d'une liste de blocs de cms.ContentStreamBlock (cms.models.ContentPage.body, ou
+les enfants d'un GenericNestingBlock) — inclus récursivement par lui-même pour
+"generic_nesting", donc sans logique de pagination ni de sommaire (celle-ci ne
+concerne que le niveau racine, voir ContentPage.get_context et content_page.html).
+{% endcomment %}
+{% for block in blocks %}
+  {% if block.block_type == "prose" %}
+    <div class="markdown">{{ block.value|richtext }}</div>
+  {% elif block.block_type == "callout" %}
+    <aside class="callout callout-{{ block.value.type }}">
+      {% if block.value.title %}<p class="callout-title">{{ block.value.title }}</p>{% endif %}
+      {{ block.value.text }}
+    </aside>
+  {% elif block.block_type == "pull" %}
+    <aside class="pull">{{ block.value.text }}</aside>
+  {% elif block.block_type == "generic" %}
+    <div class="generic-div {{ block.value.class_name|pandoc_classes }}">
+      {{ block.value.text }}
+    </div>
+  {% elif block.block_type == "generic_nesting" %}
+    <div class="generic-div generic-div-nesting {{ block.value.class_name|pandoc_classes }}">
+      {% include "cms/partials/content_blocks.html" with blocks=block.value.children %}
+    </div>
+  {% endif %}
+{% endfor %}

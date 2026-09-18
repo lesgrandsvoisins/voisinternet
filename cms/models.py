@@ -151,6 +151,81 @@ class PullQuoteBlock(blocks.StructBlock):
         label = _("citation en exergue")
 
 
+class GenericBlock(blocks.StructBlock):
+    """
+    Un div Pandoc/Quarto de classe quelconque, non reconnue par ailleurs (::: {.ma-
+    classe} … :::) : passe-plat pour tout ce qui n'a pas d'équivalent Wagtail dédié
+    (contrairement à CalloutBlock/PullQuoteBlock, qui correspondent chacun à une classe
+    Quarto précise). Voir cms/qmd.py::_split_content_blocks pour la reconnaissance
+    générique de n'importe quelle classe à l'import, et GenericNestingBlock ci-dessous
+    pour la variante qui imbrique d'autres divs.
+    """
+
+    class_name = blocks.CharBlock(label=_("classe"), required=False)
+    text = blocks.RichTextBlock(label=_("texte"), features=CONTENT_RICHTEXT_FEATURES, required=False)
+
+    class Meta:
+        icon = "placeholder"
+        label = _("div générique")
+
+
+class _ContentStreamBlockLeaf(blocks.StreamBlock):
+    """
+    Les blocs disponibles dans cms.ContentPage.body, sans nouvelle imbrication —
+    le niveau terminal de la chaîne construite par _generic_nesting_block ci-dessous
+    (voir sa docstring pour la raison de cette limite de profondeur).
+    """
+
+    prose = blocks.RichTextBlock(label=_("texte"), features=CONTENT_RICHTEXT_FEATURES)
+    callout = CalloutBlock()
+    pull = PullQuoteBlock()
+    generic = GenericBlock()
+
+
+def _generic_nesting_block(children_block):
+    """
+    Un GenericNestingBlock — le pendant "avec enfants" de GenericBlock, pour un div
+    générique qui en imbrique d'autres (::: {.x}\\n::: {.y}\\n…\\n:::\\n…\\n:::, deux-
+    points en nombre croissant vers l'extérieur — convention Pandoc/Quarto, voir
+    https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans et
+    cms/qmd.py::_parse_divs pour la reconnaissance à l'import) — dont les enfants sont
+    ceux de children_block. Une vraie auto-référence (StreamBlock contenant un bloc du
+    même type que lui-même) ferait boucler indéfiniment l'outillage de Wagtail qui
+    parcourt l'arbre des blocs sans détecter les cycles (`manage.py check` lève un
+    RecursionError, testé) ; _ContentStreamBlockN1/N2/N3 ci-dessous empilent donc 3
+    niveaux concrets plutôt qu'une récursion infinie — largement suffisant pour un
+    premier jet générique, mais une classe/instance différente à chaque niveau (voir
+    _GENERIC_NESTING_MAX_DEPTH, cms/qmd.py, pour la limite côté import).
+    """
+
+    class GenericNestingBlock(blocks.StructBlock):
+        class_name = blocks.CharBlock(label=_("classe"), required=False)
+        children = children_block
+
+        class Meta:
+            icon = "folder-open-inverse"
+            label = _("div générique (avec enfants)")
+
+    return GenericNestingBlock
+
+
+class _ContentStreamBlockN1(_ContentStreamBlockLeaf):
+    generic_nesting = _generic_nesting_block(_ContentStreamBlockLeaf())()
+
+
+class _ContentStreamBlockN2(_ContentStreamBlockLeaf):
+    generic_nesting = _generic_nesting_block(_ContentStreamBlockN1())()
+
+
+class ContentStreamBlock(_ContentStreamBlockLeaf):
+    """
+    Les blocs disponibles dans cms.ContentPage.body — jusqu'à 3 niveaux de divs
+    génériques imbriqués (voir _generic_nesting_block).
+    """
+
+    generic_nesting = _generic_nesting_block(_ContentStreamBlockN2())()
+
+
 class PolePage(Page):
     """
     Une page de pôle (civisme, arts plastiques, numérique…) : un chapeau, des
@@ -322,14 +397,7 @@ class ContentPage(Page):
         null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
     )
     tags = models.ManyToManyField("core.Tag", blank=True, related_name="content_pages", verbose_name=_("étiquettes"))
-    body = StreamField(
-        [
-            ("prose", blocks.RichTextBlock(label=_("texte"), features=CONTENT_RICHTEXT_FEATURES)),
-            ("callout", CalloutBlock()),
-            ("pull", PullQuoteBlock()),
-        ],
-        blank=True,
-    )
+    body = StreamField(ContentStreamBlock(), blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel("date"),

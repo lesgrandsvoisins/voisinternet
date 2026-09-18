@@ -1,5 +1,5 @@
 {% extends "core/base.html" %}
-{% load i18n wagtailcore_tags wagtailimages_tags %}
+{% load i18n wagtailcore_tags wagtailimages_tags content_block_filters %}
 
 {% block title %}{{ page.title }} — {{ SITE_NAME }}{% endblock %}
 
@@ -61,6 +61,14 @@
               </aside>
             {% elif item.type == "pull" %}
               <aside class="pull">{{ item.block.value.text }}</aside>
+            {% elif item.type == "generic" %}
+              <div class="generic-div {{ item.block.value.class_name|pandoc_classes }}">
+                {{ item.block.value.text }}
+              </div>
+            {% elif item.type == "generic_nesting" %}
+              <div class="generic-div generic-div-nesting {{ item.block.value.class_name|pandoc_classes }}">
+                {% include "cms/partials/content_blocks.html" with blocks=item.block.value.children %}
+              </div>
             {% endif %}
           {% endfor %}
         </div>

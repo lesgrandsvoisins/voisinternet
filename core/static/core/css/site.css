@@ -2892,6 +2892,23 @@ span.pull {
   border-inline-start-color: var(--accent-terracotta)
 }
 
+/* Div Pandoc/Quarto de classe non reconnue (cms.GenericBlock/GenericNestingBlock,
+   cms/qmd.py::_parse_divs) : rendu neutre, seule sa classe Quarto d'origine (voir
+   cms/templatetags/content_block_filters.py::pandoc_classes) permet de la distinguer
+   visuellement si un style plus spécifique lui est ajouté par la suite. */
+.generic-div {
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0
+}
+
+.generic-div-nesting > .generic-div,
+.generic-div-nesting > .callout,
+.generic-div-nesting > .pull {
+  margin-inline: 0
+}
+
 /* Aperçu en tête de tableau de bord (core/templates/core/account.html) : quelques
    chiffres-clés, chacun un lien d'ancrage direct vers sa section détaillée plus bas. */
 .dashboard-summary {

@@ -305,6 +305,62 @@ Texte de conclusion.
         self.assertEqual(reimported_blocks[1].value["title"], "Astuce")
         self.assertIn("Second paragraphe", str(reimported_blocks[1].value["text"]))
 
+    def test_generic_nested_div_round_trip(self):
+        # Exemple de la documentation Pandoc/Quarto elle-même (divs imbriqués) :
+        # https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans —
+        # une classe non reconnue (.sidebar) imbriquant elle-même un autre div (.warning)
+        # et de la prose ("Plus de contenu.") doit survivre à l'aller-retour sans rien
+        # perdre, alors qu'aucun des deux n'a d'équivalent Wagtail dédié (contrairement
+        # à .callout-*/.pull) — voir cms.models.GenericBlock/GenericNestingBlock.
+        qmd_text = """---
+title: Page avec divs imbriqués
+key: 77777777-7777-7777-7777-777777777777
+lang: fr
+pole: civisme
+slug: page-divs-imbriques
+---
+
+:::: {.sidebar}
+
+::: {.warning}
+Attention à ceci.
+:::
+
+Plus de contenu.
+
+::::
+
+Fin du texte.
+"""
+        page = import_contentpage_qmd(qmd_text)
+        blocks = list(page.body)
+        self.assertEqual([b.block_type for b in blocks], ["generic_nesting", "prose"])
+        self.assertEqual(blocks[0].value["class_name"], ".sidebar")
+        nested = list(blocks[0].value["children"])
+        self.assertEqual([b.block_type for b in nested], ["generic", "prose"])
+        self.assertEqual(nested[0].value["class_name"], ".warning")
+        self.assertIn("Attention à ceci", str(nested[0].value["text"]))
+        self.assertIn("Plus de contenu", str(nested[1].value))
+
+        response = self.client.get(page.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Attention à ceci")
+        self.assertContains(response, "Plus de contenu")
+
+        exported = export_contentpage_qmd(page)
+        self.assertIn(":::: {.sidebar}", exported)
+        self.assertIn("::: {.warning}", exported)
+        self.assertIn("Attention à ceci", exported)
+        self.assertIn("Plus de contenu", exported)
+
+        reimported = import_contentpage_qmd(exported)
+        self.assertEqual(reimported.pk, page.pk)
+        reimported_blocks = list(reimported.body)
+        self.assertEqual([b.block_type for b in blocks], [b.block_type for b in reimported_blocks])
+        reimported_nested = list(reimported_blocks[0].value["children"])
+        self.assertEqual([b.block_type for b in nested], [b.block_type for b in reimported_nested])
+        self.assertIn("Attention à ceci", str(reimported_nested[0].value["text"]))
+
 
 class AnonymousAccountTests(Base):
     def test_adding_a_service_creates_an_anonymous_account(self):

@@ -32,14 +32,20 @@ d'origine — l'image redevient alors gérée par le sélecteur d'image de Draft
 simple <img> figé. Sans cet identifiant (image/document déjà supprimé, ou contenu écrit à
 la main dans l'éditeur Quarto), l'URL absolue reste utilisée telle quelle.
 
-Copie de travail de github.com/lesgrandsvoisins/voisinternet:cms/qmd.py, retouchée ici pour
-aligner export_contentpage_qmd/_split_content_blocks sur la convention adoptée dans
-workshop/qmd_export/export_transition_qmd.py : chaque bloc de body porte son propre div
-Pandoc/Quarto fencé (_fence_div), jamais un seul div englobant tout le champ — "prose" a donc
-maintenant lui aussi un fence explicite (::: {.prose}), au lieu d'être le seul bloc sans div ;
-"callout"/"pull" étaient déjà fencés et n'ont pas changé de forme (seul le confort d'écriture,
-via _fence_div, est partagé). L'import reste rétrocompatible avec un corps sans aucun fence
-.prose (tout Markdown hors callout/pull y est encore traité comme de la prose implicite).
+Chaque bloc de cms.ContentPage.body porte son propre div Pandoc/Quarto fencé (_fence_div),
+jamais un seul div englobant tout le champ : "prose" a donc lui aussi un fence explicite
+(::: {.prose}), au lieu d'être le seul bloc sans div — mais l'import reste rétrocompatible
+avec un corps sans aucun fence .prose (tout Markdown hors div y est encore traité comme de
+la prose implicite, voir _parse_divs/_split_content_blocks).
+
+Un div de classe non reconnue par ailleurs — que la classe soit inconnue, ou que .callout-*/
+.pull/.prose contienne lui-même un div imbriqué — devient un cms.GenericBlock/
+GenericNestingBlock (cms/models.py) plutôt que d'être perdu : voir _parse_divs (analyse de
+l'imbrication par comptage de deux-points, convention Pandoc — un div englobant utilise
+strictement plus de deux-points que tout ce qu'il contient, voir
+https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans) et
+_nodes_to_blocks (classification en blocs de StreamField) côté import, _export_body_parts
+côté export.
 """
 import re
 import zipfile
@@ -86,19 +92,28 @@ _CONTENT_ALLOWED_ATTRIBUTES = {
 }
 _CONTENT_ALLOWED_PROTOCOLS = ["http", "https", "mailto"]
 
-# Callout Quarto : ::: {.callout-note} … ::: (pas de callouts imbriqués — voir
-# CalloutBlock, cms/models.py). Attribut title="…" facultatif, seule forme de titre
-# reconnue (pas de première ligne "## Titre" traitée spécialement, pour rester simple).
-_CALLOUT_OPEN_RE = re.compile(
-    r'^:::+\s*\{\.callout-(note|tip|important|warning|caution)(?:\s+title="([^"]*)")?\s*\}\s*$'
-)
-_PULL_OPEN_RE = re.compile(r'^:::+\s*\{\.pull\}\s*$')
-# ::: {.prose} explicite (voir export_contentpage_qmd/_fence_div) : facultatif à l'import — du
-# Markdown hors de tout fence reste traité comme "prose" par _split_content_blocks (branche
-# else de sa boucle), pour rester compatible avec un .qmd écrit à la main sans ce fence ou
-# exporté avant son introduction.
-_PROSE_OPEN_RE = re.compile(r'^:::+\s*\{\.prose\}\s*$')
-_FENCE_CLOSE_RE = re.compile(r'^:::+\s*$')
+# Div Pandoc/Quarto générique : ::: {<attrs>} … ::: — les trois classes reconnues
+# ci-dessous gardent leur bloc StreamField dédié (CalloutBlock/PullQuoteBlock/prose
+# implicite) ; toute autre classe devient un cms.GenericBlock, ou GenericNestingBlock
+# s'il imbrique lui-même d'autres divs (voir _parse_divs ci-dessous). L'imbrication
+# suit la convention Pandoc (un div englobant utilise STRICTEMENT plus de deux-points
+# que tout ce qu'il contient :
+# https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans) — .callout-
+# */.pull/.prose eux-mêmes restent volontairement sans imbrication (voir
+# CalloutBlock/PullQuoteBlock, cms/models.py : si l'un d'eux contient malgré tout un
+# div imbriqué, _nodes_to_blocks le traite comme un GenericBlock/GenericNestingBlock à
+# la place plutôt que de perdre le contenu imbriqué).
+_DIV_OPEN_RE = re.compile(r'^(:{3,})\s*\{([^}]*)\}\s*$')
+_DIV_CLOSE_RE = re.compile(r'^(:{3,})\s*$')
+# Attribut title="…" facultatif, seule forme de titre de callout reconnue (pas de
+# première ligne "## Titre" traitée spécialement, pour rester simple).
+_CALLOUT_CLASS_RE = re.compile(r'^\.callout-(note|tip|important|warning|caution)(?:\s+title="([^"]*)")?$')
+_PULL_CLASS_RE = re.compile(r'^\.pull$')
+# ::: {.prose} explicite (voir export_contentpage_qmd/_fence_div) : facultatif à l'import
+# — du Markdown hors de tout fence reste traité comme "prose" par _parse_divs (les
+# lignes hors div y sont déjà des noeuds "prose"), pour rester compatible avec un .qmd
+# écrit à la main sans ce fence ou exporté avant son introduction.
+_PROSE_CLASS_RE = re.compile(r'^\.prose$')
 # Span Pandoc/Quarto pour une citation en exergue ponctuelle, à l'intérieur d'un
 # paragraphe (cms.wagtail_hooks.py::register_pull_feature pour la version Draftail) :
 # [texte]{.pull} — avec des accolades comme un attribut de span Pandoc standard, pas
@@ -152,26 +167,121 @@ def _extract_footnote_defs(body_md):
     return "\n".join(remaining), defs
 
 
+def _parse_divs(lines, i=0, min_close_colons=0):
+    """
+    Analyse récursive-descendante d'un corps Markdown en noeuds "prose" (lignes hors de
+    tout div) et "div" ({"attrs": <contenu entre {…}>, "children": [noeuds imbriqués]})
+    — l'imbrication Pandoc/Quarto se reconnaît par comptage de deux-points (_DIV_OPEN_RE/
+    _DIV_CLOSE_RE), pas par un empilement générique de "::: " : un div ne se referme
+    que sur une ligne portant au moins autant de deux-points que sa propre ouverture,
+    donc jamais sur la fermeture (toujours à colonnes strictement inférieures, par
+    convention Pandoc) d'un div qu'il contient. Renvoie (noeuds, index suivant).
+    """
+    nodes = []
+    prose_lines = []
+
+    def flush_prose():
+        if prose_lines:
+            nodes.append({"type": "prose", "lines": list(prose_lines)})
+            prose_lines.clear()
+
+    while i < len(lines):
+        line = lines[i]
+        close_match = _DIV_CLOSE_RE.match(line)
+        if min_close_colons and close_match and len(close_match.group(1)) >= min_close_colons:
+            flush_prose()
+            return nodes, i + 1  # laisse la ligne de fermeture derrière nous
+        open_match = _DIV_OPEN_RE.match(line)
+        if open_match:
+            flush_prose()
+            colons, attrs = len(open_match.group(1)), open_match.group(2).strip()
+            children, i = _parse_divs(lines, i + 1, min_close_colons=colons)
+            nodes.append({"type": "div", "attrs": attrs, "children": children})
+            continue
+        prose_lines.append(line)
+        i += 1
+    flush_prose()
+    return nodes, i
+
+
+# cms.models.ContentStreamBlock n'empile que 3 niveaux concrets de GenericNestingBlock
+# (une vraie auto-référence ferait boucler indéfiniment l'outillage de Wagtail qui
+# parcourt l'arbre des blocs — voir sa docstring) : au-delà, l'import échoue avec un
+# message clair plutôt qu'une erreur Wagtail obscure au moment d'enregistrer la page.
+_GENERIC_NESTING_MAX_DEPTH = 3
+
+
+def _nodes_to_blocks(nodes, to_html, depth=0):
+    """
+    Convertit les noeuds de _parse_divs en blocs de StreamField ("prose"/"callout"/
+    "pull"/"generic"/"generic_nesting", voir cms.models.ContentStreamBlock) : un div de
+    classe .callout-*/.pull/.prose garde son bloc dédié tant qu'il ne contient lui-même
+    aucun div imbriqué (comme avant — voir CalloutBlock/PullQuoteBlock, cms/models.py) ;
+    sinon, ou pour toute autre classe, il devient un GenericBlock (aucun div imbriqué)
+    ou un GenericNestingBlock (au moins un), dont les enfants sont convertis
+    récursivement — c'est ce qui permet de ne jamais perdre de contenu même dans un
+    div imbriqué de classe inconnue. to_html est le convertisseur Markdown->HTML du
+    segment appelant (_split_content_blocks), partagé pour que chaque feuille de texte
+    profite du même rattachement des notes de bas de page qui la référencent. depth
+    compte les GenericNestingBlock déjà traversés, voir _GENERIC_NESTING_MAX_DEPTH.
+    """
+    result = []
+    for node in nodes:
+        if node["type"] == "prose":
+            html = to_html("\n".join(node["lines"]))
+            if html.strip():
+                result.append({"type": "prose", "value": html})
+            continue
+
+        attrs, children = node["attrs"], node["children"]
+        has_nested_div = any(c["type"] == "div" for c in children)
+
+        def prose_html_of(children=children):
+            return to_html("\n".join(line for c in children for line in c["lines"]))
+
+        callout_match = None if has_nested_div else _CALLOUT_CLASS_RE.match(attrs)
+        pull_match = None if (has_nested_div or callout_match) else _PULL_CLASS_RE.match(attrs)
+        prose_match = None if (has_nested_div or callout_match or pull_match) else _PROSE_CLASS_RE.match(attrs)
+        if callout_match:
+            callout_type, title = callout_match.group(1), callout_match.group(2) or ""
+            result.append({"type": "callout", "value": {"type": callout_type, "title": title, "text": prose_html_of()}})
+        elif pull_match:
+            result.append({"type": "pull", "value": {"text": prose_html_of()}})
+        elif prose_match:
+            html = prose_html_of()
+            if html.strip():
+                result.append({"type": "prose", "value": html})
+        elif has_nested_div:
+            if depth >= _GENERIC_NESTING_MAX_DEPTH:
+                raise ValueError(
+                    f"Divs génériques imbriqués sur plus de {_GENERIC_NESTING_MAX_DEPTH} "
+                    "niveaux (::: {" + attrs + "} …) — non pris en charge."
+                )
+            result.append({"type": "generic_nesting", "value": {
+                "class_name": attrs, "children": _nodes_to_blocks(children, to_html, depth=depth + 1),
+            }})
+        else:
+            result.append({"type": "generic", "value": {"class_name": attrs, "text": prose_html_of()}})
+    return result
+
+
 def _split_content_blocks(body_md):
     """
-    Découpe le Markdown d'une cms.ContentPage en blocs "prose"/"callout"/"pull" pour
-    son StreamField body (voir cms.models.ContentPage), en reconnaissant les callouts,
-    citations en exergue (::: {.pull}) et prose explicite (::: {.prose}) Quarto
-    ci-dessus. Tout le reste (avant/après/entre deux fences, ou tout un document sans
-    aucun fence .prose — voir _PROSE_OPEN_RE) devient un ou plusieurs blocs "prose" au
-    même titre qu'un bloc ::: {.prose} explicite. Chaque segment est converti
-    indépendamment par _content_markdown_to_html puis _restore_wagtail_embeds, comme
-    pour le blog — les définitions de notes de bas de page (_extract_footnote_defs)
-    sont rattachées à chaque segment avant conversion, python-markdown n'émettant que
-    celles qui y sont effectivement référencées.
+    Découpe le Markdown d'une cms.ContentPage en blocs de cms.ContentStreamBlock (voir
+    _nodes_to_blocks) : callouts, citations en exergue (::: {.pull}), prose explicite
+    (::: {.prose}) ou implicite (hors de tout div — voir _PROSE_CLASS_RE), et
+    désormais tout div Pandoc/Quarto de classe quelconque, imbriqué ou non
+    (GenericBlock/GenericNestingBlock, cms.models.py — voir _parse_divs pour
+    l'imbrication). Chaque feuille de texte est convertie indépendamment par
+    _content_markdown_to_html puis _restore_wagtail_embeds, comme pour le blog — les
+    définitions de notes de bas de page (_extract_footnote_defs) sont rattachées à
+    chaque feuille avant conversion, python-markdown n'émettant que celles qui y sont
+    effectivement référencées.
     """
     body_md = body_md.replace(PAGEBREAK_SHORTCODE, '<hr class="pagebreak">')
     body_md, footnote_defs = _extract_footnote_defs(body_md)
-    lines = body_md.split("\n")
-    result = []
-    prose_lines = []
 
-    def _to_html(markdown_text):
+    def to_html(markdown_text):
         # [texte]{.pull} -> <span class="pull"> directement dans la source Markdown,
         # avant conversion : python-markdown laisse passer le HTML brut inline tel quel.
         markdown_text = _PULL_SPAN_RE.sub(r'<span class="pull">\1</span>', markdown_text)
@@ -180,38 +290,8 @@ def _split_content_blocks(body_md):
         text = f"{markdown_text}\n\n{defs_for_segment}" if defs_for_segment else markdown_text
         return _self_close_void_tags(_restore_wagtail_embeds(_content_markdown_to_html(text)))
 
-    def flush_prose():
-        text = "\n".join(prose_lines).strip("\n")
-        prose_lines.clear()
-        if text.strip():
-            result.append({"type": "prose", "value": _to_html(text)})
-
-    i = 0
-    while i < len(lines):
-        callout_match = _CALLOUT_OPEN_RE.match(lines[i])
-        pull_match = None if callout_match else _PULL_OPEN_RE.match(lines[i])
-        prose_match = None if (callout_match or pull_match) else _PROSE_OPEN_RE.match(lines[i])
-        if callout_match or pull_match or prose_match:
-            flush_prose()
-            inner_lines = []
-            i += 1
-            while i < len(lines) and not _FENCE_CLOSE_RE.match(lines[i]):
-                inner_lines.append(lines[i])
-                i += 1
-            i += 1  # saute la ligne de fermeture ":::"
-            inner_html = _to_html("\n".join(inner_lines))
-            if callout_match:
-                callout_type, title = callout_match.group(1), callout_match.group(2) or ""
-                result.append({"type": "callout", "value": {"type": callout_type, "title": title, "text": inner_html}})
-            elif pull_match:
-                result.append({"type": "pull", "value": {"text": inner_html}})
-            else:
-                result.append({"type": "prose", "value": inner_html})
-        else:
-            prose_lines.append(lines[i])
-            i += 1
-    flush_prose()
-    return result
+    nodes, _ = _parse_divs(body_md.split("\n"))
+    return _nodes_to_blocks(nodes, to_html)
 
 
 def _absolute_url(path):
@@ -614,31 +694,46 @@ def export_blog_zip():
     return buffer.getvalue()
 
 
-def _fence_div(fence_attrs, content):
+def _fence_div(fence_attrs, content, colons=3):
     """::: {<attrs>}\\n\\n<content>\\n\\n::: — un div Pandoc/Quarto complet par bloc de
     body, jamais un seul div englobant tout le champ (voir export_contentpage_qmd) :
     chaque bloc StreamField porte ainsi sa propre frontière, identifiable par sa classe
     (le block_type, ou une classe plus spécifique — .callout-<type> — quand le bloc a
-    lui-même un équivalent Quarto natif plus précis que son seul nom de bloc)."""
-    return f"::: {{{fence_attrs}}}\n\n{(content or '').strip()}\n\n:::\n"
+    lui-même un équivalent Quarto natif plus précis que son seul nom de bloc). colons
+    n'est utile qu'à un bloc "generic_nesting" (voir _next_fence_colons) : Pandoc exige
+    qu'un div englobant utilise strictement plus de deux-points que tout ce qu'il
+    contient (https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans)."""
+    fence = ":" * colons
+    return f"{fence} {{{fence_attrs}}}\n\n{(content or '').strip()}\n\n{fence}\n"
 
 
-def export_contentpage_qmd(page, media_files=None):
+_FENCE_COLON_RUN_RE = re.compile(r'^:{3,}', re.MULTILINE)
+
+
+def _next_fence_colons(text):
+    """Nombre de deux-points à utiliser pour un div englobant text (le rendu déjà
+    fencé de ses enfants) sans ambiguïté avec eux — un de plus que le plus long fence
+    qui y apparaît déjà, 3 par défaut si text n'en contient aucun (voir _fence_div)."""
+    runs = [len(m.group(0)) for m in _FENCE_COLON_RUN_RE.finditer(text or "")]
+    return max(runs, default=2) + 1
+
+
+def _export_body_parts(body, media_files=None):
     """
-    Sérialise une cms.ContentPage (une langue) en texte .qmd — même contrat
-    qu'export_blogpost_qmd (frontmatter key/lang, marqueurs wagtail-image/-document/
-    -page), mais parcourt les blocs de body (StreamField) plutôt qu'un RichTextField
-    plat : chaque bloc devient son propre div Pandoc/Quarto fencé (_fence_div ci-dessus)
-    plutôt qu'un unique div englobant tout le champ — un bloc "prose" devient
-    ::: {.prose}, un bloc "callout" devient ::: {.callout-...} (classe Quarto native,
-    avec son niveau et son titre éventuel), un bloc "pull" devient ::: {.pull} — voir
-    _ContentHTMLToMarkdown et cms.models.ContentPage/PullQuoteBlock. Un span
-    <span class="pull"> à l'intérieur d'un bloc "prose"/"callout" (cms/wagtail_hooks.py
+    Convertit un StreamValue (cms.ContentPage.body à la racine, ou les enfants d'un
+    bloc "generic_nesting" — voir cms.models.ContentStreamBlock) en une liste de
+    fragments .qmd, un div Pandoc/Quarto fencé par bloc (_fence_div) : "prose" devient
+    ::: {.prose}, "callout" devient ::: {.callout-...} (classe Quarto native, avec son
+    niveau et son titre éventuel), "pull" devient ::: {.pull}, "generic" devient
+    ::: {<sa classe d'origine>} et "generic_nesting" de même mais avec ses propres
+    enfants exportés récursivement à l'intérieur (colons calculé par
+    _next_fence_colons pour rester un englobant sans ambiguïté). Un span
+    <span class="pull"> à l'intérieur d'un bloc de texte enrichi (cms/wagtail_hooks.py
     ::register_pull_feature) s'exporte en [texte]{.pull}, géré par
     _ContentHTMLToMarkdown elle-même.
     """
     parts = []
-    for block in page.body:
+    for block in body:
         converter = _ContentHTMLToMarkdown(media_files=media_files)
         if block.block_type == "prose":
             converter.feed(block.value.source)
@@ -652,7 +747,24 @@ def export_contentpage_qmd(page, media_files=None):
         elif block.block_type == "pull":
             converter.feed(block.value["text"].source)
             parts.append(_fence_div(".pull", converter.result()))
-    body_md = "\n".join(parts).strip() + "\n"
+        elif block.block_type == "generic":
+            converter.feed(block.value["text"].source)
+            parts.append(_fence_div(block.value["class_name"], converter.result()))
+        elif block.block_type == "generic_nesting":
+            inner_parts = _export_body_parts(block.value["children"], media_files=media_files)
+            inner_md = "\n".join(inner_parts).strip()
+            parts.append(_fence_div(block.value["class_name"], inner_md, colons=_next_fence_colons(inner_md)))
+    return parts
+
+
+def export_contentpage_qmd(page, media_files=None):
+    """
+    Sérialise une cms.ContentPage (une langue) en texte .qmd — même contrat
+    qu'export_blogpost_qmd (frontmatter key/lang, marqueurs wagtail-image/-document/
+    -page), mais parcourt les blocs de body (StreamField) plutôt qu'un RichTextField
+    plat, via _export_body_parts (voir sa docstring pour la correspondance bloc/div).
+    """
+    body_md = "\n".join(_export_body_parts(page.body, media_files=media_files)).strip() + "\n"
 
     front = {
         "title": page.title,

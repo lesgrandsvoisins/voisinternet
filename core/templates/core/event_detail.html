@@ -71,8 +71,10 @@
       {% endif %}
       {% if not is_manager %}
         {% if request.user.is_authenticated or OIDC_ENABLED %}
-          {# Pas besoin d'être déjà connecté·e pour lancer la demande : elle attend la
-             connexion Keycloak et se termine toute seule au retour (core:event_detail). #}
+          {% comment %} 
+ Pas besoin d'être déjà connecté·e pour lancer la demande : elle attend la
+             connexion Keycloak et se termine toute seule au retour (core:event_detail). {% endcomment %} 
+
           {% if my_management_request is None %}
           <form method="post" action="{% url 'core:claim_event_management' event.pk %}">
             {% csrf_token %}

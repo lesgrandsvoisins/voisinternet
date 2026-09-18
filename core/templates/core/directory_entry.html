@@ -26,8 +26,10 @@
     </div>
     {% endif %}
     {% elif entry.logo %}
-    {# Pas de photo promotionnelle ni de galerie : le logo (entry_form_fields.html),
-       déjà utilisé comme repli dans les listages (annuaire.html), sert ici de même. #}
+    {% comment %} 
+ Pas de photo promotionnelle ni de galerie : le logo (entry_form_fields.html),
+       déjà utilisé comme repli dans les listages (annuaire.html), sert ici de même. {% endcomment %} 
+
     <img class="hero" src="{{ entry.logo.url }}" alt="">
     {% endif %}
 
@@ -103,8 +105,10 @@
         <span class="chip">{% trans "Demande de responsabilité refusée" %}</span>
         {% endif %}
       {% elif not entry.owner_id and OIDC_ENABLED %}
-        {# Pas besoin d'être déjà connecté·e pour lancer la demande : elle attend la
-           connexion Keycloak et se termine toute seule au retour (core:entry_detail). #}
+        {% comment %} 
+ Pas besoin d'être déjà connecté·e pour lancer la demande : elle attend la
+           connexion Keycloak et se termine toute seule au retour (core:entry_detail). {% endcomment %} 
+
         <form method="post" action="{% url 'core:claim_entry_ownership' entry.slug %}">
           {% csrf_token %}
           <button class="sub-btn" type="submit">{% trans "Demander à être responsable de cette fiche" %}</button>

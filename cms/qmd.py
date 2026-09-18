@@ -1063,3 +1063,111 @@ def import_standardpage_qmd(text):
     page.save_revision().publish()
 
     return page
+
+
+# ::: {.cards} : cartes éditoriales (CardBlock, cms.models.py — partagé par plusieurs
+# types de page ; seul cms.PolePage.cards est câblé au round-trip .qmd pour l'instant,
+# voir export_polepage_qmd/import_polepage_qmd) : un ::: {.card} par carte, avec son
+# titre en span Pandoc ([texte]{.title} — CardBlock.title est un CharBlock, pas du
+# texte enrichi comme .text, donc pas de div dédié ni de profondeur consommée pour lui)
+# et son texte enrichi en div imbriqué ::: {.text}. Même convention de deux-points
+# décroissants que _export_body_parts (_TOP_LEVEL_COLONS - depth) : .cards à la
+# profondeur 0, .card à 1, .text à 2 — cohérent avec _parse_divs, qui ne dépend que de
+# l'ordre (englobant > imbriqué), jamais des valeurs absolues.
+_CARDS_CLASS_RE = re.compile(r'^\.cards$')
+_CARD_CLASS_RE = re.compile(r'^\.card$')
+_CARD_TITLE_SPAN_RE = re.compile(r'^\[(.+)\]\{\.title\}$')
+_CARD_TEXT_CLASS_RE = re.compile(r'^\.text$')
+
+
+def _export_cards(cards, media_files=None):
+    """Sérialise un StreamField de CardBlock en un div ::: {.cards} (voir les regex
+    ci-dessus pour la convention de syntaxe, _import_cards pour l'aller-retour)."""
+    card_parts = []
+    for block in cards:
+        converter = _HTMLToMarkdown(media_files=media_files)
+        converter.feed(block.value["text"].source)
+        text_div = _fence_div(".text", converter.result(), colons=_TOP_LEVEL_COLONS - 2)
+        card_content = f'[{block.value["title"]}]{{.title}}\n\n{text_div}'
+        card_parts.append(_fence_div(".card", card_content, colons=_TOP_LEVEL_COLONS - 1))
+    cards_md = "\n".join(card_parts).strip()
+    return _fence_div(".cards", cards_md, colons=_TOP_LEVEL_COLONS)
+
+
+def _import_cards(body_md, to_html):
+    """Reconstruit une liste de valeurs CardBlock ([{"type": "card", "value": {...}},
+    …], prête pour l'affectation à un StreamField) à partir d'un div ::: {.cards} (voir
+    _export_cards) — permissif : sans div .cards englobant, chaque ::: {.card} de
+    premier niveau du texte est pris en compte directement."""
+    nodes, _ = _parse_divs(body_md.split("\n"))
+    cards_children = nodes
+    for node in nodes:
+        if node["type"] == "div" and _CARDS_CLASS_RE.match(node["attrs"]):
+            cards_children = node["children"]
+            break
+
+    result = []
+    for node in cards_children:
+        if node["type"] != "div" or not _CARD_CLASS_RE.match(node["attrs"]):
+            continue
+        title = ""
+        text_html = ""
+        for child in node["children"]:
+            if child["type"] == "prose":
+                title_match = _CARD_TITLE_SPAN_RE.match("\n".join(child["lines"]).strip())
+                if title_match:
+                    title = title_match.group(1)
+            elif child["type"] == "div" and _CARD_TEXT_CLASS_RE.match(child["attrs"]):
+                text_html = to_html("\n".join(line for c in child["children"] for line in c["lines"]))
+        result.append({"type": "card", "value": {"title": title, "text": text_html}})
+    return result
+
+
+def export_polepage_qmd(page, media_files=None):
+    """
+    Sérialise les cartes (cards) d'une cms.PolePage (une langue) en texte .qmd — seul
+    ce champ est exporté comme corps ; les autres (couleur, icône, étiquette de blog
+    Ghost, étiquettes internes) sont de la configuration de page, pas du contenu
+    éditorial, et restent hors de portée de ce round-trip (réservés à l'admin Wagtail).
+    """
+    body_md = _export_cards(page.cards, media_files=media_files)
+    front = {
+        "title": page.title,
+        "key": str(page.translation_key),
+        "lang": page.locale.language_code,
+        "slug": page.slug,
+        "url": page.full_url,
+    }
+    frontmatter = yaml.safe_dump(front, allow_unicode=True, sort_keys=False, default_flow_style=False)
+    return f"---\n{frontmatter}---\n\n{body_md}"
+
+
+def import_polepage_qmd(text):
+    """
+    Met à jour les cartes (cards) d'une cms.PolePage existante à partir d'un texte
+    .qmd — identification par (translation_key, lang) comme les autres imports .qmd de
+    ce module. Contrairement à StandardPage/ContentPage/le blog, ne crée jamais de
+    nouvelle page : un pôle est une page de configuration (couleur, étiquette de
+    blog…) créée depuis l'admin Wagtail, pas un contenu éditorial autonome à part
+    entière.
+    """
+    match = FRONTMATTER_RE.match(text)
+    if not match:
+        raise ValueError("Frontmatter YAML manquant (le fichier doit commencer par ---).")
+    front = yaml.safe_load(match.group(1)) or {}
+    body_md = match.group(2)
+
+    lang = front.get("lang") or "fr"
+    locale = Locale.objects.get(language_code=lang)
+    key = front.get("key")
+
+    page = PolePage.objects.filter(translation_key=key, locale=locale).first() if key else None
+    if page is None:
+        raise ValueError(f"Aucune PolePage de clé « {key} » en langue « {lang} » — voir export_polepage_qmd.")
+
+    def to_html(markdown_text):
+        return _self_close_void_tags(_restore_wagtail_embeds(markdown_filter(markdown_text)))
+
+    page.cards = _import_cards(body_md, to_html)
+    page.save_revision().publish()
+    return page

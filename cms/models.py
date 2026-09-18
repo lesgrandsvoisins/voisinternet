@@ -164,25 +164,34 @@ class _ContentStreamBlockLeaf(blocks.StreamBlock):
     generic = GenericBlock()
 
 
-def _generic_nesting_block(children_block):
+def _generic_nesting_block(children_block_factory):
     """
     Un GenericNestingBlock — le pendant "avec enfants" de GenericBlock, pour un div
     générique qui en imbrique d'autres (::: {.x}\\n::: {.y}\\n…\\n:::\\n…\\n:::, deux-
     points en nombre croissant vers l'extérieur — convention Pandoc/Quarto, voir
     https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans et
     cms/qmd.py::_parse_divs pour la reconnaissance à l'import) — dont les enfants sont
-    ceux de children_block. Une vraie auto-référence (StreamBlock contenant un bloc du
-    même type que lui-même) ferait boucler indéfiniment l'outillage de Wagtail qui
-    parcourt l'arbre des blocs sans détecter les cycles (`manage.py check` lève un
-    RecursionError, testé) ; _ContentStreamBlockN1/N2/N3 ci-dessous empilent donc 3
-    niveaux concrets plutôt qu'une récursion infinie — largement suffisant pour un
-    premier jet générique, mais une classe/instance différente à chaque niveau (voir
+    ceux de children_block_factory(). Une vraie auto-référence (StreamBlock contenant
+    un bloc du même type que lui-même) ferait boucler indéfiniment l'outillage de
+    Wagtail qui parcourt l'arbre des blocs sans détecter les cycles (`manage.py check`
+    lève un RecursionError, testé) ; _ContentStreamBlockN1/N2/N3 ci-dessous empilent
+    donc 3 niveaux concrets plutôt qu'une récursion infinie — largement suffisant pour
+    un premier jet générique, mais une classe/instance différente à chaque niveau (voir
     _GENERIC_NESTING_MAX_DEPTH, cms/qmd.py, pour la limite côté import).
+
+    children_block_factory est un appelable (pas un bloc déjà construit) : l'ordre des
+    champs dans le formulaire d'admin d'un StructBlock suit l'ordre de CRÉATION des
+    blocs (Block.creation_counter, cms/../wagtail/blocks/base.py), pas l'ordre textuel
+    du corps de classe — passer un bloc déjà instancié (construit à l'évaluation de
+    l'argument, donc avant même l'entrée dans cette fonction) lui donnerait un
+    creation_counter antérieur à class_name, et "children" apparaîtrait avant "classe"
+    dans l'admin malgré l'ordre visible ci-dessous. Appeler la factory ICI, après
+    class_name, garantit l'ordre voulu.
     """
 
     class GenericNestingBlock(blocks.StructBlock):
         class_name = blocks.CharBlock(label=_("classe"), required=False)
-        children = children_block
+        children = children_block_factory()
 
         class Meta:
             icon = "folder-open-inverse"
@@ -192,11 +201,11 @@ def _generic_nesting_block(children_block):
 
 
 class _ContentStreamBlockN1(_ContentStreamBlockLeaf):
-    generic_nesting = _generic_nesting_block(_ContentStreamBlockLeaf())()
+    generic_nesting = _generic_nesting_block(_ContentStreamBlockLeaf)()
 
 
 class _ContentStreamBlockN2(_ContentStreamBlockLeaf):
-    generic_nesting = _generic_nesting_block(_ContentStreamBlockN1())()
+    generic_nesting = _generic_nesting_block(_ContentStreamBlockN1)()
 
 
 class ContentStreamBlock(_ContentStreamBlockLeaf):
@@ -205,7 +214,7 @@ class ContentStreamBlock(_ContentStreamBlockLeaf):
     génériques imbriqués (voir _generic_nesting_block).
     """
 
-    generic_nesting = _generic_nesting_block(_ContentStreamBlockN2())()
+    generic_nesting = _generic_nesting_block(_ContentStreamBlockN2)()
 
 
 class StandardPage(Page):

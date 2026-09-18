@@ -34,9 +34,10 @@ make fixtures-dump    # re-dumps those same fixtures from the current DB
 Run a single test: `.venv/bin/python manage.py test core.tests.PagesTests.test_every_page_renders`
 (export `EnvironmentFile=$(pwd)/.env` first, or run via `$(LOADENV)` as the Makefile does).
 
-There is one test module, `core/tests.py`; the `cms` app (Wagtail) has none. Tests use
-`django.test.TestCase` with the `core.*` fixtures loaded via `Base.fixtures` and override
-the cache to `locmem` so throttling/Ghost caching don't leak between tests.
+Two test modules: `core/tests.py` and `cms/tests.py` (mostly the `.qmd` import/export
+round-trips) — `make test` runs both. Tests use `django.test.TestCase` with the `core.*`
+fixtures loaded via `Base.fixtures` and override the cache to `locmem` so throttling/Ghost
+caching don't leak between tests.
 
 Wagtail admin lives at `/cms/`, Django admin at `/admin/` — both are namespaced under the
 active language prefix (see URLs below).

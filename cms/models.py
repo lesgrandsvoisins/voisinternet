@@ -33,24 +33,6 @@ class HomePage(Page):
     ]
 
 
-class StandardPage(Page):
-    """Page de contenu générique : un titre et un corps en texte enrichi."""
-
-    body = RichTextField(blank=True, default="")
-
-    content_panels = Page.content_panels + [
-        FieldPanel("body"),
-    ]
-
-    parent_page_types = ["cms.HomePage", "cms.StandardPage", "cms.PolePage"]
-    subpage_types = ["cms.StandardPage"]
-
-    def get_pole_ancestor(self):
-        """Le PolePage ancêtre le plus proche, le cas échéant (couleur/icône à reprendre dans le fil d'Ariane)."""
-        ancestor = self.get_ancestors().type(PolePage).order_by("-depth").first()
-        return ancestor.specific if ancestor else None
-
-
 class CardBlock(blocks.StructBlock):
     """Une carte éditoriale (titre + texte enrichi) : réutilisée par plusieurs types de page."""
 
@@ -224,6 +206,33 @@ class ContentStreamBlock(_ContentStreamBlockLeaf):
     """
 
     generic_nesting = _generic_nesting_block(_ContentStreamBlockN2())()
+
+
+class StandardPage(Page):
+    """
+    Page de contenu générique : un titre et un corps en StreamField — même jeu de
+    blocs que cms.ContentPage (ContentStreamBlock : texte enrichi, encarts, citations
+    en exergue, divs génériques imbriqués sur 3 niveaux), pour que le round-trip .qmd
+    (cms/qmd.py::export_standardpage_qmd/import_standardpage_qmd) reconnaisse les
+    mêmes divs Pandoc/Quarto que ContentPage plutôt que de les laisser fuiter en texte
+    brut dans l'éditeur (un simple RichTextField, avant cette migration, ne savait rien
+    des ::: {.classe} — voir la migration cms.0030_standardpage_body_streamfield pour
+    la conversion de l'ancien contenu HTML en un unique bloc "prose").
+    """
+
+    body = StreamField(ContentStreamBlock(), blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel("body"),
+    ]
+
+    parent_page_types = ["cms.HomePage", "cms.StandardPage", "cms.PolePage"]
+    subpage_types = ["cms.StandardPage"]
+
+    def get_pole_ancestor(self):
+        """Le PolePage ancêtre le plus proche, le cas échéant (couleur/icône à reprendre dans le fil d'Ariane)."""
+        ancestor = self.get_ancestors().type(PolePage).order_by("-depth").first()
+        return ancestor.specific if ancestor else None
 
 
 class PolePage(Page):

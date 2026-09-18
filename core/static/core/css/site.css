@@ -248,7 +248,11 @@
 }
 
 html {
-  -webkit-text-size-adjust: 100%
+  -webkit-text-size-adjust: 100%;
+  /* .top est en position: sticky (ci-dessous) : sans ça, toute ancre (#…) atterrit
+     juste sous elle, masquée. Un peu plus que son min-height (4.25rem) pour garder une
+     marge de respiration. */
+  scroll-padding-top: 4.75rem
 }
 
 body {

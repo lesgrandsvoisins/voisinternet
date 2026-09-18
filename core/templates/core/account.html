@@ -43,7 +43,7 @@
     {% if user.is_authenticated or account %}
       <section class="dashboard-summary"
                aria-label="{% trans "Aperçu de mon compte" %}">
-        <a class="stat-tile" href="#sc2-title">
+        <a class="stat-tile" href="{% url 'core:raccourcis' %}">
           <span class="stat-number">{{ shortcuts|length }}</span>
           <span class="stat-label">{% trans "Raccourcis" %}</span>
         </a>

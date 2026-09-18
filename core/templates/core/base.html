@@ -60,19 +60,44 @@
                x-transition:leave-start="mega-leave-start"
                x-transition:leave-end="mega-leave-end">
             <div class="wrap">
-              {% for group in header_groups %}
-                <ul class="menu-flat">
-                  {% for item in group.items %}
-                    <li>
-                      <a href="{{ item.href }}"
-                         aria-label="{{ item.entry.aria }}"
-                         target="{{ item.entry.htmltarget }}"
-                         {% if item.current %}aria-current="page"{% endif %}>{% if item.entry.icon %}{% include item.entry.icon %}{% endif %}{{ item.entry.title }}</a>
-                    </li>
-                  {% endfor %}
-                  {% if not forloop.last %}<li class="menu-sep" role="separator" aria-hidden="true"></li>{% endif %}
-                </ul>
-              {% endfor %}
+              {% comment %}
+              Sous-menu contextuel : les pages Wagtail au même niveau que la page
+              actuellement affichée (siblings, elle incluse) et ses propres sous-pages
+              (children), parmi celles cochées « Afficher dans les menus » (Page.
+              show_in_menus, natif à Wagtail — voir aussi standard_page.html pour la
+              section « Pages liées » sur la page elle-même). "page" n'existe dans le
+              contexte que pour les vues servies par Wagtail (cms.*Page) — absent pour
+              les vues core (agenda, annuaire…), qui n'ont donc jamais ce sous-menu.
+              {% endcomment %}
+              {% with menu_siblings=page.get_siblings.live.in_menu menu_children=page.get_children.live.in_menu %}
+                {% for group in header_groups %}
+                  <ul class="menu-flat">
+                    {% for item in group.items %}
+                      <li>
+                        <a href="{{ item.href }}"
+                           aria-label="{{ item.entry.aria }}"
+                           target="{{ item.entry.htmltarget }}"
+                           {% if item.current %}aria-current="page"{% endif %}>{% if item.entry.icon %}{% include item.entry.icon %}{% endif %}{{ item.entry.title }}</a>
+                      </li>
+                    {% endfor %}
+                    {% if not forloop.last or menu_siblings or menu_children %}
+                      <li class="menu-sep" role="separator" aria-hidden="true"></li>
+                    {% endif %}
+                  </ul>
+                {% endfor %}
+                {% if menu_siblings or menu_children %}
+                  <ul class="menu-flat">
+                    {% for sibling in menu_siblings %}
+                      <li>
+                        <a href="{{ sibling.url }}"{% if sibling.pk == page.pk %} aria-current="page"{% endif %}>{{ sibling.title }}</a>
+                      </li>
+                    {% endfor %}
+                    {% for child in menu_children %}
+                      <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              {% endwith %}
               <ul class="menu-flat">
                 <li>
                   <form class="site-search"

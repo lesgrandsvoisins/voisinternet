@@ -217,6 +217,58 @@ class StandardPageMenuTests(TestCase):
         self.assertNotContains(response, 'id="standard-page-menu-title"')
 
 
+class HeaderContextualMenuTests(TestCase):
+    """Sous-menu contextuel du menu principal (core/templates/core/base.html) :
+    siblings (page elle-même incluse) et children de la page affichée, parmi ceux
+    cochés « Afficher dans les menus » — distinct de la section « Pages liées » de
+    StandardPageMenuTests, qui n'apparaît que sur la page elle-même, pas dans
+    l'en-tête commun à tout le site."""
+
+    def setUp(self):
+        self.fr = Locale.objects.get(language_code="fr")
+        self.home = HomePage.objects.get(locale=self.fr)
+        self.parent = StandardPage(
+            title="Section menu contextuel", slug="section-menu-contextuel",
+            body=[{"type": "prose", "value": "<p>P.</p>"}],
+        )
+        self.home.add_child(instance=self.parent)
+        self.parent.save_revision().publish()
+
+    def test_visible_sibling_and_child_appear_hidden_sibling_does_not(self):
+        visible_sibling = StandardPage(
+            title="Frère visible", slug="frere-visible", show_in_menus=True,
+            body=[{"type": "prose", "value": "<p>1</p>"}],
+        )
+        self.home.add_child(instance=visible_sibling)
+        visible_sibling.save_revision().publish()
+
+        hidden_sibling = StandardPage(
+            title="Frère caché", slug="frere-cache", show_in_menus=False,
+            body=[{"type": "prose", "value": "<p>2</p>"}],
+        )
+        self.home.add_child(instance=hidden_sibling)
+        hidden_sibling.save_revision().publish()
+
+        child = StandardPage(
+            title="Sous-page menu", slug="sous-page-menu", show_in_menus=True,
+            body=[{"type": "prose", "value": "<p>c</p>"}],
+        )
+        self.parent.add_child(instance=child)
+        child.save_revision().publish()
+
+        response = self.client.get(self.parent.url)
+        self.assertContains(response, "Frère visible")
+        self.assertNotContains(response, "Frère caché")
+        self.assertContains(response, "Sous-page menu")
+
+    def test_does_not_crash_on_a_view_without_a_wagtail_page_in_context(self):
+        # core:home (et les autres vues de l'app core) n'a pas de "page" Wagtail dans
+        # son contexte — le sous-menu contextuel doit rester silencieusement absent,
+        # pas planter le rendu de l'en-tête commun à tout le site.
+        response = self.client.get(reverse("core:home"))
+        self.assertEqual(response.status_code, 200)
+
+
 class StandardPageQmdRoundTripTests(TestCase):
     def setUp(self):
         self.fr = Locale.objects.get(language_code="fr")

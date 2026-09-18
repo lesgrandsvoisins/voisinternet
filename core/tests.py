@@ -726,6 +726,63 @@ class DonorPrivacyTests(TestCase):
         self.assertNotContains(response, "Donateur discret")
 
 
+class EventQmdTests(Base):
+    def setUp(self):
+        super().setUp()
+        self.event = Event.objects.create(
+            title="Conseil des voisins", slug="conseil-des-voisins",
+            start=timezone.datetime(2026, 3, 2, 19, 0, tzinfo=timezone.get_current_timezone()),
+            location="Ressourcerie créative", description="Ordre du jour et compte-rendu.",
+        )
+
+    def test_export_assigns_a_source_uid_if_missing(self):
+        from core.qmd import export_event_qmd
+
+        self.assertEqual(self.event.source_uid, "")
+        qmd = export_event_qmd(self.event)
+        self.event.refresh_from_db()
+        self.assertTrue(self.event.source_uid)
+        self.assertIn(f"uid: {self.event.source_uid}", qmd)
+        self.assertIn("Ordre du jour et compte-rendu.", qmd)
+
+    def test_export_then_import_updates_the_same_event(self):
+        from core.qmd import export_event_qmd, import_event_qmd
+
+        qmd = export_event_qmd(self.event)
+        imported = import_event_qmd(qmd)
+
+        self.assertEqual(imported.pk, self.event.pk)
+        self.assertEqual(Event.objects.count(), 1)
+        self.assertEqual(imported.title, "Conseil des voisins")
+        self.assertEqual(imported.location, "Ressourcerie créative")
+
+    def test_import_with_unknown_uid_creates_a_new_event(self):
+        qmd = (
+            "---\n"
+            "title: Nouvel atelier\n"
+            "uid: brand-new-uid\n"
+            "slug: nouvel-atelier\n"
+            "start: '2026-04-01T18:00:00+02:00'\n"
+            "tags: [Vélo]\n"
+            "---\n\n"
+            "Un atelier de découverte.\n"
+        )
+        from core.qmd import import_event_qmd
+
+        event = import_event_qmd(qmd)
+        self.assertNotEqual(event.pk, self.event.pk)
+        self.assertEqual(event.source_uid, "brand-new-uid")
+        self.assertEqual(list(event.tags.values_list("name", flat=True)), ["Vélo"])
+        self.assertEqual(Event.objects.count(), 2)
+
+    def test_import_without_start_on_a_new_event_raises(self):
+        from core.qmd import import_event_qmd
+
+        qmd = "---\ntitle: Sans date\nuid: no-date-uid\n---\n\nTexte.\n"
+        with self.assertRaises(ValueError):
+            import_event_qmd(qmd)
+
+
 class AgendaTests(Base):
     def test_event_detail_page(self):
         event = Event.objects.create(

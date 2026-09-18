@@ -19,7 +19,7 @@ msgstr ""
 
 #: cms/image_formats.py:21
 msgid "Petite"
-msgstr ""
+msgstr "작게"
 
 #: cms/image_formats.py:22
 #, fuzzy
@@ -29,31 +29,31 @@ msgstr "방법"
 
 #: cms/image_formats.py:23
 msgid "Grande"
-msgstr ""
+msgstr "크게"
 
 #: cms/image_formats.py:26
 msgid "Petite, à gauche"
-msgstr ""
+msgstr "작게, 왼쪽"
 
 #: cms/image_formats.py:29
 msgid "Moyenne, à gauche"
-msgstr ""
+msgstr "중간, 왼쪽"
 
 #: cms/image_formats.py:32
 msgid "Grande, à gauche"
-msgstr ""
+msgstr "크게, 왼쪽"
 
 #: cms/image_formats.py:35
 msgid "Petite, à droite"
-msgstr ""
+msgstr "작게, 오른쪽"
 
 #: cms/image_formats.py:38
 msgid "Moyenne, à droite"
-msgstr ""
+msgstr "중간, 오른쪽"
 
 #: cms/image_formats.py:41
 msgid "Grande, à droite"
-msgstr ""
+msgstr "크게, 오른쪽"
 
 #: cms/models.py:57 cms/models.py:130 cms/models.py:733 core/models.py:460
 msgid "titre"
@@ -62,11 +62,11 @@ msgstr "제목"
 #: cms/models.py:58 cms/models.py:131 cms/models.py:147 cms/models.py:327
 #: cms/models.py:630 cms/models.py:734
 msgid "texte"
-msgstr ""
+msgstr "텍스트"
 
 #: cms/models.py:62
 msgid "carte"
-msgstr ""
+msgstr "카드"
 
 #: cms/models.py:66 cms/models.py:536 core/models.py:56 core/models.py:70
 #: core/models.py:207 core/models.py:221 core/models.py:244
@@ -75,7 +75,7 @@ msgstr "이름"
 
 #: cms/models.py:67
 msgid "rôle"
-msgstr ""
+msgstr "역할"
 
 #: cms/models.py:71
 #, fuzzy
@@ -85,11 +85,11 @@ msgstr "임원진"
 
 #: cms/models.py:75
 msgid "intitulé"
-msgstr ""
+msgstr "제목"
 
 #: cms/models.py:76 cms/models.py:80
 msgid "document"
-msgstr ""
+msgstr "문서"
 
 #: cms/models.py:86
 #, fuzzy
@@ -99,11 +99,11 @@ msgstr "협회"
 
 #: cms/models.py:87
 msgid "auteur·rice"
-msgstr ""
+msgstr "작성자"
 
 #: cms/models.py:91
 msgid "témoignage"
-msgstr ""
+msgstr "후기"
 
 #: cms/models.py:99 core/models.py:389
 #, fuzzy
@@ -113,7 +113,7 @@ msgstr "일정"
 
 #: cms/models.py:100
 msgid "photos"
-msgstr ""
+msgstr "사진"
 
 #: cms/models.py:104
 #, fuzzy
@@ -123,11 +123,11 @@ msgstr "갤러리"
 
 #: cms/models.py:122 core/forms.py:137
 msgid "Note"
-msgstr ""
+msgstr "참고"
 
 #: cms/models.py:123
 msgid "Astuce"
-msgstr ""
+msgstr "팁"
 
 #: cms/models.py:124
 #, fuzzy
@@ -137,11 +137,11 @@ msgstr "금액"
 
 #: cms/models.py:125
 msgid "Avertissement"
-msgstr ""
+msgstr "경고"
 
 #: cms/models.py:126
 msgid "Attention"
-msgstr ""
+msgstr "주의"
 
 #: cms/models.py:129 core/models.py:583 core/models.py:633
 msgid "type"
@@ -149,62 +149,62 @@ msgstr "유형"
 
 #: cms/models.py:135
 msgid "encart"
-msgstr ""
+msgstr "콜아웃"
 
 #: cms/models.py:151
 msgid "citation en exergue"
-msgstr ""
+msgstr "강조 인용문"
 
 #: cms/models.py:162
 msgid "Terracotta"
-msgstr ""
+msgstr "테라코타"
 
 #: cms/models.py:163
 msgid "Prune"
-msgstr ""
+msgstr "자두색"
 
 #: cms/models.py:164
 msgid "Indigo"
-msgstr ""
+msgstr "인디고"
 
 #: cms/models.py:165
 msgid "Sarcelle"
-msgstr ""
+msgstr "청록색"
 
 #: cms/models.py:166
 msgid "Mousse"
-msgstr ""
+msgstr "이끼색"
 
 #: cms/models.py:167
 msgid "Or"
-msgstr ""
+msgstr "골드"
 
 #: cms/models.py:170 cms/models.py:238 cms/models.py:319 cms/models.py:414
 #: cms/models.py:433 cms/models.py:460 cms/models.py:618
 msgid "chapeau"
-msgstr ""
+msgstr "리드문"
 
 #: cms/models.py:171
 msgid "couleur du pôle"
-msgstr ""
+msgstr "거점 색상"
 
 #: cms/models.py:173
 msgid "icône du pôle"
-msgstr ""
+msgstr "거점 아이콘"
 
 #: cms/models.py:177
 msgid "étiquette du blog"
-msgstr ""
+msgstr "블로그 태그"
 
 #: cms/models.py:178
 msgid ""
 "Étiquette Ghost dont les derniers articles apparaissent en bas de page."
-msgstr ""
+msgstr "페이지 하단에 최신 글이 표시되는 Ghost 태그입니다."
 
 #: cms/models.py:182 cms/models.py:246 cms/models.py:324 cms/models.py:639
 #: core/models.py:89 core/models.py:213 core/models.py:255 core/models.py:484
 msgid "étiquettes"
-msgstr ""
+msgstr "태그"
 
 #: cms/models.py:239 cms/models.py:744
 #, fuzzy
@@ -214,7 +214,7 @@ msgstr "시작"
 
 #: cms/models.py:240 cms/models.py:745
 msgid "date de fin"
-msgstr ""
+msgstr "종료일"
 
 #: cms/models.py:241 core/models.py:466
 msgid "lieu"
@@ -228,7 +228,7 @@ msgstr "디렉터리 페이지"
 
 #: cms/models.py:252 cms/models.py:438
 msgid "documents"
-msgstr ""
+msgstr "문서"
 
 #: cms/models.py:314 cms/models.py:613
 #, fuzzy
@@ -250,15 +250,15 @@ msgstr "임원진"
 
 #: cms/models.py:485
 msgid "introduction"
-msgstr ""
+msgstr "소개"
 
 #: cms/models.py:537
 msgid "biographie"
-msgstr ""
+msgstr "소개글"
 
 #: cms/models.py:539 core/models.py:388 core/models.py:467
 msgid "photo"
-msgstr ""
+msgstr "사진"
 
 #: cms/models.py:542
 #, fuzzy
@@ -276,7 +276,7 @@ msgstr "국가"
 
 #: cms/models.py:546
 msgid "e-mail"
-msgstr ""
+msgstr "이메일"
 
 #: cms/models.py:548
 msgid ""
@@ -284,6 +284,8 @@ msgid ""
 "formulaire de contact (core.views.author_detail). Laisser vide masque le "
 "formulaire sur la page de cet·te auteur·ice."
 msgstr ""
+"공개적으로 표시되지 않으며, 문의 양식(core.views.author_detail)의 메시지를 전달하는 데에만 사용됩니다. 비워두면 "
+"해당 작성자 페이지에서 양식이 표시되지 않습니다."
 
 #: cms/models.py:565
 #, fuzzy
@@ -293,27 +295,27 @@ msgstr "후원자"
 
 #: cms/models.py:584 core/models.py:368
 msgid "nom de l'expéditeur·ice"
-msgstr ""
+msgstr "보낸 사람 이름"
 
 #: cms/models.py:585 core/models.py:369
 msgid "e-mail de l'expéditeur·ice"
-msgstr ""
+msgstr "보낸 사람 이메일"
 
 #: cms/models.py:586 core/models.py:370
 msgid "message"
-msgstr ""
+msgstr "메시지"
 
 #: cms/models.py:587 core/models.py:371
 msgid "envoyé le"
-msgstr ""
+msgstr "보낸 날짜"
 
 #: cms/models.py:597
 msgid "message à un·e auteur·ice"
-msgstr ""
+msgstr "작성자에게 보낸 메시지"
 
 #: cms/models.py:598
 msgid "messages aux auteur·ices"
-msgstr ""
+msgstr "작성자에게 보낸 메시지 목록"
 
 #: cms/models.py:619 core/models.py:90 core/models.py:483
 msgid "mis en avant"
@@ -325,35 +327,37 @@ msgid ""
 "alors en plusieurs pages plutôt qu'en un seul bloc. « Ligne horizontale » "
 "est un simple séparateur visuel, sans effet sur la pagination."
 msgstr ""
+"도구 모음의 '페이지 나누기' 버튼은 글을 나눕니다. 그러면 하나의 글 대신 여러 페이지로 나뉘어 표시됩니다. '가로선'은 페이지 "
+"나누기에 영향을 주지 않는 단순한 시각적 구분선입니다."
 
 #: cms/models.py:736
 msgid "image"
-msgstr ""
+msgstr "이미지"
 
 #: cms/models.py:740
 msgid "page liée"
-msgstr ""
+msgstr "연결된 페이지"
 
 #: cms/models.py:742
 msgid "Le bandeau pointe vers cette page."
-msgstr ""
+msgstr "배너가 이 페이지로 연결됩니다."
 
 #: cms/models.py:746
 msgid "actif"
-msgstr ""
+msgstr "활성"
 
 #: cms/models.py:759
 msgid "bandeau d'annonce"
-msgstr ""
+msgstr "공지 배너"
 
 #: cms/models.py:760
 msgid "bandeaux d'annonce"
-msgstr ""
+msgstr "공지 배너 목록"
 
 #: cms/templates/cms/admin/qmd_import.html:3 cms/wagtail_hooks.py:275
 #: cms/wagtail_hooks.py:316
 msgid "Importer un .qmd"
-msgstr ""
+msgstr ".qmd 가져오기"
 
 #: cms/templates/cms/admin/qmd_import.html:7
 msgid ""
@@ -361,14 +365,16 @@ msgid ""
 "fichier .qmd. Si le fichier porte la clé d'un autre article, c'est cet autre"
 " article qui sera créé ou mis à jour à la place."
 msgstr ""
+".qmd 파일로부터 이 글의 제목, 본문, 메타데이터를 대체합니다. 파일이 다른 글의 키를 가지고 있다면, 그 다른 글이 대신 생성되거나"
+" 업데이트됩니다."
 
 #: cms/templates/cms/admin/qmd_import.html:12
 msgid "Fichier .qmd"
-msgstr ""
+msgstr ".qmd 파일"
 
 #: cms/templates/cms/admin/qmd_import.html:16
 msgid "Importer"
-msgstr ""
+msgstr "가져오기"
 
 #: cms/templates/cms/admin/qmd_import.html:17
 #, fuzzy
@@ -435,7 +441,7 @@ msgstr "투명성"
 #: cms/templates/cms/association_page.html:44
 #: cms/templates/cms/project_page.html:56
 msgid "Télécharger"
-msgstr ""
+msgstr "다운로드"
 
 #: cms/templates/cms/association_page.html:46
 msgid "[document à publier]"
@@ -443,22 +449,22 @@ msgstr "[게시 예정 문서]"
 
 #: cms/templates/cms/blog_index_page.html:21
 msgid "Rechercher dans le blog"
-msgstr ""
+msgstr "블로그 검색"
 
 #: cms/templates/cms/blog_index_page.html:22
 msgid "Rechercher un article…"
-msgstr ""
+msgstr "글 검색…"
 
 #: cms/templates/cms/blog_index_page.html:23
 #: core/templates/core/search.html:20
 msgid "Rechercher"
-msgstr ""
+msgstr "검색"
 
 #: cms/templates/cms/blog_index_page.html:47
 #: core/templates/core/author_detail.html:35
 #: core/templates/core/search.html:30
 msgid "Pages"
-msgstr ""
+msgstr "페이지"
 
 #: cms/templates/cms/blog_index_page.html:49
 msgid "← Précédent"
@@ -486,13 +492,12 @@ msgstr "아직 서비스가 없습니다"
 #: cms/templates/cms/content_page.html:42
 #: cms/templates/cms/content_page.html:43
 msgid "Sommaire"
-msgstr ""
+msgstr "목차"
 
 #: cms/templates/cms/blog_post_page.html:56
-#, fuzzy
 #| msgid "pages de l'annuaire"
 msgid "Pages de l’article"
-msgstr "디렉터리 페이지"
+msgstr "글 페이지"
 
 #: cms/templates/cms/blog_post_page.html:58
 #: cms/templates/cms/content_page.html:74
@@ -503,7 +508,7 @@ msgstr "← 이전 페이지"
 #: cms/templates/cms/content_page.html:78
 #, python-format
 msgid "Page %(page_number)s sur %(total_pages)s"
-msgstr ""
+msgstr "%(total_pages)s페이지 중 %(page_number)s페이지"
 
 #: cms/templates/cms/blog_post_page.html:64
 #: cms/templates/cms/content_page.html:80
@@ -513,11 +518,11 @@ msgstr "다음 페이지 →"
 #: cms/templates/cms/blog_post_page.html:89
 #: cms/templates/cms/content_page.html:90
 msgid "À lire aussi"
-msgstr ""
+msgstr "함께 보면 좋은 글"
 
 #: cms/templates/cms/blog_post_page.html:112
 msgid "← Retour au blog"
-msgstr ""
+msgstr "← 블로그로 돌아가기"
 
 #: cms/templates/cms/content_page.html:72
 #, fuzzy
@@ -553,7 +558,7 @@ msgstr "첫 후원자들이 동의 하에 여기에 표시될 예정입니다."
 
 #: cms/templates/cms/pole_page.html:45
 msgid "À découvrir"
-msgstr ""
+msgstr "함께 둘러보기"
 
 #: cms/templates/cms/pole_page.html:60 core/templates/core/tag_detail.html:33
 #, fuzzy
@@ -585,11 +590,11 @@ msgstr "최신 글"
 
 #: cms/templates/cms/project_page.html:50
 msgid "Documents"
-msgstr ""
+msgstr "문서"
 
 #: cms/wagtail_hooks.py:49
 msgid "Ligne horizontale"
-msgstr ""
+msgstr "가로선"
 
 #: cms/wagtail_hooks.py:74
 #, fuzzy
@@ -599,56 +604,56 @@ msgstr "페이지 내용"
 
 #: cms/wagtail_hooks.py:110
 msgid "Galerie de photos"
-msgstr ""
+msgstr "사진 갤러리"
 
 #: cms/wagtail_hooks.py:133
 msgid "Citation en exergue"
-msgstr ""
+msgstr "강조 인용문"
 
 #: cms/wagtail_hooks.py:184 cms/wagtail_hooks.py:195 cms/wagtail_hooks.py:211
 #: cms/wagtail_hooks.py:222
 msgid "Exporter .qmd"
-msgstr ""
+msgstr ".qmd 내보내기"
 
 #: cms/wagtail_hooks.py:187 cms/wagtail_hooks.py:198 cms/wagtail_hooks.py:214
 #: cms/wagtail_hooks.py:225
 msgid "Importer .qmd"
-msgstr ""
+msgstr ".qmd 가져오기"
 
 #: cms/wagtail_hooks.py:191 cms/wagtail_hooks.py:218
 msgid "Exporter tout le blog (.zip)"
-msgstr ""
+msgstr "블로그 전체 내보내기 (.zip)"
 
 #: cms/wagtail_hooks.py:254 cms/wagtail_hooks.py:295
 msgid "Choisissez un fichier .qmd à importer."
-msgstr ""
+msgstr "가져올 .qmd 파일을 선택하세요."
 
 #: cms/wagtail_hooks.py:261 cms/wagtail_hooks.py:302
 #, python-format
 msgid "Échec de l'import : %(error)s"
-msgstr ""
+msgstr "가져오기 실패: %(error)s"
 
 #: cms/wagtail_hooks.py:264
 msgid "Article mis à jour depuis le fichier .qmd."
-msgstr ""
+msgstr ".qmd 파일로부터 글이 업데이트되었습니다."
 
 #: cms/wagtail_hooks.py:269
 #, python-format
 msgid ""
 "Le fichier .qmd portait la clé d'un autre article : « %(title)s » a été créé"
 " ou mis à jour à la place de celui-ci."
-msgstr ""
+msgstr ".qmd 파일이 다른 글의 키를 가지고 있어 이 글 대신 “%(title)s”이(가) 생성되거나 업데이트되었습니다."
 
 #: cms/wagtail_hooks.py:305
 msgid "Page mise à jour depuis le fichier .qmd."
-msgstr ""
+msgstr ".qmd 파일로부터 페이지가 업데이트되었습니다."
 
 #: cms/wagtail_hooks.py:310
 #, python-format
 msgid ""
 "Le fichier .qmd portait la clé d'une autre page : « %(title)s » a été créée "
 "ou mise à jour à la place de celle-ci."
-msgstr ""
+msgstr ".qmd 파일이 다른 페이지의 키를 가지고 있어 이 페이지 대신 “%(title)s”이(가) 생성되거나 업데이트되었습니다."
 
 #: core/accounts.py:48 core/accounts.py:53
 #, python-format
@@ -669,11 +674,11 @@ msgstr "익명 계정"
 
 #: core/forms.py:19
 msgid "Général"
-msgstr ""
+msgstr "일반"
 
 #: core/forms.py:20
 msgid "Photos et médias"
-msgstr ""
+msgstr "사진 및 미디어"
 
 #: core/forms.py:21
 #, fuzzy
@@ -683,7 +688,7 @@ msgstr "회장"
 
 #: core/forms.py:22
 msgid "Publication"
-msgstr ""
+msgstr "공개 설정"
 
 #: core/forms.py:23
 #, fuzzy
@@ -709,7 +714,7 @@ msgstr "주소"
 
 #: core/forms.py:27
 msgid "Avancé"
-msgstr ""
+msgstr "고급"
 
 #: core/forms.py:49
 #, fuzzy
@@ -719,19 +724,19 @@ msgstr "설명"
 
 #: core/forms.py:125
 msgid "Une promesse de don"
-msgstr ""
+msgstr "기부 서약"
 
 #: core/forms.py:126
 msgid "Un paiement déjà effectué"
-msgstr ""
+msgstr "이미 완료된 결제"
 
 #: core/forms.py:127
 msgid "Une promesse, réglée dans le même temps"
-msgstr ""
+msgstr "서약과 동시에 결제 완료"
 
 #: core/forms.py:130
 msgid "Type"
-msgstr ""
+msgstr "유형"
 
 #: core/forms.py:132
 #, fuzzy
@@ -747,19 +752,19 @@ msgstr "방법"
 
 #: core/forms.py:135
 msgid "Date"
-msgstr ""
+msgstr "날짜"
 
 #: core/forms.py:150
 msgid "Votre nom"
-msgstr ""
+msgstr "이름"
 
 #: core/forms.py:151
 msgid "Votre e-mail"
-msgstr ""
+msgstr "이메일"
 
 #: core/forms.py:152
 msgid "Message"
-msgstr ""
+msgstr "메시지"
 
 #: core/menu.py:39
 msgid "activités"
@@ -1015,7 +1020,7 @@ msgstr "제공됨"
 
 #: core/models.py:93
 msgid "nécessite une validation"
-msgstr ""
+msgstr "승인 필요"
 
 #: core/models.py:95
 msgid ""
@@ -1024,6 +1029,8 @@ msgid ""
 "le raccourci reste « en attente » jusqu'à validation (groupe « "
 "Administration »)."
 msgstr ""
+"서비스가 사용자에게 활성화되기 전에 관리자의 개입이 필요합니다(예: 메일함 수동 생성). 승인('Administration' 그룹)이 "
+"이루어지기 전까지 바로가기는 '대기 중' 상태로 남습니다."
 
 #: core/models.py:104
 msgid "service"
@@ -1049,7 +1056,7 @@ msgstr "개인 순서"
 
 #: core/models.py:169
 msgid "validé"
-msgstr ""
+msgstr "승인됨"
 
 #: core/models.py:180
 msgid "raccourci"
@@ -1095,23 +1102,23 @@ msgstr "모든 사람을 위한 항목이라면 비워 두세요."
 
 #: core/models.py:258
 msgid "Classique"
-msgstr ""
+msgstr "클래식"
 
 #: core/models.py:259
 msgid "Carte de visite"
-msgstr ""
+msgstr "명함형"
 
 #: core/models.py:260
 msgid "Magazine"
-msgstr ""
+msgstr "매거진형"
 
 #: core/models.py:261
 msgid "Minimal"
-msgstr ""
+msgstr "미니멀"
 
 #: core/models.py:262
 msgid "Vitrine"
-msgstr ""
+msgstr "쇼케이스형"
 
 #: core/models.py:263
 #, fuzzy
@@ -1127,13 +1134,13 @@ msgstr "내 항목"
 
 #: core/models.py:267
 msgid "présentation"
-msgstr ""
+msgstr "레이아웃"
 
 #: core/models.py:268
 msgid ""
 "L'habillage visuel de votre fiche : choisissez celui qui vous ressemble le "
 "plus."
-msgstr ""
+msgstr "내 항목의 시각적 스타일을 나에게 가장 잘 맞는 것으로 선택하세요."
 
 #: core/models.py:273
 msgid "compte propriétaire"
@@ -1183,7 +1190,7 @@ msgstr "웹사이트 또는 링크"
 
 #: core/models.py:291
 msgid "France"
-msgstr ""
+msgstr "프랑스"
 
 #: core/models.py:292
 #, fuzzy
@@ -1193,55 +1200,55 @@ msgstr "공개"
 
 #: core/models.py:293
 msgid "Suisse"
-msgstr ""
+msgstr "스위스"
 
 #: core/models.py:294
 msgid "Luxembourg"
-msgstr ""
+msgstr "룩셈부르크"
 
 #: core/models.py:295
 msgid "Allemagne"
-msgstr ""
+msgstr "독일"
 
 #: core/models.py:296
 msgid "Espagne"
-msgstr ""
+msgstr "스페인"
 
 #: core/models.py:297
 msgid "Italie"
-msgstr ""
+msgstr "이탈리아"
 
 #: core/models.py:298
 msgid "Portugal"
-msgstr ""
+msgstr "포르투갈"
 
 #: core/models.py:299
 msgid "Royaume-Uni"
-msgstr ""
+msgstr "영국"
 
 #: core/models.py:300
 msgid "Maroc"
-msgstr ""
+msgstr "모로코"
 
 #: core/models.py:301
 msgid "Algérie"
-msgstr ""
+msgstr "알제리"
 
 #: core/models.py:302
 msgid "Tunisie"
-msgstr ""
+msgstr "튀니지"
 
 #: core/models.py:303
 msgid "Sénégal"
-msgstr ""
+msgstr "세네갈"
 
 #: core/models.py:304
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "코트디부아르"
 
 #: core/models.py:305
 msgid "Canada"
-msgstr ""
+msgstr "캐나다"
 
 #: core/models.py:306 core/models.py:580
 msgid "Autre"
@@ -1249,11 +1256,11 @@ msgstr "기타"
 
 #: core/models.py:309
 msgid "région"
-msgstr ""
+msgstr "지역"
 
 #: core/models.py:311
 msgid "code postal"
-msgstr ""
+msgstr "우편번호"
 
 #: core/models.py:313
 msgid "adresse"
@@ -1261,7 +1268,7 @@ msgstr "주소"
 
 #: core/models.py:314
 msgid "Numéro, type et nom de voie : « 12, rue de la Paix »."
-msgstr ""
+msgstr "번지, 도로 종류와 이름: “12, rue de la Paix”."
 
 #: core/models.py:316 core/models.py:468
 msgid "latitude"
@@ -1291,7 +1298,7 @@ msgstr "게시됨"
 
 #: core/models.py:328
 msgid "Brouillon protégé"
-msgstr ""
+msgstr "보호된 초안"
 
 #: core/models.py:329
 #, fuzzy
@@ -1301,7 +1308,7 @@ msgstr "비공개"
 
 #: core/models.py:332
 msgid "visibilité"
-msgstr ""
+msgstr "공개 범위"
 
 #: core/models.py:334
 msgid ""
@@ -1309,10 +1316,12 @@ msgid ""
 "protégé : absent de l'annuaire, visible uniquement par les personnes ayant "
 "un compte sur le site. Non publié : visible uniquement par vous."
 msgstr ""
+"공개됨: 모든 사람에게 보이며 디렉토리에 등록됩니다. 보호된 초안: 디렉토리에는 나타나지 않으며, 사이트에 계정이 있는 사람에게만 "
+"보입니다. 비공개: 나에게만 보입니다."
 
 #: core/models.py:342 core/models.py:591
 msgid "validée par l'administration"
-msgstr ""
+msgstr "관리자 승인 완료"
 
 #: core/models.py:347
 msgid "page de l'annuaire"
@@ -1354,7 +1363,7 @@ msgstr "디렉터리 페이지"
 
 #: core/models.py:407 core/models.py:547
 msgid "notifications par courriel"
-msgstr ""
+msgstr "이메일 알림"
 
 #: core/models.py:413
 msgid "abonnement à une fiche"
@@ -1366,19 +1375,19 @@ msgstr "항목 구독들"
 
 #: core/models.py:430 core/models.py:515
 msgid "validée"
-msgstr ""
+msgstr "승인됨"
 
 #: core/models.py:435
 msgid "demande de responsabilité de fiche"
-msgstr ""
+msgstr "항목 관리 권한 요청"
 
 #: core/models.py:436
 msgid "demandes de responsabilité de fiche"
-msgstr ""
+msgstr "항목 관리 권한 요청 목록"
 
 #: core/models.py:462
 msgid "slug"
-msgstr ""
+msgstr "슬러그"
 
 #: core/models.py:464
 msgid "début"
@@ -1398,21 +1407,21 @@ msgstr "원격 참여용 (화상회의 등)."
 
 #: core/models.py:475
 msgid "lien source"
-msgstr ""
+msgstr "출처 링크"
 
 #: core/models.py:476
 msgid "Page de l'évènement sur l'agenda source (OpenAgenda…)."
-msgstr ""
+msgstr "원본 캘린더(OpenAgenda 등)에 있는 행사 페이지입니다."
 
 #: core/models.py:479
 msgid "identifiant source"
-msgstr ""
+msgstr "원본 식별자"
 
 #: core/models.py:480
 msgid ""
 "Identifiant de l'évènement dans l'agenda source, pour réimporter sans "
 "dupliquer."
-msgstr ""
+msgstr "원본 캘린더에서의 행사 식별자로, 중복 없이 재가져오기를 위해 사용됩니다."
 
 #: core/models.py:482
 msgid "publié"
@@ -1428,7 +1437,7 @@ msgstr "가입 가능한 그룹"
 msgid ""
 "Comptes autorisés à gérer cet évènement, en plus du groupe « Administration "
 "»."
-msgstr ""
+msgstr "'Administration' 그룹 외에 이 행사를 관리할 수 있는 계정입니다."
 
 #: core/models.py:492
 msgid "évènement"
@@ -1440,7 +1449,7 @@ msgstr "행사"
 
 #: core/models.py:520
 msgid "demande de gestion d'évènement"
-msgstr ""
+msgstr "행사 관리 요청"
 
 #: core/models.py:521
 #, fuzzy
@@ -1450,12 +1459,12 @@ msgstr "다가오는 행사"
 
 #: core/models.py:541 core/templates/core/partials/event_interest_list.html:9
 msgid "Intéressé·e"
-msgstr ""
+msgstr "관심 있음"
 
 #: core/models.py:542 core/templates/core/event_detail.html:60
 #: core/templates/core/partials/event_interest_list.html:9
 msgid "J'y vais"
-msgstr ""
+msgstr "참석합니다"
 
 #: core/models.py:546
 #, fuzzy
@@ -1465,7 +1474,7 @@ msgstr "협회"
 
 #: core/models.py:553
 msgid "intérêt pour un évènement"
-msgstr ""
+msgstr "행사 관심 표시"
 
 #: core/models.py:554
 #, fuzzy
@@ -1487,15 +1496,15 @@ msgstr "다가오는 일정"
 
 #: core/models.py:577
 msgid "Espèces"
-msgstr ""
+msgstr "현금"
 
 #: core/models.py:578
 msgid "Chèque"
-msgstr ""
+msgstr "수표"
 
 #: core/models.py:579
 msgid "Virement"
-msgstr ""
+msgstr "계좌이체"
 
 #: core/models.py:584
 msgid "montant"
@@ -1511,11 +1520,11 @@ msgstr "날짜"
 
 #: core/models.py:593
 msgid "déduction fiscale"
-msgstr ""
+msgstr "세액 공제"
 
 #: core/models.py:594
 msgid "Éligible à un reçu fiscal (don à une association loi 1901)."
-msgstr ""
+msgstr "세금 영수증 발급 대상입니다(프랑스 비영리단체법 'loi 1901' 협회 기부)."
 
 #: core/models.py:596
 msgid "note"
@@ -1684,7 +1693,7 @@ msgstr "%(name)s을(를) 내 바로가기에 추가"
 
 #: core/templates/core/account.html:118
 msgid "Rejoindre un groupe"
-msgstr ""
+msgstr "그룹 가입"
 
 #: core/templates/core/account.html:124 core/templates/core/mes_fiches.html:14
 msgid "Mes fiches dans l'annuaire"
@@ -1739,7 +1748,7 @@ msgstr "내 그룹"
 
 #: core/templates/core/account.html:176
 msgid "déductible fiscalement"
-msgstr ""
+msgstr "세액 공제 가능"
 
 #: core/templates/core/account.html:180
 #, fuzzy
@@ -1753,7 +1762,7 @@ msgstr "아직 등록된 기여가 없습니다."
 
 #: core/templates/core/account.html:211
 msgid "Faire un don"
-msgstr ""
+msgstr "기부하기"
 
 #: core/templates/core/account.html:218 core/templates/core/account.html:222
 msgid "Se connecter ou créer son compte"
@@ -1804,30 +1813,30 @@ msgstr "내 계정 — Voisinternet"
 msgid ""
 "Réservé au groupe « Administration » : validation des demandes et gestion "
 "rapide de l'agenda."
-msgstr ""
+msgstr "'Administration' 그룹 전용: 요청 승인 및 일정 빠른 관리."
 
 #: core/templates/core/administration.html:21
 msgid "Demandes de responsabilité de fiche"
-msgstr ""
+msgstr "항목 관리 권한 요청"
 
 #: core/templates/core/administration.html:31
 #: core/templates/core/administration.html:54
 #: core/templates/core/administration.html:77
 #: core/templates/core/administration.html:100
 msgid "Valider"
-msgstr ""
+msgstr "승인"
 
 #: core/templates/core/administration.html:32
 #: core/templates/core/administration.html:55
 #: core/templates/core/administration.html:78
 #: core/templates/core/administration.html:101
 msgid "Refuser"
-msgstr ""
+msgstr "거부"
 
 #: core/templates/core/administration.html:38
 #: core/templates/core/administration.html:61
 msgid "Aucune demande en attente."
-msgstr ""
+msgstr "대기 중인 요청이 없습니다."
 
 #: core/templates/core/administration.html:44
 #, fuzzy
@@ -1837,19 +1846,19 @@ msgstr "다가오는 행사"
 
 #: core/templates/core/administration.html:67
 msgid "Fiches de l'annuaire en attente de publication"
-msgstr ""
+msgstr "게시 대기 중인 디렉토리 항목"
 
 #: core/templates/core/administration.html:84
 msgid "Aucune fiche en attente."
-msgstr ""
+msgstr "대기 중인 항목이 없습니다."
 
 #: core/templates/core/administration.html:90
 msgid "Paiements de don en attente de validation"
-msgstr ""
+msgstr "승인 대기 중인 기부 결제"
 
 #: core/templates/core/administration.html:107
 msgid "Aucun paiement en attente."
-msgstr ""
+msgstr "대기 중인 결제가 없습니다."
 
 #: core/templates/core/administration.html:125
 #: core/templates/core/directory_entry.html:86
@@ -1992,7 +2001,7 @@ msgstr "각자의 동의를 받아 항목이 여기에 표시됩니다."
 
 #: core/templates/core/author_detail.html:44
 msgid "Articles de blog"
-msgstr ""
+msgstr "블로그 글"
 
 #: core/templates/core/author_detail.html:54
 #, fuzzy
@@ -2010,7 +2019,7 @@ msgstr "%(name)s 위로 이동"
 #: core/templates/core/author_detail.html:79
 #: core/templates/core/directory_entry.html:137
 msgid "Envoyer"
-msgstr ""
+msgstr "보내기"
 
 #: core/templates/core/base.html:16 core/templates/core/home.html:17
 msgid ""
@@ -2034,11 +2043,11 @@ msgstr "기본 메뉴"
 
 #: core/templates/core/base.html:91 core/templates/core/search.html:18
 msgid "Rechercher sur le site"
-msgstr ""
+msgstr "사이트 검색"
 
 #: core/templates/core/base.html:96 core/templates/core/search.html:19
 msgid "Rechercher…"
-msgstr ""
+msgstr "검색…"
 
 #: core/templates/core/base.html:102
 #: core/templates/core/partials/account_panel_body.html:28
@@ -2049,7 +2058,7 @@ msgstr "계정"
 
 #: core/templates/core/base.html:120
 msgid "lesgrandsvoisins.com, accueil"
-msgstr ""
+msgstr "lesgrandsvoisins.com, 홈"
 
 #: core/templates/core/base.html:140
 msgid ""
@@ -2069,7 +2078,7 @@ msgstr "사이트맵"
 
 #: core/templates/core/base.html:160
 msgid "lesgrandsvoisins.com"
-msgstr ""
+msgstr "lesgrandsvoisins.com"
 
 #: core/templates/core/directory_entry.html:47
 msgid "Vidéo"
@@ -2088,14 +2097,14 @@ msgstr "자세히 보기"
 #: core/templates/core/directory_entry.html:73
 #: core/templates/core/event_detail.html:68
 msgid "Notifications par courriel ✓"
-msgstr ""
+msgstr "이메일 알림 ✓"
 
 #: core/templates/core/directory_entry.html:73
 #: core/templates/core/event_detail.html:68
 #: core/templates/core/partials/event_interest_list.html:14
 #: core/templates/core/partials/subscribed_entry_list.html:12
 msgid "Recevoir un courriel"
-msgstr ""
+msgstr "이메일로 알림 받기"
 
 #: core/templates/core/directory_entry.html:78
 #: core/templates/core/partials/entry_list.html:9
@@ -2107,24 +2116,24 @@ msgstr "수정"
 #: core/templates/core/partials/entry_list.html:8
 #: core/templates/core/partials/shortcut_list.html:19
 msgid "En attente de validation"
-msgstr ""
+msgstr "승인 대기 중"
 
 #: core/templates/core/directory_entry.html:88
 msgid "Annuler la demande"
-msgstr ""
+msgstr "요청 취소"
 
 #: core/templates/core/directory_entry.html:98
 #: core/templates/core/directory_entry.html:110
 msgid "Demander à être responsable de cette fiche"
-msgstr ""
+msgstr "이 항목의 관리자 되기 요청"
 
 #: core/templates/core/directory_entry.html:101
 msgid "Demande de responsabilité en attente de validation"
-msgstr ""
+msgstr "관리 권한 요청 승인 대기 중"
 
 #: core/templates/core/directory_entry.html:103
 msgid "Demande de responsabilité refusée"
-msgstr ""
+msgstr "관리 권한 요청 거부됨"
 
 #: core/templates/core/directory_entry.html:142
 msgid "← Retour à l’annuaire"
@@ -2176,7 +2185,7 @@ msgstr "온라인 링크"
 
 #: core/templates/core/event_detail.html:27
 msgid "Page source"
-msgstr ""
+msgstr "원본 페이지"
 
 #: core/templates/core/event_detail.html:35
 msgid "Ajouter à Google Agenda"
@@ -2194,23 +2203,23 @@ msgstr "구독 중 ✓"
 
 #: core/templates/core/event_detail.html:52
 msgid "Ça m'intéresse"
-msgstr ""
+msgstr "관심 있어요"
 
 #: core/templates/core/event_detail.html:60
 msgid "J'y vais ✓"
-msgstr ""
+msgstr "참석합니다 ✓"
 
 #: core/templates/core/event_detail.html:79
 msgid "Demander à gérer cet évènement"
-msgstr ""
+msgstr "이 행사 관리 요청"
 
 #: core/templates/core/event_detail.html:82
 msgid "Demande de gestion en attente de validation"
-msgstr ""
+msgstr "관리 요청 승인 대기 중"
 
 #: core/templates/core/event_detail.html:84
 msgid "Demande de gestion refusée"
-msgstr ""
+msgstr "관리 요청 거부됨"
 
 #: core/templates/core/event_detail.html:91
 #, fuzzy
@@ -2238,36 +2247,36 @@ msgstr "← 명부로 돌아가기"
 
 #: core/templates/core/faire_don_merci.html:3
 msgid "Merci pour votre don"
-msgstr ""
+msgstr "기부해 주셔서 감사합니다"
 
 #: core/templates/core/faire_don_merci.html:10
 msgid "Merci"
-msgstr ""
+msgstr "감사합니다"
 
 #: core/templates/core/faire_don_merci.html:13
 msgid "Merci !"
-msgstr ""
+msgstr "감사합니다!"
 
 #: core/templates/core/faire_don_merci.html:16
 #, python-format
 msgid "Vous avez indiqué %(amount)s € par %(method_display)s."
-msgstr ""
+msgstr "%(method_display)s(으)로 %(amount)s €를 입력하셨습니다."
 
 #: core/templates/core/faire_don_merci.html:18
 #, python-format
 msgid "Votre contribution par %(method_display)s a bien été enregistrée."
-msgstr ""
+msgstr "%(method_display)s(을)를 통한 기부가 정상적으로 등록되었습니다."
 
 #: core/templates/core/faire_don_merci.html:26
 msgid ""
 "Ce paiement reste « en attente » le temps qu'un administrateur confirme sa "
 "bonne réception — vous pouvez suivre son statut depuis votre compte."
-msgstr ""
+msgstr "이 결제는 관리자가 수신을 확인할 때까지 '대기 중' 상태로 유지됩니다. 내 계정에서 상태를 확인할 수 있습니다."
 
 #: core/templates/core/faire_don_merci.html:32
 #, python-format
 msgid "Terminer le paiement par %(name)s"
-msgstr ""
+msgstr "%(name)s(으)로 결제 완료하기"
 
 #: core/templates/core/faire_don_merci.html:33
 #, fuzzy, python-format
@@ -2277,7 +2286,7 @@ msgstr "%(name)s 위로 이동"
 
 #: core/templates/core/faire_don_merci.html:39
 msgid "Rappel des moyens de don"
-msgstr ""
+msgstr "기부 방법 안내"
 
 #: core/templates/core/faire_don_merci.html:52
 #, fuzzy
@@ -2564,7 +2573,7 @@ msgstr "내 그룹 — Voisinternet"
 msgid ""
 "Créez et gérez vos évènements dans l'agenda. Ils restent réservés à leurs "
 "responsables tant que le groupe « Administration » ne les a pas publiés."
-msgstr ""
+msgstr "캘린더에서 행사를 만들고 관리하세요. 'Administration' 그룹이 게시하기 전까지는 담당자에게만 표시됩니다."
 
 #: core/templates/core/mes_evenements.html:28
 #, fuzzy
@@ -2600,7 +2609,7 @@ msgstr ""
 
 #: core/templates/core/mes_fiches.html:28
 msgid "Fiches auxquelles je suis abonné·e"
-msgstr ""
+msgstr "구독 중인 항목"
 
 #: core/templates/core/mes_fiches.html:40
 msgid "Créer la fiche"
@@ -2625,7 +2634,7 @@ msgstr "내 계정 옵션"
 
 #: core/templates/core/partials/account_widget.html:35
 msgid "Fermer"
-msgstr ""
+msgstr "닫기"
 
 #: core/templates/core/partials/agenda_calendar.html:3
 #, fuzzy
@@ -2641,15 +2650,15 @@ msgstr "추천"
 
 #: core/templates/core/partials/announcement_banner.html:23
 msgid "Fermer ce bandeau"
-msgstr ""
+msgstr "이 배너 닫기"
 
 #: core/templates/core/partials/entry_form_fields.html:2
 msgid "Sections du formulaire"
-msgstr ""
+msgstr "양식 섹션"
 
 #: core/templates/core/partials/entry_form_fields.html:13
 msgid "Gras"
-msgstr ""
+msgstr "굵게"
 
 #: core/templates/core/partials/entry_form_fields.html:14
 #, fuzzy
@@ -2671,7 +2680,7 @@ msgstr "협회"
 
 #: core/templates/core/partials/entry_form_fields.html:17
 msgid "Liste à puces"
-msgstr ""
+msgstr "글머리 기호 목록"
 
 #: core/templates/core/partials/entry_form_fields.html:18
 #, fuzzy
@@ -2681,11 +2690,11 @@ msgstr "계정 번호"
 
 #: core/templates/core/partials/entry_form_fields.html:19
 msgid "Normal"
-msgstr ""
+msgstr "일반"
 
 #: core/templates/core/partials/entry_form_fields.html:20
 msgid "Lien"
-msgstr ""
+msgstr "링크"
 
 #: core/templates/core/partials/entry_form_fields.html:21
 #, fuzzy
@@ -2720,11 +2729,11 @@ msgstr "아직 디렉터리 항목이 없습니다."
 #: core/templates/core/partials/event_interest_list.html:14
 #: core/templates/core/partials/subscribed_entry_list.html:12
 msgid "Désactiver les notifications par courriel"
-msgstr ""
+msgstr "이메일 알림 끄기"
 
 #: core/templates/core/partials/event_interest_list.html:17
 msgid "Retirer votre intérêt pour cet évènement ?"
-msgstr ""
+msgstr "이 행사에 대한 관심 표시를 취소하시겠습니까?"
 
 #: core/templates/core/partials/event_interest_list.html:20
 #, fuzzy
@@ -2917,7 +2926,7 @@ msgstr "로그아웃"
 
 #: core/templates/core/partials/subscribed_entry_list.html:25
 msgid "Vous n'êtes abonné·e à aucune fiche pour l'instant."
-msgstr ""
+msgstr "아직 구독 중인 항목이 없습니다."
 
 #: core/templates/core/partials/toasts.html:4
 msgid "Compte anonyme créé. Notez votre numéro :"
@@ -2953,18 +2962,18 @@ msgstr "관심 있는 서비스를 목록에 추가하세요."
 #: core/templates/core/search.html:3 core/templates/core/search.html:10
 #: core/templates/core/search.html:13
 msgid "Recherche"
-msgstr ""
+msgstr "검색"
 
 #: core/templates/core/search.html:24
 msgid ""
 "Tapez un mot-clé pour chercher dans les pages du site, l'annuaire, l'agenda "
 "et les services."
-msgstr ""
+msgstr "키워드를 입력하면 사이트 페이지, 디렉토리, 일정, 서비스에서 검색합니다."
 
 #: core/templates/core/search.html:26
 #, python-format
 msgid "Aucun résultat pour « %(query)s »."
-msgstr ""
+msgstr "“%(query)s”에 대한 검색 결과가 없습니다."
 
 #: core/templates/core/search.html:95 core/templates/core/tag_detail.html:81
 #, fuzzy
@@ -2977,11 +2986,11 @@ msgstr "서비스"
 #: core/templates/core/tag_list.html:10 core/templates/core/tag_list.html:13
 #: core/templates/core/tag_list.html:19
 msgid "Étiquettes"
-msgstr ""
+msgstr "태그"
 
 #: core/templates/core/tag_detail.html:19
 msgid "Rien n'est encore étiqueté ainsi."
-msgstr ""
+msgstr "아직 이 태그가 지정된 항목이 없습니다."
 
 #: core/templates/core/tag_detail.html:24
 #, fuzzy
@@ -2993,7 +3002,7 @@ msgstr "분야"
 msgid ""
 "Un même mot-clé, pour retrouver ensemble articles, fiches de l'annuaire, "
 "services et pôles."
-msgstr ""
+msgstr "하나의 키워드로 글, 디렉토리 항목, 서비스, 거점을 한데 모아 볼 수 있습니다."
 
 #: core/templates/core/tag_list.html:25
 #, fuzzy
@@ -3031,7 +3040,7 @@ msgstr "내 그룹 — Voisinternet"
 #: core/views.py:305 core/views.py:499
 #, python-format
 msgid "Message envoyé à %(name)s."
-msgstr ""
+msgstr "%(name)s에게 메시지를 보냈습니다."
 
 #: core/views.py:360
 #, fuzzy
@@ -3041,23 +3050,23 @@ msgstr "아직 등록된 기여가 없습니다."
 
 #: core/views.py:362
 msgid "Le formulaire de don contient une erreur : montant ou date invalide."
-msgstr ""
+msgstr "기부 양식에 오류가 있습니다: 금액 또는 날짜가 유효하지 않습니다."
 
 #: core/views.py:518
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cette fiche."
-msgstr ""
+msgstr "요청을 보냈습니다. 관리자가 검토한 후 이 항목의 관리자로 지정해 드립니다."
 
 #: core/views.py:521
 msgid "Vous avez déjà demandé à être responsable de cette fiche."
-msgstr ""
+msgstr "이미 이 항목의 관리자 권한을 요청하셨습니다."
 
 #: core/views.py:539
 msgid ""
 "Connectez-vous pour finaliser votre demande de responsabilité de cette "
 "fiche."
-msgstr ""
+msgstr "이 항목의 관리자 권한 요청을 완료하려면 로그인하세요."
 
 #: core/views.py:563
 msgid "Fiche créée."
@@ -3089,49 +3098,49 @@ msgstr "항목이 생성되었습니다."
 
 #: core/views.py:645
 msgid "Demande de publication annulée."
-msgstr ""
+msgstr "게시 요청이 취소되었습니다."
 
 #: core/views.py:651
 msgid ""
 "Fiche envoyée pour validation : elle sera publique une fois validée par un "
 "administrateur."
-msgstr ""
+msgstr "항목이 승인을 위해 제출되었습니다. 관리자가 승인하면 공개됩니다."
 
 #: core/views.py:706
 #, python-format
 msgid "Intérêt enregistré pour « %(title)s »."
-msgstr ""
+msgstr "“%(title)s”에 대한 관심이 등록되었습니다."
 
 #: core/views.py:709
 #, python-format
 msgid "Intérêt retiré pour « %(title)s »."
-msgstr ""
+msgstr "“%(title)s”에 대한 관심이 취소되었습니다."
 
 #: core/views.py:713
 #, python-format
 msgid "Intention mise à jour pour « %(title)s »."
-msgstr ""
+msgstr "“%(title)s”에 대한 참여 의사가 업데이트되었습니다."
 
 #: core/views.py:733
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cet évènement."
-msgstr ""
+msgstr "요청을 보냈습니다. 관리자가 검토한 후 이 행사의 관리자로 지정해 드립니다."
 
 #: core/views.py:736
 msgid "Vous avez déjà demandé à gérer cet évènement."
-msgstr ""
+msgstr "이미 이 행사의 관리 권한을 요청하셨습니다."
 
 #: core/views.py:751
 msgid ""
 "Connectez-vous pour finaliser votre demande de gestion de cet évènement."
-msgstr ""
+msgstr "이 행사의 관리 요청을 완료하려면 로그인하세요."
 
 #: core/views.py:777
 msgid ""
 "Évènement créé : il reste réservé à ses responsables tant que le groupe « "
 "Administration » ne l'a pas publié."
-msgstr ""
+msgstr "행사가 생성되었습니다. 'Administration' 그룹이 게시하기 전까지는 담당자에게만 표시됩니다."
 
 #: core/views.py:798
 #, fuzzy

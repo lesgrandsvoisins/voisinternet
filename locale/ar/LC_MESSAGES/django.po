@@ -19,7 +19,7 @@ msgstr ""
 
 #: cms/image_formats.py:21
 msgid "Petite"
-msgstr ""
+msgstr "صغيرة"
 
 #: cms/image_formats.py:22
 #, fuzzy
@@ -29,31 +29,31 @@ msgstr "الوسيلة"
 
 #: cms/image_formats.py:23
 msgid "Grande"
-msgstr ""
+msgstr "كبيرة"
 
 #: cms/image_formats.py:26
 msgid "Petite, à gauche"
-msgstr ""
+msgstr "صغيرة، إلى اليسار"
 
 #: cms/image_formats.py:29
 msgid "Moyenne, à gauche"
-msgstr ""
+msgstr "متوسطة، إلى اليسار"
 
 #: cms/image_formats.py:32
 msgid "Grande, à gauche"
-msgstr ""
+msgstr "كبيرة، إلى اليسار"
 
 #: cms/image_formats.py:35
 msgid "Petite, à droite"
-msgstr ""
+msgstr "صغيرة، إلى اليمين"
 
 #: cms/image_formats.py:38
 msgid "Moyenne, à droite"
-msgstr ""
+msgstr "متوسطة، إلى اليمين"
 
 #: cms/image_formats.py:41
 msgid "Grande, à droite"
-msgstr ""
+msgstr "كبيرة، إلى اليمين"
 
 #: cms/models.py:57 cms/models.py:130 cms/models.py:733 core/models.py:460
 msgid "titre"
@@ -62,11 +62,11 @@ msgstr "العنوان"
 #: cms/models.py:58 cms/models.py:131 cms/models.py:147 cms/models.py:327
 #: cms/models.py:630 cms/models.py:734
 msgid "texte"
-msgstr ""
+msgstr "نص"
 
 #: cms/models.py:62
 msgid "carte"
-msgstr ""
+msgstr "بطاقة"
 
 #: cms/models.py:66 cms/models.py:536 core/models.py:56 core/models.py:70
 #: core/models.py:207 core/models.py:221 core/models.py:244
@@ -75,7 +75,7 @@ msgstr "الاسم"
 
 #: cms/models.py:67
 msgid "rôle"
-msgstr ""
+msgstr "الدور"
 
 #: cms/models.py:71
 #, fuzzy
@@ -85,11 +85,11 @@ msgstr "مجلس الإدارة"
 
 #: cms/models.py:75
 msgid "intitulé"
-msgstr ""
+msgstr "العنوان"
 
 #: cms/models.py:76 cms/models.py:80
 msgid "document"
-msgstr ""
+msgstr "مستند"
 
 #: cms/models.py:86
 #, fuzzy
@@ -99,11 +99,11 @@ msgstr "الجمعية"
 
 #: cms/models.py:87
 msgid "auteur·rice"
-msgstr ""
+msgstr "المؤلف·ة"
 
 #: cms/models.py:91
 msgid "témoignage"
-msgstr ""
+msgstr "شهادة"
 
 #: cms/models.py:99 core/models.py:389
 #, fuzzy
@@ -113,7 +113,7 @@ msgstr "التقويم"
 
 #: cms/models.py:100
 msgid "photos"
-msgstr ""
+msgstr "صور"
 
 #: cms/models.py:104
 #, fuzzy
@@ -123,11 +123,11 @@ msgstr "معرض"
 
 #: cms/models.py:122 core/forms.py:137
 msgid "Note"
-msgstr ""
+msgstr "ملاحظة"
 
 #: cms/models.py:123
 msgid "Astuce"
-msgstr ""
+msgstr "نصيحة"
 
 #: cms/models.py:124
 #, fuzzy
@@ -137,11 +137,11 @@ msgstr "المبلغ"
 
 #: cms/models.py:125
 msgid "Avertissement"
-msgstr ""
+msgstr "تحذير"
 
 #: cms/models.py:126
 msgid "Attention"
-msgstr ""
+msgstr "تنبيه"
 
 #: cms/models.py:129 core/models.py:583 core/models.py:633
 msgid "type"
@@ -149,62 +149,62 @@ msgstr "النوع"
 
 #: cms/models.py:135
 msgid "encart"
-msgstr ""
+msgstr "إطار تنبيه"
 
 #: cms/models.py:151
 msgid "citation en exergue"
-msgstr ""
+msgstr "اقتباس بارز"
 
 #: cms/models.py:162
 msgid "Terracotta"
-msgstr ""
+msgstr "تيراكوتا"
 
 #: cms/models.py:163
 msgid "Prune"
-msgstr ""
+msgstr "أرجواني"
 
 #: cms/models.py:164
 msgid "Indigo"
-msgstr ""
+msgstr "نيلي"
 
 #: cms/models.py:165
 msgid "Sarcelle"
-msgstr ""
+msgstr "أزرق مخضر"
 
 #: cms/models.py:166
 msgid "Mousse"
-msgstr ""
+msgstr "أخضر طحلبي"
 
 #: cms/models.py:167
 msgid "Or"
-msgstr ""
+msgstr "ذهبي"
 
 #: cms/models.py:170 cms/models.py:238 cms/models.py:319 cms/models.py:414
 #: cms/models.py:433 cms/models.py:460 cms/models.py:618
 msgid "chapeau"
-msgstr ""
+msgstr "مقدمة"
 
 #: cms/models.py:171
 msgid "couleur du pôle"
-msgstr ""
+msgstr "لون القطب"
 
 #: cms/models.py:173
 msgid "icône du pôle"
-msgstr ""
+msgstr "أيقونة القطب"
 
 #: cms/models.py:177
 msgid "étiquette du blog"
-msgstr ""
+msgstr "وسم المدونة"
 
 #: cms/models.py:178
 msgid ""
 "Étiquette Ghost dont les derniers articles apparaissent en bas de page."
-msgstr ""
+msgstr "وسم Ghost الذي تظهر أحدث مقالاته أسفل الصفحة."
 
 #: cms/models.py:182 cms/models.py:246 cms/models.py:324 cms/models.py:639
 #: core/models.py:89 core/models.py:213 core/models.py:255 core/models.py:484
 msgid "étiquettes"
-msgstr ""
+msgstr "الوسوم"
 
 #: cms/models.py:239 cms/models.py:744
 #, fuzzy
@@ -214,7 +214,7 @@ msgstr "البداية"
 
 #: cms/models.py:240 cms/models.py:745
 msgid "date de fin"
-msgstr ""
+msgstr "تاريخ الانتهاء"
 
 #: cms/models.py:241 core/models.py:466
 msgid "lieu"
@@ -228,7 +228,7 @@ msgstr "صفحة الدليل"
 
 #: cms/models.py:252 cms/models.py:438
 msgid "documents"
-msgstr ""
+msgstr "مستندات"
 
 #: cms/models.py:314 cms/models.py:613
 #, fuzzy
@@ -250,15 +250,15 @@ msgstr "مجلس الإدارة"
 
 #: cms/models.py:485
 msgid "introduction"
-msgstr ""
+msgstr "مقدمة"
 
 #: cms/models.py:537
 msgid "biographie"
-msgstr ""
+msgstr "السيرة الذاتية"
 
 #: cms/models.py:539 core/models.py:388 core/models.py:467
 msgid "photo"
-msgstr ""
+msgstr "صورة"
 
 #: cms/models.py:542
 #, fuzzy
@@ -276,7 +276,7 @@ msgstr "البلد"
 
 #: cms/models.py:546
 msgid "e-mail"
-msgstr ""
+msgstr "البريد الإلكتروني"
 
 #: cms/models.py:548
 msgid ""
@@ -284,6 +284,8 @@ msgid ""
 "formulaire de contact (core.views.author_detail). Laisser vide masque le "
 "formulaire sur la page de cet·te auteur·ice."
 msgstr ""
+"لا يُعرض علنًا أبدًا — يُستخدم فقط لإعادة توجيه رسائل نموذج الاتصال "
+"(core.views.author_detail). تركه فارغًا يخفي النموذج من صفحة هذا المؤلف."
 
 #: cms/models.py:565
 #, fuzzy
@@ -293,27 +295,27 @@ msgstr "متبرع"
 
 #: cms/models.py:584 core/models.py:368
 msgid "nom de l'expéditeur·ice"
-msgstr ""
+msgstr "اسم المُرسِل"
 
 #: cms/models.py:585 core/models.py:369
 msgid "e-mail de l'expéditeur·ice"
-msgstr ""
+msgstr "بريد المُرسِل الإلكتروني"
 
 #: cms/models.py:586 core/models.py:370
 msgid "message"
-msgstr ""
+msgstr "الرسالة"
 
 #: cms/models.py:587 core/models.py:371
 msgid "envoyé le"
-msgstr ""
+msgstr "أُرسل في"
 
 #: cms/models.py:597
 msgid "message à un·e auteur·ice"
-msgstr ""
+msgstr "رسالة إلى مؤلف"
 
 #: cms/models.py:598
 msgid "messages aux auteur·ices"
-msgstr ""
+msgstr "رسائل إلى المؤلفين"
 
 #: cms/models.py:619 core/models.py:90 core/models.py:483
 msgid "mis en avant"
@@ -325,35 +327,38 @@ msgid ""
 "alors en plusieurs pages plutôt qu'en un seul bloc. « Ligne horizontale » "
 "est un simple séparateur visuel, sans effet sur la pagination."
 msgstr ""
+"يقسّم زر «فاصل الصفحة» في شريط الأدوات المقال: يُقرأ حينها على عدة صفحات "
+"بدلاً من كتلة واحدة. أما «خط أفقي» فهو مجرد فاصل بصري بسيط، دون أي تأثير على"
+" تقسيم الصفحات."
 
 #: cms/models.py:736
 msgid "image"
-msgstr ""
+msgstr "صورة"
 
 #: cms/models.py:740
 msgid "page liée"
-msgstr ""
+msgstr "الصفحة المرتبطة"
 
 #: cms/models.py:742
 msgid "Le bandeau pointe vers cette page."
-msgstr ""
+msgstr "يشير الشريط إلى هذه الصفحة."
 
 #: cms/models.py:746
 msgid "actif"
-msgstr ""
+msgstr "نشط"
 
 #: cms/models.py:759
 msgid "bandeau d'annonce"
-msgstr ""
+msgstr "شريط الإعلان"
 
 #: cms/models.py:760
 msgid "bandeaux d'annonce"
-msgstr ""
+msgstr "أشرطة الإعلان"
 
 #: cms/templates/cms/admin/qmd_import.html:3 cms/wagtail_hooks.py:275
 #: cms/wagtail_hooks.py:316
 msgid "Importer un .qmd"
-msgstr ""
+msgstr "استيراد ملف .qmd"
 
 #: cms/templates/cms/admin/qmd_import.html:7
 msgid ""
@@ -361,14 +366,16 @@ msgid ""
 "fichier .qmd. Si le fichier porte la clé d'un autre article, c'est cet autre"
 " article qui sera créé ou mis à jour à la place."
 msgstr ""
+"يستبدل عنوان هذا المقال ونصه وبياناته الوصفية من ملف .qmd. إذا كان الملف "
+"يحمل مفتاح مقال آخر، فسيتم إنشاء ذلك المقال الآخر أو تحديثه بدلاً منه."
 
 #: cms/templates/cms/admin/qmd_import.html:12
 msgid "Fichier .qmd"
-msgstr ""
+msgstr "ملف .qmd"
 
 #: cms/templates/cms/admin/qmd_import.html:16
 msgid "Importer"
-msgstr ""
+msgstr "استيراد"
 
 #: cms/templates/cms/admin/qmd_import.html:17
 #, fuzzy
@@ -435,7 +442,7 @@ msgstr "الشفافية"
 #: cms/templates/cms/association_page.html:44
 #: cms/templates/cms/project_page.html:56
 msgid "Télécharger"
-msgstr ""
+msgstr "تنزيل"
 
 #: cms/templates/cms/association_page.html:46
 msgid "[document à publier]"
@@ -443,22 +450,22 @@ msgstr "[وثيقة سيتم نشرها]"
 
 #: cms/templates/cms/blog_index_page.html:21
 msgid "Rechercher dans le blog"
-msgstr ""
+msgstr "البحث في المدونة"
 
 #: cms/templates/cms/blog_index_page.html:22
 msgid "Rechercher un article…"
-msgstr ""
+msgstr "ابحث عن مقال…"
 
 #: cms/templates/cms/blog_index_page.html:23
 #: core/templates/core/search.html:20
 msgid "Rechercher"
-msgstr ""
+msgstr "بحث"
 
 #: cms/templates/cms/blog_index_page.html:47
 #: core/templates/core/author_detail.html:35
 #: core/templates/core/search.html:30
 msgid "Pages"
-msgstr ""
+msgstr "الصفحات"
 
 #: cms/templates/cms/blog_index_page.html:49
 msgid "← Précédent"
@@ -486,13 +493,12 @@ msgstr "لا توجد خدمة حتى الآن"
 #: cms/templates/cms/content_page.html:42
 #: cms/templates/cms/content_page.html:43
 msgid "Sommaire"
-msgstr ""
+msgstr "الفهرس"
 
 #: cms/templates/cms/blog_post_page.html:56
-#, fuzzy
 #| msgid "pages de l'annuaire"
 msgid "Pages de l’article"
-msgstr "صفحات الدليل"
+msgstr "صفحات المقال"
 
 #: cms/templates/cms/blog_post_page.html:58
 #: cms/templates/cms/content_page.html:74
@@ -503,7 +509,7 @@ msgstr "← الصفحة السابقة"
 #: cms/templates/cms/content_page.html:78
 #, python-format
 msgid "Page %(page_number)s sur %(total_pages)s"
-msgstr ""
+msgstr "الصفحة %(page_number)s من %(total_pages)s"
 
 #: cms/templates/cms/blog_post_page.html:64
 #: cms/templates/cms/content_page.html:80
@@ -513,11 +519,11 @@ msgstr "الصفحة التالية →"
 #: cms/templates/cms/blog_post_page.html:89
 #: cms/templates/cms/content_page.html:90
 msgid "À lire aussi"
-msgstr ""
+msgstr "اقرأ أيضًا"
 
 #: cms/templates/cms/blog_post_page.html:112
 msgid "← Retour au blog"
-msgstr ""
+msgstr "← العودة إلى المدونة"
 
 #: cms/templates/cms/content_page.html:72
 #, fuzzy
@@ -555,7 +561,7 @@ msgstr "سيظهر الداعمون الأوائل هنا، بموافقتهم."
 
 #: cms/templates/cms/pole_page.html:45
 msgid "À découvrir"
-msgstr ""
+msgstr "اكتشف أيضًا"
 
 #: cms/templates/cms/pole_page.html:60 core/templates/core/tag_detail.html:33
 #, fuzzy
@@ -587,11 +593,11 @@ msgstr "أحدث المقالات"
 
 #: cms/templates/cms/project_page.html:50
 msgid "Documents"
-msgstr ""
+msgstr "المستندات"
 
 #: cms/wagtail_hooks.py:49
 msgid "Ligne horizontale"
-msgstr ""
+msgstr "خط أفقي"
 
 #: cms/wagtail_hooks.py:74
 #, fuzzy
@@ -601,38 +607,38 @@ msgstr "نص الصفحة"
 
 #: cms/wagtail_hooks.py:110
 msgid "Galerie de photos"
-msgstr ""
+msgstr "معرض الصور"
 
 #: cms/wagtail_hooks.py:133
 msgid "Citation en exergue"
-msgstr ""
+msgstr "اقتباس بارز"
 
 #: cms/wagtail_hooks.py:184 cms/wagtail_hooks.py:195 cms/wagtail_hooks.py:211
 #: cms/wagtail_hooks.py:222
 msgid "Exporter .qmd"
-msgstr ""
+msgstr "تصدير .qmd"
 
 #: cms/wagtail_hooks.py:187 cms/wagtail_hooks.py:198 cms/wagtail_hooks.py:214
 #: cms/wagtail_hooks.py:225
 msgid "Importer .qmd"
-msgstr ""
+msgstr "استيراد .qmd"
 
 #: cms/wagtail_hooks.py:191 cms/wagtail_hooks.py:218
 msgid "Exporter tout le blog (.zip)"
-msgstr ""
+msgstr "تصدير المدونة بالكامل (.zip)"
 
 #: cms/wagtail_hooks.py:254 cms/wagtail_hooks.py:295
 msgid "Choisissez un fichier .qmd à importer."
-msgstr ""
+msgstr "اختر ملف .qmd لاستيراده."
 
 #: cms/wagtail_hooks.py:261 cms/wagtail_hooks.py:302
 #, python-format
 msgid "Échec de l'import : %(error)s"
-msgstr ""
+msgstr "فشل الاستيراد: %(error)s"
 
 #: cms/wagtail_hooks.py:264
 msgid "Article mis à jour depuis le fichier .qmd."
-msgstr ""
+msgstr "تم تحديث المقال من ملف .qmd."
 
 #: cms/wagtail_hooks.py:269
 #, python-format
@@ -640,10 +646,12 @@ msgid ""
 "Le fichier .qmd portait la clé d'un autre article : « %(title)s » a été créé"
 " ou mis à jour à la place de celui-ci."
 msgstr ""
+"كان ملف .qmd يحمل مفتاح مقال آخر: تم إنشاء أو تحديث «%(title)s» بدلاً من هذا"
+" المقال."
 
 #: cms/wagtail_hooks.py:305
 msgid "Page mise à jour depuis le fichier .qmd."
-msgstr ""
+msgstr "تم تحديث الصفحة من ملف .qmd."
 
 #: cms/wagtail_hooks.py:310
 #, python-format
@@ -651,6 +659,8 @@ msgid ""
 "Le fichier .qmd portait la clé d'une autre page : « %(title)s » a été créée "
 "ou mise à jour à la place de celle-ci."
 msgstr ""
+"كان ملف .qmd يحمل مفتاح صفحة أخرى: تم إنشاء أو تحديث «%(title)s» بدلاً من "
+"هذه الصفحة."
 
 #: core/accounts.py:48 core/accounts.py:53
 #, python-format
@@ -671,11 +681,11 @@ msgstr "حساب مجهول"
 
 #: core/forms.py:19
 msgid "Général"
-msgstr ""
+msgstr "عام"
 
 #: core/forms.py:20
 msgid "Photos et médias"
-msgstr ""
+msgstr "الصور والوسائط"
 
 #: core/forms.py:21
 #, fuzzy
@@ -685,7 +695,7 @@ msgstr "الرئيس"
 
 #: core/forms.py:22
 msgid "Publication"
-msgstr ""
+msgstr "النشر"
 
 #: core/forms.py:23
 #, fuzzy
@@ -711,7 +721,7 @@ msgstr "العنوان"
 
 #: core/forms.py:27
 msgid "Avancé"
-msgstr ""
+msgstr "متقدم"
 
 #: core/forms.py:49
 #, fuzzy
@@ -721,19 +731,19 @@ msgstr "الوصف"
 
 #: core/forms.py:125
 msgid "Une promesse de don"
-msgstr ""
+msgstr "وعد بتبرع"
 
 #: core/forms.py:126
 msgid "Un paiement déjà effectué"
-msgstr ""
+msgstr "دفعة تمت بالفعل"
 
 #: core/forms.py:127
 msgid "Une promesse, réglée dans le même temps"
-msgstr ""
+msgstr "وعد، تم سداده في الوقت نفسه"
 
 #: core/forms.py:130
 msgid "Type"
-msgstr ""
+msgstr "النوع"
 
 #: core/forms.py:132
 #, fuzzy
@@ -749,19 +759,19 @@ msgstr "الوسيلة"
 
 #: core/forms.py:135
 msgid "Date"
-msgstr ""
+msgstr "التاريخ"
 
 #: core/forms.py:150
 msgid "Votre nom"
-msgstr ""
+msgstr "اسمك"
 
 #: core/forms.py:151
 msgid "Votre e-mail"
-msgstr ""
+msgstr "بريدك الإلكتروني"
 
 #: core/forms.py:152
 msgid "Message"
-msgstr ""
+msgstr "الرسالة"
 
 #: core/menu.py:39
 msgid "activités"
@@ -1019,7 +1029,7 @@ msgstr "متاح"
 
 #: core/models.py:93
 msgid "nécessite une validation"
-msgstr ""
+msgstr "يتطلب الموافقة"
 
 #: core/models.py:95
 msgid ""
@@ -1028,6 +1038,9 @@ msgid ""
 "le raccourci reste « en attente » jusqu'à validation (groupe « "
 "Administration »)."
 msgstr ""
+"يلزم تدخل أحد المسؤولين قبل أن تصبح الخدمة نشطة للشخص (مثل الإنشاء اليدوي "
+"لصندوق بريد إلكتروني): يبقى الاختصار «قيد الانتظار» حتى تتم الموافقة عليه "
+"(مجموعة «Administration»)."
 
 #: core/models.py:104
 msgid "service"
@@ -1053,7 +1066,7 @@ msgstr "الترتيب الشخصي"
 
 #: core/models.py:169
 msgid "validé"
-msgstr ""
+msgstr "تمت الموافقة"
 
 #: core/models.py:180
 msgid "raccourci"
@@ -1099,23 +1112,23 @@ msgstr "اتركه فارغًا إذا كانت البطاقة موجهة للج
 
 #: core/models.py:258
 msgid "Classique"
-msgstr ""
+msgstr "كلاسيكي"
 
 #: core/models.py:259
 msgid "Carte de visite"
-msgstr ""
+msgstr "بطاقة عمل"
 
 #: core/models.py:260
 msgid "Magazine"
-msgstr ""
+msgstr "مجلة"
 
 #: core/models.py:261
 msgid "Minimal"
-msgstr ""
+msgstr "بسيط"
 
 #: core/models.py:262
 msgid "Vitrine"
-msgstr ""
+msgstr "واجهة عرض"
 
 #: core/models.py:263
 #, fuzzy
@@ -1131,13 +1144,13 @@ msgstr "بطاقتي"
 
 #: core/models.py:267
 msgid "présentation"
-msgstr ""
+msgstr "طريقة العرض"
 
 #: core/models.py:268
 msgid ""
 "L'habillage visuel de votre fiche : choisissez celui qui vous ressemble le "
 "plus."
-msgstr ""
+msgstr "المظهر البصري لسجلك: اختر ما يناسبك أكثر."
 
 #: core/models.py:273
 msgid "compte propriétaire"
@@ -1189,7 +1202,7 @@ msgstr "موقع أو رابط"
 
 #: core/models.py:291
 msgid "France"
-msgstr ""
+msgstr "فرنسا"
 
 #: core/models.py:292
 #, fuzzy
@@ -1199,55 +1212,55 @@ msgstr "عامة"
 
 #: core/models.py:293
 msgid "Suisse"
-msgstr ""
+msgstr "سويسرا"
 
 #: core/models.py:294
 msgid "Luxembourg"
-msgstr ""
+msgstr "لوكسمبورغ"
 
 #: core/models.py:295
 msgid "Allemagne"
-msgstr ""
+msgstr "ألمانيا"
 
 #: core/models.py:296
 msgid "Espagne"
-msgstr ""
+msgstr "إسبانيا"
 
 #: core/models.py:297
 msgid "Italie"
-msgstr ""
+msgstr "إيطاليا"
 
 #: core/models.py:298
 msgid "Portugal"
-msgstr ""
+msgstr "البرتغال"
 
 #: core/models.py:299
 msgid "Royaume-Uni"
-msgstr ""
+msgstr "المملكة المتحدة"
 
 #: core/models.py:300
 msgid "Maroc"
-msgstr ""
+msgstr "المغرب"
 
 #: core/models.py:301
 msgid "Algérie"
-msgstr ""
+msgstr "الجزائر"
 
 #: core/models.py:302
 msgid "Tunisie"
-msgstr ""
+msgstr "تونس"
 
 #: core/models.py:303
 msgid "Sénégal"
-msgstr ""
+msgstr "السنغال"
 
 #: core/models.py:304
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "ساحل العاج"
 
 #: core/models.py:305
 msgid "Canada"
-msgstr ""
+msgstr "كندا"
 
 #: core/models.py:306 core/models.py:580
 msgid "Autre"
@@ -1255,11 +1268,11 @@ msgstr "أخرى"
 
 #: core/models.py:309
 msgid "région"
-msgstr ""
+msgstr "المنطقة"
 
 #: core/models.py:311
 msgid "code postal"
-msgstr ""
+msgstr "الرمز البريدي"
 
 #: core/models.py:313
 msgid "adresse"
@@ -1267,7 +1280,7 @@ msgstr "العنوان"
 
 #: core/models.py:314
 msgid "Numéro, type et nom de voie : « 12, rue de la Paix »."
-msgstr ""
+msgstr "رقم المبنى ونوع الشارع واسمه: «12, rue de la Paix»."
 
 #: core/models.py:316 core/models.py:468
 msgid "latitude"
@@ -1297,7 +1310,7 @@ msgstr "منشور"
 
 #: core/models.py:328
 msgid "Brouillon protégé"
-msgstr ""
+msgstr "مسودة محمية"
 
 #: core/models.py:329
 #, fuzzy
@@ -1307,7 +1320,7 @@ msgstr "غير منشورة"
 
 #: core/models.py:332
 msgid "visibilité"
-msgstr ""
+msgstr "الظهور"
 
 #: core/models.py:334
 msgid ""
@@ -1315,10 +1328,12 @@ msgid ""
 "protégé : absent de l'annuaire, visible uniquement par les personnes ayant "
 "un compte sur le site. Non publié : visible uniquement par vous."
 msgstr ""
+"منشورة: مرئية للجميع ومدرجة في الدليل. مسودة محمية: غير مدرجة في الدليل، "
+"ومرئية فقط لمن لديهم حساب على الموقع. غير منشورة: مرئية لك فقط."
 
 #: core/models.py:342 core/models.py:591
 msgid "validée par l'administration"
-msgstr ""
+msgstr "معتمدة من الإدارة"
 
 #: core/models.py:347
 msgid "page de l'annuaire"
@@ -1360,7 +1375,7 @@ msgstr "صفحات الدليل"
 
 #: core/models.py:407 core/models.py:547
 msgid "notifications par courriel"
-msgstr ""
+msgstr "إشعارات البريد الإلكتروني"
 
 #: core/models.py:413
 msgid "abonnement à une fiche"
@@ -1372,19 +1387,19 @@ msgstr "اشتراكات في البطاقات"
 
 #: core/models.py:430 core/models.py:515
 msgid "validée"
-msgstr ""
+msgstr "تمت الموافقة"
 
 #: core/models.py:435
 msgid "demande de responsabilité de fiche"
-msgstr ""
+msgstr "طلب تولي مسؤولية السجل"
 
 #: core/models.py:436
 msgid "demandes de responsabilité de fiche"
-msgstr ""
+msgstr "طلبات تولي مسؤولية السجل"
 
 #: core/models.py:462
 msgid "slug"
-msgstr ""
+msgstr "المعرّف النصي (slug)"
 
 #: core/models.py:464
 msgid "début"
@@ -1404,21 +1419,21 @@ msgstr "للمشاركة عن بُعد (مكالمة فيديو…)."
 
 #: core/models.py:475
 msgid "lien source"
-msgstr ""
+msgstr "رابط المصدر"
 
 #: core/models.py:476
 msgid "Page de l'évènement sur l'agenda source (OpenAgenda…)."
-msgstr ""
+msgstr "صفحة الفعالية في التقويم المصدر (OpenAgenda…)."
 
 #: core/models.py:479
 msgid "identifiant source"
-msgstr ""
+msgstr "معرّف المصدر"
 
 #: core/models.py:480
 msgid ""
 "Identifiant de l'évènement dans l'agenda source, pour réimporter sans "
 "dupliquer."
-msgstr ""
+msgstr "معرّف الفعالية في التقويم المصدر، لإعادة الاستيراد دون تكرار."
 
 #: core/models.py:482
 msgid "publié"
@@ -1435,6 +1450,7 @@ msgid ""
 "Comptes autorisés à gérer cet évènement, en plus du groupe « Administration "
 "»."
 msgstr ""
+"الحسابات المخوّلة بإدارة هذه الفعالية، بالإضافة إلى مجموعة «Administration»."
 
 #: core/models.py:492
 msgid "évènement"
@@ -1446,7 +1462,7 @@ msgstr "الفعاليات"
 
 #: core/models.py:520
 msgid "demande de gestion d'évènement"
-msgstr ""
+msgstr "طلب إدارة الفعالية"
 
 #: core/models.py:521
 #, fuzzy
@@ -1456,12 +1472,12 @@ msgstr "الفعاليات القادمة"
 
 #: core/models.py:541 core/templates/core/partials/event_interest_list.html:9
 msgid "Intéressé·e"
-msgstr ""
+msgstr "مهتم"
 
 #: core/models.py:542 core/templates/core/event_detail.html:60
 #: core/templates/core/partials/event_interest_list.html:9
 msgid "J'y vais"
-msgstr ""
+msgstr "سأحضر"
 
 #: core/models.py:546
 #, fuzzy
@@ -1471,7 +1487,7 @@ msgstr "الجمعية"
 
 #: core/models.py:553
 msgid "intérêt pour un évènement"
-msgstr ""
+msgstr "الاهتمام بفعالية"
 
 #: core/models.py:554
 #, fuzzy
@@ -1493,15 +1509,15 @@ msgstr "قريبًا"
 
 #: core/models.py:577
 msgid "Espèces"
-msgstr ""
+msgstr "نقدًا"
 
 #: core/models.py:578
 msgid "Chèque"
-msgstr ""
+msgstr "شيك"
 
 #: core/models.py:579
 msgid "Virement"
-msgstr ""
+msgstr "تحويل بنكي"
 
 #: core/models.py:584
 msgid "montant"
@@ -1517,11 +1533,11 @@ msgstr "التاريخ"
 
 #: core/models.py:593
 msgid "déduction fiscale"
-msgstr ""
+msgstr "الخصم الضريبي"
 
 #: core/models.py:594
 msgid "Éligible à un reçu fiscal (don à une association loi 1901)."
-msgstr ""
+msgstr "مؤهل لإيصال ضريبي (تبرع لجمعية غير ربحية فرنسية بموجب قانون 1901)."
 
 #: core/models.py:596
 msgid "note"
@@ -1690,7 +1706,7 @@ msgstr "إضافة %(name)s إلى اختصاراتي"
 
 #: core/templates/core/account.html:118
 msgid "Rejoindre un groupe"
-msgstr ""
+msgstr "الانضمام إلى مجموعة"
 
 #: core/templates/core/account.html:124 core/templates/core/mes_fiches.html:14
 msgid "Mes fiches dans l'annuaire"
@@ -1745,7 +1761,7 @@ msgstr "مجموعاتي"
 
 #: core/templates/core/account.html:176
 msgid "déductible fiscalement"
-msgstr ""
+msgstr "قابل للخصم الضريبي"
 
 #: core/templates/core/account.html:180
 #, fuzzy
@@ -1759,7 +1775,7 @@ msgstr "لا توجد مساهمة مسجلة حتى الآن."
 
 #: core/templates/core/account.html:211
 msgid "Faire un don"
-msgstr ""
+msgstr "التبرع"
 
 #: core/templates/core/account.html:218 core/templates/core/account.html:222
 msgid "Se connecter ou créer son compte"
@@ -1814,29 +1830,30 @@ msgid ""
 "Réservé au groupe « Administration » : validation des demandes et gestion "
 "rapide de l'agenda."
 msgstr ""
+"مخصص لمجموعة «Administration»: الموافقة على الطلبات وإدارة سريعة للتقويم."
 
 #: core/templates/core/administration.html:21
 msgid "Demandes de responsabilité de fiche"
-msgstr ""
+msgstr "طلبات تولي مسؤولية السجل"
 
 #: core/templates/core/administration.html:31
 #: core/templates/core/administration.html:54
 #: core/templates/core/administration.html:77
 #: core/templates/core/administration.html:100
 msgid "Valider"
-msgstr ""
+msgstr "موافقة"
 
 #: core/templates/core/administration.html:32
 #: core/templates/core/administration.html:55
 #: core/templates/core/administration.html:78
 #: core/templates/core/administration.html:101
 msgid "Refuser"
-msgstr ""
+msgstr "رفض"
 
 #: core/templates/core/administration.html:38
 #: core/templates/core/administration.html:61
 msgid "Aucune demande en attente."
-msgstr ""
+msgstr "لا توجد طلبات قيد الانتظار."
 
 #: core/templates/core/administration.html:44
 #, fuzzy
@@ -1846,19 +1863,19 @@ msgstr "الفعاليات القادمة"
 
 #: core/templates/core/administration.html:67
 msgid "Fiches de l'annuaire en attente de publication"
-msgstr ""
+msgstr "سجلات الدليل بانتظار النشر"
 
 #: core/templates/core/administration.html:84
 msgid "Aucune fiche en attente."
-msgstr ""
+msgstr "لا توجد سجلات قيد الانتظار."
 
 #: core/templates/core/administration.html:90
 msgid "Paiements de don en attente de validation"
-msgstr ""
+msgstr "مدفوعات تبرع بانتظار الموافقة"
 
 #: core/templates/core/administration.html:107
 msgid "Aucun paiement en attente."
-msgstr ""
+msgstr "لا توجد مدفوعات قيد الانتظار."
 
 #: core/templates/core/administration.html:125
 #: core/templates/core/directory_entry.html:86
@@ -2004,7 +2021,7 @@ msgstr "ستظهر البطاقات هنا، بموافقة كل شخص."
 
 #: core/templates/core/author_detail.html:44
 msgid "Articles de blog"
-msgstr ""
+msgstr "مقالات المدونة"
 
 #: core/templates/core/author_detail.html:54
 #, fuzzy
@@ -2022,7 +2039,7 @@ msgstr "رفع %(name)s"
 #: core/templates/core/author_detail.html:79
 #: core/templates/core/directory_entry.html:137
 msgid "Envoyer"
-msgstr ""
+msgstr "إرسال"
 
 #: core/templates/core/base.html:16 core/templates/core/home.html:17
 msgid ""
@@ -2047,22 +2064,22 @@ msgstr "القائمة الرئيسية"
 
 #: core/templates/core/base.html:91 core/templates/core/search.html:18
 msgid "Rechercher sur le site"
-msgstr ""
+msgstr "البحث في الموقع"
 
 #: core/templates/core/base.html:96 core/templates/core/search.html:19
 msgid "Rechercher…"
-msgstr ""
+msgstr "بحث…"
 
 #: core/templates/core/base.html:102
 #: core/templates/core/partials/account_panel_body.html:28
 #, fuzzy
 #| msgid "compte"
 msgid "Compte"
-msgstr "حساب"
+msgstr "الحساب"
 
 #: core/templates/core/base.html:120
 msgid "lesgrandsvoisins.com, accueil"
-msgstr ""
+msgstr "lesgrandsvoisins.com، الصفحة الرئيسية"
 
 #: core/templates/core/base.html:140
 msgid ""
@@ -2085,7 +2102,7 @@ msgstr "خريطة الموقع"
 
 #: core/templates/core/base.html:160
 msgid "lesgrandsvoisins.com"
-msgstr ""
+msgstr "lesgrandsvoisins.com"
 
 #: core/templates/core/directory_entry.html:47
 msgid "Vidéo"
@@ -2104,14 +2121,14 @@ msgstr "معرفة المزيد"
 #: core/templates/core/directory_entry.html:73
 #: core/templates/core/event_detail.html:68
 msgid "Notifications par courriel ✓"
-msgstr ""
+msgstr "إشعارات البريد الإلكتروني ✓"
 
 #: core/templates/core/directory_entry.html:73
 #: core/templates/core/event_detail.html:68
 #: core/templates/core/partials/event_interest_list.html:14
 #: core/templates/core/partials/subscribed_entry_list.html:12
 msgid "Recevoir un courriel"
-msgstr ""
+msgstr "تلقي إشعار بالبريد الإلكتروني"
 
 #: core/templates/core/directory_entry.html:78
 #: core/templates/core/partials/entry_list.html:9
@@ -2123,24 +2140,24 @@ msgstr "تعديل"
 #: core/templates/core/partials/entry_list.html:8
 #: core/templates/core/partials/shortcut_list.html:19
 msgid "En attente de validation"
-msgstr ""
+msgstr "بانتظار الموافقة"
 
 #: core/templates/core/directory_entry.html:88
 msgid "Annuler la demande"
-msgstr ""
+msgstr "إلغاء الطلب"
 
 #: core/templates/core/directory_entry.html:98
 #: core/templates/core/directory_entry.html:110
 msgid "Demander à être responsable de cette fiche"
-msgstr ""
+msgstr "طلب تولي مسؤولية هذا السجل"
 
 #: core/templates/core/directory_entry.html:101
 msgid "Demande de responsabilité en attente de validation"
-msgstr ""
+msgstr "طلب تولي المسؤولية بانتظار الموافقة"
 
 #: core/templates/core/directory_entry.html:103
 msgid "Demande de responsabilité refusée"
-msgstr ""
+msgstr "تم رفض طلب تولي المسؤولية"
 
 #: core/templates/core/directory_entry.html:142
 msgid "← Retour à l’annuaire"
@@ -2192,7 +2209,7 @@ msgstr "رابط عبر الإنترنت"
 
 #: core/templates/core/event_detail.html:27
 msgid "Page source"
-msgstr ""
+msgstr "الصفحة المصدر"
 
 #: core/templates/core/event_detail.html:35
 msgid "Ajouter à Google Agenda"
@@ -2210,23 +2227,23 @@ msgstr "مشترك ✓"
 
 #: core/templates/core/event_detail.html:52
 msgid "Ça m'intéresse"
-msgstr ""
+msgstr "يهمني"
 
 #: core/templates/core/event_detail.html:60
 msgid "J'y vais ✓"
-msgstr ""
+msgstr "سأحضر ✓"
 
 #: core/templates/core/event_detail.html:79
 msgid "Demander à gérer cet évènement"
-msgstr ""
+msgstr "طلب إدارة هذه الفعالية"
 
 #: core/templates/core/event_detail.html:82
 msgid "Demande de gestion en attente de validation"
-msgstr ""
+msgstr "طلب الإدارة بانتظار الموافقة"
 
 #: core/templates/core/event_detail.html:84
 msgid "Demande de gestion refusée"
-msgstr ""
+msgstr "تم رفض طلب الإدارة"
 
 #: core/templates/core/event_detail.html:91
 #, fuzzy
@@ -2254,36 +2271,38 @@ msgstr "← العودة إلى الدليل"
 
 #: core/templates/core/faire_don_merci.html:3
 msgid "Merci pour votre don"
-msgstr ""
+msgstr "شكرًا على تبرعك"
 
 #: core/templates/core/faire_don_merci.html:10
 msgid "Merci"
-msgstr ""
+msgstr "شكرًا"
 
 #: core/templates/core/faire_don_merci.html:13
 msgid "Merci !"
-msgstr ""
+msgstr "شكرًا لك!"
 
 #: core/templates/core/faire_don_merci.html:16
 #, python-format
 msgid "Vous avez indiqué %(amount)s € par %(method_display)s."
-msgstr ""
+msgstr "لقد أدخلت %(amount)s € عبر %(method_display)s."
 
 #: core/templates/core/faire_don_merci.html:18
 #, python-format
 msgid "Votre contribution par %(method_display)s a bien été enregistrée."
-msgstr ""
+msgstr "تم تسجيل مساهمتك عبر %(method_display)s بنجاح."
 
 #: core/templates/core/faire_don_merci.html:26
 msgid ""
 "Ce paiement reste « en attente » le temps qu'un administrateur confirme sa "
 "bonne réception — vous pouvez suivre son statut depuis votre compte."
 msgstr ""
+"تبقى هذه الدفعة «قيد الانتظار» إلى أن يؤكد أحد المسؤولين استلامها — يمكنك "
+"متابعة حالتها من حسابك."
 
 #: core/templates/core/faire_don_merci.html:32
 #, python-format
 msgid "Terminer le paiement par %(name)s"
-msgstr ""
+msgstr "إتمام الدفع عبر %(name)s"
 
 #: core/templates/core/faire_don_merci.html:33
 #, fuzzy, python-format
@@ -2293,7 +2312,7 @@ msgstr "رفع %(name)s"
 
 #: core/templates/core/faire_don_merci.html:39
 msgid "Rappel des moyens de don"
-msgstr ""
+msgstr "تذكير بطرق التبرع"
 
 #: core/templates/core/faire_don_merci.html:52
 #, fuzzy
@@ -2590,6 +2609,8 @@ msgid ""
 "Créez et gérez vos évènements dans l'agenda. Ils restent réservés à leurs "
 "responsables tant que le groupe « Administration » ne les a pas publiés."
 msgstr ""
+"أنشئ فعالياتك وأدرها في التقويم. تبقى مقتصرة على المسؤولين عنها إلى أن "
+"تنشرها مجموعة «Administration»."
 
 #: core/templates/core/mes_evenements.html:28
 #, fuzzy
@@ -2625,7 +2646,7 @@ msgstr ""
 
 #: core/templates/core/mes_fiches.html:28
 msgid "Fiches auxquelles je suis abonné·e"
-msgstr ""
+msgstr "السجلات التي أتابعها"
 
 #: core/templates/core/mes_fiches.html:40
 msgid "Créer la fiche"
@@ -2650,7 +2671,7 @@ msgstr "خيارات حسابي"
 
 #: core/templates/core/partials/account_widget.html:35
 msgid "Fermer"
-msgstr ""
+msgstr "إغلاق"
 
 #: core/templates/core/partials/agenda_calendar.html:3
 #, fuzzy
@@ -2666,15 +2687,15 @@ msgstr "مميز"
 
 #: core/templates/core/partials/announcement_banner.html:23
 msgid "Fermer ce bandeau"
-msgstr ""
+msgstr "إغلاق هذا الشريط"
 
 #: core/templates/core/partials/entry_form_fields.html:2
 msgid "Sections du formulaire"
-msgstr ""
+msgstr "أقسام النموذج"
 
 #: core/templates/core/partials/entry_form_fields.html:13
 msgid "Gras"
-msgstr ""
+msgstr "عريض"
 
 #: core/templates/core/partials/entry_form_fields.html:14
 #, fuzzy
@@ -2696,7 +2717,7 @@ msgstr "الجمعية"
 
 #: core/templates/core/partials/entry_form_fields.html:17
 msgid "Liste à puces"
-msgstr ""
+msgstr "قائمة نقطية"
 
 #: core/templates/core/partials/entry_form_fields.html:18
 #, fuzzy
@@ -2706,11 +2727,11 @@ msgstr "رقم حسابك"
 
 #: core/templates/core/partials/entry_form_fields.html:19
 msgid "Normal"
-msgstr ""
+msgstr "عادي"
 
 #: core/templates/core/partials/entry_form_fields.html:20
 msgid "Lien"
-msgstr ""
+msgstr "رابط"
 
 #: core/templates/core/partials/entry_form_fields.html:21
 #, fuzzy
@@ -2745,11 +2766,11 @@ msgstr "ليس لديك بعد بطاقة في الدليل."
 #: core/templates/core/partials/event_interest_list.html:14
 #: core/templates/core/partials/subscribed_entry_list.html:12
 msgid "Désactiver les notifications par courriel"
-msgstr ""
+msgstr "إيقاف إشعارات البريد الإلكتروني"
 
 #: core/templates/core/partials/event_interest_list.html:17
 msgid "Retirer votre intérêt pour cet évènement ?"
-msgstr ""
+msgstr "هل تريد إلغاء اهتمامك بهذه الفعالية؟"
 
 #: core/templates/core/partials/event_interest_list.html:20
 #, fuzzy
@@ -2942,7 +2963,7 @@ msgstr "تسجيل الخروج"
 
 #: core/templates/core/partials/subscribed_entry_list.html:25
 msgid "Vous n'êtes abonné·e à aucune fiche pour l'instant."
-msgstr ""
+msgstr "أنت غير مشترك في أي سجل حتى الآن."
 
 #: core/templates/core/partials/toasts.html:4
 msgid "Compte anonyme créé. Notez votre numéro :"
@@ -2978,18 +2999,18 @@ msgstr "أضف ما يهمّك إلى قائمتك."
 #: core/templates/core/search.html:3 core/templates/core/search.html:10
 #: core/templates/core/search.html:13
 msgid "Recherche"
-msgstr ""
+msgstr "البحث"
 
 #: core/templates/core/search.html:24
 msgid ""
 "Tapez un mot-clé pour chercher dans les pages du site, l'annuaire, l'agenda "
 "et les services."
-msgstr ""
+msgstr "اكتب كلمة مفتاحية للبحث في صفحات الموقع والدليل والتقويم والخدمات."
 
 #: core/templates/core/search.html:26
 #, python-format
 msgid "Aucun résultat pour « %(query)s »."
-msgstr ""
+msgstr "لا توجد نتائج لـ«%(query)s»."
 
 #: core/templates/core/search.html:95 core/templates/core/tag_detail.html:81
 #, fuzzy
@@ -3002,11 +3023,11 @@ msgstr "خدمة"
 #: core/templates/core/tag_list.html:10 core/templates/core/tag_list.html:13
 #: core/templates/core/tag_list.html:19
 msgid "Étiquettes"
-msgstr ""
+msgstr "الوسوم"
 
 #: core/templates/core/tag_detail.html:19
 msgid "Rien n'est encore étiqueté ainsi."
-msgstr ""
+msgstr "لم يُوسَم أي شيء بهذا الوسم بعد."
 
 #: core/templates/core/tag_detail.html:24
 #, fuzzy
@@ -3018,7 +3039,7 @@ msgstr "المحاور"
 msgid ""
 "Un même mot-clé, pour retrouver ensemble articles, fiches de l'annuaire, "
 "services et pôles."
-msgstr ""
+msgstr "كلمة مفتاحية واحدة تجمع المقالات وسجلات الدليل والخدمات والأقطاب."
 
 #: core/templates/core/tag_list.html:25
 #, fuzzy
@@ -3056,7 +3077,7 @@ msgstr "مجموعاتي — Voisinternet"
 #: core/views.py:305 core/views.py:499
 #, python-format
 msgid "Message envoyé à %(name)s."
-msgstr ""
+msgstr "تم إرسال الرسالة إلى %(name)s."
 
 #: core/views.py:360
 #, fuzzy
@@ -3066,23 +3087,24 @@ msgstr "لا توجد مساهمة مسجلة حتى الآن."
 
 #: core/views.py:362
 msgid "Le formulaire de don contient une erreur : montant ou date invalide."
-msgstr ""
+msgstr "يحتوي نموذج التبرع على خطأ: المبلغ أو التاريخ غير صالح."
 
 #: core/views.py:518
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cette fiche."
 msgstr ""
+"تم إرسال الطلب: سيراجعه أحد المسؤولين قبل أن يجعلك مسؤولاً عن هذا السجل."
 
 #: core/views.py:521
 msgid "Vous avez déjà demandé à être responsable de cette fiche."
-msgstr ""
+msgstr "لقد سبق أن طلبت تولي مسؤولية هذا السجل."
 
 #: core/views.py:539
 msgid ""
 "Connectez-vous pour finaliser votre demande de responsabilité de cette "
 "fiche."
-msgstr ""
+msgstr "سجّل الدخول لإتمام طلب تولي مسؤولية هذا السجل."
 
 #: core/views.py:563
 msgid "Fiche créée."
@@ -3114,49 +3136,52 @@ msgstr "تم إنشاء البطاقة."
 
 #: core/views.py:645
 msgid "Demande de publication annulée."
-msgstr ""
+msgstr "تم إلغاء طلب النشر."
 
 #: core/views.py:651
 msgid ""
 "Fiche envoyée pour validation : elle sera publique une fois validée par un "
 "administrateur."
-msgstr ""
+msgstr "تم إرسال السجل للموافقة: سيصبح عامًا بمجرد موافقة أحد المسؤولين عليه."
 
 #: core/views.py:706
 #, python-format
 msgid "Intérêt enregistré pour « %(title)s »."
-msgstr ""
+msgstr "تم تسجيل الاهتمام بـ«%(title)s»."
 
 #: core/views.py:709
 #, python-format
 msgid "Intérêt retiré pour « %(title)s »."
-msgstr ""
+msgstr "تم إلغاء الاهتمام بـ«%(title)s»."
 
 #: core/views.py:713
 #, python-format
 msgid "Intention mise à jour pour « %(title)s »."
-msgstr ""
+msgstr "تم تحديث النية بخصوص «%(title)s»."
 
 #: core/views.py:733
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cet évènement."
 msgstr ""
+"تم إرسال الطلب: سيراجعه أحد المسؤولين قبل أن يجعلك مسؤولاً عن هذه الفعالية."
 
 #: core/views.py:736
 msgid "Vous avez déjà demandé à gérer cet évènement."
-msgstr ""
+msgstr "لقد سبق أن طلبت إدارة هذه الفعالية."
 
 #: core/views.py:751
 msgid ""
 "Connectez-vous pour finaliser votre demande de gestion de cet évènement."
-msgstr ""
+msgstr "سجّل الدخول لإتمام طلب إدارة هذه الفعالية."
 
 #: core/views.py:777
 msgid ""
 "Évènement créé : il reste réservé à ses responsables tant que le groupe « "
 "Administration » ne l'a pas publié."
 msgstr ""
+"تم إنشاء الفعالية: تبقى مقتصرة على المسؤولين عنها إلى أن تنشرها مجموعة "
+"«Administration»."
 
 #: core/views.py:798
 #, fuzzy

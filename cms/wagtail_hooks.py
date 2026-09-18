@@ -24,10 +24,11 @@ from wagtail.admin.rich_text.converters.html_to_contentstate import (
 )
 from wagtail.admin.rich_text.editors.draftail import features as draftail_features
 
-from .models import BlogIndexPage, BlogPostPage, ContentPage, PolePage, StandardPage
+from .models import BlogIndexPage, BlogPostPage, ContentPage, PolePage, ProjectPage, StandardPage
 from .qmd import (
-    export_blog_zip, export_blogpost_qmd, export_contentpage_qmd, export_polepage_qmd, export_standardpage_qmd,
-    import_blogpost_qmd, import_contentpage_qmd, import_polepage_qmd, import_standardpage_qmd,
+    export_blog_zip, export_blogpost_qmd, export_contentpage_qmd, export_polepage_qmd, export_projectpage_qmd,
+    export_standardpage_qmd, import_blogpost_qmd, import_contentpage_qmd, import_polepage_qmd,
+    import_projectpage_qmd, import_standardpage_qmd,
 )
 
 
@@ -214,6 +215,15 @@ def qmd_header_buttons(page, user, view_name, next_url=None):
             _("Importer .qmd"), reverse("pole_qmd_import", args=[specific.pk]),
             icon_name="upload", priority=71,
         )
+    elif isinstance(specific, ProjectPage):
+        yield wagtailadmin_widgets.Button(
+            _("Exporter .qmd"), reverse("project_qmd_export", args=[specific.pk]),
+            icon_name="download", priority=70,
+        )
+        yield wagtailadmin_widgets.Button(
+            _("Importer .qmd"), reverse("project_qmd_import", args=[specific.pk]),
+            icon_name="upload", priority=71,
+        )
 
 
 @hooks.register("register_page_listing_more_buttons")
@@ -255,6 +265,15 @@ def qmd_listing_more_buttons(page, user, next_url=None):
         )
         yield wagtailadmin_widgets.Button(
             _("Importer .qmd"), reverse("pole_qmd_import", args=[specific.pk]),
+            icon_name="upload", priority=71,
+        )
+    elif isinstance(specific, ProjectPage):
+        yield wagtailadmin_widgets.Button(
+            _("Exporter .qmd"), reverse("project_qmd_export", args=[specific.pk]),
+            icon_name="download", priority=70,
+        )
+        yield wagtailadmin_widgets.Button(
+            _("Importer .qmd"), reverse("project_qmd_import", args=[specific.pk]),
             icon_name="upload", priority=71,
         )
 
@@ -431,6 +450,47 @@ def pole_qmd_import_view(request, pk):
     return render(request, "cms/admin/qmd_import.html", {"page": page, "view_title": _("Importer un .qmd")})
 
 
+def project_qmd_export_view(request, pk):
+    if not _can_manage_qmd(request.user):
+        raise PermissionDenied
+    page = get_object_or_404(ProjectPage, pk=pk)
+    response = HttpResponse(export_projectpage_qmd(page), content_type="text/markdown; charset=utf-8")
+    response["Content-Disposition"] = f'attachment; filename="{page.slug}.qmd"'
+    return response
+
+
+def project_qmd_import_view(request, pk):
+    if not _can_manage_qmd(request.user):
+        raise PermissionDenied
+    page = get_object_or_404(ProjectPage, pk=pk)
+
+    if request.method == "POST":
+        uploaded = request.FILES.get("qmd_file")
+        if not uploaded:
+            messages.error(request, _("Choisissez un fichier .qmd à importer."))
+        else:
+            try:
+                imported = import_projectpage_qmd(uploaded.read().decode("utf-8"))
+            except Exception as exc:
+                # Fichier fourni par la personne (contenu non fiable) : toute erreur de
+                # lecture doit rester un message, jamais une page 500.
+                messages.error(request, _("Échec de l'import : %(error)s") % {"error": exc})
+            else:
+                if imported.pk == page.pk:
+                    messages.success(request, _("Page mise à jour depuis le fichier .qmd."))
+                else:
+                    messages.warning(
+                        request,
+                        _(
+                            "Le fichier .qmd portait la clé d'un autre projet : « %(title)s » a été "
+                            "créé ou mis à jour à la place de celui-ci."
+                        ) % {"title": imported.title},
+                    )
+                return redirect("wagtailadmin_pages:edit", imported.pk)
+
+    return render(request, "cms/admin/qmd_import.html", {"page": page, "view_title": _("Importer un .qmd")})
+
+
 @hooks.register("register_admin_urls")
 def register_qmd_admin_urls():
     return [
@@ -443,4 +503,6 @@ def register_qmd_admin_urls():
         path("standard-qmd/<int:pk>/import/", standard_qmd_import_view, name="standard_qmd_import"),
         path("pole-qmd/<int:pk>/export/", pole_qmd_export_view, name="pole_qmd_export"),
         path("pole-qmd/<int:pk>/import/", pole_qmd_import_view, name="pole_qmd_import"),
+        path("project-qmd/<int:pk>/export/", project_qmd_export_view, name="project_qmd_export"),
+        path("project-qmd/<int:pk>/import/", project_qmd_import_view, name="project_qmd_import"),
     ]

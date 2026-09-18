@@ -10,10 +10,10 @@ from django.urls import reverse
 from django.utils import timezone
 from wagtail.models import Locale
 
-from .models import Author, BlogIndexPage, BlogPostPage, HomePage, PolePage, StandardPage
+from .models import Author, BlogIndexPage, BlogPostPage, HomePage, PolePage, ProjectPage, StandardPage
 from .qmd import (
-    export_blogpost_qmd, export_polepage_qmd, export_standardpage_qmd, import_blogpost_qmd, import_polepage_qmd,
-    import_standardpage_qmd,
+    export_blogpost_qmd, export_polepage_qmd, export_projectpage_qmd, export_standardpage_qmd, import_blogpost_qmd,
+    import_polepage_qmd, import_projectpage_qmd, import_standardpage_qmd,
 )
 
 # PNG 1x1 valide (Wagtail traite réellement le fichier — génère des renditions — donc un
@@ -285,6 +285,8 @@ class PolePageCardsQmdRoundTripTests(TestCase):
     def test_export_matches_the_documented_syntax(self):
         qmd = export_polepage_qmd(self.pole)
         self.assertIn(f"key: {self.pole.translation_key}", qmd)
+        self.assertIn(f"lead: {self.pole.lead}", qmd)
+        self.assertIn(f"accent: {self.pole.accent}", qmd)
         self.assertIn(":::::: {.cards}", qmd)
         self.assertIn("::::: {.card}", qmd)
         self.assertIn("[Prix Alger Hiss pour excellence en service public]{.title}", qmd)
@@ -296,6 +298,7 @@ class PolePageCardsQmdRoundTripTests(TestCase):
         imported = import_polepage_qmd(qmd)
 
         self.assertEqual(imported.pk, self.pole.pk)
+        self.assertEqual(imported.accent, self.pole.accent)
         cards = list(imported.cards)
         self.assertEqual(len(cards), 2)
         self.assertEqual(cards[0].value["title"], "Prix Alger Hiss pour excellence en service public")
@@ -303,13 +306,22 @@ class PolePageCardsQmdRoundTripTests(TestCase):
         self.assertEqual(cards[1].value["title"], "Deuxième carte")
         self.assertIn("<strong>texte</strong>", str(cards[1].value["text"]))
 
-    def test_import_without_key_is_refused(self):
-        # Contrairement à StandardPage/ContentPage/le blog, import_polepage_qmd ne crée
-        # jamais de nouveau pôle (couleur/icône/étiquette Ghost hors de portée de ce
-        # round-trip, voir sa docstring) : sans clé correspondant à un pôle existant,
-        # l'import doit échouer proprement plutôt que de deviner une page au hasard.
-        with self.assertRaises(ValueError):
-            import_polepage_qmd("---\ntitle: Inconnu\nlang: fr\n---\n\n:::::: {.cards}\n::::::\n")
+    def test_import_with_unknown_key_creates_a_new_pole_under_the_home_page(self):
+        home = self.pole.get_parent()
+        qmd = (
+            "---\n"
+            "title: Nouveau pôle\n"
+            "lang: fr\n"
+            "slug: nouveau-pole\n"
+            "accent: gold\n"
+            "---\n\n"
+            ":::::: {.cards}\n::::::\n"
+        )
+        page = import_polepage_qmd(qmd)
+        self.assertIsNotNone(page.pk)
+        self.assertEqual(page.slug, "nouveau-pole")
+        self.assertEqual(page.accent, "gold")
+        self.assertEqual(page.get_parent().specific, home.specific)
 
     def test_import_without_explicit_cards_wrapper_is_still_accepted(self):
         # _import_cards est permissif : un fichier .qmd écrit à la main sans le
@@ -335,6 +347,90 @@ Un texte.
         cards = list(imported.cards)
         self.assertEqual(len(cards), 1)
         self.assertEqual(cards[0].value["title"], "Carte solitaire")
+
+
+class ProjectPageQmdRoundTripTests(TestCase):
+    """Aller-retour .qmd de cms.ProjectPage.body (card/testimonial/gallery/documents) —
+    voir cms/qmd.py::_export_project_body/_import_project_body."""
+
+    def setUp(self):
+        from wagtail.documents.models import Document
+        from wagtail.images.models import Image
+
+        self.fr = Locale.objects.get(language_code="fr")
+        self.pole = PolePage.objects.filter(locale=self.fr).first()
+        self.image = Image.objects.create(title="Photo", file=ImageFile(BytesIO(_PNG_1X1), name="photo.png"))
+        self.document = Document.objects.create(title="Compte-rendu", file=ContentFile(b"contenu", name="cr.pdf"))
+        self.page = ProjectPage(
+            title="Projet de test", slug="projet-de-test", lead="Un chapeau", location="Paris",
+            body=[
+                {"type": "card", "value": {"title": "Une carte", "text": "<p>Texte de la carte.</p>"}},
+                {"type": "testimonial", "value": {"quote": "Superbe évènement.", "author": "Jean Dupont"}},
+                {"type": "gallery", "value": {"caption": "La galerie", "images": [self.image.pk]}},
+                {"type": "documents", "value": [
+                    {"label": "Compte-rendu", "document": self.document.pk},
+                    {"label": "Sans document", "document": None},
+                ]},
+            ],
+        )
+        self.pole.add_child(instance=self.page)
+        self.page.save_revision().publish()
+
+    def test_export_matches_the_documented_syntax(self):
+        qmd = export_projectpage_qmd(self.page)
+        self.assertIn(f"key: {self.page.translation_key}", qmd)
+        self.assertIn(f"pole: {self.pole.slug}", qmd)
+        self.assertIn(":::::: {.card}", qmd)
+        self.assertIn("[Une carte]{.title}", qmd)
+        self.assertIn(":::::: {.testimonial}", qmd)
+        self.assertIn("[Jean Dupont]{.author}", qmd)
+        self.assertIn("Superbe évènement.", qmd)
+        self.assertIn(":::::: {.gallery}", qmd)
+        self.assertIn("[La galerie]{.caption}", qmd)
+        self.assertIn(f'"wagtail-image:{self.image.pk}"', qmd)
+        self.assertIn(":::::: {.documents}", qmd)
+        self.assertIn(f'"wagtail-document:{self.document.pk}"', qmd)
+        self.assertIn("- Sans document", qmd)
+
+    def test_export_then_import_round_trips_every_block_type(self):
+        qmd = export_projectpage_qmd(self.page)
+        imported = import_projectpage_qmd(qmd)
+
+        self.assertEqual(imported.pk, self.page.pk)
+        blocks = list(imported.body)
+        self.assertEqual([b.block_type for b in blocks], ["card", "testimonial", "gallery", "documents"])
+
+        self.assertEqual(blocks[0].value["title"], "Une carte")
+        self.assertIn("Texte de la carte", str(blocks[0].value["text"]))
+
+        self.assertEqual(blocks[1].value["quote"], "Superbe évènement.")
+        self.assertEqual(blocks[1].value["author"], "Jean Dupont")
+
+        self.assertEqual(blocks[2].value["caption"], "La galerie")
+        gallery_images = list(blocks[2].value["images"])
+        self.assertEqual(len(gallery_images), 1)
+        self.assertEqual(gallery_images[0].pk, self.image.pk)
+
+        documents = list(blocks[3].value)
+        self.assertEqual(documents[0]["label"], "Compte-rendu")
+        self.assertEqual(documents[0]["document"].pk, self.document.pk)
+        self.assertEqual(documents[1]["label"], "Sans document")
+        self.assertIsNone(documents[1]["document"])
+
+    def test_import_with_unknown_key_creates_a_new_project_under_the_declared_pole(self):
+        qmd = (
+            "---\n"
+            "title: Nouveau projet\n"
+            "lang: fr\n"
+            f"pole: {self.pole.slug}\n"
+            "slug: nouveau-projet\n"
+            "---\n\n"
+            ":::::: {.testimonial}\n\nUn témoignage.\n\n::::::\n"
+        )
+        page = import_projectpage_qmd(qmd)
+        self.assertIsNotNone(page.pk)
+        self.assertEqual(page.slug, "nouveau-projet")
+        self.assertEqual(page.get_parent().specific, self.pole)
 
 
 class QmdAdminViewsTests(TestCase):

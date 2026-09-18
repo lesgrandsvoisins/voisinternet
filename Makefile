@@ -13,7 +13,7 @@ LOADENV = export $$(grep -v '^\#' .env 2>/dev/null | xargs -d '\n');
         run test shell messages compilemessages collectstatic clean \
         fixtures-load fixtures-dump cms-load cms-dump blog-import qmd-export qmd-import \
         event-qmd-export event-qmd-import standard-qmd-export standard-qmd-import \
-        pole-qmd-export pole-qmd-import
+        pole-qmd-export pole-qmd-import project-qmd-export project-qmd-import
 
 help: ## Affiche cette aide
 	@grep -E '^[a-zA-Z_-]+:.*## ' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'
@@ -96,11 +96,17 @@ standard-qmd-export: ## Exporte une page générique en .qmd : make standard-qmd
 standard-qmd-import: ## Importe/met à jour une page générique depuis un .qmd : make standard-qmd-import FILE=ma-page.qmd
 	$(LOADENV) $(PYTHON) manage.py import_standard_qmd $(FILE)
 
-pole-qmd-export: ## Exporte les cartes d'un pôle en .qmd : make pole-qmd-export SLUG=civisme [LANG=fr] [OUT=chemin.qmd]
+pole-qmd-export: ## Exporte un pôle en .qmd : make pole-qmd-export SLUG=civisme [LANG=fr] [OUT=chemin.qmd]
 	$(LOADENV) $(PYTHON) manage.py export_pole_qmd $(SLUG) --lang=$(or $(LANG),fr) $(if $(OUT),--out=$(OUT))
 
-pole-qmd-import: ## Met à jour les cartes d'un pôle depuis un .qmd : make pole-qmd-import FILE=civisme-cartes.qmd
+pole-qmd-import: ## Importe/met à jour un pôle depuis un .qmd : make pole-qmd-import FILE=civisme.qmd
 	$(LOADENV) $(PYTHON) manage.py import_pole_qmd $(FILE)
+
+project-qmd-export: ## Exporte un projet en .qmd : make project-qmd-export SLUG=mon-projet [LANG=fr] [OUT=chemin.qmd]
+	$(LOADENV) $(PYTHON) manage.py export_project_qmd $(SLUG) --lang=$(or $(LANG),fr) $(if $(OUT),--out=$(OUT))
+
+project-qmd-import: ## Importe/met à jour un projet depuis un .qmd : make project-qmd-import FILE=mon-projet.qmd
+	$(LOADENV) $(PYTHON) manage.py import_project_qmd $(FILE)
 
 superuser: ## Crée un compte administrateur
 	$(LOADENV) $(PYTHON) manage.py createsuperuser

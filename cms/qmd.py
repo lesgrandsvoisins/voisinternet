@@ -66,7 +66,7 @@ from wagtail.models import Locale, Page, Site
 
 from core.templatetags.markdown_filters import markdown_filter
 
-from .models import BlogIndexPage, BlogPostPage, ContentPage, HomePage, PolePage, StandardPage
+from .models import BlogIndexPage, BlogPostPage, ContentPage, HomePage, PolePage, ProjectPage, StandardPage
 
 FRONTMATTER_RE = re.compile(r"\A---\s*\n(.*?\n)---\s*\n?(.*)\Z", re.DOTALL)
 PAGEBREAK_SHORTCODE = "{{< pagebreak >}}"
@@ -1080,15 +1080,39 @@ _CARD_TITLE_SPAN_RE = re.compile(r'^\[(.+)\]\{\.title\}$')
 _CARD_TEXT_CLASS_RE = re.compile(r'^\.text$')
 
 
+def _export_card_content(card_value, media_files, text_colons):
+    """Le contenu d'un div ::: {.card} (hors du fence lui-même, laissé à l'appelant —
+    cms.PolePage.cards l'imbrique dans ::: {.cards}, cms.ProjectPage.body l'utilise à
+    la racine) : titre en span Pandoc, texte enrichi en div ::: {.text} imbriqué à
+    text_colons deux-points (un de moins que le fence .card, choisi par l'appelant
+    selon sa propre profondeur — voir _fence_div)."""
+    converter = _HTMLToMarkdown(media_files=media_files)
+    converter.feed(card_value["text"].source)
+    text_div = _fence_div(".text", converter.result(), colons=text_colons)
+    return f'[{card_value["title"]}]{{.title}}\n\n{text_div}'
+
+
+def _extract_card_value(card_node, to_html):
+    """L'inverse de _export_card_content : reconstruit {"title": …, "text": …} à
+    partir des enfants déjà parsés (_parse_divs) d'un div ::: {.card}."""
+    title = ""
+    text_html = ""
+    for child in card_node["children"]:
+        if child["type"] == "prose":
+            title_match = _CARD_TITLE_SPAN_RE.match("\n".join(child["lines"]).strip())
+            if title_match:
+                title = title_match.group(1)
+        elif child["type"] == "div" and _CARD_TEXT_CLASS_RE.match(child["attrs"]):
+            text_html = to_html("\n".join(line for c in child["children"] for line in c["lines"]))
+    return {"title": title, "text": text_html}
+
+
 def _export_cards(cards, media_files=None):
     """Sérialise un StreamField de CardBlock en un div ::: {.cards} (voir les regex
     ci-dessus pour la convention de syntaxe, _import_cards pour l'aller-retour)."""
     card_parts = []
     for block in cards:
-        converter = _HTMLToMarkdown(media_files=media_files)
-        converter.feed(block.value["text"].source)
-        text_div = _fence_div(".text", converter.result(), colons=_TOP_LEVEL_COLONS - 2)
-        card_content = f'[{block.value["title"]}]{{.title}}\n\n{text_div}'
+        card_content = _export_card_content(block.value, media_files, text_colons=_TOP_LEVEL_COLONS - 2)
         card_parts.append(_fence_div(".card", card_content, colons=_TOP_LEVEL_COLONS - 1))
     cards_md = "\n".join(card_parts).strip()
     return _fence_div(".cards", cards_md, colons=_TOP_LEVEL_COLONS)
@@ -1110,16 +1134,7 @@ def _import_cards(body_md, to_html):
     for node in cards_children:
         if node["type"] != "div" or not _CARD_CLASS_RE.match(node["attrs"]):
             continue
-        title = ""
-        text_html = ""
-        for child in node["children"]:
-            if child["type"] == "prose":
-                title_match = _CARD_TITLE_SPAN_RE.match("\n".join(child["lines"]).strip())
-                if title_match:
-                    title = title_match.group(1)
-            elif child["type"] == "div" and _CARD_TEXT_CLASS_RE.match(child["attrs"]):
-                text_html = to_html("\n".join(line for c in child["children"] for line in c["lines"]))
-        result.append({"type": "card", "value": {"title": title, "text": text_html}})
+        result.append({"type": "card", "value": _extract_card_value(node, to_html)})
     return result
 
 
@@ -1200,6 +1215,261 @@ def import_polepage_qmd(text):
         if home is None:
             raise ValueError(f"Aucune HomePage en langue « {lang} » pour y rattacher le pôle.")
         home.add_child(instance=page)
+    page.save_revision().publish()
+
+    tags = front.get("tags") or []
+    if tags:
+        from core.models import Tag
+
+        page.tags.set([Tag.objects.get_or_create(name=t, defaults={"slug": slugify(t)})[0] for t in tags])
+
+    return page
+
+
+# cms.ProjectPage.body mélange 4 types de bloc (card/testimonial/gallery/documents,
+# cms/models.py) — chacun devient son propre div de premier niveau (comme "prose"/
+# "callout"/"pull" pour cms.ContentPage.body, _export_body_parts), à _TOP_LEVEL_COLONS
+# deux-points. .card réutilise _export_card_content/_extract_card_value ci-dessus, à
+# une profondeur de un (son propre fence est déjà au niveau racine, colons du .text
+# imbriqué = _TOP_LEVEL_COLONS - 1). .testimonial (TestimonialBlock) : auteur·ice en
+# span Pandoc ([texte]{.author}, même raison que CardBlock.title — CharBlock, pas de
+# texte enrichi), citation en texte brut (TestimonialBlock.quote est un TextBlock —
+# affiché tel quel dans le gabarit, jamais passé par |richtext, donc jamais converti
+# Markdown<->HTML ici non plus). .gallery (ProjectGalleryBlock) : légende en span
+# ([texte]{.caption}), une image par ligne en syntaxe Markdown standard, avec le même
+# marqueur wagtail-image:ID que le texte enrichi (_restore_wagtail_embeds) pour
+# reconnaître l'image à l'import — sans lui, la ligne est ignorée (image déjà
+# supprimée ou ajoutée à la main, non reconstructible). .documents (ListBlock de
+# TransparencyDocumentBlock) : une liste à puces, un marqueur wagtail-document:ID par
+# lien, ou l'intitulé seul si aucun document n'est encore attaché.
+_TESTIMONIAL_CLASS_RE = re.compile(r'^\.testimonial$')
+_TESTIMONIAL_AUTHOR_SPAN_RE = re.compile(r'^\[(.+)\]\{\.author\}$')
+_GALLERY_CLASS_RE = re.compile(r'^\.gallery$')
+_GALLERY_CAPTION_SPAN_RE = re.compile(r'^\[(.+)\]\{\.caption\}$')
+_GALLERY_IMAGE_LINE_RE = re.compile(r'^!\[[^\]]*\]\(([^ )]+)(?:\s+"wagtail-image:(\d+)")?\)$')
+_DOCUMENTS_CLASS_RE = re.compile(r'^\.documents$')
+_DOCUMENT_ITEM_RE = re.compile(r'^-\s+\[(.+)\]\(([^ )]+)(?:\s+"wagtail-document:(\d+)")?\)\s*$')
+_DOCUMENT_LABEL_ONLY_RE = re.compile(r'^-\s+(.+)$')
+
+
+def _export_testimonial(value):
+    parts = []
+    if value.get("author"):
+        parts.append(f'[{value["author"]}]{{.author}}')
+    if value.get("quote"):
+        parts.append(value["quote"])
+    return "\n\n".join(parts)
+
+
+def _extract_testimonial(node):
+    quote_lines = []
+    author = ""
+    for child in node["children"]:
+        if child["type"] != "prose":
+            continue
+        for line in child["lines"]:
+            stripped = line.strip()
+            author_match = _TESTIMONIAL_AUTHOR_SPAN_RE.match(stripped)
+            if author_match:
+                author = author_match.group(1)
+            elif stripped:
+                quote_lines.append(line)
+    return {"quote": "\n".join(quote_lines).strip(), "author": author}
+
+
+def _export_gallery(value, media_files=None):
+    parts = []
+    if value.get("caption"):
+        parts.append(f'[{value["caption"]}]{{.caption}}')
+    lines = []
+    for image in value["images"]:
+        if media_files is not None:
+            url = _collect_image_file(image.pk, media_files) or ""
+        else:
+            url = _absolute_url(image.get_rendition("width-1600").url)
+        lines.append(f'![]({url} "wagtail-image:{image.pk}")')
+    if lines:
+        parts.append("\n".join(lines))
+    return "\n\n".join(parts)
+
+
+def _extract_gallery(node):
+    caption = ""
+    image_ids = []
+    for child in node["children"]:
+        if child["type"] != "prose":
+            continue
+        for line in child["lines"]:
+            stripped = line.strip()
+            if not stripped:
+                continue
+            caption_match = _GALLERY_CAPTION_SPAN_RE.match(stripped)
+            if caption_match:
+                caption = caption_match.group(1)
+                continue
+            image_match = _GALLERY_IMAGE_LINE_RE.match(stripped)
+            if image_match and image_match.group(2):
+                image_ids.append(int(image_match.group(2)))
+    return {"caption": caption, "images": image_ids}
+
+
+def _export_documents(items, media_files=None):
+    lines = []
+    for item in items:
+        label, document = item["label"], item.get("document")
+        if document is None:
+            lines.append(f"- {label}")
+            continue
+        if media_files is not None:
+            url = _collect_document_file(document.pk, media_files) or ""
+        else:
+            url = _absolute_url(document.url)
+        lines.append(f'- [{label}]({url} "wagtail-document:{document.pk}")')
+    return "\n".join(lines)
+
+
+def _extract_documents(node):
+    result = []
+    for child in node["children"]:
+        if child["type"] != "prose":
+            continue
+        for line in child["lines"]:
+            stripped = line.strip()
+            if not stripped:
+                continue
+            item_match = _DOCUMENT_ITEM_RE.match(stripped)
+            if item_match:
+                doc_id = int(item_match.group(3)) if item_match.group(3) else None
+                result.append({"label": item_match.group(1), "document": doc_id})
+                continue
+            label_match = _DOCUMENT_LABEL_ONLY_RE.match(stripped)
+            if label_match:
+                result.append({"label": label_match.group(1), "document": None})
+    return result
+
+
+def _export_project_body(body, media_files=None):
+    """Sérialise cms.ProjectPage.body (voir le commentaire au-dessus des regex pour la
+    correspondance bloc/div) — chaque bloc devient son propre div de premier niveau,
+    comme _export_body_parts pour cms.ContentPage.body."""
+    parts = []
+    for block in body:
+        if block.block_type == "card":
+            content = _export_card_content(block.value, media_files, text_colons=_TOP_LEVEL_COLONS - 1)
+            parts.append(_fence_div(".card", content, colons=_TOP_LEVEL_COLONS))
+        elif block.block_type == "testimonial":
+            parts.append(_fence_div(".testimonial", _export_testimonial(block.value), colons=_TOP_LEVEL_COLONS))
+        elif block.block_type == "gallery":
+            parts.append(_fence_div(".gallery", _export_gallery(block.value, media_files), colons=_TOP_LEVEL_COLONS))
+        elif block.block_type == "documents":
+            parts.append(
+                _fence_div(".documents", _export_documents(block.value, media_files), colons=_TOP_LEVEL_COLONS)
+            )
+    return "\n".join(parts).strip() + "\n"
+
+
+def _import_project_body(body_md, to_html):
+    """L'inverse de _export_project_body : reconstruit la liste de blocs
+    (prête pour l'affectation à cms.ProjectPage.body) à partir des divs de premier
+    niveau du texte .qmd. Un div de classe non reconnue est simplement ignoré (pas de
+    GenericBlock ici : contrairement à cms.ContentPage, ProjectPage.body a un jeu de
+    blocs fixe, sans équivalent générique)."""
+    nodes, _ = _parse_divs(body_md.split("\n"))
+    result = []
+    for node in nodes:
+        if node["type"] != "div":
+            continue
+        if _CARD_CLASS_RE.match(node["attrs"]):
+            result.append({"type": "card", "value": _extract_card_value(node, to_html)})
+        elif _TESTIMONIAL_CLASS_RE.match(node["attrs"]):
+            result.append({"type": "testimonial", "value": _extract_testimonial(node)})
+        elif _GALLERY_CLASS_RE.match(node["attrs"]):
+            result.append({"type": "gallery", "value": _extract_gallery(node)})
+        elif _DOCUMENTS_CLASS_RE.match(node["attrs"]):
+            result.append({"type": "documents", "value": _extract_documents(node)})
+    return result
+
+
+def export_projectpage_qmd(page, media_files=None):
+    """
+    Sérialise une cms.ProjectPage (une langue) en texte .qmd — même schéma
+    d'identification (key/lang) et même convention "pole" (slug de la cms.PolePage
+    parente) qu'export_contentpage_qmd, puisque ProjectPage a le même
+    parent_page_types. Le corps (body) est sérialisé par _export_project_body.
+    """
+    body_md = _export_project_body(page.body, media_files=media_files)
+    front = {
+        "title": page.title,
+        "key": str(page.translation_key),
+        "lang": page.locale.language_code,
+        "pole": page.get_parent().slug,
+        "slug": page.slug,
+        "lead": page.lead,
+        "url": page.full_url,
+    }
+    if page.date_start:
+        front["date_start"] = page.date_start.isoformat()
+    if page.date_end:
+        front["date_end"] = page.date_end.isoformat()
+    if page.location:
+        front["location"] = page.location
+    if page.tags.exists():
+        front["tags"] = list(page.tags.order_by("name").values_list("name", flat=True))
+    if page.featured_image_id:
+        if media_files is not None:
+            front["featured_image"] = _collect_image_file(page.featured_image_id, media_files)
+        else:
+            front["featured_image"] = _absolute_url(page.featured_image.get_rendition("width-1600").url)
+
+    frontmatter = yaml.safe_dump(front, allow_unicode=True, sort_keys=False, default_flow_style=False)
+    return f"---\n{frontmatter}---\n\n{body_md}"
+
+
+def import_projectpage_qmd(text):
+    """
+    Crée ou met à jour une cms.ProjectPage à partir d'un texte .qmd — même logique
+    d'identification (translation_key + lang) et de rattachement par pôle
+    (frontmatter "pole") qu'import_contentpage_qmd.
+    """
+    match = FRONTMATTER_RE.match(text)
+    if not match:
+        raise ValueError("Frontmatter YAML manquant (le fichier doit commencer par ---).")
+    front = yaml.safe_load(match.group(1)) or {}
+    body_md = match.group(2)
+
+    lang = front.get("lang") or "fr"
+    locale = Locale.objects.get(language_code=lang)
+    key = front.get("key")
+
+    page = ProjectPage.objects.filter(translation_key=key, locale=locale).first() if key else None
+    if page is None:
+        sibling = (
+            ProjectPage.objects.filter(translation_key=key).exclude(locale=locale).first() if key else None
+        )
+        page = sibling.copy_for_translation(locale, copy_parents=True) if sibling else ProjectPage(locale=locale)
+        if key and not page.pk:
+            page.translation_key = key
+
+    page.title = front.get("title") or page.title or front.get("slug") or ""
+    page.slug = front.get("slug") or slugify(page.title)
+    page.lead = front.get("lead") or ""
+    page.date_start = _parse_date(front["date_start"]) if front.get("date_start") else None
+    page.date_end = _parse_date(front["date_end"]) if front.get("date_end") else None
+    page.location = front.get("location") or ""
+
+    def to_html(markdown_text):
+        return _self_close_void_tags(_restore_wagtail_embeds(markdown_filter(markdown_text)))
+
+    page.body = _import_project_body(body_md, to_html)
+
+    is_new = page.pk is None
+    if is_new:
+        poles = PolePage.objects.filter(locale=locale)
+        pole_slug = front.get("pole")
+        pole = poles.filter(slug=pole_slug).first() if pole_slug else poles.first()
+        if pole is None:
+            raise ValueError(f"Aucune PolePage en langue « {lang} » pour y rattacher le projet.")
+        pole.add_child(instance=page)
     page.save_revision().publish()
 
     tags = front.get("tags") or []

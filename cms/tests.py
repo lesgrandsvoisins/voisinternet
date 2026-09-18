@@ -10,9 +10,10 @@ from django.urls import reverse
 from django.utils import timezone
 from wagtail.models import Locale
 
-from .models import Author, BlogIndexPage, BlogPostPage, HomePage, StandardPage
+from .models import Author, BlogIndexPage, BlogPostPage, HomePage, PolePage, StandardPage
 from .qmd import (
-    export_blogpost_qmd, export_standardpage_qmd, import_blogpost_qmd, import_standardpage_qmd,
+    export_blogpost_qmd, export_polepage_qmd, export_standardpage_qmd, import_blogpost_qmd, import_polepage_qmd,
+    import_standardpage_qmd,
 )
 
 # PNG 1x1 valide (Wagtail traite réellement le fichier — génère des renditions — donc un
@@ -262,6 +263,78 @@ class StandardPageQmdRoundTripTests(TestCase):
         reimported = import_standardpage_qmd(qmd)
         self.assertEqual(reimported.pk, child.pk)
         self.assertEqual(reimported.get_parent().specific, self.page)
+
+
+class PolePageCardsQmdRoundTripTests(TestCase):
+    """Aller-retour .qmd des cartes (cms.PolePage.cards, CardBlock) — voir
+    cms/qmd.py::_export_cards/_import_cards. Titre en span Pandoc ([texte]{.title} —
+    CardBlock.title est un CharBlock, pas du texte enrichi comme .text)."""
+
+    def setUp(self):
+        self.fr = Locale.objects.get(language_code="fr")
+        self.pole = PolePage.objects.filter(locale=self.fr).first()
+        self.pole.cards = [
+            {"type": "card", "value": {
+                "title": "Prix Alger Hiss pour excellence en service public",
+                "text": '<p>Voir <a href="https://example.org">ici</a>.</p>',
+            }},
+            {"type": "card", "value": {"title": "Deuxième carte", "text": "<p>Un <strong>texte</strong> simple.</p>"}},
+        ]
+        self.pole.save_revision().publish()
+
+    def test_export_matches_the_documented_syntax(self):
+        qmd = export_polepage_qmd(self.pole)
+        self.assertIn(f"key: {self.pole.translation_key}", qmd)
+        self.assertIn(":::::: {.cards}", qmd)
+        self.assertIn("::::: {.card}", qmd)
+        self.assertIn("[Prix Alger Hiss pour excellence en service public]{.title}", qmd)
+        self.assertIn(":::: {.text}", qmd)
+        self.assertIn("Voir [ici](https://example.org).", qmd)
+
+    def test_export_then_import_round_trips_both_cards(self):
+        qmd = export_polepage_qmd(self.pole)
+        imported = import_polepage_qmd(qmd)
+
+        self.assertEqual(imported.pk, self.pole.pk)
+        cards = list(imported.cards)
+        self.assertEqual(len(cards), 2)
+        self.assertEqual(cards[0].value["title"], "Prix Alger Hiss pour excellence en service public")
+        self.assertIn('href="https://example.org"', str(cards[0].value["text"]))
+        self.assertEqual(cards[1].value["title"], "Deuxième carte")
+        self.assertIn("<strong>texte</strong>", str(cards[1].value["text"]))
+
+    def test_import_without_key_is_refused(self):
+        # Contrairement à StandardPage/ContentPage/le blog, import_polepage_qmd ne crée
+        # jamais de nouveau pôle (couleur/icône/étiquette Ghost hors de portée de ce
+        # round-trip, voir sa docstring) : sans clé correspondant à un pôle existant,
+        # l'import doit échouer proprement plutôt que de deviner une page au hasard.
+        with self.assertRaises(ValueError):
+            import_polepage_qmd("---\ntitle: Inconnu\nlang: fr\n---\n\n:::::: {.cards}\n::::::\n")
+
+    def test_import_without_explicit_cards_wrapper_is_still_accepted(self):
+        # _import_cards est permissif : un fichier .qmd écrit à la main sans le
+        # ::: {.cards} englobant reste accepté (cartes de premier niveau directement).
+        qmd = f"""---
+key: {self.pole.translation_key}
+lang: fr
+---
+
+::::: {{.card}}
+
+[Carte solitaire]{{.title}}
+
+:::: {{.text}}
+
+Un texte.
+
+::::
+
+:::::
+"""
+        imported = import_polepage_qmd(qmd)
+        cards = list(imported.cards)
+        self.assertEqual(len(cards), 1)
+        self.assertEqual(cards[0].value["title"], "Carte solitaire")
 
 
 class QmdAdminViewsTests(TestCase):

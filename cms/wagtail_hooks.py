@@ -24,10 +24,10 @@ from wagtail.admin.rich_text.converters.html_to_contentstate import (
 )
 from wagtail.admin.rich_text.editors.draftail import features as draftail_features
 
-from .models import BlogIndexPage, BlogPostPage, ContentPage, StandardPage
+from .models import BlogIndexPage, BlogPostPage, ContentPage, PolePage, StandardPage
 from .qmd import (
-    export_blog_zip, export_blogpost_qmd, export_contentpage_qmd, export_standardpage_qmd, import_blogpost_qmd,
-    import_contentpage_qmd, import_standardpage_qmd,
+    export_blog_zip, export_blogpost_qmd, export_contentpage_qmd, export_polepage_qmd, export_standardpage_qmd,
+    import_blogpost_qmd, import_contentpage_qmd, import_polepage_qmd, import_standardpage_qmd,
 )
 
 
@@ -205,6 +205,15 @@ def qmd_header_buttons(page, user, view_name, next_url=None):
         yield wagtailadmin_widgets.Button(
             _("Importer .qmd"), reverse("standard_qmd_import", args=[specific.pk]), icon_name="upload", priority=71,
         )
+    elif isinstance(specific, PolePage):
+        yield wagtailadmin_widgets.Button(
+            _("Exporter les cartes (.qmd)"), reverse("pole_qmd_export", args=[specific.pk]),
+            icon_name="download", priority=70,
+        )
+        yield wagtailadmin_widgets.Button(
+            _("Importer les cartes (.qmd)"), reverse("pole_qmd_import", args=[specific.pk]),
+            icon_name="upload", priority=71,
+        )
 
 
 @hooks.register("register_page_listing_more_buttons")
@@ -238,6 +247,15 @@ def qmd_listing_more_buttons(page, user, next_url=None):
         )
         yield wagtailadmin_widgets.Button(
             _("Importer .qmd"), reverse("standard_qmd_import", args=[specific.pk]), icon_name="upload", priority=71,
+        )
+    elif isinstance(specific, PolePage):
+        yield wagtailadmin_widgets.Button(
+            _("Exporter les cartes (.qmd)"), reverse("pole_qmd_export", args=[specific.pk]),
+            icon_name="download", priority=70,
+        )
+        yield wagtailadmin_widgets.Button(
+            _("Importer les cartes (.qmd)"), reverse("pole_qmd_import", args=[specific.pk]),
+            icon_name="upload", priority=71,
         )
 
 
@@ -372,6 +390,38 @@ def standard_qmd_import_view(request, pk):
     return render(request, "cms/admin/qmd_import.html", {"page": page, "view_title": _("Importer un .qmd")})
 
 
+def pole_qmd_export_view(request, pk):
+    if not _can_manage_qmd(request.user):
+        raise PermissionDenied
+    page = get_object_or_404(PolePage, pk=pk)
+    response = HttpResponse(export_polepage_qmd(page), content_type="text/markdown; charset=utf-8")
+    response["Content-Disposition"] = f'attachment; filename="{page.slug}-cartes.qmd"'
+    return response
+
+
+def pole_qmd_import_view(request, pk):
+    if not _can_manage_qmd(request.user):
+        raise PermissionDenied
+    page = get_object_or_404(PolePage, pk=pk)
+
+    if request.method == "POST":
+        uploaded = request.FILES.get("qmd_file")
+        if not uploaded:
+            messages.error(request, _("Choisissez un fichier .qmd à importer."))
+        else:
+            try:
+                imported = import_polepage_qmd(uploaded.read().decode("utf-8"))
+            except Exception as exc:
+                # Fichier fourni par la personne (contenu non fiable) : toute erreur de
+                # lecture doit rester un message, jamais une page 500.
+                messages.error(request, _("Échec de l'import : %(error)s") % {"error": exc})
+            else:
+                messages.success(request, _("Cartes mises à jour depuis le fichier .qmd."))
+                return redirect("wagtailadmin_pages:edit", imported.pk)
+
+    return render(request, "cms/admin/qmd_import.html", {"page": page, "view_title": _("Importer un .qmd")})
+
+
 @hooks.register("register_admin_urls")
 def register_qmd_admin_urls():
     return [
@@ -382,4 +432,6 @@ def register_qmd_admin_urls():
         path("content-qmd/<int:pk>/import/", content_qmd_import_view, name="content_qmd_import"),
         path("standard-qmd/<int:pk>/export/", standard_qmd_export_view, name="standard_qmd_export"),
         path("standard-qmd/<int:pk>/import/", standard_qmd_import_view, name="standard_qmd_import"),
+        path("pole-qmd/<int:pk>/export/", pole_qmd_export_view, name="pole_qmd_export"),
+        path("pole-qmd/<int:pk>/import/", pole_qmd_import_view, name="pole_qmd_import"),
     ]

@@ -103,10 +103,7 @@ def remove_pole_pages(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        # Voir cms/migrations/0032_polepage_legacy_meta_early.py : cette migration
-        # utilise le modèle PolePage courant (from cms.models import) avant sa place
-        # chronologique réelle dans l'historique.
-        ("cms", "0032_polepage_legacy_meta_early"),
+        ("cms", "0005_polepage"),
     ]
 
     operations = [

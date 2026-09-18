@@ -272,9 +272,15 @@ class PolePage(Page):
     # interne) : distinct de ghost_tag ci-dessus, qui ne concerne que l'ancien blog Ghost.
     tags = models.ManyToManyField("core.Tag", blank=True, related_name="poles", verbose_name=_("étiquettes"))
     cards = StreamField([("card", CardBlock())], blank=True)
-    # Passe-plat pour les métadonnées de frontmatter .qmd non reconnues (clé "legacy",
-    # voir cms/qmd.py et sa docstring sur cms.StandardPage.legacy_meta).
-    legacy_meta = models.JSONField(blank=True, default=dict, editable=False)
+    # Pas de legacy_meta ici (contrairement à BlogPostPage/ContentPage/StandardPage,
+    # voir cms/qmd.py et sa docstring sur cms.StandardPage.legacy_meta) : d'anciennes
+    # migrations de données (0006, 0017, 0019) importent PolePage/ProjectPage via le
+    # modèle courant (from cms.models import) pour manipuler de vraies pages Wagtail
+    # (add_child, save_revision — indisponibles sur un modèle historique), et une base
+    # migrée depuis zéro échoue si le modèle courant déclare un champ que la table n'a
+    # pas encore à ce point de l'historique. Ajouter ce champ ici demanderait de
+    # réécrire ces migrations (ex. en SQL brut) plutôt qu'un simple ajout de champ —
+    # hors de portée de cette fonctionnalité.
 
     content_panels = Page.content_panels + [
         FieldPanel("lead"),
@@ -347,9 +353,8 @@ class ProjectPage(Page):
         ],
         blank=True,
     )
-    # Passe-plat pour les métadonnées de frontmatter .qmd non reconnues (clé "legacy",
-    # voir cms/qmd.py et sa docstring sur cms.StandardPage.legacy_meta).
-    legacy_meta = models.JSONField(blank=True, default=dict, editable=False)
+    # Pas de legacy_meta ici — voir le commentaire équivalent sur cms.PolePage
+    # (0019_pole_cards_to_projects crée de vraies ProjectPage via le modèle courant).
 
     content_panels = Page.content_panels + [
         FieldPanel("lead"),

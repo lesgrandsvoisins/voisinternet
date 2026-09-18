@@ -1195,7 +1195,6 @@ def export_polepage_qmd(page, media_files=None):
             front["icon"] = _collect_image_file(page.icon_id, media_files)
         else:
             front["icon"] = _absolute_url(page.icon.get_rendition("width-400").url)
-    _export_legacy_meta(front, page)
     frontmatter = yaml.safe_dump(front, allow_unicode=True, sort_keys=False, default_flow_style=False)
     return f"---\n{frontmatter}---\n\n{body_md}"
 
@@ -1239,7 +1238,6 @@ def import_polepage_qmd(text):
         return _self_close_void_tags(_restore_wagtail_embeds(markdown_filter(markdown_text)))
 
     page.cards = _import_cards(body_md, to_html)
-    page.legacy_meta = _import_legacy_meta(front)
 
     is_new = page.pk is None
     if is_new:
@@ -1452,7 +1450,6 @@ def export_projectpage_qmd(page, media_files=None):
             front["featured_image"] = _collect_image_file(page.featured_image_id, media_files)
         else:
             front["featured_image"] = _absolute_url(page.featured_image.get_rendition("width-1600").url)
-    _export_legacy_meta(front, page)
 
     frontmatter = yaml.safe_dump(front, allow_unicode=True, sort_keys=False, default_flow_style=False)
     return f"---\n{frontmatter}---\n\n{body_md}"
@@ -1494,7 +1491,6 @@ def import_projectpage_qmd(text):
         return _self_close_void_tags(_restore_wagtail_embeds(markdown_filter(markdown_text)))
 
     page.body = _import_project_body(body_md, to_html)
-    page.legacy_meta = _import_legacy_meta(front)
 
     is_new = page.pk is None
     if is_new:

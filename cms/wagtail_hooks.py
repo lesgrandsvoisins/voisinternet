@@ -207,11 +207,11 @@ def qmd_header_buttons(page, user, view_name, next_url=None):
         )
     elif isinstance(specific, PolePage):
         yield wagtailadmin_widgets.Button(
-            _("Exporter les cartes (.qmd)"), reverse("pole_qmd_export", args=[specific.pk]),
+            _("Exporter .qmd"), reverse("pole_qmd_export", args=[specific.pk]),
             icon_name="download", priority=70,
         )
         yield wagtailadmin_widgets.Button(
-            _("Importer les cartes (.qmd)"), reverse("pole_qmd_import", args=[specific.pk]),
+            _("Importer .qmd"), reverse("pole_qmd_import", args=[specific.pk]),
             icon_name="upload", priority=71,
         )
 
@@ -250,11 +250,11 @@ def qmd_listing_more_buttons(page, user, next_url=None):
         )
     elif isinstance(specific, PolePage):
         yield wagtailadmin_widgets.Button(
-            _("Exporter les cartes (.qmd)"), reverse("pole_qmd_export", args=[specific.pk]),
+            _("Exporter .qmd"), reverse("pole_qmd_export", args=[specific.pk]),
             icon_name="download", priority=70,
         )
         yield wagtailadmin_widgets.Button(
-            _("Importer les cartes (.qmd)"), reverse("pole_qmd_import", args=[specific.pk]),
+            _("Importer .qmd"), reverse("pole_qmd_import", args=[specific.pk]),
             icon_name="upload", priority=71,
         )
 
@@ -395,7 +395,7 @@ def pole_qmd_export_view(request, pk):
         raise PermissionDenied
     page = get_object_or_404(PolePage, pk=pk)
     response = HttpResponse(export_polepage_qmd(page), content_type="text/markdown; charset=utf-8")
-    response["Content-Disposition"] = f'attachment; filename="{page.slug}-cartes.qmd"'
+    response["Content-Disposition"] = f'attachment; filename="{page.slug}.qmd"'
     return response
 
 
@@ -416,7 +416,16 @@ def pole_qmd_import_view(request, pk):
                 # lecture doit rester un message, jamais une page 500.
                 messages.error(request, _("Échec de l'import : %(error)s") % {"error": exc})
             else:
-                messages.success(request, _("Cartes mises à jour depuis le fichier .qmd."))
+                if imported.pk == page.pk:
+                    messages.success(request, _("Page mise à jour depuis le fichier .qmd."))
+                else:
+                    messages.warning(
+                        request,
+                        _(
+                            "Le fichier .qmd portait la clé d'un autre pôle : « %(title)s » a été "
+                            "créé ou mis à jour à la place de celui-ci."
+                        ) % {"title": imported.title},
+                    )
                 return redirect("wagtailadmin_pages:edit", imported.pk)
 
     return render(request, "cms/admin/qmd_import.html", {"page": page, "view_title": _("Importer un .qmd")})

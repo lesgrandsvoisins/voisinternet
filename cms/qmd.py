@@ -66,7 +66,7 @@ from wagtail.models import Locale, Page, Site
 
 from core.templatetags.markdown_filters import markdown_filter
 
-from .models import BlogIndexPage, BlogPostPage, ContentPage, PolePage, StandardPage
+from .models import BlogIndexPage, BlogPostPage, ContentPage, HomePage, PolePage, StandardPage
 
 FRONTMATTER_RE = re.compile(r"\A---\s*\n(.*?\n)---\s*\n?(.*)\Z", re.DOTALL)
 PAGEBREAK_SHORTCODE = "{{< pagebreak >}}"
@@ -1125,10 +1125,13 @@ def _import_cards(body_md, to_html):
 
 def export_polepage_qmd(page, media_files=None):
     """
-    Sérialise les cartes (cards) d'une cms.PolePage (une langue) en texte .qmd — seul
-    ce champ est exporté comme corps ; les autres (couleur, icône, étiquette de blog
-    Ghost, étiquettes internes) sont de la configuration de page, pas du contenu
-    éditorial, et restent hors de portée de ce round-trip (réservés à l'admin Wagtail).
+    Sérialise une cms.PolePage (une langue) en texte .qmd — même schéma
+    d'identification (key/lang) que le blog/ContentPage/StandardPage. Couleur, icône,
+    étiquette de blog Ghost et étiquettes internes vont en frontmatter (comme
+    date/auteur/étiquettes/image de une pour le blog) ; les cartes (cards, voir
+    _export_cards) sont le corps. "icon" n'est qu'informatif au réimport, comme
+    "featured_image" pour le blog/ContentPage : reconstruire l'image Wagtail
+    elle-même n'est pas pris en charge (voir import_polepage_qmd).
     """
     body_md = _export_cards(page.cards, media_files=media_files)
     front = {
@@ -1136,20 +1139,30 @@ def export_polepage_qmd(page, media_files=None):
         "key": str(page.translation_key),
         "lang": page.locale.language_code,
         "slug": page.slug,
+        "lead": page.lead,
+        "accent": page.accent,
+        "ghost_tag": page.ghost_tag,
+        "tags": list(page.tags.order_by("name").values_list("name", flat=True)),
         "url": page.full_url,
     }
+    if page.icon_id:
+        if media_files is not None:
+            front["icon"] = _collect_image_file(page.icon_id, media_files)
+        else:
+            front["icon"] = _absolute_url(page.icon.get_rendition("width-400").url)
     frontmatter = yaml.safe_dump(front, allow_unicode=True, sort_keys=False, default_flow_style=False)
     return f"---\n{frontmatter}---\n\n{body_md}"
 
 
 def import_polepage_qmd(text):
     """
-    Met à jour les cartes (cards) d'une cms.PolePage existante à partir d'un texte
-    .qmd — identification par (translation_key, lang) comme les autres imports .qmd de
-    ce module. Contrairement à StandardPage/ContentPage/le blog, ne crée jamais de
-    nouvelle page : un pôle est une page de configuration (couleur, étiquette de
-    blog…) créée depuis l'admin Wagtail, pas un contenu éditorial autonome à part
-    entière.
+    Crée ou met à jour une cms.PolePage à partir d'un texte .qmd — même logique
+    d'identification (translation_key + lang) qu'import_blogpost_qmd/
+    import_standardpage_qmd. Pour une page nouvelle, le seul parent possible est la
+    cms.HomePage de la langue cible (PolePage.parent_page_types), comme la
+    BlogIndexPage fixe du blog — pas de champ "parent" à fournir. "icon" du frontmatter
+    n'est jamais reconstruit (voir export_polepage_qmd) : image Wagtail à choisir
+    depuis l'admin comme avant.
     """
     match = FRONTMATTER_RE.match(text)
     if not match:
@@ -1163,11 +1176,36 @@ def import_polepage_qmd(text):
 
     page = PolePage.objects.filter(translation_key=key, locale=locale).first() if key else None
     if page is None:
-        raise ValueError(f"Aucune PolePage de clé « {key} » en langue « {lang} » — voir export_polepage_qmd.")
+        sibling = (
+            PolePage.objects.filter(translation_key=key).exclude(locale=locale).first() if key else None
+        )
+        page = sibling.copy_for_translation(locale, copy_parents=True) if sibling else PolePage(locale=locale)
+        if key and not page.pk:
+            page.translation_key = key
+
+    page.title = front.get("title") or page.title or front.get("slug") or ""
+    page.slug = front.get("slug") or slugify(page.title)
+    page.lead = front.get("lead") or ""
+    page.accent = front.get("accent") or "teal"
+    page.ghost_tag = front.get("ghost_tag") or ""
 
     def to_html(markdown_text):
         return _self_close_void_tags(_restore_wagtail_embeds(markdown_filter(markdown_text)))
 
     page.cards = _import_cards(body_md, to_html)
+
+    is_new = page.pk is None
+    if is_new:
+        home = HomePage.objects.filter(locale=locale).first()
+        if home is None:
+            raise ValueError(f"Aucune HomePage en langue « {lang} » pour y rattacher le pôle.")
+        home.add_child(instance=page)
     page.save_revision().publish()
+
+    tags = front.get("tags") or []
+    if tags:
+        from core.models import Tag
+
+        page.tags.set([Tag.objects.get_or_create(name=t, defaults={"slug": slugify(t)})[0] for t in tags])
+
     return page

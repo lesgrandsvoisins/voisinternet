@@ -1,4 +1,4 @@
-"""Met à jour les cartes d'un pôle depuis un fichier .qmd — voir cms/qmd.py."""
+"""Importe ou met à jour un pôle depuis un fichier .qmd — voir cms/qmd.py."""
 from pathlib import Path
 
 from django.core.management.base import BaseCommand, CommandError
@@ -7,7 +7,7 @@ from cms.qmd import import_polepage_qmd
 
 
 class Command(BaseCommand):
-    help = "Met à jour les cartes d'un pôle existant (cms.PolePage.cards) depuis un fichier .qmd."
+    help = "Importe ou met à jour un pôle (cms.PolePage) depuis un fichier .qmd."
 
     def add_arguments(self, parser):
         parser.add_argument("path", help="Chemin du fichier .qmd à importer.")

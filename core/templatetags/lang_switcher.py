@@ -5,10 +5,11 @@ from django.utils.translation import get_language, get_language_info
 register = template.Library()
 
 
-@register.inclusion_tag("core/partials/lang_switcher.html", takes_context=True)
-def lang_switcher(context):
+def _lang_switcher_context(context):
     """
-    Sélecteur de langue.
+    Sélecteur de langue — logique commune à lang_switcher (menu déroulant du menu
+    hamburger, <select>) et lang_switcher_menu (bouton icône de la barre du haut, liste
+    d'options) : mêmes langues, mêmes URL, deux gabarits différents.
 
     Sur une page Wagtail, changer de langue via le simple préfixe d'URL
     (comme le fait `set_language`) casse dès que la traduction a un slug
@@ -51,3 +52,16 @@ def lang_switcher(context):
         "direct_links": False,
         "next": request.get_full_path(),
     }
+
+
+@register.inclusion_tag("core/partials/lang_switcher.html", takes_context=True)
+def lang_switcher(context):
+    """Sélecteur de langue en <select> (menu hamburger) — voir _lang_switcher_context."""
+    return _lang_switcher_context(context)
+
+
+@register.inclusion_tag("core/partials/lang_switcher_menu.html", takes_context=True)
+def lang_switcher_menu(context):
+    """Sélecteur de langue en liste d'options pour un menu déroulant (bouton icône de
+    la barre du haut, core/templates/core/base.html) — voir _lang_switcher_context."""
+    return _lang_switcher_context(context)

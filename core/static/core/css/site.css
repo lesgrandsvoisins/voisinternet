@@ -333,12 +333,15 @@ a {
 }
 
 .top>.wrap {
-  display: grid;
-  grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+  /* display: grid; */
+  /* grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr); */
   align-items: center;
   gap: 1rem;
   min-height: 4.25rem;
   max-width: unset;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 
@@ -575,6 +578,93 @@ div.menu {
 
 .account-action:hover {
   filter: brightness(1.05)
+}
+
+/* Icônes langue/recherche de la barre du haut (core/templates/core/base.html) : même
+   principe que .account-panel/.account-menu ci-dessus, en plus simple (pas de sous-
+   menu imbriqué). Le panneau n'a pas de x-cloak : sans JavaScript, il reste simplement
+   toujours déplié plutôt que caché en permanence (voir le commentaire du template). */
+.lang-dropdown,
+.search-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center
+}
+
+.lang-dropdown-btn,
+.search-dropdown-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  border-radius: 50%
+}
+
+.lang-dropdown-btn:hover,
+.search-dropdown-btn:hover {
+  background: var(--hover)
+}
+
+.lang-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  inset-inline-end: 0;
+  min-width: 10rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+  padding: .4rem;
+  z-index: 200
+}
+
+.lang-dropdown-item {
+  display: block;
+  width: 100%;
+  font: inherit;
+  text-align: start;
+  text-decoration: none;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: .5rem .7rem;
+  border-radius: 6px;
+  cursor: pointer
+}
+
+.lang-dropdown-item:hover {
+  background: var(--hover)
+}
+
+.lang-dropdown-item.current {
+  font-weight: 700
+}
+
+.search-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  inset-inline-start: 0;
+  min-width: 16rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+  padding: .6rem;
+  z-index: 20
+}
+
+.search-dropdown-menu .menu-site-search {
+  margin: 0
+}
+
+.search-dropdown-menu input[type="search"] {
+  width: 100%
 }
 
 .account-action-secondary {
@@ -3686,7 +3776,14 @@ a.prevnext {
   }
 }
 
-@media (max-width:550px) {
+@media screen and (max-width:600px) {
+  .brand img {
+    max-width: 250px;
+    height: auto;
+  }
+}
+
+@media screen and (max-width:500px) {
   /* Sous ce seuil, le mot-symbole complet ne tient plus sur la même ligne que
      le bouton menu et le compte : le logo passe sur sa propre ligne, centré,
      plutôt que de forcer les boutons (et leurs icônes) à rétrécir dans une
@@ -3696,9 +3793,9 @@ a.prevnext {
      l'espace entre colonnes de façon peu prévisible, au détriment du bouton
      compte. */
   .top>.wrap {
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around; */
     row-gap: .4rem;
     padding-block: .6rem;
     min-height: 0;
@@ -3760,7 +3857,42 @@ a.prevnext {
   .account-shortcuts ul {
     grid-template-columns: 1fr
   }
+  .lang-dropdown {
+    display: none;
+  }
+  .brand img {
+    max-width: 200px;
+    height: auto;
+  }
 }
+
+@media  screen and (max-width:400px) {
+  .search-dropdown {
+    display: none;
+  }
+
+  .brand img {
+    max-width: 150px;
+    height: auto;
+  }
+}
+
+
+@media  screen and (max-width:350px) {
+  .brand img {
+    max-width: 100px;
+    height: auto;
+  }
+}
+
+
+@media  screen and (max-width:300px) {
+  .brand img {
+    max-width: 75px;
+    height: auto;
+  }
+}
+
 
 @media print {
   wagtail-userbar,

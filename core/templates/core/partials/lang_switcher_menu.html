@@ -1,0 +1,20 @@
+{% load i18n %}
+{% if direct_links %}
+  {% for lang in languages %}
+    <a role="menuitem"
+       href="{{ lang.url }}"
+       class="lang-dropdown-item{% if lang.code == current_language %} current{% endif %}"
+       x-on:click="open = false">{{ lang.name_local }}</a>
+  {% endfor %}
+{% else %}
+  {% for lang in languages %}
+    <form method="post" action="{% url 'set_language' %}">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}">
+      <input type="hidden" name="language" value="{{ lang.code }}">
+      <button type="submit" role="menuitem" class="lang-dropdown-item{% if lang.code == current_language %} current{% endif %}">
+        {{ lang.name_local }}
+      </button>
+    </form>
+  {% endfor %}
+{% endif %}

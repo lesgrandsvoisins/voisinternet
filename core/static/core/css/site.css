@@ -2256,6 +2256,43 @@ blockquote p {
   gap: .15rem
 }
 
+/* Sommaire de blog (BlogPostPage.get_context, titres h2, à partir de deux) : un
+   encart en tête d'article par défaut ; à partir d'une largeur de fenêtre suffisante
+   pour laisser de la place hors de .wrap (1120px), une colonne collante dans la marge
+   de droite plutôt qu'un encart dans le texte. */
+.blog-toc {
+  background: var(--sky);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem
+}
+
+.blog-toc-title {
+  font-weight: 700;
+  margin: 0 0 .5rem
+}
+
+.blog-toc ul {
+  margin: 0;
+  padding-inline-start: 1.2rem
+}
+
+.blog-toc li {
+  margin: .15rem 0
+}
+
+@media (min-width: 1300px) {
+  .blog-toc {
+    position: sticky;
+    top: 2rem;
+    float: right;
+    clear: right;
+    width: 220px;
+    margin: 0 -250px 1rem 2rem
+  }
+}
+
 /* Vidéo intégrée (bouton « embed » du texte enrichi : YouTube, Vimeo…). Wagtail enveloppe
    l'iframe du fournisseur dans <div class="responsive-object" style="padding-bottom:…">
    (wagtailembeds/embed_frontend.html) pour fixer le ratio via le padding, mais sans cette

@@ -671,6 +671,19 @@ class BlogPostPage(Page):
         # même transmises au template (body_pages) : à l'impression, l'article s'imprime
         # en entier plutôt qu'une seule page à la fois (core/static/core/css/site.css).
         pages = re.split(r'<hr class="pagebreak"\s*/?>', self.body) if self.body else [""]
+        # Sommaire (titres h2, colonne de marge du gabarit) : toutes les pages ensemble
+        # — contrairement à cms.ContentPage, dont le sommaire ne porte que sur la page
+        # affichée — chaque entrée porte donc le numéro de sa page, pour y renvoyer via
+        # ?page= au besoin (voir blog_post_page.html). N'apparaît qu'à partir de deux
+        # titres, sans quoi un sommaire d'une seule entrée n'a pas d'intérêt.
+        seen_slugs = {}
+        toc = []
+        for i, page_html in enumerate(pages, start=1):
+            annotated, headings = _add_heading_anchors(page_html, seen_slugs)
+            pages[i - 1] = annotated
+            toc.extend((level, text, anchor, i) for level, text, anchor in headings if level == "h2")
+        context["toc"] = toc if len(toc) >= 2 else []
+
         try:
             page_number = int(request.GET.get("page", 1))
         except ValueError:

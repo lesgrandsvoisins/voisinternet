@@ -130,7 +130,7 @@ def register_pull_feature(features):
         "draftail",
         "pull",
         draftail_features.InlineStyleFeature(
-            {"type": "PULL", "label": "P", "description": _("Citation en exergue")},
+            {"type": "PULL", "icon": "openquote", "description": _("Citation en exergue")},
         ),
     )
     features.register_converter_rule(

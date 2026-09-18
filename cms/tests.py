@@ -135,6 +135,23 @@ class QmdRoundTripTests(TestCase):
         imported = import_blogpost_qmd(qmd)
         self.assertIn('<span class="pull">une citation en exergue</span>', imported.body)
 
+    def test_toc_needs_at_least_two_h2(self):
+        self.page.body = "<h2>Seul titre</h2><p>Texte.</p>"
+        self.page.save_revision().publish()
+        response = self.client.get(self.page.url)
+        self.assertNotContains(response, 'class="blog-toc')
+
+    def test_toc_covers_every_page_with_page_aware_links(self):
+        self.page.body = (
+            '<h2>Un</h2><p>a</p><hr class="pagebreak"><h2>Deux</h2><p>b</p>'
+        )
+        self.page.save_revision().publish()
+        response = self.client.get(self.page.url)
+        self.assertContains(response, 'class="blog-toc')
+        self.assertContains(response, 'id="un"')
+        self.assertContains(response, 'href="#un"')  # même page : pas de ?page=
+        self.assertContains(response, 'href="?page=2#deux"')  # autre page : ?page= présent
+
     def test_divider_and_pagebreak_round_trip(self):
         self.page.body = '<p>Avant</p><hr><p>Milieu</p><hr class="pagebreak"><p>Après</p>'
         self.page.save_revision().publish()

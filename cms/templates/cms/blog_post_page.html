@@ -31,6 +31,19 @@
   </div>
   <div class="wrap page">
     <article class="blog-post">
+      {% if toc %}
+        {% comment %}Toutes les pages de l'article ensemble (pas seulement celle
+        affichée) : un lien vers un titre d'une autre page change ?page= au passage,
+        contrairement au sommaire de cms.ContentPage (limité à la page affichée).{% endcomment %}
+        <nav class="blog-toc no-print" aria-label="{% trans "Sommaire" %}">
+          <p class="blog-toc-title">{% trans "Sommaire" %}</p>
+          <ul>
+            {% for level, text, anchor, toc_page in toc %}
+              <li><a href="{% if toc_page != page_number %}?page={{ toc_page }}{% endif %}#{{ anchor }}">{{ text }}</a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+      {% endif %}
       {% comment %}Chaque page de l'article est présente dans le HTML : seule la page
       courante s'affiche à l'écran (JS ou CSS ci-dessous), mais l'impression
       (core/static/core/css/site.css) les révèle toutes pour imprimer l'article entier.{% endcomment %}

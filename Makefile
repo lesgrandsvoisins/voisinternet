@@ -89,7 +89,7 @@ run: ## Lance le serveur de développement
 	$(LOADENV) $(PYTHON) manage.py runserver $$DJANGO_IP:$$DJANGO_PORT
 
 test: ## Lance les tests
-	$(LOADENV) $(PYTHON) manage.py test core
+	$(LOADENV) $(PYTHON) manage.py test core cms
 
 shell: ## Ouvre un shell Django
 	$(LOADENV) $(PYTHON) manage.py shell

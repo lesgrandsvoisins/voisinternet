@@ -18,6 +18,7 @@ urlpatterns = [
     path("account/raccourcis/", views.raccourcis, name="raccourcis"),
     path("account/groupes/", views.groupes, name="groupes"),
     path("account/dons/", views.faire_don, name="faire_don"),
+    path("dons/merci/", views.faire_don_merci, name="faire_don_merci"),
     path("agenda/", views.agenda, name="agenda"),
     path("agenda/mes-evenements/", views.mes_evenements, name="mes_evenements"),
     path("agenda/mes-evenements/<int:pk>/modifier/", views.evenement_modifier, name="evenement_modifier"),

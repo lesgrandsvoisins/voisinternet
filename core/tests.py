@@ -16,8 +16,8 @@ from cms.qmd import export_contentpage_qmd, import_contentpage_qmd
 
 from .accounts import SESSION_KEY
 from .models import (
-    Account, Audience, DirectoryEntry, DirectorySector, Donor, EntryMessage, EntrySubscription, Event,
-    EventInterest, EventManagementRequest, Membership, OwnershipClaim, Service, Shortcut, Tag, format_number,
+    Account, Audience, Contribution, DirectoryEntry, DirectorySector, Donor, EntryMessage, EntrySubscription,
+    Event, EventInterest, EventManagementRequest, Membership, OwnershipClaim, Service, Shortcut, Tag, format_number,
 )
 
 
@@ -1076,3 +1076,41 @@ class WikiJsSearchTests(TestCase):
 
         with mock.patch("core.wikijs.urlopen", side_effect=URLError("down")):
             self.assertEqual(search("permanence"), [])
+
+
+class DonationFlowTests(Base):
+    def test_pledge_is_auto_approved(self):
+        self.client.post(reverse("core:faire_don"), {
+            "kind": "pledge", "amount": "25", "method": "virement", "date": "2026-01-01", "note": "",
+        })
+        contribution = Contribution.objects.get()
+        self.assertEqual(contribution.kind, Contribution.PLEDGE)
+        self.assertTrue(contribution.approved)
+
+    def test_payment_awaits_validation(self):
+        self.client.post(reverse("core:faire_don"), {
+            "kind": "payment", "amount": "25", "method": "cheque", "date": "2026-01-01", "note": "",
+        })
+        contribution = Contribution.objects.get()
+        self.assertEqual(contribution.kind, Contribution.PAYMENT)
+        self.assertIsNone(contribution.approved)
+
+    def test_faire_don_redirects_to_confirmation_page(self):
+        response = self.client.post(reverse("core:faire_don"), {
+            "kind": "payment", "amount": "25", "method": "paypal", "date": "2026-01-01", "note": "",
+        })
+        self.assertRedirects(response, f"{reverse('core:faire_don_merci')}?amount=25&method=paypal&kind=payment")
+
+    def test_confirmation_page_prefills_paypal_amount(self):
+        response = self.client.get(reverse("core:faire_don_merci"), {"amount": "25", "method": "paypal", "kind": "payment"})
+        self.assertContains(response, "hosted_button_id=BPUUS6H6TP62Y&amp;amount=25")
+        self.assertContains(response, "en attente")
+
+    def test_confirmation_page_shows_donation_page_cards_for_bank_transfer(self):
+        from cms.models import DonationPage
+
+        donation_page = DonationPage.objects.live().first()
+        response = self.client.get(reverse("core:faire_don_merci"), {"amount": "25", "method": "virement", "kind": "pledge"})
+        self.assertNotContains(response, "en attente")  # une promesse n'attend rien
+        for block in donation_page.cards:
+            self.assertContains(response, block.value["title"])

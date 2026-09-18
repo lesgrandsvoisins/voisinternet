@@ -584,6 +584,11 @@ class Contribution(models.Model):
     amount = models.DecimalField(_("montant"), max_digits=8, decimal_places=2)
     method = models.CharField(_("moyen"), max_length=20, choices=METHODS, default="helloasso")
     date = models.DateField(_("date"), default=timezone.localdate)
+    # Auto-déclaré par la personne (views.faire_don) : None = paiement en attente de
+    # validation par le groupe « Administration » (une promesse, elle, est validée dès
+    # sa création — rien à vérifier avant qu'un paiement n'ait effectivement eu lieu).
+    # Même principe que OwnershipClaim.approved/EventManagementRequest.approved.
+    approved = models.BooleanField(_("validée par l'administration"), null=True, default=None)
     tax_deductible = models.BooleanField(
         _("déduction fiscale"), default=False,
         help_text=_("Éligible à un reçu fiscal (don à une association loi 1901)."),

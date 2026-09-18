@@ -103,9 +103,9 @@ class ContributionAdmin(TranslationAdmin):
     d'AccountAdmin ci-dessus reste pratique pour en ajouter une depuis une fiche compte,
     mais ne permet pas de filtrer/rechercher à travers l'ensemble (ex. « toutes les
     promesses non encore payées cette année », « tous les reçus fiscaux à établir »)."""
-    list_display = ["account", "kind", "amount", "method", "date", "tax_deductible"]
-    list_filter = ["kind", "method", "tax_deductible"]
-    list_editable = ["tax_deductible"]
+    list_display = ["account", "kind", "amount", "method", "date", "approved", "tax_deductible"]
+    list_filter = ["kind", "method", "approved", "tax_deductible"]
+    list_editable = ["approved", "tax_deductible"]
     date_hierarchy = "date"
     search_fields = ["account__user__username", "account__user__first_name", "account__user__last_name", "note"]
     autocomplete_fields = ["account"]

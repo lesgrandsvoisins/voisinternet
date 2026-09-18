@@ -1,6 +1,7 @@
 import calendar
 import re
 from datetime import date, timedelta
+from decimal import Decimal, InvalidOperation
 from urllib.parse import urlencode
 
 from django.conf import settings
@@ -346,17 +347,52 @@ def faire_don(request):
         note = form.cleaned_data["note"]
         kind = form.cleaned_data["kind"]
         if kind in (ContributionForm.KIND_PLEDGE, ContributionForm.KIND_BOTH):
+            # Une promesse n'a rien à valider : approved=True dès la création, à
+            # l'inverse d'un paiement (voir Contribution.approved).
             Contribution.objects.create(
                 account=acc, kind=Contribution.PLEDGE, amount=amount, method=method, date=date, note=note,
+                approved=True,
             )
         if kind in (ContributionForm.KIND_PAYMENT, ContributionForm.KIND_BOTH):
             Contribution.objects.create(
                 account=acc, kind=Contribution.PAYMENT, amount=amount, method=method, date=date, note=note,
             )
         messages.success(request, _("Merci ! Votre contribution a été enregistrée."))
-    else:
-        messages.error(request, _("Le formulaire de don contient une erreur : montant ou date invalide."))
+        return redirect(f"{reverse('core:faire_don_merci')}?{urlencode({'amount': amount, 'method': method, 'kind': kind})}")
+    messages.error(request, _("Le formulaire de don contient une erreur : montant ou date invalide."))
     return redirect(f"{reverse('core:account')}#fin-title")
+
+
+def faire_don_merci(request):
+    from cms.models import DonationPage
+
+    try:
+        amount = Decimal(request.GET.get("amount", ""))
+    except InvalidOperation:
+        amount = None
+    method = request.GET.get("method", "")
+    kind = request.GET.get("kind", "")
+
+    donation_service = (
+        Service.objects.filter(slug__in=["helloasso", "paypal", "stripe"], slug=method, active=True).first()
+    )
+    # PayPal accepte le montant en paramètre d'URL, contrairement à HelloAsso/Stripe
+    # (leurs liens ne sont pas garantis le permettre) — on ne le tente donc que là.
+    donation_link = donation_service.url if donation_service else ""
+    if donation_service and method == "paypal" and amount:
+        sep = "&" if "?" in donation_link else "?"
+        donation_link = f"{donation_link}{sep}amount={amount}"
+
+    return render(request, "core/faire_don_merci.html", {
+        "amount": amount,
+        "method": method,
+        "method_display": dict(Contribution.METHODS).get(method, method),
+        "kind": kind,
+        "awaiting_validation": kind in (ContributionForm.KIND_PAYMENT, ContributionForm.KIND_BOTH),
+        "donation_service": donation_service,
+        "donation_link": donation_link,
+        "donation_page": DonationPage.objects.live().first(),
+    })
 
 
 def raccourcis(request):

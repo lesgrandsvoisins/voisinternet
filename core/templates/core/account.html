@@ -176,6 +176,9 @@
                       , {% trans "déductible fiscalement" %}
                     {% endif %}
                     {% if c.note %}— {{ c.note }}{% endif %}
+                    {% if c.approved is None %}
+                      — <span class="chip">{% trans "en attente de validation" %}</span>
+                    {% endif %}
                   </span>
                 </li>
               {% endfor %}

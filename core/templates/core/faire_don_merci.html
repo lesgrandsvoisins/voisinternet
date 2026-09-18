@@ -1,0 +1,56 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Merci pour votre don" %} — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+        <ol>
+          <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+          <li aria-current="page">{% trans "Merci" %}</li>
+        </ol>
+      </nav>
+      <h1>{% trans "Merci !" %}</h1>
+      <p class="lead">
+        {% if amount %}
+          {% blocktrans %}Vous avez indiqué {{ amount }} € par {{ method_display }}.{% endblocktrans %}
+        {% else %}
+          {% blocktrans %}Votre contribution par {{ method_display }} a bien été enregistrée.{% endblocktrans %}
+        {% endif %}
+      </p>
+    </div>
+  </div>
+  <div class="wrap page">
+    {% if awaiting_validation %}
+      <p class="intro">
+        {% trans "Ce paiement reste « en attente » le temps qu'un administrateur confirme sa bonne réception — vous pouvez suivre son statut depuis votre compte." %}
+      </p>
+    {% endif %}
+
+    {% if donation_service %}
+      <section aria-labelledby="finish-donation-title">
+        <h2 id="finish-donation-title">{% blocktrans with name=donation_service.name %}Terminer le paiement par {{ name }}{% endblocktrans %}</h2>
+        <p><a class="btn btn-sun" href="{{ donation_link }}" target="_new" rel="noopener">{% blocktrans with name=donation_service.name %}Continuer sur {{ name }}{% endblocktrans %}</a></p>
+      </section>
+    {% endif %}
+
+    {% if donation_page.cards %}
+      <section aria-labelledby="other-ways-title">
+        <h2 id="other-ways-title">{% trans "Rappel des moyens de don" %}</h2>
+        <div class="cols">
+          {% for block in donation_page.cards %}
+            <section class="card">
+              <h3>{{ block.value.title }}</h3>
+              {{ block.value.text }}
+            </section>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+
+    <p class="muted">
+      <a href="{% url 'core:account' %}#fin-title">{% trans "← Mon compte" %}</a>
+      {% if donation_page %} · <a href="{{ donation_page.url }}">{% trans "Retour à la page des dons" %}</a>{% endif %}
+    </p>
+  </div>
+{% endblock %}

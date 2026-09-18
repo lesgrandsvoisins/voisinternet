@@ -30,6 +30,8 @@ from .models import (
     format_number,
 )
 
+from wagtail.models import Locale
+
 # Chapeau de présentation pour chaque page intermédiaire (une par groupe du menu).
 GROUP_PAGE_INTROS = {
     "reperes": _("Les rendez-vous et les ressources pour s'y retrouver dans la communauté."),
@@ -132,12 +134,14 @@ def home(request):
     quicklink_events = Event.objects.filter(
         public=True, start__gte=timezone.now(),
     ).order_by("-featured", "start")[:4]
+    active_lang = Locale.get_active()
+    recent_posts = BlogPostPage.objects.live().filter(locale_id=active_lang.id).order_by("-date")[:3]
 
     return render(request, "core/home.html", {
         "services": Service.objects.filter(active=True)[:6],
         "shortcut_ids": _shortcut_ids(request),
         "books": GuideBook.objects.filter(published=True)[:4],
-        "posts": BlogPostPage.objects.live().order_by("-date")[:3],
+        "posts": recent_posts,
         "audiences": Audience.objects.all(),
         "poles": PolePage.objects.live().order_by("path"),
         "recent_entries": recent_entries,

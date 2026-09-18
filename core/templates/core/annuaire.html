@@ -1,61 +1,102 @@
 {% extends "core/base.html" %}
 {% load i18n markdown_filters %}
-{% block title %}{% trans "Annuaire" %}{% if sector %} — {{ sector.name }}{% endif %} — {{ SITE_NAME }}{% endblock %}
+{% block title %}
+  {% trans "Annuaire" %}
+  {% if sector %}— {{ sector.name }}{% endif %}
+  — {{ SITE_NAME }}
+{% endblock %}
 {% block content %}
-{% trans "Qui fait partie de la communauté, et comment les joindre : personnes et structures, individuelles ou collectives, avec leur accord." as page_lead %}
-{% include "core/partials/page_head.html" with item=conj.annuaire lead=page_lead %}
-<div class="wrap page">
-  <p class="muted"><a href="{% url 'core:mes_fiches' %}">{% trans "Gérer mes fiches dans l'annuaire" %}</a></p>
-  {% if sectors %}
-  <nav class="chips" aria-label="{% trans 'Secteurs d’activité' %}">
-    <a href="{% url 'core:annuaire' %}"{% if not sector %} aria-current="page"{% endif %}>{% trans "Tous les secteurs" %}</a>
-    {% for s in sectors %}<a href="{% url 'core:annuaire_pour' s.slug %}"{% if sector == s %} aria-current="page"{% endif %}>{{ s.name }}</a>{% endfor %}
-  </nav>
-  {% endif %}
-
-  <div class="directory">
-    {% for entry in entries %}
-    <article class="directory-card">
-      {% if entry.photos %}
-        <a href="{% url 'core:entry_detail' entry.slug %}"><img class="hero" src="{{ entry.photos.0.url }}" alt=""></a>
-      {% elif entry.logo %}
-        <a class="hero-logo" href="{% url 'core:entry_detail' entry.slug %}"><img src="{{ entry.logo.url }}" alt=""></a>
-      {% else %}
-        <a class="hero-placeholder" href="{% url 'core:entry_detail' entry.slug %}" aria-hidden="true">{{ entry.name|slice:":1" }}</a>
-      {% endif %}
-      {% if entry.photos|length > 1 %}
-      <div class="gallery">
-        {% for photo in entry.photos|slice:"1:" %}<a href="{% url 'core:entry_detail' entry.slug %}"><img src="{{ photo.url }}" alt=""></a>{% endfor %}
-      </div>
-      {% endif %}
-      <div class="body">
-        <div class="logo-row">
-          {% if entry.logo %}<img class="svc-icon" src="{{ entry.logo.url }}" alt="">{% else %}<span class="led" aria-hidden="true"></span>{% endif %}
-          <h2><a href="{% url 'core:entry_detail' entry.slug %}">{{ entry.name }}</a></h2>
-        </div>
-        {% if entry.title %}<p>{{ entry.title }}</p>{% elif entry.sector %}<p>{{ entry.sector.name }}</p>{% endif %}
-        {% if entry.tagline %}<p class="tagline">{{ entry.tagline }}</p>{% endif %}
-        {% if entry.audiences.all %}
-        <p class="chips-inline">{% for a in entry.audiences.all %}<span class="chip">{{ a.name }}</span>{% endfor %}</p>
-        {% endif %}
-        {% if entry.tags.all %}
-        <p class="chips-inline">{% for t in entry.tags.all %}<a class="chip chip-tag" href="{% url 'core:tag_detail' t.slug %}">#{{ t.name }}</a>{% endfor %}</p>
-        {% endif %}
-        <p><a href="{% url 'core:entry_detail' entry.slug %}">{% trans "Voir la fiche" %}</a></p>
-        <form method="post" action="{% url 'core:toggle_subscription' entry.slug %}">
-          {% csrf_token %}
-          <input type="hidden" name="next" value="{{ request.get_full_path }}">
-          {% if entry.pk in subscribed_ids %}
-          <button class="sub-btn subscribed" type="submit">{% trans "Abonné·e ✓" %}</button>
+  {% trans "Qui fait partie de la communauté, et comment les joindre : personnes et structures, individuelles ou collectives, avec leur accord." as page_lead %}
+  {% include "core/partials/page_head.html" with item=conj.annuaire lead=page_lead %}
+  <div class="wrap page">
+    <p class="muted">
+      <a href="{% url 'core:mes_fiches' %}">{% trans "Gérer mes fiches dans l'annuaire" %}</a>
+    </p>
+    {% if sectors %}
+      <nav class="chips" aria-label="{% trans 'Secteurs d’activité' %}">
+        <a href="{% url 'core:annuaire' %}"
+           {% if not sector %}aria-current="page"{% endif %}>{% trans "Tous les secteurs" %}</a>
+        {% for s in sectors %}
+          <a href="{% url 'core:annuaire_pour' s.slug %}"
+             {% if sector == s %}aria-current="page"{% endif %}>{{ s.name }}</a>
+        {% endfor %}
+      </nav>
+    {% endif %}
+    <div class="directory">
+      {% for entry in entries %}
+        <article class="directory-card">
+          {% if entry.photos %}
+            <a href="{% url 'core:entry_detail' entry.slug %}">
+              <img class="hero" src="{{ entry.photos.0.url }}" alt="{{ entry.name | escape }}">
+            </a>
+          {% elif entry.logo %}
+            <a class="hero-logo" href="{% url 'core:entry_detail' entry.slug %}">
+              <img src="{{ entry.logo.url }}" alt="{{ entry.name | escape }}">
+            </a>
           {% else %}
-          <button class="sub-btn" type="submit">{% trans "S'abonner" %}</button>
+            <a class="hero-placeholder"
+               href="{% url 'core:entry_detail' entry.slug %}"
+               aria-hidden="true">{{ entry.name|slice:":1" }}</a>
           {% endif %}
-        </form>
-      </div>
-    </article>
-    {% empty %}
-    <div class="directory-empty"><h3>{% trans "Personne pour l'instant" %}</h3><p>{% trans "Les fiches apparaîtront ici, avec l'accord de chacun." %}</p></div>
-    {% endfor %}
+          {% if entry.photos|length > 1 %}
+            <div class="gallery">
+              {% for photo in entry.photos|slice:"1:" %}
+                <a href="{% url 'core:entry_detail' entry.slug %}">
+                  <img src="{{ photo.url }}" alt="{{ entry.name | escape }}">
+                </a>
+              {% endfor %}
+            </div>
+          {% endif %}
+          <div class="body">
+            <div class="logo-row">
+              {% if entry.logo %}
+                <img class="svc-icon" src="{{ entry.logo.url }}" alt="{{ entry.name | escape }}">
+              {% else %}
+                <span class="led" aria-hidden="true"></span>
+              {% endif %}
+              <h2>
+                <a href="{% url 'core:entry_detail' entry.slug %}">{{ entry.name }}</a>
+              </h2>
+            </div>
+            {% if entry.title %}
+              <p>{{ entry.title }}</p>
+            {% elif entry.sector %}
+              <p>{{ entry.sector.name }}</p>
+            {% endif %}
+            {% if entry.tagline %}<p class="tagline">{{ entry.tagline }}</p>{% endif %}
+            {% if entry.audiences.all %}
+              <p class="chips-inline">
+                {% for a in entry.audiences.all %}<span class="chip">{{ a.name }}</span>{% endfor %}
+              </p>
+            {% endif %}
+            {% if entry.tags.all %}
+              <p class="chips-inline">
+                {% for t in entry.tags.all %}
+                  <a class="chip chip-tag" href="{% url 'core:tag_detail' t.slug %}">#{{ t.name }}</a>
+                {% endfor %}
+              </p>
+            {% endif %}
+            <p>
+              <a href="{% url 'core:entry_detail' entry.slug %}">{% trans "Voir la fiche" %}</a>
+            </p>
+            <form method="post"
+                  action="{% url 'core:toggle_subscription' entry.slug %}">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{{ request.get_full_path }}">
+              {% if entry.pk in subscribed_ids %}
+                <button class="sub-btn subscribed" type="submit">{% trans "Abonné·e ✓" %}</button>
+              {% else %}
+                <button class="sub-btn" type="submit">{% trans "S'abonner" %}</button>
+              {% endif %}
+            </form>
+          </div>
+        </article>
+      {% empty %}
+        <div class="directory-empty">
+          <h3>{% trans "Personne pour l'instant" %}</h3>
+          <p>{% trans "Les fiches apparaîtront ici, avec l'accord de chacun." %}</p>
+        </div>
+      {% endfor %}
+    </div>
   </div>
-</div>
 {% endblock %}

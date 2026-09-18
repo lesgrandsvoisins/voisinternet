@@ -273,7 +273,7 @@ class ProjectPage(Page):
     subpage_types = []
 
 
-_HEADING_RE = re.compile(r'<(h[234])>(.*?)</\1>', re.S)
+_HEADING_RE = re.compile(r'<(h[234])(?:\s[^>]*)?>(.*?)</\1>', re.S)
 _TAG_RE = re.compile(r'<[^>]+>')
 
 

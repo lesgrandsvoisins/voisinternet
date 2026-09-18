@@ -316,10 +316,10 @@
   }
 
   document.addEventListener("DOMContentLoaded", randomizeBlobs);
-  // Se réarrangent ensuite toutes les 12s tant que la page reste ouverte — sauté pour
+  // Se réarrangent ensuite toutes les 6s tant que la page reste ouverte — sauté pour
   // prefers-reduced-motion, comme la transition CSS ci-dessus (site.css:.blob).
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    setInterval(randomizeBlobs, 12000);
+    setInterval(randomizeBlobs, 6000);
   }
 
   // Le menu principal et le widget du compte (en-tête) sont gérés par Alpine.js (voir base.html).

@@ -152,6 +152,17 @@ class QmdRoundTripTests(TestCase):
         self.assertContains(response, 'href="#un"')  # même page : pas de ?page=
         self.assertContains(response, 'href="?page=2#deux"')  # autre page : ?page= présent
 
+    def test_toc_detects_headings_with_draftail_attributes(self):
+        # Draftail ajoute data-block-key="…" à tous les titres qu'il enregistre (pas
+        # seulement les articles repris de Ghost) : un regex qui n'accepterait que
+        # <h2> sans aucun attribut ne détecterait jamais rien en conditions réelles.
+        self.page.body = '<h2 data-block-key="zmju9">Un</h2><p>a</p><h2 data-block-key="qaoqu">Deux</h2>'
+        self.page.save_revision().publish()
+        response = self.client.get(self.page.url)
+        self.assertContains(response, 'class="blog-toc')
+        self.assertContains(response, 'id="un"')
+        self.assertContains(response, 'id="deux"')
+
     def test_divider_and_pagebreak_round_trip(self):
         self.page.body = '<p>Avant</p><hr><p>Milieu</p><hr class="pagebreak"><p>Après</p>'
         self.page.save_revision().publish()

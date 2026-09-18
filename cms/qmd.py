@@ -31,6 +31,15 @@ et l'édition du texte) mais que l'import sait reconnaître pour reconstruire l'
 d'origine — l'image redevient alors gérée par le sélecteur d'image de Draftail, pas un
 simple <img> figé. Sans cet identifiant (image/document déjà supprimé, ou contenu écrit à
 la main dans l'éditeur Quarto), l'URL absolue reste utilisée telle quelle.
+
+Copie de travail de github.com/lesgrandsvoisins/voisinternet:cms/qmd.py, retouchée ici pour
+aligner export_contentpage_qmd/_split_content_blocks sur la convention adoptée dans
+workshop/qmd_export/export_transition_qmd.py : chaque bloc de body porte son propre div
+Pandoc/Quarto fencé (_fence_div), jamais un seul div englobant tout le champ — "prose" a donc
+maintenant lui aussi un fence explicite (::: {.prose}), au lieu d'être le seul bloc sans div ;
+"callout"/"pull" étaient déjà fencés et n'ont pas changé de forme (seul le confort d'écriture,
+via _fence_div, est partagé). L'import reste rétrocompatible avec un corps sans aucun fence
+.prose (tout Markdown hors callout/pull y est encore traité comme de la prose implicite).
 """
 import re
 import zipfile
@@ -84,6 +93,11 @@ _CALLOUT_OPEN_RE = re.compile(
     r'^:::+\s*\{\.callout-(note|tip|important|warning|caution)(?:\s+title="([^"]*)")?\s*\}\s*$'
 )
 _PULL_OPEN_RE = re.compile(r'^:::+\s*\{\.pull\}\s*$')
+# ::: {.prose} explicite (voir export_contentpage_qmd/_fence_div) : facultatif à l'import — du
+# Markdown hors de tout fence reste traité comme "prose" par _split_content_blocks (branche
+# else de sa boucle), pour rester compatible avec un .qmd écrit à la main sans ce fence ou
+# exporté avant son introduction.
+_PROSE_OPEN_RE = re.compile(r'^:::+\s*\{\.prose\}\s*$')
 _FENCE_CLOSE_RE = re.compile(r'^:::+\s*$')
 # Span Pandoc/Quarto pour une citation en exergue ponctuelle, à l'intérieur d'un
 # paragraphe (cms.wagtail_hooks.py::register_pull_feature pour la version Draftail) :
@@ -141,13 +155,15 @@ def _extract_footnote_defs(body_md):
 def _split_content_blocks(body_md):
     """
     Découpe le Markdown d'une cms.ContentPage en blocs "prose"/"callout"/"pull" pour
-    son StreamField body (voir cms.models.ContentPage), en reconnaissant les callouts
-    et citations en exergue (::: {.pull}) Quarto ci-dessus. Tout le reste (avant/
-    après/entre deux fences) devient un ou plusieurs blocs "prose". Chaque segment est
-    converti indépendamment par _content_markdown_to_html puis _restore_wagtail_embeds,
-    comme pour le blog — les définitions de notes de bas de page
-    (_extract_footnote_defs) sont rattachées à chaque segment avant conversion,
-    python-markdown n'émettant que celles qui y sont effectivement référencées.
+    son StreamField body (voir cms.models.ContentPage), en reconnaissant les callouts,
+    citations en exergue (::: {.pull}) et prose explicite (::: {.prose}) Quarto
+    ci-dessus. Tout le reste (avant/après/entre deux fences, ou tout un document sans
+    aucun fence .prose — voir _PROSE_OPEN_RE) devient un ou plusieurs blocs "prose" au
+    même titre qu'un bloc ::: {.prose} explicite. Chaque segment est converti
+    indépendamment par _content_markdown_to_html puis _restore_wagtail_embeds, comme
+    pour le blog — les définitions de notes de bas de page (_extract_footnote_defs)
+    sont rattachées à chaque segment avant conversion, python-markdown n'émettant que
+    celles qui y sont effectivement référencées.
     """
     body_md = body_md.replace(PAGEBREAK_SHORTCODE, '<hr class="pagebreak">')
     body_md, footnote_defs = _extract_footnote_defs(body_md)
@@ -174,7 +190,8 @@ def _split_content_blocks(body_md):
     while i < len(lines):
         callout_match = _CALLOUT_OPEN_RE.match(lines[i])
         pull_match = None if callout_match else _PULL_OPEN_RE.match(lines[i])
-        if callout_match or pull_match:
+        prose_match = None if (callout_match or pull_match) else _PROSE_OPEN_RE.match(lines[i])
+        if callout_match or pull_match or prose_match:
             flush_prose()
             inner_lines = []
             i += 1
@@ -186,8 +203,10 @@ def _split_content_blocks(body_md):
             if callout_match:
                 callout_type, title = callout_match.group(1), callout_match.group(2) or ""
                 result.append({"type": "callout", "value": {"type": callout_type, "title": title, "text": inner_html}})
-            else:
+            elif pull_match:
                 result.append({"type": "pull", "value": {"text": inner_html}})
+            else:
+                result.append({"type": "prose", "value": inner_html})
         else:
             prose_lines.append(lines[i])
             i += 1
@@ -595,13 +614,24 @@ def export_blog_zip():
     return buffer.getvalue()
 
 
+def _fence_div(fence_attrs, content):
+    """::: {<attrs>}\\n\\n<content>\\n\\n::: — un div Pandoc/Quarto complet par bloc de
+    body, jamais un seul div englobant tout le champ (voir export_contentpage_qmd) :
+    chaque bloc StreamField porte ainsi sa propre frontière, identifiable par sa classe
+    (le block_type, ou une classe plus spécifique — .callout-<type> — quand le bloc a
+    lui-même un équivalent Quarto natif plus précis que son seul nom de bloc)."""
+    return f"::: {{{fence_attrs}}}\n\n{(content or '').strip()}\n\n:::\n"
+
+
 def export_contentpage_qmd(page, media_files=None):
     """
     Sérialise une cms.ContentPage (une langue) en texte .qmd — même contrat
     qu'export_blogpost_qmd (frontmatter key/lang, marqueurs wagtail-image/-document/
     -page), mais parcourt les blocs de body (StreamField) plutôt qu'un RichTextField
-    plat : un bloc "prose" devient du Markdown normal, un bloc "callout" devient un div
-    Pandoc/Quarto (::: {.callout-...}), un bloc "pull" devient ::: {.pull} — voir
+    plat : chaque bloc devient son propre div Pandoc/Quarto fencé (_fence_div ci-dessus)
+    plutôt qu'un unique div englobant tout le champ — un bloc "prose" devient
+    ::: {.prose}, un bloc "callout" devient ::: {.callout-...} (classe Quarto native,
+    avec son niveau et son titre éventuel), un bloc "pull" devient ::: {.pull} — voir
     _ContentHTMLToMarkdown et cms.models.ContentPage/PullQuoteBlock. Un span
     <span class="pull"> à l'intérieur d'un bloc "prose"/"callout" (cms/wagtail_hooks.py
     ::register_pull_feature) s'exporte en [texte]{.pull}, géré par
@@ -612,16 +642,16 @@ def export_contentpage_qmd(page, media_files=None):
         converter = _ContentHTMLToMarkdown(media_files=media_files)
         if block.block_type == "prose":
             converter.feed(block.value.source)
-            parts.append(converter.result())
+            parts.append(_fence_div(".prose", converter.result()))
         elif block.block_type == "callout":
             converter.feed(block.value["text"].source)
             fence_attrs = f'.callout-{block.value["type"]}'
             if block.value["title"]:
                 fence_attrs += f' title="{block.value["title"]}"'
-            parts.append(f"::: {{{fence_attrs}}}\n{converter.result()}:::\n")
+            parts.append(_fence_div(fence_attrs, converter.result()))
         elif block.block_type == "pull":
             converter.feed(block.value["text"].source)
-            parts.append(f"::: {{.pull}}\n{converter.result()}:::\n")
+            parts.append(_fence_div(".pull", converter.result()))
     body_md = "\n".join(parts).strip() + "\n"
 
     front = {

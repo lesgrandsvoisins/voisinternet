@@ -240,7 +240,18 @@ EMAIL_BACKEND = (
 EMAIL_PORT = int(env("EMAIL_PORT", "587"))
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", "")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", "")
-EMAIL_USE_TLS = env_bool("EMAIL_USE_TLS", True)
+# TLS implicite (port 465, EMAIL_USE_SSL) et TLS explicite/STARTTLS (port 587,
+# EMAIL_USE_TLS) sont mutuellement exclusifs pour smtplib — un mauvais choix pour le
+# port utilisé bloque la connexion indéfiniment plutôt que d'échouer proprement (voir
+# EMAIL_TIMEOUT ci-dessous, seule protection dans ce cas).
+EMAIL_USE_SSL = env_bool("EMAIL_USE_SSL", False)
+EMAIL_USE_TLS = env_bool("EMAIL_USE_TLS", not EMAIL_USE_SSL)
+# Sans timeout, une connexion SMTP qui ne répond pas bloque le worker gunicorn jusqu'à
+# son propre délai (30s, deploy/voisinternet.service) — avec seulement 2 workers, deux
+# messages de contact envoyés en même temps suffisent à rendre tout le site
+# injoignable. Un timeout court fait échouer l'envoi proprement à la place (voir
+# core.views._process_contact_form, qui l'intercepte).
+EMAIL_TIMEOUT = int(env("EMAIL_TIMEOUT", "10"))
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", CONTACT_EMAIL)
 
 # --- Wagtail : pages de contenu gérées depuis /cms/ (indépendant de l'admin Django en /admin/).

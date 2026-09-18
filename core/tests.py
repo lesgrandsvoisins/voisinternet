@@ -1111,6 +1111,21 @@ class AuthorContactTests(Base):
         self.assertEqual(len(mail.outbox), 5)  # le 6e message n'est pas parti
         self.assertContains(response, "Trop de messages envoyés récemment")
 
+    def test_smtp_failure_still_records_the_message_without_crashing(self):
+        # Incident réel : un serveur SMTP injoignable/mal configuré (mauvais port,
+        # connexion qui traîne) ne doit jamais faire planter la requête — voir
+        # settings.EMAIL_TIMEOUT et _process_contact_form.
+        from smtplib import SMTPConnectError
+
+        with mock.patch("core.views.EmailMessage.send", side_effect=SMTPConnectError(421, "down")):
+            response = self.client.post(reverse("core:author_detail", args=[self.author.pk]), {
+                "sender_name": "Alice", "sender_email": "alice@example.org", "message": "Bonjour !", "website": "",
+            }, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(AuthorMessage.objects.filter(author=self.author).count(), 1)
+        self.assertEqual(len(mail.outbox), 0)
+        self.assertContains(response, "son envoi par e-mail a échoué")
+
 
 class EntryDetailPhotoTests(Base):
     def test_logo_shown_when_no_promo_photo_or_gallery(self):

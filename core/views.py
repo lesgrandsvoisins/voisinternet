@@ -1,7 +1,9 @@
 import calendar
+import logging
 import re
 from datetime import date, timedelta
 from decimal import Decimal, InvalidOperation
+from smtplib import SMTPException
 from urllib.parse import urlencode
 
 from django.conf import settings
@@ -31,6 +33,8 @@ from .models import (
 )
 
 from wagtail.models import Locale
+
+logger = logging.getLogger(__name__)
 
 
 # Chapeau de présentation pour chaque page intermédiaire (une par groupe du menu).
@@ -272,31 +276,43 @@ def tag_detail(request, slug):
 def _process_contact_form(request, throttle_scope, recipient_email):
     """
     Partie commune du formulaire de contact (author_detail, entry_detail) : throttle,
-    validation, piège à robots, envoi par e-mail. Renvoie (form, cleaned_data) —
-    cleaned_data reste None tant qu'il n'y a rien de plus à faire ; une fois non-None,
-    à l'appelant de créer sa propre trace (AuthorMessage/EntryMessage, à condition que
-    cleaned_data["website"] soit vide — voir ContactMessageForm) et de rediriger.
+    validation, piège à robots, envoi par e-mail. Renvoie (form, cleaned_data,
+    email_sent) — cleaned_data reste None tant qu'il n'y a rien de plus à faire ; une
+    fois non-None, à l'appelant de créer sa propre trace (AuthorMessage/EntryMessage, à
+    condition que cleaned_data["website"] soit vide — voir ContactMessageForm) et de
+    rediriger. email_sent est False si le message a été validé et enregistré mais que
+    l'envoi immédiat par e-mail a échoué (serveur SMTP injoignable/mal configuré) — la
+    trace existe quand même, seul l'e-mail est manqué.
     """
     form = ContactMessageForm()
     if not (recipient_email and request.method == "POST"):
-        return form, None
+        return form, None, True
     if _throttled(request, throttle_scope, limit=5):
         messages.error(request, _("Trop de messages envoyés récemment depuis cet appareil. Réessayez plus tard."))
-        return form, None
+        return form, None, True
     form = ContactMessageForm(request.POST)
     if not form.is_valid():
-        return form, None
+        return form, None, True
+    email_sent = True
     if not form.cleaned_data["website"]:
-        EmailMessage(
-            subject=_("Message via lesgrandsvoisins.com de %(name)s") % {
-                "name": form.cleaned_data["sender_name"] or form.cleaned_data["sender_email"],
-            },
-            body=form.cleaned_data["message"],
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            to=[recipient_email],
-            reply_to=[form.cleaned_data["sender_email"]],
-        ).send()
-    return form, form.cleaned_data
+        try:
+            EmailMessage(
+                subject=_("Message via lesgrandsvoisins.com de %(name)s") % {
+                    "name": form.cleaned_data["sender_name"] or form.cleaned_data["sender_email"],
+                },
+                body=form.cleaned_data["message"],
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[recipient_email],
+                reply_to=[form.cleaned_data["sender_email"]],
+            ).send()
+        except (OSError, SMTPException) as exc:
+            # Un serveur SMTP mal configuré/injoignable ne doit jamais faire planter la
+            # requête (ni, pire, bloquer tout un worker gunicorn) — le message reste
+            # quand même enregistré (AuthorMessage/EntryMessage, côté appelant) pour ne
+            # pas le perdre ; seul l'e-mail immédiat échoue.
+            logger.warning("Échec de l'envoi du message de contact à %s : %s", recipient_email, exc)
+            email_sent = False
+    return form, form.cleaned_data, email_sent
 
 
 def author_detail(request, pk):
@@ -308,14 +324,20 @@ def author_detail(request, pk):
     posts = BlogPostPage.objects.live().filter(author=author).filter(locale_id=active_lang.id).order_by("-date")
     pages = ContentPage.objects.live().filter(author=author).filter(locale_id=active_lang.id).order_by("-first_published_at")
 
-    form, sent = _process_contact_form(request, "author_contact", author.email)
+    form, sent, email_sent = _process_contact_form(request, "author_contact", author.email)
     if sent is not None:
         if not sent["website"]:
             AuthorMessage.objects.create(
                 author=author, sender_name=sent["sender_name"], sender_email=sent["sender_email"],
                 message=sent["message"],
             )
-        messages.success(request, _("Message envoyé à %(name)s.") % {"name": author.name})
+        if email_sent:
+            messages.success(request, _("Message envoyé à %(name)s.") % {"name": author.name})
+        else:
+            messages.error(
+                request,
+                _("Votre message a été enregistré, mais son envoi par e-mail a échoué. Réessayez plus tard."),
+            )
         return redirect("core:author_detail", pk=author.pk)
     return render(request, "core/author_detail.html", {
         "author": author, "posts": posts, "pages": pages, "form": form,
@@ -516,14 +538,20 @@ def entry_detail(request, slug):
     if request.user.is_authenticated and entry.owner_id is None:
         my_claim = OwnershipClaim.objects.filter(entry=entry, account=acc).first()
 
-    form, sent = _process_contact_form(request, "entry_contact", entry.email)
+    form, sent, email_sent = _process_contact_form(request, "entry_contact", entry.email)
     if sent is not None:
         if not sent["website"]:
             EntryMessage.objects.create(
                 entry=entry, sender_name=sent["sender_name"], sender_email=sent["sender_email"],
                 message=sent["message"],
             )
-        messages.success(request, _("Message envoyé à %(name)s.") % {"name": entry.name})
+        if email_sent:
+            messages.success(request, _("Message envoyé à %(name)s.") % {"name": entry.name})
+        else:
+            messages.error(
+                request,
+                _("Votre message a été enregistré, mais son envoi par e-mail a échoué. Réessayez plus tard."),
+            )
         return redirect("core:entry_detail", slug=entry.slug)
 
     return render(request, "core/directory_entry.html", {

@@ -3,11 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: core/templates/core/home.html:20
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-18 12:04+0200\n"
+"POT-Creation-Date: 2026-09-18 17:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -197,8 +198,7 @@ msgid "étiquette du blog"
 msgstr "blog tag"
 
 #: cms/models.py:178
-msgid ""
-"Étiquette Ghost dont les derniers articles apparaissent en bas de page."
+msgid "Étiquette Ghost dont les derniers articles apparaissent en bas de page."
 msgstr "Ghost tag whose latest posts appear at the bottom of the page."
 
 #: cms/models.py:182 cms/models.py:246 cms/models.py:324 cms/models.py:639
@@ -285,8 +285,8 @@ msgid ""
 "formulaire sur la page de cet·te auteur·ice."
 msgstr ""
 "Never shown publicly — only used to forward messages from the contact form "
-"(core.views.author_detail). Leaving it blank hides the form on this author's"
-" page."
+"(core.views.author_detail). Leaving it blank hides the form on this author's "
+"page."
 
 #: cms/models.py:565
 #, fuzzy
@@ -364,8 +364,8 @@ msgstr "Import a .qmd"
 #: cms/templates/cms/admin/qmd_import.html:7
 msgid ""
 "Remplace le titre, le texte et les métadonnées de cet article à partir d'un "
-"fichier .qmd. Si le fichier porte la clé d'un autre article, c'est cet autre"
-" article qui sera créé ou mis à jour à la place."
+"fichier .qmd. Si le fichier porte la clé d'un autre article, c'est cet autre "
+"article qui sera créé ou mis à jour à la place."
 msgstr ""
 "Replaces this article's title, text and metadata from a .qmd file. If the "
 "file carries another article's key, that other article will be created or "
@@ -388,8 +388,7 @@ msgstr "Directory"
 #: cms/templates/cms/association_page.html:10
 #: cms/templates/cms/blog_index_page.html:9
 #: cms/templates/cms/blog_post_page.html:10
-#: cms/templates/cms/contact_page.html:10
-#: cms/templates/cms/content_page.html:8
+#: cms/templates/cms/contact_page.html:10 cms/templates/cms/content_page.html:8
 #: cms/templates/cms/donation_page.html:10 cms/templates/cms/pole_page.html:11
 #: cms/templates/cms/project_page.html:10
 #: cms/templates/cms/standard_page.html:12 core/templates/core/account.html:9
@@ -400,7 +399,7 @@ msgstr "Directory"
 #: core/templates/core/event_detail.html:7
 #: core/templates/core/faire_don_merci.html:7
 #: core/templates/core/fiche_modifier.html:7
-#: core/templates/core/group_page.html:7
+#: core/templates/core/group_page.html:7 core/templates/core/mes_dons.html:7
 #: core/templates/core/mes_evenements.html:7
 #: core/templates/core/mes_fiches.html:7
 #: core/templates/core/partials/page_head.html:3
@@ -424,7 +423,7 @@ msgstr "Breadcrumb"
 #: core/templates/core/event_detail.html:9
 #: core/templates/core/faire_don_merci.html:9
 #: core/templates/core/fiche_modifier.html:9
-#: core/templates/core/group_page.html:9
+#: core/templates/core/group_page.html:9 core/templates/core/mes_dons.html:9
 #: core/templates/core/mes_evenements.html:9
 #: core/templates/core/mes_fiches.html:9
 #: core/templates/core/partials/page_head.html:5
@@ -458,14 +457,12 @@ msgstr "Search the blog"
 msgid "Rechercher un article…"
 msgstr "Search for an article…"
 
-#: cms/templates/cms/blog_index_page.html:23
-#: core/templates/core/search.html:20
+#: cms/templates/cms/blog_index_page.html:23 core/templates/core/search.html:20
 msgid "Rechercher"
 msgstr "Search"
 
 #: cms/templates/cms/blog_index_page.html:47
-#: core/templates/core/author_detail.html:35
-#: core/templates/core/search.html:30
+#: core/templates/core/author_detail.html:35 core/templates/core/search.html:30
 msgid "Pages"
 msgstr "Pages"
 
@@ -479,8 +476,7 @@ msgstr "Next →"
 
 #: cms/templates/cms/blog_index_page.html:58
 #, fuzzy
-#| msgid ""
-#| "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
+#| msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgid "Aucun article ne correspond à votre recherche."
 msgstr "No account matches this number. Check the 16 digits."
 
@@ -498,7 +494,6 @@ msgid "Sommaire"
 msgstr "Table of contents"
 
 #: cms/templates/cms/blog_post_page.html:56
-#| msgid "pages de l'annuaire"
 msgid "Pages de l’article"
 msgstr "Article pages"
 
@@ -545,8 +540,8 @@ msgid ""
 "Un don peut rester anonyme. Si vous souhaitez un reçu, votre identité nous "
 "est nécessaire, mais elle n'est jamais publiée sans votre accord."
 msgstr ""
-"A donation can stay anonymous. If you want a receipt, we need your identity,"
-" but it is never published without your consent."
+"A donation can stay anonymous. If you want a receipt, we need your identity, "
+"but it is never published without your consent."
 
 #: cms/templates/cms/donation_page.html:48
 msgid "Nos soutiens"
@@ -645,8 +640,8 @@ msgstr "Article updated from the .qmd file."
 #: cms/wagtail_hooks.py:269
 #, python-format
 msgid ""
-"Le fichier .qmd portait la clé d'un autre article : « %(title)s » a été créé"
-" ou mis à jour à la place de celui-ci."
+"Le fichier .qmd portait la clé d'un autre article : « %(title)s » a été créé "
+"ou mis à jour à la place de celui-ci."
 msgstr ""
 "The .qmd file carried another article's key: “%(title)s” was created or "
 "updated instead of this one."
@@ -661,15 +656,15 @@ msgid ""
 "Le fichier .qmd portait la clé d'une autre page : « %(title)s » a été créée "
 "ou mise à jour à la place de celle-ci."
 msgstr ""
-"The .qmd file carried another page's key: “%(title)s” was created or updated"
-" instead of this one."
+"The .qmd file carried another page's key: “%(title)s” was created or updated "
+"instead of this one."
 
 #: core/accounts.py:48 core/accounts.py:53
 #, python-format
 msgid "mes raccourcis (%d)"
 msgstr "my shortcuts (%d)"
 
-#: core/accounts.py:48 core/menu.py:42
+#: core/accounts.py:48 core/menu.py:43 core/templates/core/home.html:227
 msgid "mon compte"
 msgstr "my account"
 
@@ -711,7 +706,7 @@ msgstr "category"
 msgid "Mise en avant"
 msgstr "featured"
 
-#: core/forms.py:25 core/menu.py:82
+#: core/forms.py:25 core/menu.py:86
 msgid "Contact"
 msgstr "Contact"
 
@@ -775,74 +770,74 @@ msgstr "Your email"
 msgid "Message"
 msgstr "Message"
 
-#: core/menu.py:39
+#: core/menu.py:40
 msgid "activités"
 msgstr "activities"
 
-#: core/menu.py:40
+#: core/menu.py:41
 msgid "pôles"
 msgstr "focus areas"
 
-#: core/menu.py:41
+#: core/menu.py:42
 msgid "à propos"
 msgstr "about"
 
-#: core/menu.py:55 core/templates/core/account.html:106
+#: core/menu.py:56 core/templates/core/account.html:106
 #: core/templates/core/raccourcis.html:12
 msgid "Mes raccourcis"
 msgstr "My shortcuts"
 
-#: core/menu.py:56
+#: core/menu.py:57
 msgid "les services que vous avez choisis, à ajouter ou retirer"
 msgstr "the services you've chosen, to add or remove"
 
-#: core/menu.py:57
+#: core/menu.py:58
 msgid "se connecter, créer un compte, retrouver mes raccourcis"
 msgstr "log in, create an account, recover my shortcuts"
 
-#: core/menu.py:64 core/templates/core/account.html:115
+#: core/menu.py:66 core/templates/core/account.html:115
 #: core/templates/core/groupes.html:12
 msgid "Mes groupes"
 msgstr "My groups"
 
-#: core/menu.py:65
+#: core/menu.py:67
 msgid "les identités auxquelles vous adhérez, individuelles ou collectives"
 msgstr "the identities you belong to, individual or collective"
 
-#: core/menu.py:66 core/menu.py:111
+#: core/menu.py:68 core/menu.py:120
 msgid "un particulier, une association, une entreprise…"
 msgstr "an individual, an association, a business…"
 
-#: core/menu.py:73 core/models.py:630
+#: core/menu.py:76 core/models.py:630
 msgid "Association"
 msgstr "Association"
 
-#: core/menu.py:74
+#: core/menu.py:77
 msgid "une conscience collective, l'association coopérative"
 msgstr "a collective consciousness, the cooperative association"
 
-#: core/menu.py:75
+#: core/menu.py:78
 msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "bylaws, governance, accounts: everything is public"
 
-#: core/menu.py:83
+#: core/menu.py:87
 msgid "une question, un problème : écrivez-nous"
 msgstr "a question, a problem: write to us"
 
-#: core/menu.py:84
+#: core/menu.py:88
 msgid "un voisin vous répond, pas un robot"
 msgstr "a neighbor answers you, not a robot"
 
-#: core/menu.py:91
+#: core/menu.py:96
 msgid "Dons"
 msgstr "Donations"
 
-#: core/menu.py:92
+#: core/menu.py:97
 msgid ""
 "du temps, un don financier, ou du matériel : sans rien attendre en retour"
 msgstr "time, a financial donation, or equipment: expecting nothing in return"
 
-#: core/menu.py:93
+#: core/menu.py:99
 #, fuzzy
 #| msgid "donner du temps, faire un don, ou donner du matériel"
 msgid ""
@@ -850,61 +845,70 @@ msgid ""
 "du matériel"
 msgstr "give your time, make a donation, or donate equipment"
 
-#: core/menu.py:100 core/templates/core/event_detail.html:3
+#: core/menu.py:108 core/templates/core/event_detail.html:3
 #: core/templates/core/event_detail.html:10 core/templates/core/home.html:46
+#: core/templates/core/icons/agenda-svg.html:3
+#: core/templates/core/icons/agenda-svg.html:7
 #: core/templates/core/search.html:75 core/templates/core/tag_detail.html:53
 msgid "Agenda"
 msgstr "Calendar"
 
-#: core/menu.py:101
+#: core/menu.py:109
 msgid "les rendez-vous collectifs, en ligne ou en présence"
 msgstr "collective gatherings, online or in person"
 
-#: core/menu.py:102
+#: core/menu.py:110
 msgid "les conseils des voisins, deux séances pour un même ordre du jour"
 msgstr "the Conseils des Voisins, two sessions for the same agenda"
 
-#: core/menu.py:109 core/templates/core/annuaire.html:3
-#: core/templates/core/directory_entry.html:10
-#: core/templates/core/home.html:38 core/templates/core/home.html:118
+#: core/menu.py:118 core/templates/core/annuaire.html:4
+#: core/templates/core/directory_entry.html:10 core/templates/core/home.html:38
+#: core/templates/core/home.html:118
+#: core/templates/core/icons/annuaire-svg.html:2
+#: core/templates/core/icons/annuaire-svg.html:6
 #: core/templates/core/search.html:52 core/templates/core/tag_detail.html:67
 msgid "Annuaire"
 msgstr "Directory"
 
-#: core/menu.py:110
+#: core/menu.py:119
 msgid "qui fait partie de la communauté, et comment les joindre"
 msgstr "who is part of the community, and how to reach them"
 
-#: core/menu.py:118 core/templates/core/home.html:42
+#: core/menu.py:128 core/templates/core/home.html:42
+#: core/templates/core/home.html:91 core/templates/core/icons/blog-svg.html:3
+#: core/templates/core/icons/blog-svg.html:7
 #: core/templates/core/tag_detail.html:42
 msgid "Blog"
 msgstr "Blog"
 
-#: core/menu.py:119
+#: core/menu.py:129
 msgid "le blog couvre le civisme, les arts plastiques et le numérique"
 msgstr "the blog covers civic engagement, visual arts, and digital"
 
-#: core/menu.py:120
+#: core/menu.py:130
 msgid "les nouvelles et les tribunes des adhérents"
 msgstr "member news and opinion pieces"
 
-#: core/menu.py:127 core/templates/core/search.html:114
+#: core/menu.py:138 core/templates/core/home.html:142
+#: core/templates/core/icons/wiki-svg.html:3
+#: core/templates/core/icons/wiki-svg.html:7
+#: core/templates/core/search.html:114
 msgid "Wiki"
 msgstr "Wiki"
 
-#: core/menu.py:128
+#: core/menu.py:139
 msgid "le guide sur comment utiliser nos outils"
 msgstr "the guide on how to use our tools"
 
-#: core/menu.py:129
+#: core/menu.py:140
 msgid "pas à pas, du premier serveur aux sauvegardes"
 msgstr "step by step, from your first server to backups"
 
-#: core/menu.py:136
+#: core/menu.py:148
 msgid "Civisme"
 msgstr "Civic Engagement"
 
-#: core/menu.py:137
+#: core/menu.py:150
 msgid ""
 "Profession d'empathie nationale, prix d'excellence en service public et en "
 "travail social"
@@ -912,40 +916,40 @@ msgstr ""
 "Profession d'Empathie Nationale, an excellence award for public service and "
 "social work"
 
-#: core/menu.py:138
+#: core/menu.py:152
 #, fuzzy
 #| msgid "s'engager pour l'intérêt général, entre voisins"
 msgid "s'engager pour l'intérêt général, entre voisins et associations"
 msgstr "getting involved for the common good, between neighbors"
 
-#: core/menu.py:145
+#: core/menu.py:160
 msgid "Arts Plastiques"
 msgstr "Visual Arts"
 
-#: core/menu.py:146
+#: core/menu.py:161
 msgid "Galléries d'art dans des lieux insolites et soutien aux artistes"
 msgstr "Art galleries in unusual places, and support for artists"
 
-#: core/menu.py:147
+#: core/menu.py:162
 msgid "transformer tout lieu en galerie d'art hybride"
 msgstr "turning any space into a hybrid art gallery"
 
-#: core/menu.py:154
+#: core/menu.py:170
 msgid "Numérique"
 msgstr "Digital"
 
-#: core/menu.py:155
+#: core/menu.py:171
 #, fuzzy
 #| msgid "Salles de sociabilité numérique et Voisinternet"
 msgid "Salles de sociabilité numérique et lesgrandsvoisins.com"
 msgstr "Digital social spaces, and lesgrandsvoisins.com"
 
-#: core/menu.py:156
+#: core/menu.py:173
 #, fuzzy
 #| msgid "matériel reconditionné et compétences partagées"
 msgid ""
-"matériel reconditionné et compétences partagées, pour les particuliers comme"
-" pour les associations"
+"matériel reconditionné et compétences partagées, pour les particuliers comme "
+"pour les associations"
 msgstr "refurbished equipment and shared skills"
 
 #: core/models.py:34
@@ -1039,8 +1043,8 @@ msgstr "requires approval"
 msgid ""
 "Une intervention d'un administrateur est nécessaire avant que le service ne "
 "soit actif pour la personne (ex. création manuelle d'une boîte courriel) : "
-"le raccourci reste « en attente » jusqu'à validation (groupe « "
-"Administration »)."
+"le raccourci reste « en attente » jusqu'à validation (groupe "
+"« Administration »)."
 msgstr ""
 "An administrator needs to step in before the service becomes active for the "
 "person (e.g. manually creating a mailbox): the shortcut stays “pending” "
@@ -1332,8 +1336,8 @@ msgid ""
 "protégé : absent de l'annuaire, visible uniquement par les personnes ayant "
 "un compte sur le site. Non publié : visible uniquement par vous."
 msgstr ""
-"Published: visible to everyone and listed in the directory. Protected draft:"
-" absent from the directory, visible only to people with an account on the "
+"Published: visible to everyone and listed in the directory. Protected draft: "
+"absent from the directory, visible only to people with an account on the "
 "site. Unpublished: visible only to you."
 
 #: core/models.py:342 core/models.py:591
@@ -1454,8 +1458,8 @@ msgstr "Available groups"
 
 #: core/models.py:487
 msgid ""
-"Comptes autorisés à gérer cet évènement, en plus du groupe « Administration "
-"»."
+"Comptes autorisés à gérer cet évènement, en plus du groupe "
+"« Administration »."
 msgstr ""
 "Accounts allowed to manage this event, in addition to the “Administration” "
 "group."
@@ -1633,8 +1637,8 @@ msgstr "An anonymous account is open on this device"
 
 #: core/templates/core/account.html:36
 msgid ""
-"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera"
-" ensuite supprimé."
+"Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera "
+"ensuite supprimé."
 msgstr ""
 "Would you like to attach its shortcuts to your account? The anonymous "
 "account will then be deleted."
@@ -1765,27 +1769,29 @@ msgstr "Email"
 msgid "Modifier mon profil"
 msgstr "Edit my profile"
 
-#: core/templates/core/account.html:167
+#: core/templates/core/account.html:167 core/templates/core/mes_dons.html:11
+#: core/templates/core/mes_dons.html:14
 #, fuzzy
 #| msgid "Mes groupes"
 msgid "Mes dons"
 msgstr "My groups"
 
-#: core/templates/core/account.html:176
+#: core/templates/core/account.html:176 core/templates/core/mes_dons.html:30
 msgid "déductible fiscalement"
 msgstr "tax-deductible"
 
-#: core/templates/core/account.html:180
+#: core/templates/core/account.html:180 core/templates/core/mes_dons.html:34
 #, fuzzy
 #| msgid "Statuts de l'association"
 msgid "en attente de validation"
 msgstr "Association's bylaws"
 
-#: core/templates/core/account.html:187
+#: core/templates/core/account.html:187 core/templates/core/mes_dons.html:41
 msgid "Aucune contribution enregistrée pour l'instant."
 msgstr "No contribution recorded yet."
 
-#: core/templates/core/account.html:211
+#: core/templates/core/account.html:211 core/templates/core/mes_dons.html:47
+#: core/templates/core/mes_dons.html:71
 msgid "Faire un don"
 msgstr "Make a donation"
 
@@ -1817,8 +1823,8 @@ msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
 "pour retrouver vos raccourcis."
 msgstr ""
-"A 16-digit number, with no name or email. You write it down, and it's enough"
-" to recover your shortcuts."
+"A 16-digit number, with no name or email. You write it down, and it's enough "
+"to recover your shortcuts."
 
 #: core/templates/core/account.html:234
 #: core/templates/core/partials/account_panel_body.html:19
@@ -1893,14 +1899,14 @@ msgid "Aucun paiement en attente."
 msgstr "No payments pending."
 
 #: core/templates/core/administration.html:125
-#: core/templates/core/directory_entry.html:86
+#: core/templates/core/directory_entry.html:89
 #, fuzzy
 #| msgid "public"
 msgid "Dépublier"
 msgstr "audience"
 
 #: core/templates/core/administration.html:125
-#: core/templates/core/directory_entry.html:90
+#: core/templates/core/directory_entry.html:93
 #, fuzzy
 #| msgid "Publique"
 msgid "Publier"
@@ -1935,8 +1941,8 @@ msgid ""
 "Le rendez-vous collectif des Grands Voisins : décider ensemble, en présence "
 "ou à distance."
 msgstr ""
-"The collective gathering of Les Grands Voisins: deciding together, in person"
-" or remotely."
+"The collective gathering of Les Grands Voisins: deciding together, in person "
+"or remotely."
 
 #: core/templates/core/agenda.html:10
 #, fuzzy
@@ -1986,14 +1992,14 @@ msgid ""
 "Écrivez-nous à <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. "
 "Un voisin vous répond, pas un robot."
 msgstr ""
-"Write to us at <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. A"
-" neighbor answers you, not a robot."
+"Write to us at <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>. A "
+"neighbor answers you, not a robot."
 
 #: core/templates/core/agenda.html:49
 msgid "Évènements passés"
 msgstr "Past events"
 
-#: core/templates/core/annuaire.html:5 core/templates/core/home.html:119
+#: core/templates/core/annuaire.html:9 core/templates/core/home.html:119
 msgid ""
 "Qui fait partie de la communauté, et comment les joindre : personnes et "
 "structures, individuelles ou collectives, avec leur accord."
@@ -2001,38 +2007,38 @@ msgstr ""
 "Who is part of the community, and how to reach them: people and "
 "organisations, individual or collective, with their consent."
 
-#: core/templates/core/annuaire.html:8
+#: core/templates/core/annuaire.html:13
 msgid "Gérer mes fiches dans l'annuaire"
 msgstr "Manage my directory listings"
 
-#: core/templates/core/annuaire.html:10
+#: core/templates/core/annuaire.html:16
 msgid "Secteurs d’activité"
 msgstr "Activity sectors"
 
-#: core/templates/core/annuaire.html:11
+#: core/templates/core/annuaire.html:18
 msgid "Tous les secteurs"
 msgstr "All sectors"
 
-#: core/templates/core/annuaire.html:44
+#: core/templates/core/annuaire.html:80
 #: core/templates/core/partials/subscribed_entry_list.html:8
 msgid "Voir la fiche"
 msgstr "View the listing"
 
-#: core/templates/core/annuaire.html:49
-#: core/templates/core/directory_entry.html:63
+#: core/templates/core/annuaire.html:87
+#: core/templates/core/directory_entry.html:66
 msgid "Abonné·e ✓"
 msgstr "Subscribed ✓"
 
-#: core/templates/core/annuaire.html:51
-#: core/templates/core/directory_entry.html:65
+#: core/templates/core/annuaire.html:89
+#: core/templates/core/directory_entry.html:68
 msgid "S'abonner"
 msgstr "Subscribe"
 
-#: core/templates/core/annuaire.html:57
+#: core/templates/core/annuaire.html:96
 msgid "Personne pour l'instant"
 msgstr "No one yet"
 
-#: core/templates/core/annuaire.html:57
+#: core/templates/core/annuaire.html:97
 msgid "Les fiches apparaîtront ici, avec l'accord de chacun."
 msgstr "Entries will appear here, with everyone's consent."
 
@@ -2047,14 +2053,14 @@ msgid "Aucun article publié pour l'instant."
 msgstr "No service yet"
 
 #: core/templates/core/author_detail.html:59
-#: core/templates/core/directory_entry.html:117
+#: core/templates/core/directory_entry.html:123
 #, fuzzy, python-format
 #| msgid "Monter %(name)s"
 msgid "Contacter %(name)s"
 msgstr "Move %(name)s up"
 
 #: core/templates/core/author_detail.html:79
-#: core/templates/core/directory_entry.html:137
+#: core/templates/core/directory_entry.html:143
 msgid "Envoyer"
 msgstr "Send"
 
@@ -2076,38 +2082,46 @@ msgstr ""
 msgid "Aller au contenu"
 msgstr "Skip to content"
 
-#: core/templates/core/base.html:64
+#: core/templates/core/base.html:56
 msgid "Menu principal"
 msgstr "Main menu"
 
-#: core/templates/core/base.html:91 core/templates/core/search.html:18
+#: core/templates/core/base.html:83 core/templates/core/base.html:132
+#: core/templates/core/base.html:144 core/templates/core/search.html:18
 msgid "Rechercher sur le site"
 msgstr "Search the site"
 
-#: core/templates/core/base.html:96 core/templates/core/search.html:19
+#: core/templates/core/base.html:88 core/templates/core/base.html:150
+#: core/templates/core/search.html:19
 msgid "Rechercher…"
 msgstr "Search…"
 
-#: core/templates/core/base.html:102
+#: core/templates/core/base.html:95
 #: core/templates/core/partials/account_panel_body.html:28
 #, fuzzy
 #| msgid "compte"
 msgid "Compte"
 msgstr "Account"
 
-#: core/templates/core/base.html:120
+#: core/templates/core/base.html:156
 msgid "lesgrandsvoisins.com, accueil"
 msgstr "lesgrandsvoisins.com, home"
 
-#: core/templates/core/base.html:140
+#: core/templates/core/base.html:180 core/templates/core/base.html:191
+#: core/templates/core/partials/lang_switcher.html:7
+#: core/templates/core/partials/lang_switcher.html:28
+msgid "Langue"
+msgstr "Language"
+
+#: core/templates/core/base.html:208
 msgid ""
 "Porté par Les Grands Voisins, à Fontenay-aux-Roses et dans le 14ᵉ "
 "arrondissement de Paris."
 msgstr ""
-"Run by Les Grands Voisins, in Fontenay-aux-Roses and the 14th arrondissement"
-" of Paris."
+"Run by Les Grands Voisins, in Fontenay-aux-Roses and the 14th arrondissement "
+"of Paris."
 
-#: core/templates/core/base.html:142
+#: core/templates/core/base.html:210
 msgid ""
 "Seulement deux cookies techniques : votre session et la protection des "
 "formulaires. Aucun traceur, rien n'est chargé depuis un tiers."
@@ -2115,70 +2129,70 @@ msgstr ""
 "Only two technical cookies: your session and form protection. No trackers, "
 "nothing loaded from a third party."
 
-#: core/templates/core/base.html:145
+#: core/templates/core/base.html:213
 msgid "Plan du site"
 msgstr "Site map"
 
-#: core/templates/core/base.html:160
+#: core/templates/core/base.html:228
 msgid "lesgrandsvoisins.com"
 msgstr "lesgrandsvoisins.com"
 
-#: core/templates/core/directory_entry.html:47
+#: core/templates/core/directory_entry.html:50
 msgid "Vidéo"
 msgstr "Video"
 
-#: core/templates/core/directory_entry.html:50
+#: core/templates/core/directory_entry.html:53
 msgid "Site"
 msgstr "Website"
 
-#: core/templates/core/directory_entry.html:55
+#: core/templates/core/directory_entry.html:58
 #: core/templates/core/partials/announcement_banner.html:18
 #: core/templates/core/partials/announcement_card.html:14
 msgid "En savoir plus"
 msgstr "Learn more"
 
-#: core/templates/core/directory_entry.html:73
+#: core/templates/core/directory_entry.html:76
 #: core/templates/core/event_detail.html:68
 msgid "Notifications par courriel ✓"
 msgstr "Email notifications ✓"
 
-#: core/templates/core/directory_entry.html:73
+#: core/templates/core/directory_entry.html:76
 #: core/templates/core/event_detail.html:68
 #: core/templates/core/partials/event_interest_list.html:14
 #: core/templates/core/partials/subscribed_entry_list.html:12
 msgid "Recevoir un courriel"
 msgstr "Get email notifications"
 
-#: core/templates/core/directory_entry.html:78
+#: core/templates/core/directory_entry.html:81
 #: core/templates/core/partials/entry_list.html:9
 #: core/templates/core/partials/my_event_list.html:9
 msgid "Modifier"
 msgstr "Edit"
 
-#: core/templates/core/directory_entry.html:80
+#: core/templates/core/directory_entry.html:83
 #: core/templates/core/partials/entry_list.html:8
 #: core/templates/core/partials/shortcut_list.html:19
 msgid "En attente de validation"
 msgstr "Awaiting approval"
 
-#: core/templates/core/directory_entry.html:88
+#: core/templates/core/directory_entry.html:91
 msgid "Annuler la demande"
 msgstr "Cancel the request"
 
-#: core/templates/core/directory_entry.html:98
-#: core/templates/core/directory_entry.html:110
+#: core/templates/core/directory_entry.html:101
+#: core/templates/core/directory_entry.html:116
 msgid "Demander à être responsable de cette fiche"
 msgstr "Ask to become responsible for this listing"
 
-#: core/templates/core/directory_entry.html:101
+#: core/templates/core/directory_entry.html:104
 msgid "Demande de responsabilité en attente de validation"
 msgstr "Ownership request awaiting approval"
 
-#: core/templates/core/directory_entry.html:103
+#: core/templates/core/directory_entry.html:106
 msgid "Demande de responsabilité refusée"
 msgstr "Ownership request rejected"
 
-#: core/templates/core/directory_entry.html:142
+#: core/templates/core/directory_entry.html:148
 msgid "← Retour à l’annuaire"
 msgstr "← Back to the directory"
 
@@ -2252,37 +2266,37 @@ msgstr "I'm interested"
 msgid "J'y vais ✓"
 msgstr "I'm going ✓"
 
-#: core/templates/core/event_detail.html:79
+#: core/templates/core/event_detail.html:82
 msgid "Demander à gérer cet évènement"
 msgstr "Ask to manage this event"
 
-#: core/templates/core/event_detail.html:82
+#: core/templates/core/event_detail.html:85
 msgid "Demande de gestion en attente de validation"
 msgstr "Management request awaiting approval"
 
-#: core/templates/core/event_detail.html:84
+#: core/templates/core/event_detail.html:87
 msgid "Demande de gestion refusée"
 msgstr "Management request rejected"
 
-#: core/templates/core/event_detail.html:91
+#: core/templates/core/event_detail.html:94
 #, fuzzy
 #| msgid "Prochains évènements"
 msgid "Navigation entre évènements"
 msgstr "Upcoming events"
 
-#: core/templates/core/event_detail.html:94
+#: core/templates/core/event_detail.html:97
 #, fuzzy
 #| msgid "← Page précédente"
 msgid "← Évènement précédent"
 msgstr "← Previous page"
 
-#: core/templates/core/event_detail.html:100
+#: core/templates/core/event_detail.html:103
 #, fuzzy
 #| msgid "Page suivante →"
 msgid "Évènement suivant →"
 msgstr "Next page →"
 
-#: core/templates/core/event_detail.html:106
+#: core/templates/core/event_detail.html:109
 #, fuzzy
 #| msgid "← Retour à l’annuaire"
 msgid "← Retour à l’agenda"
@@ -2315,8 +2329,8 @@ msgid ""
 "Ce paiement reste « en attente » le temps qu'un administrateur confirme sa "
 "bonne réception — vous pouvez suivre son statut depuis votre compte."
 msgstr ""
-"This payment stays “pending” until an administrator confirms it was received"
-" — you can follow its status from your account."
+"This payment stays “pending” until an administrator confirms it was received "
+"— you can follow its status from your account."
 
 #: core/templates/core/faire_don_merci.html:32
 #, python-format
@@ -2334,6 +2348,7 @@ msgid "Rappel des moyens de don"
 msgstr "Reminder of donation methods"
 
 #: core/templates/core/faire_don_merci.html:52
+#: core/templates/core/mes_dons.html:22
 #, fuzzy
 #| msgid "Mon compte"
 msgid "← Mon compte"
@@ -2420,7 +2435,6 @@ msgid "Bientôt un nouvel article"
 msgstr "A new article is coming soon"
 
 #: core/templates/core/home.html:47
-#| msgid "Aucun service pour l'instant"
 msgid "Rien de prévu pour l'instant"
 msgstr "Nothing planned for now"
 
@@ -2431,12 +2445,12 @@ msgstr "Coming up"
 #: core/templates/core/home.html:62
 msgid ""
 "Permanence chaque lundi de 12h à 19h30, en personne (93 av. du Général "
-"Leclerc, 75014 Paris — métro Alésia, Atelier de la Ressourcerie Créative) ou"
-" en ligne sur meet.lesgrandsvoisins.com."
+"Leclerc, 75014 Paris — métro Alésia, Atelier de la Ressourcerie Créative) ou "
+"en ligne sur meet.lesgrandsvoisins.com."
 msgstr ""
 "Office hours every Monday from 12pm to 7:30pm, in person (93 av. du Général "
-"Leclerc, 75014 Paris — métro Alésia, Atelier de la Ressourcerie Créative) or"
-" online at meet.lesgrandsvoisins.com."
+"Leclerc, 75014 Paris — métro Alésia, Atelier de la Ressourcerie Créative) or "
+"online at meet.lesgrandsvoisins.com."
 
 #: core/templates/core/home.html:64
 msgid "Tout l'agenda"
@@ -2448,8 +2462,7 @@ msgstr "Our three hubs"
 
 #: core/templates/core/home.html:75
 msgid ""
-"Portés ensemble par les bénévoles, chacun avec sa couleur et ses rendez-"
-"vous."
+"Portés ensemble par les bénévoles, chacun avec sa couleur et ses rendez-vous."
 msgstr ""
 "Carried together by our volunteers, each with its own colour and its own "
 "events."
@@ -2474,17 +2487,14 @@ msgid "Les derniers articles s'afficheront ici."
 msgstr "The latest articles will appear here."
 
 #: core/templates/core/home.html:114
-#| msgid "Annuaire"
 msgid "L'annuaire"
 msgstr "The directory"
 
 #: core/templates/core/home.html:120
-#| msgid "Voir l'annuaire"
 msgid "Voir tout l'annuaire"
 msgstr "View the full directory"
 
 #: core/templates/core/home.html:134
-#| msgid "Les derniers articles s'afficheront ici."
 msgid "Les dernières fiches s'afficheront ici."
 msgstr "The latest listings will appear here."
 
@@ -2581,8 +2591,8 @@ msgid ""
 "Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « mon "
 "Compte », même sans compte nominatif."
 msgstr ""
-"Add the ones that interest you. They'll join your shortcuts in “my Account”,"
-" even without a named account."
+"Add the ones that interest you. They'll join your shortcuts in “my Account”, "
+"even without a named account."
 
 #: core/templates/core/home.html:234
 msgid "Tous les services, avec ce que chacun conserve"
@@ -2595,8 +2605,8 @@ msgstr "Where we come from"
 #: core/templates/core/home.html:261
 msgid ""
 "Les Grands Voisins sont nés entre 2015 et 2017 à l'hôpital Saint-Vincent-de-"
-"Paul, dans le 14ᵉ arrondissement de Paris. Depuis, nous nous demandons si un"
-" lieu physique est encore nécessaire pour rester voisins."
+"Paul, dans le 14ᵉ arrondissement de Paris. Depuis, nous nous demandons si un "
+"lieu physique est encore nécessaire pour rester voisins."
 msgstr ""
 "Les Grands Voisins was born between 2015 and 2017 at the Saint-Vincent-de-"
 "Paul hospital, in the 14th arrondissement of Paris. Ever since, we've been "
@@ -2621,6 +2631,40 @@ msgstr ""
 #: core/templates/core/home.html:267
 msgid "Rencontrer le bureau"
 msgstr "Meet the board"
+
+#: core/templates/core/icons/account-svg.html:7
+#, fuzzy
+#| msgid "raccourci"
+msgid "account"
+msgstr "shortcut"
+
+#: core/templates/core/icons/lang-svg.html:7
+#, fuzzy
+#| msgid "Langue"
+msgid "Lang"
+msgstr "Language"
+
+#: core/templates/core/icons/menu-svg.html:8
+msgid "Menu"
+msgstr ""
+
+#: core/templates/core/icons/search-svg.html:7
+msgid "Search"
+msgstr ""
+
+#: core/templates/core/mes_dons.html:3
+#, fuzzy
+#| msgid "Mes groupes — Voisinternet"
+msgid "Mes dons — lesgrandsvoisins.com"
+msgstr "My groups — Voisinternet"
+
+#: core/templates/core/mes_dons.html:15
+msgid "L'historique de vos promesses et paiements, et un nouveau don."
+msgstr ""
+
+#: core/templates/core/mes_dons.html:21
+msgid "Historique"
+msgstr ""
 
 #: core/templates/core/mes_evenements.html:3
 #, fuzzy
@@ -2657,17 +2701,17 @@ msgstr "My directory listings — Voisinternet"
 #: core/templates/core/mes_fiches.html:15
 #, fuzzy
 #| msgid ""
-#| "Créez et gérez vos propres pages dans l'annuaire : personnes ou structures. "
-#| "Elles ne deviennent visibles de tous qu'une fois « apparaît publiquement » "
-#| "coché — c'est votre consentement explicite."
+#| "Créez et gérez vos propres pages dans l'annuaire : personnes ou "
+#| "structures. Elles ne deviennent visibles de tous qu'une fois « apparaît "
+#| "publiquement » coché — c'est votre consentement explicite."
 msgid ""
 "Créez et gérez vos propres pages dans l'annuaire : personnes ou structures. "
 "Elles restent non publiées tant que vous n'avez pas choisi de les publier — "
 "c'est votre consentement explicite."
 msgstr ""
-"Create and manage your own directory listings: people or organizations. They"
-" only become visible to everyone once “appears publicly” is checked — that "
-"is your explicit consent."
+"Create and manage your own directory listings: people or organizations. They "
+"only become visible to everyone once “appears publicly” is checked — that is "
+"your explicit consent."
 
 #: core/templates/core/mes_fiches.html:28
 msgid "Fiches auxquelles je suis abonné·e"
@@ -2690,11 +2734,11 @@ msgstr "No service added yet."
 msgid "Mon compte : %(account_sub)s"
 msgstr "My account: %(account_sub)s"
 
-#: core/templates/core/partials/account_widget.html:31
+#: core/templates/core/partials/account_widget.html:26
 msgid "Options de mon compte"
 msgstr "My account options"
 
-#: core/templates/core/partials/account_widget.html:35
+#: core/templates/core/partials/account_widget.html:30
 msgid "Fermer"
 msgstr "Close"
 
@@ -2769,8 +2813,8 @@ msgid ""
 "Markdown ou HTML acceptés : **gras**, _italique_, [lien](https://…), listes "
 "avec « - »."
 msgstr ""
-"Markdown or HTML accepted: **bold**, _italic_, [link](https://…), lists with"
-" “- ”."
+"Markdown or HTML accepted: **bold**, _italic_, [link](https://…), lists with "
+"“- ”."
 
 #: core/templates/core/partials/entry_form_fields.html:28
 msgid "Aperçu"
@@ -2827,11 +2871,6 @@ msgstr "Propose a partnership"
 #: core/templates/core/partials/group_list.html:23
 msgid "Aucun groupe pour l'instant"
 msgstr "No group yet"
-
-#: core/templates/core/partials/lang_switcher.html:7
-#: core/templates/core/partials/lang_switcher.html:28
-msgid "Langue"
-msgstr "Language"
 
 #: core/templates/core/partials/lang_switcher.html:34
 msgid "Changer"
@@ -2901,9 +2940,9 @@ msgstr "You don't have a directory listing yet."
 #: core/templates/core/partials/scene.html:1
 #, fuzzy
 #| msgid ""
-#| "Une rue de quartier au soleil : café, galerie, théâtre et salle de concert, "
-#| "restaurant, salon de thé, centre social, atelier d'art et hôpital, reliés "
-#| "entre eux ; un nuage s'éloigne."
+#| "Une rue de quartier au soleil : café, galerie, théâtre et salle de "
+#| "concert, restaurant, salon de thé, centre social, atelier d'art et "
+#| "hôpital, reliés entre eux ; un nuage s'éloigne."
 msgid ""
 "Une rue de quartier au soleil : café, galerie, théâtre et salle de concert, "
 "restaurant, salon de thé, centre social, atelier d'art et hôpital, reliés "
@@ -3011,8 +3050,7 @@ msgid "Mes raccourcis — lesgrandsvoisins.com"
 msgstr "My shortcuts — Voisinternet"
 
 #: core/templates/core/raccourcis.html:5
-msgid ""
-"Les services que vous avez choisis, à ajouter ou retirer à tout moment."
+msgid "Les services que vous avez choisis, à ajouter ou retirer à tout moment."
 msgstr "The services you've chosen, to add or remove at any time."
 
 #: core/templates/core/raccourcis.html:21
@@ -3046,10 +3084,9 @@ msgstr "No results for “%(query)s”."
 msgid "Services"
 msgstr "service"
 
-#: core/templates/core/tag_detail.html:3
-#: core/templates/core/tag_detail.html:10 core/templates/core/tag_list.html:3
-#: core/templates/core/tag_list.html:10 core/templates/core/tag_list.html:13
-#: core/templates/core/tag_list.html:19
+#: core/templates/core/tag_detail.html:3 core/templates/core/tag_detail.html:10
+#: core/templates/core/tag_list.html:3 core/templates/core/tag_list.html:10
+#: core/templates/core/tag_list.html:13 core/templates/core/tag_list.html:19
 msgid "Étiquettes"
 msgstr "Tags"
 
@@ -3068,8 +3105,8 @@ msgid ""
 "Un même mot-clé, pour retrouver ensemble articles, fiches de l'annuaire, "
 "services et pôles."
 msgstr ""
-"One single keyword, to bring together articles, directory listings, services"
-" and hubs."
+"One single keyword, to bring together articles, directory listings, services "
+"and hubs."
 
 #: core/templates/core/tag_list.html:25
 #, fuzzy
@@ -3077,49 +3114,54 @@ msgstr ""
 msgid "Aucune étiquette pour l'instant."
 msgstr "No group yet"
 
-#: core/views.py:35
+#: core/views.py:42
 msgid ""
 "Les rendez-vous et les ressources pour s'y retrouver dans la communauté."
 msgstr "The meetings and resources to find your way in the community."
 
-#: core/views.py:36
+#: core/views.py:43
 msgid "Nos trois pôles d'action, portés ensemble par les bénévoles."
 msgstr "Our three focus areas, carried together by volunteers."
 
-#: core/views.py:37
+#: core/views.py:44
 msgid "Nous rejoindre, nous soutenir, nous contacter."
 msgstr "Join us, support us, contact us."
 
-#: core/views.py:273
+#: core/views.py:291
 #, fuzzy
-#| msgid ""
-#| "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
+#| msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgid ""
 "Trop de messages envoyés récemment depuis cet appareil. Réessayez plus tard."
 msgstr "Too many attempts from this device. Try again in fifteen minutes."
 
-#: core/views.py:280
+#: core/views.py:300
 #, fuzzy, python-format
 #| msgid "Mes groupes — Voisinternet"
 msgid "Message via lesgrandsvoisins.com de %(name)s"
 msgstr "My groups — Voisinternet"
 
-#: core/views.py:305 core/views.py:499
+#: core/views.py:335 core/views.py:549
 #, python-format
 msgid "Message envoyé à %(name)s."
 msgstr "Message sent to %(name)s."
 
-#: core/views.py:360
+#: core/views.py:339 core/views.py:553
+msgid ""
+"Votre message a été enregistré, mais son envoi par e-mail a échoué. "
+"Réessayez plus tard."
+msgstr "Your message was recorded, but sending it by e-mail failed. Try again later."
+
+#: core/views.py:406
 #, fuzzy
 #| msgid "Aucune contribution enregistrée pour l'instant."
 msgid "Merci ! Votre contribution a été enregistrée."
 msgstr "No contribution recorded yet."
 
-#: core/views.py:362
+#: core/views.py:408
 msgid "Le formulaire de don contient une erreur : montant ou date invalide."
 msgstr "The donation form contains an error: invalid amount or date."
 
-#: core/views.py:518
+#: core/views.py:573
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cette fiche."
@@ -3127,50 +3169,49 @@ msgstr ""
 "Request sent: an administrator will review it before making you responsible "
 "for this listing."
 
-#: core/views.py:521
+#: core/views.py:576
 msgid "Vous avez déjà demandé à être responsable de cette fiche."
 msgstr "You have already asked to become responsible for this listing."
 
-#: core/views.py:539
+#: core/views.py:594
 msgid ""
-"Connectez-vous pour finaliser votre demande de responsabilité de cette "
-"fiche."
+"Connectez-vous pour finaliser votre demande de responsabilité de cette fiche."
 msgstr ""
 "Sign in to complete your request to take responsibility for this listing."
 
-#: core/views.py:563
+#: core/views.py:618
 msgid "Fiche créée."
 msgstr "Listing created."
 
-#: core/views.py:592
+#: core/views.py:647
 msgid "Fiche mise à jour."
 msgstr "Listing updated."
 
-#: core/views.py:604
+#: core/views.py:659
 msgid "Fiche supprimée."
 msgstr "Listing deleted."
 
-#: core/views.py:616
+#: core/views.py:671
 #, python-format
 msgid "Abonnement à « %(name)s » retiré."
 msgstr "Subscription to “%(name)s” removed."
 
-#: core/views.py:619
+#: core/views.py:674
 #, python-format
 msgid "Abonné à « %(name)s »."
 msgstr "Subscribed to “%(name)s”."
 
-#: core/views.py:645
+#: core/views.py:700
 #, fuzzy
 #| msgid "Fiche créée."
 msgid "Fiche dépubliée."
 msgstr "Listing created."
 
-#: core/views.py:645
+#: core/views.py:700
 msgid "Demande de publication annulée."
 msgstr "Publication request cancelled."
 
-#: core/views.py:651
+#: core/views.py:706
 msgid ""
 "Fiche envoyée pour validation : elle sera publique une fois validée par un "
 "administrateur."
@@ -3178,22 +3219,22 @@ msgstr ""
 "Listing sent for approval: it will become public once approved by an "
 "administrator."
 
-#: core/views.py:706
+#: core/views.py:761
 #, python-format
 msgid "Intérêt enregistré pour « %(title)s »."
 msgstr "Interest recorded for “%(title)s”."
 
-#: core/views.py:709
+#: core/views.py:764
 #, python-format
 msgid "Intérêt retiré pour « %(title)s »."
 msgstr "Interest removed for “%(title)s”."
 
-#: core/views.py:713
+#: core/views.py:768
 #, python-format
 msgid "Intention mise à jour pour « %(title)s »."
 msgstr "Intent updated for “%(title)s”."
 
-#: core/views.py:733
+#: core/views.py:788
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cet évènement."
@@ -3201,52 +3242,52 @@ msgstr ""
 "Request sent: an administrator will review it before making you responsible "
 "for this event."
 
-#: core/views.py:736
+#: core/views.py:791
 msgid "Vous avez déjà demandé à gérer cet évènement."
 msgstr "You have already asked to manage this event."
 
-#: core/views.py:751
+#: core/views.py:806
 msgid ""
 "Connectez-vous pour finaliser votre demande de gestion de cet évènement."
 msgstr "Sign in to complete your request to manage this event."
 
-#: core/views.py:777
+#: core/views.py:832
 msgid ""
-"Évènement créé : il reste réservé à ses responsables tant que le groupe « "
-"Administration » ne l'a pas publié."
+"Évènement créé : il reste réservé à ses responsables tant que le groupe "
+"« Administration » ne l'a pas publié."
 msgstr ""
 "Event created: it stays reserved to its organisers until the "
 "“Administration” group publishes it."
 
-#: core/views.py:798
+#: core/views.py:853
 #, fuzzy
 #| msgid "Fiche mise à jour."
 msgid "Évènement mis à jour."
 msgstr "Listing updated."
 
-#: core/views.py:810
+#: core/views.py:865
 #, fuzzy
 #| msgid "Évènements passés"
 msgid "Évènement supprimé."
 msgstr "Past events"
 
-#: core/views.py:847
+#: core/views.py:902
 msgid "Compte anonyme créé."
 msgstr "Anonymous account created."
 
-#: core/views.py:854
+#: core/views.py:909
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "Too many attempts from this device. Try again in fifteen minutes."
 
-#: core/views.py:858
+#: core/views.py:913
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "No account matches this number. Check the 16 digits."
 
-#: core/views.py:861
+#: core/views.py:916
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "Account found. Your shortcuts are back."
 
-#: core/views.py:868
+#: core/views.py:923
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
@@ -3254,21 +3295,21 @@ msgstr ""
 "This account is no longer open on this device. Your number lets you find it "
 "again."
 
-#: core/views.py:879
+#: core/views.py:934
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "Your anonymous shortcuts have joined your account."
 
-#: core/views.py:895
+#: core/views.py:950
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "“%(name)s” removed from your shortcuts."
 
-#: core/views.py:902
+#: core/views.py:957
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "“%(name)s” added to your shortcuts."
 
-#: core/views.py:905
+#: core/views.py:960
 #, fuzzy, python-format
 #| msgid "« %(name)s » ajouté à vos raccourcis."
 msgid ""
@@ -3276,12 +3317,12 @@ msgid ""
 "administrateur."
 msgstr "“%(name)s” added to your shortcuts."
 
-#: core/views.py:1018
+#: core/views.py:1073
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "“%(name)s” removed from your groups."
 
-#: core/views.py:1022
+#: core/views.py:1077
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "“%(name)s” added to your groups."

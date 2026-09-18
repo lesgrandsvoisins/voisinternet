@@ -62,6 +62,52 @@
     {% endif %}
   </section>
 
+  <section aria-labelledby="entries-title">
+    <div class="split">
+      <h2 id="entries-title">{% trans "Fiches de l'annuaire en attente de publication" %}</h2>
+    </div>
+    {% if pending_entries %}
+    <ul class="docs">
+      {% for entry in pending_entries %}
+      <li>
+        <strong><a href="{% url 'core:entry_detail' entry.slug %}">{{ entry.name }}</a></strong>
+        <span>{{ entry.owner }}</span>
+        <form method="post" action="{% url 'core:administration_review_entry' entry.slug %}">
+          {% csrf_token %}
+          <button class="sub-btn" type="submit" name="decision" value="approve">{% trans "Valider" %}</button>
+          <button class="sub-btn" type="submit" name="decision" value="reject">{% trans "Refuser" %}</button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="intro">{% trans "Aucune fiche en attente." %}</p>
+    {% endif %}
+  </section>
+
+  <section aria-labelledby="contributions-title">
+    <div class="split">
+      <h2 id="contributions-title">{% trans "Paiements de don en attente de validation" %}</h2>
+    </div>
+    {% if pending_contributions %}
+    <ul class="docs">
+      {% for c in pending_contributions %}
+      <li>
+        <strong>{{ c.amount }} € — {{ c.get_method_display }}</strong>
+        <span>{{ c.account }} — {{ c.date|date:"j F Y" }}{% if c.note %} — {{ c.note }}{% endif %}</span>
+        <form method="post" action="{% url 'core:administration_review_contribution' c.pk %}">
+          {% csrf_token %}
+          <button class="sub-btn" type="submit" name="decision" value="approve">{% trans "Valider" %}</button>
+          <button class="sub-btn" type="submit" name="decision" value="reject">{% trans "Refuser" %}</button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="intro">{% trans "Aucun paiement en attente." %}</p>
+    {% endif %}
+  </section>
+
   <section aria-labelledby="events-title">
     <div class="split">
       <h2 id="events-title">{% trans "Évènements" %}</h2>

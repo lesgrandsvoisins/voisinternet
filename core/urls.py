@@ -73,4 +73,12 @@ urlpatterns = [
         "administration/evenements/<int:pk>/bascule/",
         views.administration_toggle_event, name="administration_toggle_event",
     ),
+    path(
+        "administration/annuaire/<slug:slug>/",
+        views.administration_review_entry, name="administration_review_entry",
+    ),
+    path(
+        "administration/dons/<int:pk>/",
+        views.administration_review_contribution, name="administration_review_contribution",
+    ),
 ]

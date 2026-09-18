@@ -1129,6 +1129,15 @@ def administration(request):
             approved__isnull=True,
         ).select_related("event", "account"),
         "events": Event.objects.order_by("-start"),
+        # Publication demandée (views.toggle_publication) mais pas encore validée.
+        "pending_entries": DirectoryEntry.objects.filter(
+            visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=False,
+        ).select_related("owner"),
+        # Paiement auto-déclaré (views.faire_don) en attente de validation — une
+        # promesse, elle, est déjà approuvée dès sa création (Contribution.approved).
+        "pending_contributions": Contribution.objects.filter(
+            kind=Contribution.PAYMENT, approved__isnull=True,
+        ).select_related("account"),
     })
 
 
@@ -1162,4 +1171,29 @@ def administration_toggle_event(request, pk):
     event = get_object_or_404(Event, pk=pk)
     setattr(event, field, not getattr(event, field))
     event.save(update_fields=[field])
+    return redirect("core:administration")
+
+
+@require_POST
+def administration_review_entry(request, slug):
+    if not _is_administration(request.user):
+        raise PermissionDenied
+    entry = get_object_or_404(
+        DirectoryEntry, slug=slug, visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=False,
+    )
+    if request.POST.get("decision") == "approve":
+        entry.approved = True
+    else:
+        entry.visibility = DirectoryEntry.VISIBILITY_DRAFT
+    entry.save()
+    return redirect("core:administration")
+
+
+@require_POST
+def administration_review_contribution(request, pk):
+    if not _is_administration(request.user):
+        raise PermissionDenied
+    contribution = get_object_or_404(Contribution, pk=pk, kind=Contribution.PAYMENT, approved__isnull=True)
+    contribution.approved = request.POST.get("decision") == "approve"
+    contribution.save()
     return redirect("core:administration")

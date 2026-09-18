@@ -660,6 +660,61 @@ class AdministrationTests(Base):
         event.refresh_from_db()
         self.assertTrue(event.featured)
 
+    def test_administration_group_member_can_review_pending_entry(self):
+        from django.contrib.auth.models import Group
+
+        entry = DirectoryEntry.objects.create(
+            name="Fiche en attente", slug="fiche-en-attente",
+            visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=False,
+        )
+        admin_user = get_user_model().objects.create_user("admin")
+        admin_user.groups.add(Group.objects.get(name="Administration"))
+        self.client.force_login(admin_user)
+
+        response = self.client.get(reverse("core:administration"))
+        self.assertContains(response, "Fiche en attente")
+
+        self.client.post(reverse("core:administration_review_entry", args=[entry.slug]), {"decision": "approve"})
+        entry.refresh_from_db()
+        self.assertTrue(entry.approved)
+        self.assertEqual(entry.visibility, DirectoryEntry.VISIBILITY_PUBLIC)
+
+    def test_administration_group_member_can_reject_pending_entry(self):
+        from django.contrib.auth.models import Group
+
+        entry = DirectoryEntry.objects.create(
+            name="Fiche refusée", slug="fiche-refusee",
+            visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=False,
+        )
+        admin_user = get_user_model().objects.create_user("admin")
+        admin_user.groups.add(Group.objects.get(name="Administration"))
+        self.client.force_login(admin_user)
+
+        self.client.post(reverse("core:administration_review_entry", args=[entry.slug]), {"decision": "reject"})
+        entry.refresh_from_db()
+        self.assertFalse(entry.approved)
+        self.assertEqual(entry.visibility, DirectoryEntry.VISIBILITY_DRAFT)
+
+    def test_administration_group_member_can_review_pending_contribution(self):
+        from django.contrib.auth.models import Group
+
+        acc = Account.objects.create(user=get_user_model().objects.create_user("voisine"))
+        contribution = Contribution.objects.create(
+            account=acc, kind=Contribution.PAYMENT, amount=25, method="virement", date=timezone.localdate(),
+        )
+        admin_user = get_user_model().objects.create_user("admin")
+        admin_user.groups.add(Group.objects.get(name="Administration"))
+        self.client.force_login(admin_user)
+
+        response = self.client.get(reverse("core:administration"))
+        self.assertContains(response, "25")
+
+        self.client.post(
+            reverse("core:administration_review_contribution", args=[contribution.pk]), {"decision": "approve"},
+        )
+        contribution.refresh_from_db()
+        self.assertTrue(contribution.approved)
+
 
 class DonorPrivacyTests(TestCase):
     def test_only_consenting_donors_are_listed(self):

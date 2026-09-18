@@ -83,7 +83,13 @@ _CONTENT_ALLOWED_PROTOCOLS = ["http", "https", "mailto"]
 _CALLOUT_OPEN_RE = re.compile(
     r'^:::+\s*\{\.callout-(note|tip|important|warning|caution)(?:\s+title="([^"]*)")?\s*\}\s*$'
 )
+_PULL_OPEN_RE = re.compile(r'^:::+\s*\{\.pull\}\s*$')
 _FENCE_CLOSE_RE = re.compile(r'^:::+\s*$')
+# Span Pandoc/Quarto pour une citation en exergue ponctuelle, à l'intérieur d'un
+# paragraphe (cms.wagtail_hooks.py::register_pull_feature pour la version Draftail) :
+# [texte]{.pull} — avec des accolades comme un attribut de span Pandoc standard, pas
+# des parenthèses (qui feraient un lien Markdown normal).
+_PULL_SPAN_RE = re.compile(r'\[([^\]]+)\]\{\.pull\}')
 
 
 def _content_markdown_to_html(text):
@@ -134,14 +140,14 @@ def _extract_footnote_defs(body_md):
 
 def _split_content_blocks(body_md):
     """
-    Découpe le Markdown d'une cms.ContentPage en blocs "prose"/"callout" pour son
-    StreamField body (voir cms.models.ContentPage), en reconnaissant les callouts
-    Quarto ci-dessus. Tout le reste (avant/après/entre deux callouts) devient un ou
-    plusieurs blocs "prose". Chaque segment est converti indépendamment par
-    _content_markdown_to_html puis _restore_wagtail_embeds, comme pour le blog — les
-    définitions de notes de bas de page (_extract_footnote_defs) sont rattachées à
-    chaque segment avant conversion, python-markdown n'émettant que celles qui y sont
-    effectivement référencées.
+    Découpe le Markdown d'une cms.ContentPage en blocs "prose"/"callout"/"pull" pour
+    son StreamField body (voir cms.models.ContentPage), en reconnaissant les callouts
+    et citations en exergue (::: {.pull}) Quarto ci-dessus. Tout le reste (avant/
+    après/entre deux fences) devient un ou plusieurs blocs "prose". Chaque segment est
+    converti indépendamment par _content_markdown_to_html puis _restore_wagtail_embeds,
+    comme pour le blog — les définitions de notes de bas de page
+    (_extract_footnote_defs) sont rattachées à chaque segment avant conversion,
+    python-markdown n'émettant que celles qui y sont effectivement référencées.
     """
     body_md = body_md.replace(PAGEBREAK_SHORTCODE, '<hr class="pagebreak">')
     body_md, footnote_defs = _extract_footnote_defs(body_md)
@@ -150,6 +156,9 @@ def _split_content_blocks(body_md):
     prose_lines = []
 
     def _to_html(markdown_text):
+        # [texte]{.pull} -> <span class="pull"> directement dans la source Markdown,
+        # avant conversion : python-markdown laisse passer le HTML brut inline tel quel.
+        markdown_text = _PULL_SPAN_RE.sub(r'<span class="pull">\1</span>', markdown_text)
         used_ids = dict.fromkeys(_FOOTNOTE_REF_RE.findall(markdown_text))
         defs_for_segment = "\n\n".join(footnote_defs[i] for i in used_ids if i in footnote_defs)
         text = f"{markdown_text}\n\n{defs_for_segment}" if defs_for_segment else markdown_text
@@ -163,20 +172,22 @@ def _split_content_blocks(body_md):
 
     i = 0
     while i < len(lines):
-        match = _CALLOUT_OPEN_RE.match(lines[i])
-        if match:
+        callout_match = _CALLOUT_OPEN_RE.match(lines[i])
+        pull_match = None if callout_match else _PULL_OPEN_RE.match(lines[i])
+        if callout_match or pull_match:
             flush_prose()
-            callout_type, title = match.group(1), match.group(2) or ""
             inner_lines = []
             i += 1
             while i < len(lines) and not _FENCE_CLOSE_RE.match(lines[i]):
                 inner_lines.append(lines[i])
                 i += 1
             i += 1  # saute la ligne de fermeture ":::"
-            result.append({
-                "type": "callout",
-                "value": {"type": callout_type, "title": title, "text": _to_html("\n".join(inner_lines))},
-            })
+            inner_html = _to_html("\n".join(inner_lines))
+            if callout_match:
+                callout_type, title = callout_match.group(1), callout_match.group(2) or ""
+                result.append({"type": "callout", "value": {"type": callout_type, "title": title, "text": inner_html}})
+            else:
+                result.append({"type": "pull", "value": {"text": inner_html}})
         else:
             prose_lines.append(lines[i])
             i += 1
@@ -383,12 +394,14 @@ class _HTMLToMarkdown(HTMLParser):
 
 class _ContentHTMLToMarkdown(_HTMLToMarkdown):
     """
-    Étend _HTMLToMarkdown avec les deux structures que produit l'extension "extra" de
-    python-markdown mais que BlogPostPage.body ne connaît pas : tableaux et notes de
-    bas de page (cms.ContentPage, voir son docstring dans cms/models.py). Capture le
-    Markdown d'une cellule de tableau ou d'une définition de note en substituant
-    temporairement self.out (_push_capture/_pop_capture) : les gestionnaires hérités
-    (gras, liens, images…) fonctionnent alors sans modification à l'intérieur.
+    Étend _HTMLToMarkdown avec ce que BlogPostPage.body ne connaît pas : tableaux et
+    notes de bas de page produits par l'extension "extra" de python-markdown, et le
+    span <span class="pull"> d'une citation en exergue (cms.ContentPage, voir son
+    docstring dans cms/models.py et cms/wagtail_hooks.py::register_pull_feature).
+    Capture le Markdown d'une cellule de tableau ou d'une définition de note en
+    substituant temporairement self.out (_push_capture/_pop_capture) : les
+    gestionnaires hérités (gras, liens, images…) fonctionnent alors sans modification
+    à l'intérieur.
     """
 
     def __init__(self, media_files=None):
@@ -398,6 +411,7 @@ class _ContentHTMLToMarkdown(_HTMLToMarkdown):
         self._footnotes = None
         self._footnote_ref = None
         self._skip_depth = 0
+        self._pull_span_stack = []
 
     def _push_capture(self):
         self._capture_stack.append(self.out)
@@ -443,6 +457,12 @@ class _ContentHTMLToMarkdown(_HTMLToMarkdown):
             self._footnote_ref = attrs["id"].split(":", 1)[1]
             self._skip_depth = 1
             return
+        if tag == "span":
+            is_pull = "pull" in (attrs.get("class") or "").split()
+            self._pull_span_stack.append(is_pull)
+            if is_pull:
+                self.out.append("[")
+            return
         super().handle_starttag(tag, attrs)
 
     def handle_endtag(self, tag):
@@ -480,6 +500,10 @@ class _ContentHTMLToMarkdown(_HTMLToMarkdown):
                     self.out.append(f"[^{fn_id}]: {text}\n\n")
                 self._footnotes = None
                 return
+        if tag == "span" and self._pull_span_stack:
+            if self._pull_span_stack.pop():
+                self.out.append("]{.pull}")
+            return
         super().handle_endtag(tag)
 
     def handle_data(self, data):
@@ -574,8 +598,11 @@ def export_contentpage_qmd(page, media_files=None):
     qu'export_blogpost_qmd (frontmatter key/lang, marqueurs wagtail-image/-document/
     -page), mais parcourt les blocs de body (StreamField) plutôt qu'un RichTextField
     plat : un bloc "prose" devient du Markdown normal, un bloc "callout" devient un div
-    Pandoc/Quarto (::: {.callout-...}), voir _ContentHTMLToMarkdown et
-    cms.models.ContentPage.
+    Pandoc/Quarto (::: {.callout-...}), un bloc "pull" devient ::: {.pull} — voir
+    _ContentHTMLToMarkdown et cms.models.ContentPage/PullQuoteBlock. Un span
+    <span class="pull"> à l'intérieur d'un bloc "prose"/"callout" (cms/wagtail_hooks.py
+    ::register_pull_feature) s'exporte en [texte]{.pull}, géré par
+    _ContentHTMLToMarkdown elle-même.
     """
     parts = []
     for block in page.body:
@@ -589,6 +616,9 @@ def export_contentpage_qmd(page, media_files=None):
             if block.value["title"]:
                 fence_attrs += f' title="{block.value["title"]}"'
             parts.append(f"::: {{{fence_attrs}}}\n{converter.result()}:::\n")
+        elif block.block_type == "pull":
+            converter.feed(block.value["text"].source)
+            parts.append(f"::: {{.pull}}\n{converter.result()}:::\n")
     body_md = "\n".join(parts).strip() + "\n"
 
     front = {

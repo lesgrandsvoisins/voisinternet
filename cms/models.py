@@ -105,7 +105,7 @@ class ProjectGalleryBlock(blocks.StructBlock):
 
 CONTENT_RICHTEXT_FEATURES = [
     "bold", "italic", "h2", "h3", "h4", "ol", "ul", "link", "document-link", "image", "embed",
-    "divider", "pagebreak", "image-gallery",
+    "divider", "pagebreak", "image-gallery", "pull",
 ]
 
 
@@ -132,6 +132,22 @@ class CalloutBlock(blocks.StructBlock):
     class Meta:
         icon = "help"
         label = _("encart")
+
+
+class PullQuoteBlock(blocks.StructBlock):
+    """
+    Une citation en exergue (::: {.pull} en Quarto) pouvant porter plusieurs
+    paragraphes — la version « bloc » du style de texte "pull" (voir
+    cms/wagtail_hooks.py::register_pull_feature pour la version en ligne). Même
+    rendu CSS que le span (.pull, core/static/core/css/site.css) : grand, grisé, en
+    encart qui déborde dans la marge sur ordinateur, pleine largeur sur smartphone.
+    """
+
+    text = blocks.RichTextBlock(label=_("texte"), features=CONTENT_RICHTEXT_FEATURES)
+
+    class Meta:
+        icon = "openquote"
+        label = _("citation en exergue")
 
 
 class PolePage(Page):
@@ -309,6 +325,7 @@ class ContentPage(Page):
         [
             ("prose", blocks.RichTextBlock(label=_("texte"), features=CONTENT_RICHTEXT_FEATURES)),
             ("callout", CalloutBlock()),
+            ("pull", PullQuoteBlock()),
         ],
         blank=True,
     )
@@ -368,19 +385,21 @@ class ContentPage(Page):
 
         # « À lire aussi » : par étiquette commune (core.Tag) comme BlogPostPage, sinon
         # d'autres pages du même pôle (ordre de l'arbre Wagtail, pas de date fiable ici
-        # puisque ContentPage.date est facultatif).
+        # puisque ContentPage.date est facultatif). Filtré sur la langue de cette page :
+        # sans ça, les traductions d'un même article (autant de Page distinctes, un pk
+        # chacune) se faisaient passer pour plusieurs suggestions différentes.
         my_tag_ids = list(self.tags.values_list("pk", flat=True))
         related = ContentPage.objects.none()
         if my_tag_ids:
             related = (
-                ContentPage.objects.live().exclude(pk=self.pk)
+                ContentPage.objects.live().filter(locale_id=self.locale_id).exclude(pk=self.pk)
                 .filter(tags__in=my_tag_ids).distinct().order_by("title")
             )
         related_pages = list(related[:3])
         if len(related_pages) < 3:
             seen_ids = {p.pk for p in related_pages} | {self.pk}
             extra = (
-                ContentPage.objects.live().child_of(self.get_parent())
+                ContentPage.objects.live().filter(locale_id=self.locale_id).child_of(self.get_parent())
                 .exclude(pk__in=seen_ids).order_by("path")
             )
             related_pages += list(extra[: 3 - len(related_pages)])
@@ -622,17 +641,23 @@ class BlogPostPage(Page):
         context["total_pages"] = len(pages)
         # « À lire aussi » : par étiquette commune (core.Tag) quand il y en a, sinon les
         # plus récents autres articles (billets Ghost importés sans étiquette, par ex).
+        # Filtré sur la langue de cette page : sans ça, les traductions d'un même
+        # article (autant de Page distinctes, un pk chacune) se faisaient passer pour
+        # plusieurs suggestions différentes — cf. le même correctif sur ContentPage.
         my_tag_ids = list(self.tags.values_list("pk", flat=True))
         related = BlogPostPage.objects.none()
         if my_tag_ids:
             related = (
-                BlogPostPage.objects.live().exclude(pk=self.pk)
+                BlogPostPage.objects.live().filter(locale_id=self.locale_id).exclude(pk=self.pk)
                 .filter(tags__in=my_tag_ids).distinct().order_by("-date")
             )
         related_posts = list(related[:3])
         if len(related_posts) < 3:
             seen_ids = {p.pk for p in related_posts} | {self.pk}
-            extra = BlogPostPage.objects.live().exclude(pk__in=seen_ids).order_by("-date")
+            extra = (
+                BlogPostPage.objects.live().filter(locale_id=self.locale_id)
+                .exclude(pk__in=seen_ids).order_by("-date")
+            )
             related_posts += list(extra[: 3 - len(related_posts)])
         context["related_posts"] = related_posts
         return context

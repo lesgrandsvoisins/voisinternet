@@ -59,6 +59,8 @@
                 {% if item.block.value.title %}<p class="callout-title">{{ item.block.value.title }}</p>{% endif %}
                 {{ item.block.value.text }}
               </aside>
+            {% elif item.type == "pull" %}
+              <aside class="pull">{{ item.block.value.text }}</aside>
             {% endif %}
           {% endfor %}
         </div>

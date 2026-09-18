@@ -2524,6 +2524,35 @@ blockquote p {
   margin-inline-start: 2rem
 }
 
+/* Citation en exergue (pullquote) : span en ligne (cms/wagtail_hooks.py::
+   register_pull_feature) ou bloc de plusieurs paragraphes (cms.models.PullQuoteBlock)
+   — même classe, même rendu dans les deux cas. Déborde dans la marge du panneau
+   .content-page sur ordinateur (marge -2.5rem = son padding horizontal), pleine
+   largeur sur smartphone (plus de marge dans laquelle déborder). */
+.pull,
+span.pull {
+  display: block;
+  float: right;
+  clear: right;
+  width: 42%;
+  margin: .25rem -2.5rem 1rem 1.5rem;
+  padding-inline-start: 1rem;
+  border-inline-start: 3px solid var(--line);
+  font-family: var(--display);
+  font-size: 1.35rem;
+  line-height: 1.35;
+  color: var(--ink-soft)
+}
+
+@media (max-width: 640px) {
+  .pull,
+  span.pull {
+    float: none;
+    width: 100%;
+    margin: 1.5rem 0
+  }
+}
+
 .content-page-hero {
   width: 100%;
   max-height: 420px;

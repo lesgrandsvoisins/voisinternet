@@ -19,7 +19,9 @@ from django.utils.translation import gettext_lazy as _
 from wagtail import hooks
 from wagtail.admin import widgets as wagtailadmin_widgets
 from wagtail.admin.rich_text.converters.contentstate_models import Entity
-from wagtail.admin.rich_text.converters.html_to_contentstate import AtomicBlockEntityElementHandler
+from wagtail.admin.rich_text.converters.html_to_contentstate import (
+    AtomicBlockEntityElementHandler, InlineStyleElementHandler,
+)
 from wagtail.admin.rich_text.editors.draftail import features as draftail_features
 
 from .models import BlogIndexPage, BlogPostPage, ContentPage
@@ -112,6 +114,32 @@ def register_image_gallery_feature(features):
             },
             js=["cms/js/draftail_gallery.js"],
         ),
+    )
+
+
+@hooks.register("register_rich_text_features")
+def register_pull_feature(features):
+    """
+    Style de texte « en exergue » (cms.ContentPage uniquement, CONTENT_RICHTEXT_FEATURES) :
+    un simple style en ligne (comme gras/italique), pas une entité — un <span
+    class="pull"> ne porte pas de données propres, contrairement à une image ou un
+    lien. Isomorphe avec [texte]{.pull} en Quarto (cms/qmd.py) ; la version « bloc »,
+    pour une citation de plusieurs paragraphes, est cms.models.PullQuoteBlock.
+    """
+    features.register_editor_plugin(
+        "draftail",
+        "pull",
+        draftail_features.InlineStyleFeature(
+            {"type": "PULL", "label": "P", "description": _("Citation en exergue")},
+        ),
+    )
+    features.register_converter_rule(
+        "contentstate",
+        "pull",
+        {
+            "from_database_format": {"span[class=pull]": InlineStyleElementHandler("PULL")},
+            "to_database_format": {"style_map": {"PULL": {"element": "span", "props": {"class": "pull"}}}},
+        },
     )
 
 

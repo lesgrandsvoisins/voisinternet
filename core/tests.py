@@ -189,6 +189,63 @@ class ContentPageQmdTests(Base):
         self.assertContains(response, "À lire aussi")
         self.assertContains(response, "Page B")
 
+    def test_content_page_related_excludes_other_locales(self):
+        # Bug réel observé en production : sans filtre de langue, une traduction du
+        # même article (une Page distincte, même étiquette) se faisait passer pour un
+        # contenu lié différent — voir ContentPage.get_context et BlogPostPage.get_context.
+        from wagtail.models import Locale
+
+        tag, _ = Tag.objects.get_or_create(slug="test-locale-tag", defaults={"name": "Test locale"})
+        page = ContentPage(title="Page FR", slug="page-fr-locale", live=True, body=[])
+        self.pole.add_child(instance=page)
+        page.tags.set([tag])
+
+        translated = page.copy_for_translation(Locale.objects.get(language_code="en"), copy_parents=True)
+        translated.tags.set([tag])
+        translated.save_revision().publish()
+
+        response = self.client.get(page.url)
+        self.assertNotContains(response, "À lire aussi")
+
+    def test_pull_quote_div_and_span_round_trip(self):
+        qmd_text = """---
+title: Page avec citation
+key: 66666666-6666-6666-6666-666666666666
+lang: fr
+pole: civisme
+slug: page-avec-citation
+---
+
+Un texte avec une citation glissée en ligne : [Voici une citation.]{.pull} La suite du paragraphe.
+
+::: {.pull}
+Une citation plus longue,
+
+sur plusieurs paragraphes.
+:::
+
+Fin du texte.
+"""
+        page = import_contentpage_qmd(qmd_text)
+        blocks = list(page.body)
+        self.assertEqual([b.block_type for b in blocks], ["prose", "pull", "prose"])
+        self.assertIn('<span class="pull">Voici une citation.</span>', str(blocks[0].value))
+        self.assertIn("Une citation plus longue", str(blocks[1].value["text"]))
+        self.assertIn("sur plusieurs paragraphes", str(blocks[1].value["text"]))
+
+        response = self.client.get(page.url)
+        self.assertContains(response, 'class="pull"')
+
+        exported = export_contentpage_qmd(page)
+        self.assertIn("[Voici une citation.]{.pull}", exported)
+        self.assertIn("::: {.pull}", exported)
+        self.assertIn("Une citation plus longue", exported)
+
+        reimported = import_contentpage_qmd(exported)
+        self.assertEqual(reimported.pk, page.pk)
+        reimported_blocks = list(reimported.body)
+        self.assertEqual([b.block_type for b in blocks], [b.block_type for b in reimported_blocks])
+
     def test_qmd_round_trip_is_isomorphic(self):
         # Callout multi-paragraphes, tableau, et note de bas de page dont la définition
         # est séparée de sa référence — la convention Quarto/Pandoc habituelle.

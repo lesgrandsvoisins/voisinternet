@@ -32,7 +32,7 @@ from .models import (
     format_number,
 )
 
-from wagtail.models import Locale
+from wagtail.models import Locale, Site
 
 logger = logging.getLogger(__name__)
 
@@ -193,15 +193,25 @@ def _page_search_image(page):
 def search(request):
     query = request.GET.get("q", "").strip()
     pages = entries = events = services = wiki_results = []
-    
+
     active_lang = Locale.get_active()
-    
+
     if query:
         from wagtail.models import Page
 
+        # Une seule Site Wagtail existe aujourd'hui (voir wagtail.models.Site), mais
+        # scoper explicitement par arbre plutôt que de compter dessus prépare le
+        # terrain si ce site en sert plusieurs un jour — pas besoin d'un champ "site"
+        # sur chaque page, Wagtail sait déjà à qui chaque page appartient via sa
+        # position dans l'arbre (Site.root_page).
+        current_site = Site.find_for_request(request)
         # .search() renvoie des Page génériques (pas de .specific() sur ses résultats) :
         # on récupère les instances spécifiques à part, en gardant l'ordre de pertinence.
-        found = list(Page.objects.live().filter(locale_id=active_lang.id).search(query)[:20])
+        found = list(
+            Page.objects.live().filter(locale_id=active_lang.id)
+            .descendant_of(current_site.root_page, inclusive=True)
+            .search(query)[:20]
+        )
         specific_by_id = {p.pk: p for p in Page.objects.specific().filter(pk__in=[p.pk for p in found])}
         pages = [specific_by_id[p.pk] for p in found if p.pk in specific_by_id]
         for page in pages:

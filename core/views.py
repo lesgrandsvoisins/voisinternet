@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
+from django.core.mail import EmailMessage
 from django.db.models import Q
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -19,7 +20,7 @@ from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
-from .forms import ContributionForm, DirectoryEntryForm, EventForm
+from .forms import AuthorContactForm, ContributionForm, DirectoryEntryForm, EventForm
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntrySubscription, Event,
@@ -232,6 +233,43 @@ def tag_detail(request, slug):
         "total": (
             entries.count() + services.count() + events.count() + posts.count() + poles.count() + projects.count()
         ),
+    })
+
+
+def author_detail(request, pk):
+    from cms.models import Author, AuthorMessage, BlogPostPage, ContentPage
+
+    author = get_object_or_404(Author, pk=pk)
+    posts = BlogPostPage.objects.live().filter(author=author).order_by("-date")
+    pages = ContentPage.objects.live().filter(author=author).order_by("-first_published_at")
+
+    form = AuthorContactForm()
+    if author.email and request.method == "POST":
+        if _throttled(request, "author_contact", limit=5):
+            messages.error(request, _("Trop de messages envoyés récemment depuis cet appareil. Réessayez plus tard."))
+        else:
+            form = AuthorContactForm(request.POST)
+            if form.is_valid():
+                if not form.cleaned_data["website"]:  # champ normalement vide, voir AuthorContactForm
+                    AuthorMessage.objects.create(
+                        author=author,
+                        sender_name=form.cleaned_data["sender_name"],
+                        sender_email=form.cleaned_data["sender_email"],
+                        message=form.cleaned_data["message"],
+                    )
+                    EmailMessage(
+                        subject=_("Message via lesgrandsvoisins.com de %(name)s") % {
+                            "name": form.cleaned_data["sender_name"] or form.cleaned_data["sender_email"],
+                        },
+                        body=form.cleaned_data["message"],
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        to=[author.email],
+                        reply_to=[form.cleaned_data["sender_email"]],
+                    ).send()
+                messages.success(request, _("Message envoyé à %(name)s.") % {"name": author.name})
+                return redirect("core:author_detail", pk=author.pk)
+    return render(request, "core/author_detail.html", {
+        "author": author, "posts": posts, "pages": pages, "form": form,
     })
 
 

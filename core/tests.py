@@ -1,12 +1,13 @@
 import re
 
 from django.contrib.auth import get_user_model
+from django.core import mail
 from django.core.cache import cache
 from django.test import TestCase, override_settings
 from django.urls import reverse
 from django.utils import timezone
 
-from cms.models import ContentPage, PolePage
+from cms.models import Author, AuthorMessage, ContentPage, PolePage
 from cms.qmd import export_contentpage_qmd, import_contentpage_qmd
 
 from .accounts import SESSION_KEY
@@ -952,3 +953,44 @@ class AudienceTests(Base):
         session.save()
         owner_response = self.client.get(reverse("core:entry_detail", args=[entry.slug]))
         self.assertEqual(owner_response.status_code, 200)
+
+
+class AuthorContactTests(Base):
+    def setUp(self):
+        super().setUp()
+        self.author = Author.objects.create(name="Jean Dupont", email="jean@example.org")
+
+    def test_page_without_email_hides_contact_form(self):
+        author = Author.objects.create(name="Sans e-mail")
+        response = self.client.get(reverse("core:author_detail", args=[author.pk]))
+        self.assertNotContains(response, 'id="author-contact-title"')
+
+    def test_valid_message_is_sent_and_recorded(self):
+        response = self.client.post(reverse("core:author_detail", args=[self.author.pk]), {
+            "sender_name": "Alice", "sender_email": "alice@example.org", "message": "Bonjour !", "website": "",
+        })
+        self.assertRedirects(response, reverse("core:author_detail", args=[self.author.pk]))
+        self.assertEqual(AuthorMessage.objects.filter(author=self.author).count(), 1)
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, ["jean@example.org"])
+        self.assertEqual(mail.outbox[0].reply_to, ["alice@example.org"])
+
+    def test_honeypot_silently_drops_message(self):
+        self.client.post(reverse("core:author_detail", args=[self.author.pk]), {
+            "sender_name": "Robot", "sender_email": "bot@example.org", "message": "spam",
+            "website": "http://spam.example",
+        })
+        self.assertEqual(AuthorMessage.objects.count(), 0)
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_contact_form_is_throttled(self):
+        for _ in range(5):
+            self.client.post(reverse("core:author_detail", args=[self.author.pk]), {
+                "sender_name": "Alice", "sender_email": "alice@example.org", "message": "Bonjour !", "website": "",
+            })
+        self.assertEqual(len(mail.outbox), 5)
+        response = self.client.post(reverse("core:author_detail", args=[self.author.pk]), {
+            "sender_name": "Alice", "sender_email": "alice@example.org", "message": "Encore un.", "website": "",
+        }, follow=True)
+        self.assertEqual(len(mail.outbox), 5)  # le 6e message n'est pas parti
+        self.assertContains(response, "Trop de messages envoyés récemment")

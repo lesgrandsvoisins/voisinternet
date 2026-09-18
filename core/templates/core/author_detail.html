@@ -1,0 +1,84 @@
+{% extends "core/base.html" %}
+{% load i18n wagtailimages_tags %}
+
+{% block title %}{{ author.name }} — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+  <div class="page-head">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+        <ol>
+          <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+          <li aria-current="page">{{ author.name }}</li>
+        </ol>
+      </nav>
+      <div class="page-head-top">
+        {% if author.photo %}
+          {% image author.photo fill-96x96 as photo_img %}
+          <img class="page-head-icon" src="{{ photo_img.url }}" alt="">
+        {% endif %}
+        <h1>{{ author.name }}</h1>
+      </div>
+      {% if author.city or author.country %}
+        <p class="muted">{{ author.city }}{% if author.city and author.country %}, {% endif %}{{ author.country }}</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="wrap page">
+    {% if author.bio %}<div class="markdown"><p>{{ author.bio }}</p></div>{% endif %}
+    {% if author.website %}
+      <p><a href="{{ author.website }}" target="_new" rel="noopener">{{ author.website }}</a></p>
+    {% endif %}
+
+    {% if pages %}
+      <section aria-labelledby="author-pages-title">
+        <h2 id="author-pages-title">{% trans "Pages" %}</h2>
+        <ul class="search-results">
+          {% for content_page in pages %}<li><a href="{{ content_page.url }}">{{ content_page.title }}</a></li>{% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
+    {% if posts %}
+      <section aria-labelledby="author-posts-title">
+        <h2 id="author-posts-title">{% trans "Articles de blog" %}</h2>
+        <ul class="search-results">
+          {% for post in posts %}
+            <li><a href="{{ post.url }}">{{ post.title }}</a> <span class="muted">— {{ post.date|date:"j F Y" }}</span></li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
+    {% if not pages and not posts %}
+      <p class="intro">{% trans "Aucun article publié pour l'instant." %}</p>
+    {% endif %}
+
+    {% if author.email %}
+      <section aria-labelledby="author-contact-title">
+        <h2 id="author-contact-title">{% blocktrans with name=author.name %}Contacter {{ name }}{% endblocktrans %}</h2>
+        <form class="entry-form" method="post">
+          {% csrf_token %}
+          {% if form.non_field_errors %}<ul class="errorlist">{{ form.non_field_errors }}</ul>{% endif %}
+          <div class="form-row">
+            {{ form.sender_name.label_tag }}
+            {{ form.sender_name }}
+            {{ form.sender_name.errors }}
+          </div>
+          <div class="form-row">
+            {{ form.sender_email.label_tag }}
+            {{ form.sender_email }}
+            {{ form.sender_email.errors }}
+          </div>
+          <div class="form-row">
+            {{ form.message.label_tag }}
+            {{ form.message }}
+            {{ form.message.errors }}
+          </div>
+          {{ form.website }}
+          <button class="btn btn-sun" type="submit">{% trans "Envoyer" %}</button>
+        </form>
+      </section>
+    {% endif %}
+  </div>
+{% endblock %}

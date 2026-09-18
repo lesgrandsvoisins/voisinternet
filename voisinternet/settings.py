@@ -225,6 +225,20 @@ GHOST_URL = env("GHOST_URL", BLOG_URL)
 GHOST_CONTENT_KEY = env("GHOST_CONTENT_KEY", "")
 CONTACT_EMAIL = env("VOISINTERNET_CONTACT_EMAIL", "contact@lesgrandsvoisins.com")
 
+# --- E-mail sortant (formulaire « Contacter l'auteur·ice », cms.Author) : facultatif
+# comme OIDC ci-dessous — sans EMAIL_HOST, le backend "console" écrit les messages
+# dans les logs du serveur au lieu de les envoyer, suffisant en développement.
+EMAIL_HOST = env("EMAIL_HOST", "")
+EMAIL_BACKEND = (
+    "django.core.mail.backends.smtp.EmailBackend" if EMAIL_HOST
+    else "django.core.mail.backends.console.EmailBackend"
+)
+EMAIL_PORT = int(env("EMAIL_PORT", "587"))
+EMAIL_HOST_USER = env("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", "")
+EMAIL_USE_TLS = env_bool("EMAIL_USE_TLS", True)
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", CONTACT_EMAIL)
+
 # --- Wagtail : pages de contenu gérées depuis /cms/ (indépendant de l'admin Django en /admin/).
 WAGTAIL_SITE_NAME = "lesgrandsvoisins.com"
 WAGTAILADMIN_BASE_URL = env("DJANGO_BASE_URL", f"http://{DJANGO_IP}:{DJANGO_PORT}")

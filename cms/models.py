@@ -541,6 +541,13 @@ class Author(TranslatableMixin, models.Model):
     website = models.URLField(_("site web"), blank=True, default="")
     city = models.CharField(_("ville"), max_length=140, blank=True, default="")
     country = models.CharField(_("pays"), max_length=140, blank=True, default="")
+    email = models.EmailField(
+        _("e-mail"), blank=True, default="",
+        help_text=_(
+            "Jamais affiché publiquement — sert uniquement à transmettre les messages du formulaire de "
+            "contact (core.views.author_detail). Laisser vide masque le formulaire sur la page de cet·te auteur·ice."
+        ),
+    )
 
     panels = [
         FieldPanel("name"),
@@ -549,6 +556,7 @@ class Author(TranslatableMixin, models.Model):
         FieldPanel("website"),
         FieldPanel("city"),
         FieldPanel("country"),
+        FieldPanel("email"),
     ]
 
     class Meta(TranslatableMixin.Meta):
@@ -557,6 +565,39 @@ class Author(TranslatableMixin, models.Model):
 
     def __str__(self):
         return self.name
+
+
+@register_snippet
+class AuthorMessage(models.Model):
+    """
+    Historique des messages envoyés via le formulaire de contact d'un·e auteur·ice
+    (core.views.author_detail, core.forms.AuthorContactForm) — modération et
+    traçabilité, jamais montré publiquement. L'envoi lui-même se fait par e-mail au
+    moment de la soumission ; cette ligne n'est qu'une trace conservée après coup, pas
+    une file d'attente d'envoi.
+    """
+    author = models.ForeignKey(
+        Author, verbose_name=_("auteur·ice"), on_delete=models.CASCADE, related_name="messages",
+    )
+    sender_name = models.CharField(_("nom de l'expéditeur·ice"), max_length=140, blank=True, default="")
+    sender_email = models.EmailField(_("e-mail de l'expéditeur·ice"))
+    message = models.TextField(_("message"))
+    created = models.DateTimeField(_("envoyé le"), auto_now_add=True)
+
+    panels = [
+        FieldPanel("author"),
+        FieldPanel("sender_name"),
+        FieldPanel("sender_email"),
+        FieldPanel("message"),
+    ]
+
+    class Meta:
+        verbose_name = _("message à un·e auteur·ice")
+        verbose_name_plural = _("messages aux auteur·ices")
+        ordering = ["-created"]
+
+    def __str__(self):
+        return f"{self.sender_email} → {self.author.name}"
 
 
 class BlogPostPage(Page):

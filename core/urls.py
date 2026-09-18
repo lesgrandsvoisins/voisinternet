@@ -10,6 +10,7 @@ urlpatterns = [
     path("recherche/", views.search, name="search"),
     path("etiquettes/", views.tag_list, name="tag_list"),
     path("etiquettes/<slug:slug>/", views.tag_detail, name="tag_detail"),
+    path("auteur/<int:pk>/", views.author_detail, name="author_detail"),
     path("account/anonyme/creer/", views.create_anonymous, name="create_anonymous"),
     path("account/anonyme/retrouver/", views.recover_anonymous, name="recover_anonymous"),
     path("account/anonyme/oublier/", views.forget_anonymous, name="forget_anonymous"),

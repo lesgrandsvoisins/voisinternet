@@ -40,7 +40,6 @@ GROUP_PAGE_INTROS = {
     "association": _("Nous rejoindre, nous soutenir, nous contacter."),
 }
 
-
 def _is_htmx(request):
     return request.headers.get("HX-Request") == "true"
 
@@ -124,10 +123,8 @@ def _month_calendar(request):
 def home(request):
     from cms.models import BlogPostPage, PolePage
     
-    
     active_lang = Locale.get_active()
     
-
     recent_entries = DirectoryEntry.objects.filter(
         visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
     ).select_related("sector").order_by("-pk")[:4]
@@ -147,7 +144,7 @@ def home(request):
         "books": GuideBook.objects.filter(published=True)[:4],
         "posts": recent_posts,
         "audiences": Audience.objects.all(),
-        "poles": PolePage.objects.live().order_by("path"),
+        "poles": PolePage.objects.live().filter(locale_id=active_lang.id).order_by("path"),
         "recent_entries": recent_entries,
         "agenda_calendar": _month_calendar(request),
         "next_event": Event.objects.filter(public=True, start__gte=timezone.now()).order_by("start").first(),
@@ -192,12 +189,15 @@ def _page_search_image(page):
 def search(request):
     query = request.GET.get("q", "").strip()
     pages = entries = events = services = wiki_results = []
+    
+    active_lang = Locale.get_active()
+    
     if query:
         from wagtail.models import Page
 
         # .search() renvoie des Page génériques (pas de .specific() sur ses résultats) :
         # on récupère les instances spécifiques à part, en gardant l'ordre de pertinence.
-        found = list(Page.objects.live().search(query)[:20])
+        found = list(Page.objects.live().filter(locale_id=active_lang.id).search(query)[:20])
         specific_by_id = {p.pk: p for p in Page.objects.specific().filter(pk__in=[p.pk for p in found])}
         pages = [specific_by_id[p.pk] for p in found if p.pk in specific_by_id]
         for page in pages:
@@ -243,6 +243,7 @@ def tag_list(request):
 
 
 def tag_detail(request, slug):
+    
     active_lang = Locale.get_active()
     
     tag = get_object_or_404(Tag, slug=slug)
@@ -252,8 +253,8 @@ def tag_detail(request, slug):
     from cms.models import BlogPostPage, PolePage, ProjectPage
 
     posts = BlogPostPage.objects.live().filter(tags=tag).filter(locale_id=active_lang.id).order_by("-date")
-    poles = PolePage.objects.live().filter(tags=tag)
-    projects = ProjectPage.objects.live().filter(tags=tag)
+    poles = PolePage.objects.live().filter(locale_id=active_lang.id).filter(tags=tag)
+    projects = ProjectPage.objects.live().filter(locale_id=active_lang.id).filter(tags=tag)
     return render(request, "core/tag_detail.html", {
         "tag": tag,
         "entries": entries,
@@ -302,7 +303,6 @@ def author_detail(request, pk):
     from cms.models import Author, AuthorMessage, BlogPostPage, ContentPage
     
     active_lang = Locale.get_active()
-    
 
     author = get_object_or_404(Author, pk=pk)
     posts = BlogPostPage.objects.live().filter(author=author).filter(locale_id=active_lang.id).order_by("-date")
@@ -389,6 +389,9 @@ def faire_don(request):
 
 def faire_don_merci(request):
     from cms.models import DonationPage
+    
+    active_lang = Locale.get_active()
+    
 
     try:
         amount = Decimal(request.GET.get("amount", ""))
@@ -415,7 +418,7 @@ def faire_don_merci(request):
         "awaiting_validation": kind in (ContributionForm.KIND_PAYMENT, ContributionForm.KIND_BOTH),
         "donation_service": donation_service,
         "donation_link": donation_link,
-        "donation_page": DonationPage.objects.live().first(),
+        "donation_page": DonationPage.objects.live().filter(locale_id=active_lang.id).first(),
     })
 
 

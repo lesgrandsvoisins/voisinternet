@@ -336,6 +336,17 @@ def account(request):
     })
 
 
+def mes_dons(request):
+    acc = current_account(request)
+    if acc is None:
+        return redirect("core:account")
+    return render(request, "core/mes_dons.html", {
+        "account": acc,
+        "account_contributions": acc.contributions.all(),
+        "contribution_form": ContributionForm(),
+    })
+
+
 @require_POST
 def faire_don(request):
     acc = current_account(request, create=True)

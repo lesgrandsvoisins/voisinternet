@@ -1,0 +1,75 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Mes dons — lesgrandsvoisins.com" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+      <ol>
+        <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+        <li><a href="{{ conj.contributions.href }}">{{ conj.contributions.entry.title }}</a></li>
+        <li aria-current="page">{% trans "Mes dons" %}</li>
+      </ol>
+    </nav>
+    <h1>{% trans "Mes dons" %}</h1>
+    <p class="lead">{% trans "L'historique de vos promesses et paiements, et un nouveau don." %}</p>
+  </div>
+</div>
+<div class="wrap page">
+  <section aria-labelledby="dons-title">
+    <div class="split">
+      <h2 id="dons-title">{% trans "Historique" %}</h2>
+      <p class="muted"><a href="{% url 'core:account' %}">{% trans "← Mon compte" %}</a></p>
+    </div>
+    {% if account_contributions %}
+      <ul class="docs">
+        {% for c in account_contributions %}
+          <li>
+            <strong>{{ c.get_kind_display }} — {{ c.amount }} €</strong><span>{{ c.get_method_display }}, {{ c.date }}
+              {% if c.tax_deductible %}
+                , {% trans "déductible fiscalement" %}
+              {% endif %}
+              {% if c.note %}— {{ c.note }}{% endif %}
+              {% if c.approved is None %}
+                — <span class="chip">{% trans "en attente de validation" %}</span>
+              {% endif %}
+            </span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="intro">{% trans "Aucune contribution enregistrée pour l'instant." %}</p>
+    {% endif %}
+  </section>
+
+  <section aria-labelledby="new-don-title">
+    <div class="split">
+      <h2 id="new-don-title">{% trans "Faire un don" %}</h2>
+    </div>
+    <form class="entry-form" method="post" action="{% url 'core:faire_don' %}">
+      {% csrf_token %}
+      <div class="form-row">
+        {{ contribution_form.kind.label_tag }}
+        {{ contribution_form.kind }}
+      </div>
+      <div class="form-row">
+        {{ contribution_form.amount.label_tag }}
+        {{ contribution_form.amount }} €
+      </div>
+      <div class="form-row">
+        {{ contribution_form.method.label_tag }}
+        {{ contribution_form.method }}
+      </div>
+      <div class="form-row">
+        {{ contribution_form.date.label_tag }}
+        {{ contribution_form.date }}
+      </div>
+      <div class="form-row">
+        {{ contribution_form.note.label_tag }}
+        {{ contribution_form.note }}
+      </div>
+      <button class="btn btn-sun" type="submit">{% trans "Faire un don" %}</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

@@ -420,7 +420,7 @@ div.menu {
 }
 
 .mark {
-  height: 2.2rem;
+  height: 3.2rem;
   width: auto
 }
 
@@ -783,6 +783,7 @@ div.menu {
 }
 
 @media (prefers-reduced-motion:reduce) {
+
   .mega-enter,
   .mega-leave {
     transition: none
@@ -871,6 +872,7 @@ div.menu {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+
   /* randomizeBlobs() (site.js) change top/left juste après le chargement : sans
      transition, les taches sautaient instantanément de leur position CSS par défaut à
      leur position aléatoire. Pas de transition pour prefers-reduced-motion : le
@@ -892,10 +894,37 @@ div.menu {
   opacity: .4
 }
 
-.blob-a { width: 20rem; height: 20rem; top: -4rem; left: 4%; background: var(--blob-1) }
-.blob-b { width: 17rem; height: 17rem; top: -6rem; left: 22%; background: var(--blob-2) }
-.blob-c { width: 16rem; height: 16rem; top: 6rem; right: 22%; background: var(--blob-4) }
-.blob-d { width: 14rem; height: 14rem; top: -2rem; right: 4%; background: var(--blob-5) }
+.blob-a {
+  width: 20rem;
+  height: 20rem;
+  top: -4rem;
+  left: 4%;
+  background: var(--blob-1)
+}
+
+.blob-b {
+  width: 17rem;
+  height: 17rem;
+  top: -6rem;
+  left: 22%;
+  background: var(--blob-2)
+}
+
+.blob-c {
+  width: 16rem;
+  height: 16rem;
+  top: 6rem;
+  right: 22%;
+  background: var(--blob-4)
+}
+
+.blob-d {
+  width: 14rem;
+  height: 14rem;
+  top: -2rem;
+  right: 4%;
+  background: var(--blob-5)
+}
 
 /* Nos trois pôles (page d'accueil) */
 .poles-grid {
@@ -929,12 +958,29 @@ div.menu {
   color: var(--ink-soft)
 }
 
-.pole-card.accent-terracotta { border-top-color: var(--accent-terracotta) }
-.pole-card.accent-plum { border-top-color: var(--accent-plum) }
-.pole-card.accent-indigo { border-top-color: var(--accent-indigo) }
-.pole-card.accent-teal { border-top-color: var(--accent-teal) }
-.pole-card.accent-moss { border-top-color: var(--accent-moss) }
-.pole-card.accent-gold { border-top-color: var(--accent-gold) }
+.pole-card.accent-terracotta {
+  border-top-color: var(--accent-terracotta)
+}
+
+.pole-card.accent-plum {
+  border-top-color: var(--accent-plum)
+}
+
+.pole-card.accent-indigo {
+  border-top-color: var(--accent-indigo)
+}
+
+.pole-card.accent-teal {
+  border-top-color: var(--accent-teal)
+}
+
+.pole-card.accent-moss {
+  border-top-color: var(--accent-moss)
+}
+
+.pole-card.accent-gold {
+  border-top-color: var(--accent-gold)
+}
 
 .hero-text {
   display: grid;
@@ -1015,6 +1061,7 @@ div.menu {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+
   /* armQuicklinkCycle() (site.js) change le texte toutes les 4s : un fondu plutôt
      qu'un changement instantané. Pas de transition pour prefers-reduced-motion —
      la rotation elle-même y est de toute façon désactivée côté JS. */
@@ -1023,9 +1070,17 @@ div.menu {
   }
 }
 
-.quicklink.accent-terracotta { border-top-color: var(--accent-terracotta) }
-.quicklink.accent-indigo { border-top-color: var(--accent-indigo) }
-.quicklink.accent-gold { border-top-color: var(--accent-gold) }
+.quicklink.accent-terracotta {
+  border-top-color: var(--accent-terracotta)
+}
+
+.quicklink.accent-indigo {
+  border-top-color: var(--accent-indigo)
+}
+
+.quicklink.accent-gold {
+  border-top-color: var(--accent-gold)
+}
 
 .btn {
   display: inline-block;
@@ -1506,11 +1561,12 @@ a.chip-tag:hover {
 /* Colonne centrale (titre + description) : une piste "1fr" ne rétrécit pas sous sa
    largeur de contenu par défaut (min-width: auto) — un nom de service un peu long
    poussait toute la ligne plus large que l'écran au lieu de passer à la ligne. */
-.svc li > div {
+.svc li>div {
   min-width: 0
 }
 
 @media (max-width: 30rem) {
+
   /* Sur petit écran, la 3e colonne (boutons ↑↓ ou "Ajouté") passe sous le titre plutôt
      que de se serrer à côté : avec la colonne centrale déjà réduite au minimum, il ne
      restait pas assez de place et le contenu débordait, illisible. */
@@ -1518,7 +1574,7 @@ a.chip-tag:hover {
     grid-template-columns: auto 1fr;
   }
 
-  .svc li > :last-child {
+  .svc li> :last-child {
     grid-column: 1 / -1;
     justify-self: start
   }
@@ -2225,13 +2281,13 @@ blockquote p {
 }
 
 .blog-post .markdown img.left {
-    float: left;
-    margin: 0 2rem 2rem 0;
+  float: left;
+  margin: 0 2rem 2rem 0;
 }
 
 .blog-post .markdown img.right {
-    float: right;
-    margin: 0 0 2rem 2rem;
+  float: right;
+  margin: 0 0 2rem 2rem;
 }
 
 .blog-post .markdown hr {
@@ -2551,12 +2607,29 @@ blockquote p {
 }
 
 /* Pôles : un accent (couleur choisie par la fiche Wagtail) distingue le pôle courant. */
-.page-head.accent-terracotta { border-bottom: 3px solid var(--accent-terracotta) }
-.page-head.accent-plum { border-bottom: 3px solid var(--accent-plum) }
-.page-head.accent-indigo { border-bottom: 3px solid var(--accent-indigo) }
-.page-head.accent-teal { border-bottom: 3px solid var(--accent-teal) }
-.page-head.accent-moss { border-bottom: 3px solid var(--accent-moss) }
-.page-head.accent-gold { border-bottom: 3px solid var(--accent-gold) }
+.page-head.accent-terracotta {
+  border-bottom: 3px solid var(--accent-terracotta)
+}
+
+.page-head.accent-plum {
+  border-bottom: 3px solid var(--accent-plum)
+}
+
+.page-head.accent-indigo {
+  border-bottom: 3px solid var(--accent-indigo)
+}
+
+.page-head.accent-teal {
+  border-bottom: 3px solid var(--accent-teal)
+}
+
+.page-head.accent-moss {
+  border-bottom: 3px solid var(--accent-moss)
+}
+
+.page-head.accent-gold {
+  border-bottom: 3px solid var(--accent-gold)
+}
 
 .page-head-top {
   display: flex;
@@ -2671,12 +2744,29 @@ blockquote p {
   box-shadow: 0 1px 3px rgba(0, 0, 0, .06)
 }
 
-.content-page.accent-terracotta { border-top-color: var(--accent-terracotta) }
-.content-page.accent-plum { border-top-color: var(--accent-plum) }
-.content-page.accent-indigo { border-top-color: var(--accent-indigo) }
-.content-page.accent-teal { border-top-color: var(--accent-teal) }
-.content-page.accent-moss { border-top-color: var(--accent-moss) }
-.content-page.accent-gold { border-top-color: var(--accent-gold) }
+.content-page.accent-terracotta {
+  border-top-color: var(--accent-terracotta)
+}
+
+.content-page.accent-plum {
+  border-top-color: var(--accent-plum)
+}
+
+.content-page.accent-indigo {
+  border-top-color: var(--accent-indigo)
+}
+
+.content-page.accent-teal {
+  border-top-color: var(--accent-teal)
+}
+
+.content-page.accent-moss {
+  border-top-color: var(--accent-moss)
+}
+
+.content-page.accent-gold {
+  border-top-color: var(--accent-gold)
+}
 
 /* Sommaire (ContentPage.get_context, titres h2/h3/h4 du corps) : limité à la page
    actuellement affichée quand l'article est paginé (saut de page). */
@@ -2738,6 +2828,7 @@ span.pull {
 }
 
 @media (max-width: 640px) {
+
   .pull,
   span.pull {
     float: none;
@@ -2777,11 +2868,25 @@ span.pull {
   margin-bottom: .5rem
 }
 
-.callout-note { border-inline-start-color: var(--accent-indigo) }
-.callout-tip { border-inline-start-color: var(--accent-moss) }
-.callout-important { border-inline-start-color: var(--danger) }
-.callout-warning { border-inline-start-color: var(--sun) }
-.callout-caution { border-inline-start-color: var(--accent-terracotta) }
+.callout-note {
+  border-inline-start-color: var(--accent-indigo)
+}
+
+.callout-tip {
+  border-inline-start-color: var(--accent-moss)
+}
+
+.callout-important {
+  border-inline-start-color: var(--danger)
+}
+
+.callout-warning {
+  border-inline-start-color: var(--sun)
+}
+
+.callout-caution {
+  border-inline-start-color: var(--accent-terracotta)
+}
 
 /* Aperçu en tête de tableau de bord (core/templates/core/account.html) : quelques
    chiffres-clés, chacun un lien d'ancrage direct vers sa section détaillée plus bas. */
@@ -3241,6 +3346,7 @@ span.pull {
   letter-spacing: .04em;
   padding-top: .3rem;
 }
+
 .agenda-date-weekday {
   position: relative;
   display: block;
@@ -3253,6 +3359,7 @@ span.pull {
   letter-spacing: .04em;
   padding-bottom: .3rem;
 }
+
 /* Les encoches « perforées » reprennent le fond de la page pour l'effet déchiré. */
 
 .agenda-date-year::before,
@@ -3460,14 +3567,14 @@ a.prevnext {
   color: var(--danger)
 }
 
-.tabs-input:checked + .tabs-label {
+.tabs-input:checked+.tabs-label {
   background: var(--sun-soft);
   border-color: var(--sun);
   color: var(--ink);
   border-bottom-color: var(--sun)
 }
 
-.tabs-input:focus-visible + .tabs-label {
+.tabs-input:focus-visible+.tabs-label {
   outline: 2px solid var(--ink);
   outline-offset: 2px
 }
@@ -3479,7 +3586,7 @@ a.prevnext {
   padding-top: 1.1rem
 }
 
-.tabs-input:checked + .tabs-label + .tabs-panel {
+.tabs-input:checked+.tabs-label+.tabs-panel {
   display: grid;
   gap: 1.1rem
 }
@@ -3740,6 +3847,10 @@ a.prevnext {
 /* Adaptatif */
 @media (max-width:900px) {
 
+  .mark {
+    height: 2.2rem;
+  }
+
   .hero-text,
   .quote .wrap,
   .two,
@@ -3785,9 +3896,14 @@ a.prevnext {
     max-width: 250px;
     height: auto;
   }
+  .lang-dropdown {
+    display: none;
+  }
+
 }
 
 @media screen and (max-width:500px) {
+
   /* Sous ce seuil, le mot-symbole complet ne tient plus sur la même ligne que
      le bouton menu et le compte : le logo passe sur sa propre ligne, centré,
      plutôt que de forcer les boutons (et leurs icônes) à rétrécir dans une
@@ -3861,19 +3977,17 @@ a.prevnext {
   .account-shortcuts ul {
     grid-template-columns: 1fr
   }
-  .lang-dropdown {
-    display: none;
-  }
+
   .brand img {
     max-width: 200px;
     height: auto;
   }
-}
-
-@media  screen and (max-width:400px) {
   .search-dropdown {
     display: none;
   }
+}
+
+@media screen and (max-width:400px) {
 
   .brand img {
     max-width: 150px;
@@ -3882,7 +3996,7 @@ a.prevnext {
 }
 
 
-@media  screen and (max-width:350px) {
+@media screen and (max-width:350px) {
   .brand img {
     max-width: 100px;
     height: auto;
@@ -3890,7 +4004,7 @@ a.prevnext {
 }
 
 
-@media  screen and (max-width:300px) {
+@media screen and (max-width:300px) {
   .brand img {
     max-width: 75px;
     height: auto;
@@ -3899,6 +4013,7 @@ a.prevnext {
 
 
 @media print {
+
   wagtail-userbar,
   div.menu,
   form.lang-switcher,
@@ -3906,7 +4021,9 @@ a.prevnext {
   nav.foot-nav {
     display: none;
   }
-  img, div.gallery {
+
+  img,
+  div.gallery {
     break-inside: avoid;
   }
 }

@@ -1147,6 +1147,15 @@ class WikiJsSearchTests(TestCase):
 
 
 class DonationFlowTests(Base):
+    def test_mes_dons_page_lists_contributions_and_form(self):
+        self.client.post(reverse("core:faire_don"), {
+            "kind": "pledge", "amount": "25", "method": "virement", "date": "2026-01-01", "note": "",
+        })
+        response = self.client.get(reverse("core:mes_dons"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "25")
+        self.assertContains(response, "Faire un don")
+
     def test_pledge_is_auto_approved(self):
         self.client.post(reverse("core:faire_don"), {
             "kind": "pledge", "amount": "25", "method": "virement", "date": "2026-01-01", "note": "",

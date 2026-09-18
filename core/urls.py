@@ -17,6 +17,7 @@ urlpatterns = [
     path("account/anonyme/rattacher/", views.link_anonymous, name="link_anonymous"),
     path("account/raccourcis/", views.raccourcis, name="raccourcis"),
     path("account/groupes/", views.groupes, name="groupes"),
+    path("contributions/dons/", views.mes_dons, name="mes_dons"),
     path("account/dons/", views.faire_don, name="faire_don"),
     path("dons/merci/", views.faire_don_merci, name="faire_don_merci"),
     path("agenda/", views.agenda, name="agenda"),

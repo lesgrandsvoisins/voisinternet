@@ -1,0 +1,138 @@
+---
+title: LesGrandsVoisins.com
+key: b91f110b-0fdc-40b6-9707-5b6e44dec2fc
+lang: fr
+parent: transition
+slug: wwwlesgrandsvoisinscom
+url: https://transition.lesgrandsvoisins.com/fr/wwwlesgrandsvoisinscom/
+legacy:
+  title: LesGrandsVoisins.com
+  legacy_id: 626
+  legacy_type: lesgv.lesgvhomepage
+  legacy_url: /wwwlesgrandsvoisinscom/
+  legacy_parent_id: null
+  lang: fr
+  key: b91f110b-0fdc-40b6-9707-5b6e44dec2fc
+  slug: wwwlesgrandsvoisinscom
+  live: true
+  first_published_at: '2025-02-23T09:17:44.499Z'
+  suggested_target: HomePage
+  header_image:
+    id: 209
+    title: logo-lesgrandsvoisins-800-400-white
+    file: original_images/logo-lesgrandsvoisins-800-400-white.png
+  extra:
+    theme: generique
+---
+
+:::::: {.lesgv.lesgvhomepage.intro}
+
+*« Les Grands Voisins sont nés à l'hôpital Saint-Vincent-de-Paul dans le 14e arrondissement à Paris, entre Port royal et les Catacombes. Nous sommes issus des failles dans le béton et dans les politiques publiques. Nous sommes au service de l'accueil de tous et croyons aux ponts entre utopie et réalité. »  
+
+ [extrait de notre* [*déclaration de mission*](https://www.lesgrandsvoisins.fr/wwwlesgrandsvoisinscom/association/mission/)* de 2017]*
+
+*Créer ou accéder à son* [compte ici](https://key.gv.je/)*.*
+
+::::::
+
+:::::: {.lesgv.lesgvhomepage.section1}
+
+## Section 1
+
+## lundi 28 septembre - 27e Conseil des Voisins
+
+deux rendez-vous (même conseil) 13h à 14h45 ou 18h à 19h45  
+
+et remise de prix d'excellence en service public
+
+[Inscriptions ici](https://www.lesgrandsvoisins.fr/wwwlesgrandsvoisinscom/association/conseils-des-voisins/27/inscription/) - [Evènement ici](https://openagenda.com/lesgrandsvoisins/events/27e-conseil-des-voisins-8703779?cl=fr)
+
+## Permanence le lundi de 12h à 19h30
+
+*en personne: 93 ave. du Gén. Leclerc 75014 Paris  
+
+* (Métro Alésia (4), Atelier de la Ressourcerie, *7e boutique sur la gauche*)
+
+**en ligne**: [meet.lesgrandsvoisins.com pour participer en hybride](https://meet.lesg/).
+
+## Annuaire des voisins
+
+[*Annuaire des Grands Voisins*](https://www.lesgrandsvoisins.fr/wwwlesgrandsvoisinscom/annuaire/)
+
+Venez voir vos Grands Voisins et vous y inscrire si vous voulez.
+
+## 
+
+## Souscriptions
+
+[*Dons & souscriptions de dons*](https://www.lesgrandsvoisins.fr/wwwlesgrandsvoisinscom/association/faire-un-don/)*  
+
+* Soutenez notre activité par vos talents et volonté, par votre participation économique, par la cession de matériel informatique, ...
+
+::::::
+
+:::::: {.lesgv.lesgvhomepage.section2}
+
+## Section 2
+
+## **Civisme** {[Profession d'Empathie Nationale](https://www.lesgrandsvoisins.fr/wwwlesgrandsvoisinscom/civisme/empathie/)}
+
+*Profession d'Empathie Nationale samedi* *le**** 27 juin 2026*** *de 15h à 18h !*
+
+## **Arts plastiques** {[Popup Expos](https://www.lesgrandsvoisins.fr/wwwlesgrandsvoisinscom/activités/arts-plastiques/popup-expos/)}
+
+Transformer tout lieu en galerie d'art hybride.
+
+## **Numérique** {[Revalorisation en numérique](https://www.lesgrandsvoisins.fr/wwwlesgrandsvoisinscom/numerique/)}
+
+*Inscrivez-vous sur* [gdvoisins.com](https://www.gdvoisins.com)*.*
+
+::::::
+
+:::::: {.lesgv.lesgvhomepage.section3}
+
+## Section 3
+
+## 
+
+## Notre histoire de Saint Vincent de Paul de 2015 à 2017
+
+Lisez [notre histoire ici](https://www.lesgrandsvoisins.fr/wwwlesgrandsvoisinscom/association/historique/). Nous venons d'une expérience unique à Paris. Cela nous invite à se poser la question de savoir si nous avons bien besoin d'un lieu physique pour se considérer Grands Voisins. Nous pensons que nous pouvons aller au-delà des murs, tout en gardant l'image de voisins.
+
+## Notre mission écrit par 100 personnes sur un mois en 2017
+
+Lisez [notre mission ici](https://www.lesgrandsvoisins.fr/wwwlesgrandsvoisinscom/association/mission/) qui est à la base de toutes nos actions. Chaque personne a une définition différente de ce que c'est, Les Grands Voisins, et chaque personne a raison. Si nous arrivons à créer des conditions de liant -- une sorte de voisinage complémentaire à vos voisinages existants, c'est réussi.
+
+---
+
+## Equipe
+
+Chris Mann, Président,  
+
+ Sviatlana Viarbitskya, Trésorière,  
+
+ et Caroline Lhomme, Vice-Présidente  
+
+ sont à votre service.
+
+Rencontrer les personnes actuelles et passées qui ont contribué à notre association coopérative [ici](https://www.lesgrandsvoisins.fr/wwwlesgrandsvoisinscom/association/equipe/).
+
+---
+
+## Contact
+
+[*Pensez à vous inscrire sur notre liste d'infos !*](https://list.lesgrandsvoisins.com/subscription/form)
+
+*Ecrivez Chris à* [*chris@lesgrandsvoisins.com*](mailto:chris@lesgrandsvoisins.com)
+
+---
+
+## Compte
+
+- [*Enregistrez-vous ou connectez-vous en tant que Grand(e) Voisin(e)*](https://key.lesgrandsvoisins.com/realms/master/account)
+
+- [*Voir l'annuaire des Grands Voisins.*](https://www.lesgrandsvoisins.fr/wwwlesgrandsvoisinscom/annuaire/)
+
+- [*Enregistrez-vous dans le voisinage des Grands Voisins*](https://www.lesgrandsvoisins.fr/wwwlesgrandsvoisinscom/association/devenir-grandes-voisines/)
+
+::::::

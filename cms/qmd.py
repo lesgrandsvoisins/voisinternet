@@ -1041,6 +1041,11 @@ def export_standardpage_qmd(page, media_files=None):
         "slug": page.slug,
         "url": page.full_url,
     }
+    if page.header_image_id:
+        if media_files is not None:
+            front["header_image"] = _collect_image_file(page.header_image_id, media_files)
+        else:
+            front["header_image"] = _absolute_url(page.header_image.get_rendition("width-1600").url)
     _export_legacy_meta(front, page)
     frontmatter = yaml.safe_dump(front, allow_unicode=True, sort_keys=False, default_flow_style=False)
     return f"---\n{frontmatter}---\n\n{body_md}"

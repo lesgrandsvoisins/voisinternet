@@ -1,3 +1,4 @@
+import json
 import re
 from html import unescape
 
@@ -5,17 +6,48 @@ from django import forms
 from django.core.paginator import Paginator
 from django.db import models
 from django.utils import timezone
+from django.utils.html import format_html
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from wagtail import blocks
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, HelpPanel
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.models import Locale, Page, TranslatableMixin
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
+
+
+class LegacyMetaPanel(HelpPanel):
+    """
+    Affiche <Page>.legacy_meta (passe-plat des métadonnées de frontmatter .qmd non
+    reconnues par ce site — clé "legacy", voir cms/qmd.py::_export_legacy_meta/
+    _import_legacy_meta) en lecture seule dans l'admin Wagtail, pour pouvoir vérifier
+    ce qu'un import a conservé sans avoir à rouvrir le fichier .qmd d'origine.
+    Jamais un FieldPanel : le champ reste editable=False exprès (Django l'exclut alors
+    complètement du formulaire, donc impossible à modifier via une requête POST
+    forgée) — cette donnée ne doit venir que d'un import .qmd, jamais d'une saisie
+    dans l'admin. N'affiche rien pour une page qui n'a jamais été importée ainsi
+    (legacy_meta vide), pour ne pas encombrer l'écran d'édition dans le cas courant.
+    """
+
+    class BoundPanel(HelpPanel.BoundPanel):
+        def __init__(self, **kwargs):
+            # HelpPanel.BoundPanel.__init__ affecte self.content = self.panel.content
+            # (un simple attribut, pas une propriété) : on le laisse faire puis on le
+            # recalcule ici à partir de self.instance, plutôt que de déclarer "content"
+            # en propriété (HelpPanel essaierait alors de lui affecter une valeur, ce
+            # qu'une propriété sans setter refuse).
+            super().__init__(**kwargs)
+            legacy = getattr(self.instance, "legacy_meta", None)
+            if legacy:
+                pretty = json.dumps(legacy, indent=2, ensure_ascii=False, sort_keys=True)
+                self.content = format_html(
+                    "<details><summary>{}</summary><pre>{}</pre></details>",
+                    _("Métadonnées héritées (import .qmd)"), pretty,
+                )
 
 
 class HomePage(Page):
@@ -229,17 +261,26 @@ class StandardPage(Page):
     la conversion de l'ancien contenu HTML en un unique bloc "prose").
     """
 
+    header_image = models.ForeignKey(
+        "wagtailimages.Image", verbose_name=_("image d'en-tête"),
+        null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+    )
     body = StreamField(ContentStreamBlock(), blank=True)
     # Passe-plat pour les métadonnées de frontmatter .qmd non reconnues par ce site (la
     # clé "legacy" — voir cms/qmd.py) : conservées telles quelles à l'aller-retour
     # export/import, sans que ce code ait besoin de comprendre leur contenu. Un
     # JSONField ordinaire, donc inclus tel quel dans le dumpdata Django et les
     # révisions Wagtail (StreamField/RichTextField le sont déjà) — editable=False :
-    # pas de FieldPanel, jamais saisi à la main dans l'admin.
+    # jamais un FieldPanel, jamais saisi à la main dans l'admin (voir LegacyMetaPanel
+    # ci-dessus pour l'afficher en lecture seule).
     legacy_meta = models.JSONField(blank=True, default=dict, editable=False)
 
     content_panels = Page.content_panels + [
         FieldPanel("body"),
+        LegacyMetaPanel(),
+    ]
+    promote_panels = Page.promote_panels + [
+        FieldPanel("header_image"),
     ]
 
     parent_page_types = ["cms.HomePage", "cms.StandardPage", "cms.PolePage"]

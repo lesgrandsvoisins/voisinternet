@@ -7,7 +7,8 @@
   {% cache 86400 cms_page_content page.pk page.last_published_at %}
   {% with pole=page.get_pole_ancestor %}
     {% if pole.icon %}{% image pole.icon fill-96x96 preserve-svg as icon_img %}{% endif %}
-    <div class="page-head{% if pole.accent %} accent-{{ pole.accent }}{% endif %}">
+    {% if page.header_image %}{% image page.header_image fill-1600x500 as hero_bg %}{% endif %}
+    <div class="page-head{% if pole.accent %} accent-{{ pole.accent }}{% endif %}"{% if hero_bg %} style="background-image: linear-gradient(var(--page-head-overlay), var(--page-head-overlay)), url('{{ hero_bg.url }}')"{% endif %}>
       <div class="wrap">
         <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
           <ol>

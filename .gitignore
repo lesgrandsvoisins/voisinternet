@@ -5,3 +5,4 @@ __pycache__/
 *.pyc
 .venv/
 wwwlesgrandsvoisinscom.json
+/deploy/cms.json

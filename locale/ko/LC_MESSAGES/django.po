@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-18 17:17+0200\n"
+"POT-Creation-Date: 2026-09-18 17:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3120,113 +3120,131 @@ msgstr "이 기기에서 시도 횟수가 너무 많습니다. 15분 후 다시 
 msgid "Message via lesgrandsvoisins.com de %(name)s"
 msgstr "내 그룹 — Voisinternet"
 
-#: core/views.py:335 core/views.py:549
+#: core/views.py:308
+#, python-format
+msgid ""
+"Nom : %(name)s\n"
+"E-mail : %(email)s\n"
+"\n"
+"%(message)s"
+msgstr ""
+"이름: %(name)s\n"
+"이메일: %(email)s\n"
+"\n"
+"%(message)s"
+
+#: core/views.py:310
+msgid "(non renseigné)"
+msgstr "(미입력)"
+
+#: core/views.py:345 core/views.py:559
 #, python-format
 msgid "Message envoyé à %(name)s."
 msgstr "%(name)s에게 메시지를 보냈습니다."
 
-#: core/views.py:339 core/views.py:553
+#: core/views.py:349 core/views.py:563
 msgid ""
 "Votre message a été enregistré, mais son envoi par e-mail a échoué. "
 "Réessayez plus tard."
-msgstr "메시지는 저장되었지만 이메일 전송에 실패했습니다. 나중에 다시 시도해 주세요."
+msgstr ""
+"메시지는 저장되었지만 이메일 전송에 실패했습니다. 나중에 다시 시도해 주세요."
 
-#: core/views.py:406
+#: core/views.py:416
 #, fuzzy
 #| msgid "Aucune contribution enregistrée pour l'instant."
 msgid "Merci ! Votre contribution a été enregistrée."
 msgstr "아직 등록된 기여가 없습니다."
 
-#: core/views.py:408
+#: core/views.py:418
 msgid "Le formulaire de don contient une erreur : montant ou date invalide."
 msgstr "기부 양식에 오류가 있습니다: 금액 또는 날짜가 유효하지 않습니다."
 
-#: core/views.py:573
+#: core/views.py:583
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cette fiche."
 msgstr ""
 "요청을 보냈습니다. 관리자가 검토한 후 이 항목의 관리자로 지정해 드립니다."
 
-#: core/views.py:576
+#: core/views.py:586
 msgid "Vous avez déjà demandé à être responsable de cette fiche."
 msgstr "이미 이 항목의 관리자 권한을 요청하셨습니다."
 
-#: core/views.py:594
+#: core/views.py:604
 msgid ""
 "Connectez-vous pour finaliser votre demande de responsabilité de cette fiche."
 msgstr "이 항목의 관리자 권한 요청을 완료하려면 로그인하세요."
 
-#: core/views.py:618
+#: core/views.py:628
 msgid "Fiche créée."
 msgstr "항목이 생성되었습니다."
 
-#: core/views.py:647
+#: core/views.py:657
 msgid "Fiche mise à jour."
 msgstr "항목이 업데이트되었습니다."
 
-#: core/views.py:659
+#: core/views.py:669
 msgid "Fiche supprimée."
 msgstr "항목이 삭제되었습니다."
 
-#: core/views.py:671
+#: core/views.py:681
 #, python-format
 msgid "Abonnement à « %(name)s » retiré."
 msgstr "“%(name)s” 구독이 해지되었습니다."
 
-#: core/views.py:674
+#: core/views.py:684
 #, python-format
 msgid "Abonné à « %(name)s »."
 msgstr "“%(name)s”에 구독했습니다."
 
-#: core/views.py:700
+#: core/views.py:710
 #, fuzzy
 #| msgid "Fiche créée."
 msgid "Fiche dépubliée."
 msgstr "항목이 생성되었습니다."
 
-#: core/views.py:700
+#: core/views.py:710
 msgid "Demande de publication annulée."
 msgstr "게시 요청이 취소되었습니다."
 
-#: core/views.py:706
+#: core/views.py:716
 msgid ""
 "Fiche envoyée pour validation : elle sera publique une fois validée par un "
 "administrateur."
 msgstr "항목이 승인을 위해 제출되었습니다. 관리자가 승인하면 공개됩니다."
 
-#: core/views.py:761
+#: core/views.py:771
 #, python-format
 msgid "Intérêt enregistré pour « %(title)s »."
 msgstr "“%(title)s”에 대한 관심이 등록되었습니다."
 
-#: core/views.py:764
+#: core/views.py:774
 #, python-format
 msgid "Intérêt retiré pour « %(title)s »."
 msgstr "“%(title)s”에 대한 관심이 취소되었습니다."
 
-#: core/views.py:768
+#: core/views.py:778
 #, python-format
 msgid "Intention mise à jour pour « %(title)s »."
 msgstr "“%(title)s”에 대한 참여 의사가 업데이트되었습니다."
 
-#: core/views.py:788
+#: core/views.py:798
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cet évènement."
 msgstr ""
 "요청을 보냈습니다. 관리자가 검토한 후 이 행사의 관리자로 지정해 드립니다."
 
-#: core/views.py:791
+#: core/views.py:801
 msgid "Vous avez déjà demandé à gérer cet évènement."
 msgstr "이미 이 행사의 관리 권한을 요청하셨습니다."
 
-#: core/views.py:806
+#: core/views.py:816
 msgid ""
 "Connectez-vous pour finaliser votre demande de gestion de cet évènement."
 msgstr "이 행사의 관리 요청을 완료하려면 로그인하세요."
 
-#: core/views.py:832
+#: core/views.py:842
 msgid ""
 "Évènement créé : il reste réservé à ses responsables tant que le groupe "
 "« Administration » ne l'a pas publié."
@@ -3234,35 +3252,35 @@ msgstr ""
 "행사가 생성되었습니다. 'Administration' 그룹이 게시하기 전까지는 담당자에게"
 "만 표시됩니다."
 
-#: core/views.py:853
+#: core/views.py:863
 #, fuzzy
 #| msgid "Fiche mise à jour."
 msgid "Évènement mis à jour."
 msgstr "항목이 업데이트되었습니다."
 
-#: core/views.py:865
+#: core/views.py:875
 #, fuzzy
 #| msgid "Évènements passés"
 msgid "Évènement supprimé."
 msgstr "지난 행사"
 
-#: core/views.py:902
+#: core/views.py:912
 msgid "Compte anonyme créé."
 msgstr "익명 계정이 생성되었습니다."
 
-#: core/views.py:909
+#: core/views.py:919
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "이 기기에서 시도 횟수가 너무 많습니다. 15분 후 다시 시도해 주세요."
 
-#: core/views.py:913
+#: core/views.py:923
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "이 번호와 일치하는 계정이 없습니다. 16자리 숫자를 확인해 주세요."
 
-#: core/views.py:916
+#: core/views.py:926
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "계정을 찾았습니다. 바로가기가 복구되었습니다."
 
-#: core/views.py:923
+#: core/views.py:933
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
@@ -3270,21 +3288,21 @@ msgstr ""
 "이 기기에서는 더 이상 계정이 열려 있지 않습니다. 번호를 이용해 다시 찾을 수 "
 "있습니다."
 
-#: core/views.py:934
+#: core/views.py:944
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "익명 바로가기가 계정에 연결되었습니다."
 
-#: core/views.py:950
+#: core/views.py:960
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "“%(name)s”이(가) 바로가기에서 제거되었습니다."
 
-#: core/views.py:957
+#: core/views.py:967
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "“%(name)s”이(가) 바로가기에 추가되었습니다."
 
-#: core/views.py:960
+#: core/views.py:970
 #, fuzzy, python-format
 #| msgid "« %(name)s » ajouté à vos raccourcis."
 msgid ""
@@ -3292,12 +3310,12 @@ msgid ""
 "administrateur."
 msgstr "“%(name)s”이(가) 바로가기에 추가되었습니다."
 
-#: core/views.py:1073
+#: core/views.py:1083
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "“%(name)s”이(가) 그룹에서 제거되었습니다."
 
-#: core/views.py:1077
+#: core/views.py:1087
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "“%(name)s”이(가) 그룹에 추가되었습니다."

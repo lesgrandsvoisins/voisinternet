@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-18 17:17+0200\n"
+"POT-Creation-Date: 2026-09-18 17:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3150,29 +3150,48 @@ msgstr ""
 msgid "Message via lesgrandsvoisins.com de %(name)s"
 msgstr "Mis grupos — Voisinternet"
 
-#: core/views.py:335 core/views.py:549
+#: core/views.py:308
+#, python-format
+msgid ""
+"Nom : %(name)s\n"
+"E-mail : %(email)s\n"
+"\n"
+"%(message)s"
+msgstr ""
+"Nombre: %(name)s\n"
+"Correo electrónico: %(email)s\n"
+"\n"
+"%(message)s"
+
+#: core/views.py:310
+msgid "(non renseigné)"
+msgstr "(no indicado)"
+
+#: core/views.py:345 core/views.py:559
 #, python-format
 msgid "Message envoyé à %(name)s."
 msgstr "Mensaje enviado a %(name)s."
 
-#: core/views.py:339 core/views.py:553
+#: core/views.py:349 core/views.py:563
 msgid ""
 "Votre message a été enregistré, mais son envoi par e-mail a échoué. "
 "Réessayez plus tard."
-msgstr "Su mensaje ha sido registrado, pero el envío por correo electrónico ha fallado. Vuelva a intentarlo más tarde."
+msgstr ""
+"Su mensaje ha sido registrado, pero el envío por correo electrónico ha "
+"fallado. Vuelva a intentarlo más tarde."
 
-#: core/views.py:406
+#: core/views.py:416
 #, fuzzy
 #| msgid "Aucune contribution enregistrée pour l'instant."
 msgid "Merci ! Votre contribution a été enregistrée."
 msgstr "Todavía no hay ninguna contribución registrada."
 
-#: core/views.py:408
+#: core/views.py:418
 msgid "Le formulaire de don contient une erreur : montant ou date invalide."
 msgstr ""
 "El formulario de donación contiene un error: importe o fecha no válidos."
 
-#: core/views.py:573
+#: core/views.py:583
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cette fiche."
@@ -3180,49 +3199,49 @@ msgstr ""
 "Solicitud enviada: un administrador la revisará antes de hacerte responsable "
 "de esta ficha."
 
-#: core/views.py:576
+#: core/views.py:586
 msgid "Vous avez déjà demandé à être responsable de cette fiche."
 msgstr "Ya has solicitado ser responsable de esta ficha."
 
-#: core/views.py:594
+#: core/views.py:604
 msgid ""
 "Connectez-vous pour finaliser votre demande de responsabilité de cette fiche."
 msgstr ""
 "Inicia sesión para finalizar tu solicitud de responsabilidad de esta ficha."
 
-#: core/views.py:618
+#: core/views.py:628
 msgid "Fiche créée."
 msgstr "Ficha creada."
 
-#: core/views.py:647
+#: core/views.py:657
 msgid "Fiche mise à jour."
 msgstr "Ficha actualizada."
 
-#: core/views.py:659
+#: core/views.py:669
 msgid "Fiche supprimée."
 msgstr "Ficha eliminada."
 
-#: core/views.py:671
+#: core/views.py:681
 #, python-format
 msgid "Abonnement à « %(name)s » retiré."
 msgstr "Suscripción a «%(name)s» eliminada."
 
-#: core/views.py:674
+#: core/views.py:684
 #, python-format
 msgid "Abonné à « %(name)s »."
 msgstr "Suscrito a «%(name)s»."
 
-#: core/views.py:700
+#: core/views.py:710
 #, fuzzy
 #| msgid "Fiche créée."
 msgid "Fiche dépubliée."
 msgstr "Ficha creada."
 
-#: core/views.py:700
+#: core/views.py:710
 msgid "Demande de publication annulée."
 msgstr "Solicitud de publicación cancelada."
 
-#: core/views.py:706
+#: core/views.py:716
 msgid ""
 "Fiche envoyée pour validation : elle sera publique une fois validée par un "
 "administrateur."
@@ -3230,22 +3249,22 @@ msgstr ""
 "Ficha enviada para su validación: será pública una vez validada por un "
 "administrador."
 
-#: core/views.py:761
+#: core/views.py:771
 #, python-format
 msgid "Intérêt enregistré pour « %(title)s »."
 msgstr "Interés registrado para «%(title)s»."
 
-#: core/views.py:764
+#: core/views.py:774
 #, python-format
 msgid "Intérêt retiré pour « %(title)s »."
 msgstr "Interés retirado para «%(title)s»."
 
-#: core/views.py:768
+#: core/views.py:778
 #, python-format
 msgid "Intention mise à jour pour « %(title)s »."
 msgstr "Intención actualizada para «%(title)s»."
 
-#: core/views.py:788
+#: core/views.py:798
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cet évènement."
@@ -3253,16 +3272,16 @@ msgstr ""
 "Solicitud enviada: un administrador la revisará antes de hacerte responsable "
 "de este evento."
 
-#: core/views.py:791
+#: core/views.py:801
 msgid "Vous avez déjà demandé à gérer cet évènement."
 msgstr "Ya has solicitado gestionar este evento."
 
-#: core/views.py:806
+#: core/views.py:816
 msgid ""
 "Connectez-vous pour finaliser votre demande de gestion de cet évènement."
 msgstr "Inicia sesión para finalizar tu solicitud de gestión de este evento."
 
-#: core/views.py:832
+#: core/views.py:842
 msgid ""
 "Évènement créé : il reste réservé à ses responsables tant que le groupe "
 "« Administration » ne l'a pas publié."
@@ -3270,37 +3289,37 @@ msgstr ""
 "Evento creado: permanece reservado a sus responsables hasta que el grupo "
 "«Administration» lo publique."
 
-#: core/views.py:853
+#: core/views.py:863
 #, fuzzy
 #| msgid "Fiche mise à jour."
 msgid "Évènement mis à jour."
 msgstr "Ficha actualizada."
 
-#: core/views.py:865
+#: core/views.py:875
 #, fuzzy
 #| msgid "Évènements passés"
 msgid "Évènement supprimé."
 msgstr "Eventos pasados"
 
-#: core/views.py:902
+#: core/views.py:912
 msgid "Compte anonyme créé."
 msgstr "Cuenta anónima creada."
 
-#: core/views.py:909
+#: core/views.py:919
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr ""
 "Demasiados intentos desde este dispositivo. Vuelve a intentarlo en un cuarto "
 "de hora."
 
-#: core/views.py:913
+#: core/views.py:923
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "Ninguna cuenta corresponde a este número. Verifica las 16 cifras."
 
-#: core/views.py:916
+#: core/views.py:926
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "Cuenta recuperada. Tus accesos directos han vuelto."
 
-#: core/views.py:923
+#: core/views.py:933
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
@@ -3308,21 +3327,21 @@ msgstr ""
 "Esta cuenta ya no está abierta en este dispositivo. Tu número permite "
 "recuperarla."
 
-#: core/views.py:934
+#: core/views.py:944
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "Tus accesos directos anónimos se han unido a tu cuenta."
 
-#: core/views.py:950
+#: core/views.py:960
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "«%(name)s» eliminado de tus accesos directos."
 
-#: core/views.py:957
+#: core/views.py:967
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "«%(name)s» añadido a tus accesos directos."
 
-#: core/views.py:960
+#: core/views.py:970
 #, fuzzy, python-format
 #| msgid "« %(name)s » ajouté à vos raccourcis."
 msgid ""
@@ -3330,12 +3349,12 @@ msgid ""
 "administrateur."
 msgstr "«%(name)s» añadido a tus accesos directos."
 
-#: core/views.py:1073
+#: core/views.py:1083
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "«%(name)s» eliminado de tus grupos."
 
-#: core/views.py:1077
+#: core/views.py:1087
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "«%(name)s» añadido a tus grupos."

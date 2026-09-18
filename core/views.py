@@ -300,7 +300,17 @@ def _process_contact_form(request, throttle_scope, recipient_email):
                 subject=_("Message via lesgrandsvoisins.com de %(name)s") % {
                     "name": form.cleaned_data["sender_name"] or form.cleaned_data["sender_email"],
                 },
-                body=form.cleaned_data["message"],
+                # Le nom et l'e-mail figurent aussi dans l'en-tête Reply-To, mais de
+                # nombreux clients mail ne l'affichent pas de façon visible — on les
+                # répète dans le corps pour que la personne destinataire les ait sous
+                # les yeux sans avoir à répondre au message pour les retrouver.
+                body=_(
+                    "Nom : %(name)s\nE-mail : %(email)s\n\n%(message)s"
+                ) % {
+                    "name": form.cleaned_data["sender_name"] or _("(non renseigné)"),
+                    "email": form.cleaned_data["sender_email"],
+                    "message": form.cleaned_data["message"],
+                },
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 to=[recipient_email],
                 reply_to=[form.cleaned_data["sender_email"]],

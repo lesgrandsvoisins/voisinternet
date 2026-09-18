@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-18 17:17+0200\n"
+"POT-Creation-Date: 2026-09-18 17:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3140,28 +3140,46 @@ msgstr "Too many attempts from this device. Try again in fifteen minutes."
 msgid "Message via lesgrandsvoisins.com de %(name)s"
 msgstr "My groups — Voisinternet"
 
-#: core/views.py:335 core/views.py:549
+#: core/views.py:308
+#, python-format
+msgid ""
+"Nom : %(name)s\n"
+"E-mail : %(email)s\n"
+"\n"
+"%(message)s"
+msgstr ""
+"Name: %(name)s\n"
+"E-mail: %(email)s\n"
+"\n"
+"%(message)s"
+
+#: core/views.py:310
+msgid "(non renseigné)"
+msgstr "(not provided)"
+
+#: core/views.py:345 core/views.py:559
 #, python-format
 msgid "Message envoyé à %(name)s."
 msgstr "Message sent to %(name)s."
 
-#: core/views.py:339 core/views.py:553
+#: core/views.py:349 core/views.py:563
 msgid ""
 "Votre message a été enregistré, mais son envoi par e-mail a échoué. "
 "Réessayez plus tard."
-msgstr "Your message was recorded, but sending it by e-mail failed. Try again later."
+msgstr ""
+"Your message was recorded, but sending it by e-mail failed. Try again later."
 
-#: core/views.py:406
+#: core/views.py:416
 #, fuzzy
 #| msgid "Aucune contribution enregistrée pour l'instant."
 msgid "Merci ! Votre contribution a été enregistrée."
 msgstr "No contribution recorded yet."
 
-#: core/views.py:408
+#: core/views.py:418
 msgid "Le formulaire de don contient une erreur : montant ou date invalide."
 msgstr "The donation form contains an error: invalid amount or date."
 
-#: core/views.py:573
+#: core/views.py:583
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cette fiche."
@@ -3169,49 +3187,49 @@ msgstr ""
 "Request sent: an administrator will review it before making you responsible "
 "for this listing."
 
-#: core/views.py:576
+#: core/views.py:586
 msgid "Vous avez déjà demandé à être responsable de cette fiche."
 msgstr "You have already asked to become responsible for this listing."
 
-#: core/views.py:594
+#: core/views.py:604
 msgid ""
 "Connectez-vous pour finaliser votre demande de responsabilité de cette fiche."
 msgstr ""
 "Sign in to complete your request to take responsibility for this listing."
 
-#: core/views.py:618
+#: core/views.py:628
 msgid "Fiche créée."
 msgstr "Listing created."
 
-#: core/views.py:647
+#: core/views.py:657
 msgid "Fiche mise à jour."
 msgstr "Listing updated."
 
-#: core/views.py:659
+#: core/views.py:669
 msgid "Fiche supprimée."
 msgstr "Listing deleted."
 
-#: core/views.py:671
+#: core/views.py:681
 #, python-format
 msgid "Abonnement à « %(name)s » retiré."
 msgstr "Subscription to “%(name)s” removed."
 
-#: core/views.py:674
+#: core/views.py:684
 #, python-format
 msgid "Abonné à « %(name)s »."
 msgstr "Subscribed to “%(name)s”."
 
-#: core/views.py:700
+#: core/views.py:710
 #, fuzzy
 #| msgid "Fiche créée."
 msgid "Fiche dépubliée."
 msgstr "Listing created."
 
-#: core/views.py:700
+#: core/views.py:710
 msgid "Demande de publication annulée."
 msgstr "Publication request cancelled."
 
-#: core/views.py:706
+#: core/views.py:716
 msgid ""
 "Fiche envoyée pour validation : elle sera publique une fois validée par un "
 "administrateur."
@@ -3219,22 +3237,22 @@ msgstr ""
 "Listing sent for approval: it will become public once approved by an "
 "administrator."
 
-#: core/views.py:761
+#: core/views.py:771
 #, python-format
 msgid "Intérêt enregistré pour « %(title)s »."
 msgstr "Interest recorded for “%(title)s”."
 
-#: core/views.py:764
+#: core/views.py:774
 #, python-format
 msgid "Intérêt retiré pour « %(title)s »."
 msgstr "Interest removed for “%(title)s”."
 
-#: core/views.py:768
+#: core/views.py:778
 #, python-format
 msgid "Intention mise à jour pour « %(title)s »."
 msgstr "Intent updated for “%(title)s”."
 
-#: core/views.py:788
+#: core/views.py:798
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cet évènement."
@@ -3242,16 +3260,16 @@ msgstr ""
 "Request sent: an administrator will review it before making you responsible "
 "for this event."
 
-#: core/views.py:791
+#: core/views.py:801
 msgid "Vous avez déjà demandé à gérer cet évènement."
 msgstr "You have already asked to manage this event."
 
-#: core/views.py:806
+#: core/views.py:816
 msgid ""
 "Connectez-vous pour finaliser votre demande de gestion de cet évènement."
 msgstr "Sign in to complete your request to manage this event."
 
-#: core/views.py:832
+#: core/views.py:842
 msgid ""
 "Évènement créé : il reste réservé à ses responsables tant que le groupe "
 "« Administration » ne l'a pas publié."
@@ -3259,35 +3277,35 @@ msgstr ""
 "Event created: it stays reserved to its organisers until the "
 "“Administration” group publishes it."
 
-#: core/views.py:853
+#: core/views.py:863
 #, fuzzy
 #| msgid "Fiche mise à jour."
 msgid "Évènement mis à jour."
 msgstr "Listing updated."
 
-#: core/views.py:865
+#: core/views.py:875
 #, fuzzy
 #| msgid "Évènements passés"
 msgid "Évènement supprimé."
 msgstr "Past events"
 
-#: core/views.py:902
+#: core/views.py:912
 msgid "Compte anonyme créé."
 msgstr "Anonymous account created."
 
-#: core/views.py:909
+#: core/views.py:919
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "Too many attempts from this device. Try again in fifteen minutes."
 
-#: core/views.py:913
+#: core/views.py:923
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "No account matches this number. Check the 16 digits."
 
-#: core/views.py:916
+#: core/views.py:926
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "Account found. Your shortcuts are back."
 
-#: core/views.py:923
+#: core/views.py:933
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
@@ -3295,21 +3313,21 @@ msgstr ""
 "This account is no longer open on this device. Your number lets you find it "
 "again."
 
-#: core/views.py:934
+#: core/views.py:944
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "Your anonymous shortcuts have joined your account."
 
-#: core/views.py:950
+#: core/views.py:960
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "“%(name)s” removed from your shortcuts."
 
-#: core/views.py:957
+#: core/views.py:967
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "“%(name)s” added to your shortcuts."
 
-#: core/views.py:960
+#: core/views.py:970
 #, fuzzy, python-format
 #| msgid "« %(name)s » ajouté à vos raccourcis."
 msgid ""
@@ -3317,12 +3335,12 @@ msgid ""
 "administrateur."
 msgstr "“%(name)s” added to your shortcuts."
 
-#: core/views.py:1073
+#: core/views.py:1083
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "“%(name)s” removed from your groups."
 
-#: core/views.py:1077
+#: core/views.py:1087
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "“%(name)s” added to your groups."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-18 17:17+0200\n"
+"POT-Creation-Date: 2026-09-18 17:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3110,113 +3110,131 @@ msgstr "عدد كبير جدًا من المحاولات من هذا الجها�
 msgid "Message via lesgrandsvoisins.com de %(name)s"
 msgstr "مجموعاتي — Voisinternet"
 
-#: core/views.py:335 core/views.py:549
+#: core/views.py:308
+#, python-format
+msgid ""
+"Nom : %(name)s\n"
+"E-mail : %(email)s\n"
+"\n"
+"%(message)s"
+msgstr ""
+"الاسم: %(name)s\n"
+"البريد الإلكتروني: %(email)s\n"
+"\n"
+"%(message)s"
+
+#: core/views.py:310
+msgid "(non renseigné)"
+msgstr "(غير محدد)"
+
+#: core/views.py:345 core/views.py:559
 #, python-format
 msgid "Message envoyé à %(name)s."
 msgstr "تم إرسال الرسالة إلى %(name)s."
 
-#: core/views.py:339 core/views.py:553
+#: core/views.py:349 core/views.py:563
 msgid ""
 "Votre message a été enregistré, mais son envoi par e-mail a échoué. "
 "Réessayez plus tard."
-msgstr "تم تسجيل رسالتك، لكن إرسالها بالبريد الإلكتروني فشل. أعد المحاولة لاحقًا."
+msgstr ""
+"تم تسجيل رسالتك، لكن إرسالها بالبريد الإلكتروني فشل. أعد المحاولة لاحقًا."
 
-#: core/views.py:406
+#: core/views.py:416
 #, fuzzy
 #| msgid "Aucune contribution enregistrée pour l'instant."
 msgid "Merci ! Votre contribution a été enregistrée."
 msgstr "لا توجد مساهمة مسجلة حتى الآن."
 
-#: core/views.py:408
+#: core/views.py:418
 msgid "Le formulaire de don contient une erreur : montant ou date invalide."
 msgstr "يحتوي نموذج التبرع على خطأ: المبلغ أو التاريخ غير صالح."
 
-#: core/views.py:573
+#: core/views.py:583
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cette fiche."
 msgstr ""
 "تم إرسال الطلب: سيراجعه أحد المسؤولين قبل أن يجعلك مسؤولاً عن هذا السجل."
 
-#: core/views.py:576
+#: core/views.py:586
 msgid "Vous avez déjà demandé à être responsable de cette fiche."
 msgstr "لقد سبق أن طلبت تولي مسؤولية هذا السجل."
 
-#: core/views.py:594
+#: core/views.py:604
 msgid ""
 "Connectez-vous pour finaliser votre demande de responsabilité de cette fiche."
 msgstr "سجّل الدخول لإتمام طلب تولي مسؤولية هذا السجل."
 
-#: core/views.py:618
+#: core/views.py:628
 msgid "Fiche créée."
 msgstr "تم إنشاء البطاقة."
 
-#: core/views.py:647
+#: core/views.py:657
 msgid "Fiche mise à jour."
 msgstr "تم تحديث البطاقة."
 
-#: core/views.py:659
+#: core/views.py:669
 msgid "Fiche supprimée."
 msgstr "تم حذف البطاقة."
 
-#: core/views.py:671
+#: core/views.py:681
 #, python-format
 msgid "Abonnement à « %(name)s » retiré."
 msgstr "تمت إزالة الاشتراك في «%(name)s»."
 
-#: core/views.py:674
+#: core/views.py:684
 #, python-format
 msgid "Abonné à « %(name)s »."
 msgstr "تم الاشتراك في «%(name)s»."
 
-#: core/views.py:700
+#: core/views.py:710
 #, fuzzy
 #| msgid "Fiche créée."
 msgid "Fiche dépubliée."
 msgstr "تم إنشاء البطاقة."
 
-#: core/views.py:700
+#: core/views.py:710
 msgid "Demande de publication annulée."
 msgstr "تم إلغاء طلب النشر."
 
-#: core/views.py:706
+#: core/views.py:716
 msgid ""
 "Fiche envoyée pour validation : elle sera publique une fois validée par un "
 "administrateur."
 msgstr "تم إرسال السجل للموافقة: سيصبح عامًا بمجرد موافقة أحد المسؤولين عليه."
 
-#: core/views.py:761
+#: core/views.py:771
 #, python-format
 msgid "Intérêt enregistré pour « %(title)s »."
 msgstr "تم تسجيل الاهتمام بـ«%(title)s»."
 
-#: core/views.py:764
+#: core/views.py:774
 #, python-format
 msgid "Intérêt retiré pour « %(title)s »."
 msgstr "تم إلغاء الاهتمام بـ«%(title)s»."
 
-#: core/views.py:768
+#: core/views.py:778
 #, python-format
 msgid "Intention mise à jour pour « %(title)s »."
 msgstr "تم تحديث النية بخصوص «%(title)s»."
 
-#: core/views.py:788
+#: core/views.py:798
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cet évènement."
 msgstr ""
 "تم إرسال الطلب: سيراجعه أحد المسؤولين قبل أن يجعلك مسؤولاً عن هذه الفعالية."
 
-#: core/views.py:791
+#: core/views.py:801
 msgid "Vous avez déjà demandé à gérer cet évènement."
 msgstr "لقد سبق أن طلبت إدارة هذه الفعالية."
 
-#: core/views.py:806
+#: core/views.py:816
 msgid ""
 "Connectez-vous pour finaliser votre demande de gestion de cet évènement."
 msgstr "سجّل الدخول لإتمام طلب إدارة هذه الفعالية."
 
-#: core/views.py:832
+#: core/views.py:842
 msgid ""
 "Évènement créé : il reste réservé à ses responsables tant que le groupe "
 "« Administration » ne l'a pas publié."
@@ -3224,55 +3242,55 @@ msgstr ""
 "تم إنشاء الفعالية: تبقى مقتصرة على المسؤولين عنها إلى أن تنشرها مجموعة "
 "«Administration»."
 
-#: core/views.py:853
+#: core/views.py:863
 #, fuzzy
 #| msgid "Fiche mise à jour."
 msgid "Évènement mis à jour."
 msgstr "تم تحديث البطاقة."
 
-#: core/views.py:865
+#: core/views.py:875
 #, fuzzy
 #| msgid "Évènements passés"
 msgid "Évènement supprimé."
 msgstr "الفعاليات الماضية"
 
-#: core/views.py:902
+#: core/views.py:912
 msgid "Compte anonyme créé."
 msgstr "تم إنشاء حساب مجهول."
 
-#: core/views.py:909
+#: core/views.py:919
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "عدد كبير جدًا من المحاولات من هذا الجهاز. أعد المحاولة بعد ربع ساعة."
 
-#: core/views.py:913
+#: core/views.py:923
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "لا يوجد حساب مطابق لهذا الرقم. تحقق من الخانات الـ16."
 
-#: core/views.py:916
+#: core/views.py:926
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "تم العثور على الحساب. عادت اختصاراتك."
 
-#: core/views.py:923
+#: core/views.py:933
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
 msgstr "لم يعد هذا الحساب مفتوحًا على هذا الجهاز. رقمك يتيح لك استعادته."
 
-#: core/views.py:934
+#: core/views.py:944
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "انضمت اختصاراتك المجهولة إلى حسابك."
 
-#: core/views.py:950
+#: core/views.py:960
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "تمت إزالة «%(name)s» من اختصاراتك."
 
-#: core/views.py:957
+#: core/views.py:967
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "تمت إضافة «%(name)s» إلى اختصاراتك."
 
-#: core/views.py:960
+#: core/views.py:970
 #, fuzzy, python-format
 #| msgid "« %(name)s » ajouté à vos raccourcis."
 msgid ""
@@ -3280,12 +3298,12 @@ msgid ""
 "administrateur."
 msgstr "تمت إضافة «%(name)s» إلى اختصاراتك."
 
-#: core/views.py:1073
+#: core/views.py:1083
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "تمت إزالة «%(name)s» من مجموعاتك."
 
-#: core/views.py:1077
+#: core/views.py:1087
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "تمت إضافة «%(name)s» إلى مجموعاتك."

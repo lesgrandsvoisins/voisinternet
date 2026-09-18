@@ -12,7 +12,7 @@ LOADENV = export $$(grep -v '^\#' .env 2>/dev/null | xargs -d '\n');
 .PHONY: help venv install setup migrate makemigrations fixtures superuser \
         run test shell messages compilemessages collectstatic clean \
         fixtures-load fixtures-dump cms-load cms-dump blog-import qmd-export qmd-import \
-        event-qmd-export event-qmd-import
+        event-qmd-export event-qmd-import standard-qmd-export standard-qmd-import
 
 help: ## Affiche cette aide
 	@grep -E '^[a-zA-Z_-]+:.*## ' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'
@@ -88,6 +88,12 @@ event-qmd-export: ## Exporte un évènement en .qmd : make event-qmd-export PK=4
 
 event-qmd-import: ## Importe/met à jour un évènement depuis un .qmd : make event-qmd-import FILE=mon-evenement.qmd
 	$(LOADENV) $(PYTHON) manage.py import_event_qmd $(FILE)
+
+standard-qmd-export: ## Exporte une page générique en .qmd : make standard-qmd-export SLUG=ma-page [LANG=fr] [OUT=chemin.qmd]
+	$(LOADENV) $(PYTHON) manage.py export_standard_qmd $(SLUG) --lang=$(or $(LANG),fr) $(if $(OUT),--out=$(OUT))
+
+standard-qmd-import: ## Importe/met à jour une page générique depuis un .qmd : make standard-qmd-import FILE=ma-page.qmd
+	$(LOADENV) $(PYTHON) manage.py import_standard_qmd $(FILE)
 
 superuser: ## Crée un compte administrateur
 	$(LOADENV) $(PYTHON) manage.py createsuperuser

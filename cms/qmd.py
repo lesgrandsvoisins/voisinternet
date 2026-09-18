@@ -66,7 +66,7 @@ from wagtail.models import Locale, Page, Site
 
 from core.templatetags.markdown_filters import markdown_filter
 
-from .models import BlogIndexPage, BlogPostPage, ContentPage, PolePage
+from .models import BlogIndexPage, BlogPostPage, ContentPage, PolePage, StandardPage
 
 FRONTMATTER_RE = re.compile(r"\A---\s*\n(.*?\n)---\s*\n?(.*)\Z", re.DOTALL)
 PAGEBREAK_SHORTCODE = "{{< pagebreak >}}"
@@ -989,5 +989,77 @@ def import_contentpage_qmd(text):
         from core.models import Tag
 
         page.tags.set([Tag.objects.get_or_create(name=t, defaults={"slug": slugify(t)})[0] for t in tags])
+
+    return page
+
+
+def export_standardpage_qmd(page, media_files=None):
+    """
+    Sérialise une cms.StandardPage (une langue) en texte .qmd — même schéma
+    d'identification (key/lang) que le blog/ContentPage, mais sans leurs champs
+    éditoriaux (auteur/date/étiquettes/image de une) : StandardPage n'a qu'un titre et
+    un corps en texte enrichi. "parent" (slug de la page parente, quel que soit son
+    type — HomePage/PolePage/StandardPage, qui peut s'imbriquer à toute profondeur)
+    indique où la rattacher à l'import si la page n'existe pas encore ; voir
+    import_standardpage_qmd pour le repli si absent.
+    """
+    converter = _HTMLToMarkdown(media_files=media_files)
+    converter.feed(page.body)
+
+    front = {
+        "title": page.title,
+        "key": str(page.translation_key),
+        "lang": page.locale.language_code,
+        "parent": page.get_parent().slug,
+        "slug": page.slug,
+        "url": page.full_url,
+    }
+    frontmatter = yaml.safe_dump(front, allow_unicode=True, sort_keys=False, default_flow_style=False)
+    return f"---\n{frontmatter}---\n\n{converter.result()}"
+
+
+def import_standardpage_qmd(text):
+    """
+    Crée ou met à jour une cms.StandardPage à partir d'un texte .qmd — même logique
+    d'identification (translation_key + lang) qu'import_blogpost_qmd/
+    import_contentpage_qmd. Pour une page nouvelle, le frontmatter "parent" (slug de la
+    page parente, tel qu'écrit par export_standardpage_qmd) indique où la rattacher ; à
+    défaut, la page d'accueil du site (cms.HomePage, seule racine possible dans cet
+    arbre) est utilisée.
+    """
+    match = FRONTMATTER_RE.match(text)
+    if not match:
+        raise ValueError("Frontmatter YAML manquant (le fichier doit commencer par ---).")
+    front = yaml.safe_load(match.group(1)) or {}
+    body_md = match.group(2)
+
+    lang = front.get("lang") or "fr"
+    locale = Locale.objects.get(language_code=lang)
+    key = front.get("key")
+
+    page = StandardPage.objects.filter(translation_key=key, locale=locale).first() if key else None
+    if page is None:
+        sibling = (
+            StandardPage.objects.filter(translation_key=key).exclude(locale=locale).first() if key else None
+        )
+        page = sibling.copy_for_translation(locale, copy_parents=True) if sibling else StandardPage(locale=locale)
+        if key and not page.pk:
+            page.translation_key = key
+
+    page.title = front.get("title") or page.title or front.get("slug") or ""
+    page.slug = front.get("slug") or slugify(page.title)
+    page.body = _self_close_void_tags(_restore_wagtail_embeds(markdown_filter(body_md)))
+
+    is_new = page.pk is None
+    if is_new:
+        parent_slug = front.get("parent")
+        parent = Page.objects.filter(locale=locale, slug=parent_slug).first() if parent_slug else None
+        if parent is None:
+            site = Site.objects.filter(is_default_site=True).first()
+            parent = site.root_page if site else None
+        if parent is None:
+            raise ValueError(f"Aucune page parente trouvée en langue « {lang} » pour y rattacher la page.")
+        parent.add_child(instance=page)
+    page.save_revision().publish()
 
     return page

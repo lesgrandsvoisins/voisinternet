@@ -47,10 +47,16 @@ def search(query, limit=10):
     try:
         with urlopen(request, timeout=3) as response:
             data = json.load(response)
+        # Le paramètre locale envoyé ci-dessus n'est pas garanti d'être respecté côté
+        # Wiki.js (selon le moteur de recherche configuré, ex. recherche plein texte
+        # basique) : on refiltre nous-mêmes plutôt que de risquer d'afficher des
+        # résultats dans une autre langue que celle demandée.
+        active_locale = get_language()
         results = [
             {"title": r["title"], "description": r.get("description", ""), "url": f"{base_url}/{r['locale']}/{r['path']}"}
-            for r in data["data"]["pages"]["search"]["results"][:limit]
-        ]
+            for r in data["data"]["pages"]["search"]["results"]
+            if r.get("locale") == active_locale
+        ][:limit]
     except (URLError, OSError, ValueError, KeyError, TypeError):
         results = []
     # Un wiki injoignable ne doit pas ralentir la recherche : on réessaie plus tard.

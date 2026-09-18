@@ -221,6 +221,13 @@ class StandardPage(Page):
     """
 
     body = StreamField(ContentStreamBlock(), blank=True)
+    # Passe-plat pour les métadonnées de frontmatter .qmd non reconnues par ce site (la
+    # clé "legacy" — voir cms/qmd.py) : conservées telles quelles à l'aller-retour
+    # export/import, sans que ce code ait besoin de comprendre leur contenu. Un
+    # JSONField ordinaire, donc inclus tel quel dans le dumpdata Django et les
+    # révisions Wagtail (StreamField/RichTextField le sont déjà) — editable=False :
+    # pas de FieldPanel, jamais saisi à la main dans l'admin.
+    legacy_meta = models.JSONField(blank=True, default=dict, editable=False)
 
     content_panels = Page.content_panels + [
         FieldPanel("body"),
@@ -265,6 +272,9 @@ class PolePage(Page):
     # interne) : distinct de ghost_tag ci-dessus, qui ne concerne que l'ancien blog Ghost.
     tags = models.ManyToManyField("core.Tag", blank=True, related_name="poles", verbose_name=_("étiquettes"))
     cards = StreamField([("card", CardBlock())], blank=True)
+    # Passe-plat pour les métadonnées de frontmatter .qmd non reconnues (clé "legacy",
+    # voir cms/qmd.py et sa docstring sur cms.StandardPage.legacy_meta).
+    legacy_meta = models.JSONField(blank=True, default=dict, editable=False)
 
     content_panels = Page.content_panels + [
         FieldPanel("lead"),
@@ -337,6 +347,9 @@ class ProjectPage(Page):
         ],
         blank=True,
     )
+    # Passe-plat pour les métadonnées de frontmatter .qmd non reconnues (clé "legacy",
+    # voir cms/qmd.py et sa docstring sur cms.StandardPage.legacy_meta).
+    legacy_meta = models.JSONField(blank=True, default=dict, editable=False)
 
     content_panels = Page.content_panels + [
         FieldPanel("lead"),
@@ -407,6 +420,9 @@ class ContentPage(Page):
     )
     tags = models.ManyToManyField("core.Tag", blank=True, related_name="content_pages", verbose_name=_("étiquettes"))
     body = StreamField(ContentStreamBlock(), blank=True)
+    # Passe-plat pour les métadonnées de frontmatter .qmd non reconnues (clé "legacy",
+    # voir cms/qmd.py et sa docstring sur cms.StandardPage.legacy_meta).
+    legacy_meta = models.JSONField(blank=True, default=dict, editable=False)
 
     content_panels = Page.content_panels + [
         FieldPanel("date"),
@@ -714,6 +730,9 @@ class BlogPostPage(Page):
     # de mots-clés pour tout le site (core.views.tag_detail), plutôt qu'un système de
     # tags par section.
     tags = models.ManyToManyField("core.Tag", blank=True, related_name="blog_posts", verbose_name=_("étiquettes"))
+    # Passe-plat pour les métadonnées de frontmatter .qmd non reconnues (clé "legacy",
+    # voir cms/qmd.py et sa docstring sur cms.StandardPage.legacy_meta).
+    legacy_meta = models.JSONField(blank=True, default=dict, editable=False)
 
     content_panels = Page.content_panels + [
         FieldPanel("date"),

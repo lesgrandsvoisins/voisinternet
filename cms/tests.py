@@ -179,13 +179,52 @@ class QmdRoundTripTests(TestCase):
         self.assertIn('class="pagebreak"', imported.body)
 
 
+class StandardPageMenuTests(TestCase):
+    """Sous-pages mises en avant via Page.show_in_menus (case « Afficher dans les
+    menus », onglet Promouvoir) — voir cms/templates/cms/standard_page.html."""
+
+    def setUp(self):
+        self.fr = Locale.objects.get(language_code="fr")
+        self.home = HomePage.objects.get(locale=self.fr)
+        self.parent = StandardPage(
+            title="Page parente", slug="page-parente-menu",
+            body=[{"type": "prose", "value": "<p>Parent.</p>"}],
+        )
+        self.home.add_child(instance=self.parent)
+        self.parent.save_revision().publish()
+
+    def test_only_children_with_show_in_menus_are_listed(self):
+        visible = StandardPage(
+            title="Enfant visible", slug="enfant-visible", show_in_menus=True,
+            body=[{"type": "prose", "value": "<p>Enfant.</p>"}],
+        )
+        self.parent.add_child(instance=visible)
+        visible.save_revision().publish()
+
+        hidden = StandardPage(
+            title="Enfant caché", slug="enfant-cache", show_in_menus=False,
+            body=[{"type": "prose", "value": "<p>Caché.</p>"}],
+        )
+        self.parent.add_child(instance=hidden)
+        hidden.save_revision().publish()
+
+        response = self.client.get(self.parent.url)
+        self.assertContains(response, "Enfant visible")
+        self.assertNotContains(response, "Enfant caché")
+
+    def test_no_menu_section_when_no_child_is_flagged(self):
+        response = self.client.get(self.parent.url)
+        self.assertNotContains(response, 'id="standard-page-menu-title"')
+
+
 class StandardPageQmdRoundTripTests(TestCase):
     def setUp(self):
         self.fr = Locale.objects.get(language_code="fr")
         self.home = HomePage.objects.get(locale=self.fr)
         self.page = StandardPage(
             title="Page générique de test", slug="page-generique-de-test",
-            body="<p>Un <strong>paragraphe</strong> avec une <a href=\"https://example.org\">source</a>.</p>",
+            body=[{"type": "prose", "value":
+                   '<p>Un <strong>paragraphe</strong> avec une <a href="https://example.org">source</a>.</p>'}],
         )
         self.home.add_child(instance=self.page)
         self.page.save_revision().publish()
@@ -200,8 +239,31 @@ class StandardPageQmdRoundTripTests(TestCase):
 
         self.assertEqual(imported.pk, self.page.pk)
         self.assertEqual(StandardPage.objects.filter(translation_key=self.page.translation_key).count(), 1)
-        self.assertIn("paragraphe", imported.body)
-        self.assertIn('href="https://example.org"', imported.body)
+        blocks = list(imported.body)
+        self.assertEqual([b.block_type for b in blocks], ["prose"])
+        self.assertIn("paragraphe", str(blocks[0].value))
+        self.assertIn('href="https://example.org"', str(blocks[0].value))
+
+    def test_import_recognizes_a_callout_div_like_contentpage(self):
+        # Depuis cms.0030_standardpage_body_streamfield, StandardPage.body partage
+        # ContentStreamBlock avec cms.ContentPage : les mêmes divs Pandoc/Quarto
+        # (callouts, generic_nesting…) doivent être reconnus, pas seulement de la prose.
+        qmd = f"""---
+title: Page avec encart
+lang: fr
+parent: {self.home.slug}
+slug: page-avec-encart
+---
+
+::: {{.callout-tip}}
+Un conseil utile.
+:::
+"""
+        page = import_standardpage_qmd(qmd)
+        blocks = list(page.body)
+        self.assertEqual([b.block_type for b in blocks], ["callout"])
+        self.assertEqual(blocks[0].value["type"], "tip")
+        self.assertIn("Un conseil utile", str(blocks[0].value["text"]))
 
     def test_import_with_unknown_key_creates_a_new_page_under_its_declared_parent(self):
         qmd = (
@@ -247,13 +309,13 @@ class StandardPageQmdRoundTripTests(TestCase):
         self.assertNotEqual(translated.pk, self.page.pk)
         self.assertEqual(translated.translation_key, self.page.translation_key)
         self.assertEqual(translated.locale.language_code, "en")
-        self.assertIn("translated paragraph", translated.body)
+        self.assertIn("translated paragraph", str(translated.body[0].value))
 
     def test_nested_standard_page_round_trips_with_its_parent_slug(self):
         # StandardPage peut s'imbriquer à toute profondeur (parent_page_types) : le
         # frontmatter "parent" doit pointer vers la sous-page réelle, pas systématiquement
         # la racine du site (voir export_standardpage_qmd/import_standardpage_qmd).
-        child = StandardPage(title="Sous-page", slug="sous-page", body="<p>Contenu.</p>")
+        child = StandardPage(title="Sous-page", slug="sous-page", body=[{"type": "prose", "value": "<p>Contenu.</p>"}])
         self.page.add_child(instance=child)
         child.save_revision().publish()
 

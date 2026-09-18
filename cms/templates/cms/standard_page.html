@@ -29,8 +29,29 @@
   {% endwith %}
   <section class="block">
     <div class="wrap">
-      {{ page.body|richtext }}
+      {% include "cms/partials/content_blocks.html" with blocks=page.body %}
     </div>
   </section>
   {% endcache %}
+  {% comment %}
+  Sous-pages mises en avant (case « Afficher dans les menus » de l'onglet Promouvoir de
+  chaque page — Page.show_in_menus, natif à Wagtail, jusqu'ici jamais utilisé sur ce
+  site) : hors du cache ci-dessus, comme les autres sections dépendant d'autres pages
+  (voir pole_page.html) — sans ça, ajouter/retirer une sous-page du menu ou en publier
+  une nouvelle resterait invisible jusqu'à l'expiration du cache de cette page-ci.
+  {% endcomment %}
+  {% with menu_children=page.get_children.live.in_menu %}
+    {% if menu_children %}
+      <div class="wrap page">
+        <section aria-labelledby="standard-page-menu-title">
+          <h2 id="standard-page-menu-title">{% trans "Pages liées" %}</h2>
+          <ul class="blog-list">
+            {% for child in menu_children %}
+              <li class="blog-list-item"><a href="{{ child.url }}"><h3>{{ child.title }}</h3></a></li>
+            {% endfor %}
+          </ul>
+        </section>
+      </div>
+    {% endif %}
+  {% endwith %}
 {% endblock %}

@@ -1273,6 +1273,27 @@ class WikiJsSearchTests(TestCase):
         with mock.patch("core.wikijs.urlopen", side_effect=URLError("down")):
             self.assertEqual(search("permanence"), [])
 
+    @override_settings(WIKIJS_API_KEY="test-token")
+    def test_filters_out_other_language_results(self):
+        # Le paramètre "locale" envoyé à Wiki.js n'est pas garanti d'être respecté côté
+        # serveur (selon son moteur de recherche) : on ne fait pas confiance à la seule
+        # réponse de l'API et on refiltre nous-mêmes par langue active.
+        from core.wikijs import search
+
+        payload = {
+            "data": {"pages": {"search": {"results": [
+                {"title": "Permanences", "description": "Où et quand", "path": "guide/permanences", "locale": "fr"},
+                {"title": "Opening hours", "description": "When and where", "path": "guide/opening-hours", "locale": "en"},
+            ]}}},
+        }
+        response = mock.MagicMock()
+        response.__enter__.return_value = response
+        response.read.return_value = json.dumps(payload).encode("utf-8")
+        with mock.patch("core.wikijs.urlopen", return_value=response):
+            results = search("permanence")
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["title"], "Permanences")
+
 
 class DonationFlowTests(Base):
     def test_mes_dons_page_lists_contributions_and_form(self):

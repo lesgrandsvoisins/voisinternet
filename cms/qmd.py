@@ -626,6 +626,26 @@ class _ContentHTMLToMarkdown(_HTMLToMarkdown):
         return "\n".join(lines) + "\n\n"
 
 
+def _export_legacy_meta(front, page):
+    """
+    Ajoute front["legacy"] = page.legacy_meta si non vide — passe-plat pour les
+    métadonnées de frontmatter .qmd d'origine externe (autre outil/pipeline) que ce
+    site ne reconnaît pas mais préserve telles quelles à l'aller-retour export/import,
+    sans avoir besoin d'en comprendre le contenu (voir cms.models.StandardPage.
+    legacy_meta et sa docstring, et _import_legacy_meta pour l'inverse).
+    """
+    if page.legacy_meta:
+        front["legacy"] = page.legacy_meta
+
+
+def _import_legacy_meta(front):
+    """L'inverse de _export_legacy_meta : front.get("legacy") doit être un mapping
+    JSON pour être conservé (n'importe quelle autre valeur est ignorée plutôt que de
+    faire échouer tout l'import pour un champ qu'on ne fait que transporter)."""
+    legacy = front.get("legacy")
+    return legacy if isinstance(legacy, dict) else {}
+
+
 def export_blogpost_qmd(page, media_files=None):
     """
     Sérialise un BlogPostPage (une langue) en texte .qmd. `media_files=None` (défaut,
@@ -654,6 +674,7 @@ def export_blogpost_qmd(page, media_files=None):
             front["featured_image"] = _collect_image_file(page.featured_image_id, media_files)
         else:
             front["featured_image"] = _absolute_url(page.featured_image.get_rendition("width-1600").url)
+    _export_legacy_meta(front, page)
 
     frontmatter = yaml.safe_dump(front, allow_unicode=True, sort_keys=False, default_flow_style=False)
     return f"---\n{frontmatter}---\n\n{converter.result()}"
@@ -788,6 +809,7 @@ def export_contentpage_qmd(page, media_files=None):
             front["featured_image"] = _collect_image_file(page.featured_image_id, media_files)
         else:
             front["featured_image"] = _absolute_url(page.featured_image.get_rendition("width-1600").url)
+    _export_legacy_meta(front, page)
 
     frontmatter = yaml.safe_dump(front, allow_unicode=True, sort_keys=False, default_flow_style=False)
     return f"---\n{frontmatter}---\n\n{body_md}"
@@ -913,6 +935,7 @@ def import_blogpost_qmd(text):
     page.featured = bool(front.get("featured", False))
     body_html = _restore_wagtail_embeds(markdown_filter(body_md))
     page.body = _self_close_void_tags(body_html)
+    page.legacy_meta = _import_legacy_meta(front)
 
     is_new = page.pk is None
     if is_new:
@@ -973,6 +996,7 @@ def import_contentpage_qmd(text):
         page.author = None
     page.excerpt = (front.get("excerpt") or "")[:300]
     page.body = _split_content_blocks(body_md)
+    page.legacy_meta = _import_legacy_meta(front)
 
     is_new = page.pk is None
     if is_new:
@@ -998,13 +1022,16 @@ def export_standardpage_qmd(page, media_files=None):
     Sérialise une cms.StandardPage (une langue) en texte .qmd — même schéma
     d'identification (key/lang) que le blog/ContentPage, mais sans leurs champs
     éditoriaux (auteur/date/étiquettes/image de une) : StandardPage n'a qu'un titre et
-    un corps en texte enrichi. "parent" (slug de la page parente, quel que soit son
-    type — HomePage/PolePage/StandardPage, qui peut s'imbriquer à toute profondeur)
-    indique où la rattacher à l'import si la page n'existe pas encore ; voir
-    import_standardpage_qmd pour le repli si absent.
+    un corps. Depuis cms.0030_standardpage_body_streamfield, ce corps est un
+    StreamField (ContentStreamBlock, comme cms.ContentPage) plutôt qu'un simple texte
+    enrichi — _export_body_parts reconnaît donc les mêmes divs Pandoc/Quarto
+    (callouts, citations en exergue, divs génériques imbriqués sur 3 niveaux) que pour
+    ContentPage, au lieu de les laisser fuiter en texte brut dans l'éditeur. "parent"
+    (slug de la page parente, quel que soit son type — HomePage/PolePage/StandardPage,
+    qui peut s'imbriquer à toute profondeur) indique où la rattacher à l'import si la
+    page n'existe pas encore ; voir import_standardpage_qmd pour le repli si absent.
     """
-    converter = _HTMLToMarkdown(media_files=media_files)
-    converter.feed(page.body)
+    body_md = "\n".join(_export_body_parts(page.body, media_files=media_files)).strip() + "\n"
 
     front = {
         "title": page.title,
@@ -1014,18 +1041,20 @@ def export_standardpage_qmd(page, media_files=None):
         "slug": page.slug,
         "url": page.full_url,
     }
+    _export_legacy_meta(front, page)
     frontmatter = yaml.safe_dump(front, allow_unicode=True, sort_keys=False, default_flow_style=False)
-    return f"---\n{frontmatter}---\n\n{converter.result()}"
+    return f"---\n{frontmatter}---\n\n{body_md}"
 
 
 def import_standardpage_qmd(text):
     """
     Crée ou met à jour une cms.StandardPage à partir d'un texte .qmd — même logique
     d'identification (translation_key + lang) qu'import_blogpost_qmd/
-    import_contentpage_qmd. Pour une page nouvelle, le frontmatter "parent" (slug de la
-    page parente, tel qu'écrit par export_standardpage_qmd) indique où la rattacher ; à
-    défaut, la page d'accueil du site (cms.HomePage, seule racine possible dans cet
-    arbre) est utilisée.
+    import_contentpage_qmd, et même reconstruction du corps (StreamField
+    ContentStreamBlock) que import_contentpage_qmd::_split_content_blocks. Pour une
+    page nouvelle, le frontmatter "parent" (slug de la page parente, tel qu'écrit par
+    export_standardpage_qmd) indique où la rattacher ; à défaut, la page d'accueil du
+    site (cms.HomePage, seule racine possible dans cet arbre) est utilisée.
     """
     match = FRONTMATTER_RE.match(text)
     if not match:
@@ -1048,7 +1077,8 @@ def import_standardpage_qmd(text):
 
     page.title = front.get("title") or page.title or front.get("slug") or ""
     page.slug = front.get("slug") or slugify(page.title)
-    page.body = _self_close_void_tags(_restore_wagtail_embeds(markdown_filter(body_md)))
+    page.body = _split_content_blocks(body_md)
+    page.legacy_meta = _import_legacy_meta(front)
 
     is_new = page.pk is None
     if is_new:
@@ -1165,6 +1195,7 @@ def export_polepage_qmd(page, media_files=None):
             front["icon"] = _collect_image_file(page.icon_id, media_files)
         else:
             front["icon"] = _absolute_url(page.icon.get_rendition("width-400").url)
+    _export_legacy_meta(front, page)
     frontmatter = yaml.safe_dump(front, allow_unicode=True, sort_keys=False, default_flow_style=False)
     return f"---\n{frontmatter}---\n\n{body_md}"
 
@@ -1208,6 +1239,7 @@ def import_polepage_qmd(text):
         return _self_close_void_tags(_restore_wagtail_embeds(markdown_filter(markdown_text)))
 
     page.cards = _import_cards(body_md, to_html)
+    page.legacy_meta = _import_legacy_meta(front)
 
     is_new = page.pk is None
     if is_new:
@@ -1420,6 +1452,7 @@ def export_projectpage_qmd(page, media_files=None):
             front["featured_image"] = _collect_image_file(page.featured_image_id, media_files)
         else:
             front["featured_image"] = _absolute_url(page.featured_image.get_rendition("width-1600").url)
+    _export_legacy_meta(front, page)
 
     frontmatter = yaml.safe_dump(front, allow_unicode=True, sort_keys=False, default_flow_style=False)
     return f"---\n{frontmatter}---\n\n{body_md}"
@@ -1461,6 +1494,7 @@ def import_projectpage_qmd(text):
         return _self_close_void_tags(_restore_wagtail_embeds(markdown_filter(markdown_text)))
 
     page.body = _import_project_body(body_md, to_html)
+    page.legacy_meta = _import_legacy_meta(front)
 
     is_new = page.pk is None
     if is_new:

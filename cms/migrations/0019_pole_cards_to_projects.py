@@ -128,6 +128,10 @@ def revert(apps, schema_editor):
 class Migration(migrations.Migration):
     dependencies = [
         ("cms", "0018_fix_poor_excerpts"),
+        # Voir cms/migrations/0033_projectpage_legacy_meta_early.py : convert()
+        # ci-dessus crée de vraies ProjectPage via le modèle courant, qui doit déjà
+        # connaître la colonne legacy_meta pour que l'INSERT réussisse.
+        ("cms", "0033_projectpage_legacy_meta_early"),
     ]
 
     operations = [

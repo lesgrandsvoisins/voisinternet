@@ -1,5 +1,9 @@
+import json
 import re
+from unittest import mock
+from urllib.error import URLError
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core import mail
 from django.core.cache import cache
@@ -994,3 +998,42 @@ class AuthorContactTests(Base):
         }, follow=True)
         self.assertEqual(len(mail.outbox), 5)  # le 6e message n'est pas parti
         self.assertContains(response, "Trop de messages envoyés récemment")
+
+
+class WikiJsSearchTests(TestCase):
+    def setUp(self):
+        cache.clear()
+
+    @override_settings(WIKIJS_API_KEY="")
+    def test_disabled_without_api_key(self):
+        from core.wikijs import search
+
+        with mock.patch("core.wikijs.urlopen") as urlopen:
+            self.assertEqual(search("permanence"), [])
+        urlopen.assert_not_called()
+
+    @override_settings(WIKIJS_API_KEY="test-token")
+    def test_parses_successful_response(self):
+        from core.wikijs import search
+
+        payload = {
+            "data": {"pages": {"search": {"results": [
+                {"title": "Permanences", "description": "Où et quand", "path": "guide/permanences", "locale": "fr"},
+            ]}}},
+        }
+        response = mock.MagicMock()
+        response.__enter__.return_value = response
+        response.read.return_value = json.dumps(payload).encode("utf-8")
+        with mock.patch("core.wikijs.urlopen", return_value=response):
+            results = search("permanence")
+        self.assertEqual(results, [{
+            "title": "Permanences", "description": "Où et quand",
+            "url": f"{settings.GUIDE_URL.rstrip('/')}/fr/guide/permanences",
+        }])
+
+    @override_settings(WIKIJS_API_KEY="test-token")
+    def test_degrades_gracefully_when_unreachable(self):
+        from core.wikijs import search
+
+        with mock.patch("core.wikijs.urlopen", side_effect=URLError("down")):
+            self.assertEqual(search("permanence"), [])

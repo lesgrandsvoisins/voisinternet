@@ -12,10 +12,11 @@ from django.core.mail import EmailMessage
 from django.db.models import Q
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template.defaultfilters import date as format_date
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.http import url_has_allowed_host_and_scheme
-from django.utils.text import slugify
+from django.utils.text import Truncator, slugify
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
@@ -119,6 +120,18 @@ def _month_calendar(request):
 def home(request):
     from cms.models import BlogPostPage, PolePage
 
+    recent_entries = DirectoryEntry.objects.filter(
+        visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
+    ).select_related("sector").order_by("-pk")[:4]
+    # Sous-titre qui défile dans les .hero-quicklinks (home.html), mis en avant
+    # d'abord — sans JS, le premier élément (déjà le plus pertinent grâce à ce tri)
+    # reste affiché seul, statique. DirectoryEntry n'a pas de notion de mise en avant
+    # ni de date de création : recent_entries (-pk, déjà calculé ci-dessus) en tient lieu.
+    quicklink_posts = BlogPostPage.objects.live().order_by("-featured", "-date")[:4]
+    quicklink_events = Event.objects.filter(
+        public=True, start__gte=timezone.now(),
+    ).order_by("-featured", "start")[:4]
+
     return render(request, "core/home.html", {
         "services": Service.objects.filter(active=True)[:6],
         "shortcut_ids": _shortcut_ids(request),
@@ -126,11 +139,14 @@ def home(request):
         "posts": BlogPostPage.objects.live().order_by("-date")[:3],
         "audiences": Audience.objects.all(),
         "poles": PolePage.objects.live().order_by("path"),
-        "recent_entries": DirectoryEntry.objects.filter(
-            visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
-        ).select_related("sector").order_by("-pk")[:4],
+        "recent_entries": recent_entries,
         "agenda_calendar": _month_calendar(request),
         "next_event": Event.objects.filter(public=True, start__gte=timezone.now()).order_by("start").first(),
+        "quicklink_entry_texts": [e.name for e in recent_entries],
+        "quicklink_post_texts": [str(Truncator(p.title).chars(40)) for p in quicklink_posts],
+        "quicklink_event_texts": [
+            f"{format_date(e.start, 'j M')} — {Truncator(e.title).chars(30)}" for e in quicklink_events
+        ],
     })
 
 
@@ -166,7 +182,7 @@ def _page_search_image(page):
 
 def search(request):
     query = request.GET.get("q", "").strip()
-    pages = entries = events = services = []
+    pages = entries = events = services = wiki_results = []
     if query:
         from wagtail.models import Page
 
@@ -197,13 +213,18 @@ def search(request):
             Q(name__icontains=query) | Q(summary__icontains=query) | Q(description__icontains=query),
             active=True,
         )[:20])
+
+        from .wikijs import search as wikijs_search
+
+        wiki_results = wikijs_search(query)
     return render(request, "core/search.html", {
         "query": query,
         "pages": pages,
         "entries": entries,
         "events": events,
         "services": services,
-        "total": len(pages) + len(entries) + len(events) + len(services),
+        "wiki_results": wiki_results,
+        "total": len(pages) + len(entries) + len(events) + len(services) + len(wiki_results),
     })
 
 

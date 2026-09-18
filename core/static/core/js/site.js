@@ -322,6 +322,42 @@
     setInterval(randomizeBlobs, 6000);
   }
 
+  // Boutons Annuaire/Blog/Agenda de l'accueil (.hero-quicklinks) : chaque sous-titre
+  // défile parmi les 4 dernières entrées (mises en avant d'abord, voir views.home),
+  // transmises via {{ ... |json_script }} (home.html). Sans JS ou avec
+  // prefers-reduced-motion, seul le premier élément reste affiché, statique.
+  function armQuicklinkCycle() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    [
+      ["quicklink-annuaire", "quicklink-annuaire-data"],
+      ["quicklink-blog", "quicklink-blog-data"],
+      ["quicklink-agenda", "quicklink-agenda-data"],
+    ].forEach(function (ids) {
+      var span = document.getElementById(ids[0]);
+      var data = document.getElementById(ids[1]);
+      if (!span || !data || span.dataset.cycleArmed) return;
+      span.dataset.cycleArmed = "1";
+      var items;
+      try {
+        items = JSON.parse(data.textContent);
+      } catch (e) {
+        return;
+      }
+      if (!items || items.length < 2) return;
+      var i = 0;
+      setInterval(function () {
+        span.style.opacity = "0";
+        setTimeout(function () {
+          i = (i + 1) % items.length;
+          span.textContent = items[i];
+          span.style.opacity = "1";
+        }, 300);
+      }, 4000);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", armQuicklinkCycle);
+
   // Le menu principal et le widget du compte (en-tête) sont gérés par Alpine.js (voir base.html).
   document.addEventListener("DOMContentLoaded", armToasts);
   document.addEventListener("htmx:afterSettle", armToasts);

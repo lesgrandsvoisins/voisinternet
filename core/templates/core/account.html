@@ -1,204 +1,256 @@
 {% extends "core/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "mon Compte — lesgrandsvoisins.com" %}{% endblock %}
+{% block title %}
+  {% trans "mon Compte — lesgrandsvoisins.com" %}
+{% endblock %}
 {% block content %}
-<div class="page-head">
-  <div class="wrap">
-    <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
-      <ol>
-        <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
-        <li aria-current="page">{% trans "Mon compte" %}</li>
-      </ol>
-    </nav>
-    <h1>{% trans "Mon compte" %}</h1>
-    <p class="lead">{% trans "Mon statut, mes contributions financières, et les actions sur mon compte." %}</p>
-  </div>
-</div>
-<div class="wrap page">
-
-  {% if new_number %}
-  <section class="card card-sun" aria-labelledby="num-title">
-    <h2 id="num-title">{% trans "Votre numéro de compte" %}</h2>
-    <p class="number"><code>{{ new_number }}</code></p>
-    <p>{% trans "Notez-le maintenant. Nous n'en gardons qu'une empreinte : nous ne pourrons jamais vous le redonner. Il suffit, seul, pour retrouver vos raccourcis sur un autre appareil." %}</p>
-  </section>
-  {% endif %}
-
-  {% if pending %}
-  <section class="card" aria-labelledby="link-title">
-    <h2 id="link-title">{% trans "Un compte anonyme est ouvert sur cet appareil" %}</h2>
-    <p>{% trans "Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera ensuite supprimé." %}</p>
-    <form method="post" action="{% url 'core:link_anonymous' %}">{% csrf_token %}<button class="btn btn-sun" type="submit">{% trans "Rattacher mes raccourcis" %}</button></form>
-  </section>
-  {% endif %}
-
-  {% if user.is_authenticated or account %}
-  <section class="dashboard-summary" aria-label="{% trans "Aperçu de mon compte" %}">
-    <a class="stat-tile" href="#sc2-title">
-      <span class="stat-number">{{ shortcuts|length }}</span>
-      <span class="stat-label">{% trans "Raccourcis" %}</span>
-    </a>
-    <a class="stat-tile" href="#mb2-title">
-      <span class="stat-number">{{ memberships|length }}</span>
-      <span class="stat-label">{% trans "Groupes" %}</span>
-    </a>
-    <a class="stat-tile" href="#fiches2-title">
-      <span class="stat-number">{{ owned_entries|length }}</span>
-      <span class="stat-label">{% trans "Fiches annuaire" %}</span>
-    </a>
-    <a class="stat-tile" href="#events2-title">
-      <span class="stat-number">{{ managed_events|length }}</span>
-      <span class="stat-label">{% trans "Évènements" %}</span>
-    </a>
-    {% if user.is_authenticated %}
-    <a class="stat-tile" href="#fin-title">
-      <span class="stat-number">{{ account_contributions|length }}</span>
-      <span class="stat-label">{% trans "Contributions" %}</span>
-    </a>
-    {% endif %}
-  </section>
-
-  <section aria-labelledby="sc-title">
-    <div class="split">
-      <h2 id="sc-title">{% trans "Mon compte" %}</h2>
-      <p class="muted">{% if user.is_authenticated %}{% trans "Connecté" %}{% if user.first_name %} : {{ user.first_name }}{% endif %}{% else %}{% trans "Compte anonyme" %}{% endif %}</p>
+  <div class="page-head">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+        <ol>
+          <li>
+            <a href="{% url 'core:home' %}">{% trans "Accueil" %}</a>
+          </li>
+          <li aria-current="page">{% trans "Mon compte" %}</li>
+        </ol>
+      </nav>
+      <h1>{% trans "Mon compte" %}</h1>
+      <p class="lead">{% trans "Mon statut, mes contributions financières, et les actions sur mon compte." %}</p>
     </div>
-    <div class="actions">
-      {% if is_administration %}<a class="btn btn-line" href="{% url 'core:administration' %}">{% trans "Administration" %}</a>{% endif %}
+  </div>
+  <div class="wrap page">
+    {% if new_number %}
+      <section class="card card-sun" aria-labelledby="num-title">
+        <h2 id="num-title">{% trans "Votre numéro de compte" %}</h2>
+        <p class="number">
+          <code>{{ new_number }}</code>
+        </p>
+        <p>
+          {% trans "Notez-le maintenant. Nous n'en gardons qu'une empreinte : nous ne pourrons jamais vous le redonner. Il suffit, seul, pour retrouver vos raccourcis sur un autre appareil." %}
+        </p>
+      </section>
+    {% endif %}
+    {% if pending %}
+      <section class="card" aria-labelledby="link-title">
+        <h2 id="link-title">{% trans "Un compte anonyme est ouvert sur cet appareil" %}</h2>
+        <p>{% trans "Voulez-vous rattacher ses raccourcis à votre compte ? Le compte anonyme sera ensuite supprimé." %}</p>
+        <form method="post" action="{% url 'core:link_anonymous' %}">
+          {% csrf_token %}
+          <button class="btn btn-sun" type="submit">{% trans "Rattacher mes raccourcis" %}</button>
+        </form>
+      </section>
+    {% endif %}
+    {% if user.is_authenticated or account %}
+      <section class="dashboard-summary"
+               aria-label="{% trans "Aperçu de mon compte" %}">
+        <a class="stat-tile" href="#sc2-title">
+          <span class="stat-number">{{ shortcuts|length }}</span>
+          <span class="stat-label">{% trans "Raccourcis" %}</span>
+        </a>
+        <a class="stat-tile" href="#mb2-title">
+          <span class="stat-number">{{ memberships|length }}</span>
+          <span class="stat-label">{% trans "Groupes" %}</span>
+        </a>
+        <a class="stat-tile" href="#fiches2-title">
+          <span class="stat-number">{{ owned_entries|length }}</span>
+          <span class="stat-label">{% trans "Fiches annuaire" %}</span>
+        </a>
+        <a class="stat-tile" href="#events2-title">
+          <span class="stat-number">{{ managed_events|length }}</span>
+          <span class="stat-label">{% trans "Évènements" %}</span>
+        </a>
+        {% if user.is_authenticated %}
+          <a class="stat-tile" href="#fin-title">
+            <span class="stat-number">{{ account_contributions|length }}</span>
+            <span class="stat-label">{% trans "Contributions" %}</span>
+          </a>
+        {% endif %}
+      </section>
+      <section aria-labelledby="sc-title">
+        <div class="split">
+          <h2 id="sc-title">{% trans "Mon compte" %}</h2>
+          <p class="muted">
+            {% if user.is_authenticated %}
+              {% trans "Connecté" %}
+              {% if user.first_name %}: {{ user.first_name }}{% endif %}
+            {% else %}
+              {% trans "Compte anonyme" %}
+            {% endif %}
+          </p>
+        </div>
+        <div class="actions">
+          {% if is_administration %}
+            <a class="btn btn-line" href="{% url 'core:administration' %}">{% trans "Administration" %}</a>
+          {% endif %}
+          {% if user.is_authenticated %}
+            {% if OIDC_ENABLED %}
+              <form method="post" action="{% url 'oidc_logout' %}">
+                {% csrf_token %}
+                <button class="btn btn-line" type="submit">{% trans "Se déconnecter" %}</button>
+              </form>
+            {% endif %}
+          {% else %}
+            {% if OIDC_ENABLED %}
+              <a class="btn btn-sun"
+                 href="{% url 'oidc_authentication_init' %}?next={% url 'core:account' %}">{% trans "Rattacher à mon compte Grands Voisins" %}</a>
+            {% endif %}
+            <form method="post" action="{% url 'core:forget_anonymous' %}">
+              {% csrf_token %}
+              <button class="btn btn-line" type="submit">{% trans "Fermer ce compte sur cet appareil" %}</button>
+            </form>
+          {% endif %}
+        </div>
+      </section>
+      <details class="account-accordion" id="sc2-title">
+        <summary class="accordion-summary">
+          <h2>{% trans "Mes raccourcis" %}</h2>
+          <a class="accordion-manage"
+             href="{% url 'core:raccourcis' %}#available-services"
+             onclick="event.stopPropagation()">{% trans "Ajouter un raccourci" %}</a>
+        </summary>
+        <div id="shortcuts-list">{% include "core/partials/shortcut_list.html" %}</div>
+      </details>
+      <details class="account-accordion" id="mb2-title">
+        <summary class="accordion-summary">
+          <h2>{% trans "Mes groupes" %}</h2>
+          <a class="accordion-manage"
+             href="{% url 'core:groupes' %}#available-groups"
+             onclick="event.stopPropagation()">{% trans "Rejoindre un groupe" %}</a>
+        </summary>
+        <div id="memberships-list">{% include "core/partials/membership_list.html" %}</div>
+      </details>
+      <details class="account-accordion" id="fiches2-title">
+        <summary class="accordion-summary">
+          <h2>{% trans "Mes fiches dans l'annuaire" %}</h2>
+          <a class="accordion-manage"
+             href="{% url 'core:mes_fiches' %}"
+             onclick="event.stopPropagation()">{% trans "Créer une fiche" %}</a>
+        </summary>
+        <div>{% include "core/partials/entry_list.html" with entries=owned_entries %}</div>
+      </details>
+      <details class="account-accordion" id="events2-title">
+        <summary class="accordion-summary">
+          <h2>{% trans "Mes évènements dans l'agenda" %}</h2>
+          <a class="accordion-manage"
+             href="{% url 'core:mes_evenements' %}"
+             onclick="event.stopPropagation()">{% trans "Créer un évènement" %}</a>
+        </summary>
+        <div>{% include "core/partials/my_event_list.html" with events=managed_events %}</div>
+      </details>
       {% if user.is_authenticated %}
-        {% if OIDC_ENABLED %}<form method="post" action="{% url 'oidc_logout' %}">{% csrf_token %}<button class="btn btn-line" type="submit">{% trans "Se déconnecter" %}</button></form>{% endif %}
-      {% else %}
-        {% if OIDC_ENABLED %}<a class="btn btn-sun" href="{% url 'oidc_authentication_init' %}?next={% url 'core:account' %}">{% trans "Rattacher à mon compte Grands Voisins" %}</a>{% endif %}
-        <form method="post" action="{% url 'core:forget_anonymous' %}">{% csrf_token %}<button class="btn btn-line" type="submit">{% trans "Fermer ce compte sur cet appareil" %}</button></form>
+        <details class="account-accordion" id="fin-title">
+          <summary class="accordion-summary">
+            <h2 id="profile-title">{% trans "Mon profil" %}</h2>
+            <a class="accordion-manage"
+               href="{{ keycloak_account_url }}"
+               onclick="event.stopPropagation()">{% trans "Géré par votre compte unique Grands Voisins" %}</a>
+          </summary>
+          <div>
+            <ul class="docs">
+              <li>
+                <strong>{% trans "Nom" %}</strong><span>{{ user.get_full_name|default:_("Non renseigné") }}</span>
+              </li>
+              <li>
+                <strong>{% trans "Courriel" %}</strong><span>{{ user.email|default:_("Non renseigné") }}</span>
+              </li>
+            </ul>
+            {% if keycloak_account_url %}
+              <p class="note">
+                <a href="{{ keycloak_account_url }}" target="_new">{% trans "Modifier mon profil" %}</a>
+              </p>
+            {% endif %}
+          </div>
+        </details>
       {% endif %}
-    </div>
-  </section>
-
-  <details class="account-accordion" id="sc2-title">
-    <summary class="accordion-summary">
-      <h2>{% trans "Mes raccourcis" %}</h2>
-      <a class="accordion-manage" href="{% url 'core:raccourcis' %}#available-services" onclick="event.stopPropagation()">{% trans "Ajouter un raccourci" %}</a>
-    </summary>
-    <div id="shortcuts-list">
-      {% include "core/partials/shortcut_list.html" %}
-    </div>
-  </details>
-
-  <details class="account-accordion" id="mb2-title">
-    <summary class="accordion-summary">
-      <h2>{% trans "Mes groupes" %}</h2>
-      <a class="accordion-manage" href="{% url 'core:groupes' %}#available-groups" onclick="event.stopPropagation()">{% trans "Rejoindre un groupe" %}</a>
-    </summary>
-    <div id="memberships-list">
-      {% include "core/partials/membership_list.html" %}
-    </div>
-  </details>
-
-  <details class="account-accordion" id="fiches2-title">
-    <summary class="accordion-summary">
-      <h2>{% trans "Mes fiches dans l'annuaire" %}</h2>
-      <a class="accordion-manage" href="{% url 'core:mes_fiches' %}" onclick="event.stopPropagation()">{% trans "Créer une fiche" %}</a>
-    </summary>
-    <div>
-      {% include "core/partials/entry_list.html" with entries=owned_entries %}
-    </div>
-  </details>
-
-  <details class="account-accordion" id="events2-title">
-    <summary class="accordion-summary">
-      <h2>{% trans "Mes évènements dans l'agenda" %}</h2>
-      <a class="accordion-manage" href="{% url 'core:mes_evenements' %}" onclick="event.stopPropagation()">{% trans "Créer un évènement" %}</a>
-    </summary>
-    <div>
-      {% include "core/partials/my_event_list.html" with events=managed_events %}
-    </div>
-  </details>
-
-  {% if user.is_authenticated %}
-  <section aria-labelledby="profile-title">
-    <div class="split">
-      <h2 id="profile-title">{% trans "Mon profil" %}</h2>
-      <p class="muted"><a href="{{ keycloak_account_url }}">{% trans "Géré par votre compte unique Grands Voisins" %}</a></p>
-    </div>
-    <ul class="docs">
-      <li><strong>{% trans "Nom" %}</strong><span>{{ user.get_full_name|default:_("Non renseigné") }}</span></li>
-      <li><strong>{% trans "Courriel" %}</strong><span>{{ user.email|default:_("Non renseigné") }}</span></li>
-    </ul>
-    {% if keycloak_account_url %}
-    <p class="note"><a href="{{ keycloak_account_url }}" target="_new">{% trans "Modifier mon profil" %}</a></p>
+      <details class="account-accordion" id="fin-title">
+        <summary class="accordion-summary">
+          <h2>{% trans "Mes dons" %}</h2>
+        </summary>
+        <div>
+          {% if account_contributions %}
+            <ul class="docs">
+              {% for c in account_contributions %}
+                <li>
+                  <strong>{{ c.get_kind_display }} — {{ c.amount }} €</strong><span>{{ c.get_method_display }}, {{ c.date }}
+                    {% if c.tax_deductible %}
+                      , {% trans "déductible fiscalement" %}
+                    {% endif %}
+                    {% if c.note %}— {{ c.note }}{% endif %}
+                  </span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="intro">{% trans "Aucune contribution enregistrée pour l'instant." %}</p>
+          {% endif %}
+          <form class="entry-form" method="post" action="{% url 'core:faire_don' %}">
+            {% csrf_token %}
+            <div class="form-row">
+              {{ contribution_form.kind.label_tag }}
+              {{ contribution_form.kind }}
+            </div>
+            <div class="form-row">
+              {{ contribution_form.amount.label_tag }}
+              {{ contribution_form.amount }} €
+            </div>
+            <div class="form-row">
+              {{ contribution_form.method.label_tag }}
+              {{ contribution_form.method }}
+            </div>
+            <div class="form-row">
+              {{ contribution_form.date.label_tag }}
+              {{ contribution_form.date }}
+            </div>
+            <div class="form-row">
+              {{ contribution_form.note.label_tag }}
+              {{ contribution_form.note }}
+            </div>
+            <button class="btn btn-sun" type="submit">{% trans "Faire un don" %}</button>
+          </form>
+        </div>
+      </details>
+    {% else %}
+      <div class="choices">
+        <section class="card" aria-labelledby="login-title">
+          <h2 id="login-title">{% trans "Se connecter ou créer son compte" %}</h2>
+          <p>{% trans "Avec votre compte unique des Grands Voisins, le même que pour les autres outils de l'association." %}</p>
+          {% if OIDC_ENABLED %}
+            <a class="btn btn-sun"
+               href="{% url 'oidc_authentication_init' %}?next={% url 'core:account' %}">{% trans "Se connecter ou créer son compte" %}</a>
+          {% else %}
+            <p class="muted">{% trans "La connexion par compte Grands Voisins n'est pas encore configurée sur ce serveur." %}</p>
+          {% endif %}
+        </section>
+        <section class="card" aria-labelledby="anon-title">
+          <h2 id="anon-title">{% trans "Rester anonyme" %}</h2>
+          <p>
+            {% trans "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit pour retrouver vos raccourcis." %}
+          </p>
+          <form method="post" action="{% url 'core:create_anonymous' %}">
+            {% csrf_token %}
+            <button class="btn btn-sun" type="submit">{% trans "Créer un compte anonyme" %}</button>
+          </form>
+          <form class="recover"
+                method="post"
+                action="{% url 'core:recover_anonymous' %}">
+            {% csrf_token %}
+            <label for="number">{% trans "J'ai déjà un numéro" %}</label>
+            <div class="field">
+              <input id="number"
+                     name="number"
+                     inputmode="numeric"
+                     autocomplete="off"
+                     placeholder="0000 0000 0000 0000"
+                     pattern="[0-9]{4} ?[0-9]{4} ?[0-9]{4} ?[0-9]{4}"
+                     maxlength="19"
+                     required
+                     x-data
+                     x-on:input="$el.value = $el.value.replace(/\D/g, '').slice(0, 16).replace(/(.{4})(?=.)/g, '$1 ')">
+              <button class="btn btn-line" type="submit">{% trans "Retrouver" %}</button>
+            </div>
+          </form>
+        </section>
+      </div>
     {% endif %}
-  </section>
-  {% endif %}
-
-  <details class="account-accordion" id="fin-title">
-    <summary class="accordion-summary">
-      <h2>{% trans "Mes contributions financières" %}</h2>
-    </summary>
-    <div>
-      <form class="entry-form" method="post" action="{% url 'core:faire_don' %}">
-        {% csrf_token %}
-        <div class="form-row">
-          {{ contribution_form.kind.label_tag }}
-          {{ contribution_form.kind }}
-        </div>
-        <div class="form-row">
-          {{ contribution_form.amount.label_tag }}
-          {{ contribution_form.amount }} €
-        </div>
-        <div class="form-row">
-          {{ contribution_form.method.label_tag }}
-          {{ contribution_form.method }}
-        </div>
-        <div class="form-row">
-          {{ contribution_form.date.label_tag }}
-          {{ contribution_form.date }}
-        </div>
-        <div class="form-row">
-          {{ contribution_form.note.label_tag }}
-          {{ contribution_form.note }}
-        </div>
-        <button class="btn btn-sun" type="submit">{% trans "Faire un don" %}</button>
-      </form>
-
-      {% if account_contributions %}
-      <ul class="docs">
-        {% for c in account_contributions %}
-        <li><strong>{{ c.get_kind_display }} — {{ c.amount }} €</strong><span>{{ c.get_method_display }}, {{ c.date }}{% if c.tax_deductible %}, {% trans "déductible fiscalement" %}{% endif %}{% if c.note %} — {{ c.note }}{% endif %}</span></li>
-        {% endfor %}
-      </ul>
-      {% else %}
-      <p class="intro">{% trans "Aucune contribution enregistrée pour l'instant." %}</p>
-      {% endif %}
-    </div>
-  </details>
-
-  {% else %}
-  <div class="choices">
-    <section class="card" aria-labelledby="login-title">
-      <h2 id="login-title">{% trans "Se connecter ou créer son compte" %}</h2>
-      <p>{% trans "Avec votre compte unique des Grands Voisins, le même que pour les autres outils de l'association." %}</p>
-      {% if OIDC_ENABLED %}
-      <a class="btn btn-sun" href="{% url 'oidc_authentication_init' %}?next={% url 'core:account' %}">{% trans "Se connecter ou créer son compte" %}</a>
-      {% else %}
-      <p class="muted">{% trans "La connexion par compte Grands Voisins n'est pas encore configurée sur ce serveur." %}</p>
-      {% endif %}
-    </section>
-    <section class="card" aria-labelledby="anon-title">
-      <h2 id="anon-title">{% trans "Rester anonyme" %}</h2>
-      <p>{% trans "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit pour retrouver vos raccourcis." %}</p>
-      <form method="post" action="{% url 'core:create_anonymous' %}">{% csrf_token %}<button class="btn btn-sun" type="submit">{% trans "Créer un compte anonyme" %}</button></form>
-      <form class="recover" method="post" action="{% url 'core:recover_anonymous' %}">{% csrf_token %}
-        <label for="number">{% trans "J'ai déjà un numéro" %}</label>
-        <div class="field">
-          <input id="number" name="number" inputmode="numeric" autocomplete="off" placeholder="0000 0000 0000 0000"
-                 pattern="[0-9]{4} ?[0-9]{4} ?[0-9]{4} ?[0-9]{4}" maxlength="19" required
-                 x-data
-                 x-on:input="$el.value = $el.value.replace(/\D/g, '').slice(0, 16).replace(/(.{4})(?=.)/g, '$1 ')">
-          <button class="btn btn-line" type="submit">{% trans "Retrouver" %}</button>
-        </div>
-      </form>
-    </section>
   </div>
-  {% endif %}
-</div>
 {% endblock %}

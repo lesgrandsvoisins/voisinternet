@@ -25,9 +25,9 @@
       <li>
         <a href="{% url 'core:account' %}"><span class="gear" aria-hidden="true">⚙</span>{% trans "Compte" %}</a>
       </li>
-      <li><strong><a href="{% url 'core:raccourcis' %}">{% trans "Mes raccourcis" %}</strong></a></li>
+      {% comment %} <li><strong><a href="{% url 'core:raccourcis' %}">{% trans "Mes raccourcis" %}</strong></a></li> {% endcomment %}
       {% comment %} <li><strong><a href="{% url 'core:groupes' %}">{% trans "Mes groupes" %}</strong></a></li> {% endcomment %}
-      <li><strong><a href="{% url 'core:mes_fiches' %}">{% trans "Mes fiches dans l'annuaire" %}</strong></a></li>
+      {% comment %} <li><strong><a href="{% url 'core:mes_fiches' %}">{% trans "Mes fiches dans l'annuaire" %}</strong></a></li> {% endcomment %}
       {% for shortcut in account_shortcuts %}
         {% with service=shortcut.service %}
           <li>

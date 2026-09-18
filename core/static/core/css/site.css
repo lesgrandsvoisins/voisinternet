@@ -920,6 +920,15 @@ div.menu {
   white-space: nowrap
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  /* armQuicklinkCycle() (site.js) change le texte toutes les 4s : un fondu plutôt
+     qu'un changement instantané. Pas de transition pour prefers-reduced-motion —
+     la rotation elle-même y est de toute façon désactivée côté JS. */
+  .quicklink-cycle {
+    transition: opacity .3s ease
+  }
+}
+
 .quicklink.accent-terracotta { border-top-color: var(--accent-terracotta) }
 .quicklink.accent-indigo { border-top-color: var(--accent-indigo) }
 .quicklink.accent-gold { border-top-color: var(--accent-gold) }

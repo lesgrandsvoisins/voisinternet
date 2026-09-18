@@ -30,19 +30,25 @@
         </div>
       </div>
       <div class="hero-quicklinks">
+        {% comment %}Chaque span défile parmi les 4 dernières (mises en avant d'abord),
+        voir views.home et site.js::armQuicklinkCycle — sans JS, seul le premier élément
+        (déjà le plus pertinent grâce à ce tri) reste affiché, statique.{% endcomment %}
         <a class="quicklink accent-terracotta" href="{{ conj.annuaire.href }}">
           <strong>{% trans "Annuaire" %}</strong>
-          <span>{% if recent_entries %}{{ recent_entries.0.name }}{% else %}{% trans "Bientôt de nouvelles fiches" %}{% endif %}</span>
+          <span id="quicklink-annuaire" class="quicklink-cycle">{% if quicklink_entry_texts %}{{ quicklink_entry_texts.0 }}{% else %}{% trans "Bientôt de nouvelles fiches" %}{% endif %}</span>
         </a>
         <a class="quicklink accent-indigo" href="{{ conj.grandzine.href }}">
           <strong>{% trans "Blog" %}</strong>
-          <span>{% if posts %}{{ posts.0.title|truncatechars:40 }}{% else %}{% trans "Bientôt un nouvel article" %}{% endif %}</span>
+          <span id="quicklink-blog" class="quicklink-cycle">{% if quicklink_post_texts %}{{ quicklink_post_texts.0 }}{% else %}{% trans "Bientôt un nouvel article" %}{% endif %}</span>
         </a>
         <a class="quicklink accent-gold" href="{% url 'core:agenda' %}">
           <strong>{% trans "Agenda" %}</strong>
-          <span>{% if next_event %}{{ next_event.start|date:"j M" }} — {{ next_event.title|truncatechars:30 }}{% else %}{% trans "Rien de prévu pour l'instant" %}{% endif %}</span>
+          <span id="quicklink-agenda" class="quicklink-cycle">{% if quicklink_event_texts %}{{ quicklink_event_texts.0 }}{% else %}{% trans "Rien de prévu pour l'instant" %}{% endif %}</span>
         </a>
       </div>
+      {{ quicklink_entry_texts|json_script:"quicklink-annuaire-data" }}
+      {{ quicklink_post_texts|json_script:"quicklink-blog-data" }}
+      {{ quicklink_event_texts|json_script:"quicklink-agenda-data" }}
       {% include "core/partials/scene.html" %}
     </div>
   </section>

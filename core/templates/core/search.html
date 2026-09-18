@@ -108,6 +108,24 @@
           </ul>
         </section>
       {% endif %}
+
+      {% if wiki_results %}
+        <section class="search-section">
+          <h2>{% trans "Wiki" %}</h2>
+          <ul class="blog-list">
+            {% for result in wiki_results %}
+              <li class="blog-list-item">
+                <a href="{{ result.url }}" target="_new" rel="noopener">
+                  <div class="blog-list-body">
+                    <h3>{{ result.title }}</h3>
+                    {% if result.description %}<p class="blog-list-excerpt">{{ result.description }}</p>{% endif %}
+                  </div>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endif %}
     {% endif %}
   </div>
 {% endblock %}

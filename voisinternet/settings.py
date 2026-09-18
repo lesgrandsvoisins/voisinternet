@@ -223,6 +223,10 @@ BLOG_URL = env("VOISINTERNET_BLOG_URL", "https://blog.lesgrandsvoisins.com")
 GUIDE_URL = env("VOISINTERNET_GUIDE_URL", "https://wiki.grandsvoisins.org/")
 GHOST_URL = env("GHOST_URL", BLOG_URL)
 GHOST_CONTENT_KEY = env("GHOST_CONTENT_KEY", "")
+# Wiki.js (GUIDE_URL ci-dessus) : clé d'API pour sa recherche en GraphQL
+# (core/wikijs.py) — laisser vide désactive simplement la section « Wiki » de la
+# recherche du site, comme GHOST_CONTENT_KEY ci-dessus pour le blog.
+WIKIJS_API_KEY = env("WIKIJS_API_KEY", "")
 CONTACT_EMAIL = env("VOISINTERNET_CONTACT_EMAIL", "contact@lesgrandsvoisins.com")
 
 # --- E-mail sortant (formulaire « Contacter l'auteur·ice », cms.Author) : facultatif

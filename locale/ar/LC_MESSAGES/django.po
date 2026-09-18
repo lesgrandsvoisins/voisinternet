@@ -926,7 +926,7 @@ msgstr "الرقمي"
 #, fuzzy
 #| msgid "Salles de sociabilité numérique et Voisinternet"
 msgid "Salles de sociabilité numérique et lesgrandsvoisins.com"
-msgstr "قاعات التواصل الرقمي، وVoisinternet"
+msgstr "قاعات التواصل الرقمي، وlesgrandsvoisins.com"
 
 #: core/menu.py:156
 #, fuzzy

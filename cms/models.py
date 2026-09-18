@@ -572,10 +572,11 @@ class Author(TranslatableMixin, models.Model):
 class AuthorMessage(models.Model):
     """
     Historique des messages envoyés via le formulaire de contact d'un·e auteur·ice
-    (core.views.author_detail, core.forms.AuthorContactForm) — modération et
+    (core.views.author_detail, core.forms.ContactMessageForm) — modération et
     traçabilité, jamais montré publiquement. L'envoi lui-même se fait par e-mail au
     moment de la soumission ; cette ligne n'est qu'une trace conservée après coup, pas
-    une file d'attente d'envoi.
+    une file d'attente d'envoi. Même principe que core.models.EntryMessage pour les
+    fiches de l'annuaire.
     """
     author = models.ForeignKey(
         Author, verbose_name=_("auteur·ice"), on_delete=models.CASCADE, related_name="messages",

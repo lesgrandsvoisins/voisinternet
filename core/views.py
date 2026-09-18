@@ -21,10 +21,10 @@ from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
-from .forms import AuthorContactForm, ContributionForm, DirectoryEntryForm, EventForm
+from .forms import ContactMessageForm, ContributionForm, DirectoryEntryForm, EventForm
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
-    Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntrySubscription, Event,
+    Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntryMessage, EntrySubscription, Event,
     EventInterest, EventManagementRequest, GuideBook, Membership, OwnershipClaim, Service, Shortcut, Tag,
     format_number,
 )
@@ -257,6 +257,36 @@ def tag_detail(request, slug):
     })
 
 
+def _process_contact_form(request, throttle_scope, recipient_email):
+    """
+    Partie commune du formulaire de contact (author_detail, entry_detail) : throttle,
+    validation, piège à robots, envoi par e-mail. Renvoie (form, cleaned_data) —
+    cleaned_data reste None tant qu'il n'y a rien de plus à faire ; une fois non-None,
+    à l'appelant de créer sa propre trace (AuthorMessage/EntryMessage, à condition que
+    cleaned_data["website"] soit vide — voir ContactMessageForm) et de rediriger.
+    """
+    form = ContactMessageForm()
+    if not (recipient_email and request.method == "POST"):
+        return form, None
+    if _throttled(request, throttle_scope, limit=5):
+        messages.error(request, _("Trop de messages envoyés récemment depuis cet appareil. Réessayez plus tard."))
+        return form, None
+    form = ContactMessageForm(request.POST)
+    if not form.is_valid():
+        return form, None
+    if not form.cleaned_data["website"]:
+        EmailMessage(
+            subject=_("Message via lesgrandsvoisins.com de %(name)s") % {
+                "name": form.cleaned_data["sender_name"] or form.cleaned_data["sender_email"],
+            },
+            body=form.cleaned_data["message"],
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[recipient_email],
+            reply_to=[form.cleaned_data["sender_email"]],
+        ).send()
+    return form, form.cleaned_data
+
+
 def author_detail(request, pk):
     from cms.models import Author, AuthorMessage, BlogPostPage, ContentPage
 
@@ -264,31 +294,15 @@ def author_detail(request, pk):
     posts = BlogPostPage.objects.live().filter(author=author).order_by("-date")
     pages = ContentPage.objects.live().filter(author=author).order_by("-first_published_at")
 
-    form = AuthorContactForm()
-    if author.email and request.method == "POST":
-        if _throttled(request, "author_contact", limit=5):
-            messages.error(request, _("Trop de messages envoyés récemment depuis cet appareil. Réessayez plus tard."))
-        else:
-            form = AuthorContactForm(request.POST)
-            if form.is_valid():
-                if not form.cleaned_data["website"]:  # champ normalement vide, voir AuthorContactForm
-                    AuthorMessage.objects.create(
-                        author=author,
-                        sender_name=form.cleaned_data["sender_name"],
-                        sender_email=form.cleaned_data["sender_email"],
-                        message=form.cleaned_data["message"],
-                    )
-                    EmailMessage(
-                        subject=_("Message via lesgrandsvoisins.com de %(name)s") % {
-                            "name": form.cleaned_data["sender_name"] or form.cleaned_data["sender_email"],
-                        },
-                        body=form.cleaned_data["message"],
-                        from_email=settings.DEFAULT_FROM_EMAIL,
-                        to=[author.email],
-                        reply_to=[form.cleaned_data["sender_email"]],
-                    ).send()
-                messages.success(request, _("Message envoyé à %(name)s.") % {"name": author.name})
-                return redirect("core:author_detail", pk=author.pk)
+    form, sent = _process_contact_form(request, "author_contact", author.email)
+    if sent is not None:
+        if not sent["website"]:
+            AuthorMessage.objects.create(
+                author=author, sender_name=sent["sender_name"], sender_email=sent["sender_email"],
+                message=sent["message"],
+            )
+        messages.success(request, _("Message envoyé à %(name)s.") % {"name": author.name})
+        return redirect("core:author_detail", pk=author.pk)
     return render(request, "core/author_detail.html", {
         "author": author, "posts": posts, "pages": pages, "form": form,
     })
@@ -438,10 +452,22 @@ def entry_detail(request, slug):
     my_claim = None
     if request.user.is_authenticated and entry.owner_id is None:
         my_claim = OwnershipClaim.objects.filter(entry=entry, account=acc).first()
+
+    form, sent = _process_contact_form(request, "entry_contact", entry.email)
+    if sent is not None:
+        if not sent["website"]:
+            EntryMessage.objects.create(
+                entry=entry, sender_name=sent["sender_name"], sender_email=sent["sender_email"],
+                message=sent["message"],
+            )
+        messages.success(request, _("Message envoyé à %(name)s.") % {"name": entry.name})
+        return redirect("core:entry_detail", slug=entry.slug)
+
     return render(request, "core/directory_entry.html", {
         "entry": entry,
         "my_subscription": my_subscription,
         "my_claim": my_claim,
+        "contact_form": form,
     })
 
 

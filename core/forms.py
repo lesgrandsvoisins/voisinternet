@@ -137,13 +137,15 @@ class ContributionForm(forms.Form):
     note = forms.CharField(label=_("Note"), max_length=200, required=False)
 
 
-class AuthorContactForm(forms.Form):
+class ContactMessageForm(forms.Form):
     """
-    Formulaire de contact d'un·e auteur·ice (views.author_detail) : le message part
-    par e-mail à Author.email, une copie est conservée (cms.AuthorMessage) pour
-    modération/traçabilité. "website" est un piège à robots (honeypot) : un champ
-    masqué qu'une personne ne remplit jamais, mais qu'un robot generique remplit
-    souvent — la vue traite un champ non vide comme un envoi silencieusement ignoré.
+    Formulaire de contact générique — un·e auteur·ice de blog (views.author_detail,
+    cms.AuthorMessage) ou une fiche de l'annuaire (views.entry_detail,
+    core.models.EntryMessage) : le message part par e-mail à l'adresse de la cible,
+    une copie est conservée pour modération/traçabilité. "website" est un piège à
+    robots (honeypot) : un champ masqué qu'une personne ne remplit jamais, mais qu'un
+    robot générique remplit souvent — la vue traite un champ non vide comme un envoi
+    silencieusement ignoré.
     """
     sender_name = forms.CharField(label=_("Votre nom"), max_length=140, required=False)
     sender_email = forms.EmailField(label=_("Votre e-mail"))

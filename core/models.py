@@ -356,6 +356,29 @@ class DirectoryEntry(models.Model):
         return ([self.photo_promo] if self.photo_promo else []) + gallery
 
 
+class EntryMessage(models.Model):
+    """
+    Historique des messages envoyés via le formulaire de contact d'une fiche de
+    l'annuaire (core.views.entry_detail, core.forms.ContactMessageForm) — modération
+    et traçabilité, jamais montré publiquement. L'envoi lui-même se fait par e-mail au
+    moment de la soumission ; cette ligne n'est qu'une trace conservée après coup, pas
+    une file d'attente d'envoi. Même principe que cms.AuthorMessage pour les auteur·ices.
+    """
+    entry = models.ForeignKey(DirectoryEntry, verbose_name=_("fiche"), on_delete=models.CASCADE, related_name="messages")
+    sender_name = models.CharField(_("nom de l'expéditeur·ice"), max_length=140, blank=True, default="")
+    sender_email = models.EmailField(_("e-mail de l'expéditeur·ice"))
+    message = models.TextField(_("message"))
+    created = models.DateTimeField(_("envoyé le"), auto_now_add=True)
+
+    class Meta:
+        verbose_name = _("message à une fiche de l'annuaire")
+        verbose_name_plural = _("messages aux fiches de l'annuaire")
+        ordering = ["-created"]
+
+    def __str__(self):
+        return f"{self.sender_email} → {self.entry.name}"
+
+
 class DirectoryEntryPhoto(models.Model):
     """
     Une photo supplémentaire d'une fiche de l'annuaire (galerie), en plus de la photo

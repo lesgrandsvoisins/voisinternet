@@ -2,8 +2,8 @@ from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 from .models import (
-    Account, Audience, Contribution, DirectoryEntry, DirectoryEntryPhoto, DirectorySector, Donor, EntrySubscription,
-    Event, EventInterest, EventManagementRequest, GuideBook,
+    Account, Audience, Contribution, DirectoryEntry, DirectoryEntryPhoto, DirectorySector, Donor, EntryMessage,
+    EntrySubscription, Event, EventInterest, EventManagementRequest, GuideBook,
     Membership, OwnershipClaim, Service, ServiceCategory, Shortcut, Tag,
 )
 
@@ -209,3 +209,17 @@ class EventManagementRequestAdmin(admin.ModelAdmin):
     list_filter = ["approved"]
     list_editable = ["approved"]
     autocomplete_fields = ["event", "account"]
+
+
+@admin.register(EntryMessage)
+class EntryMessageAdmin(admin.ModelAdmin):
+    """Historique du formulaire de contact d'une fiche (views.entry_detail) : simple
+    trace pour modération, jamais éditée depuis l'admin — l'envoi a déjà eu lieu."""
+    list_display = ["entry", "sender_name", "sender_email", "created"]
+    list_filter = ["created"]
+    search_fields = ["sender_name", "sender_email", "entry__name"]
+    autocomplete_fields = ["entry"]
+    readonly_fields = ["entry", "sender_name", "sender_email", "message", "created"]
+
+    def has_add_permission(self, request):
+        return False

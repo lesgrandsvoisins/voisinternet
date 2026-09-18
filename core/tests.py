@@ -16,8 +16,8 @@ from cms.qmd import export_contentpage_qmd, import_contentpage_qmd
 
 from .accounts import SESSION_KEY
 from .models import (
-    Account, Audience, DirectoryEntry, DirectorySector, Donor, EntrySubscription, Event, EventInterest,
-    EventManagementRequest, Membership, OwnershipClaim, Service, Shortcut, Tag, format_number,
+    Account, Audience, DirectoryEntry, DirectorySector, Donor, EntryMessage, EntrySubscription, Event,
+    EventInterest, EventManagementRequest, Membership, OwnershipClaim, Service, Shortcut, Tag, format_number,
 )
 
 
@@ -998,6 +998,45 @@ class AuthorContactTests(Base):
         }, follow=True)
         self.assertEqual(len(mail.outbox), 5)  # le 6e message n'est pas parti
         self.assertContains(response, "Trop de messages envoyés récemment")
+
+
+class EntryContactTests(Base):
+    def setUp(self):
+        super().setUp()
+        self.entry = DirectoryEntry.objects.create(
+            name="Fiche Test", slug="fiche-test", email="fiche@example.org",
+            visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
+        )
+
+    def test_entry_without_email_hides_contact_form_and_mailto(self):
+        entry = DirectoryEntry.objects.create(
+            name="Sans e-mail", slug="sans-email",
+            visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
+        )
+        response = self.client.get(reverse("core:entry_detail", args=[entry.slug]))
+        self.assertNotContains(response, 'id="entry-contact-title"')
+
+    def test_email_is_never_shown_as_a_mailto_link(self):
+        response = self.client.get(reverse("core:entry_detail", args=[self.entry.slug]))
+        self.assertNotContains(response, "mailto:fiche@example.org")
+
+    def test_valid_message_is_sent_and_recorded(self):
+        response = self.client.post(reverse("core:entry_detail", args=[self.entry.slug]), {
+            "sender_name": "Alice", "sender_email": "alice@example.org", "message": "Bonjour !", "website": "",
+        })
+        self.assertRedirects(response, reverse("core:entry_detail", args=[self.entry.slug]))
+        self.assertEqual(EntryMessage.objects.filter(entry=self.entry).count(), 1)
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, ["fiche@example.org"])
+        self.assertEqual(mail.outbox[0].reply_to, ["alice@example.org"])
+
+    def test_honeypot_silently_drops_message(self):
+        self.client.post(reverse("core:entry_detail", args=[self.entry.slug]), {
+            "sender_name": "Robot", "sender_email": "bot@example.org", "message": "spam",
+            "website": "http://spam.example",
+        })
+        self.assertEqual(EntryMessage.objects.count(), 0)
+        self.assertEqual(len(mail.outbox), 0)
 
 
 class WikiJsSearchTests(TestCase):

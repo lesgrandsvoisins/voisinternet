@@ -41,10 +41,9 @@
     <p>{% if entry.address %}{{ entry.address }}{% if entry.city %}, {% endif %}{% endif %}{{ entry.city }}{% if entry.country %}, {{ entry.country }}{% endif %}</p>
     {% endif %}
     {% if entry.video_url %}<p><a href="{{ entry.video_url }}" target="_new">{% trans "Vidéo" %}</a></p>{% endif %}
-    {% if entry.website or entry.email or entry.phone %}
+    {% if entry.website or entry.phone %}
     <p class="pair">
       {% if entry.website %}<a href="{{ entry.website }}" target="_new">{% trans "Site" %}</a>{% endif %}
-      {% if entry.email %}<a href="mailto:{{ entry.email }}">{{ entry.email }}</a>{% endif %}
       {% if entry.phone %}<span>{{ entry.phone }}</span>{% endif %}
     </p>
     {% endif %}
@@ -108,6 +107,33 @@
         </form>
       {% endif %}
     </div>
+
+    {% if entry.email %}
+      <section aria-labelledby="entry-contact-title">
+        <h2 id="entry-contact-title">{% blocktrans with name=entry.name %}Contacter {{ name }}{% endblocktrans %}</h2>
+        <form class="entry-form" method="post">
+          {% csrf_token %}
+          {% if contact_form.non_field_errors %}<ul class="errorlist">{{ contact_form.non_field_errors }}</ul>{% endif %}
+          <div class="form-row">
+            {{ contact_form.sender_name.label_tag }}
+            {{ contact_form.sender_name }}
+            {{ contact_form.sender_name.errors }}
+          </div>
+          <div class="form-row">
+            {{ contact_form.sender_email.label_tag }}
+            {{ contact_form.sender_email }}
+            {{ contact_form.sender_email.errors }}
+          </div>
+          <div class="form-row">
+            {{ contact_form.message.label_tag }}
+            {{ contact_form.message }}
+            {{ contact_form.message.errors }}
+          </div>
+          {{ contact_form.website }}
+          <button class="btn btn-sun" type="submit">{% trans "Envoyer" %}</button>
+        </form>
+      </section>
+    {% endif %}
 
     <p class="muted"><a href="{% url 'core:annuaire' %}">{% trans "← Retour à l’annuaire" %}</a></p>
   </article>

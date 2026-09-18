@@ -2849,7 +2849,8 @@ span.pull {
 }
 
 .account-accordion[open] .accordion-summary h2::before {
-  content: "▾"
+  content: "▾";
+  margin-right: 0.5rem;
 }
 
 .account-accordion>div {

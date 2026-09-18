@@ -16,7 +16,16 @@
       </nav>
       <h1>{{ page.title }}</h1>
       <p class="muted">
-        <time datetime="{{ page.date|date:'c' }}">{{ page.date|date:"j F Y" }}</time>{% if page.author %} — <a href="{% url 'core:author_detail' page.author.pk %}">{{ page.author.name }}</a>{% endif %}
+        <time datetime="{{ page.date|date:'c' }}">{{ page.date|date:"j F Y" }}</time>
+        {% if page.author %}
+          — <a class="author-byline" href="{% url 'core:author_detail' page.author.pk %}">
+            {% if page.author.photo %}
+              {% image page.author.photo fill-32x32 as author_avatar %}
+              <img class="author-avatar" src="{{ author_avatar.url }}" alt="">
+            {% endif %}
+            {{ page.author.name }}
+          </a>
+        {% endif %}
       </p>
     </div>
   </div>
@@ -31,19 +40,34 @@
       {% if total_pages > 1 %}
         <nav class="pagination no-print" aria-label="{% trans "Pages de l’article" %}">
           {% if page_number > 1 %}
-            <a href="?page={{ page_number|add:"-1" }}">{% trans "← Page précédente" %}</a>
+            <a class="prevnext" href="?page={{ page_number|add:"-1" }}">{% trans "← Page précédente" %}</a>
           {% else %}
             <span></span>
           {% endif %}
           <span class="muted">{% blocktrans %}Page {{ page_number }} sur {{ total_pages }}{% endblocktrans %}</span>
           {% if page_number < total_pages %}
-            <a href="?page={{ page_number|add:"1" }}">{% trans "Page suivante →" %}</a>
+            <a class="prevnext" href="?page={{ page_number|add:"1" }}">{% trans "Page suivante →" %}</a>
           {% else %}
             <span></span>
           {% endif %}
         </nav>
       {% endif %}
     </article>
+
+    {% if page.author %}
+      <aside class="author-signature no-print">
+        <a href="{% url 'core:author_detail' page.author.pk %}">
+          {% if page.author.photo %}
+            {% image page.author.photo fill-96x96 as author_avatar_lg %}
+            <img class="author-avatar-lg" src="{{ author_avatar_lg.url }}" alt="">
+          {% endif %}
+          <span class="author-signature-body">
+            <strong>{{ page.author.name }}</strong>
+            {% if page.author.bio %}<span class="muted">{{ page.author.bio|truncatewords:30 }}</span>{% endif %}
+          </span>
+        </a>
+      </aside>
+    {% endif %}
 
     {% if related_posts %}
       <section class="related-posts no-print" aria-labelledby="related-posts-title">

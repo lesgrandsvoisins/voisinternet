@@ -2210,6 +2210,52 @@ blockquote p {
   margin: -.75rem 0 1.25rem
 }
 
+/* Pastille de l'auteur·ice : toute petite dans la signature en tête d'article (à
+   côté de la date), plus grande dans la signature de fin d'article. */
+.author-byline {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  color: inherit
+}
+
+.author-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover
+}
+
+.author-signature {
+  display: block;
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--sky);
+  border-radius: 12px
+}
+
+.author-signature a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: inherit;
+  text-decoration: none
+}
+
+.author-avatar-lg {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0
+}
+
+.author-signature-body {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem
+}
+
 /* Vidéo intégrée (bouton « embed » du texte enrichi : YouTube, Vimeo…). Wagtail enveloppe
    l'iframe du fournisseur dans <div class="responsive-object" style="padding-bottom:…">
    (wagtailembeds/embed_frontend.html) pour fixer le ratio via le padding, mais sans cette
@@ -3216,6 +3262,12 @@ span.pull {
 
 .link-btn:hover {
   color: var(--ink)
+}
+
+/* Really should be in cms */
+
+a.prevnext {
+  font-weight: bold;
 }
 
 .entry-form {

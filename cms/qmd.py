@@ -694,66 +694,67 @@ def export_blog_zip():
     return buffer.getvalue()
 
 
-def _fence_div(fence_attrs, content, colons=3):
+# Longueur de fence (nombre de deux-points) par profondeur d'imbrication dans body — même
+# convention que workshop/qmd_export/export_transition_qmd.py (voir ses FIELD_COLONS/
+# BLOCK_COLONS/ITEM_COLONS/NESTED_ITEM_COLONS) : 6 pour un bloc de premier niveau de body,
+# décroissant de 1 à chaque niveau de "generic_nesting" traversé (_export_body_parts), pour
+# qu'un div englobant utilise toujours strictement plus de deux-points que tout ce qu'il
+# contient (https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans) — sans
+# jamais descendre sous le minimum Pandoc (3, "::: "), puisque ContentStreamBlock (cms/models.py)
+# n'empile structurellement que 3 niveaux concrets de GenericNestingBlock (voir
+# _GENERIC_NESTING_MAX_DEPTH ci-dessus) : la profondeur maximale possible (3) tombe donc
+# exactement sur 6 - 3 = 3, jamais en dessous.
+_TOP_LEVEL_COLONS = 6
+
+
+def _fence_div(fence_attrs, content, colons=_TOP_LEVEL_COLONS):
     """::: {<attrs>}\\n\\n<content>\\n\\n::: — un div Pandoc/Quarto complet par bloc de
     body, jamais un seul div englobant tout le champ (voir export_contentpage_qmd) :
     chaque bloc StreamField porte ainsi sa propre frontière, identifiable par sa classe
     (le block_type, ou une classe plus spécifique — .callout-<type> — quand le bloc a
     lui-même un équivalent Quarto natif plus précis que son seul nom de bloc). colons
-    n'est utile qu'à un bloc "generic_nesting" (voir _next_fence_colons) : Pandoc exige
-    qu'un div englobant utilise strictement plus de deux-points que tout ce qu'il
-    contient (https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans)."""
+    dépend de la profondeur d'imbrication (voir _TOP_LEVEL_COLONS/_export_body_parts)."""
     fence = ":" * colons
     return f"{fence} {{{fence_attrs}}}\n\n{(content or '').strip()}\n\n{fence}\n"
 
 
-_FENCE_COLON_RUN_RE = re.compile(r'^:{3,}', re.MULTILINE)
-
-
-def _next_fence_colons(text):
-    """Nombre de deux-points à utiliser pour un div englobant text (le rendu déjà
-    fencé de ses enfants) sans ambiguïté avec eux — un de plus que le plus long fence
-    qui y apparaît déjà, 3 par défaut si text n'en contient aucun (voir _fence_div)."""
-    runs = [len(m.group(0)) for m in _FENCE_COLON_RUN_RE.finditer(text or "")]
-    return max(runs, default=2) + 1
-
-
-def _export_body_parts(body, media_files=None):
+def _export_body_parts(body, media_files=None, depth=0):
     """
-    Convertit un StreamValue (cms.ContentPage.body à la racine, ou les enfants d'un
-    bloc "generic_nesting" — voir cms.models.ContentStreamBlock) en une liste de
-    fragments .qmd, un div Pandoc/Quarto fencé par bloc (_fence_div) : "prose" devient
+    Convertit un StreamValue (cms.ContentPage.body à la racine, depth=0, ou les enfants
+    d'un bloc "generic_nesting" à une profondeur croissante — voir
+    cms.models.ContentStreamBlock) en une liste de fragments .qmd, un div Pandoc/Quarto
+    fencé par bloc (_fence_div, à _TOP_LEVEL_COLONS - depth deux-points) : "prose" devient
     ::: {.prose}, "callout" devient ::: {.callout-...} (classe Quarto native, avec son
     niveau et son titre éventuel), "pull" devient ::: {.pull}, "generic" devient
     ::: {<sa classe d'origine>} et "generic_nesting" de même mais avec ses propres
-    enfants exportés récursivement à l'intérieur (colons calculé par
-    _next_fence_colons pour rester un englobant sans ambiguïté). Un span
-    <span class="pull"> à l'intérieur d'un bloc de texte enrichi (cms/wagtail_hooks.py
-    ::register_pull_feature) s'exporte en [texte]{.pull}, géré par
-    _ContentHTMLToMarkdown elle-même.
+    enfants exportés récursivement à l'intérieur, à une profondeur (et donc un nombre de
+    deux-points) inférieure de un. Un span <span class="pull"> à l'intérieur d'un bloc de
+    texte enrichi (cms/wagtail_hooks.py::register_pull_feature) s'exporte en
+    [texte]{.pull}, géré par _ContentHTMLToMarkdown elle-même.
     """
+    colons = _TOP_LEVEL_COLONS - depth
     parts = []
     for block in body:
         converter = _ContentHTMLToMarkdown(media_files=media_files)
         if block.block_type == "prose":
             converter.feed(block.value.source)
-            parts.append(_fence_div(".prose", converter.result()))
+            parts.append(_fence_div(".prose", converter.result(), colons=colons))
         elif block.block_type == "callout":
             converter.feed(block.value["text"].source)
             fence_attrs = f'.callout-{block.value["type"]}'
             if block.value["title"]:
                 fence_attrs += f' title="{block.value["title"]}"'
-            parts.append(_fence_div(fence_attrs, converter.result()))
+            parts.append(_fence_div(fence_attrs, converter.result(), colons=colons))
         elif block.block_type == "pull":
             converter.feed(block.value["text"].source)
-            parts.append(_fence_div(".pull", converter.result()))
+            parts.append(_fence_div(".pull", converter.result(), colons=colons))
         elif block.block_type == "generic":
             converter.feed(block.value["text"].source)
-            parts.append(_fence_div(block.value["class_name"], converter.result()))
+            parts.append(_fence_div(block.value["class_name"], converter.result(), colons=colons))
         elif block.block_type == "generic_nesting":
-            inner_parts = _export_body_parts(block.value["children"], media_files=media_files)
+            inner_parts = _export_body_parts(block.value["children"], media_files=media_files, depth=depth + 1)
             inner_md = "\n".join(inner_parts).strip()
-            parts.append(_fence_div(block.value["class_name"], inner_md, colons=_next_fence_colons(inner_md)))
+            parts.append(_fence_div(block.value["class_name"], inner_md, colons=colons))
     return parts
 
 

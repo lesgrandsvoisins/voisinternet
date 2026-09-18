@@ -813,6 +813,10 @@ div.menu {
 .menu-flat li form select {
   margin: 0 auto;
 }
+.menu-flat svg {
+ display: inline;
+ margin-bottom: -0.25rem;
+}
 
 .menu-sep {
   height: 1px;
@@ -3889,13 +3893,41 @@ a.prevnext {
   .foot-nav {
     grid-template-columns: 1fr 1fr
   }
+
+  .menu-wiki {
+    display: none;
+  }
+
+}
+
+@media screen and (max-width:800px) {
+
+  .menu-blog {
+    display: none;
+  }
+
+}
+
+
+@media screen and (max-width:700px) {
+
+  .menu-annuaire {
+    display: none;
+  }
+
 }
 
 @media screen and (max-width:600px) {
+
+  .menu-agenda {
+    display: none;
+  }
+
   .brand img {
-    max-width: 250px;
+    max-width: 200px;
     height: auto;
   }
+
   .lang-dropdown {
     display: none;
   }
@@ -3979,9 +4011,10 @@ a.prevnext {
   }
 
   .brand img {
-    max-width: 200px;
+    max-width: 150px;
     height: auto;
   }
+
   .search-dropdown {
     display: none;
   }
@@ -3990,7 +4023,7 @@ a.prevnext {
 @media screen and (max-width:400px) {
 
   .brand img {
-    max-width: 150px;
+    max-width: 125px;
     height: auto;
   }
 }

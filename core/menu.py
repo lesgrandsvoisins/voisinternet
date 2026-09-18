@@ -18,6 +18,7 @@ class Entry:
     target: str  # nom d'URL Django, « setting:NOM » ou « path:/chemin/ » (page Wagtail à URL fixe)
     group: str
     htmltarget: str
+    icon: str
 
     @property
     def aria(self):
@@ -58,6 +59,7 @@ ENTRIES = [
         "core:raccourcis",
         "compte",
         "_self",
+        False,
     ),
     Entry(
         "groupes",
@@ -67,6 +69,7 @@ ENTRIES = [
         "core:groupes",
         "compte",
         "_self",
+        False,
     ),
     Entry(
         "grandsvoisins",
@@ -76,6 +79,7 @@ ENTRIES = [
         "path:/grandsvoisins/",
         "association",
         "_self",
+        False,
     ),
     Entry(
         "contact",
@@ -85,15 +89,19 @@ ENTRIES = [
         "path:/contact/",
         "association",
         "_self",
+        False,
     ),
     Entry(
         "contributions",
         _("Dons"),
         _("du temps, un don financier, ou du matériel : sans rien attendre en retour"),
-        _("donner du temps, faire un don — à titre personnel ou associatif — ou donner du matériel"),
+        _(
+            "donner du temps, faire un don — à titre personnel ou associatif — ou donner du matériel"
+        ),
         "path:/contributions/",
         "association",
         "_self",
+        False,
     ),
     Entry(
         "agenda",
@@ -103,6 +111,7 @@ ENTRIES = [
         "core:agenda",
         "reperes",
         "_self",
+        "core/icons/agenda-svg.html",
     ),
     Entry(
         "annuaire",
@@ -112,6 +121,7 @@ ENTRIES = [
         "core:annuaire",
         "reperes",
         "_self",
+        "core/icons/annuaire-svg.html",
     ),
     Entry(
         "grandzine",
@@ -121,6 +131,7 @@ ENTRIES = [
         "path:/blog/",
         "reperes",
         "_self",
+        "core/icons/blog-svg.html",
     ),
     Entry(
         "wiki",
@@ -130,15 +141,19 @@ ENTRIES = [
         "setting:GUIDE_URL",
         "reperes",
         "_new",
+        "core/icons/wiki-svg.html",
     ),
     Entry(
         "civisme",
         _("Civisme"),
-        _("Profession d'empathie nationale, prix d'excellence en service public et en travail social"),
+        _(
+            "Profession d'empathie nationale, prix d'excellence en service public et en travail social"
+        ),
         _("s'engager pour l'intérêt général, entre voisins et associations"),
         "path:/civisme/",
         "poles",
         "_self",
+        False,
     ),
     Entry(
         "arts_plastiques",
@@ -148,14 +163,18 @@ ENTRIES = [
         "path:/arts-plastiques/",
         "poles",
         "_self",
+        False,
     ),
     Entry(
         "numerique",
         _("Numérique"),
         _("Salles de sociabilité numérique et lesgrandsvoisins.com"),
-        _("matériel reconditionné et compétences partagées, pour les particuliers comme pour les associations"),
+        _(
+            "matériel reconditionné et compétences partagées, pour les particuliers comme pour les associations"
+        ),
         "path:/numerique/",
         "poles",
         "_self",
+        False,
     ),
 ]

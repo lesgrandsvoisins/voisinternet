@@ -45,16 +45,8 @@
                   x-bind:aria-expanded="open.toString()"
                   aria-controls="main-menu-panel">
             {% comment %} <span class="label">{% trans "Menu" %}</span> {% endcomment %}
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 width="24px"
-                 height="24px"
-                 viewBox="0 0 24 24"
-                 alt="Menu"
-                 title="Menu ">
-              <!-- Icon downloaded from https://icon-sets.iconify.design/mdi/hamburger-menu/ -->
-              <path d="M0 0h24v24H0z" fill="none" />
-              <path fill="var(--ink)" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" />
-            </svg>
+            {% include "core/icons/menu-svg.html" %}
+
           </button>
           <nav class="mega"
                id="main-menu-panel"
@@ -75,7 +67,7 @@
                       <a href="{{ item.href }}"
                          aria-label="{{ item.entry.aria }}"
                          target="{{ item.entry.htmltarget }}"
-                         {% if item.current %}aria-current="page"{% endif %}>{{ item.entry.title }}</a>
+                         {% if item.current %}aria-current="page"{% endif %}>{% if item.entry.icon %}{% include item.entry.icon %}{% endif %}{{ item.entry.title }}</a>
                     </li>
                   {% endfor %}
                   {% if not forloop.last %}<li class="menu-sep" role="separator" aria-hidden="true"></li>{% endif %}
@@ -114,6 +106,17 @@
             </div>
           </nav>
         </div>
+        <div class="menu-agenda">
+          <a href="{% url 'core:agenda' %}" alt="Agenda">
+            {% include "core/icons/agenda-svg.html" %}
+            
+          </a>
+        </div>
+        <div class="menu-annuaire">
+          <a href="{% url 'core:annuaire' %}" alt="Annuaire">
+            {% include "core/icons/annuaire-svg.html" %}
+          </a>
+        </div>
         <div class="search-dropdown"
              x-data="{ open: false }"
              x-on:keydown.escape.window="open = false"
@@ -124,15 +127,16 @@
                   x-bind:aria-expanded="open.toString()"
                   aria-controls="search-dropdown-menu"
                   aria-label="{% trans "Rechercher sur le site" %}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M0 0h24v24H0z" fill="none" />
-              <path fill="currentColor" d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5l-1.5 1.5l-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16A6.5 6.5 0 0 1 3 9.5A6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14S14 12 14 9.5S12 5 9.5 5" />
-            </svg>
+            {% include "core/icons/search-svg.html" %}
+
           </button>
           {% comment %} Même raison qu'au-dessus (pas de x-cloak) : le formulaire de
           recherche doit rester utilisable sans JavaScript, pas caché en permanence. {% endcomment %}
           <div class="search-dropdown-menu" id="search-dropdown-menu" x-show="open">
-            <form class="menu-site-search" method="get" action="{% url 'core:search' %}" role="search">
+            <form class="menu-site-search"
+                  method="get"
+                  action="{% url 'core:search' %}"
+                  role="search">
               <label for="topbar-search-q" class="sr-only">{% trans "Rechercher sur le site" %}</label>
               <input id="topbar-search-q"
                      x-ref="topbarSearchInput"
@@ -149,6 +153,16 @@
           {% include "core/partials/logo_mark.html" %}
           {% comment %} {% include "core/partials/wordmark.html" %} {% endcomment %}
         </a>
+        <div class="menu-blog">
+          <a href="/{{ LANGUAGE_CODE }}/blog/" alt="Blog">
+            {% include "core/icons/blog-svg.html" %}
+          </a>
+        </div>
+        <div class="menu-wiki">
+          <a href="{{ GUIDE_URL }}" alt="Wiki">
+            {% include "core/icons/wiki-svg.html" %}
+          </a>
+        </div>
         <div class="lang-dropdown"
              x-data="{ open: false }"
              x-on:keydown.escape.window="open = false"
@@ -159,10 +173,7 @@
                   x-bind:aria-expanded="open.toString()"
                   aria-controls="lang-dropdown-menu"
                   aria-label="{% trans "Langue" %}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M0 0h24v24H0z" fill="none" />
-              <path fill="currentColor" d="m12.87 15.07l-2.54-2.51l.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35C8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5l3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7l1.62-4.33L19.12 17z" />
-            </svg>
+            {% include "core/icons/lang-svg.html" %}
           </button>
           {% comment %} Pas de x-cloak ici : sans JavaScript, Alpine ne masque jamais ce
           panneau (au lieu de rester bloqué invisible pour toujours) — le sélecteur de
@@ -171,9 +182,7 @@
                id="lang-dropdown-menu"
                role="menu"
                x-show="open"
-               aria-label="{% trans "Langue" %}">
-            {% lang_switcher_menu %}
-          </div>
+               aria-label="{% trans "Langue" %}">{% lang_switcher_menu %}</div>
         </div>
         {% include "core/partials/account_widget.html" %}
       </div>

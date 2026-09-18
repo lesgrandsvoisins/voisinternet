@@ -125,6 +125,16 @@ class QmdRoundTripTests(TestCase):
         imported = import_blogpost_qmd(qmd)
         self.assertIn(f'<a linktype="page" id="{target.pk}">l\'accueil</a>', imported.body)
 
+    def test_pull_quote_span_round_trip(self):
+        self.page.body = '<p>Texte avec <span class="pull">une citation en exergue</span> au milieu.</p>'
+        self.page.save_revision().publish()
+
+        qmd = export_blogpost_qmd(self.page)
+        self.assertIn("[une citation en exergue]{.pull}", qmd)
+
+        imported = import_blogpost_qmd(qmd)
+        self.assertIn('<span class="pull">une citation en exergue</span>', imported.body)
+
     def test_divider_and_pagebreak_round_trip(self):
         self.page.body = '<p>Avant</p><hr><p>Milieu</p><hr class="pagebreak"><p>Après</p>'
         self.page.save_revision().publish()

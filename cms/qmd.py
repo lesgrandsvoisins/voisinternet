@@ -274,9 +274,11 @@ class _HTMLToMarkdown(HTMLParser):
     Convertisseur volontairement minimal : couvre exactement le sous-ensemble de balises
     que BlogPostPage.body (RichTextField) peut produire — gras/italique, h2-h4, listes,
     liens (externes, page, document), images (dont les entités Wagtail <embed>), <hr>
-    (séparateur ou saut de page). Pas une bibliothèque HTML→Markdown généraliste : le
-    format d'entrée est entièrement sous notre contrôle (cms/models.py:BlogPostPage.body
-    features=). Travaille directement sur le HTML tel que stocké en base (pas
+    (séparateur ou saut de page), <span class="pull"> (citation en exergue, voir
+    cms/wagtail_hooks.py::register_pull_feature) -> [texte]{.pull}. Pas une bibliothèque
+    HTML→Markdown généraliste : le format d'entrée est entièrement sous notre contrôle
+    (cms/models.py:BlogPostPage.body features=). Travaille directement sur le HTML tel
+    que stocké en base (pas
     wagtail.rich_text.expand_db_html) pour garder les identifiants image/document/page,
     perdus par expand_db_html — voir _resolve_*_url ci-dessus et le docstring du module.
     """
@@ -291,6 +293,10 @@ class _HTMLToMarkdown(HTMLParser):
         # zip (export_blog_zip) — les images/documents Wagtail sont copiés dans ce dict
         # (chemin -> fichier) et référencés par un chemin local plutôt qu'une URL.
         self.media_files = media_files
+        # <span class="pull"> (cms/wagtail_hooks.py::register_pull_feature, citation en
+        # exergue) -> [texte]{.pull} — une pile plutôt qu'un simple booléen, pour ignorer
+        # correctement un <span> sans classe imbriqué à l'intérieur (rare mais possible).
+        self._pull_span_stack = []
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -351,6 +357,11 @@ class _HTMLToMarkdown(HTMLParser):
             if url:
                 self._ensure_blank_line()
                 self.out.append(f"<{url}>\n\n")
+        elif tag == "span":
+            is_pull = "pull" in (attrs.get("class") or "").split()
+            self._pull_span_stack.append(is_pull)
+            if is_pull:
+                self.out.append("[")
 
     def handle_endtag(self, tag):
         if tag == "p":
@@ -372,6 +383,9 @@ class _HTMLToMarkdown(HTMLParser):
                 self.out.append(f"]({self.link_href})")
             self.link_href = None
             self.link_title_marker = None
+        elif tag == "span" and self._pull_span_stack:
+            if self._pull_span_stack.pop():
+                self.out.append("]{.pull}")
 
     def handle_data(self, data):
         self.out.append(data)
@@ -395,13 +409,13 @@ class _HTMLToMarkdown(HTMLParser):
 class _ContentHTMLToMarkdown(_HTMLToMarkdown):
     """
     Étend _HTMLToMarkdown avec ce que BlogPostPage.body ne connaît pas : tableaux et
-    notes de bas de page produits par l'extension "extra" de python-markdown, et le
-    span <span class="pull"> d'une citation en exergue (cms.ContentPage, voir son
-    docstring dans cms/models.py et cms/wagtail_hooks.py::register_pull_feature).
-    Capture le Markdown d'une cellule de tableau ou d'une définition de note en
-    substituant temporairement self.out (_push_capture/_pop_capture) : les
-    gestionnaires hérités (gras, liens, images…) fonctionnent alors sans modification
-    à l'intérieur.
+    notes de bas de page produits par l'extension "extra" de python-markdown
+    (cms.ContentPage, voir son docstring dans cms/models.py) — le span <span
+    class="pull"> d'une citation en exergue est géré par la classe de base elle-même,
+    partagé avec le blog (cms/wagtail_hooks.py::register_pull_feature). Capture le
+    Markdown d'une cellule de tableau ou d'une définition de note en substituant
+    temporairement self.out (_push_capture/_pop_capture) : les gestionnaires hérités
+    (gras, liens, images…) fonctionnent alors sans modification à l'intérieur.
     """
 
     def __init__(self, media_files=None):
@@ -411,7 +425,6 @@ class _ContentHTMLToMarkdown(_HTMLToMarkdown):
         self._footnotes = None
         self._footnote_ref = None
         self._skip_depth = 0
-        self._pull_span_stack = []
 
     def _push_capture(self):
         self._capture_stack.append(self.out)
@@ -457,12 +470,6 @@ class _ContentHTMLToMarkdown(_HTMLToMarkdown):
             self._footnote_ref = attrs["id"].split(":", 1)[1]
             self._skip_depth = 1
             return
-        if tag == "span":
-            is_pull = "pull" in (attrs.get("class") or "").split()
-            self._pull_span_stack.append(is_pull)
-            if is_pull:
-                self.out.append("[")
-            return
         super().handle_starttag(tag, attrs)
 
     def handle_endtag(self, tag):
@@ -500,10 +507,6 @@ class _ContentHTMLToMarkdown(_HTMLToMarkdown):
                     self.out.append(f"[^{fn_id}]: {text}\n\n")
                 self._footnotes = None
                 return
-        if tag == "span" and self._pull_span_stack:
-            if self._pull_span_stack.pop():
-                self.out.append("]{.pull}")
-            return
         super().handle_endtag(tag)
 
     def handle_data(self, data):
@@ -734,6 +737,9 @@ def import_blogpost_qmd(text):
         raise ValueError("Frontmatter YAML manquant (le fichier doit commencer par ---).")
     front = yaml.safe_load(match.group(1)) or {}
     body_md = match.group(2).replace(PAGEBREAK_SHORTCODE, '<hr class="pagebreak">')
+    # [texte]{.pull} -> <span class="pull"> avant markdown_filter, comme pour
+    # cms.ContentPage (_split_content_blocks) : le HTML brut inline passe tel quel.
+    body_md = _PULL_SPAN_RE.sub(r'<span class="pull">\1</span>', body_md)
 
     lang = front.get("lang") or "fr"
     locale = Locale.objects.get(language_code=lang)

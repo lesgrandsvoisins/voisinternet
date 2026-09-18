@@ -628,7 +628,7 @@ class BlogPostPage(Page):
         _("texte"), blank=True, default="",
         features=[
             "bold", "italic", "h2", "h3", "h4", "ol", "ul", "link", "document-link", "image", "embed",
-            "divider", "pagebreak", "image-gallery",
+            "divider", "pagebreak", "image-gallery", "pull",
         ],
     )
     # Étiquettes partagées avec l'annuaire et les services (core.Tag) : une seule liste

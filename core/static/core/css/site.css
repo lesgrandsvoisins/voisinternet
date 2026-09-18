@@ -2525,23 +2525,30 @@ blockquote p {
 }
 
 /* Citation en exergue (pullquote) : span en ligne (cms/wagtail_hooks.py::
-   register_pull_feature) ou bloc de plusieurs paragraphes (cms.models.PullQuoteBlock)
-   — même classe, même rendu dans les deux cas. Déborde dans la marge du panneau
-   .content-page sur ordinateur (marge -2.5rem = son padding horizontal), pleine
-   largeur sur smartphone (plus de marge dans laquelle déborder). */
+   register_pull_feature, partagé par le blog et cms.ContentPage) ou bloc de
+   plusieurs paragraphes (cms.models.PullQuoteBlock, ContentPage uniquement) — même
+   classe, même rendu dans les deux cas. Déborde dans la marge sur ordinateur, pleine
+   largeur sur smartphone (plus de marge dans laquelle déborder). Le débordement par
+   défaut correspond au padding de .wrap (article de blog) ; à l'intérieur du panneau
+   .content-page, plus large, il correspond à son propre padding (règle ci-dessous). */
 .pull,
 span.pull {
   display: block;
   float: right;
   clear: right;
   width: 42%;
-  margin: .25rem -2.5rem 1rem 1.5rem;
+  margin: .25rem -1.25rem 1rem 1.5rem;
   padding-inline-start: 1rem;
   border-inline-start: 3px solid var(--line);
   font-family: var(--display);
   font-size: 1.35rem;
   line-height: 1.35;
   color: var(--ink-soft)
+}
+
+.content-page .pull,
+.content-page span.pull {
+  margin-right: -2.5rem
 }
 
 @media (max-width: 640px) {

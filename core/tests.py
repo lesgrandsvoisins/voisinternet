@@ -1055,6 +1055,19 @@ class AuthorContactTests(Base):
         self.assertContains(response, "Trop de messages envoyés récemment")
 
 
+class EntryDetailPhotoTests(Base):
+    def test_logo_shown_when_no_promo_photo_or_gallery(self):
+        from django.core.files.uploadedfile import SimpleUploadedFile
+
+        entry = DirectoryEntry.objects.create(
+            name="Fiche avec logo", slug="fiche-avec-logo",
+            visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
+            logo=SimpleUploadedFile("logo.gif", b"GIF87a", content_type="image/gif"),
+        )
+        response = self.client.get(reverse("core:entry_detail", args=[entry.slug]))
+        self.assertContains(response, entry.logo.url)
+
+
 class EntryContactTests(Base):
     def setUp(self):
         super().setUp()

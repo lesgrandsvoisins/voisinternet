@@ -25,6 +25,10 @@
       {% for photo in entry.photos|slice:"1:" %}<img src="{{ photo.url }}" alt="">{% endfor %}
     </div>
     {% endif %}
+    {% elif entry.logo %}
+    {# Pas de photo promotionnelle ni de galerie : le logo (entry_form_fields.html),
+       déjà utilisé comme repli dans les listages (annuaire.html), sert ici de même. #}
+    <img class="hero" src="{{ entry.logo.url }}" alt="">
     {% endif %}
 
     <p class="chips-inline">

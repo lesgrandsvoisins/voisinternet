@@ -87,7 +87,7 @@
     <div class="wrap two two-even">
       <div>
         <h2>
-          <span class="form"><span class="V">B</span>log</span>
+          <span class="form">{% trans "Blog" %}</span>
         </h2>
         <p class="intro">{% trans "Les nouvelles de l'association et de ses voisins, publiées régulièrement." %}</p>
         <a class="more" href="{{ conj.grandzine.href }}">{% trans "Tous les articles" %}</a>
@@ -138,7 +138,7 @@
   <section class="block" aria-label="{% trans 'Le guide' %}">
     <div class="wrap">
       <h2>
-        <span class="form"><span class="V">W</span>iki</span>
+        <span class="form">{% trans "Wiki" %}</span>
       </h2>
       {% if books %}
         <ul class="books">
@@ -223,7 +223,7 @@
   <section class="block" aria-labelledby="svc-title">
     <div class="wrap">
       <h2 id="svc-title">
-        <span class="form">mon <span class="V">C</span>ompte</span> : {% trans "les services" %}
+                <span class="form">{% trans "mon compte" %}</span> : {% trans "les services" %}
       </h2>
       <p class="intro">
         {% trans "Ajoutez ceux qui vous intéressent. Ils rejoignent vos raccourcis dans « mon Compte », même sans compte nominatif." %}

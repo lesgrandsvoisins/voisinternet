@@ -333,5 +333,4 @@
   document.addEventListener("htmx:afterSettle", armLightbox);
   document.addEventListener("DOMContentLoaded", armLangSwitcher);
   document.addEventListener("htmx:afterSettle", armLangSwitcher);
-  document.addEventListener("DOMContentLoaded", randomizeBlobs);
 })();

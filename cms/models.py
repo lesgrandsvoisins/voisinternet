@@ -1,6 +1,7 @@
 import re
 from html import unescape
 
+from django import forms
 from django.core.paginator import Paginator
 from django.db import models
 from django.utils import timezone
@@ -186,7 +187,7 @@ class PolePage(Page):
         FieldPanel("accent"),
         FieldPanel("icon"),
         FieldPanel("ghost_tag"),
-        FieldPanel("tags"),
+        FieldPanel("tags", widget=forms.CheckboxSelectMultiple),
         FieldPanel("cards"),
     ]
 
@@ -259,7 +260,7 @@ class ProjectPage(Page):
         FieldPanel("date_end"),
         FieldPanel("location"),
         FieldPanel("featured_image"),
-        FieldPanel("tags"),
+        FieldPanel("tags", widget=forms.CheckboxSelectMultiple),
         FieldPanel("body"),
     ]
 
@@ -335,7 +336,7 @@ class ContentPage(Page):
         FieldPanel("author"),
         FieldPanel("excerpt"),
         FieldPanel("featured_image"),
-        FieldPanel("tags"),
+        FieldPanel("tags", widget=forms.CheckboxSelectMultiple),
         FieldPanel("body"),
     ]
 
@@ -642,7 +643,7 @@ class BlogPostPage(Page):
         FieldPanel("excerpt"),
         FieldPanel("featured"),
         FieldPanel("featured_image"),
-        FieldPanel("tags"),
+        FieldPanel("tags", widget=forms.CheckboxSelectMultiple),
         FieldPanel(
             "body",
             help_text=_(

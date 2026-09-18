@@ -32,6 +32,7 @@ from .models import (
 
 from wagtail.models import Locale
 
+
 # Chapeau de présentation pour chaque page intermédiaire (une par groupe du menu).
 GROUP_PAGE_INTROS = {
     "reperes": _("Les rendez-vous et les ressources pour s'y retrouver dans la communauté."),
@@ -122,6 +123,10 @@ def _month_calendar(request):
 
 def home(request):
     from cms.models import BlogPostPage, PolePage
+    
+    
+    active_lang = Locale.get_active()
+    
 
     recent_entries = DirectoryEntry.objects.filter(
         visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
@@ -130,11 +135,10 @@ def home(request):
     # d'abord — sans JS, le premier élément (déjà le plus pertinent grâce à ce tri)
     # reste affiché seul, statique. DirectoryEntry n'a pas de notion de mise en avant
     # ni de date de création : recent_entries (-pk, déjà calculé ci-dessus) en tient lieu.
-    quicklink_posts = BlogPostPage.objects.live().order_by("-featured", "-date")[:4]
+    quicklink_posts = BlogPostPage.objects.live().filter(locale_id=active_lang.id).order_by("-featured", "-date")[:4]
     quicklink_events = Event.objects.filter(
         public=True, start__gte=timezone.now(),
     ).order_by("-featured", "start")[:4]
-    active_lang = Locale.get_active()
     recent_posts = BlogPostPage.objects.live().filter(locale_id=active_lang.id).order_by("-date")[:3]
 
     return render(request, "core/home.html", {
@@ -239,13 +243,15 @@ def tag_list(request):
 
 
 def tag_detail(request, slug):
+    active_lang = Locale.get_active()
+    
     tag = get_object_or_404(Tag, slug=slug)
     entries = tag.directory_entries.filter(visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True)
     services = tag.services.filter(active=True)
     events = tag.events.filter(public=True, start__gte=timezone.now()).order_by("start")
     from cms.models import BlogPostPage, PolePage, ProjectPage
 
-    posts = BlogPostPage.objects.live().filter(tags=tag).order_by("-date")
+    posts = BlogPostPage.objects.live().filter(tags=tag).filter(locale_id=active_lang.id).order_by("-date")
     poles = PolePage.objects.live().filter(tags=tag)
     projects = ProjectPage.objects.live().filter(tags=tag)
     return render(request, "core/tag_detail.html", {
@@ -294,10 +300,13 @@ def _process_contact_form(request, throttle_scope, recipient_email):
 
 def author_detail(request, pk):
     from cms.models import Author, AuthorMessage, BlogPostPage, ContentPage
+    
+    active_lang = Locale.get_active()
+    
 
     author = get_object_or_404(Author, pk=pk)
-    posts = BlogPostPage.objects.live().filter(author=author).order_by("-date")
-    pages = ContentPage.objects.live().filter(author=author).order_by("-first_published_at")
+    posts = BlogPostPage.objects.live().filter(author=author).filter(locale_id=active_lang.id).order_by("-date")
+    pages = ContentPage.objects.live().filter(author=author).filter(locale_id=active_lang.id).order_by("-first_published_at")
 
     form, sent = _process_contact_form(request, "author_contact", author.email)
     if sent is not None:

@@ -519,11 +519,17 @@ class Author(TranslatableMixin, models.Model):
         "wagtailimages.Image", verbose_name=_("photo"),
         null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
     )
+    website = models.URLField(_("site web"), blank=True, default="")
+    city = models.CharField(_("ville"), max_length=140, blank=True, default="")
+    country = models.CharField(_("pays"), max_length=140, blank=True, default="")
 
     panels = [
         FieldPanel("name"),
         FieldPanel("bio"),
         FieldPanel("photo"),
+        FieldPanel("website"),
+        FieldPanel("city"),
+        FieldPanel("country"),
     ]
 
     class Meta(TranslatableMixin.Meta):

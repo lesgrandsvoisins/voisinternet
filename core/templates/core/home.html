@@ -49,10 +49,10 @@
       {{ quicklink_entry_texts|json_script:"quicklink-annuaire-data" }}
       {{ quicklink_post_texts|json_script:"quicklink-blog-data" }}
       {{ quicklink_event_texts|json_script:"quicklink-agenda-data" }}
-      {% include "core/partials/scene.html" %}
+      {% comment %} {% include "core/partials/scene.html" %} {% endcomment %}
     </div>
   </section>
-  {% comment %} {% include "core/partials/announcement_card.html" %} {% endcomment %}
+  {% include "core/partials/announcement_card.html" %}
   <section class="block" aria-labelledby="next-title">
     <div class="wrap two two-even">
       <div>

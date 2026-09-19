@@ -60,6 +60,18 @@
         <p class="intro">
           {% blocktrans %}Permanence chaque lundi de 12h à 19h30, en personne (93 av. du Général Leclerc, 75014 Paris — métro Alésia, Atelier de la Ressourcerie Créative) ou en ligne sur meet.lesgrandsvoisins.com.{% endblocktrans %}
         </p>
+        {% if next_events %}
+          <ul class="posts">
+            {% for event in next_events %}
+              <li{% if event.featured %} class="feat"{% endif %}>
+                <a href="{% url 'core:event_detail' event.pk %}">
+                  <h3>{{ event.title }}</h3>
+                  <time datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
         <a class="more" href="{% url 'core:agenda' %}">{% trans "Tout l'agenda" %}</a>
       </div>
       <div>
@@ -114,11 +126,10 @@
     <div class="wrap two two-even">
       <div>
         {% include "core/partials/scene.html" %}
+      </div>
+      <div class="home-annuaire-panel">
         <h2>{% trans "Annuaire" %}</h2>
         <p class="intro">{% trans "Qui fait partie de la communauté, et comment les joindre : personnes et structures, individuelles ou collectives, avec leur accord." %}</p>
-        <a class="more" href="{{ conj.annuaire.href }}">{% trans "Voir tout l'annuaire" %}</a>
-      </div>
-      <div>
         {% if recent_entries %}
           <ul class="books">
             {% for entry in recent_entries %}
@@ -128,10 +139,17 @@
                 </a>
               </li>
             {% endfor %}
+             <li>
+                <a href="{{ conj.annuaire.href }}"><strong>...</strong></a>
+              </li>
+             <li>
+                <a href="{% url 'core:mes_fiches' %}"><strong>{% trans "Vous" %}</strong></a>
+              </li>
           </ul>
         {% else %}
           <p class="intro">{% trans "Les dernières fiches s'afficheront ici." %}</p>
         {% endif %}
+        <a class="more" href="{{ conj.annuaire.href }}">{% trans "Voir tout l'annuaire" %}</a>
       </div>
     </div>
   </section>

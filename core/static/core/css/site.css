@@ -742,6 +742,10 @@ div.menu {
   margin: 0
 }
 
+.home-annuaire-panel {
+  text-align: center;
+}
+
 /* Menu : la conjugaison */
 .mega {
   position: absolute;

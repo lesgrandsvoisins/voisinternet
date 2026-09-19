@@ -152,6 +152,7 @@ def home(request):
         "recent_entries": recent_entries,
         "agenda_calendar": _month_calendar(request),
         "next_event": Event.objects.filter(public=True, start__gte=timezone.now()).order_by("start").first(),
+        "next_events": Event.objects.filter(public=True, start__gte=timezone.now()).order_by("start")[:3],
         "quicklink_entry_texts": [e.name for e in recent_entries],
         "quicklink_post_texts": [str(Truncator(p.title).chars(40)) for p in quicklink_posts],
         "quicklink_event_texts": [

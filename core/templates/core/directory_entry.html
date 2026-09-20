@@ -116,7 +116,7 @@
       {% endif %}
     </div>
 
-    {% if entry.email %}
+    {% if entry.email and CONTACT_FORMS_ENABLED %}
       <section aria-labelledby="entry-contact-title">
         <h2 id="entry-contact-title">{% blocktrans with name=entry.name %}Contacter {{ name }}{% endblocktrans %}</h2>
         <form class="entry-form" method="post">

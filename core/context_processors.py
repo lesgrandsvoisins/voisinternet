@@ -65,5 +65,6 @@ def site(request):
         "BLOG_URL": settings.BLOG_URL,
         "GUIDE_URL": settings.GUIDE_URL,
         "CONTACT_EMAIL": settings.CONTACT_EMAIL,
+        "CONTACT_FORMS_ENABLED": settings.CONTACT_FORMS_ENABLED,
         "SITE_NAME": get_current_site(request).name,
     }

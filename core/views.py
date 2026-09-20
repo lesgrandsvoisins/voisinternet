@@ -296,7 +296,7 @@ def _process_contact_form(request, throttle_scope, recipient_email):
     trace existe quand même, seul l'e-mail est manqué.
     """
     form = ContactMessageForm()
-    if not (recipient_email and request.method == "POST"):
+    if not (settings.CONTACT_FORMS_ENABLED and recipient_email and request.method == "POST"):
         return form, None, True
     if _throttled(request, throttle_scope, limit=5):
         messages.error(request, _("Trop de messages envoyés récemment depuis cet appareil. Réessayez plus tard."))

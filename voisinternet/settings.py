@@ -218,6 +218,8 @@ X_FRAME_OPTIONS = "DENY"
 ANON_ACCOUNT_PEPPER = env("VOISINTERNET_ANON_PEPPER", SECRET_KEY)
 # Derrière Caddy ou nginx, l'adresse du visiteur arrive dans X-Forwarded-For.
 BEHIND_PROXY = env_bool("VOISINTERNET_BEHIND_PROXY", False)
+# Formulaires « Contacter… » (envoi de courriel) : désactivés par défaut, à cause du spam.
+CONTACT_FORMS_ENABLED = env_bool("VOISINTERNET_CONTACT_FORMS", False)
 
 BLOG_URL = env("VOISINTERNET_BLOG_URL", "https://blog.lesgrandsvoisins.com")
 GUIDE_URL = env("VOISINTERNET_GUIDE_URL", "https://wiki.grandsvoisins.org/")

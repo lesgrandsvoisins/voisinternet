@@ -1133,6 +1133,7 @@ def _captcha(answer=8, a=3, b=5):
     return {"captcha_answer": answer, "captcha_token": ContactMessageForm.make_captcha_token(a, b)}
 
 
+@override_settings(CONTACT_FORMS_ENABLED=True)
 class ContactCaptchaTests(Base):
     def setUp(self):
         super().setUp()
@@ -1171,6 +1172,24 @@ class ContactCaptchaTests(Base):
         self.assertEqual(AuthorMessage.objects.count(), 0)
 
 
+@override_settings(CONTACT_FORMS_ENABLED=False)
+class ContactFormsDisabledTests(Base):
+    def test_forms_are_hidden_and_posts_send_nothing(self):
+        author = Author.objects.create(name="Jean Dupont", email="jean@example.org")
+        entry = DirectoryEntry.objects.create(
+            name="Fiche Test", slug="fiche-test", email="fiche@example.org",
+            visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True,
+        )
+        data = {"sender_name": "A", "sender_email": "a@example.org", "message": "Salut", "website": "", **_captcha()}
+        for url, marker in ((reverse("core:author_detail", args=[author.pk]), "author-contact-title"),
+                            (reverse("core:entry_detail", args=[entry.slug]), "entry-contact-title")):
+            self.assertNotContains(self.client.get(url), marker)
+            self.client.post(url, data)
+        self.assertEqual(len(mail.outbox), 0)
+        self.assertEqual(AuthorMessage.objects.count() + EntryMessage.objects.count(), 0)
+
+
+@override_settings(CONTACT_FORMS_ENABLED=True)
 class AuthorContactTests(Base):
     def setUp(self):
         super().setUp()
@@ -1240,6 +1259,7 @@ class EntryDetailPhotoTests(Base):
         self.assertContains(response, entry.logo.url)
 
 
+@override_settings(CONTACT_FORMS_ENABLED=True)
 class EntryContactTests(Base):
     def setUp(self):
         super().setUp()

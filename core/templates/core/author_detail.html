@@ -54,7 +54,7 @@
       <p class="intro">{% trans "Aucun article publié pour l'instant." %}</p>
     {% endif %}
 
-    {% if author.email %}
+    {% if author.email and CONTACT_FORMS_ENABLED %}
       <section aria-labelledby="author-contact-title">
         <h2 id="author-contact-title">{% blocktrans with name=author.name %}Contacter {{ name }}{% endblocktrans %}</h2>
         <form class="entry-form" method="post">

@@ -1,4 +1,7 @@
+import random
+
 from django import forms
+from django.core import signing
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -137,6 +140,10 @@ class ContributionForm(forms.Form):
     note = forms.CharField(label=_("Note"), max_length=200, required=False)
 
 
+_CAPTCHA_SALT = "core.forms.ContactMessageForm.captcha"
+_CAPTCHA_MAX_AGE = 60 * 30  # une demi-heure : le temps de rédiger un message
+
+
 class ContactMessageForm(forms.Form):
     """
     Formulaire de contact générique — un·e auteur·ice de blog (views.author_detail,
@@ -146,8 +153,53 @@ class ContactMessageForm(forms.Form):
     robots (honeypot) : un champ masqué qu'une personne ne remplit jamais, mais qu'un
     robot générique remplit souvent — la vue traite un champ non vide comme un envoi
     silencieusement ignoré.
+
+    "captcha_answer"/"captcha_token" forment un anti-robot par calcul simple, auto-hébergé
+    (aucun service tiers) : les deux nombres voyagent signés (django.core.signing) dans
+    un champ masqué, sans état en session, et seule la vérification côté serveur de
+    (nombres, réponse) valide l'envoi. Fonctionne sans JavaScript.
     """
     sender_name = forms.CharField(label=_("Votre nom"), max_length=140, required=False)
     sender_email = forms.EmailField(label=_("Votre e-mail"))
     message = forms.CharField(label=_("Message"), max_length=4000, widget=forms.Textarea)
     website = forms.CharField(required=False, widget=forms.HiddenInput)
+    captcha_answer = forms.IntegerField(label=_("Anti-robot"))
+    captcha_token = forms.CharField(widget=forms.HiddenInput)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Formulaire soumis : on réaffiche la même question (jeton relu même expiré, pour
+        # l'affichage seulement) afin que la personne puisse corriger sa réponse. Sinon,
+        # nouveau défi — le champ masqué d'un formulaire lié reprend de toute façon la
+        # valeur soumise, d'où l'initial réservé au cas non lié.
+        numbers = self._read_captcha_token(self.data.get("captcha_token")) if self.is_bound else None
+        if numbers is None:
+            numbers = (random.randint(1, 9), random.randint(1, 9))
+            if not self.is_bound:
+                self.initial["captcha_token"] = self.make_captcha_token(*numbers)
+        self.fields["captcha_answer"].label = _("Combien font %(a)d + %(b)d ?") % {
+            "a": numbers[0], "b": numbers[1],
+        }
+
+    @staticmethod
+    def make_captcha_token(a, b):
+        return signing.dumps([a, b], salt=_CAPTCHA_SALT)
+
+    @staticmethod
+    def _read_captcha_token(token, max_age=None):
+        if not token:
+            return None
+        try:
+            a, b = signing.loads(token, salt=_CAPTCHA_SALT, max_age=max_age)
+        except signing.BadSignature:
+            return None
+        return a, b
+
+    def clean(self):
+        cleaned_data = super().clean()
+        numbers = self._read_captcha_token(cleaned_data.get("captcha_token"), max_age=_CAPTCHA_MAX_AGE)
+        if numbers is None:
+            self.add_error("captcha_answer", _("Anti-robot expiré : rechargez la page et réessayez."))
+        elif cleaned_data.get("captcha_answer") != sum(numbers):
+            self.add_error("captcha_answer", _("Réponse incorrecte, réessayez."))
+        return cleaned_data

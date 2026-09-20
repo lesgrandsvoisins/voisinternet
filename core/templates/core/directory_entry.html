@@ -137,6 +137,12 @@
             {{ contact_form.message }}
             {{ contact_form.message.errors }}
           </div>
+          <div class="form-row">
+            {{ contact_form.captcha_answer.label_tag }}
+            {{ contact_form.captcha_answer }}
+            {{ contact_form.captcha_answer.errors }}
+          </div>
+          {{ contact_form.captcha_token }}
           {{ contact_form.website }}
           <button class="btn btn-sun" type="submit">{% trans "Envoyer" %}</button>
         </form>

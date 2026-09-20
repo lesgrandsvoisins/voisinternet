@@ -15,6 +15,7 @@ from cms.models import Author, AuthorMessage, ContentPage, PolePage
 from cms.qmd import export_contentpage_qmd, import_contentpage_qmd
 
 from .accounts import SESSION_KEY
+from .forms import ContactMessageForm
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectorySector, Donor, EntryMessage, EntrySubscription,
     Event, EventInterest, EventManagementRequest, Membership, OwnershipClaim, Service, Shortcut, Tag, format_number,
@@ -1127,6 +1128,49 @@ class AudienceTests(Base):
         self.assertEqual(owner_response.status_code, 200)
 
 
+def _captcha(answer=8, a=3, b=5):
+    """Champs anti-robot valides (3 + 5 = 8) d'un ContactMessageForm."""
+    return {"captcha_answer": answer, "captcha_token": ContactMessageForm.make_captcha_token(a, b)}
+
+
+class ContactCaptchaTests(Base):
+    def setUp(self):
+        super().setUp()
+        self.author = Author.objects.create(name="Jean Dupont", email="jean@example.org")
+        self.url = reverse("core:author_detail", args=[self.author.pk])
+        self.data = {"sender_name": "Alice", "sender_email": "alice@example.org", "message": "Bonjour !", "website": ""}
+
+    def test_form_shows_a_question_and_a_signed_token(self):
+        response = self.client.get(self.url)
+        self.assertContains(response, "Combien font")
+        self.assertContains(response, 'name="captcha_token"')
+
+    def test_wrong_answer_is_refused_and_question_is_kept(self):
+        response = self.client.post(self.url, {**self.data, **_captcha(answer=9)})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Réponse incorrecte")
+        self.assertContains(response, "Combien font 3 + 5")
+        self.assertEqual(AuthorMessage.objects.count(), 0)
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_missing_captcha_is_refused(self):
+        self.client.post(self.url, self.data)
+        self.assertEqual(AuthorMessage.objects.count(), 0)
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_forged_token_is_refused(self):
+        response = self.client.post(self.url, {**self.data, "captcha_answer": 8, "captcha_token": "3:5:forge"})
+        self.assertContains(response, "Anti-robot expiré")
+        self.assertEqual(AuthorMessage.objects.count(), 0)
+
+    def test_expired_token_is_refused(self):
+        token = ContactMessageForm.make_captcha_token(3, 5)
+        with mock.patch("django.core.signing.time.time", return_value=timezone.now().timestamp() + 3600):
+            response = self.client.post(self.url, {**self.data, "captcha_answer": 8, "captcha_token": token})
+        self.assertContains(response, "Anti-robot expiré")
+        self.assertEqual(AuthorMessage.objects.count(), 0)
+
+
 class AuthorContactTests(Base):
     def setUp(self):
         super().setUp()
@@ -1139,7 +1183,7 @@ class AuthorContactTests(Base):
 
     def test_valid_message_is_sent_and_recorded(self):
         response = self.client.post(reverse("core:author_detail", args=[self.author.pk]), {
-            "sender_name": "Alice", "sender_email": "alice@example.org", "message": "Bonjour !", "website": "",
+            "sender_name": "Alice", "sender_email": "alice@example.org", "message": "Bonjour !", "website": "", **_captcha(),
         })
         self.assertRedirects(response, reverse("core:author_detail", args=[self.author.pk]))
         self.assertEqual(AuthorMessage.objects.filter(author=self.author).count(), 1)
@@ -1150,7 +1194,7 @@ class AuthorContactTests(Base):
     def test_honeypot_silently_drops_message(self):
         self.client.post(reverse("core:author_detail", args=[self.author.pk]), {
             "sender_name": "Robot", "sender_email": "bot@example.org", "message": "spam",
-            "website": "http://spam.example",
+            "website": "http://spam.example", **_captcha(),
         })
         self.assertEqual(AuthorMessage.objects.count(), 0)
         self.assertEqual(len(mail.outbox), 0)
@@ -1158,11 +1202,11 @@ class AuthorContactTests(Base):
     def test_contact_form_is_throttled(self):
         for _ in range(5):
             self.client.post(reverse("core:author_detail", args=[self.author.pk]), {
-                "sender_name": "Alice", "sender_email": "alice@example.org", "message": "Bonjour !", "website": "",
+                "sender_name": "Alice", "sender_email": "alice@example.org", "message": "Bonjour !", "website": "", **_captcha(),
             })
         self.assertEqual(len(mail.outbox), 5)
         response = self.client.post(reverse("core:author_detail", args=[self.author.pk]), {
-            "sender_name": "Alice", "sender_email": "alice@example.org", "message": "Encore un.", "website": "",
+            "sender_name": "Alice", "sender_email": "alice@example.org", "message": "Encore un.", "website": "", **_captcha(),
         }, follow=True)
         self.assertEqual(len(mail.outbox), 5)  # le 6e message n'est pas parti
         self.assertContains(response, "Trop de messages envoyés récemment")
@@ -1175,7 +1219,7 @@ class AuthorContactTests(Base):
 
         with mock.patch("core.views.EmailMessage.send", side_effect=SMTPConnectError(421, "down")):
             response = self.client.post(reverse("core:author_detail", args=[self.author.pk]), {
-                "sender_name": "Alice", "sender_email": "alice@example.org", "message": "Bonjour !", "website": "",
+                "sender_name": "Alice", "sender_email": "alice@example.org", "message": "Bonjour !", "website": "", **_captcha(),
             }, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(AuthorMessage.objects.filter(author=self.author).count(), 1)
@@ -1218,7 +1262,7 @@ class EntryContactTests(Base):
 
     def test_valid_message_is_sent_and_recorded(self):
         response = self.client.post(reverse("core:entry_detail", args=[self.entry.slug]), {
-            "sender_name": "Alice", "sender_email": "alice@example.org", "message": "Bonjour !", "website": "",
+            "sender_name": "Alice", "sender_email": "alice@example.org", "message": "Bonjour !", "website": "", **_captcha(),
         })
         self.assertRedirects(response, reverse("core:entry_detail", args=[self.entry.slug]))
         self.assertEqual(EntryMessage.objects.filter(entry=self.entry).count(), 1)
@@ -1229,7 +1273,7 @@ class EntryContactTests(Base):
     def test_honeypot_silently_drops_message(self):
         self.client.post(reverse("core:entry_detail", args=[self.entry.slug]), {
             "sender_name": "Robot", "sender_email": "bot@example.org", "message": "spam",
-            "website": "http://spam.example",
+            "website": "http://spam.example", **_captcha(),
         })
         self.assertEqual(EntryMessage.objects.count(), 0)
         self.assertEqual(len(mail.outbox), 0)

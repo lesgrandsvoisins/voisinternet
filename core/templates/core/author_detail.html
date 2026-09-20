@@ -75,6 +75,12 @@
             {{ form.message }}
             {{ form.message.errors }}
           </div>
+          <div class="form-row">
+            {{ form.captcha_answer.label_tag }}
+            {{ form.captcha_answer }}
+            {{ form.captcha_answer.errors }}
+          </div>
+          {{ form.captcha_token }}
           {{ form.website }}
           <button class="btn btn-sun" type="submit">{% trans "Envoyer" %}</button>
         </form>

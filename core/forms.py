@@ -97,10 +97,23 @@ class EventForm(forms.ModelForm):
         # active, pour créer/modifier un évènement dans la langue qu'on est en train de
         # parcourir plutôt que toujours en français.
         exclude = ["slug", "public", "featured", "managers", "source_url", "source_uid"] + _EVENT_TRANSLATED_FIELDS
+        widgets = {
+            "start": forms.DateTimeInput(
+                attrs={"type": "datetime-local"},
+                format="%Y-%m-%dT%H:%M",
+            ),
+            "end": forms.DateTimeInput(
+                attrs={"type": "datetime-local"},
+                format="%Y-%m-%dT%H:%M",
+            ),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         from django.utils.translation import get_language
+        
+        self.fields["start"].input_formats = ["%Y-%m-%dT%H:%M"]
+        self.fields["end"].input_formats = ["%Y-%m-%dT%H:%M"]
 
         lang = get_language() if get_language() in _EVENT_LANGUAGES else "fr"
         for field in _EVENT_TRANSLATED_FIELDS:

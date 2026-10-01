@@ -173,7 +173,7 @@ LANGUAGES = [
     ("ko", "한국어"),
 ]
 LOCALE_PATHS = [BASE_DIR / "locale"]
-TIME_ZONE = "Europe/Paris"
+TIME_ZONE = env("TIME_ZONE", "Europe/Paris")
 USE_I18N = True
 USE_TZ = True
 

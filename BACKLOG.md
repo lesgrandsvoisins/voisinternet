@@ -1,34 +1,49 @@
 # Backlog
 
-Ce qui reste à faire pour `www.lesgrandsvoisins.com`, avec **qui** doit agir : *UX* (cette session), *Admin* (session d'administration des serveurs, dépôt `chris2fr/flakeops`), *Chris*. Ce qui est fait est dans [CHANGELOG.md](CHANGELOG.md). Tout ce qui n'est pas vérifié sur le vrai serveur est marqué **non vérifié**.
+Ce qui reste à faire pour `www.lesgrandsvoisins.com`. Identifiants `U-nnn` (le backlog d'administration de `chris2fr/flakeops`, branche `rosest330`, utilise `B-nnn` : les deux peuvent finir dans un même projet Vikunja sans collision). États : `a_faire`, `en_cours`, `bloque`, `fait`. Responsables : **Chris**, **Admin** (session d'administration des serveurs), **UX** (cette session). Ce qui est fait est daté dans [CHANGELOG.md](CHANGELOG.md). Tout ce qui n'est pas vérifié sur le vrai serveur est marqué **non vérifié**. Aucun secret ici.
 
-## Décisions attendues de Chris
-1. **Identifiant** : garder l'identifiant généré (`famille[:4]+prénom[:4]+compteur@gv.je`) ou en laisser choisir un ? Pistes en discussion : identifiant de connexion généré et stable (une personne, un identifiant lié à son nom), plus une adresse choisie, par exemple `monchoix@gv.coop`, comme alias sur la même boîte. Compteur qui commence à 2 (`dupojean2`) : voulu ?
-2. **Logo du pied de page** : il affiche « new.LesGrandsVoisins.com » (`partials/wordmark.html`) alors que `www` a remplacé `new`. Remplacer par « www. » ou retirer le préfixe ?
-3. **« Mark for documents »** : à préciser (relecture de documents ? marquage ? Markdown ?) pour en faire un parcours guidé.
-4. **Blog** : `blog.lesgrandsvoisins.com` doit-il rediriger vers `www` ?
+Les besoins côté serveur passent par `docs/DEMANDES-UX.md` (dépôt `flakeops`) ; l'administration les suit sous `B-0nn`.
 
-## En attente de l'administration (voir `docs/DEMANDES-UX.md` dans `flakeops`)
-- Reconstruire le serveur et activer *Internationalization* du royaume `master` (fr, en, es, ar, ko), pour que les messages du thème Keycloak s'affichent. *Chris*
-- Vérifier le client OIDC de `www` (identifiant, adresses de retour, scope `profile`) et `KEYCLOAK_REALM_URL`. **Non vérifié.** *Admin / Chris*
-- Tester `prompt=create` dans un navigateur. **Non vérifié.** *Chris*
-- Compte de service Keycloak pour `just nonreg-onboarding`, puis le lancer ; prouver que le hachage des mots de passe fonctionne. *Chris / Admin*
-- Relecture de l'arabe et du coréen (thème Keycloak et site). *Relecteurs natifs*
-- Redirection de l'ancien `/signup` (`old.lesgrandsvoisins.com`) vers `/fr/account/inscription/`. *Admin*
-- Adresses `@gv.coop` : la zone a un MX mais le domaine n'est pas hébergé, le courrier serait refusé. Nécessaire avant tout alias choisi en `@gv.coop`. *Admin*
+## P0 — Décisions de Chris
+| ID | État | Tâche | Resp. | Terminé quand |
+|---|---|---|---|---|
+| U-001 | bloque | **Identifiant** : garder l'identifiant généré (`famille[:4]+prénom[:4]+compteur@gv.je`, compteur qui commence à 2 aujourd'hui) et y ajouter une adresse choisie (`monchoix@gv.coop`, alias sur la même boîte) ? Conception côté admin : `B-036`. | Chris | Décision écrite ici et dans `B-036`. |
+| U-002 | a_faire | **Logo du pied de page** : il affiche « new.LesGrandsVoisins.com » (`partials/wordmark.html`). « www. » ou sans préfixe ? | Chris | Choix noté ; UX modifie le gabarit. |
+| U-003 | a_faire | **« Mark for documents »** : préciser (relecture ? marquage ? Markdown ?) pour en faire un parcours guidé. | Chris | Description reçue. |
+| U-004 | a_faire | **Blog** : `blog.lesgrandsvoisins.com` doit-il rediriger vers `www` ? (`B-035` côté admin) | Chris | Décision notée. |
+| U-005 | a_faire | **Accès à Vikunja** pour la relecture ar/ko : qui peut l'obtenir ? Le parcours dit « demandez-nous un accès ». | Chris | Règle d'accès notée ; le parcours est ajusté. |
 
-## À faire côté UX
-- [x] Interface des parcours guidés traduite en en/es/ar/ko.
-- [ ] Traduire le CONTENU des parcours (titres, étapes) dans l'administration, en commençant par l'arabe et le coréen (relecteurs natifs).
-- [ ] Parcours « documents » (selon la décision 3) et « Vikunja » plus détaillé (nom du projet de relecture à confirmer).
-- [x] Test d'inscription dans un navigateur : écrit (`flakeops`, branche `ux/test-inscription-navigateur`, `scripts/nonreg/inscription-navigateur.py`, page `docs/INSCRIPTION-NAVIGATEUR-TEST.md`). **Non vérifié, jamais lancé** ; à fusionner et lancer par l'administration. *Admin / Chris*
-- [ ] Doublons d'inscription : message qui oriente vers la connexion sans bloquer (une personne peut avoir un homonyme).
-- [ ] Audit d'accessibilité : navigation au clavier, contraste, arabe (droite à gauche), `prefers-reduced-motion`.
-- [ ] Courriel de bienvenue (contenu, à envoyer par Keycloak) et écran de bienvenue après la première connexion.
-- [ ] Un évènement publié puis modifié reste publié sans nouvelle relecture : décider si la modification le repasse en attente.
-- [ ] Création d'un compte nommé proposée en premier par défaut (le numéro anonyme est difficile à garder pour ce public).
+## P1 — Pour que l'inscription fonctionne de bout en bout (côté serveur)
+| ID | État | Tâche | Resp. | Terminé quand |
+|---|---|---|---|---|
+| U-010 | bloque | Reconstruire et activer *Internationalization* du royaume `master` (fr, en, es, ar, ko) ; `B-004`. | Chris | L'écran d'inscription s'affiche en français avec `ui_locales=fr`. |
+| U-011 | bloque | Tester `prompt=create` dans un navigateur ; `B-005`. **Non vérifié.** | Chris | Le bouton « Créer mon compte » de `www` ouvre directement le formulaire d'inscription. |
+| U-012 | bloque | Vérifier le client OIDC de `www` (identifiant, adresses de retour, scope `profile`) et `KEYCLOAK_REALM_URL` ; `B-033`. **Non vérifié.** | Chris / Admin | Une connexion depuis `www` montre l'identifiant dans « Mon profil ». |
+| U-013 | bloque | Compte de service Keycloak, puis lancer `just nonreg-onboarding` ; prouver que le hachage des mots de passe fonctionne ; `B-002`. | Chris / Admin | Test vert. |
+| U-014 | a_faire | Premier lancement du test d'inscription navigateur (`scripts/nonreg/inscription-navigateur.py`, fusionné ; `B-020`). Prérequis : Playwright + Chromium, compte de service, chemin du fichier secret. **Non vérifié, jamais lancé.** | Chris | Test passé une fois ; corriger les KO de forme. |
+| U-015 | a_faire | Avant ce premier lancement : vérifier que l'adresse de la machine est dans `ignoreip` de fail2ban (une connexion de test échouée alimente la jaille `keycloak`). **Non vérifié.** | Chris | Vérifié. |
+| U-016 | a_faire | Si l'appel du jeton échoue au premier lancement : `KC_URL` vaut `https://key.gv.je` dans le test, alors que `onboarding.py` utilise le port local avec les en-têtes `X-Forwarded`. | UX / Admin | Le test obtient un jeton. |
+| U-017 | bloque | Redirection de l'ancien `/signup` (`old.lesgrandsvoisins.com`) vers `/fr/account/inscription/` ; `B-034`. Attend `U-011` et `U-013`. | Admin | `curl -I` renvoie 301. |
+| U-018 | bloque | Héberger `@gv.coop` (zone avec MX, domaine absent de `modules/mail/domains.nix`, courrier refusé ; `B-006`). Prérequis de tout alias en `@gv.coop`. | Admin / Chris | Un envoi de test à `@gv.coop` arrive. |
 
-## Idées
+## P2 — À faire côté UX
+| ID | État | Tâche | Resp. | Terminé quand |
+|---|---|---|---|---|
+| U-020 | a_faire | Traduire le **contenu** des parcours guidés (titres, étapes) en ar et ko d'abord, via l'administration. Relecteurs natifs. | UX / relecteurs | Parcours lisibles en ar et ko. |
+| U-021 | a_faire | Relecture de l'arabe et du coréen du thème Keycloak et de l'interface du site. | Relecteurs natifs | Relecture notée. |
+| U-022 | a_faire | Parcours « documents » (selon `U-003`) et parcours Vikunja plus précis (nom du projet de relecture à confirmer). | UX | Parcours publiés. |
+| U-023 | a_faire | Doublons d'inscription : message qui oriente vers la connexion sans bloquer (homonymes possibles). Côté thème Keycloak, les messages existent ; reste le cas « même nom » sur `www`. | UX | Message en place. |
+| U-024 | a_faire | Audit d'accessibilité : navigation au clavier, contraste restant, arabe (droite à gauche), `prefers-reduced-motion`. | UX | Anomalies corrigées. |
+| U-025 | a_faire | Courriel de bienvenue (contenu, à envoyer par Keycloak) et écran de bienvenue après la première connexion. | UX / Admin | Contenu écrit ; envoi configuré. |
+| U-026 | a_faire | Un évènement publié puis modifié reste publié sans relecture : décider si la modification le repasse en attente. | UX / Chris | Décision appliquée. |
+| U-027 | a_faire | Proposer en premier la création d'un compte nommé (le numéro anonyme est difficile à garder pour ce public). | UX | Ordre et textes changés. |
+
+## P3 — Idées
 - Rendre les parcours plus ludiques (défis, petits quiz, « montrer à un voisin »).
-- Parcours « aider quelqu'un » pour les personnes qui accompagnent les autres (un voisin qui aide plusieurs personnes).
+- Parcours « aider quelqu'un » pour les personnes qui accompagnent les autres.
 - Identité collective : associations et entreprises comme fiches d'annuaire plutôt que comptes partagés.
+- Adresse choisie en alias : l'administration penche pour un petit service côté serveur appelé par `www` (conception `B-036`, rien sans accord de Chris). `www` n'aura jamais d'accès à l'annuaire LDAP.
+
+## Fait
+- Test d'inscription dans un navigateur écrit et fusionné (`flakeops`, `scripts/nonreg/inscription-navigateur.py`).
+- Parcours guidés (interface traduite en en/es/ar/ko), bandeau du numéro anonyme, boutons inscription/connexion, identifiant affiché : voir [CHANGELOG.md](CHANGELOG.md).

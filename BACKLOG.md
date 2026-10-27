@@ -18,7 +18,8 @@ Ce qui reste à faire pour `www.lesgrandsvoisins.com`, avec **qui** doit agir : 
 - Adresses `@gv.coop` : la zone a un MX mais le domaine n'est pas hébergé, le courrier serait refusé. Nécessaire avant tout alias choisi en `@gv.coop`. *Admin*
 
 ## À faire côté UX
-- [ ] Traduire en en/es/ar/ko l'interface des parcours guidés (le contenu des parcours reste en français tant qu'il n'est pas traduit dans l'administration).
+- [x] Interface des parcours guidés traduite en en/es/ar/ko.
+- [ ] Traduire le CONTENU des parcours (titres, étapes) dans l'administration, en commençant par l'arabe et le coréen (relecteurs natifs).
 - [ ] Parcours « documents » (selon la décision 3) et « Vikunja » plus détaillé (nom du projet de relecture à confirmer).
 - [x] Test d'inscription dans un navigateur : écrit (`flakeops`, branche `ux/test-inscription-navigateur`, `scripts/nonreg/inscription-navigateur.py`, page `docs/INSCRIPTION-NAVIGATEUR-TEST.md`). **Non vérifié, jamais lancé** ; à fusionner et lancer par l'administration. *Admin / Chris*
 - [ ] Doublons d'inscription : message qui oriente vers la connexion sans bloquer (une personne peut avoir un homonyme).

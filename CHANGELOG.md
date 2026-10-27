@@ -5,6 +5,9 @@ Changements notables de `www.lesgrandsvoisins.com` (voisinternet), branche de tr
 ## [Unreleased]
 ### Added
 - **Parcours guidés** (`/account/parcours/`) : petites missions pédagogiques (étapes cochables ou détectées d'après le compte, « Pourquoi ? » dépliable, barre de progression, félicitations), éditables et traduisibles dans l'administration (`Mission`, `MissionStep`, `StepCompletion`). Trois parcours d'exemple : premiers pas, boîte courriel, relecture des traductions arabe et coréen via Vikunja. Entrée « Parcours guidés » dans le menu.
+### Fixed
+- En arabe (droite à gauche), les groupes de chiffres du numéro de compte anonyme s'affichaient à l'envers : le numéro est maintenant toujours lu de gauche à droite.
+- Interface des parcours guidés traduite en en/es/ar/ko (le contenu des parcours reste en français tant qu'il n'est pas traduit dans l'administration).
 ### Changed
 - Test d'inscription dans un navigateur écrit côté `flakeops` (branche `ux/test-inscription-navigateur`, non vérifié, jamais lancé).
 - Taches décoratives de l'accueil atténuées sur petit écran (contraste du texte d'introduction).

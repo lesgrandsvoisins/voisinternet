@@ -384,6 +384,8 @@ class AnonymousAccountTests(Base):
         for _ in range(2):
             page = self.client.get(reverse("core:home"))
             self.assertContains(page, "Votre numéro de compte anonyme")
+            # Les chiffres se lisent toujours de gauche à droite, même dans une langue RTL (arabe).
+            self.assertContains(page, 'id="number-banner-code" dir="ltr"')
         download = self.client.get(reverse("core:download_number"))
         self.assertEqual(download.status_code, 200)
         self.assertIn("attachment", download["Content-Disposition"])

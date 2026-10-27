@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-27 23:42+0100\n"
+"POT-Creation-Date: 2026-10-28 00:08+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,6 +60,7 @@ msgid "Métadonnées héritées (import .qmd)"
 msgstr ""
 
 #: cms/models.py:71 cms/models.py:144 cms/models.py:886 core/models.py:460
+#: core/models.py:655 core/models.py:685
 msgid "titre"
 msgstr "العنوان"
 
@@ -423,7 +424,8 @@ msgstr "الدليل"
 #: core/templates/core/fiche_modifier.html:7
 #: core/templates/core/group_page.html:7 core/templates/core/mes_dons.html:7
 #: core/templates/core/mes_evenements.html:7
-#: core/templates/core/mes_fiches.html:7
+#: core/templates/core/mes_fiches.html:7 core/templates/core/parcours.html:7
+#: core/templates/core/parcours_detail.html:7
 #: core/templates/core/partials/page_head.html:3
 #: core/templates/core/search.html:7 core/templates/core/tag_detail.html:7
 #: core/templates/core/tag_list.html:7
@@ -447,7 +449,8 @@ msgstr "مسار التنقل"
 #: core/templates/core/fiche_modifier.html:9
 #: core/templates/core/group_page.html:9 core/templates/core/mes_dons.html:9
 #: core/templates/core/mes_evenements.html:9
-#: core/templates/core/mes_fiches.html:9
+#: core/templates/core/mes_fiches.html:9 core/templates/core/parcours.html:9
+#: core/templates/core/parcours_detail.html:9
 #: core/templates/core/partials/page_head.html:5
 #: core/templates/core/search.html:9 core/templates/core/tag_detail.html:9
 #: core/templates/core/tag_list.html:9
@@ -775,7 +778,7 @@ msgstr "الفئة"
 msgid "Mise en avant"
 msgstr "مميز"
 
-#: core/forms.py:28 core/menu.py:86
+#: core/forms.py:28 core/menu.py:96
 msgid "Contact"
 msgstr "اتصال"
 
@@ -868,7 +871,7 @@ msgstr "المحاور"
 msgid "à propos"
 msgstr "حول"
 
-#: core/menu.py:56 core/templates/core/account.html:116
+#: core/menu.py:56 core/templates/core/account.html:117
 #: core/templates/core/raccourcis.html:12
 msgid "Mes raccourcis"
 msgstr "اختصاراتي"
@@ -881,7 +884,7 @@ msgstr "الخدمات التي اخترتها، للإضافة أو الإزا�
 msgid "se connecter, créer un compte, retrouver mes raccourcis"
 msgstr "تسجيل الدخول، إنشاء حساب، استعادة اختصاراتي"
 
-#: core/menu.py:66 core/templates/core/account.html:125
+#: core/menu.py:66 core/templates/core/account.html:126
 #: core/templates/core/groupes.html:12
 msgid "Mes groupes"
 msgstr "مجموعاتي"
@@ -890,40 +893,55 @@ msgstr "مجموعاتي"
 msgid "les identités auxquelles vous adhérez, individuelles ou collectives"
 msgstr "الهويات التي تنتمي إليها، فردية أو جماعية"
 
-#: core/menu.py:68 core/menu.py:120
+#: core/menu.py:68 core/menu.py:130
 msgid "un particulier, une association, une entreprise…"
 msgstr "فرد، جمعية، شركة…"
 
-#: core/menu.py:76 core/models.py:630
+#: core/menu.py:76 core/templates/core/parcours.html:3
+#: core/templates/core/parcours.html:10 core/templates/core/parcours.html:13
+#: core/templates/core/parcours_detail.html:3
+#: core/templates/core/parcours_detail.html:10
+msgid "Parcours guidés"
+msgstr "مسارات إرشادية"
+
+#: core/menu.py:77
+msgid "de petites missions pour apprendre à se servir des outils, pas à pas"
+msgstr "مهمّات صغيرة لتعلّم استخدام الأدوات خطوة بخطوة"
+
+#: core/menu.py:78
+msgid "courriel, relecture, premiers pas : une étape à la fois"
+msgstr "البريد، المراجعة، الخطوات الأولى: خطوة واحدة في كل مرة"
+
+#: core/menu.py:86 core/models.py:630
 msgid "Association"
 msgstr "الجمعية"
 
-#: core/menu.py:77
+#: core/menu.py:87
 msgid "une conscience collective, l'association coopérative"
 msgstr "وعي جماعي، الجمعية التعاونية"
 
-#: core/menu.py:78
+#: core/menu.py:88
 msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "النظام الأساسي، الحوكمة، الحسابات: كل شيء علني"
 
-#: core/menu.py:87
+#: core/menu.py:97
 msgid "une question, un problème : écrivez-nous"
 msgstr "سؤال، مشكلة: راسلونا"
 
-#: core/menu.py:88
+#: core/menu.py:98
 msgid "un voisin vous répond, pas un robot"
 msgstr "يجيبك جار، وليس روبوتًا"
 
-#: core/menu.py:96
+#: core/menu.py:106
 msgid "Dons"
 msgstr "التبرعات"
 
-#: core/menu.py:97
+#: core/menu.py:107
 msgid ""
 "du temps, un don financier, ou du matériel : sans rien attendre en retour"
 msgstr "الوقت، أو تبرع مالي، أو معدات: دون انتظار أي مقابل"
 
-#: core/menu.py:99
+#: core/menu.py:109
 #, fuzzy
 #| msgid "donner du temps, faire un don, ou donner du matériel"
 msgid ""
@@ -931,7 +949,7 @@ msgid ""
 "du matériel"
 msgstr "تقديم الوقت، أو التبرع ماليًا، أو التبرع بمعدات"
 
-#: core/menu.py:108 core/templates/core/base.html:139
+#: core/menu.py:118 core/templates/core/base.html:139
 #: core/templates/core/event_detail.html:3
 #: core/templates/core/event_detail.html:10 core/templates/core/home.html:49
 #: core/templates/core/icons/agenda-svg.html:3
@@ -940,15 +958,15 @@ msgstr "تقديم الوقت، أو التبرع ماليًا، أو التبر
 msgid "Agenda"
 msgstr "الأجندة"
 
-#: core/menu.py:109
+#: core/menu.py:119
 msgid "les rendez-vous collectifs, en ligne ou en présence"
 msgstr "لقاءات جماعية، عبر الإنترنت أو حضوريًا"
 
-#: core/menu.py:110
+#: core/menu.py:120
 msgid "les conseils des voisins, deux séances pour un même ordre du jour"
 msgstr "Conseils des Voisins، جلستان لنفس جدول الأعمال"
 
-#: core/menu.py:118 core/templates/core/annuaire.html:4
+#: core/menu.py:128 core/templates/core/annuaire.html:4
 #: core/templates/core/base.html:145
 #: core/templates/core/directory_entry.html:10 core/templates/core/home.html:41
 #: core/templates/core/home.html:138
@@ -958,11 +976,11 @@ msgstr "Conseils des Voisins، جلستان لنفس جدول الأعمال"
 msgid "Annuaire"
 msgstr "الدليل"
 
-#: core/menu.py:119
+#: core/menu.py:129
 msgid "qui fait partie de la communauté, et comment les joindre"
 msgstr "من ينتمي إلى المجتمع، وكيفية التواصل معه"
 
-#: core/menu.py:128 core/templates/core/base.html:188
+#: core/menu.py:138 core/templates/core/base.html:188
 #: core/templates/core/home.html:45 core/templates/core/home.html:108
 #: core/templates/core/icons/blog-svg.html:3
 #: core/templates/core/icons/blog-svg.html:7
@@ -970,34 +988,34 @@ msgstr "من ينتمي إلى المجتمع، وكيفية التواصل مع
 msgid "Blog"
 msgstr "المدونة"
 
-#: core/menu.py:129
+#: core/menu.py:139
 msgid "le blog couvre le civisme, les arts plastiques et le numérique"
 msgstr "تغطي المدونة الالتزام المدني والفنون التشكيلية والرقمي"
 
-#: core/menu.py:130
+#: core/menu.py:140
 msgid "les nouvelles et les tribunes des adhérents"
 msgstr "أخبار ومقالات رأي الأعضاء"
 
-#: core/menu.py:138 core/templates/core/base.html:193
+#: core/menu.py:148 core/templates/core/base.html:193
 #: core/templates/core/home.html:166 core/templates/core/icons/wiki-svg.html:3
 #: core/templates/core/icons/wiki-svg.html:7
 #: core/templates/core/search.html:114
 msgid "Wiki"
 msgstr "ويكي"
 
-#: core/menu.py:139
+#: core/menu.py:149
 msgid "le guide sur comment utiliser nos outils"
 msgstr "الدليل حول كيفية استخدام أدواتنا"
 
-#: core/menu.py:140
+#: core/menu.py:150
 msgid "pas à pas, du premier serveur aux sauvegardes"
 msgstr "خطوة بخطوة، من أول خادم إلى النسخ الاحتياطي"
 
-#: core/menu.py:148
+#: core/menu.py:158
 msgid "Civisme"
 msgstr "الالتزام المدني"
 
-#: core/menu.py:150
+#: core/menu.py:160
 msgid ""
 "Profession d'empathie nationale, prix d'excellence en service public et en "
 "travail social"
@@ -1005,35 +1023,35 @@ msgstr ""
 "Profession d'Empathie Nationale، جائزة التميز في الخدمة العامة والعمل "
 "الاجتماعي"
 
-#: core/menu.py:152
+#: core/menu.py:162
 #, fuzzy
 #| msgid "s'engager pour l'intérêt général, entre voisins"
 msgid "s'engager pour l'intérêt général, entre voisins et associations"
 msgstr "الانخراط من أجل المصلحة العامة، بين الجيران"
 
-#: core/menu.py:160
+#: core/menu.py:170
 msgid "Arts Plastiques"
 msgstr "الفنون التشكيلية"
 
-#: core/menu.py:161
+#: core/menu.py:171
 msgid "Galléries d'art dans des lieux insolites et soutien aux artistes"
 msgstr "معارض فنية في أماكن غير مألوفة، ودعم للفنانين"
 
-#: core/menu.py:162
+#: core/menu.py:172
 msgid "transformer tout lieu en galerie d'art hybride"
 msgstr "تحويل أي مكان إلى معرض فني هجين"
 
-#: core/menu.py:170
+#: core/menu.py:180
 msgid "Numérique"
 msgstr "الرقمي"
 
-#: core/menu.py:171
+#: core/menu.py:181
 #, fuzzy
 #| msgid "Salles de sociabilité numérique et Voisinternet"
 msgid "Salles de sociabilité numérique et lesgrandsvoisins.com"
 msgstr "قاعات التواصل الرقمي، وlesgrandsvoisins.com"
 
-#: core/menu.py:173
+#: core/menu.py:183
 #, fuzzy
 #| msgid "matériel reconditionné et compétences partagées"
 msgid ""
@@ -1053,7 +1071,7 @@ msgstr "على سبيل المثال: «جمعية»."
 msgid "qui est concerné"
 msgstr "من يخص هذا"
 
-#: core/models.py:37 core/models.py:72
+#: core/models.py:37 core/models.py:72 core/models.py:656
 msgid "en une phrase"
 msgstr "بجملة واحدة"
 
@@ -1072,7 +1090,7 @@ msgid ""
 msgstr "للجهات العامة والاجتماعية: تقترح الصفحة شراكة، دون زر «إضافة»."
 
 #: core/models.py:43 core/models.py:58 core/models.py:100 core/models.py:223
-#: core/models.py:343 core/models.py:390
+#: core/models.py:343 core/models.py:390 core/models.py:659
 msgid "ordre"
 msgstr "الترتيب"
 
@@ -1118,7 +1136,7 @@ msgstr "الفئة"
 msgid "Laisser vide si le service s'adresse à tout le monde."
 msgstr "اتركه فارغًا إذا كانت الخدمة موجهة للجميع."
 
-#: core/models.py:91
+#: core/models.py:91 core/models.py:660
 msgid "proposé"
 msgstr "متاح"
 
@@ -1679,6 +1697,126 @@ msgstr "يدعم منذ"
 msgid "donateur"
 msgstr "متبرع"
 
+#: core/models.py:657
+msgid "emoji"
+msgstr ""
+
+#: core/models.py:658
+msgid "durée estimée (minutes)"
+msgstr ""
+
+#: core/models.py:664
+msgid "parcours guidé"
+msgstr ""
+
+#: core/models.py:665
+msgid "parcours guidés"
+msgstr ""
+
+#: core/models.py:675
+#, fuzzy
+#| msgid "ordre personnel"
+msgid "à cocher par la personne"
+msgstr "الترتيب الشخصي"
+
+#: core/models.py:676
+#, fuzzy
+#| msgid "J'ai déjà un compte"
+msgid "détectée : a un compte"
+msgstr "لدي حساب بالفعل"
+
+#: core/models.py:677
+msgid "détectée : compte nommé (connecté)"
+msgstr ""
+
+#: core/models.py:678
+#, fuzzy
+#| msgid "Ajouter %(name)s à mes raccourcis"
+msgid "détectée : a un raccourci"
+msgstr "إضافة %(name)s إلى اختصاراتي"
+
+#: core/models.py:679
+msgid "détectée : a rejoint un groupe"
+msgstr ""
+
+#: core/models.py:680
+#, fuzzy
+#| msgid "Mes fiches dans l'annuaire"
+msgid "détectée : a une fiche d'annuaire"
+msgstr "بطاقاتي في الدليل"
+
+#: core/models.py:681
+#, fuzzy
+#| msgid "évènement"
+msgid "détectée : gère un évènement"
+msgstr "فعالية"
+
+#: core/models.py:683
+#, fuzzy
+#| msgid "raccourci"
+msgid "parcours"
+msgstr "اختصار"
+
+#: core/models.py:684
+#, fuzzy
+#| msgid "Association"
+msgid "position"
+msgstr "الجمعية"
+
+#: core/models.py:686
+#, fuzzy
+#| msgid "Sommaire"
+msgid "comment faire"
+msgstr "الفهرس"
+
+#: core/models.py:686
+msgid "Markdown."
+msgstr ""
+
+#: core/models.py:688
+msgid "pourquoi"
+msgstr ""
+
+#: core/models.py:689
+msgid "Ce que la personne apprend en le faisant. Markdown."
+msgstr ""
+
+#: core/models.py:692
+msgid "lien"
+msgstr ""
+
+#: core/models.py:693
+msgid "Adresse complète, ou chemin du site (/ar/account/)."
+msgstr ""
+
+#: core/models.py:695
+#, fuzzy
+#| msgid "site ou lien"
+msgid "texte du lien"
+msgstr "موقع أو رابط"
+
+#: core/models.py:696
+#, fuzzy
+#| msgid "description"
+msgid "détection"
+msgstr "الوصف"
+
+#: core/models.py:700
+msgid "étape de parcours"
+msgstr ""
+
+#: core/models.py:701
+msgid "étapes de parcours"
+msgstr ""
+
+#: core/models.py:728
+msgid "étape accomplie"
+msgstr ""
+
+#: core/models.py:729
+msgid "étapes accomplies"
+msgstr ""
+
 #: core/templates/core/account.html:4
 #, fuzzy
 #| msgid "mon Compte — Voisinternet"
@@ -1686,7 +1824,7 @@ msgid "mon Compte — lesgrandsvoisins.com"
 msgstr "حسابي — Voisinternet"
 
 #: core/templates/core/account.html:14 core/templates/core/account.html:17
-#: core/templates/core/account.html:81 core/templates/core/groupes.html:7
+#: core/templates/core/account.html:82 core/templates/core/groupes.html:7
 #: core/templates/core/home.html:24 core/templates/core/raccourcis.html:7
 msgid "Mon compte"
 msgstr "حسابي"
@@ -1720,55 +1858,60 @@ msgid "%(done)s sur %(total)s faits"
 msgstr "تم إنجاز %(done)s من %(total)s"
 
 #: core/templates/core/account.html:44
+#: core/templates/core/parcours_detail.html:39
 msgid "Fait :"
 msgstr "تم:"
 
-#: core/templates/core/account.html:55
+#: core/templates/core/account.html:52
+msgid "Voir tous les parcours guidés"
+msgstr "عرض كل المسارات الإرشادية"
+
+#: core/templates/core/account.html:56
 #, fuzzy
 #| msgid "Options de mon compte"
 msgid "Aperçu de mon compte"
 msgstr "خيارات حسابي"
 
-#: core/templates/core/account.html:58
+#: core/templates/core/account.html:59
 #, fuzzy
 #| msgid "raccourci"
 msgid "Raccourcis"
 msgstr "اختصار"
 
-#: core/templates/core/account.html:62
+#: core/templates/core/account.html:63
 #, fuzzy
 #| msgid "Mes groupes"
 msgid "Groupes"
 msgstr "مجموعاتي"
 
-#: core/templates/core/account.html:66
+#: core/templates/core/account.html:67
 #, fuzzy
 #| msgid "Mes fiches dans l'annuaire"
 msgid "Fiches annuaire"
 msgstr "بطاقاتي في الدليل"
 
-#: core/templates/core/account.html:70
+#: core/templates/core/account.html:71
 #: core/templates/core/administration.html:113
 #, fuzzy
 #| msgid "évènements"
 msgid "Évènements"
 msgstr "الفعاليات"
 
-#: core/templates/core/account.html:75
+#: core/templates/core/account.html:76
 #, fuzzy
 #| msgid "contributions financières"
 msgid "Contributions"
 msgstr "مساهمات مالية"
 
-#: core/templates/core/account.html:84
+#: core/templates/core/account.html:85
 msgid "Connecté"
 msgstr "متصل"
 
-#: core/templates/core/account.html:87
+#: core/templates/core/account.html:88
 msgid "Compte anonyme"
 msgstr "حساب مجهول"
 
-#: core/templates/core/account.html:93
+#: core/templates/core/account.html:94
 #: core/templates/core/administration.html:10
 #: core/templates/core/administration.html:13
 #, fuzzy
@@ -1776,113 +1919,112 @@ msgstr "حساب مجهول"
 msgid "Administration"
 msgstr "الجمعية"
 
-#: core/templates/core/account.html:99
+#: core/templates/core/account.html:100
 #: core/templates/core/partials/account_panel_body.html:51
 msgid "Se déconnecter"
 msgstr "تسجيل الخروج"
 
-#: core/templates/core/account.html:105
+#: core/templates/core/account.html:106
 msgid "Rattacher à mon compte Grands Voisins"
 msgstr "الربط بحساب Grands Voisins الخاص بي"
 
-#: core/templates/core/account.html:109
+#: core/templates/core/account.html:110
 #: core/templates/core/partials/account_panel_body.html:58
 msgid "Fermer ce compte sur cet appareil"
 msgstr "إغلاق هذا الحساب على هذا الجهاز"
 
-#: core/templates/core/account.html:119
+#: core/templates/core/account.html:120
 #, fuzzy
 #| msgid "Ajouter %(name)s à mes raccourcis"
 msgid "Ajouter un raccourci"
 msgstr "إضافة %(name)s إلى اختصاراتي"
 
-#: core/templates/core/account.html:128 core/views.py:378
+#: core/templates/core/account.html:129 core/views.py:379
 msgid "Rejoindre un groupe"
 msgstr "انضم إلى مجموعة"
 
-#: core/templates/core/account.html:134 core/templates/core/mes_fiches.html:14
+#: core/templates/core/account.html:135 core/templates/core/mes_fiches.html:14
 msgid "Mes fiches dans l'annuaire"
 msgstr "بطاقاتي في الدليل"
 
-#: core/templates/core/account.html:137 core/templates/core/mes_fiches.html:35
+#: core/templates/core/account.html:138 core/templates/core/mes_fiches.html:35
 msgid "Créer une fiche"
 msgstr "إنشاء بطاقة"
 
-#: core/templates/core/account.html:143
+#: core/templates/core/account.html:144
 #, fuzzy
 #| msgid "Mes fiches dans l'annuaire"
 msgid "Mes évènements dans l'agenda"
 msgstr "بطاقاتي في الدليل"
 
-#: core/templates/core/account.html:146
+#: core/templates/core/account.html:147
 #: core/templates/core/mes_evenements.html:21
 #, fuzzy
 #| msgid "évènement"
 msgid "Créer un évènement"
 msgstr "فعالية"
 
-#: core/templates/core/account.html:153
+#: core/templates/core/account.html:154
 msgid "Mon profil"
 msgstr "ملفي الشخصي"
 
-#: core/templates/core/account.html:156
+#: core/templates/core/account.html:157
 msgid "Géré par votre compte unique Grands Voisins"
 msgstr "تتم إدارته عبر حسابك الموحّد لدى Grands Voisins"
 
-#: core/templates/core/account.html:162
-#| msgid "identifiant source"
+#: core/templates/core/account.html:163
 msgid "Identifiant de connexion"
 msgstr "اسم المستخدم لتسجيل الدخول"
 
-#: core/templates/core/account.html:166
+#: core/templates/core/account.html:167
 msgid "Nom"
 msgstr "الاسم"
 
-#: core/templates/core/account.html:166 core/templates/core/account.html:169
+#: core/templates/core/account.html:167 core/templates/core/account.html:170
 msgid "Non renseigné"
 msgstr "غير محدد"
 
-#: core/templates/core/account.html:169
+#: core/templates/core/account.html:170
 msgid "Courriel"
 msgstr "البريد الإلكتروني"
 
-#: core/templates/core/account.html:174
+#: core/templates/core/account.html:175
 msgid "Modifier mon profil"
 msgstr "تعديل ملفي الشخصي"
 
-#: core/templates/core/account.html:182 core/templates/core/mes_dons.html:11
+#: core/templates/core/account.html:183 core/templates/core/mes_dons.html:11
 #: core/templates/core/mes_dons.html:14
 #, fuzzy
 #| msgid "Mes groupes"
 msgid "Mes dons"
 msgstr "مجموعاتي"
 
-#: core/templates/core/account.html:191 core/templates/core/mes_dons.html:30
+#: core/templates/core/account.html:192 core/templates/core/mes_dons.html:30
 msgid "déductible fiscalement"
 msgstr "قابل للخصم الضريبي"
 
-#: core/templates/core/account.html:195 core/templates/core/mes_dons.html:34
+#: core/templates/core/account.html:196 core/templates/core/mes_dons.html:34
 #, fuzzy
 #| msgid "Statuts de l'association"
 msgid "en attente de validation"
 msgstr "النظام الأساسي للجمعية"
 
-#: core/templates/core/account.html:202 core/templates/core/mes_dons.html:41
+#: core/templates/core/account.html:203 core/templates/core/mes_dons.html:41
 msgid "Aucune contribution enregistrée pour l'instant."
 msgstr "لا توجد مساهمة مسجلة حتى الآن."
 
-#: core/templates/core/account.html:226 core/templates/core/mes_dons.html:47
+#: core/templates/core/account.html:227 core/templates/core/mes_dons.html:47
 #: core/templates/core/mes_dons.html:71
 msgid "Faire un don"
 msgstr "التبرع"
 
-#: core/templates/core/account.html:233 core/templates/core/account.html:239
+#: core/templates/core/account.html:234 core/templates/core/account.html:240
 #: core/templates/core/home.html:26
 #: core/templates/core/partials/account_panel_body.html:7
 msgid "Créer mon compte"
 msgstr "إنشاء حسابي"
 
-#: core/templates/core/account.html:235
+#: core/templates/core/account.html:236
 msgid ""
 "Un compte unique des Grands Voisins, le même pour tous les outils de "
 "l'association. Il retrouve vos raccourcis, groupes, fiches et évènements sur "
@@ -1892,34 +2034,34 @@ msgstr ""
 "اختصاراتك ومجموعاتك وبطاقاتك وفعالياتك على جميع أجهزتك، ويمكنك استعادة كلمة "
 "المرور عبر البريد الإلكتروني."
 
-#: core/templates/core/account.html:241
+#: core/templates/core/account.html:242
 msgid ""
 "La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
 "serveur."
 msgstr "لم يتم بعد إعداد تسجيل الدخول عبر حساب Grands Voisins على هذا الخادم."
 
-#: core/templates/core/account.html:245
+#: core/templates/core/account.html:246
 #: core/templates/core/partials/account_panel_body.html:9
 msgid "J'ai déjà un compte"
 msgstr "لدي حساب بالفعل"
 
-#: core/templates/core/account.html:246
+#: core/templates/core/account.html:247
 msgid ""
 "Connectez-vous avec le compte que vous utilisez déjà pour les autres outils "
 "des Grands Voisins."
 msgstr ""
 "سجّل الدخول بالحساب الذي تستخدمه بالفعل لأدوات Les Grands Voisins الأخرى."
 
-#: core/templates/core/account.html:249
+#: core/templates/core/account.html:250
 msgid "Se connecter"
 msgstr "تسجيل الدخول"
 
-#: core/templates/core/account.html:253
+#: core/templates/core/account.html:254
 #: core/templates/core/partials/account_panel_body.html:14
 msgid "Rester anonyme"
 msgstr "البقاء مجهولًا"
 
-#: core/templates/core/account.html:255
+#: core/templates/core/account.html:256
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit pour"
 " retrouver vos raccourcis. Sans ce numéro, le compte est perdu : aucun "
@@ -1928,15 +2070,15 @@ msgstr ""
 "رقم من 16 خانة، بلا اسم ولا بريد إلكتروني. دوّنه: يكفي لاستعادة اختصاراتك. "
 "بدون هذا الرقم يضيع الحساب: لا يوجد بريد استرداد."
 
-#: core/templates/core/account.html:259
+#: core/templates/core/account.html:260
 msgid "Créer un compte anonyme"
 msgstr "إنشاء حساب مجهول"
 
-#: core/templates/core/account.html:265
+#: core/templates/core/account.html:266
 msgid "J'ai déjà un numéro"
 msgstr "لدي رقم بالفعل"
 
-#: core/templates/core/account.html:277
+#: core/templates/core/account.html:278
 msgid "Retrouver"
 msgstr "استعادة"
 
@@ -2452,10 +2594,10 @@ msgid "Terminer le paiement par %(name)s"
 msgstr "إتمام الدفع عبر %(name)s"
 
 #: core/templates/core/faire_don_merci.html:33
-#, fuzzy, python-format
+#, python-format
 #| msgid "Monter %(name)s"
 msgid "Continuer sur %(name)s"
-msgstr "رفع %(name)s"
+msgstr "متابعة"
 
 #: core/templates/core/faire_don_merci.html:39
 msgid "Rappel des moyens de don"
@@ -2836,6 +2978,98 @@ msgstr "السجلات التي أتابعها"
 #: core/templates/core/mes_fiches.html:40
 msgid "Créer la fiche"
 msgstr "إنشاء البطاقة"
+
+#: core/templates/core/parcours.html:14
+msgid ""
+"De petites missions, quelques minutes chacune, pour apprendre à se servir des"
+" outils des Grands Voisins. Un pas à la fois, personne n'est jugé."
+msgstr ""
+"مهمّات صغيرة، بضع دقائق لكل منها، لتعلّم استخدام أدوات Les Grands Voisins. "
+"خطوة بعد خطوة ولا أحد يُحاسَب."
+
+#: core/templates/core/parcours.html:26
+#, python-format
+msgid "environ %(m)s min"
+msgstr "حوالي %(m)s دقيقة"
+
+#: core/templates/core/parcours.html:27
+msgid "Terminé ✓"
+msgstr "تم ✓"
+
+#: core/templates/core/parcours.html:27
+#: core/templates/core/parcours_detail.html:17
+#, python-format
+#| msgid "%(done)s sur %(total)s faits"
+msgid "%(done)s sur %(total)s étapes"
+msgstr "%(done)s من %(total)s خطوات"
+
+#: core/templates/core/parcours.html:29
+#: core/templates/core/parcours_detail.html:16
+msgid "Progression"
+msgstr "التقدّم"
+
+#: core/templates/core/parcours.html:31
+msgid "Revoir"
+msgstr "مراجعة"
+
+#: core/templates/core/parcours.html:31
+msgid "Continuer"
+msgstr "متابعة"
+
+#: core/templates/core/parcours.html:31
+msgid "Commencer"
+msgstr "ابدأ"
+
+#: core/templates/core/parcours.html:35
+#| msgid "Aucun raccourci pour l'instant."
+msgid "Aucun parcours pour l'instant."
+msgstr "لا توجد مسارات بعد."
+
+#: core/templates/core/parcours_detail.html:23
+msgid "Bravo, parcours terminé ! 🎉"
+msgstr "أحسنت، اكتمل المسار! 🎉"
+
+#: core/templates/core/parcours_detail.html:24
+msgid ""
+"Vous savez maintenant le faire. N'hésitez pas à montrer à une voisine ou un "
+"voisin : c'est la meilleure façon de s'en souvenir."
+msgstr "أصبحت تعرف كيف تفعل ذلك. أرِه لجار: إنها أفضل طريقة للتذكّر."
+
+#: core/templates/core/parcours_detail.html:25
+#| msgid "Mes raccourcis"
+msgid "Autres parcours"
+msgstr "مسارات أخرى"
+
+#: core/templates/core/parcours_detail.html:30
+msgid ""
+"Vous pouvez lire le parcours sans compte. Pour cocher vos étapes et garder la"
+" trace de votre avancée,"
+msgstr "يمكنك قراءة المسار دون حساب. لتحديد خطواتك وحفظ تقدّمك،"
+
+#: core/templates/core/parcours_detail.html:31
+#| msgid "Créer un compte anonyme"
+msgid "ouvrez un compte (nommé ou anonyme)"
+msgstr "افتح حسابًا (باسمك أو مجهولًا)"
+
+#: core/templates/core/parcours_detail.html:48
+msgid "Pourquoi ?"
+msgstr "لماذا؟"
+
+#: core/templates/core/parcours_detail.html:56
+msgid "Décocher"
+msgstr "إلغاء التحديد"
+
+#: core/templates/core/parcours_detail.html:56
+msgid "C'est fait"
+msgstr "تم"
+
+#: core/templates/core/parcours_detail.html:60
+msgid "Détecté automatiquement."
+msgstr "تم اكتشافه تلقائيًا."
+
+#: core/templates/core/parcours_detail.html:62
+msgid "Se coche tout seul dès que c'est fait."
+msgstr "يُحدَّد تلقائيًا بمجرد إنجازه."
 
 #: core/templates/core/partials/account_panel_body.html:44
 msgid "Aucun service ajouté pour l'instant."
@@ -3246,20 +3480,20 @@ msgstr "كلمة مفتاحية واحدة تجمع المقالات وسجلا�
 msgid "Aucune étiquette pour l'instant."
 msgstr "لا توجد مجموعة حتى الآن"
 
-#: core/views.py:43
+#: core/views.py:44
 msgid ""
 "Les rendez-vous et les ressources pour s'y retrouver dans la communauté."
 msgstr "المواعيد والموارد للاهتداء داخل المجتمع."
 
-#: core/views.py:44
+#: core/views.py:45
 msgid "Nos trois pôles d'action, portés ensemble par les bénévoles."
 msgstr "مجالاتنا الثلاثة للعمل، يقودها المتطوعون معًا."
 
-#: core/views.py:45
+#: core/views.py:46
 msgid "Nous rejoindre, nous soutenir, nous contacter."
 msgstr "انضم إلينا، ادعمنا، تواصل معنا."
 
-#: core/views.py:303
+#: core/views.py:304
 #, fuzzy
 #| msgid ""
 #| "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
@@ -3267,13 +3501,13 @@ msgid ""
 "Trop de messages envoyés récemment depuis cet appareil. Réessayez plus tard."
 msgstr "عدد كبير جدًا من المحاولات من هذا الجهاز. أعد المحاولة بعد ربع ساعة."
 
-#: core/views.py:312
+#: core/views.py:313
 #, fuzzy, python-format
 #| msgid "Mes groupes — Voisinternet"
 msgid "Message via lesgrandsvoisins.com de %(name)s"
 msgstr "مجموعاتي — Voisinternet"
 
-#: core/views.py:320
+#: core/views.py:321
 #, python-format
 msgid ""
 "Nom : %(name)s\n"
@@ -3286,140 +3520,140 @@ msgstr ""
 "\n"
 "%(message)s"
 
-#: core/views.py:322
+#: core/views.py:323
 msgid "(non renseigné)"
 msgstr "(غير محدد)"
 
-#: core/views.py:357 core/views.py:595
+#: core/views.py:358 core/views.py:596
 #, python-format
 msgid "Message envoyé à %(name)s."
 msgstr "تم إرسال الرسالة إلى %(name)s."
 
-#: core/views.py:361 core/views.py:599
+#: core/views.py:362 core/views.py:600
 msgid ""
 "Votre message a été enregistré, mais son envoi par e-mail a échoué. Réessayez"
 " plus tard."
 msgstr ""
 "تم تسجيل رسالتك، لكن إرسالها بالبريد الإلكتروني فشل. أعد المحاولة لاحقًا."
 
-#: core/views.py:376
+#: core/views.py:377
 msgid "Ajouter un raccourci vers un outil"
 msgstr "أضف اختصارًا إلى أداة"
 
-#: core/views.py:380
+#: core/views.py:381
 msgid "Présenter votre activité dans l'annuaire"
 msgstr "قدّم نشاطك في الدليل"
 
-#: core/views.py:385
+#: core/views.py:386
 msgid "Créer un compte nommé pour ne jamais perdre l'accès"
 msgstr "أنشئ حسابًا باسمك كي لا تفقد الوصول أبدًا"
 
-#: core/views.py:395
+#: core/views.py:396
 msgid ""
 "La connexion n'a pas abouti. Réessayez, ou continuez avec un compte anonyme."
 msgstr "لم يكتمل تسجيل الدخول. أعد المحاولة أو تابع بحساب مجهول."
 
-#: core/views.py:452
+#: core/views.py:453
 #, fuzzy
 #| msgid "Aucune contribution enregistrée pour l'instant."
 msgid "Merci ! Votre contribution a été enregistrée."
 msgstr "لا توجد مساهمة مسجلة حتى الآن."
 
-#: core/views.py:454
+#: core/views.py:455
 msgid "Le formulaire de don contient une erreur : montant ou date invalide."
 msgstr "يحتوي نموذج التبرع على خطأ: المبلغ أو التاريخ غير صالح."
 
-#: core/views.py:619
+#: core/views.py:620
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cette fiche."
 msgstr ""
 "تم إرسال الطلب: سيراجعه أحد المسؤولين قبل أن يجعلك مسؤولاً عن هذا السجل."
 
-#: core/views.py:622
+#: core/views.py:623
 msgid "Vous avez déjà demandé à être responsable de cette fiche."
 msgstr "لقد سبق أن طلبت تولي مسؤولية هذا السجل."
 
-#: core/views.py:640
+#: core/views.py:641
 msgid ""
 "Connectez-vous pour finaliser votre demande de responsabilité de cette fiche."
 msgstr "سجّل الدخول لإتمام طلب تولي مسؤولية هذا السجل."
 
-#: core/views.py:664
+#: core/views.py:665
 msgid "Fiche créée."
 msgstr "تم إنشاء البطاقة."
 
-#: core/views.py:693
+#: core/views.py:694
 msgid "Fiche mise à jour."
 msgstr "تم تحديث البطاقة."
 
-#: core/views.py:705
+#: core/views.py:706
 msgid "Fiche supprimée."
 msgstr "تم حذف البطاقة."
 
-#: core/views.py:717
+#: core/views.py:718
 #, python-format
 msgid "Abonnement à « %(name)s » retiré."
 msgstr "تمت إزالة الاشتراك في «%(name)s»."
 
-#: core/views.py:720
+#: core/views.py:721
 #, python-format
 msgid "Abonné à « %(name)s »."
 msgstr "تم الاشتراك في «%(name)s»."
 
-#: core/views.py:746
+#: core/views.py:747
 #, fuzzy
 #| msgid "Fiche créée."
 msgid "Fiche dépubliée."
 msgstr "تم إنشاء البطاقة."
 
-#: core/views.py:746
+#: core/views.py:747
 msgid "Demande de publication annulée."
 msgstr "تم إلغاء طلب النشر."
 
-#: core/views.py:752
+#: core/views.py:753
 msgid ""
 "Fiche envoyée pour validation : elle sera publique une fois validée par un "
 "administrateur."
 msgstr "تم إرسال السجل للموافقة: سيصبح عامًا بمجرد موافقة أحد المسؤولين عليه."
 
-#: core/views.py:807
+#: core/views.py:808
 #, python-format
 msgid "Intérêt enregistré pour « %(title)s »."
 msgstr "تم تسجيل الاهتمام بـ«%(title)s»."
 
-#: core/views.py:810
+#: core/views.py:811
 #, python-format
 msgid "Intérêt retiré pour « %(title)s »."
 msgstr "تم إلغاء الاهتمام بـ«%(title)s»."
 
-#: core/views.py:814
+#: core/views.py:815
 #, python-format
 msgid "Intention mise à jour pour « %(title)s »."
 msgstr "تم تحديث النية بخصوص «%(title)s»."
 
-#: core/views.py:834
+#: core/views.py:835
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cet évènement."
 msgstr ""
 "تم إرسال الطلب: سيراجعه أحد المسؤولين قبل أن يجعلك مسؤولاً عن هذه الفعالية."
 
-#: core/views.py:837
+#: core/views.py:838
 msgid "Vous avez déjà demandé à gérer cet évènement."
 msgstr "لقد سبق أن طلبت إدارة هذه الفعالية."
 
-#: core/views.py:852
+#: core/views.py:853
 msgid ""
 "Connectez-vous pour finaliser votre demande de gestion de cet évènement."
 msgstr "سجّل الدخول لإتمام طلب إدارة هذه الفعالية."
 
-#: core/views.py:877
+#: core/views.py:878
 #, python-format
 msgid "Évènement à publier : %(title)s"
 msgstr "فعالية بانتظار النشر: %(title)s"
 
-#: core/views.py:878
+#: core/views.py:879
 #, python-format
 msgid ""
 "Un évènement attend votre validation dans l'agenda.\n"
@@ -3434,17 +3668,17 @@ msgstr ""
 "\n"
 "راجعوها وانشروها: %(url)s"
 
-#: core/views.py:893
+#: core/views.py:894
 #, python-format
 msgid "Votre évènement est publié : %(title)s"
 msgstr "تم نشر فعاليتك: %(title)s"
 
-#: core/views.py:894
+#: core/views.py:895
 #, python-format
 msgid "« %(title)s » est maintenant visible dans l'agenda : %(url)s"
 msgstr "«%(title)s» أصبحت ظاهرة الآن في الأجندة: %(url)s"
 
-#: core/views.py:922
+#: core/views.py:923
 msgid ""
 "Évènement enregistré. Il reste visible de vous seul·e jusqu'à sa publication "
 "par le groupe « Administration », prévenu par courriel."
@@ -3452,30 +3686,30 @@ msgstr ""
 "تم حفظ الفعالية. لا يراها غيرك حتى تنشرها مجموعة «الإدارة» التي أُبلغت "
 "بالبريد الإلكتروني."
 
-#: core/views.py:943
+#: core/views.py:944
 #, fuzzy
 #| msgid "Fiche mise à jour."
 msgid "Évènement mis à jour."
 msgstr "تم تحديث البطاقة."
 
-#: core/views.py:955
+#: core/views.py:956
 #, fuzzy
 #| msgid "Évènements passés"
 msgid "Évènement supprimé."
 msgstr "الفعاليات الماضية"
 
-#: core/views.py:1009
+#: core/views.py:1010
 msgid "Compte anonyme créé."
 msgstr "تم إنشاء حساب مجهول."
 
-#: core/views.py:1017
+#: core/views.py:1018
 msgid ""
 "Merci. Gardez ce numéro précieusement : il est la seule façon de retrouver ce"
 " compte."
 msgstr ""
 "شكرًا. احتفظ بهذا الرقم جيدًا: إنه الطريقة الوحيدة لاستعادة هذا الحساب."
 
-#: core/views.py:1027
+#: core/views.py:1028
 #, python-format
 msgid ""
 "Numéro de compte anonyme lesgrandsvoisins.com : %(number)s\n"
@@ -3484,39 +3718,39 @@ msgstr ""
 "رقم الحساب المجهول على lesgrandsvoisins.com: %(number)s\n"
 "يكفي وحده لاستعادة اختصاراتك على جهاز آخر. نحتفظ ببصمته فقط ولن نتمكن من إعادته إليك.\n"
 
-#: core/views.py:1040
+#: core/views.py:1041
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "عدد كبير جدًا من المحاولات من هذا الجهاز. أعد المحاولة بعد ربع ساعة."
 
-#: core/views.py:1044
+#: core/views.py:1045
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "لا يوجد حساب مطابق لهذا الرقم. تحقق من الخانات الـ16."
 
-#: core/views.py:1047
+#: core/views.py:1048
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "تم العثور على الحساب. عادت اختصاراتك."
 
-#: core/views.py:1054
+#: core/views.py:1055
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
 msgstr "لم يعد هذا الحساب مفتوحًا على هذا الجهاز. رقمك يتيح لك استعادته."
 
-#: core/views.py:1065
+#: core/views.py:1066
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "انضمت اختصاراتك المجهولة إلى حسابك."
 
-#: core/views.py:1081
+#: core/views.py:1082
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "تمت إزالة «%(name)s» من اختصاراتك."
 
-#: core/views.py:1088
+#: core/views.py:1089
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "تمت إضافة «%(name)s» إلى اختصاراتك."
 
-#: core/views.py:1091
+#: core/views.py:1092
 #, fuzzy, python-format
 #| msgid "« %(name)s » ajouté à vos raccourcis."
 msgid ""
@@ -3524,12 +3758,29 @@ msgid ""
 "administrateur."
 msgstr "تمت إضافة «%(name)s» إلى اختصاراتك."
 
-#: core/views.py:1199
+#: core/views.py:1200
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "تمت إزالة «%(name)s» من مجموعاتك."
 
-#: core/views.py:1203
+#: core/views.py:1204
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "تمت إضافة «%(name)s» إلى مجموعاتك."
+
+#: core/views.py:1425
+msgid ""
+"Pour garder la trace de vos étapes, ouvrez d'abord un compte (nommé ou "
+"anonyme)."
+msgstr "لحفظ خطواتك افتح أولًا حسابًا (باسمك أو مجهولًا)."
+
+#: core/views.py:1435
+#, python-format
+msgid "Bravo ! Parcours « %(title)s » terminé. 🎉"
+msgstr "أحسنت! اكتمل المسار «%(title)s». 🎉"
+
+#: core/views.py:1437
+#, python-format
+#| msgid "Évènement à publier : %(title)s"
+msgid "Étape faite : %(title)s"
+msgstr "تمت الخطوة: %(title)s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-27 23:42+0100\n"
+"POT-Creation-Date: 2026-10-28 00:08+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,6 +60,7 @@ msgid "Métadonnées héritées (import .qmd)"
 msgstr ""
 
 #: cms/models.py:71 cms/models.py:144 cms/models.py:886 core/models.py:460
+#: core/models.py:655 core/models.py:685
 msgid "titre"
 msgstr "제목"
 
@@ -422,7 +423,8 @@ msgstr "디렉토리"
 #: core/templates/core/fiche_modifier.html:7
 #: core/templates/core/group_page.html:7 core/templates/core/mes_dons.html:7
 #: core/templates/core/mes_evenements.html:7
-#: core/templates/core/mes_fiches.html:7
+#: core/templates/core/mes_fiches.html:7 core/templates/core/parcours.html:7
+#: core/templates/core/parcours_detail.html:7
 #: core/templates/core/partials/page_head.html:3
 #: core/templates/core/search.html:7 core/templates/core/tag_detail.html:7
 #: core/templates/core/tag_list.html:7
@@ -446,7 +448,8 @@ msgstr "이동 경로"
 #: core/templates/core/fiche_modifier.html:9
 #: core/templates/core/group_page.html:9 core/templates/core/mes_dons.html:9
 #: core/templates/core/mes_evenements.html:9
-#: core/templates/core/mes_fiches.html:9
+#: core/templates/core/mes_fiches.html:9 core/templates/core/parcours.html:9
+#: core/templates/core/parcours_detail.html:9
 #: core/templates/core/partials/page_head.html:5
 #: core/templates/core/search.html:9 core/templates/core/tag_detail.html:9
 #: core/templates/core/tag_list.html:9
@@ -763,7 +766,7 @@ msgstr "카테고리"
 msgid "Mise en avant"
 msgstr "추천"
 
-#: core/forms.py:28 core/menu.py:86
+#: core/forms.py:28 core/menu.py:96
 msgid "Contact"
 msgstr "연락처"
 
@@ -856,7 +859,7 @@ msgstr "분야"
 msgid "à propos"
 msgstr "소개"
 
-#: core/menu.py:56 core/templates/core/account.html:116
+#: core/menu.py:56 core/templates/core/account.html:117
 #: core/templates/core/raccourcis.html:12
 msgid "Mes raccourcis"
 msgstr "내 바로가기"
@@ -869,7 +872,7 @@ msgstr "선택하신 서비스, 추가하거나 제거할 수 있습니다"
 msgid "se connecter, créer un compte, retrouver mes raccourcis"
 msgstr "로그인, 계정 만들기, 바로가기 복구하기"
 
-#: core/menu.py:66 core/templates/core/account.html:125
+#: core/menu.py:66 core/templates/core/account.html:126
 #: core/templates/core/groupes.html:12
 msgid "Mes groupes"
 msgstr "내 그룹"
@@ -878,40 +881,55 @@ msgstr "내 그룹"
 msgid "les identités auxquelles vous adhérez, individuelles ou collectives"
 msgstr "당신이 속한 정체성, 개인 또는 단체"
 
-#: core/menu.py:68 core/menu.py:120
+#: core/menu.py:68 core/menu.py:130
 msgid "un particulier, une association, une entreprise…"
 msgstr "개인, 협회, 기업…"
 
-#: core/menu.py:76 core/models.py:630
+#: core/menu.py:76 core/templates/core/parcours.html:3
+#: core/templates/core/parcours.html:10 core/templates/core/parcours.html:13
+#: core/templates/core/parcours_detail.html:3
+#: core/templates/core/parcours_detail.html:10
+msgid "Parcours guidés"
+msgstr "안내 코스"
+
+#: core/menu.py:77
+msgid "de petites missions pour apprendre à se servir des outils, pas à pas"
+msgstr "도구 사용법을 한 걸음씩 배우는 작은 미션"
+
+#: core/menu.py:78
+msgid "courriel, relecture, premiers pas : une étape à la fois"
+msgstr "이메일, 교정, 첫걸음: 한 번에 한 단계씩"
+
+#: core/menu.py:86 core/models.py:630
 msgid "Association"
 msgstr "협회"
 
-#: core/menu.py:77
+#: core/menu.py:87
 msgid "une conscience collective, l'association coopérative"
 msgstr "집단 의식, 협동조합 협회"
 
-#: core/menu.py:78
+#: core/menu.py:88
 msgid "statuts, gouvernance, comptes : tout est public"
 msgstr "정관, 운영, 회계: 모두 공개됩니다"
 
-#: core/menu.py:87
+#: core/menu.py:97
 msgid "une question, un problème : écrivez-nous"
 msgstr "질문이나 문제가 있으면 저희에게 연락하세요"
 
-#: core/menu.py:88
+#: core/menu.py:98
 msgid "un voisin vous répond, pas un robot"
 msgstr "로봇이 아닌 이웃이 답변합니다"
 
-#: core/menu.py:96
+#: core/menu.py:106
 msgid "Dons"
 msgstr "후원"
 
-#: core/menu.py:97
+#: core/menu.py:107
 msgid ""
 "du temps, un don financier, ou du matériel : sans rien attendre en retour"
 msgstr "시간, 재정 후원, 또는 장비: 대가를 바라지 않고"
 
-#: core/menu.py:99
+#: core/menu.py:109
 #, fuzzy
 #| msgid "donner du temps, faire un don, ou donner du matériel"
 msgid ""
@@ -919,7 +937,7 @@ msgid ""
 "du matériel"
 msgstr "시간 기부, 후원, 또는 장비 기부"
 
-#: core/menu.py:108 core/templates/core/base.html:139
+#: core/menu.py:118 core/templates/core/base.html:139
 #: core/templates/core/event_detail.html:3
 #: core/templates/core/event_detail.html:10 core/templates/core/home.html:49
 #: core/templates/core/icons/agenda-svg.html:3
@@ -928,15 +946,15 @@ msgstr "시간 기부, 후원, 또는 장비 기부"
 msgid "Agenda"
 msgstr "일정"
 
-#: core/menu.py:109
+#: core/menu.py:119
 msgid "les rendez-vous collectifs, en ligne ou en présence"
 msgstr "온라인 또는 대면으로 진행되는 공동 모임"
 
-#: core/menu.py:110
+#: core/menu.py:120
 msgid "les conseils des voisins, deux séances pour un même ordre du jour"
 msgstr "Conseils des Voisins, 동일한 안건을 위한 두 세션"
 
-#: core/menu.py:118 core/templates/core/annuaire.html:4
+#: core/menu.py:128 core/templates/core/annuaire.html:4
 #: core/templates/core/base.html:145
 #: core/templates/core/directory_entry.html:10 core/templates/core/home.html:41
 #: core/templates/core/home.html:138
@@ -946,11 +964,11 @@ msgstr "Conseils des Voisins, 동일한 안건을 위한 두 세션"
 msgid "Annuaire"
 msgstr "디렉토리"
 
-#: core/menu.py:119
+#: core/menu.py:129
 msgid "qui fait partie de la communauté, et comment les joindre"
 msgstr "커뮤니티 구성원과 연락 방법"
 
-#: core/menu.py:128 core/templates/core/base.html:188
+#: core/menu.py:138 core/templates/core/base.html:188
 #: core/templates/core/home.html:45 core/templates/core/home.html:108
 #: core/templates/core/icons/blog-svg.html:3
 #: core/templates/core/icons/blog-svg.html:7
@@ -958,68 +976,68 @@ msgstr "커뮤니티 구성원과 연락 방법"
 msgid "Blog"
 msgstr "블로그"
 
-#: core/menu.py:129
+#: core/menu.py:139
 msgid "le blog couvre le civisme, les arts plastiques et le numérique"
 msgstr "블로그는 시민 참여, 조형 예술, 디지털 분야를 다룹니다"
 
-#: core/menu.py:130
+#: core/menu.py:140
 msgid "les nouvelles et les tribunes des adhérents"
 msgstr "회원 소식 및 기고문"
 
-#: core/menu.py:138 core/templates/core/base.html:193
+#: core/menu.py:148 core/templates/core/base.html:193
 #: core/templates/core/home.html:166 core/templates/core/icons/wiki-svg.html:3
 #: core/templates/core/icons/wiki-svg.html:7
 #: core/templates/core/search.html:114
 msgid "Wiki"
 msgstr "위키"
 
-#: core/menu.py:139
+#: core/menu.py:149
 msgid "le guide sur comment utiliser nos outils"
 msgstr "도구 사용법에 대한 가이드"
 
-#: core/menu.py:140
+#: core/menu.py:150
 msgid "pas à pas, du premier serveur aux sauvegardes"
 msgstr "첫 서버 구축부터 백업까지, 단계별로"
 
-#: core/menu.py:148
+#: core/menu.py:158
 msgid "Civisme"
 msgstr "시민 참여"
 
-#: core/menu.py:150
+#: core/menu.py:160
 msgid ""
 "Profession d'empathie nationale, prix d'excellence en service public et en "
 "travail social"
 msgstr "Profession d'Empathie Nationale, 공공서비스 및 사회복지 우수상"
 
-#: core/menu.py:152
+#: core/menu.py:162
 #, fuzzy
 #| msgid "s'engager pour l'intérêt général, entre voisins"
 msgid "s'engager pour l'intérêt général, entre voisins et associations"
 msgstr "이웃 간의 공동선을 위한 참여"
 
-#: core/menu.py:160
+#: core/menu.py:170
 msgid "Arts Plastiques"
 msgstr "조형 예술"
 
-#: core/menu.py:161
+#: core/menu.py:171
 msgid "Galléries d'art dans des lieux insolites et soutien aux artistes"
 msgstr "특별한 장소에서 열리는 아트 갤러리와 예술가 지원"
 
-#: core/menu.py:162
+#: core/menu.py:172
 msgid "transformer tout lieu en galerie d'art hybride"
 msgstr "어떤 공간이든 하이브리드 아트 갤러리로 변신시키기"
 
-#: core/menu.py:170
+#: core/menu.py:180
 msgid "Numérique"
 msgstr "디지털"
 
-#: core/menu.py:171
+#: core/menu.py:181
 #, fuzzy
 #| msgid "Salles de sociabilité numérique et Voisinternet"
 msgid "Salles de sociabilité numérique et lesgrandsvoisins.com"
 msgstr "디지털 사교 공간, 그리고 lesgrandsvoisins.com"
 
-#: core/menu.py:173
+#: core/menu.py:183
 #, fuzzy
 #| msgid "matériel reconditionné et compétences partagées"
 msgid ""
@@ -1039,7 +1057,7 @@ msgstr "예: “협회”."
 msgid "qui est concerné"
 msgstr "해당 대상"
 
-#: core/models.py:37 core/models.py:72
+#: core/models.py:37 core/models.py:72 core/models.py:656
 msgid "en une phrase"
 msgstr "한 문장으로"
 
@@ -1058,7 +1076,7 @@ msgid ""
 msgstr "공공 및 사회 기관용: 이 페이지는 “추가” 버튼 없이 파트너십을 제안합니다."
 
 #: core/models.py:43 core/models.py:58 core/models.py:100 core/models.py:223
-#: core/models.py:343 core/models.py:390
+#: core/models.py:343 core/models.py:390 core/models.py:659
 msgid "ordre"
 msgstr "순서"
 
@@ -1104,7 +1122,7 @@ msgstr "카테고리"
 msgid "Laisser vide si le service s'adresse à tout le monde."
 msgstr "모든 사용자를 위한 서비스라면 비워 두세요."
 
-#: core/models.py:91
+#: core/models.py:91 core/models.py:660
 msgid "proposé"
 msgstr "제공됨"
 
@@ -1662,6 +1680,126 @@ msgstr "후원 시작일"
 msgid "donateur"
 msgstr "후원자"
 
+#: core/models.py:657
+msgid "emoji"
+msgstr ""
+
+#: core/models.py:658
+msgid "durée estimée (minutes)"
+msgstr ""
+
+#: core/models.py:664
+msgid "parcours guidé"
+msgstr ""
+
+#: core/models.py:665
+msgid "parcours guidés"
+msgstr ""
+
+#: core/models.py:675
+#, fuzzy
+#| msgid "ordre personnel"
+msgid "à cocher par la personne"
+msgstr "개인 순서"
+
+#: core/models.py:676
+#, fuzzy
+#| msgid "J'ai déjà un compte"
+msgid "détectée : a un compte"
+msgstr "이미 계정이 있습니다"
+
+#: core/models.py:677
+msgid "détectée : compte nommé (connecté)"
+msgstr ""
+
+#: core/models.py:678
+#, fuzzy
+#| msgid "Ajouter %(name)s à mes raccourcis"
+msgid "détectée : a un raccourci"
+msgstr "%(name)s을(를) 내 바로가기에 추가"
+
+#: core/models.py:679
+msgid "détectée : a rejoint un groupe"
+msgstr ""
+
+#: core/models.py:680
+#, fuzzy
+#| msgid "Mes fiches dans l'annuaire"
+msgid "détectée : a une fiche d'annuaire"
+msgstr "내 디렉터리 항목"
+
+#: core/models.py:681
+#, fuzzy
+#| msgid "évènement"
+msgid "détectée : gère un évènement"
+msgstr "행사"
+
+#: core/models.py:683
+#, fuzzy
+#| msgid "raccourci"
+msgid "parcours"
+msgstr "바로가기"
+
+#: core/models.py:684
+#, fuzzy
+#| msgid "Association"
+msgid "position"
+msgstr "협회"
+
+#: core/models.py:686
+#, fuzzy
+#| msgid "Sommaire"
+msgid "comment faire"
+msgstr "목차"
+
+#: core/models.py:686
+msgid "Markdown."
+msgstr ""
+
+#: core/models.py:688
+msgid "pourquoi"
+msgstr ""
+
+#: core/models.py:689
+msgid "Ce que la personne apprend en le faisant. Markdown."
+msgstr ""
+
+#: core/models.py:692
+msgid "lien"
+msgstr ""
+
+#: core/models.py:693
+msgid "Adresse complète, ou chemin du site (/ar/account/)."
+msgstr ""
+
+#: core/models.py:695
+#, fuzzy
+#| msgid "site ou lien"
+msgid "texte du lien"
+msgstr "웹사이트 또는 링크"
+
+#: core/models.py:696
+#, fuzzy
+#| msgid "description"
+msgid "détection"
+msgstr "설명"
+
+#: core/models.py:700
+msgid "étape de parcours"
+msgstr ""
+
+#: core/models.py:701
+msgid "étapes de parcours"
+msgstr ""
+
+#: core/models.py:728
+msgid "étape accomplie"
+msgstr ""
+
+#: core/models.py:729
+msgid "étapes accomplies"
+msgstr ""
+
 #: core/templates/core/account.html:4
 #, fuzzy
 #| msgid "mon Compte — Voisinternet"
@@ -1669,7 +1807,7 @@ msgid "mon Compte — lesgrandsvoisins.com"
 msgstr "내 계정 — Voisinternet"
 
 #: core/templates/core/account.html:14 core/templates/core/account.html:17
-#: core/templates/core/account.html:81 core/templates/core/groupes.html:7
+#: core/templates/core/account.html:82 core/templates/core/groupes.html:7
 #: core/templates/core/home.html:24 core/templates/core/raccourcis.html:7
 msgid "Mon compte"
 msgstr "내 계정"
@@ -1703,55 +1841,60 @@ msgid "%(done)s sur %(total)s faits"
 msgstr "%(total)s개 중 %(done)s개 완료"
 
 #: core/templates/core/account.html:44
+#: core/templates/core/parcours_detail.html:39
 msgid "Fait :"
 msgstr "완료:"
 
-#: core/templates/core/account.html:55
+#: core/templates/core/account.html:52
+msgid "Voir tous les parcours guidés"
+msgstr "모든 안내 코스 보기"
+
+#: core/templates/core/account.html:56
 #, fuzzy
 #| msgid "Options de mon compte"
 msgid "Aperçu de mon compte"
 msgstr "내 계정 옵션"
 
-#: core/templates/core/account.html:58
+#: core/templates/core/account.html:59
 #, fuzzy
 #| msgid "raccourci"
 msgid "Raccourcis"
 msgstr "바로가기"
 
-#: core/templates/core/account.html:62
+#: core/templates/core/account.html:63
 #, fuzzy
 #| msgid "Mes groupes"
 msgid "Groupes"
 msgstr "내 그룹"
 
-#: core/templates/core/account.html:66
+#: core/templates/core/account.html:67
 #, fuzzy
 #| msgid "Mes fiches dans l'annuaire"
 msgid "Fiches annuaire"
 msgstr "내 디렉터리 항목"
 
-#: core/templates/core/account.html:70
+#: core/templates/core/account.html:71
 #: core/templates/core/administration.html:113
 #, fuzzy
 #| msgid "évènements"
 msgid "Évènements"
 msgstr "행사"
 
-#: core/templates/core/account.html:75
+#: core/templates/core/account.html:76
 #, fuzzy
 #| msgid "contributions financières"
 msgid "Contributions"
 msgstr "재정 기여"
 
-#: core/templates/core/account.html:84
+#: core/templates/core/account.html:85
 msgid "Connecté"
 msgstr "로그인됨"
 
-#: core/templates/core/account.html:87
+#: core/templates/core/account.html:88
 msgid "Compte anonyme"
 msgstr "익명 계정"
 
-#: core/templates/core/account.html:93
+#: core/templates/core/account.html:94
 #: core/templates/core/administration.html:10
 #: core/templates/core/administration.html:13
 #, fuzzy
@@ -1759,113 +1902,112 @@ msgstr "익명 계정"
 msgid "Administration"
 msgstr "협회"
 
-#: core/templates/core/account.html:99
+#: core/templates/core/account.html:100
 #: core/templates/core/partials/account_panel_body.html:51
 msgid "Se déconnecter"
 msgstr "로그아웃"
 
-#: core/templates/core/account.html:105
+#: core/templates/core/account.html:106
 msgid "Rattacher à mon compte Grands Voisins"
 msgstr "내 Grands Voisins 계정에 연결하기"
 
-#: core/templates/core/account.html:109
+#: core/templates/core/account.html:110
 #: core/templates/core/partials/account_panel_body.html:58
 msgid "Fermer ce compte sur cet appareil"
 msgstr "이 기기에서 계정 닫기"
 
-#: core/templates/core/account.html:119
+#: core/templates/core/account.html:120
 #, fuzzy
 #| msgid "Ajouter %(name)s à mes raccourcis"
 msgid "Ajouter un raccourci"
 msgstr "%(name)s을(를) 내 바로가기에 추가"
 
-#: core/templates/core/account.html:128 core/views.py:378
+#: core/templates/core/account.html:129 core/views.py:379
 msgid "Rejoindre un groupe"
 msgstr "그룹 가입"
 
-#: core/templates/core/account.html:134 core/templates/core/mes_fiches.html:14
+#: core/templates/core/account.html:135 core/templates/core/mes_fiches.html:14
 msgid "Mes fiches dans l'annuaire"
 msgstr "내 디렉터리 항목"
 
-#: core/templates/core/account.html:137 core/templates/core/mes_fiches.html:35
+#: core/templates/core/account.html:138 core/templates/core/mes_fiches.html:35
 msgid "Créer une fiche"
 msgstr "항목 만들기"
 
-#: core/templates/core/account.html:143
+#: core/templates/core/account.html:144
 #, fuzzy
 #| msgid "Mes fiches dans l'annuaire"
 msgid "Mes évènements dans l'agenda"
 msgstr "내 디렉터리 항목"
 
-#: core/templates/core/account.html:146
+#: core/templates/core/account.html:147
 #: core/templates/core/mes_evenements.html:21
 #, fuzzy
 #| msgid "évènement"
 msgid "Créer un évènement"
 msgstr "행사"
 
-#: core/templates/core/account.html:153
+#: core/templates/core/account.html:154
 msgid "Mon profil"
 msgstr "내 프로필"
 
-#: core/templates/core/account.html:156
+#: core/templates/core/account.html:157
 msgid "Géré par votre compte unique Grands Voisins"
 msgstr "Grands Voisins 단일 계정으로 관리됩니다"
 
-#: core/templates/core/account.html:162
-#| msgid "identifiant source"
+#: core/templates/core/account.html:163
 msgid "Identifiant de connexion"
 msgstr "로그인 사용자 이름"
 
-#: core/templates/core/account.html:166
+#: core/templates/core/account.html:167
 msgid "Nom"
 msgstr "이름"
 
-#: core/templates/core/account.html:166 core/templates/core/account.html:169
+#: core/templates/core/account.html:167 core/templates/core/account.html:170
 msgid "Non renseigné"
 msgstr "미입력"
 
-#: core/templates/core/account.html:169
+#: core/templates/core/account.html:170
 msgid "Courriel"
 msgstr "이메일"
 
-#: core/templates/core/account.html:174
+#: core/templates/core/account.html:175
 msgid "Modifier mon profil"
 msgstr "프로필 수정"
 
-#: core/templates/core/account.html:182 core/templates/core/mes_dons.html:11
+#: core/templates/core/account.html:183 core/templates/core/mes_dons.html:11
 #: core/templates/core/mes_dons.html:14
 #, fuzzy
 #| msgid "Mes groupes"
 msgid "Mes dons"
 msgstr "내 그룹"
 
-#: core/templates/core/account.html:191 core/templates/core/mes_dons.html:30
+#: core/templates/core/account.html:192 core/templates/core/mes_dons.html:30
 msgid "déductible fiscalement"
 msgstr "세액 공제 가능"
 
-#: core/templates/core/account.html:195 core/templates/core/mes_dons.html:34
+#: core/templates/core/account.html:196 core/templates/core/mes_dons.html:34
 #, fuzzy
 #| msgid "Statuts de l'association"
 msgid "en attente de validation"
 msgstr "협회 정관"
 
-#: core/templates/core/account.html:202 core/templates/core/mes_dons.html:41
+#: core/templates/core/account.html:203 core/templates/core/mes_dons.html:41
 msgid "Aucune contribution enregistrée pour l'instant."
 msgstr "아직 등록된 기여가 없습니다."
 
-#: core/templates/core/account.html:226 core/templates/core/mes_dons.html:47
+#: core/templates/core/account.html:227 core/templates/core/mes_dons.html:47
 #: core/templates/core/mes_dons.html:71
 msgid "Faire un don"
 msgstr "기부하기"
 
-#: core/templates/core/account.html:233 core/templates/core/account.html:239
+#: core/templates/core/account.html:234 core/templates/core/account.html:240
 #: core/templates/core/home.html:26
 #: core/templates/core/partials/account_panel_body.html:7
 msgid "Créer mon compte"
 msgstr "내 계정 만들기"
 
-#: core/templates/core/account.html:235
+#: core/templates/core/account.html:236
 msgid ""
 "Un compte unique des Grands Voisins, le même pour tous les outils de "
 "l'association. Il retrouve vos raccourcis, groupes, fiches et évènements sur "
@@ -1874,33 +2016,33 @@ msgstr ""
 "협회의 모든 도구에 쓰이는 Les Grands Voisins 통합 계정입니다. 모든 기기에서 바로가기, 그룹, 항목, 행사를 다시 볼 수 "
 "있고 이메일로 비밀번호를 복구할 수 있습니다."
 
-#: core/templates/core/account.html:241
+#: core/templates/core/account.html:242
 msgid ""
 "La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
 "serveur."
 msgstr "이 서버에는 아직 Grands Voisins 계정 로그인이 설정되어 있지 않습니다."
 
-#: core/templates/core/account.html:245
+#: core/templates/core/account.html:246
 #: core/templates/core/partials/account_panel_body.html:9
 msgid "J'ai déjà un compte"
 msgstr "이미 계정이 있습니다"
 
-#: core/templates/core/account.html:246
+#: core/templates/core/account.html:247
 msgid ""
 "Connectez-vous avec le compte que vous utilisez déjà pour les autres outils "
 "des Grands Voisins."
 msgstr "다른 Les Grands Voisins 도구에 이미 쓰는 계정으로 로그인하세요."
 
-#: core/templates/core/account.html:249
+#: core/templates/core/account.html:250
 msgid "Se connecter"
 msgstr "로그인"
 
-#: core/templates/core/account.html:253
+#: core/templates/core/account.html:254
 #: core/templates/core/partials/account_panel_body.html:14
 msgid "Rester anonyme"
 msgstr "익명으로 계속"
 
-#: core/templates/core/account.html:255
+#: core/templates/core/account.html:256
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit pour"
 " retrouver vos raccourcis. Sans ce numéro, le compte est perdu : aucun "
@@ -1909,15 +2051,15 @@ msgstr ""
 "이름도 이메일도 없는 16자리 번호입니다. 적어 두세요. 이 번호만으로 바로가기를 되찾을 수 있습니다. 번호가 없으면 계정을 잃게 되며 "
 "복구용 이메일도 없습니다."
 
-#: core/templates/core/account.html:259
+#: core/templates/core/account.html:260
 msgid "Créer un compte anonyme"
 msgstr "익명 계정 만들기"
 
-#: core/templates/core/account.html:265
+#: core/templates/core/account.html:266
 msgid "J'ai déjà un numéro"
 msgstr "이미 번호가 있어요"
 
-#: core/templates/core/account.html:277
+#: core/templates/core/account.html:278
 msgid "Retrouver"
 msgstr "복구하기"
 
@@ -2421,10 +2563,10 @@ msgid "Terminer le paiement par %(name)s"
 msgstr "%(name)s(으)로 결제 완료하기"
 
 #: core/templates/core/faire_don_merci.html:33
-#, fuzzy, python-format
+#, python-format
 #| msgid "Monter %(name)s"
 msgid "Continuer sur %(name)s"
-msgstr "%(name)s 위로 이동"
+msgstr "계속"
 
 #: core/templates/core/faire_don_merci.html:39
 msgid "Rappel des moyens de don"
@@ -2794,6 +2936,97 @@ msgstr "구독 중인 항목"
 #: core/templates/core/mes_fiches.html:40
 msgid "Créer la fiche"
 msgstr "항목 생성"
+
+#: core/templates/core/parcours.html:14
+msgid ""
+"De petites missions, quelques minutes chacune, pour apprendre à se servir des"
+" outils des Grands Voisins. Un pas à la fois, personne n'est jugé."
+msgstr ""
+"각각 몇 분이면 되는 작은 미션으로 Les Grands Voisins의 도구 사용법을 배웁니다. 한 걸음씩, 아무도 평가받지 않습니다."
+
+#: core/templates/core/parcours.html:26
+#, python-format
+msgid "environ %(m)s min"
+msgstr "약 %(m)s분"
+
+#: core/templates/core/parcours.html:27
+msgid "Terminé ✓"
+msgstr "완료 ✓"
+
+#: core/templates/core/parcours.html:27
+#: core/templates/core/parcours_detail.html:17
+#, python-format
+#| msgid "%(done)s sur %(total)s faits"
+msgid "%(done)s sur %(total)s étapes"
+msgstr "%(total)s단계 중 %(done)s단계"
+
+#: core/templates/core/parcours.html:29
+#: core/templates/core/parcours_detail.html:16
+msgid "Progression"
+msgstr "진행 상황"
+
+#: core/templates/core/parcours.html:31
+msgid "Revoir"
+msgstr "다시 보기"
+
+#: core/templates/core/parcours.html:31
+msgid "Continuer"
+msgstr "계속"
+
+#: core/templates/core/parcours.html:31
+msgid "Commencer"
+msgstr "시작"
+
+#: core/templates/core/parcours.html:35
+#| msgid "Aucun raccourci pour l'instant."
+msgid "Aucun parcours pour l'instant."
+msgstr "아직 코스가 없습니다."
+
+#: core/templates/core/parcours_detail.html:23
+msgid "Bravo, parcours terminé ! 🎉"
+msgstr "축하합니다, 코스를 마쳤어요! 🎉"
+
+#: core/templates/core/parcours_detail.html:24
+msgid ""
+"Vous savez maintenant le faire. N'hésitez pas à montrer à une voisine ou un "
+"voisin : c'est la meilleure façon de s'en souvenir."
+msgstr "이제 할 줄 아시네요. 이웃에게 보여 주세요. 기억하는 가장 좋은 방법입니다."
+
+#: core/templates/core/parcours_detail.html:25
+#| msgid "Mes raccourcis"
+msgid "Autres parcours"
+msgstr "다른 코스"
+
+#: core/templates/core/parcours_detail.html:30
+msgid ""
+"Vous pouvez lire le parcours sans compte. Pour cocher vos étapes et garder la"
+" trace de votre avancée,"
+msgstr "계정 없이도 코스를 읽을 수 있습니다. 단계를 체크하고 진행 상황을 보관하려면"
+
+#: core/templates/core/parcours_detail.html:31
+#| msgid "Créer un compte anonyme"
+msgid "ouvrez un compte (nommé ou anonyme)"
+msgstr "계정(실명 또는 익명)을 만드세요"
+
+#: core/templates/core/parcours_detail.html:48
+msgid "Pourquoi ?"
+msgstr "왜일까요?"
+
+#: core/templates/core/parcours_detail.html:56
+msgid "Décocher"
+msgstr "체크 해제"
+
+#: core/templates/core/parcours_detail.html:56
+msgid "C'est fait"
+msgstr "완료했어요"
+
+#: core/templates/core/parcours_detail.html:60
+msgid "Détecté automatiquement."
+msgstr "자동으로 확인되었습니다."
+
+#: core/templates/core/parcours_detail.html:62
+msgid "Se coche tout seul dès que c'est fait."
+msgstr "완료하면 저절로 체크됩니다."
 
 #: core/templates/core/partials/account_panel_body.html:44
 msgid "Aucun service ajouté pour l'instant."
@@ -3202,20 +3435,20 @@ msgstr "하나의 키워드로 글, 디렉토리 항목, 서비스, 거점을 �
 msgid "Aucune étiquette pour l'instant."
 msgstr "아직 그룹이 없습니다"
 
-#: core/views.py:43
+#: core/views.py:44
 msgid ""
 "Les rendez-vous et les ressources pour s'y retrouver dans la communauté."
 msgstr "커뮤니티 안에서 길을 찾기 위한 모임과 자료입니다."
 
-#: core/views.py:44
+#: core/views.py:45
 msgid "Nos trois pôles d'action, portés ensemble par les bénévoles."
 msgstr "자원봉사자들이 함께 이끄는 우리의 세 가지 활동 분야입니다."
 
-#: core/views.py:45
+#: core/views.py:46
 msgid "Nous rejoindre, nous soutenir, nous contacter."
 msgstr "함께하기, 후원하기, 연락하기."
 
-#: core/views.py:303
+#: core/views.py:304
 #, fuzzy
 #| msgid ""
 #| "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
@@ -3223,13 +3456,13 @@ msgid ""
 "Trop de messages envoyés récemment depuis cet appareil. Réessayez plus tard."
 msgstr "이 기기에서 시도 횟수가 너무 많습니다. 15분 후 다시 시도해 주세요."
 
-#: core/views.py:312
+#: core/views.py:313
 #, fuzzy, python-format
 #| msgid "Mes groupes — Voisinternet"
 msgid "Message via lesgrandsvoisins.com de %(name)s"
 msgstr "내 그룹 — Voisinternet"
 
-#: core/views.py:320
+#: core/views.py:321
 #, python-format
 msgid ""
 "Nom : %(name)s\n"
@@ -3242,137 +3475,137 @@ msgstr ""
 "\n"
 "%(message)s"
 
-#: core/views.py:322
+#: core/views.py:323
 msgid "(non renseigné)"
 msgstr "(미입력)"
 
-#: core/views.py:357 core/views.py:595
+#: core/views.py:358 core/views.py:596
 #, python-format
 msgid "Message envoyé à %(name)s."
 msgstr "%(name)s에게 메시지를 보냈습니다."
 
-#: core/views.py:361 core/views.py:599
+#: core/views.py:362 core/views.py:600
 msgid ""
 "Votre message a été enregistré, mais son envoi par e-mail a échoué. Réessayez"
 " plus tard."
 msgstr "메시지는 저장되었지만 이메일 전송에 실패했습니다. 나중에 다시 시도해 주세요."
 
-#: core/views.py:376
+#: core/views.py:377
 msgid "Ajouter un raccourci vers un outil"
 msgstr "도구 바로가기 추가"
 
-#: core/views.py:380
+#: core/views.py:381
 msgid "Présenter votre activité dans l'annuaire"
 msgstr "안내 목록에 활동 소개하기"
 
-#: core/views.py:385
+#: core/views.py:386
 msgid "Créer un compte nommé pour ne jamais perdre l'accès"
 msgstr "접근을 잃지 않도록 실명 계정 만들기"
 
-#: core/views.py:395
+#: core/views.py:396
 msgid ""
 "La connexion n'a pas abouti. Réessayez, ou continuez avec un compte anonyme."
 msgstr "로그인이 완료되지 않았습니다. 다시 시도하거나 익명 계정으로 계속하세요."
 
-#: core/views.py:452
+#: core/views.py:453
 #, fuzzy
 #| msgid "Aucune contribution enregistrée pour l'instant."
 msgid "Merci ! Votre contribution a été enregistrée."
 msgstr "아직 등록된 기여가 없습니다."
 
-#: core/views.py:454
+#: core/views.py:455
 msgid "Le formulaire de don contient une erreur : montant ou date invalide."
 msgstr "기부 양식에 오류가 있습니다: 금액 또는 날짜가 유효하지 않습니다."
 
-#: core/views.py:619
+#: core/views.py:620
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cette fiche."
 msgstr "요청을 보냈습니다. 관리자가 검토한 후 이 항목의 관리자로 지정해 드립니다."
 
-#: core/views.py:622
+#: core/views.py:623
 msgid "Vous avez déjà demandé à être responsable de cette fiche."
 msgstr "이미 이 항목의 관리자 권한을 요청하셨습니다."
 
-#: core/views.py:640
+#: core/views.py:641
 msgid ""
 "Connectez-vous pour finaliser votre demande de responsabilité de cette fiche."
 msgstr "이 항목의 관리자 권한 요청을 완료하려면 로그인하세요."
 
-#: core/views.py:664
+#: core/views.py:665
 msgid "Fiche créée."
 msgstr "항목이 생성되었습니다."
 
-#: core/views.py:693
+#: core/views.py:694
 msgid "Fiche mise à jour."
 msgstr "항목이 업데이트되었습니다."
 
-#: core/views.py:705
+#: core/views.py:706
 msgid "Fiche supprimée."
 msgstr "항목이 삭제되었습니다."
 
-#: core/views.py:717
+#: core/views.py:718
 #, python-format
 msgid "Abonnement à « %(name)s » retiré."
 msgstr "“%(name)s” 구독이 해지되었습니다."
 
-#: core/views.py:720
+#: core/views.py:721
 #, python-format
 msgid "Abonné à « %(name)s »."
 msgstr "“%(name)s”에 구독했습니다."
 
-#: core/views.py:746
+#: core/views.py:747
 #, fuzzy
 #| msgid "Fiche créée."
 msgid "Fiche dépubliée."
 msgstr "항목이 생성되었습니다."
 
-#: core/views.py:746
+#: core/views.py:747
 msgid "Demande de publication annulée."
 msgstr "게시 요청이 취소되었습니다."
 
-#: core/views.py:752
+#: core/views.py:753
 msgid ""
 "Fiche envoyée pour validation : elle sera publique une fois validée par un "
 "administrateur."
 msgstr "항목이 승인을 위해 제출되었습니다. 관리자가 승인하면 공개됩니다."
 
-#: core/views.py:807
+#: core/views.py:808
 #, python-format
 msgid "Intérêt enregistré pour « %(title)s »."
 msgstr "“%(title)s”에 대한 관심이 등록되었습니다."
 
-#: core/views.py:810
+#: core/views.py:811
 #, python-format
 msgid "Intérêt retiré pour « %(title)s »."
 msgstr "“%(title)s”에 대한 관심이 취소되었습니다."
 
-#: core/views.py:814
+#: core/views.py:815
 #, python-format
 msgid "Intention mise à jour pour « %(title)s »."
 msgstr "“%(title)s”에 대한 참여 의사가 업데이트되었습니다."
 
-#: core/views.py:834
+#: core/views.py:835
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cet évènement."
 msgstr "요청을 보냈습니다. 관리자가 검토한 후 이 행사의 관리자로 지정해 드립니다."
 
-#: core/views.py:837
+#: core/views.py:838
 msgid "Vous avez déjà demandé à gérer cet évènement."
 msgstr "이미 이 행사의 관리 권한을 요청하셨습니다."
 
-#: core/views.py:852
+#: core/views.py:853
 msgid ""
 "Connectez-vous pour finaliser votre demande de gestion de cet évènement."
 msgstr "이 행사의 관리 요청을 완료하려면 로그인하세요."
 
-#: core/views.py:877
+#: core/views.py:878
 #, python-format
 msgid "Évènement à publier : %(title)s"
 msgstr "게시 대기 행사: %(title)s"
 
-#: core/views.py:878
+#: core/views.py:879
 #, python-format
 msgid ""
 "Un évènement attend votre validation dans l'agenda.\n"
@@ -3387,45 +3620,45 @@ msgstr ""
 "\n"
 "검토 후 게시하기: %(url)s"
 
-#: core/views.py:893
+#: core/views.py:894
 #, python-format
 msgid "Votre évènement est publié : %(title)s"
 msgstr "행사가 게시되었습니다: %(title)s"
 
-#: core/views.py:894
+#: core/views.py:895
 #, python-format
 msgid "« %(title)s » est maintenant visible dans l'agenda : %(url)s"
 msgstr "“%(title)s” 이(가) 이제 일정표에 표시됩니다: %(url)s"
 
-#: core/views.py:922
+#: core/views.py:923
 msgid ""
 "Évènement enregistré. Il reste visible de vous seul·e jusqu'à sa publication "
 "par le groupe « Administration », prévenu par courriel."
 msgstr "행사가 저장되었습니다. 이메일로 안내받은 '관리' 그룹이 게시할 때까지 본인만 볼 수 있습니다."
 
-#: core/views.py:943
+#: core/views.py:944
 #, fuzzy
 #| msgid "Fiche mise à jour."
 msgid "Évènement mis à jour."
 msgstr "항목이 업데이트되었습니다."
 
-#: core/views.py:955
+#: core/views.py:956
 #, fuzzy
 #| msgid "Évènements passés"
 msgid "Évènement supprimé."
 msgstr "지난 행사"
 
-#: core/views.py:1009
+#: core/views.py:1010
 msgid "Compte anonyme créé."
 msgstr "익명 계정이 생성되었습니다."
 
-#: core/views.py:1017
+#: core/views.py:1018
 msgid ""
 "Merci. Gardez ce numéro précieusement : il est la seule façon de retrouver ce"
 " compte."
 msgstr "감사합니다. 이 번호를 잘 보관하세요. 이 계정을 되찾는 유일한 방법입니다."
 
-#: core/views.py:1027
+#: core/views.py:1028
 #, python-format
 msgid ""
 "Numéro de compte anonyme lesgrandsvoisins.com : %(number)s\n"
@@ -3434,39 +3667,39 @@ msgstr ""
 "lesgrandsvoisins.com 익명 계정 번호: %(number)s\n"
 "이 번호만으로 다른 기기에서 바로가기를 되찾을 수 있습니다. 지문 값만 보관하므로 다시 알려 드릴 수 없습니다.\n"
 
-#: core/views.py:1040
+#: core/views.py:1041
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "이 기기에서 시도 횟수가 너무 많습니다. 15분 후 다시 시도해 주세요."
 
-#: core/views.py:1044
+#: core/views.py:1045
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "이 번호와 일치하는 계정이 없습니다. 16자리 숫자를 확인해 주세요."
 
-#: core/views.py:1047
+#: core/views.py:1048
 msgid "Compte retrouvé. Vos raccourcis sont de retour."
 msgstr "계정을 찾았습니다. 바로가기가 복구되었습니다."
 
-#: core/views.py:1054
+#: core/views.py:1055
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
 msgstr "이 기기에서는 더 이상 계정이 열려 있지 않습니다. 번호를 이용해 다시 찾을 수 있습니다."
 
-#: core/views.py:1065
+#: core/views.py:1066
 msgid "Vos raccourcis anonymes ont rejoint votre compte."
 msgstr "익명 바로가기가 계정에 연결되었습니다."
 
-#: core/views.py:1081
+#: core/views.py:1082
 #, python-format
 msgid "« %(name)s » retiré de vos raccourcis."
 msgstr "“%(name)s”이(가) 바로가기에서 제거되었습니다."
 
-#: core/views.py:1088
+#: core/views.py:1089
 #, python-format
 msgid "« %(name)s » ajouté à vos raccourcis."
 msgstr "“%(name)s”이(가) 바로가기에 추가되었습니다."
 
-#: core/views.py:1091
+#: core/views.py:1092
 #, fuzzy, python-format
 #| msgid "« %(name)s » ajouté à vos raccourcis."
 msgid ""
@@ -3474,12 +3707,29 @@ msgid ""
 "administrateur."
 msgstr "“%(name)s”이(가) 바로가기에 추가되었습니다."
 
-#: core/views.py:1199
+#: core/views.py:1200
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "“%(name)s”이(가) 그룹에서 제거되었습니다."
 
-#: core/views.py:1203
+#: core/views.py:1204
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "“%(name)s”이(가) 그룹에 추가되었습니다."
+
+#: core/views.py:1425
+msgid ""
+"Pour garder la trace de vos étapes, ouvrez d'abord un compte (nommé ou "
+"anonyme)."
+msgstr "단계를 기록하려면 먼저 계정(실명 또는 익명)을 만드세요."
+
+#: core/views.py:1435
+#, python-format
+msgid "Bravo ! Parcours « %(title)s » terminé. 🎉"
+msgstr "축하합니다! “%(title)s” 코스를 마쳤습니다. 🎉"
+
+#: core/views.py:1437
+#, python-format
+#| msgid "Évènement à publier : %(title)s"
+msgid "Étape faite : %(title)s"
+msgstr "단계 완료: %(title)s"

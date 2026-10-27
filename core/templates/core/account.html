@@ -36,7 +36,7 @@
           <p class="muted">
             {% blocktrans with done=first_steps_done total=first_steps|length %}{{ done }} sur {{ total }} faits{% endblocktrans %}
           </p>
-          <ol class="steps">
+          <ul class="steps">
             {% for step in first_steps %}
               <li{% if step.done %} class="done"{% endif %}>
                 {% if step.done %}
@@ -48,7 +48,7 @@
                 {% endif %}
               </li>
             {% endfor %}
-          </ol>
+          </ul>
         </section>
       {% endif %}
       <section class="dashboard-summary"

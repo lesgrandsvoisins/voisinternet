@@ -902,6 +902,15 @@ div.menu {
   opacity: .4
 }
 
+/* Sur petit écran, les taches passent derrière le texte d'introduction : on les
+   atténue pour garder un contraste de lecture suffisant (le texte est sombre). */
+@media (max-width: 900px) {
+  .blob {
+    opacity: .28;
+    border-width: 2px
+  }
+}
+
 .blob-a {
   width: 20rem;
   height: 20rem;

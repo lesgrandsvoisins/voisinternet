@@ -7,7 +7,7 @@ Les besoins côté serveur passent par `docs/DEMANDES-UX.md` (dépôt `flakeops`
 ## P0 — Décisions de Chris
 | ID | État | Tâche | Resp. | Terminé quand |
 |---|---|---|---|---|
-| U-001 | bloque | **Identifiant** : garder l'identifiant généré (`famille[:4]+prénom[:4]+compteur@gv.je`, compteur qui commence à 2 aujourd'hui) et y ajouter une adresse choisie (`monchoix@gv.coop`, alias sur la même boîte) ? Conception côté admin : `B-036`. | Chris | Décision écrite ici et dans `B-036`. |
+| U-001 | en_cours | **Identifiant** : décidé le 27/10 (relayé par l'Admin) : jusqu'à 5 lettres du nom + 5 du prénom, numéro seulement si pris. Code : `flakeops` `ux/identifiant-sans-compteur` (`6b9d846`) ; textes : `ux/identifiant-textes` (`1e82518`). **Non fusionnés, non déployés.** Reste la question de l'adresse choisie (`B-036`, bloquée). | Admin / Chris | Fusionné avec les textes, reconstruit, essayé en vrai. |
 | U-002 | a_faire | **Logo du pied de page** : il affiche « new.LesGrandsVoisins.com » (`partials/wordmark.html`). « www. » ou sans préfixe ? | Chris | Choix noté ; UX modifie le gabarit. |
 | U-003 | a_faire | **« Mark for documents »** : préciser (relecture ? marquage ? Markdown ?) pour en faire un parcours guidé. | Chris | Description reçue. |
 | U-004 | a_faire | **Blog** : `blog.lesgrandsvoisins.com` doit-il rediriger vers `www` ? (`B-035` côté admin) | Chris | Décision notée. |
@@ -25,6 +25,8 @@ Les besoins côté serveur passent par `docs/DEMANDES-UX.md` (dépôt `flakeops`
 | U-016 | a_faire | Si l'appel du jeton échoue au premier lancement : `KC_URL` vaut `https://key.gv.je` dans le test, alors que `onboarding.py` utilise le port local avec les en-têtes `X-Forwarded`. | UX / Admin | Le test obtient un jeton. |
 | U-017 | bloque | Redirection de l'ancien `/signup` (`old.lesgrandsvoisins.com`) vers `/fr/account/inscription/` ; `B-034`. Attend `U-011` et `U-013`. | Admin | `curl -I` renvoie 301. |
 | U-018 | bloque | Héberger `@gv.coop` (zone avec MX, domaine absent de `modules/mail/domains.nix`, courrier refusé ; `B-006`). Prérequis de tout alias en `@gv.coop`. | Admin / Chris | Un envoi de test à `@gv.coop` arrive. |
+| U-019 | a_faire | **`B-039` (P0)** : l'entrée d'annuaire créée par une inscription n'a AUCUNE valeur `mail` (`bobbob2`, `duvoloui`) : un nouveau membre se connecte au SSO mais n'a pas de boîte. Ne rien promettre sur la boîte tant que ce n'est pas résolu. Le parcours « Ma boîte courriel » est masqué en attendant. | Admin | Cause trouvée et corrigée ; une inscription test a une adresse ; parcours courriel réactivé (administration > parcours guidés). |
+| U-028 | a_faire | **Noms en alphabet non latin** (arabe, coréen) : le générateur ne garde que a–z, un tel nom donne « aucun identifiant disponible » sans issue (`B-038`). Le thème demande des lettres latines et propose d'écrire à contact@ ; il faudrait une vraie solution (translittération, identifiant proposé par l'équipe). **À signaler/décider.** | Chris / Admin | Un membre arabophone ou coréanophone peut s'inscrire seul. |
 
 ## P2 — À faire côté UX
 | ID | État | Tâche | Resp. | Terminé quand |

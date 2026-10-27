@@ -5,6 +5,9 @@ Changements notables de `www.lesgrandsvoisins.com` (voisinternet), branche de tr
 ## [Unreleased]
 ### Added
 - **Parcours guidés** (`/account/parcours/`) : petites missions pédagogiques (étapes cochables ou détectées d'après le compte, « Pourquoi ? » dépliable, barre de progression, félicitations), éditables et traduisibles dans l'administration (`Mission`, `MissionStep`, `StepCompletion`). Trois parcours d'exemple : premiers pas, boîte courriel, relecture des traductions arabe et coréen via Vikunja. Entrée « Parcours guidés » dans le menu.
+### Changed
+- Identifiant de connexion : les textes décrivent la nouvelle règle (5+5 lettres, numéro seulement si pris) ; le parcours « Ma boîte courriel » est **masqué** (fixtures : `active: false`) tant que les nouveaux comptes n'ont pas d'adresse de courrier (`B-039`).
+- Outil `tools/export_contenu.py` : extraction du contenu public (pages Wagtail, redirections, agenda, annuaire public) en JSON Lines, pour comparer `old`, `www` et le blog. `deploy/smoke.sh` et `docs/DEPLOIEMENT.md` (brouillon).
 ### Fixed
 - Parcours courriel et Vikunja : retiré ce qui n'est pas vérifié (connexion de Vikunja par `key.gv.je`, libellé « Indésirables » seul) ; la relecture ar/ko dit maintenant « demandez-nous un accès ».
 - En arabe (droite à gauche), les groupes de chiffres du numéro de compte anonyme s'affichaient à l'envers : le numéro est maintenant toujours lu de gauche à droite.

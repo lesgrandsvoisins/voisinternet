@@ -28,7 +28,7 @@ class KeycloakBackend(OIDCAuthenticationBackend):
     def get_userinfo(self, access_token, id_token, payload):
         """
         Garde l'identifiant de connexion Keycloak (« preferred_username », fabriqué à
-        l'inscription : famille[:4] + prénom[:4] + compteur + @gv.je) en session pour
+        l'inscription : jusqu'à 5 lettres du nom + 5 du prénom + @gv.je, un numéro seulement s'il est déjà pris) en session pour
         l'afficher à la personne : elle ne l'a pas tapé, donc elle ne le connaît pas.
         """
         claims = super().get_userinfo(access_token, id_token, payload)

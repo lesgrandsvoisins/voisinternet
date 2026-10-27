@@ -41,12 +41,12 @@ jamais rien en route. Le site reste utilisable sans JavaScript, sans service tie
 - Échec de connexion : retour sur « Mon compte » avec un message clair.
 - Royaume en production : **`master`** (Keycloak 26.8.1), inscription libre, courriels de vérification
   et de réinitialisation actifs (SMTP `mail.lesgrandsvoisins.com`). Voir `docs/HANDOFF-UX.md` de
-  `flakeops@rosest330`. L'identifiant (`famille[:4]+prénom[:4]+compteur@gv.je`) est montré à la
+  `flakeops@rosest330`. L'identifiant (jusqu'à 5 lettres du nom + jusqu'à 5 du prénom + `@gv.je`, un numéro seulement s'il est déjà pris — décision de Chris du 27/10) est montré à la
   personne à sa première connexion et dans « Mon profil ».
 - Messages du thème Keycloak `gv-key-registration` en fr/es/ar/ko (erreurs manquantes et doublons
   de courriel comprises) : écrits, commit `01d42c3` dans le clone de `flakeops`, **pas encore
   poussés ni déployés** ; arabe et coréen à faire relire.
-- **À décider :** le compteur d'identifiant qui commence à 2 (`dupojean2@gv.je`) est-il voulu ?
+- Identifiant : décision prise (5 + 5 lettres, numéro seulement si pris) ; code côté `flakeops`, branche `ux/identifiant-sans-compteur`, textes sur `ux/identifiant-textes`, **non fusionnés ni déployés**. Les noms écrits dans un autre alphabet (arabe, coréen) ne donnent pas d'identifiant : le thème demande des lettres latines et propose d'écrire à contact@.
 
 ### Phase 4 — Premiers pas (fait)
 - Liste « Premiers pas » sur « Mon compte » : ajouter un raccourci, rejoindre un groupe, créer

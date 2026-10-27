@@ -54,6 +54,7 @@ def site(request):
         keycloak_account_url = f"{settings.KEYCLOAK_REALM_URL}/account/"
     pending_number = request.session.get(NEW_NUMBER_KEY)
     return {
+        "login_identifier": request.session.get("voisinternet_login_identifier", ""),
         "pending_number": format_number(pending_number) if pending_number else None,
         "conj": {i["entry"].key: i for i in entries},
         "conj_groups": groups,

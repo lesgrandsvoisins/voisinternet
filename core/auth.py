@@ -2,10 +2,15 @@
 from urllib.parse import urlencode
 
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.utils.translation import get_language
+from django.utils.translation import gettext as _
 from mozilla_django_oidc.auth import OIDCAuthenticationBackend
 from mozilla_django_oidc.views import OIDCAuthenticationRequestView
+
+
+LOGIN_IDENTIFIER_KEY = "voisinternet_login_identifier"
 
 
 class KeycloakBackend(OIDCAuthenticationBackend):
@@ -20,7 +25,26 @@ class KeycloakBackend(OIDCAuthenticationBackend):
             return get_user_model().objects.none()
         return get_user_model().objects.filter(username=sub)
 
+    def get_userinfo(self, access_token, id_token, payload):
+        """
+        Garde l'identifiant de connexion Keycloak (« preferred_username », fabriqué à
+        l'inscription : famille[:4] + prénom[:4] + compteur + @gv.je) en session pour
+        l'afficher à la personne : elle ne l'a pas tapé, donc elle ne le connaît pas.
+        """
+        claims = super().get_userinfo(access_token, id_token, payload)
+        username = claims.get("preferred_username", "")
+        request = getattr(self, "request", None)
+        if request is not None and username:
+            request.session[LOGIN_IDENTIFIER_KEY] = username
+        return claims
+
     def create_user(self, claims):
+        request = getattr(self, "request", None)
+        if request is not None and claims.get("preferred_username"):
+            messages.success(request, _(
+                "Bienvenue ! Votre identifiant de connexion est %(identifier)s : notez-le, "
+                "il ne change pas."
+            ) % {"identifier": claims["preferred_username"]})
         return get_user_model().objects.create_user(
             username=claims["sub"],
             email=claims.get("email", ""),

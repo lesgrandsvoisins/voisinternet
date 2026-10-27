@@ -397,6 +397,14 @@ class AnonymousAccountTests(Base):
         self.assertContains(page, "Premiers pas")
         self.assertContains(page, "1 sur")
 
+    def test_login_identifier_is_shown_in_profile(self):
+        user = get_user_model().objects.create_user("sub-123", first_name="Jean")
+        self.client.force_login(user)
+        session = self.client.session
+        session["voisinternet_login_identifier"] = "dupojean2@gv.je"
+        session.save()
+        self.assertContains(self.client.get(reverse("core:account")), "dupojean2@gv.je")
+
     def test_connexion_is_404_without_oidc(self):
         with override_settings(OIDC_ENABLED=False):
             self.assertEqual(self.client.get(reverse("core:inscription")).status_code, 404)

@@ -157,6 +157,11 @@
           </summary>
           <div>
             <ul class="docs">
+              {% if login_identifier %}
+                <li>
+                  <strong>{% trans "Identifiant de connexion" %}</strong><span>{{ login_identifier }}</span>
+                </li>
+              {% endif %}
               <li>
                 <strong>{% trans "Nom" %}</strong><span>{{ user.get_full_name|default:_("Non renseigné") }}</span>
               </li>

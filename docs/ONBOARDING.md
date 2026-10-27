@@ -39,9 +39,14 @@ jamais rien en route. Le site reste utilisable sans JavaScript, sans service tie
   site) et, pour l'inscription, `prompt=create` (Keycloak ≥ 24 ouvre directement le formulaire
   d'inscription). Le lien cassé `/registrations` disparaît.
 - Échec de connexion : retour sur « Mon compte » avec un message clair.
-- **Reste à faire dans `chris2fr/flakeops@rosest330`** (`modules/keycloak/`) : messages du thème
-  `gv-key-registration` en fr/es/ar/ko (seul `messages_en.properties` existe), vérifier que
-  l'inscription est autorisée dans le royaume et que le courriel de vérification part.
+- Royaume en production : **`master`** (Keycloak 26.8.1), inscription libre, courriels de vérification
+  et de réinitialisation actifs (SMTP `mail.lesgrandsvoisins.com`). Voir `docs/HANDOFF-UX.md` de
+  `flakeops@rosest330`. L'identifiant (`famille[:4]+prénom[:4]+compteur@gv.je`) est montré à la
+  personne à sa première connexion et dans « Mon profil ».
+- Messages du thème Keycloak `gv-key-registration` en fr/es/ar/ko (erreurs manquantes et doublons
+  de courriel comprises) : écrits, commit `01d42c3` dans le clone de `flakeops`, **pas encore
+  poussés ni déployés** ; arabe et coréen à faire relire.
+- **À décider :** le compteur d'identifiant qui commence à 2 (`dupojean2@gv.je`) est-il voulu ?
 
 ### Phase 4 — Premiers pas (fait)
 - Liste « Premiers pas » sur « Mon compte » : ajouter un raccourci, rejoindre un groupe, créer

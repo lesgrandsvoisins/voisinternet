@@ -15,7 +15,7 @@ verif() { # verif DESCRIPTION CHEMIN STATUT_ATTENDU [TEXTE_ATTENDU_DANS_LA_REPON
   if [ -n "$texte" ] && ! printf '%s' "$sortie" | grep -qiF -- "$texte"; then echo "KO   $desc : « $texte » absent"; ko=1; return; fi
   echo "OK   $desc"
 }
-verif "accueil (fr)"                      /fr/                          200 "Mon compte\|compte"
+verif "accueil (fr)"                      /fr/                          200 "Créer mon compte"
 verif "accueil (ar, droite à gauche)"     /ar/                          200 'dir="rtl"'
 verif "mon compte"                        /fr/account/                  200 "Créer mon compte"
 verif "parcours guidés"                   /fr/account/parcours/         200 "Parcours guidés"

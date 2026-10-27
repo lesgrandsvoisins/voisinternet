@@ -1,0 +1,39 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Parcours guidés" %} — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+        <ol>
+          <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+          <li aria-current="page">{% trans "Parcours guidés" %}</li>
+        </ol>
+      </nav>
+      <h1>{% trans "Parcours guidés" %}</h1>
+      <p class="lead">{% trans "De petites missions, quelques minutes chacune, pour apprendre à se servir des outils des Grands Voisins. Un pas à la fois, personne n'est jugé." %}</p>
+    </div>
+  </div>
+  <div class="wrap page">
+    <ul class="missions">
+      {% for item in missions %}
+        <li class="card mission{% if item.complete %} mission-done{% endif %}">
+          <h2>
+            <a href="{% url 'core:parcours_detail' item.mission.slug %}"><span aria-hidden="true">{{ item.mission.emoji }}</span> {{ item.mission.title }}</a>
+          </h2>
+          <p>{{ item.mission.summary }}</p>
+          <p class="muted">
+            {% if item.mission.minutes %}{% blocktrans with m=item.mission.minutes %}environ {{ m }} min{% endblocktrans %} · {% endif %}
+            {% if item.complete %}{% trans "Terminé ✓" %}{% else %}{% blocktrans with done=item.finished total=item.total %}{{ done }} sur {{ total }} étapes{% endblocktrans %}{% endif %}
+          </p>
+          <progress max="{{ item.total }}" value="{{ item.finished }}" aria-label="{% trans "Progression" %}">{{ item.finished }}/{{ item.total }}</progress>
+          <a class="btn {% if item.complete %}btn-line{% else %}btn-sun{% endif %}" href="{% url 'core:parcours_detail' item.mission.slug %}">
+            {% if item.complete %}{% trans "Revoir" %}{% elif item.finished %}{% trans "Continuer" %}{% else %}{% trans "Commencer" %}{% endif %}
+          </a>
+        </li>
+      {% empty %}
+        <li class="muted">{% trans "Aucun parcours pour l'instant." %}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

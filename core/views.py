@@ -29,7 +29,8 @@ from .forms import ContactMessageForm, ContributionForm, DirectoryEntryForm, Eve
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntryMessage, EntrySubscription, Event,
-    EventInterest, EventManagementRequest, GuideBook, Membership, OwnershipClaim, Service, Shortcut, Tag,
+    EventInterest, EventManagementRequest, GuideBook, Membership, Mission, MissionStep, OwnershipClaim, Service,
+    Shortcut, StepCompletion, Tag,
     format_number,
 )
 
@@ -1376,3 +1377,62 @@ def administration_review_contribution(request, pk):
     contribution.approved = request.POST.get("decision") == "approve"
     contribution.save()
     return redirect("core:administration")
+
+
+# --- Parcours guidés
+
+def _mission_progress(account, mission):
+    """Étapes d'un parcours avec leur état, et le décompte (étapes faites, total)."""
+    done_ids = set(
+        account.step_completions.filter(step__mission=mission).values_list("step_id", flat=True)
+    ) if account else set()
+    steps = []
+    for step in mission.steps.all():
+        done = step.pk in done_ids or step.detected_for(account)
+        steps.append({"step": step, "done": done, "manual": not step.auto_check})
+    finished = sum(1 for item in steps if item["done"])
+    return steps, finished, len(steps)
+
+
+def parcours(request):
+    account = current_account(request)
+    missions = []
+    for mission in Mission.objects.filter(active=True).prefetch_related("steps"):
+        _steps, finished, total = _mission_progress(account, mission)
+        missions.append({
+            "mission": mission, "finished": finished, "total": total,
+            "complete": total > 0 and finished == total,
+        })
+    return render(request, "core/parcours.html", {"missions": missions})
+
+
+def parcours_detail(request, slug):
+    mission = get_object_or_404(Mission, slug=slug, active=True)
+    account = current_account(request)
+    steps, finished, total = _mission_progress(account, mission)
+    return render(request, "core/parcours_detail.html", {
+        "mission": mission, "steps": steps, "finished": finished, "total": total,
+        "complete": total > 0 and finished == total, "has_account": account is not None,
+    })
+
+
+@require_POST
+def parcours_step(request, pk):
+    step = get_object_or_404(MissionStep, pk=pk, mission__active=True, auto_check="")
+    account = current_account(request)
+    if account is None:
+        messages.info(request, _(
+            "Pour garder la trace de vos étapes, ouvrez d'abord un compte (nommé ou anonyme)."
+        ))
+        return redirect("core:account")
+    completion = StepCompletion.objects.filter(account=account, step=step)
+    if completion.exists():
+        completion.delete()
+    else:
+        StepCompletion.objects.create(account=account, step=step)
+        _steps, finished, total = _mission_progress(account, step.mission)
+        if total and finished == total:
+            messages.success(request, _("Bravo ! Parcours « %(title)s » terminé. 🎉") % {"title": step.mission.title})
+        else:
+            messages.success(request, _("Étape faite : %(title)s") % {"title": step.title})
+    return redirect("core:parcours_detail", slug=step.mission.slug)

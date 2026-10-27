@@ -1,10 +1,10 @@
 from django.contrib import admin
-from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
+from modeltranslation.admin import TranslationAdmin, TranslationStackedInline, TranslationTabularInline
 
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectoryEntryPhoto, DirectorySector, Donor, EntryMessage,
     EntrySubscription, Event, EventInterest, EventManagementRequest, GuideBook,
-    Membership, OwnershipClaim, Service, ServiceCategory, Shortcut, Tag,
+    Membership, Mission, MissionStep, OwnershipClaim, Service, ServiceCategory, Shortcut, StepCompletion, Tag,
 )
 
 admin.site.site_header = "lesgrandsvoisins.com"
@@ -223,3 +223,23 @@ class EntryMessageAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return False
+
+
+class MissionStepInline(TranslationStackedInline):
+    model = MissionStep
+    extra = 1
+    fields = ("position", "title", "body", "why", "link_url", "link_label", "auto_check")
+
+
+@admin.register(Mission)
+class MissionAdmin(TranslationAdmin):
+    list_display = ("title", "emoji", "minutes", "order", "active")
+    list_editable = ("order", "active")
+    prepopulated_fields = {"slug": ("title",)}
+    inlines = [MissionStepInline]
+
+
+@admin.register(StepCompletion)
+class StepCompletionAdmin(admin.ModelAdmin):
+    list_display = ("account", "step", "created")
+    list_filter = ("step__mission",)

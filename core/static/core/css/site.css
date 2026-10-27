@@ -4178,3 +4178,65 @@ a.prevnext {
   color: var(--muted, inherit);
   text-decoration: line-through
 }
+
+/* Parcours guidés */
+.missions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr))
+}
+
+.mission h2 {
+  margin: 0 0 .5rem
+}
+
+.mission h2 a {
+  text-decoration: none
+}
+
+.mission progress,
+.page-head progress {
+  width: 100%;
+  height: .75rem;
+  margin: .25rem 0 1rem;
+  accent-color: var(--sun)
+}
+
+.mission-done {
+  border-color: var(--sun)
+}
+
+.mission-steps {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  counter-reset: etape
+}
+
+.mission-step {
+  counter-increment: etape;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1rem 1.25rem
+}
+
+.mission-step h2::before {
+  content: counter(etape) ". ";
+  color: var(--muted, inherit)
+}
+
+.mission-step.done {
+  border-color: var(--sun)
+}
+
+.mission-why summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin: .5rem 0
+}

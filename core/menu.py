@@ -72,6 +72,16 @@ ENTRIES = [
         False,
     ),
     Entry(
+        "parcours",
+        _("Parcours guidés"),
+        _("de petites missions pour apprendre à se servir des outils, pas à pas"),
+        _("courriel, relecture, premiers pas : une étape à la fois"),
+        "core:parcours",
+        "compte",
+        "_self",
+        False,
+    ),
+    Entry(
         "grandsvoisins",
         _("Association"),
         _("une conscience collective, l'association coopérative"),

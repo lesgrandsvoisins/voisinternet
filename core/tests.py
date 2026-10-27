@@ -1480,3 +1480,50 @@ class DonationFlowTests(Base):
         self.assertNotContains(response, "en attente")  # une promesse n'attend rien
         for block in donation_page.cards:
             self.assertContains(response, block.value["title"])
+
+
+class ParcoursTests(Base):
+    def setUp(self):
+        super().setUp()
+        from core.models import Mission, MissionStep
+
+        self.mission = Mission.objects.create(slug="courriel", title="Ma boîte courriel", summary="Lire et écrire")
+        self.manual = MissionStep.objects.create(mission=self.mission, position=1, title="Ouvrir le webmail")
+        self.auto = MissionStep.objects.create(mission=self.mission, position=2, title="Un raccourci", auto_check="shortcut")
+
+    def test_pages_render_without_account_and_create_none(self):
+        self.assertContains(self.client.get(reverse("core:parcours")), "Ma boîte courriel")
+        page = self.client.get(reverse("core:parcours_detail", args=["courriel"]))
+        self.assertContains(page, "Ouvrir le webmail")
+        self.assertContains(page, "0 sur 2")
+        self.assertFalse(Account.objects.exists())
+
+    def test_ticking_without_account_asks_to_open_one(self):
+        response = self.client.post(reverse("core:parcours_step", args=[self.manual.pk]))
+        self.assertRedirects(response, reverse("core:account"))
+        self.assertFalse(Account.objects.exists())
+
+    def test_manual_and_detected_steps_lead_to_completion(self):
+        account, _digits = Account.create_anonymous()
+        session = self.client.session
+        session["voisinternet_account"] = account.pk
+        session.save()
+        from core.accounts import SESSION_KEY
+        session = self.client.session
+        session[SESSION_KEY] = account.pk
+        session.save()
+
+        self.client.post(reverse("core:parcours_step", args=[self.manual.pk]))
+        page = self.client.get(reverse("core:parcours_detail", args=["courriel"]))
+        self.assertContains(page, "1 sur 2")
+        self.assertNotContains(page, "Bravo, parcours terminé")
+
+        Shortcut.objects.create(account=account, service=self.service)  # étape détectée
+        page = self.client.get(reverse("core:parcours_detail", args=["courriel"]))
+        self.assertContains(page, "Bravo, parcours terminé")
+
+        # Une étape détectée ne se coche pas à la main.
+        self.assertEqual(self.client.post(reverse("core:parcours_step", args=[self.auto.pk])).status_code, 404)
+        # Décocher l'étape manuelle la remet à faire.
+        self.client.post(reverse("core:parcours_step", args=[self.manual.pk]))
+        self.assertContains(self.client.get(reverse("core:parcours_detail", args=["courriel"])), "1 sur 2")

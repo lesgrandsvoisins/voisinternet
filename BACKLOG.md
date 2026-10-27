@@ -20,7 +20,7 @@ Ce qui reste à faire pour `www.lesgrandsvoisins.com`, avec **qui** doit agir : 
 ## À faire côté UX
 - [ ] Traduire en en/es/ar/ko l'interface des parcours guidés (le contenu des parcours reste en français tant qu'il n'est pas traduit dans l'administration).
 - [ ] Parcours « documents » (selon la décision 3) et « Vikunja » plus détaillé (nom du projet de relecture à confirmer).
-- [ ] Test d'inscription dans un navigateur (Playwright), à écrire dans `flakeops/scripts/nonreg/` avec une identité jetable ; ne peut être lancé que par l'administration.
+- [x] Test d'inscription dans un navigateur : écrit (`flakeops`, branche `ux/test-inscription-navigateur`, `scripts/nonreg/inscription-navigateur.py`, page `docs/INSCRIPTION-NAVIGATEUR-TEST.md`). **Non vérifié, jamais lancé** ; à fusionner et lancer par l'administration. *Admin / Chris*
 - [ ] Doublons d'inscription : message qui oriente vers la connexion sans bloquer (une personne peut avoir un homonyme).
 - [ ] Audit d'accessibilité : navigation au clavier, contraste, arabe (droite à gauche), `prefers-reduced-motion`.
 - [ ] Courriel de bienvenue (contenu, à envoyer par Keycloak) et écran de bienvenue après la première connexion.

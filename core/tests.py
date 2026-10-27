@@ -42,6 +42,13 @@ class PagesTests(Base):
                 self.assertEqual(response.status_code, 200)
                 self.assertContains(response, 'id="main-menu-panel"')  # le menu principal est présent
 
+    def test_footer_language_switcher(self):
+        # Sélecteur de langue du pied de page : une entrée par langue, sans JavaScript.
+        response = self.client.get(reverse("core:home"))
+        self.assertContains(response, 'class="foot-lang"')
+        for code in ["fr", "en", "es", "ar", "ko"]:
+            self.assertContains(response, f'name="language" value="{code}"')
+
     def test_wagtail_pages_render(self):
         # Pages gérées par Wagtail (cms.PolePage, ContactPage, AssociationPage,
         # DonationPage) : pas de nom d'URL Django à inverser (voir core/menu.py).

@@ -976,11 +976,39 @@ class MesEvenementsTests(Base):
             "title_fr": "Atelier vélo", "start": "2026-10-01 10:00:00",
             "description_fr": "", "location_fr": "", "online_url": "", "tags": [],
         })
-        self.assertRedirects(response, reverse("core:mes_evenements"))
         event = Event.objects.get(title="Atelier vélo")
+        self.assertRedirects(response, reverse("core:event_detail", args=[event.pk]))
         self.assertFalse(event.public)
         acc = Account.objects.get(user=user)
         self.assertIn(event, acc.managed_events.all())
+        # La page d'aperçu dit clairement où en est l'évènement.
+        self.assertContains(self.client.get(response["Location"]), "En attente de publication")
+
+    def test_creation_notifies_administration_and_publication_notifies_the_creator(self):
+        from django.contrib.auth.models import Group
+
+        admin = get_user_model().objects.create_user("admin", email="admin@example.org")
+        admin.groups.add(Group.objects.get_or_create(name="Administration")[0])
+        creator = get_user_model().objects.create_user("voisine", email="voisine@example.org")
+        self.client.force_login(creator)
+        self.client.post(reverse("core:mes_evenements"), {
+            "title_fr": "Atelier vélo", "start": "2026-10-01 10:00:00",
+            "description_fr": "", "location_fr": "", "online_url": "", "tags": [],
+        })
+        self.assertEqual([m.to for m in mail.outbox], [["admin@example.org"]])
+        event = Event.objects.get(title="Atelier vélo")
+
+        self.client.force_login(admin)
+        self.client.post(reverse("core:administration_toggle_event", args=[event.pk]), {"field": "public"})
+        self.assertEqual(mail.outbox[-1].to, ["voisine@example.org"])
+        event.refresh_from_db()
+        self.assertTrue(event.public)
+
+    def test_visiting_my_events_does_not_create_an_account(self):
+        response = self.client.get(reverse("core:mes_evenements"))
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(Account.objects.exists())
+        self.assertNotContains(response, "Votre numéro de compte anonyme")
 
     def test_event_form_follows_the_active_browsing_language(self):
         # Contrairement à DirectoryEntryForm (toujours _fr) : un évènement se crée/modifie
@@ -999,8 +1027,8 @@ class MesEvenementsTests(Base):
             "title_en": "Bike workshop", "start": "2026-10-01 10:00:00",
             "description_en": "", "location_en": "", "online_url": "", "tags": [],
         })
-        self.assertRedirects(response, "/en/agenda/mes-evenements/")
         event = Event.objects.get(title_en="Bike workshop")
+        self.assertRedirects(response, f"/en/agenda/{event.pk}/")
         acc = Account.objects.get(user=user)
         self.assertIn(event, acc.managed_events.all())
 
@@ -1022,7 +1050,7 @@ class MesEvenementsTests(Base):
             "title_fr": "Atelier vélo (mis à jour)", "start": "2026-10-01 10:00:00",
             "description_fr": "", "location_fr": "", "online_url": "", "tags": [],
         })
-        self.assertRedirects(response, reverse("core:mes_evenements"))
+        self.assertRedirects(response, reverse("core:event_detail", args=[event.pk]))
         event.refresh_from_db()
         self.assertEqual(event.title, "Atelier vélo (mis à jour)")
 

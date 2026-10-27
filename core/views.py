@@ -8,6 +8,7 @@ from urllib.parse import urlencode
 
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
@@ -857,8 +858,51 @@ def claim_event_management(request, pk):
     return redirect(reverse("core:event_detail", args=[event.pk]))
 
 
+def _send_best_effort(subject, body, recipients):
+    """Courriel de notification : un SMTP injoignable ne doit jamais faire échouer l'action."""
+    recipients = [r for r in dict.fromkeys(recipients) if r]
+    if not recipients:
+        return
+    try:
+        EmailMessage(subject=subject, body=body, from_email=settings.DEFAULT_FROM_EMAIL, to=recipients).send()
+    except (OSError, SMTPException):
+        pass
+
+
+def _notify_administration_of_event(request, event):
+    emails = get_user_model().objects.filter(
+        groups__name="Administration", is_active=True,
+    ).exclude(email="").values_list("email", flat=True)
+    _send_best_effort(
+        _("Évènement à publier : %(title)s") % {"title": event.title},
+        _("Un évènement attend votre validation dans l'agenda.\n\n%(title)s — %(start)s\n\n"
+          "Le relire et le publier : %(url)s") % {
+            "title": event.title,
+            "start": event.start.strftime("%d/%m/%Y %H:%M"),
+            "url": request.build_absolute_uri(reverse("core:administration")),
+        },
+        list(emails) or [settings.CONTACT_EMAIL],
+    )
+
+
+def _notify_managers_of_publication(request, event):
+    emails = [
+        account.user.email for account in event.managers.select_related("user") if account.user and account.user.email
+    ]
+    _send_best_effort(
+        _("Votre évènement est publié : %(title)s") % {"title": event.title},
+        _("« %(title)s » est maintenant visible dans l'agenda : %(url)s") % {
+            "title": event.title,
+            "url": request.build_absolute_uri(reverse("core:event_detail", args=[event.pk])),
+        },
+        emails,
+    )
+
+
 def mes_evenements(request):
-    acc = current_account(request, create=True)
+    # Seule la création d'un évènement ouvre un compte : consulter la page ne doit pas en
+    # créer un (et donc ne pas imposer un numéro anonyme à qui regarde seulement).
+    acc = current_account(request, create=request.method == "POST")
     if request.method == "POST":
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
@@ -874,14 +918,15 @@ def mes_evenements(request):
             event.save()
             form.save_m2m()
             event.managers.add(acc)
-            messages.success(request, _("Évènement créé : il reste réservé à ses responsables tant que le "
-                                         "groupe « Administration » ne l'a pas publié."))
-            return redirect("core:mes_evenements")
+            _notify_administration_of_event(request, event)
+            messages.success(request, _("Évènement enregistré. Il reste visible de vous seul·e jusqu'à sa "
+                                         "publication par le groupe « Administration », prévenu par courriel."))
+            return redirect("core:event_detail", pk=event.pk)
     else:
         form = EventForm()
     return render(request, "core/mes_evenements.html", {
-        "events": acc.managed_events.order_by("-start"),
-        "interests": acc.event_interests.select_related("event").order_by("event__start"),
+        "events": acc.managed_events.order_by("-start") if acc else [],
+        "interests": acc.event_interests.select_related("event").order_by("event__start") if acc else [],
         "form": form,
     })
 
@@ -896,7 +941,7 @@ def evenement_modifier(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, _("Évènement mis à jour."))
-            return redirect("core:mes_evenements")
+            return redirect("core:event_detail", pk=event.pk)
     else:
         form = EventForm(instance=event)
     return render(request, "core/evenement_modifier.html", {"form": form, "event": event})
@@ -1303,6 +1348,8 @@ def administration_toggle_event(request, pk):
     event = get_object_or_404(Event, pk=pk)
     setattr(event, field, not getattr(event, field))
     event.save(update_fields=[field])
+    if field == "public" and event.public:
+        _notify_managers_of_publication(request, event)
     return redirect("core:administration")
 
 

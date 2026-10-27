@@ -4119,3 +4119,53 @@ a.prevnext {
     break-inside: avoid;
   }
 }
+/* Accueil : numéro de compte anonyme, tant qu'il n'est pas confirmé */
+.number-banner {
+  background: var(--sun);
+  color: #1a1a1a;
+  padding: 1rem 0;
+  border-bottom: 2px solid var(--line)
+}
+
+.number-banner .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: center;
+  justify-content: space-between
+}
+
+.number-banner p {
+  margin: .25rem 0
+}
+
+.number-banner code {
+  font-size: 1.5rem;
+  letter-spacing: .08em;
+  user-select: all
+}
+
+.number-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  align-items: center
+}
+
+.number-banner-actions form {
+  margin: 0
+}
+
+/* Premiers pas */
+.steps {
+  list-style: none;
+  margin: .5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: .5rem
+}
+
+.steps li.done {
+  color: var(--muted, inherit);
+  text-decoration: line-through
+}

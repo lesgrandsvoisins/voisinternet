@@ -5,7 +5,8 @@ from django.conf import settings
 from django.urls import reverse
 from django.utils.translation import get_language
 
-from .accounts import account_label, current_account
+from .accounts import NEW_NUMBER_KEY, account_label, current_account
+from .models import format_number
 from .menu import ENTRIES, GROUP_PAGES, GROUPS, entry_href
 
 from django.contrib.sites.shortcuts import get_current_site
@@ -47,11 +48,13 @@ def site(request):
     keycloak_register_url = ""
     keycloak_account_url = ""
     if settings.OIDC_ENABLED:
-        next_url = request.get_full_path()
-        keycloak_login_url = f"{reverse('oidc_authentication_init')}?{urlencode({'next': next_url})}"
-        keycloak_register_url = f"{settings.KEYCLOAK_REALM_URL}/protocol/openid-connect/registrations?{urlencode({'client_id': settings.OIDC_RP_CLIENT_ID, 'redirect_uri': request.build_absolute_uri(reverse('core:account'))})}"
+        query = urlencode({'next': request.get_full_path()})
+        keycloak_login_url = f"{reverse('core:connexion')}?{query}"
+        keycloak_register_url = f"{reverse('core:inscription')}?{query}"
         keycloak_account_url = f"{settings.KEYCLOAK_REALM_URL}/account/"
+    pending_number = request.session.get(NEW_NUMBER_KEY)
     return {
+        "pending_number": format_number(pending_number) if pending_number else None,
         "conj": {i["entry"].key: i for i in entries},
         "conj_groups": groups,
         "header_groups": header_groups,

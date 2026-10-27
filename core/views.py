@@ -369,8 +369,30 @@ def _is_administration(user):
     return user.is_authenticated and user.groups.filter(name="Administration").exists()
 
 
+def _first_steps(request, acc):
+    """Premiers pas proposés sur « Mon compte », cochés d'après les données (rien à stocker)."""
+    steps = [
+        {"label": _("Ajouter un raccourci vers un outil"), "url": reverse("core:raccourcis"),
+         "done": acc.shortcut_set.exists()},
+        {"label": _("Rejoindre un groupe"), "url": reverse("core:groupes"),
+         "done": acc.membership_set.exists()},
+        {"label": _("Présenter votre activité dans l'annuaire"), "url": reverse("core:mes_fiches"),
+         "done": acc.directory_entries.exists()},
+    ]
+    if settings.OIDC_ENABLED and not request.user.is_authenticated:
+        steps.append({
+            "label": _("Créer un compte nommé pour ne jamais perdre l'accès"),
+            "url": f"{reverse('core:inscription')}?{urlencode({'next': reverse('core:account')})}",
+            "done": False,
+        })
+    return steps
+
+
 def account(request):
-    new_number = request.session.pop(NEW_NUMBER_KEY, None)
+    if request.GET.get("connexion") == "echec":
+        messages.error(request, _(
+            "La connexion n'a pas abouti. Réessayez, ou continuez avec un compte anonyme."
+        ))
     acc = current_account(request)
     shortcuts = acc.shortcut_set.select_related("service").order_by(
         "position", "service__order", "service__name",
@@ -378,6 +400,7 @@ def account(request):
     memberships = acc.membership_set.select_related("audience").order_by(
         "position", "audience__order", "audience__name",
     ) if acc else []
+    first_steps = _first_steps(request, acc) if acc else []
     return render(request, "core/account.html", {
         "account": acc,
         "account_contributions": acc.contributions.all() if acc else [],
@@ -385,8 +408,9 @@ def account(request):
         "memberships": memberships,
         "owned_entries": acc.directory_entries.order_by("name") if acc else [],
         "managed_events": acc.managed_events.order_by("-start") if acc else [],
-        "new_number": format_number(new_number) if new_number else None,
         "pending": pending_anonymous_account(request),
+        "first_steps": first_steps,
+        "first_steps_done": sum(1 for step in first_steps if step["done"]),
         "is_administration": _is_administration(request.user),
         "contribution_form": ContributionForm(),
     })
@@ -914,6 +938,23 @@ def markdown_preview(request):
         "text": request.POST.get("description_fr", ""),
     })
 
+# --- Compte nommé (Keycloak)
+
+def _keycloak_redirect(request, register):
+    if not settings.OIDC_ENABLED:
+        raise Http404
+    from .auth import KeycloakAuthRequestView
+    return KeycloakAuthRequestView.as_view(register=register)(request)
+
+
+def connexion(request):
+    return _keycloak_redirect(request, register=False)
+
+
+def inscription(request):
+    return _keycloak_redirect(request, register=True)
+
+
 # --- Comptes anonymes
 
 @require_POST
@@ -922,6 +963,30 @@ def create_anonymous(request):
         current_account(request, create=True)
         messages.success(request, _("Compte anonyme créé."))
     return redirect("core:account")
+
+
+@require_POST
+def confirm_number(request):
+    """La personne a noté son numéro : le bandeau disparaît et le numéro est oublié."""
+    request.session.pop(NEW_NUMBER_KEY, None)
+    messages.success(request, _("Merci. Gardez ce numéro précieusement : il est la seule façon de retrouver ce compte."))
+    return redirect(_safe_next(request, reverse("core:account")))
+
+
+def download_number(request):
+    """Numéro du compte anonyme tout juste créé, en fichier texte (tant qu'il n'est pas confirmé)."""
+    number = request.session.get(NEW_NUMBER_KEY)
+    if not number:
+        raise Http404
+    body = _(
+        "Numéro de compte anonyme lesgrandsvoisins.com : %(number)s\n"
+        "Il suffit, seul, pour retrouver vos raccourcis sur un autre appareil. "
+        "Nous n'en gardons qu'une empreinte : nous ne pourrons pas vous le redonner.\n"
+    ) % {"number": format_number(number)}
+    response = HttpResponse(body, content_type="text/plain; charset=utf-8")
+    response["Content-Disposition"] = 'attachment; filename="numero-lesgrandsvoisins.txt"'
+    response["Cache-Control"] = "no-store"
+    return response
 
 
 @require_POST
@@ -983,7 +1048,7 @@ def toggle_shortcut(request, slug):
 
     new_number = None
     if not had_account and account.is_anonymous_only:
-        new_number = request.session.pop(NEW_NUMBER_KEY, None)
+        new_number = request.session.get(NEW_NUMBER_KEY)
 
     if _is_htmx(request):
         account = current_account(request)
@@ -1001,11 +1066,6 @@ def toggle_shortcut(request, slug):
             "shortcut_ids": shortcut_ids,
         })
 
-    if new_number:
-        # Sans JavaScript : on passe par « mon Compte » pour montrer le numéro une fois.
-        request.session[NEW_NUMBER_KEY] = new_number
-        messages.success(request, text)
-        return redirect("core:account")
     messages.success(request, text)
     return redirect(_safe_next(request, reverse("core:raccourcis")))
 
@@ -1099,7 +1159,7 @@ def toggle_membership(request, slug):
 
     new_number = None
     if not had_account and account.is_anonymous_only:
-        new_number = request.session.pop(NEW_NUMBER_KEY, None)
+        new_number = request.session.get(NEW_NUMBER_KEY)
 
     if _is_htmx(request):
         account = current_account(request)
@@ -1117,10 +1177,6 @@ def toggle_membership(request, slug):
             "membership_ids": membership_ids,
         })
 
-    if new_number:
-        request.session[NEW_NUMBER_KEY] = new_number
-        messages.success(request, text)
-        return redirect("core:account")
     messages.success(request, text)
     return redirect(_safe_next(request, reverse("core:groupes")))
 

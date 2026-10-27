@@ -1,0 +1,34 @@
+{% load i18n %}
+{% if pending_number %}
+  <section class="number-banner"
+           role="region"
+           aria-labelledby="number-banner-title"
+           x-data="{ copied: false }">
+    <div class="wrap">
+      <div class="number-banner-body">
+        <strong id="number-banner-title">{% trans "Votre numéro de compte anonyme" %}</strong>
+        <p class="number">
+          <code id="number-banner-code">{{ pending_number }}</code>
+        </p>
+        <p>
+          {% trans "Notez-le maintenant : il est la seule façon de retrouver ce compte sur un autre appareil. Nous n'en gardons qu'une empreinte et ne pourrons jamais vous le redonner." %}
+        </p>
+      </div>
+      <div class="number-banner-actions">
+        <button type="button"
+                class="btn btn-line"
+                x-cloak
+                x-on:click="navigator.clipboard.writeText(document.getElementById('number-banner-code').textContent.trim()).then(() => copied = true)">
+          <span x-show="!copied">{% trans "Copier" %}</span>
+          <span x-show="copied" x-cloak>{% trans "Copié" %}</span>
+        </button>
+        <a class="btn btn-line" href="{% url 'core:download_number' %}" download>{% trans "Télécharger" %}</a>
+        <form method="post" action="{% url 'core:confirm_number' %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+          <button class="btn btn-sun" type="submit">{% trans "J'ai noté mon numéro" %}</button>
+        </form>
+      </div>
+    </div>
+  </section>
+{% endif %}

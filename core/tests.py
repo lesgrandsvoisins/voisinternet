@@ -9,7 +9,7 @@ from django.core import mail
 from django.core.cache import cache
 from django.test import TestCase, override_settings
 from django.urls import reverse
-from django.utils import timezone
+from django.utils import timezone, translation
 
 from cms.models import Author, AuthorMessage, ContentPage, PolePage
 from cms.qmd import export_contentpage_qmd, import_contentpage_qmd
@@ -59,9 +59,12 @@ class PagesTests(Base):
                 self.assertEqual(response.status_code, 200)
                 self.assertContains(response, 'id="main-menu-panel"')
 
-    def test_header_says_se_connecter_for_new_visitor(self):
+    @override_settings(OIDC_ENABLED=True, KEYCLOAK_REALM_URL="https://key.example/realms/gv",
+                       OIDC_RP_CLIENT_ID="voisinternet")
+    def test_header_offers_register_and_login_for_new_visitor(self):
         response = self.client.get(reverse("core:home"))
-        self.assertContains(response, "Connecter")
+        self.assertContains(response, reverse("core:inscription"))
+        self.assertContains(response, reverse("core:connexion"))
 
     def test_header_widget_lists_shortcuts_once_an_account_exists(self):
         # Une fois un compte créé (même anonyme), le widget bascule des actions de
@@ -373,15 +376,45 @@ Fin du texte.
 class AnonymousAccountTests(Base):
     def test_adding_a_service_creates_an_anonymous_account(self):
         response = self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]))
-        self.assertRedirects(response, reverse("core:account"), fetch_redirect_response=False)
+        self.assertRedirects(response, reverse("core:raccourcis"), fetch_redirect_response=False)
         account = Account.objects.get()
         self.assertTrue(account.is_anonymous_only)
         self.assertTrue(Shortcut.objects.filter(account=account, service=self.service).exists())
-        # Le numéro est montré une seule fois, puis oublié.
+        # Le numéro reste affiché, sur toutes les pages, jusqu'à confirmation explicite.
+        for _ in range(2):
+            page = self.client.get(reverse("core:home"))
+            self.assertContains(page, "Votre numéro de compte anonyme")
+        download = self.client.get(reverse("core:download_number"))
+        self.assertEqual(download.status_code, 200)
+        self.assertIn("attachment", download["Content-Disposition"])
+        self.client.post(reverse("core:confirm_number"))
+        self.assertNotContains(self.client.get(reverse("core:home")), "Votre numéro de compte anonyme")
+        self.assertEqual(self.client.get(reverse("core:download_number")).status_code, 404)
+
+    def test_first_steps_are_ticked_from_data(self):
+        self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]))
         page = self.client.get(reverse("core:account"))
-        self.assertContains(page, "Votre numéro de compte")
-        again = self.client.get(reverse("core:account"))
-        self.assertNotContains(again, "Votre numéro de compte")
+        self.assertContains(page, "Premiers pas")
+        self.assertContains(page, "1 sur")
+
+    def test_connexion_is_404_without_oidc(self):
+        with override_settings(OIDC_ENABLED=False):
+            self.assertEqual(self.client.get(reverse("core:inscription")).status_code, 404)
+
+    @override_settings(OIDC_ENABLED=True, KEYCLOAK_REALM_URL="https://key.example/realms/gv",
+                       OIDC_RP_CLIENT_ID="voisinternet",
+                       OIDC_OP_AUTHORIZATION_ENDPOINT="https://key.example/auth",
+                       OIDC_OP_TOKEN_ENDPOINT="https://key.example/token",
+                       OIDC_OP_USER_ENDPOINT="https://key.example/user",
+                       OIDC_RP_CLIENT_SECRET="x")
+    def test_inscription_passes_language_and_create_prompt(self):
+        self.addCleanup(translation.activate, "fr")  # la requête /es/ active l'espagnol pour le fil
+        response = self.client.get("/es/account/inscription/")
+        self.assertEqual(response.status_code, 302)
+        self.assertIn("ui_locales=es", response["Location"])
+        self.assertIn("prompt=create", response["Location"])
+        login = self.client.get("/es/account/connexion/")
+        self.assertNotIn("prompt=create", login["Location"])
 
     def test_number_is_never_stored_in_clear(self):
         account, digits = Account.create_anonymous()

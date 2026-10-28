@@ -4,6 +4,7 @@ Changements notables de `www.lesgrandsvoisins.com` (voisinternet), branche de tr
 
 ## [Unreleased]
 ### Added
+- **`tools/export_ancien_site.py`** : extraction de l'ancien site (`old.lesgrandsvoisins.com`, dépôt `sites-faciles`, branche `lesgrandsvoisins`) : pages, billets, catégories, étiquettes, menus, redirections Wagtail, liste des documents et images, plus `adresses.csv` (une ligne par page publiée) pour écrire la table `LEGACY_REDIRECTS`. Non testé sur la vraie base (rubriques isolées : une erreur n'arrête pas les autres).
 - **Raccourcis, repris** : boutons d'action explicites (« + Ajouter à mes raccourcis » / « ✓ Dans mes raccourcis »), catalogue rangé par catégorie (les services déjà ajoutés y restent, voulu), lien « Ouvrir ↗ » homogène (`_blank` + `noopener`, fini le `_new`), « Bientôt » pour un service sans adresse, raccourci en attente grisé et non cliquable avec explication, indication du réordonnancement. Traductions en/es/ar/ko à refaire (`make messages`).
 - **Page d'un évènement** : le bloc « Modifier / Mes évènements » (et l'état de publication) passe à la fin de la page, après l'évènement lui-même.
 - **`.justfile`** à la racine : recettes de développement (`test`, `run`) et de production (`statut`, `decomptes`, `fumee`, `sauvegarde`, `essai`, `maj`, `manage`, `redemarrer`, `journal`) ; `deploy/manage.sh` lance `manage.py` avec l'environnement du site ; les scripts de `deploy/` acceptent la variable `PROJECT` (alias de `PROJET`).

@@ -15,11 +15,16 @@ verif() { # verif DESCRIPTION CHEMIN STATUT_ATTENDU [TEXTE_ATTENDU_DANS_LA_REPON
   if [ -n "$texte" ] && ! printf '%s' "$sortie" | grep -qiF -- "$texte"; then echo "KO   $desc : « $texte » absent"; ko=1; return; fi
   echo "OK   $desc"
 }
+absent() { # absent DESCRIPTION CHEMIN TEXTE_QUI_NE_DOIT_PAS_APPARAITRE
+  local desc=$1 chemin=$2 texte=$3 sortie
+  sortie=$(curl -s -m 20 "${HOST_HDR[@]}" "$BASE$chemin") || { echo "KO   $desc : pas de réponse"; ko=1; return; }
+  if printf '%s' "$sortie" | grep -qiF -- "$texte"; then echo "KO   $desc : « $texte » est visible"; ko=1; else echo "OK   $desc"; fi
+}
 verif "accueil (fr)"                      /fr/                          200 "Créer mon compte"
 verif "accueil (ar, droite à gauche)"     /ar/                          200 'dir="rtl"'
 verif "mon compte"                        /fr/account/                  200 "Créer mon compte"
 verif "parcours guidés"                   /fr/account/parcours/         200 "Parcours guidés"
-verif "parcours : détail (courriel)"      /fr/account/parcours/courriel/ 200 "Ma boîte courriel"
+verif "parcours : détail (premiers pas)"  /fr/account/parcours/premiers-pas/ 200 "Premiers pas"
 verif "agenda"                            /fr/agenda/                   200
 verif "mes évènements (sans compte)"      /fr/agenda/mes-evenements/    200
 verif "annuaire"                          /fr/annuaire/                 200
@@ -28,5 +33,8 @@ verif "inscription : langue transmise"    /es/account/inscription/      302 "ui_
 verif "connexion -> Keycloak"             /fr/account/connexion/        302 "/protocol/openid-connect/auth"
 verif "pied de page : sélecteur de langue" /fr/                         200 'class="foot-lang"'
 verif "numéro anonyme : pas de téléchargement sans compte" /fr/account/anonyme/numero/ 404
+absent "compte anonyme discret : aucun bouton à l'accueil" /fr/ "rester anonyme"
+absent "compte anonyme discret : aucun bouton dans « Mon compte »" /fr/account/ "Rester anonyme"
+verif "compte anonyme discret : rubrique « Autres options » repliée" /fr/account/ 200 'class="anon-discret"'
 [ "$ko" -eq 0 ] && echo "Tout est OK." || echo "Au moins un KO."
 exit $ko

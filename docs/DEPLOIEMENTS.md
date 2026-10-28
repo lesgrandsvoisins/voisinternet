@@ -14,5 +14,6 @@ Production : `05f2014` = `main` (fusionné le 28/10). Le code du site tourne en 
 
 ## À faire avant la prochaine mise en ligne
 - La branche `claude/lesgrandsvoisins-ux-klh29a` est abandonnée (tout est dans `main`) : à supprimer sur GitHub (la suppression par push depuis la session de travail est refusée).
+- Étiquettes de rattrapage à poser : `v0.1.6` sur `e8898fe` (avant le 28/10), `v0.2.0` sur `1f08e1d` (code en ligne depuis le 28/10 12:38) : voir DEPLOIEMENT.md, « Étiquettes ». Les suivantes : `v0.2.1`, etc.
 - Les prochaines mises à jour se font depuis `main` : `deploy/mise-a-jour.sh main` (ou `just maj <dossier>`).
 - Une sauvegarde plus récente que `2026-10-28-1052` si des données ont beaucoup changé.

@@ -72,8 +72,14 @@ puis redémarrer et relancer `smoke.sh`. **La restauration n'a jamais été essa
 - Ce que rien ne teste encore : l'arrivée du courriel de vérification depuis `www`, l'affichage réel des messages du thème Keycloak, l'envoi des courriels de l'agenda (serveur SMTP réel).
 
 ## Étiquettes (tags) de version
-Une étiquette donne un **nom lisible à un commit précis** : « ce qui tournait en production le 28/10 ». Elle sert de cible de retour arrière (`git checkout --detach prod-2026-10-28`) et de repère dans `docs/DEPLOIEMENTS.md`.
-- **Quand** : à chaque mise en ligne qui change le code du site (pas pour de la documentation seule), et à un jalon (« onboarding terminé », « qualification en place »).
-- **Nom proposé** : `prod-AAAA-MM-JJ` pour une mise en ligne (`prod-2026-10-28-2` s'il y en a deux le même jour) ; `v0.N.0` pour un jalon (0.1.0 = première version avec l'onboarding refait).
-- **Comment** (par la personne qui met en ligne, depuis un clone où elle peut pousser, ou par moi sur demande) : `git tag -a prod-2026-10-28 1f08e1d -m "Production du 28/10 12:38"` puis `git push origin prod-2026-10-28`. Une étiquette annotée garde l'auteur et la date. Ne jamais déplacer une étiquette déjà poussée.
-- **Rattrapage possible** : `prod-2026-10-28` sur `1f08e1d` (le code qui tourne depuis 12:38) et `prod-2026-10-28-avant` sur `e8898fe` (l'état d'avant). Non créées : à décider.
+Une étiquette donne un **nom lisible à un commit précis** : « ce qui tournait en production le 28/10 ». Elle sert de cible de retour arrière (`git checkout --detach v0.2.0`) et de repère dans `docs/DEPLOIEMENTS.md`.
+- **Schéma : on continue celui du dépôt**, `v0.MINEUR.CORRECTIF` (déjà `v0.1.0` à `v0.1.5`, posées les 12 et 13 septembre). Un **correctif** (`v0.2.1`) à chaque mise en ligne qui change le code du site ; une **mineure** (`v0.3.0`) pour un jalon ou un changement important. Pas pour de la documentation seule. Les dates et les commits sont dans `docs/DEPLOIEMENTS.md`.
+- **Rattrapage** (non créé : mon accès à GitHub refuse de pousser des étiquettes, erreur 403) : `v0.1.6` sur `e8898fe` (ce qui tournait avant le 28/10, 50 commits après `v0.1.5`) et `v0.2.0` sur `1f08e1d` (le code qui tourne depuis le 28/10 à 12:38).
+- **Comment** (depuis un clone où l'on peut pousser, ou dans GitHub : *Releases → Draft a new release → Choose a tag → Create new tag*, en choisissant le commit) :
+  ```
+  git fetch origin
+  git tag -a v0.1.6 e8898fe -m "Production avant le 28/10"
+  git tag -a v0.2.0 1f08e1d -m "Production du 28/10 12:38 : onboarding, parcours guidés, compte anonyme discret, robots.txt, adresses de la boîte"
+  git push origin v0.1.6 v0.2.0
+  ```
+  Une étiquette annotée garde l'auteur et la date. **Ne jamais déplacer une étiquette déjà poussée.**

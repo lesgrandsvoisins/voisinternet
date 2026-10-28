@@ -1,6 +1,6 @@
 {% extends "core/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Mes raccourcis — lesgrandsvoisins.com" %}{% endblock %}
+{% block title %}{% trans "Services et liens — lesgrandsvoisins.com" %}{% endblock %}
 {% block content %}
 {% trans "Les services que vous avez choisis, à ajouter ou retirer à tout moment." as page_lead %}
 {% url 'core:account' as account_url %}
@@ -9,7 +9,7 @@
 <div class="wrap page">
   <section aria-labelledby="sc-title">
     <div class="split">
-      <h2 id="sc-title">{% trans "Mes raccourcis" %}</h2>
+      <h2 id="sc-title">{% trans "Mes liens" %}</h2>
     </div>
     <div id="shortcuts-list">
       {% include "core/partials/shortcut_list.html" %}
@@ -18,7 +18,7 @@
 
   <section id="available-services" aria-labelledby="add-title">
     <div class="split">
-      <h2 id="add-title">{% trans "Services à ajouter à mes raccourcis" %}</h2>
+      <h2 id="add-title">{% trans "Services à ajouter à mes liens" %}</h2>
       <p class="muted">{% trans "Ceux déjà ajoutés restent affichés : cliquez pour les retirer." %}</p>
     </div>
     {% include "core/partials/service_list.html" with services=available_services details=True %}

@@ -391,7 +391,7 @@ def _is_administration(user):
 def _first_steps(request, acc):
     """Premiers pas proposés sur « Mon compte », cochés d'après les données (rien à stocker)."""
     steps = [
-        {"label": _("Ajouter un raccourci vers un outil"), "url": reverse("core:raccourcis"),
+        {"label": _("Ajouter un lien vers un outil"), "url": reverse("core:raccourcis"),
          "done": acc.shortcut_set.exists()},
         {"label": _("Rejoindre un groupe"), "url": reverse("core:groupes"),
          "done": acc.membership_set.exists()},
@@ -523,7 +523,7 @@ def raccourcis(request):
         return redirect("core:account")
     shortcuts = acc.shortcut_set.select_related("service").order_by("position", "service__order", "service__name")
     shortcut_ids = set(shortcuts.values_list("service_id", flat=True))
-    # Reste dans la liste une fois ajouté (bouton « Dans mes raccourcis », qui permet de le retirer) :
+    # Reste dans la liste une fois ajouté (bouton « Dans mes liens », qui permet de le retirer) :
     # la carte ne doit pas disparaître d'un coup sous le pointeur au moment du clic.
     available_services = _catalogue()
     return render(request, "core/raccourcis.html", {
@@ -1064,7 +1064,7 @@ def download_number(request):
         raise Http404
     body = _(
         "Numéro de compte anonyme lesgrandsvoisins.com : %(number)s\n"
-        "Il suffit, seul, pour retrouver vos raccourcis sur un autre appareil. "
+        "Il suffit, seul, pour retrouver vos liens sur un autre appareil. "
         "Nous n'en gardons qu'une empreinte : nous ne pourrons pas vous le redonner.\n"
     ) % {"number": format_number(number)}
     response = HttpResponse(body, content_type="text/plain; charset=utf-8")
@@ -1083,7 +1083,7 @@ def recover_anonymous(request):
         messages.error(request, _("Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."))
     else:
         request.session[SESSION_KEY] = account.pk
-        messages.success(request, _("Compte retrouvé. Vos raccourcis sont de retour."))
+        messages.success(request, _("Compte retrouvé. Vos liens sont de retour."))
     return redirect("core:account")
 
 
@@ -1101,11 +1101,11 @@ def link_anonymous(request):
     if pending is not None:
         current_account(request).absorb(pending)
         request.session.pop(SESSION_KEY, None)
-        messages.success(request, _("Vos raccourcis anonymes ont rejoint votre compte."))
+        messages.success(request, _("Vos liens anonymes ont rejoint votre compte."))
     return redirect("core:account")
 
 
-# --- Raccourcis
+# --- Liens
 
 @require_POST
 def toggle_shortcut(request, slug):
@@ -1119,17 +1119,17 @@ def toggle_shortcut(request, slug):
     if shortcut:
         shortcut.delete()
         added = False
-        text = _("« %(name)s » retiré de vos raccourcis.") % {"name": service.name}
+        text = _("« %(name)s » retiré de vos liens.") % {"name": service.name}
     else:
         new_shortcut = Shortcut.objects.create(
             account=account, service=service, position=account.shortcut_set.count(),
         )
         added = True
         if new_shortcut.approved:
-            text = _("« %(name)s » ajouté à vos raccourcis.") % {"name": service.name}
+            text = _("« %(name)s » ajouté à vos liens.") % {"name": service.name}
         else:
             text = _(
-                "« %(name)s » ajouté à vos raccourcis, en attente de validation par un administrateur."
+                "« %(name)s » ajouté à vos liens, en attente de validation par un administrateur."
             ) % {"name": service.name}
 
     new_number = None

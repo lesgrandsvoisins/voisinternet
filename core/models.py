@@ -93,7 +93,7 @@ class Service(models.Model):
         _("nécessite une validation"), default=False,
         help_text=_(
             "Une intervention d'un administrateur est nécessaire avant que le service ne soit actif pour la "
-            "personne (ex. création manuelle d'une boîte courriel) : le raccourci reste « en attente » jusqu'à "
+            "personne (ex. création manuelle d'une boîte courriel) : le lien reste « en attente » jusqu'à "
             "validation (groupe « Administration »)."
         ),
     )
@@ -151,7 +151,7 @@ class Account(models.Model):
         return cls.objects.filter(number_digest=number_digest(digits), user__isnull=True).first()
 
     def absorb(self, other):
-        """Rattache les raccourcis et appartenances d'un compte anonyme à ce compte, puis supprime l'anonyme."""
+        """Rattache les liens et appartenances d'un compte anonyme à ce compte, puis supprime l'anonyme."""
         for shortcut in other.shortcut_set.all():
             Shortcut.objects.get_or_create(account=self, service_id=shortcut.service_id)
         for membership in other.membership_set.all():
@@ -177,7 +177,7 @@ class Shortcut(models.Model):
     class Meta:
         constraints = [models.UniqueConstraint(fields=["account", "service"], name="unique_shortcut")]
         ordering = ["account", "position", "service__name"]
-        verbose_name = _("raccourci")
+        verbose_name = _("lien")
 
     def __str__(self):
         return f"{self.service} ({self.account})"
@@ -675,7 +675,7 @@ class MissionStep(models.Model):
         (AUTO_NONE, _("à cocher par la personne")),
         ("account", _("détectée : a un compte")),
         ("named", _("détectée : compte nommé (connecté)")),
-        ("shortcut", _("détectée : a un raccourci")),
+        ("shortcut", _("détectée : a un lien")),
         ("group", _("détectée : a rejoint un groupe")),
         ("entry", _("détectée : a une fiche d'annuaire")),
         ("event", _("détectée : gère un évènement")),

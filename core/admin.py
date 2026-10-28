@@ -50,7 +50,7 @@ class ServiceAdmin(TranslationAdmin):
 class ShortcutAdmin(admin.ModelAdmin):
     """
     Accessible au groupe « Administration » (core.migrations.0019) pour valider les
-    raccourcis en attente (Service.requires_approval) : eux seuls, sans autre droit sur
+    liens en attente (Service.requires_approval) : eux seuls, sans autre droit sur
     core.Account, ont donc besoin d'un accès direct à ce modèle plutôt que par l'inline
     d'AccountAdmin (qui exige la permission sur Account).
     """
@@ -88,7 +88,7 @@ class AccountAdmin(admin.ModelAdmin):
     # Requis par ShortcutAdmin.autocomplete_fields ci-dessus.
     search_fields = ["user__username", "user__first_name", "user__last_name"]
 
-    @admin.display(description="raccourcis")
+    @admin.display(description="liens")
     def shortcut_count(self, obj):
         return obj.shortcut_set.count()
 

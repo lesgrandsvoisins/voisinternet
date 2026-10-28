@@ -1681,3 +1681,29 @@ class AnciennesAdressesTests(Base):
                 response = self.client.get(f"/{langue}/association/")
                 self.assertEqual(response.status_code, 301)
                 self.assertEqual(response["Location"], f"/{langue}/grandsvoisins/")
+
+    def test_old_site_fr_fr_addresses(self):
+        from urllib.parse import quote
+        DirectoryEntry.objects.create(name="Carton Plein", slug="carton-plein")
+        Event.objects.create(title="Bonne année 2025", slug="bonne-annee-2025", start=timezone.now(), public=True)
+        event = Event.objects.get(slug="bonne-annee-2025")
+        cas = {
+            "/fr-fr/": "/fr/",
+            "/fr-fr/association/conseils-des-voisins/25e/": "/fr/grandsvoisins/",
+            "/fr-fr/activités/": "/fr/activites/",
+            "/fr-fr/annuaire/carton-plein/": "/fr/annuaire/carton-plein/",
+            "/fr-fr/annuaire/inconnu/": "/fr/annuaire/",
+            "/fr-fr/blog/introuvable/": "/fr/blog/",
+            "/fr-fr/numerique/proposition-annuaire/": "/fr/numerique/",
+            "/fr-fr/agenda/" + quote("bonne-année-2025") + "/": f"/fr/agenda/{event.pk}/",
+            "/fr-fr/agenda/autre-chose/": "/fr/agenda/",
+        }
+        for ancien, attendu in cas.items():
+            with self.subTest(ancien=ancien):
+                response = self.client.get(ancien)
+                self.assertEqual(response.status_code, 301)
+                self.assertEqual(response["Location"], attendu)
+        self.assertEqual(self.client.get("/fr-fr/rien-du-tout/").status_code, 404)
+
+    def test_old_blog_post_renamed_on_migration(self):
+        self.assertEqual(self.client.get("/fr-fr/blog/sites-faciles/")["Location"], "/fr/blog/")  # billet absent ici : rubrique

@@ -13,5 +13,6 @@ Une ligne par mise en ligne : date, commit, ce qui change, contrôles faits. Rec
 Production : `05f2014` = `main` (fusionné le 28/10). Le code du site tourne en réalité depuis `1f08e1d` (redémarrage de 12:38), la mise à jour vers `main` n'ayant ajouté que de la documentation et des scripts. Retour arrière : `git checkout --detach <commit précédent> && systemctl restart voisinter-django`.
 
 ## À faire avant la prochaine mise en ligne
+- La branche `claude/lesgrandsvoisins-ux-klh29a` est abandonnée (tout est dans `main`) : à supprimer sur GitHub (la suppression par push depuis la session de travail est refusée).
 - Les prochaines mises à jour se font depuis `main` : `deploy/mise-a-jour.sh main` (ou `just maj <dossier>`).
 - Une sauvegarde plus récente que `2026-10-28-1052` si des données ont beaucoup changé.

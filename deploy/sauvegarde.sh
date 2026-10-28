@@ -23,7 +23,7 @@ charger_env() {
     export "$k=$v"
   done < "$f"
 }
-PROJET=${PROJET:-$(pwd)}; ENV_FILE=${ENV_FILE:-/etc/voisinter-django/voisinter-django.env}; DEST=${DEST:-$HOME/sauvegardes}
+PROJET=${PROJET:-${PROJECT:-$(pwd)}}; ENV_FILE=${ENV_FILE:-/etc/voisinter-django/voisinter-django.env}; DEST=${DEST:-$HOME/sauvegardes}
 PY="$PROJET/.venv/bin/python"; [ -x "$PY" ] || PY=$(command -v python3)
 cd "$PROJET" || { echo "KO   dossier du projet introuvable : $PROJET"; exit 2; }
 ko=0; ok() { echo "OK   $*"; }; ko() { echo "KO   $*"; ko=1; }

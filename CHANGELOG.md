@@ -4,6 +4,8 @@ Changements notables de `www.lesgrandsvoisins.com` (voisinternet), branche de tr
 
 ## [Unreleased]
 ### Added
+- **`.justfile`** à la racine : recettes de développement (`test`, `run`) et de production (`statut`, `decomptes`, `fumee`, `sauvegarde`, `essai`, `maj`, `manage`, `redemarrer`, `journal`) ; `deploy/manage.sh` lance `manage.py` avec l'environnement du site ; les scripts de `deploy/` acceptent la variable `PROJECT` (alias de `PROJET`).
+- `docs/DEPLOIEMENTS.md` : journal des mises en ligne.
 - **Anciennes adresses du vieux site** (`old.lesgrandsvoisins.com`) : table `LEGACY_REDIRECTS` (`core/urls.py`), redirections permanentes 301 qui gardent la langue. Première entrée : `/fr/association/` (404 vu dans le journal de production, demandé par Bing) → `/fr/grandsvoisins/` (page « Association », qui porte le manifeste).
 - **`robots.txt`** (absent jusqu'ici : 404 dans le journal) : tient les robots à l'écart du compte, de l'administration, des formulaires et des mois du calendrier. Les pages portant `?mois=` et « Mon compte » sont aussi `noindex, nofollow`.
 - **Calendrier borné** : le paramètre `?mois=` n'accepte plus que 5 ans en arrière et 3 ans en avant (au-delà : mois courant). Le journal de production du 28/10 montrait des robots (ClaudeBot, DotBot, bingbot) parcourant des mois comme `?mois=1997-07`, soit un nombre illimité de pages.

@@ -14,7 +14,7 @@ charger_env() {
     export "$k=$v"
   done < "$f"
 }
-PROJET=${PROJET:-$(pwd)}; ENV_FILE=${ENV_FILE:-/etc/voisinter-django/voisinter-django.env}
+PROJET=${PROJET:-${PROJECT:-$(pwd)}}; ENV_FILE=${ENV_FILE:-/etc/voisinter-django/voisinter-django.env}
 PY="$PROJET/.venv/bin/python"; [ -x "$PY" ] || PY=$(command -v python3)
 cd "$PROJET" || exit 2; charger_env "$ENV_FILE"
 "$PY" manage.py shell -c "

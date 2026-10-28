@@ -26,7 +26,7 @@ charger_env() {
 }
 REF=${1:-}; ESSAI=0; [ "${2:-}" = "--essai" ] && ESSAI=1
 [ -n "$REF" ] || { sed -n 2,13p "$0"; exit 2; }
-PROJET=${PROJET:-$(pwd)}; ENV_FILE=${ENV_FILE:-/etc/voisinter-django/voisinter-django.env}; DEST=${DEST:-$HOME/sauvegardes}; SOURCE=${SOURCE:-origin}
+PROJET=${PROJET:-${PROJECT:-$(pwd)}}; ENV_FILE=${ENV_FILE:-/etc/voisinter-django/voisinter-django.env}; DEST=${DEST:-$HOME/sauvegardes}; SOURCE=${SOURCE:-origin}
 PY="$PROJET/.venv/bin/python"; [ -x "$PY" ] || PY=$(command -v python3)
 cd "$PROJET" || { echo "KO dossier du projet introuvable : $PROJET"; exit 2; }
 die() { echo "KO   $*"; exit 1; }

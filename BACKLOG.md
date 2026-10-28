@@ -47,6 +47,7 @@ Les besoins côté serveur passent par `docs/DEMANDES-UX.md` (dépôt `flakeops`
 | U-025 | a_faire | Courriel de bienvenue (contenu, à envoyer par Keycloak) et écran de bienvenue après la première connexion. | UX / Admin | Contenu écrit ; envoi configuré. |
 | U-026 | a_faire | Un évènement publié puis modifié reste publié sans relecture : décider si la modification le repasse en attente. | UX / Chris | Décision appliquée. |
 | U-027 | a_faire | Proposer en premier la création d'un compte nommé (le numéro anonyme est difficile à garder pour ce public). | UX | Ordre et textes changés. |
+| U-030 | a_faire | Traduire en en/es/ar/ko les nouveaux libellés des raccourcis (`make messages`, puis relecture). | Claude + relecteurs | `.po` à jour, libellés relus |
 
 ## P3 — Idées
 - Rendre les parcours plus ludiques (défis, petits quiz, « montrer à un voisin »).

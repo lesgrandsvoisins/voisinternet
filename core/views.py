@@ -508,15 +508,24 @@ def faire_don_merci(request):
     })
 
 
+def _catalogue():
+    """Services proposés, rangés par catégorie (celles sans catégorie à la fin)."""
+    return sorted(
+        Service.objects.filter(active=True).select_related("category"),
+        key=lambda s: (s.category is None, s.category.order if s.category else 0,
+                       s.category.name if s.category else "", s.order, s.name),
+    )
+
+
 def raccourcis(request):
     acc = current_account(request)
     if acc is None:
         return redirect("core:account")
     shortcuts = acc.shortcut_set.select_related("service").order_by("position", "service__order", "service__name")
     shortcut_ids = set(shortcuts.values_list("service_id", flat=True))
-    # Reste dans la liste une fois ajouté (bouton « Ajouté », qui permet de le retirer) :
+    # Reste dans la liste une fois ajouté (bouton « Dans mes raccourcis », qui permet de le retirer) :
     # la carte ne doit pas disparaître d'un coup sous le pointeur au moment du clic.
-    available_services = Service.objects.filter(active=True).order_by("order", "name")
+    available_services = _catalogue()
     return render(request, "core/raccourcis.html", {
         "account": acc,
         "shortcuts": shortcuts,
@@ -1131,7 +1140,7 @@ def toggle_shortcut(request, slug):
         account = current_account(request)
         shortcut_ids = set(account.shortcut_set.values_list("service_id", flat=True)) if account else set()
         shortcuts = account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name") if account else []
-        available_services = Service.objects.filter(active=True).order_by("order", "name")
+        available_services = _catalogue()
         return render(request, "core/partials/shortcut_response.html", {
             "service": service,
             "added": added,

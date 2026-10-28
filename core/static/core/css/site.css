@@ -4257,3 +4257,9 @@ a.prevnext {
 .anon-discret[open] {
   opacity: 1
 }
+
+/* Catalogue de raccourcis : catégories, lien « Ouvrir », raccourci en attente */
+.svc li.svc-cat { display: block; background: none; border: 0; box-shadow: none; padding: 1rem 0 0; }
+.svc li.svc-cat p { margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: .85rem; }
+.svc .pending { opacity: .65; }
+.open-link { font-weight: 600; }

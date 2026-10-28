@@ -1,6 +1,7 @@
 {% load i18n markdown_filters %}
 <ul class="svc">
   {% for service in services %}
+    {% if details %}{% ifchanged service.category_id %}<li class="svc-cat" role="presentation"><p>{% if service.category %}{{ service.category.name }}{% else %}{% trans "Autres" %}{% endif %}</p></li>{% endifchanged %}{% endif %}
     <li {% if service.featured %}class="feat"{% endif %}>
       {% if service.icon %}
         <img class="svc-icon" src="{{ service.icon.url }}" alt="">
@@ -8,8 +9,13 @@
         <span class="led" aria-hidden="true"></span>
       {% endif %}
       <div>
-        <h3><a target="_new" href="{{ service.url }}">{{ service.name }}</a></h3>
+        <h3>{{ service.name }}</h3>
         <p>{{ service.summary }}</p>
+        {% if service.url %}
+          <p><a class="open-link" href="{{ service.url }}" target="_blank" rel="noopener">{% blocktrans with name=service.name %}Ouvrir {{ name }}{% endblocktrans %} <span aria-hidden="true">↗</span></a></p>
+        {% else %}
+          <p><span class="chip">{% trans "Bientôt" %}</span></p>
+        {% endif %}
         {% if details and service.description %}<div class="markdown">{{ service.description|markdown }}</div>{% endif %}
         {% if details and service.retention %}
           <details class="retention">

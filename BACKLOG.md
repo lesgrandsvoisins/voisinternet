@@ -34,6 +34,8 @@ Les besoins côté serveur passent par `docs/DEMANDES-UX.md` (dépôt `flakeops`
 
 | U-031 | a_faire | Inscription Keycloak (demande Admin du 28/10, `B-043`) : (1) champ identifiant en lecture seule « calculé pour vous » : thème 0.2.0 écrit (`flakeops` `ux/inscription-lecture-seule`, `a8280db`), **non déployé, non essayé dans Keycloak** ; (2) textes du royaume proposés dans `docs/TEXTES-ROYAUME.md`, à appliquer par Chris ; (3) adresses lues dans le claim `lgvmail` (demande n°9 : protocol mapper) ; (4) test navigateur adapté (5+5 sans numéro, deux `mail`) ; (5) le lien d'inscription de `www` part de `client_id=<OIDC_RP_CLIENT_ID>` (voisinternet), pas de la console d'administration : voir réponse à l'Admin. | UX / Admin / Chris | Une inscription test sur la qualification ou la production : identifiant lu en lecture seule, deux adresses affichées, arrivée sur `www`. |
 
+| U-032 | a_faire | Journal de production du 28/10 : beaucoup de trafic de robots (ClaudeBot, DotBot, bingbot, scanners `cache.php`, `wp-admin`), `/fr/association/` en 404 depuis Bing (ancienne adresse), journal d'accès de 215 Mo. `robots.txt` et calendrier borné faits ; reste à décider : limitation de débit côté Caddy, rotation du journal, redirection des anciennes adresses (`B-0xx` ?). | Admin / UX / Chris | Trafic de robots maîtrisé ; anciennes adresses redirigées. |
+
 ## P2 — À faire côté UX
 | ID | État | Tâche | Resp. | Terminé quand |
 |---|---|---|---|---|

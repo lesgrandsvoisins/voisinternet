@@ -101,11 +101,16 @@ def _month_calendar(request):
     voisins pour compléter la grille — sans évènement dessus, juste pour l'alignement.
     """
     today = timezone.localdate()
+    current = date(today.year, today.month, 1)
     try:
         year, month = (int(part) for part in request.GET.get("mois", "").split("-"))
         first_of_month = date(year, month, 1)
     except (TypeError, ValueError):
-        first_of_month = date(today.year, today.month, 1)
+        first_of_month = current
+    # Fenêtre bornée (5 ans en arrière, 3 ans en avant) : sans elle, des robots parcouraient des mois à l'infini
+    # (?mois=1997-07…), un nombre illimité de pages. Hors fenêtre : le mois courant.
+    if not (date(today.year - 5, today.month, 1) <= first_of_month <= date(today.year + 3, today.month, 1)):
+        first_of_month = current
 
     month_dates = list(calendar.Calendar(firstweekday=0).itermonthdates(first_of_month.year, first_of_month.month))
     events_by_day = {}
@@ -1464,3 +1469,20 @@ def parcours_step(request, pk):
         else:
             messages.success(request, _("Étape faite : %(title)s") % {"title": step.title})
     return redirect("core:parcours_detail", slug=step.mission.slug)
+
+
+def robots_txt(request):
+    """robots.txt : tient les robots à l'écart des pages sans intérêt pour un moteur de recherche (compte, administration,
+    formulaires, mois du calendrier) ; le reste du site reste ouvert. Les jokers (*) sont compris des principaux moteurs."""
+    lines = [
+        "User-agent: *",
+        "Disallow: /oidc/",
+        "Disallow: /*/account/",
+        "Disallow: /*/admin/",
+        "Disallow: /*/cms/",
+        "Disallow: /*/agenda/mes-evenements/",
+        "Disallow: /*/annuaire/mes-fiches/",
+        "Disallow: /*?mois=",
+        "Disallow: /*&mois=",
+    ]
+    return HttpResponse("\n".join(lines) + "\n", content_type="text/plain; charset=utf-8")

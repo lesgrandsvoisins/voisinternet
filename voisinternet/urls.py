@@ -7,7 +7,10 @@ from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
+from core import views as core_views
+
 urlpatterns = [
+    path("robots.txt", core_views.robots_txt, name="robots_txt"),
     path("documents/", include(wagtaildocs_urls)),
 ]
 

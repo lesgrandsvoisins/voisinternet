@@ -1635,3 +1635,28 @@ class AnonymeFermeTests(Base):
         self.client.post(reverse("core:recover_anonymous"), {"number": digits})
         self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]))
         self.assertTrue(Shortcut.objects.filter(account=account).exists())
+
+
+class RobotsEtCalendrierTests(Base):
+    def test_robots_txt_keeps_robots_out_of_useless_pages(self):
+        response = self.client.get("/robots.txt")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], "text/plain; charset=utf-8")
+        for rule in ["Disallow: /*/account/", "Disallow: /*?mois=", "Disallow: /*/cms/"]:
+            self.assertContains(response, rule)
+
+    def test_calendar_months_are_bounded(self):
+        today = timezone.localdate()
+        courant = self.client.get(reverse("core:home")).context["agenda_calendar"]["month_label"]
+        # Mois absurdes (passé lointain, futur lointain, valeur illisible) : retombent sur le mois courant.
+        for valeur in ["1997-07", f"{today.year + 10}-01", "n-importe-quoi"]:
+            with self.subTest(mois=valeur):
+                self.assertEqual(self.client.get(reverse("core:home") + f"?mois={valeur}").context["agenda_calendar"]["month_label"], courant)
+        # Un mois dans la fenêtre (il y a un an) reste accessible.
+        proche = self.client.get(reverse("core:home") + f"?mois={today.year - 1}-{today.month:02d}")
+        self.assertEqual(proche.context["agenda_calendar"]["month_label"].year, today.year - 1)
+
+    def test_calendar_pages_with_a_month_are_noindex(self):
+        self.assertContains(self.client.get(reverse("core:home") + "?mois=2026-10"), 'name="robots" content="noindex, nofollow"')
+        self.assertNotContains(self.client.get(reverse("core:home")), 'name="robots"')
+        self.assertContains(self.client.get(reverse("core:account")), 'name="robots" content="noindex, nofollow"')

@@ -4,6 +4,8 @@ Changements notables de `www.lesgrandsvoisins.com` (voisinternet), branche de tr
 
 ## [Unreleased]
 ### Added
+- **`robots.txt`** (absent jusqu'ici : 404 dans le journal) : tient les robots à l'écart du compte, de l'administration, des formulaires et des mois du calendrier. Les pages portant `?mois=` et « Mon compte » sont aussi `noindex, nofollow`.
+- **Calendrier borné** : le paramètre `?mois=` n'accepte plus que 5 ans en arrière et 3 ans en avant (au-delà : mois courant). Le journal de production du 28/10 montrait des robots (ClaudeBot, DotBot, bingbot) parcourant des mois comme `?mois=1997-07`, soit un nombre illimité de pages.
 - **Adresses de la boîte** : `www` lit le claim `lgvmail` (multivalué) du compte Keycloak et l'affiche dans « Mon profil » et dans le message de bienvenue ; **aucun domaine n'est écrit dans `www`**, sans claim rien n'est affiché. Demande côté Keycloak : `docs/DEMANDES-UX.md` n°9 (`flakeops`).
 - **Compte anonyme discret** (réglage `VOISINTERNET_ANON_ACCOUNTS` : `discret` par défaut, `ouvert` = comportement historique, `ferme`) : plus de bouton visible (en-tête, accueil, « Mon compte » : une rubrique « Autres options » repliée et grisée au bas de la page, qui garde aussi « J'ai déjà un numéro »), plus de création à la simple visite (« Mes fiches » en ouvrait un à chaque passage, robots compris), plus de création implicite par « Ajouter un raccourci / groupe », intérêt pour un évènement ou abonnement : ces actions renvoient vers « Mon compte » (HX-Redirect pour htmx). Un don reste un acte délibéré qui peut ouvrir un compte. Les comptes anonymes existants continuent de fonctionner. 157 tests.
 - `docs/QUALIFICATION.md` : proposition d'environnement de qualification (rien en place).

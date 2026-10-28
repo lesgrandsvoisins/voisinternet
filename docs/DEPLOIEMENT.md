@@ -21,6 +21,13 @@ Trois scripts dans `deploy/`, essayés sur une **simulation locale** (base SQLit
 
 Ce qui change entre `main` (production d'après le dernier commit connu, `e8898fe`) et la branche de travail : 15 commits, 45 fichiers, **aucune dépendance Python nouvelle**, **une migration** (`core/migrations/0034`, trois nouvelles tables, aucune table existante modifiée), un réglage ajouté (`LOGIN_REDIRECT_URL_FAILURE`, sans variable d'environnement). Essayé en simulation : la migration s'applique sur l'ancien schéma sans toucher aux données, et `migrate core 0033` la retire (l'ancien code refonctionne ensuite).
 
+**0a. Récupérer les scripts d'abord** : le code en production (`main`) ne les contient pas encore. Dans le conteneur (par exemple `sudo nixos-container root-login voisinter-django`, puis `su -s /bin/bash voisinter-django` ; **non vérifié**) :
+```
+cd ~ && for f in sauvegarde.sh mise-a-jour.sh smoke.sh; do curl -fsSLO https://raw.githubusercontent.com/lesgrandsvoisins/voisinternet/claude/lesgrandsvoisins-ux-klh29a/deploy/$f; done; chmod +x *.sh
+export PROJET=/var/voisinter/voisinter        # puis lancer ./sauvegarde.sh, ./mise-a-jour.sh, ./smoke.sh au lieu de deploy/…
+```
+Lire les scripts avant de les lancer : ce sont de courts fichiers texte.
+
 **0. Choisir le code à mettre en ligne.** Ne pas fusionner dans `main` pour « essayer » : la mise à jour se fait en tête détachée sur la branche de travail ; `main` n'est pas modifiée. Fusionner dans `main` seulement une fois la mise en ligne jugée bonne.
 
 **1. Sauvegarder** (obligatoire, la mise à jour refuse sans sauvegarde de moins d'une heure) :

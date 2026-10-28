@@ -1,7 +1,8 @@
 from modeltranslation.translator import TranslationOptions, translator
 
 from .models import (
-    Audience, Contribution, DirectoryEntry, DirectorySector, Donor, Event, GuideBook, Service, ServiceCategory, Tag,
+    Audience, Contribution, DirectoryEntry, DirectorySector, Donor, Event, GuideBook, Mission, MissionStep, Service,
+    ServiceCategory, Tag,
 )
 
 
@@ -55,3 +56,15 @@ translator.register(DirectoryEntry, DirectoryEntryTranslationOptions)
 translator.register(Event, EventTranslationOptions)
 translator.register(Contribution, ContributionTranslationOptions)
 translator.register(Donor, DonorTranslationOptions)
+
+
+class MissionTranslationOptions(TranslationOptions):
+    fields = ("title", "summary")
+
+
+class MissionStepTranslationOptions(TranslationOptions):
+    fields = ("title", "body", "why", "link_label")
+
+
+translator.register(Mission, MissionTranslationOptions)
+translator.register(MissionStep, MissionStepTranslationOptions)

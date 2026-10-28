@@ -8,6 +8,7 @@ from urllib.parse import urlencode
 
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
@@ -28,7 +29,8 @@ from .forms import ContactMessageForm, ContributionForm, DirectoryEntryForm, Eve
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntryMessage, EntrySubscription, Event,
-    EventInterest, EventManagementRequest, GuideBook, Membership, OwnershipClaim, Service, Shortcut, Tag,
+    EventInterest, EventManagementRequest, GuideBook, Membership, Mission, MissionStep, OwnershipClaim, Service,
+    Shortcut, StepCompletion, Tag,
     format_number,
 )
 
@@ -369,8 +371,30 @@ def _is_administration(user):
     return user.is_authenticated and user.groups.filter(name="Administration").exists()
 
 
+def _first_steps(request, acc):
+    """Premiers pas proposés sur « Mon compte », cochés d'après les données (rien à stocker)."""
+    steps = [
+        {"label": _("Ajouter un raccourci vers un outil"), "url": reverse("core:raccourcis"),
+         "done": acc.shortcut_set.exists()},
+        {"label": _("Rejoindre un groupe"), "url": reverse("core:groupes"),
+         "done": acc.membership_set.exists()},
+        {"label": _("Présenter votre activité dans l'annuaire"), "url": reverse("core:mes_fiches"),
+         "done": acc.directory_entries.exists()},
+    ]
+    if settings.OIDC_ENABLED and not request.user.is_authenticated:
+        steps.append({
+            "label": _("Créer un compte nommé pour ne jamais perdre l'accès"),
+            "url": f"{reverse('core:inscription')}?{urlencode({'next': reverse('core:account')})}",
+            "done": False,
+        })
+    return steps
+
+
 def account(request):
-    new_number = request.session.pop(NEW_NUMBER_KEY, None)
+    if request.GET.get("connexion") == "echec":
+        messages.error(request, _(
+            "La connexion n'a pas abouti. Réessayez, ou continuez avec un compte anonyme."
+        ))
     acc = current_account(request)
     shortcuts = acc.shortcut_set.select_related("service").order_by(
         "position", "service__order", "service__name",
@@ -378,6 +402,7 @@ def account(request):
     memberships = acc.membership_set.select_related("audience").order_by(
         "position", "audience__order", "audience__name",
     ) if acc else []
+    first_steps = _first_steps(request, acc) if acc else []
     return render(request, "core/account.html", {
         "account": acc,
         "account_contributions": acc.contributions.all() if acc else [],
@@ -385,8 +410,9 @@ def account(request):
         "memberships": memberships,
         "owned_entries": acc.directory_entries.order_by("name") if acc else [],
         "managed_events": acc.managed_events.order_by("-start") if acc else [],
-        "new_number": format_number(new_number) if new_number else None,
         "pending": pending_anonymous_account(request),
+        "first_steps": first_steps,
+        "first_steps_done": sum(1 for step in first_steps if step["done"]),
         "is_administration": _is_administration(request.user),
         "contribution_form": ContributionForm(),
     })
@@ -833,8 +859,51 @@ def claim_event_management(request, pk):
     return redirect(reverse("core:event_detail", args=[event.pk]))
 
 
+def _send_best_effort(subject, body, recipients):
+    """Courriel de notification : un SMTP injoignable ne doit jamais faire échouer l'action."""
+    recipients = [r for r in dict.fromkeys(recipients) if r]
+    if not recipients:
+        return
+    try:
+        EmailMessage(subject=subject, body=body, from_email=settings.DEFAULT_FROM_EMAIL, to=recipients).send()
+    except (OSError, SMTPException):
+        pass
+
+
+def _notify_administration_of_event(request, event):
+    emails = get_user_model().objects.filter(
+        groups__name="Administration", is_active=True,
+    ).exclude(email="").values_list("email", flat=True)
+    _send_best_effort(
+        _("Évènement à publier : %(title)s") % {"title": event.title},
+        _("Un évènement attend votre validation dans l'agenda.\n\n%(title)s — %(start)s\n\n"
+          "Le relire et le publier : %(url)s") % {
+            "title": event.title,
+            "start": event.start.strftime("%d/%m/%Y %H:%M"),
+            "url": request.build_absolute_uri(reverse("core:administration")),
+        },
+        list(emails) or [settings.CONTACT_EMAIL],
+    )
+
+
+def _notify_managers_of_publication(request, event):
+    emails = [
+        account.user.email for account in event.managers.select_related("user") if account.user and account.user.email
+    ]
+    _send_best_effort(
+        _("Votre évènement est publié : %(title)s") % {"title": event.title},
+        _("« %(title)s » est maintenant visible dans l'agenda : %(url)s") % {
+            "title": event.title,
+            "url": request.build_absolute_uri(reverse("core:event_detail", args=[event.pk])),
+        },
+        emails,
+    )
+
+
 def mes_evenements(request):
-    acc = current_account(request, create=True)
+    # Seule la création d'un évènement ouvre un compte : consulter la page ne doit pas en
+    # créer un (et donc ne pas imposer un numéro anonyme à qui regarde seulement).
+    acc = current_account(request, create=request.method == "POST")
     if request.method == "POST":
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
@@ -850,14 +919,15 @@ def mes_evenements(request):
             event.save()
             form.save_m2m()
             event.managers.add(acc)
-            messages.success(request, _("Évènement créé : il reste réservé à ses responsables tant que le "
-                                         "groupe « Administration » ne l'a pas publié."))
-            return redirect("core:mes_evenements")
+            _notify_administration_of_event(request, event)
+            messages.success(request, _("Évènement enregistré. Il reste visible de vous seul·e jusqu'à sa "
+                                         "publication par le groupe « Administration », prévenu par courriel."))
+            return redirect("core:event_detail", pk=event.pk)
     else:
         form = EventForm()
     return render(request, "core/mes_evenements.html", {
-        "events": acc.managed_events.order_by("-start"),
-        "interests": acc.event_interests.select_related("event").order_by("event__start"),
+        "events": acc.managed_events.order_by("-start") if acc else [],
+        "interests": acc.event_interests.select_related("event").order_by("event__start") if acc else [],
         "form": form,
     })
 
@@ -872,7 +942,7 @@ def evenement_modifier(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, _("Évènement mis à jour."))
-            return redirect("core:mes_evenements")
+            return redirect("core:event_detail", pk=event.pk)
     else:
         form = EventForm(instance=event)
     return render(request, "core/evenement_modifier.html", {"form": form, "event": event})
@@ -914,6 +984,23 @@ def markdown_preview(request):
         "text": request.POST.get("description_fr", ""),
     })
 
+# --- Compte nommé (Keycloak)
+
+def _keycloak_redirect(request, register):
+    if not settings.OIDC_ENABLED:
+        raise Http404
+    from .auth import KeycloakAuthRequestView
+    return KeycloakAuthRequestView.as_view(register=register)(request)
+
+
+def connexion(request):
+    return _keycloak_redirect(request, register=False)
+
+
+def inscription(request):
+    return _keycloak_redirect(request, register=True)
+
+
 # --- Comptes anonymes
 
 @require_POST
@@ -922,6 +1009,30 @@ def create_anonymous(request):
         current_account(request, create=True)
         messages.success(request, _("Compte anonyme créé."))
     return redirect("core:account")
+
+
+@require_POST
+def confirm_number(request):
+    """La personne a noté son numéro : le bandeau disparaît et le numéro est oublié."""
+    request.session.pop(NEW_NUMBER_KEY, None)
+    messages.success(request, _("Merci. Gardez ce numéro précieusement : il est la seule façon de retrouver ce compte."))
+    return redirect(_safe_next(request, reverse("core:account")))
+
+
+def download_number(request):
+    """Numéro du compte anonyme tout juste créé, en fichier texte (tant qu'il n'est pas confirmé)."""
+    number = request.session.get(NEW_NUMBER_KEY)
+    if not number:
+        raise Http404
+    body = _(
+        "Numéro de compte anonyme lesgrandsvoisins.com : %(number)s\n"
+        "Il suffit, seul, pour retrouver vos raccourcis sur un autre appareil. "
+        "Nous n'en gardons qu'une empreinte : nous ne pourrons pas vous le redonner.\n"
+    ) % {"number": format_number(number)}
+    response = HttpResponse(body, content_type="text/plain; charset=utf-8")
+    response["Content-Disposition"] = 'attachment; filename="numero-lesgrandsvoisins.txt"'
+    response["Cache-Control"] = "no-store"
+    return response
 
 
 @require_POST
@@ -983,7 +1094,7 @@ def toggle_shortcut(request, slug):
 
     new_number = None
     if not had_account and account.is_anonymous_only:
-        new_number = request.session.pop(NEW_NUMBER_KEY, None)
+        new_number = request.session.get(NEW_NUMBER_KEY)
 
     if _is_htmx(request):
         account = current_account(request)
@@ -1001,11 +1112,6 @@ def toggle_shortcut(request, slug):
             "shortcut_ids": shortcut_ids,
         })
 
-    if new_number:
-        # Sans JavaScript : on passe par « mon Compte » pour montrer le numéro une fois.
-        request.session[NEW_NUMBER_KEY] = new_number
-        messages.success(request, text)
-        return redirect("core:account")
     messages.success(request, text)
     return redirect(_safe_next(request, reverse("core:raccourcis")))
 
@@ -1099,7 +1205,7 @@ def toggle_membership(request, slug):
 
     new_number = None
     if not had_account and account.is_anonymous_only:
-        new_number = request.session.pop(NEW_NUMBER_KEY, None)
+        new_number = request.session.get(NEW_NUMBER_KEY)
 
     if _is_htmx(request):
         account = current_account(request)
@@ -1117,10 +1223,6 @@ def toggle_membership(request, slug):
             "membership_ids": membership_ids,
         })
 
-    if new_number:
-        request.session[NEW_NUMBER_KEY] = new_number
-        messages.success(request, text)
-        return redirect("core:account")
     messages.success(request, text)
     return redirect(_safe_next(request, reverse("core:groupes")))
 
@@ -1247,6 +1349,8 @@ def administration_toggle_event(request, pk):
     event = get_object_or_404(Event, pk=pk)
     setattr(event, field, not getattr(event, field))
     event.save(update_fields=[field])
+    if field == "public" and event.public:
+        _notify_managers_of_publication(request, event)
     return redirect("core:administration")
 
 
@@ -1273,3 +1377,62 @@ def administration_review_contribution(request, pk):
     contribution.approved = request.POST.get("decision") == "approve"
     contribution.save()
     return redirect("core:administration")
+
+
+# --- Parcours guidés
+
+def _mission_progress(account, mission):
+    """Étapes d'un parcours avec leur état, et le décompte (étapes faites, total)."""
+    done_ids = set(
+        account.step_completions.filter(step__mission=mission).values_list("step_id", flat=True)
+    ) if account else set()
+    steps = []
+    for step in mission.steps.all():
+        done = step.pk in done_ids or step.detected_for(account)
+        steps.append({"step": step, "done": done, "manual": not step.auto_check})
+    finished = sum(1 for item in steps if item["done"])
+    return steps, finished, len(steps)
+
+
+def parcours(request):
+    account = current_account(request)
+    missions = []
+    for mission in Mission.objects.filter(active=True).prefetch_related("steps"):
+        _steps, finished, total = _mission_progress(account, mission)
+        missions.append({
+            "mission": mission, "finished": finished, "total": total,
+            "complete": total > 0 and finished == total,
+        })
+    return render(request, "core/parcours.html", {"missions": missions})
+
+
+def parcours_detail(request, slug):
+    mission = get_object_or_404(Mission, slug=slug, active=True)
+    account = current_account(request)
+    steps, finished, total = _mission_progress(account, mission)
+    return render(request, "core/parcours_detail.html", {
+        "mission": mission, "steps": steps, "finished": finished, "total": total,
+        "complete": total > 0 and finished == total, "has_account": account is not None,
+    })
+
+
+@require_POST
+def parcours_step(request, pk):
+    step = get_object_or_404(MissionStep, pk=pk, mission__active=True, auto_check="")
+    account = current_account(request)
+    if account is None:
+        messages.info(request, _(
+            "Pour garder la trace de vos étapes, ouvrez d'abord un compte (nommé ou anonyme)."
+        ))
+        return redirect("core:account")
+    completion = StepCompletion.objects.filter(account=account, step=step)
+    if completion.exists():
+        completion.delete()
+    else:
+        StepCompletion.objects.create(account=account, step=step)
+        _steps, finished, total = _mission_progress(account, step.mission)
+        if total and finished == total:
+            messages.success(request, _("Bravo ! Parcours « %(title)s » terminé. 🎉") % {"title": step.mission.title})
+        else:
+            messages.success(request, _("Étape faite : %(title)s") % {"title": step.title})
+    return redirect("core:parcours_detail", slug=step.mission.slug)

@@ -9,7 +9,7 @@ from django.core import mail
 from django.core.cache import cache
 from django.test import TestCase, override_settings
 from django.urls import reverse
-from django.utils import timezone
+from django.utils import timezone, translation
 
 from cms.models import Author, AuthorMessage, ContentPage, PolePage
 from cms.qmd import export_contentpage_qmd, import_contentpage_qmd
@@ -42,6 +42,13 @@ class PagesTests(Base):
                 self.assertEqual(response.status_code, 200)
                 self.assertContains(response, 'id="main-menu-panel"')  # le menu principal est présent
 
+    def test_footer_language_switcher(self):
+        # Sélecteur de langue du pied de page : une entrée par langue, sans JavaScript.
+        response = self.client.get(reverse("core:home"))
+        self.assertContains(response, 'class="foot-lang"')
+        for code in ["fr", "en", "es", "ar", "ko"]:
+            self.assertContains(response, f'name="language" value="{code}"')
+
     def test_wagtail_pages_render(self):
         # Pages gérées par Wagtail (cms.PolePage, ContactPage, AssociationPage,
         # DonationPage) : pas de nom d'URL Django à inverser (voir core/menu.py).
@@ -52,9 +59,12 @@ class PagesTests(Base):
                 self.assertEqual(response.status_code, 200)
                 self.assertContains(response, 'id="main-menu-panel"')
 
-    def test_header_says_se_connecter_for_new_visitor(self):
+    @override_settings(OIDC_ENABLED=True, KEYCLOAK_REALM_URL="https://key.example/realms/gv",
+                       OIDC_RP_CLIENT_ID="voisinternet")
+    def test_header_offers_register_and_login_for_new_visitor(self):
         response = self.client.get(reverse("core:home"))
-        self.assertContains(response, "Connecter")
+        self.assertContains(response, reverse("core:inscription"))
+        self.assertContains(response, reverse("core:connexion"))
 
     def test_header_widget_lists_shortcuts_once_an_account_exists(self):
         # Une fois un compte créé (même anonyme), le widget bascule des actions de
@@ -366,15 +376,55 @@ Fin du texte.
 class AnonymousAccountTests(Base):
     def test_adding_a_service_creates_an_anonymous_account(self):
         response = self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]))
-        self.assertRedirects(response, reverse("core:account"), fetch_redirect_response=False)
+        self.assertRedirects(response, reverse("core:raccourcis"), fetch_redirect_response=False)
         account = Account.objects.get()
         self.assertTrue(account.is_anonymous_only)
         self.assertTrue(Shortcut.objects.filter(account=account, service=self.service).exists())
-        # Le numéro est montré une seule fois, puis oublié.
+        # Le numéro reste affiché, sur toutes les pages, jusqu'à confirmation explicite.
+        for _ in range(2):
+            page = self.client.get(reverse("core:home"))
+            self.assertContains(page, "Votre numéro de compte anonyme")
+            # Les chiffres se lisent toujours de gauche à droite, même dans une langue RTL (arabe).
+            self.assertContains(page, 'id="number-banner-code" dir="ltr"')
+        download = self.client.get(reverse("core:download_number"))
+        self.assertEqual(download.status_code, 200)
+        self.assertIn("attachment", download["Content-Disposition"])
+        self.client.post(reverse("core:confirm_number"))
+        self.assertNotContains(self.client.get(reverse("core:home")), "Votre numéro de compte anonyme")
+        self.assertEqual(self.client.get(reverse("core:download_number")).status_code, 404)
+
+    def test_first_steps_are_ticked_from_data(self):
+        self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]))
         page = self.client.get(reverse("core:account"))
-        self.assertContains(page, "Votre numéro de compte")
-        again = self.client.get(reverse("core:account"))
-        self.assertNotContains(again, "Votre numéro de compte")
+        self.assertContains(page, "Premiers pas")
+        self.assertContains(page, "1 sur")
+
+    def test_login_identifier_is_shown_in_profile(self):
+        user = get_user_model().objects.create_user("sub-123", first_name="Jean")
+        self.client.force_login(user)
+        session = self.client.session
+        session["voisinternet_login_identifier"] = "dupojean2@gv.je"
+        session.save()
+        self.assertContains(self.client.get(reverse("core:account")), "dupojean2@gv.je")
+
+    def test_connexion_is_404_without_oidc(self):
+        with override_settings(OIDC_ENABLED=False):
+            self.assertEqual(self.client.get(reverse("core:inscription")).status_code, 404)
+
+    @override_settings(OIDC_ENABLED=True, KEYCLOAK_REALM_URL="https://key.example/realms/gv",
+                       OIDC_RP_CLIENT_ID="voisinternet",
+                       OIDC_OP_AUTHORIZATION_ENDPOINT="https://key.example/auth",
+                       OIDC_OP_TOKEN_ENDPOINT="https://key.example/token",
+                       OIDC_OP_USER_ENDPOINT="https://key.example/user",
+                       OIDC_RP_CLIENT_SECRET="x")
+    def test_inscription_passes_language_and_create_prompt(self):
+        self.addCleanup(translation.activate, "fr")  # la requête /es/ active l'espagnol pour le fil
+        response = self.client.get("/es/account/inscription/")
+        self.assertEqual(response.status_code, 302)
+        self.assertIn("ui_locales=es", response["Location"])
+        self.assertIn("prompt=create", response["Location"])
+        login = self.client.get("/es/account/connexion/")
+        self.assertNotIn("prompt=create", login["Location"])
 
     def test_number_is_never_stored_in_clear(self):
         account, digits = Account.create_anonymous()
@@ -936,11 +986,39 @@ class MesEvenementsTests(Base):
             "title_fr": "Atelier vélo", "start": "2026-10-01 10:00:00",
             "description_fr": "", "location_fr": "", "online_url": "", "tags": [],
         })
-        self.assertRedirects(response, reverse("core:mes_evenements"))
         event = Event.objects.get(title="Atelier vélo")
+        self.assertRedirects(response, reverse("core:event_detail", args=[event.pk]))
         self.assertFalse(event.public)
         acc = Account.objects.get(user=user)
         self.assertIn(event, acc.managed_events.all())
+        # La page d'aperçu dit clairement où en est l'évènement.
+        self.assertContains(self.client.get(response["Location"]), "En attente de publication")
+
+    def test_creation_notifies_administration_and_publication_notifies_the_creator(self):
+        from django.contrib.auth.models import Group
+
+        admin = get_user_model().objects.create_user("admin", email="admin@example.org")
+        admin.groups.add(Group.objects.get_or_create(name="Administration")[0])
+        creator = get_user_model().objects.create_user("voisine", email="voisine@example.org")
+        self.client.force_login(creator)
+        self.client.post(reverse("core:mes_evenements"), {
+            "title_fr": "Atelier vélo", "start": "2026-10-01 10:00:00",
+            "description_fr": "", "location_fr": "", "online_url": "", "tags": [],
+        })
+        self.assertEqual([m.to for m in mail.outbox], [["admin@example.org"]])
+        event = Event.objects.get(title="Atelier vélo")
+
+        self.client.force_login(admin)
+        self.client.post(reverse("core:administration_toggle_event", args=[event.pk]), {"field": "public"})
+        self.assertEqual(mail.outbox[-1].to, ["voisine@example.org"])
+        event.refresh_from_db()
+        self.assertTrue(event.public)
+
+    def test_visiting_my_events_does_not_create_an_account(self):
+        response = self.client.get(reverse("core:mes_evenements"))
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(Account.objects.exists())
+        self.assertNotContains(response, "Votre numéro de compte anonyme")
 
     def test_event_form_follows_the_active_browsing_language(self):
         # Contrairement à DirectoryEntryForm (toujours _fr) : un évènement se crée/modifie
@@ -959,8 +1037,8 @@ class MesEvenementsTests(Base):
             "title_en": "Bike workshop", "start": "2026-10-01 10:00:00",
             "description_en": "", "location_en": "", "online_url": "", "tags": [],
         })
-        self.assertRedirects(response, "/en/agenda/mes-evenements/")
         event = Event.objects.get(title_en="Bike workshop")
+        self.assertRedirects(response, f"/en/agenda/{event.pk}/")
         acc = Account.objects.get(user=user)
         self.assertIn(event, acc.managed_events.all())
 
@@ -982,7 +1060,7 @@ class MesEvenementsTests(Base):
             "title_fr": "Atelier vélo (mis à jour)", "start": "2026-10-01 10:00:00",
             "description_fr": "", "location_fr": "", "online_url": "", "tags": [],
         })
-        self.assertRedirects(response, reverse("core:mes_evenements"))
+        self.assertRedirects(response, reverse("core:event_detail", args=[event.pk]))
         event.refresh_from_db()
         self.assertEqual(event.title, "Atelier vélo (mis à jour)")
 
@@ -1404,3 +1482,50 @@ class DonationFlowTests(Base):
         self.assertNotContains(response, "en attente")  # une promesse n'attend rien
         for block in donation_page.cards:
             self.assertContains(response, block.value["title"])
+
+
+class ParcoursTests(Base):
+    def setUp(self):
+        super().setUp()
+        from core.models import Mission, MissionStep
+
+        self.mission = Mission.objects.create(slug="courriel", title="Ma boîte courriel", summary="Lire et écrire")
+        self.manual = MissionStep.objects.create(mission=self.mission, position=1, title="Ouvrir le webmail")
+        self.auto = MissionStep.objects.create(mission=self.mission, position=2, title="Un raccourci", auto_check="shortcut")
+
+    def test_pages_render_without_account_and_create_none(self):
+        self.assertContains(self.client.get(reverse("core:parcours")), "Ma boîte courriel")
+        page = self.client.get(reverse("core:parcours_detail", args=["courriel"]))
+        self.assertContains(page, "Ouvrir le webmail")
+        self.assertContains(page, "0 sur 2")
+        self.assertFalse(Account.objects.exists())
+
+    def test_ticking_without_account_asks_to_open_one(self):
+        response = self.client.post(reverse("core:parcours_step", args=[self.manual.pk]))
+        self.assertRedirects(response, reverse("core:account"))
+        self.assertFalse(Account.objects.exists())
+
+    def test_manual_and_detected_steps_lead_to_completion(self):
+        account, _digits = Account.create_anonymous()
+        session = self.client.session
+        session["voisinternet_account"] = account.pk
+        session.save()
+        from core.accounts import SESSION_KEY
+        session = self.client.session
+        session[SESSION_KEY] = account.pk
+        session.save()
+
+        self.client.post(reverse("core:parcours_step", args=[self.manual.pk]))
+        page = self.client.get(reverse("core:parcours_detail", args=["courriel"]))
+        self.assertContains(page, "1 sur 2")
+        self.assertNotContains(page, "Bravo, parcours terminé")
+
+        Shortcut.objects.create(account=account, service=self.service)  # étape détectée
+        page = self.client.get(reverse("core:parcours_detail", args=["courriel"]))
+        self.assertContains(page, "Bravo, parcours terminé")
+
+        # Une étape détectée ne se coche pas à la main.
+        self.assertEqual(self.client.post(reverse("core:parcours_step", args=[self.auto.pk])).status_code, 404)
+        # Décocher l'étape manuelle la remet à faire.
+        self.client.post(reverse("core:parcours_step", args=[self.manual.pk]))
+        self.assertContains(self.client.get(reverse("core:parcours_detail", args=["courriel"])), "1 sur 2")

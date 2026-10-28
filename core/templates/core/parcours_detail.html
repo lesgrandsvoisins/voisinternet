@@ -1,0 +1,69 @@
+{% extends "core/base.html" %}
+{% load i18n markdown_filters %}
+{% block title %}{{ mission.title }} — {% trans "Parcours guidés" %} — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+  <div class="page-head">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+        <ol>
+          <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+          <li><a href="{% url 'core:parcours' %}">{% trans "Parcours guidés" %}</a></li>
+          <li aria-current="page">{{ mission.title }}</li>
+        </ol>
+      </nav>
+      <h1><span aria-hidden="true">{{ mission.emoji }}</span> {{ mission.title }}</h1>
+      <p class="lead">{{ mission.summary }}</p>
+      <progress max="{{ total }}" value="{{ finished }}" aria-label="{% trans "Progression" %}">{{ finished }}/{{ total }}</progress>
+      <p class="muted">{% blocktrans with done=finished total=total %}{{ done }} sur {{ total }} étapes{% endblocktrans %}</p>
+    </div>
+  </div>
+  <div class="wrap page">
+    {% if complete %}
+      <section class="card card-sun" role="status">
+        <h2>{% trans "Bravo, parcours terminé ! 🎉" %}</h2>
+        <p>{% trans "Vous savez maintenant le faire. N'hésitez pas à montrer à une voisine ou un voisin : c'est la meilleure façon de s'en souvenir." %}</p>
+        <a class="btn btn-line" href="{% url 'core:parcours' %}">{% trans "Autres parcours" %}</a>
+      </section>
+    {% endif %}
+    {% if not has_account %}
+      <p class="card">
+        {% trans "Vous pouvez lire le parcours sans compte. Pour cocher vos étapes et garder la trace de votre avancée," %}
+        <a href="{% url 'core:account' %}">{% trans "ouvrez un compte (nommé ou anonyme)" %}</a>.
+      </p>
+    {% endif %}
+    <ol class="mission-steps">
+      {% for item in steps %}
+        {% with step=item.step %}
+          <li class="mission-step{% if item.done %} done{% endif %}">
+            <h2>
+              {% if item.done %}<span aria-hidden="true">✓</span><span class="sr-only">{% trans "Fait :" %}</span>{% endif %}
+              {{ step.title }}
+            </h2>
+            {% if step.body %}<div class="markdown">{{ step.body|markdown }}</div>{% endif %}
+            {% if step.link_url %}
+              <p><a class="btn btn-line" href="{{ step.link_url }}"{% if "://" in step.link_url %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ step.link_label|default:step.link_url }}</a></p>
+            {% endif %}
+            {% if step.why %}
+              <details class="mission-why">
+                <summary>{% trans "Pourquoi ?" %}</summary>
+                <div class="markdown">{{ step.why|markdown }}</div>
+              </details>
+            {% endif %}
+            {% if item.manual %}
+              <form method="post" action="{% url 'core:parcours_step' step.pk %}">
+                {% csrf_token %}
+                <button class="btn {% if item.done %}btn-line{% else %}btn-sun{% endif %}" type="submit">
+                  {% if item.done %}{% trans "Décocher" %}{% else %}{% trans "C'est fait" %}{% endif %}
+                </button>
+              </form>
+            {% elif item.done %}
+              <p class="muted">{% trans "Détecté automatiquement." %}</p>
+            {% else %}
+              <p class="muted">{% trans "Se coche tout seul dès que c'est fait." %}</p>
+            {% endif %}
+          </li>
+        {% endwith %}
+      {% endfor %}
+    </ol>
+  </div>
+{% endblock %}

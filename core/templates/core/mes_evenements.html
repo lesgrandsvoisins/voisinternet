@@ -16,6 +16,17 @@
   </div>
 </div>
 <div class="wrap page">
+  <section aria-labelledby="new-title">
+    <div class="split">
+      <h2 id="new-title">{% trans "Créer un évènement" %}</h2>
+    </div>
+    <form class="entry-form" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% include "core/partials/event_form_fields.html" %}
+      <button class="btn btn-sun" type="submit">{% trans "Créer l'évènement" %}</button>
+    </form>
+  </section>
+
   <section aria-labelledby="events-title">
     <div class="split">
       <h2 id="events-title">{% trans "Mes évènements" %}</h2>
@@ -30,15 +41,5 @@
     {% include "core/partials/event_interest_list.html" %}
   </section>
 
-  <section aria-labelledby="new-title">
-    <div class="split">
-      <h2 id="new-title">{% trans "Créer un évènement" %}</h2>
-    </div>
-    <form class="entry-form" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {% include "core/partials/event_form_fields.html" %}
-      <button class="btn btn-sun" type="submit">{% trans "Créer l'évènement" %}</button>
-    </form>
-  </section>
 </div>
 {% endblock %}

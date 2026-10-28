@@ -19,17 +19,6 @@
     </div>
   </div>
   <div class="wrap page">
-    {% if new_number %}
-      <section class="card card-sun" aria-labelledby="num-title">
-        <h2 id="num-title">{% trans "Votre numéro de compte" %}</h2>
-        <p class="number">
-          <code>{{ new_number }}</code>
-        </p>
-        <p>
-          {% trans "Notez-le maintenant. Nous n'en gardons qu'une empreinte : nous ne pourrons jamais vous le redonner. Il suffit, seul, pour retrouver vos raccourcis sur un autre appareil." %}
-        </p>
-      </section>
-    {% endif %}
     {% if pending %}
       <section class="card" aria-labelledby="link-title">
         <h2 id="link-title">{% trans "Un compte anonyme est ouvert sur cet appareil" %}</h2>
@@ -41,6 +30,28 @@
       </section>
     {% endif %}
     {% if user.is_authenticated or account %}
+      {% if first_steps and first_steps_done < first_steps|length %}
+        <section class="card first-steps" aria-labelledby="steps-title">
+          <h2 id="steps-title">{% trans "Premiers pas" %}</h2>
+          <p class="muted">
+            {% blocktrans with done=first_steps_done total=first_steps|length %}{{ done }} sur {{ total }} faits{% endblocktrans %}
+          </p>
+          <ul class="steps">
+            {% for step in first_steps %}
+              <li{% if step.done %} class="done"{% endif %}>
+                {% if step.done %}
+                  <span aria-hidden="true">✓</span>
+                  <span class="sr-only">{% trans "Fait :" %}</span>
+                  {{ step.label }}
+                {% else %}
+                  <a href="{{ step.url }}">{{ step.label }}</a>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+          <p><a href="{% url 'core:parcours' %}">{% trans "Voir tous les parcours guidés" %}</a></p>
+        </section>
+      {% endif %}
       <section class="dashboard-summary"
                aria-label="{% trans "Aperçu de mon compte" %}">
         <a class="stat-tile" href="{% url 'core:raccourcis' %}">
@@ -92,7 +103,7 @@
           {% else %}
             {% if OIDC_ENABLED %}
               <a class="btn btn-sun"
-                 href="{% url 'oidc_authentication_init' %}?next={% url 'core:account' %}">{% trans "Rattacher à mon compte Grands Voisins" %}</a>
+                 href="{% url 'core:connexion' %}?next={% url 'core:account' %}">{% trans "Rattacher à mon compte Grands Voisins" %}</a>
             {% endif %}
             <form method="post" action="{% url 'core:forget_anonymous' %}">
               {% csrf_token %}
@@ -147,6 +158,11 @@
           </summary>
           <div>
             <ul class="docs">
+              {% if login_identifier %}
+                <li>
+                  <strong>{% trans "Identifiant de connexion" %}</strong><span>{{ login_identifier }}</span>
+                </li>
+              {% endif %}
               <li>
                 <strong>{% trans "Nom" %}</strong><span>{{ user.get_full_name|default:_("Non renseigné") }}</span>
               </li>
@@ -214,20 +230,30 @@
       </details>
     {% else %}
       <div class="choices">
-        <section class="card" aria-labelledby="login-title">
-          <h2 id="login-title">{% trans "Se connecter ou créer son compte" %}</h2>
-          <p>{% trans "Avec votre compte unique des Grands Voisins, le même que pour les autres outils de l'association." %}</p>
+        <section class="card" aria-labelledby="register-title">
+          <h2 id="register-title">{% trans "Créer mon compte" %}</h2>
+          <p>
+            {% trans "Un compte unique des Grands Voisins, le même pour tous les outils de l'association. Il retrouve vos raccourcis, groupes, fiches et évènements sur tous vos appareils, et vous pouvez récupérer votre mot de passe par courriel." %}
+          </p>
           {% if OIDC_ENABLED %}
             <a class="btn btn-sun"
-               href="{% url 'oidc_authentication_init' %}?next={% url 'core:account' %}">{% trans "Se connecter ou créer son compte" %}</a>
+               href="{% url 'core:inscription' %}?next={% url 'core:account' %}">{% trans "Créer mon compte" %}</a>
           {% else %}
             <p class="muted">{% trans "La connexion par compte Grands Voisins n'est pas encore configurée sur ce serveur." %}</p>
+          {% endif %}
+        </section>
+        <section class="card" aria-labelledby="login-title">
+          <h2 id="login-title">{% trans "J'ai déjà un compte" %}</h2>
+          <p>{% trans "Connectez-vous avec le compte que vous utilisez déjà pour les autres outils des Grands Voisins." %}</p>
+          {% if OIDC_ENABLED %}
+            <a class="btn btn-line"
+               href="{% url 'core:connexion' %}?next={% url 'core:account' %}">{% trans "Se connecter" %}</a>
           {% endif %}
         </section>
         <section class="card" aria-labelledby="anon-title">
           <h2 id="anon-title">{% trans "Rester anonyme" %}</h2>
           <p>
-            {% trans "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit pour retrouver vos raccourcis." %}
+            {% trans "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit pour retrouver vos raccourcis. Sans ce numéro, le compte est perdu : aucun courriel de secours n'existe." %}
           </p>
           <form method="post" action="{% url 'core:create_anonymous' %}">
             {% csrf_token %}

@@ -132,13 +132,13 @@
           </nav>
         </div>
         <div class="menu-agenda">
-          <a href="{% url 'core:agenda' %}" alt="Agenda">
+          <a href="{% url 'core:agenda' %}" aria-label="{% trans "Agenda" %}" title="{% trans "Agenda" %}">
             {% include "core/icons/agenda-svg.html" %}
             
           </a>
         </div>
         <div class="menu-annuaire">
-          <a href="{% url 'core:annuaire' %}" alt="Annuaire">
+          <a href="{% url 'core:annuaire' %}" aria-label="{% trans "Annuaire" %}" title="{% trans "Annuaire" %}">
             {% include "core/icons/annuaire-svg.html" %}
           </a>
         </div>
@@ -179,12 +179,12 @@
           {% comment %} {% include "core/partials/wordmark.html" %} {% endcomment %}
         </a>
         <div class="menu-blog">
-          <a href="/{{ LANGUAGE_CODE }}/blog/" alt="Blog">
+          <a href="/{{ LANGUAGE_CODE }}/blog/" aria-label="{% trans "Blog" %}" title="{% trans "Blog" %}">
             {% include "core/icons/blog-svg.html" %}
           </a>
         </div>
         <div class="menu-wiki">
-          <a href="{{ GUIDE_URL }}" alt="Wiki">
+          <a href="{{ GUIDE_URL }}" aria-label="{% trans "Wiki" %}" title="{% trans "Wiki" %}">
             {% include "core/icons/wiki-svg.html" %}
           </a>
         </div>
@@ -212,6 +212,7 @@
         {% include "core/partials/account_widget.html" %}
       </div>
     </header>
+    {% include "core/partials/number_banner.html" %}
     {% include "core/partials/announcement_banner.html" %}
     <!-- MAIN -->
     <main id="contenu">
@@ -234,8 +235,7 @@
               <ul>
                 {% for item in group.items %}
                   <li>
-                    <a target="_new"
-                       href="{{ item.href }}"
+                    <a href="{{ item.href }}"
                        aria-label="{{ item.entry.aria }}">{{ item.entry.title }}</a>
                   </li>
                 {% endfor %}
@@ -244,11 +244,11 @@
           </nav>
         </div>
         <div class="foot-bottom">
+          {% lang_switcher_footer %}
           <span>{% trans "lesgrandsvoisins.com" %}</span>
-          <a target="_new"
-             href="https://github.com/lesgrandsvoisins"
-             rel="noreferrer">GitHub</a>
-          <a target="_new" href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>
+          <a href="https://github.com/lesgrandsvoisins"
+             rel="noopener noreferrer">GitHub</a>
+          <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>
         </div>
       </div>
     </footer>

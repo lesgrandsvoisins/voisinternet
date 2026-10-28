@@ -643,3 +643,90 @@ class Donor(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Mission(models.Model):
+    """
+    Un parcours guidé : une courte suite d'étapes pour apprendre à se servir d'un outil de
+    l'association (courriel, relecture d'une traduction dans Vikunja…). Rédigé et traduit
+    depuis l'administration ; la progression de chaque compte est dans StepCompletion.
+    """
+    slug = models.SlugField(unique=True)
+    title = models.CharField(_("titre"), max_length=120)
+    summary = models.CharField(_("en une phrase"), max_length=240)
+    emoji = models.CharField(_("emoji"), max_length=8, default="🧭")
+    minutes = models.PositiveSmallIntegerField(_("durée estimée (minutes)"), null=True, blank=True)
+    order = models.PositiveSmallIntegerField(_("ordre"), default=0)
+    active = models.BooleanField(_("proposé"), default=True)
+
+    class Meta:
+        ordering = ["order", "title"]
+        verbose_name = _("parcours guidé")
+        verbose_name_plural = _("parcours guidés")
+
+    def __str__(self):
+        return self.title
+
+
+class MissionStep(models.Model):
+    """Une étape d'un parcours : cochée par la personne, ou détectée d'après ses données."""
+    AUTO_NONE = ""
+    AUTO_CHOICES = [
+        (AUTO_NONE, _("à cocher par la personne")),
+        ("account", _("détectée : a un compte")),
+        ("named", _("détectée : compte nommé (connecté)")),
+        ("shortcut", _("détectée : a un raccourci")),
+        ("group", _("détectée : a rejoint un groupe")),
+        ("entry", _("détectée : a une fiche d'annuaire")),
+        ("event", _("détectée : gère un évènement")),
+    ]
+    mission = models.ForeignKey(Mission, on_delete=models.CASCADE, related_name="steps", verbose_name=_("parcours"))
+    position = models.PositiveSmallIntegerField(_("position"), default=0)
+    title = models.CharField(_("titre"), max_length=140)
+    body = models.TextField(_("comment faire"), blank=True, default="", help_text=_("Markdown."))
+    why = models.TextField(
+        _("pourquoi"), blank=True, default="",
+        help_text=_("Ce que la personne apprend en le faisant. Markdown."),
+    )
+    link_url = models.CharField(
+        _("lien"), max_length=300, blank=True, default="",
+        help_text=_("Adresse complète, ou chemin du site (/ar/account/)."),
+    )
+    link_label = models.CharField(_("texte du lien"), max_length=80, blank=True, default="")
+    auto_check = models.CharField(_("détection"), max_length=12, choices=AUTO_CHOICES, blank=True, default=AUTO_NONE)
+
+    class Meta:
+        ordering = ["mission", "position", "pk"]
+        verbose_name = _("étape de parcours")
+        verbose_name_plural = _("étapes de parcours")
+
+    def __str__(self):
+        return f"{self.mission} — {self.title}"
+
+    def detected_for(self, account):
+        """True si les données du compte prouvent l'étape accomplie (sans case à cocher)."""
+        if account is None or not self.auto_check:
+            return False
+        checks = {
+            "account": lambda: True,
+            "named": lambda: account.user_id is not None,
+            "shortcut": lambda: account.shortcut_set.exists(),
+            "group": lambda: account.membership_set.exists(),
+            "entry": lambda: account.directory_entries.exists(),
+            "event": lambda: account.managed_events.exists(),
+        }
+        return bool(checks[self.auto_check]())
+
+
+class StepCompletion(models.Model):
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="step_completions")
+    step = models.ForeignKey(MissionStep, on_delete=models.CASCADE, related_name="completions")
+    created = models.DateTimeField(default=timezone.now, editable=False)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=["account", "step"], name="unique_step_completion")]
+        verbose_name = _("étape accomplie")
+        verbose_name_plural = _("étapes accomplies")
+
+    def __str__(self):
+        return f"{self.account} ✓ {self.step}"

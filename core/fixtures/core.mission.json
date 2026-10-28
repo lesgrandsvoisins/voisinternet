@@ -1,0 +1,71 @@
+[
+{
+  "model": "core.mission",
+  "pk": 1,
+  "fields": {
+    "slug": "premiers-pas",
+    "title": "Premiers pas chez les Grands Voisins",
+    "title_fr": "Premiers pas chez les Grands Voisins",
+    "title_en": null,
+    "title_es": null,
+    "title_ar": null,
+    "title_ko": null,
+    "summary": "Ouvrez votre compte et faites le tour de ce qui existe. Quelques minutes, sans vous presser.",
+    "summary_fr": "Ouvrez votre compte et faites le tour de ce qui existe. Quelques minutes, sans vous presser.",
+    "summary_en": null,
+    "summary_es": null,
+    "summary_ar": null,
+    "summary_ko": null,
+    "emoji": "🏡",
+    "minutes": 10,
+    "order": 1,
+    "active": true
+  }
+},
+{
+  "model": "core.mission",
+  "pk": 2,
+  "fields": {
+    "slug": "courriel",
+    "title": "Ma boîte courriel",
+    "title_fr": "Ma boîte courriel",
+    "title_en": null,
+    "title_es": null,
+    "title_ar": null,
+    "title_ko": null,
+    "summary": "Lire et écrire vos messages @gv.je, sur le web puis sur votre téléphone.",
+    "summary_fr": "Lire et écrire vos messages @gv.je, sur le web puis sur votre téléphone.",
+    "summary_en": null,
+    "summary_es": null,
+    "summary_ar": null,
+    "summary_ko": null,
+    "emoji": "✉️",
+    "minutes": 15,
+    "order": 2,
+    "active": false
+  }
+},
+{
+  "model": "core.mission",
+  "pk": 3,
+  "fields": {
+    "slug": "relire-traductions",
+    "title": "Relire les traductions (arabe, coréen)",
+    "title_fr": "Relire les traductions (arabe, coréen)",
+    "title_en": null,
+    "title_es": null,
+    "title_ar": null,
+    "title_ko": null,
+    "summary": "Aidez le site à parler votre langue : lisez-le, notez ce qui sonne faux dans Vikunja.",
+    "summary_fr": "Aidez le site à parler votre langue : lisez-le, notez ce qui sonne faux dans Vikunja.",
+    "summary_en": null,
+    "summary_es": null,
+    "summary_ar": null,
+    "summary_ko": null,
+    "emoji": "🌍",
+    "minutes": 20,
+    "order": 3,
+    "active": true
+  }
+}
+]

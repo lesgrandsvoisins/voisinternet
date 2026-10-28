@@ -160,6 +160,8 @@ if OIDC_ENABLED:
     OIDC_OP_JWKS_ENDPOINT = f"{KEYCLOAK_REALM_URL}/protocol/openid-connect/certs"
     OIDC_OP_LOGOUT_URL_METHOD = "core.auth.keycloak_logout_url"
 
+# Échec de la connexion Keycloak : retour sur « Mon compte », qui l'explique (core.views.account).
+LOGIN_REDIRECT_URL_FAILURE = "/account/?connexion=echec"
 LOGIN_URL = "core:account"
 LOGIN_REDIRECT_URL = "core:account"
 LOGOUT_REDIRECT_URL = "core:home"

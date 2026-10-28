@@ -65,3 +65,11 @@ def lang_switcher_menu(context):
     """Sélecteur de langue en liste d'options pour un menu déroulant (bouton icône de
     la barre du haut, core/templates/core/base.html) — voir _lang_switcher_context."""
     return _lang_switcher_context(context)
+
+
+@register.inclusion_tag("core/partials/lang_switcher_footer.html", takes_context=True)
+def lang_switcher_footer(context):
+    """Liste de langues pour le pied de page : de simples liens (ou boutons POST sur
+    les pages « core »), sans JavaScript ni identifiant partagé avec les autres
+    sélecteurs — voir _lang_switcher_context."""
+    return _lang_switcher_context(context)

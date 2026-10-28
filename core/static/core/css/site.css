@@ -902,6 +902,15 @@ div.menu {
   opacity: .4
 }
 
+/* Sur petit écran, les taches passent derrière le texte d'introduction : on les
+   atténue pour garder un contraste de lecture suffisant (le texte est sombre). */
+@media (max-width: 900px) {
+  .blob {
+    opacity: .28;
+    border-width: 2px
+  }
+}
+
 .blob-a {
   width: 20rem;
   height: 20rem;
@@ -3869,6 +3878,44 @@ a.prevnext {
   font-size: .9rem
 }
 
+.foot-lang ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem 1rem
+}
+
+.foot-lang form {
+  display: inline;
+  margin: 0
+}
+
+.foot-lang a,
+.foot-lang button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: .35rem 0;
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none
+}
+
+.foot-lang a:hover,
+.foot-lang button:hover,
+.foot-lang [aria-current] {
+  text-decoration: underline
+}
+
+.foot-lang [aria-current] {
+  font-weight: 700
+}
+
 /* Adaptatif */
 @media (max-width:900px) {
 
@@ -4080,4 +4127,116 @@ a.prevnext {
   div.gallery {
     break-inside: avoid;
   }
+}
+/* Accueil : numéro de compte anonyme, tant qu'il n'est pas confirmé */
+.number-banner {
+  background: var(--sun);
+  color: #1a1a1a;
+  padding: 1rem 0;
+  border-bottom: 2px solid var(--line)
+}
+
+.number-banner .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: center;
+  justify-content: space-between
+}
+
+.number-banner p {
+  margin: .25rem 0
+}
+
+.number-banner code {
+  font-size: 1.5rem;
+  letter-spacing: .08em;
+  user-select: all
+}
+
+.number-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  align-items: center
+}
+
+.number-banner-actions form {
+  margin: 0
+}
+
+/* Premiers pas */
+.steps {
+  list-style: none;
+  margin: .5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: .5rem
+}
+
+.steps li.done {
+  color: var(--muted, inherit);
+  text-decoration: line-through
+}
+
+/* Parcours guidés */
+.missions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr))
+}
+
+.mission h2 {
+  margin: 0 0 .5rem
+}
+
+.mission h2 a {
+  text-decoration: none
+}
+
+.mission progress,
+.page-head progress {
+  width: 100%;
+  height: .75rem;
+  margin: .25rem 0 1rem;
+  accent-color: var(--sun)
+}
+
+.mission-done {
+  border-color: var(--sun)
+}
+
+.mission-steps {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  counter-reset: etape
+}
+
+.mission-step {
+  counter-increment: etape;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1rem 1.25rem
+}
+
+.mission-step h2::before {
+  content: counter(etape) ". ";
+  color: var(--muted, inherit)
+}
+
+.mission-step.done {
+  border-color: var(--sun)
+}
+
+.mission-why summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin: .5rem 0
 }

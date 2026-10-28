@@ -136,3 +136,7 @@ hidden, not broken.
 (static files, HTTPS/HSTS, strict CSP, and redirects the former domains —
 `voisinter.net` and the `voisinternet.fr`/`.com`/`.org` variants — to
 `lesgrandsvoisins.com` keeping the path).
+
+## Suivi du travail
+
+`CHANGELOG.md` (ce qui a changé, daté) et `BACKLOG.md` (ce qui reste, avec qui doit agir) sont tenus à jour à chaque série de changements, par toute session de travail. Les besoins côté serveur (Keycloak, Caddy, courrier) ne se supposent pas : ils passent par `docs/DEMANDES-UX.md` dans le dépôt `chris2fr/flakeops` (branche `ux/…`, jamais `rosest330`). Aucun secret dans ces fichiers.

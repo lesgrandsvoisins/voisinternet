@@ -29,6 +29,9 @@ Les besoins côté serveur passent par `docs/DEMANDES-UX.md` (dépôt `flakeops`
 | U-019 | a_faire | **`B-039` (P0)** : l'entrée d'annuaire créée par une inscription n'a AUCUNE valeur `mail` (`bobbob2`, `duvoloui`) : un nouveau membre se connecte au SSO mais n'a pas de boîte. Ne rien promettre sur la boîte tant que ce n'est pas résolu. Le parcours « Ma boîte courriel » est masqué en attendant. | Admin | Cause trouvée (le courriel Keycloak va dans `uid`, `mail` vient de l'attribut `lgvmail` que l'inscription ne remplit pas) ; correctif prêt sur `flakeops` `ux/identifiant-sans-compteur` (`090d374`), non déployé ; une inscription test a une adresse ; parcours courriel réactivé (administration > parcours guidés). |
 | U-028 | a_faire | **Noms en alphabet non latin** (arabe, coréen) : le générateur ne garde que a–z, un tel nom donne « aucun identifiant disponible » sans issue (`B-038`). Le thème demande des lettres latines et propose d'écrire à contact@ ; il faudrait une vraie solution (translittération, identifiant proposé par l'équipe). **À signaler/décider.** | Chris / Admin | Un membre arabophone ou coréanophone peut s'inscrire seul. |
 
+| U-029 | a_faire | **Purger les comptes anonymes** (1 973 comptes dont 1 956 anonymes au 28/10, presque tous vides) : à faire plus tard (décision de Chris). Prudence : supprimer un compte supprime ses raccourcis, groupes, intérêts et dons ; ne purger que les comptes **sans aucune donnée liée** et anciens. Commande à écrire (essai à blanc par défaut). | UX / Chris | Comptes vides supprimés, décomptes avant/après notés. |
+| U-030 | a_faire | **Environnement de qualification** : proposition dans `docs/QUALIFICATION.md` ; la partie serveur est à évaluer par l'Admin. | Chris / Admin | Décision ; si oui, demande dans `DEMANDES-UX.md`. |
+
 ## P2 — À faire côté UX
 | ID | État | Tâche | Resp. | Terminé quand |
 |---|---|---|---|---|

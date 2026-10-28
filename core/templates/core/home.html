@@ -24,7 +24,11 @@
               <a class="btn btn-sun" href="{% url 'core:account' %}">{% trans "Mon compte" %}</a>
             {% elif keycloak_register_url %}
               <a class="btn btn-sun" href="{{ keycloak_register_url }}">{% trans "Créer mon compte" %}</a>
-              <a class="btn btn-line" href="{% url 'core:account' %}">{% trans "Me connecter ou rester anonyme" %}</a>
+              {% if anon_visible %}
+                <a class="btn btn-line" href="{% url 'core:account' %}">{% trans "Me connecter ou rester anonyme" %}</a>
+              {% else %}
+                <a class="btn btn-line" href="{{ keycloak_login_url }}">{% trans "Se connecter" %}</a>
+              {% endif %}
             {% else %}
               <a class="btn btn-sun" href="{% url 'core:account' %}">{% trans "Créer ou rejoindre son compte" %}</a>
             {% endif %}

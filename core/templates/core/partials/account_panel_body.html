@@ -8,11 +8,15 @@
         <a class="account-action account-action-secondary"
            href="{{ keycloak_login_url }}">{% trans "J'ai déjà un compte" %}</a>
       {% endif %}
-      <form method="post" action="{% url 'core:create_anonymous' %}">
-        {% csrf_token %}
-        <button class="account-action{% if keycloak_login_url %} account-action-secondary{% endif %}"
-                type="submit">{% trans "Rester anonyme" %}</button>
-      </form>
+      {% if anon_visible or not keycloak_register_url %}
+        {% if anon_allowed %}
+          <form method="post" action="{% url 'core:create_anonymous' %}">
+            {% csrf_token %}
+            <button class="account-action{% if keycloak_login_url %} account-action-secondary{% endif %}"
+                    type="submit">{% trans "Rester anonyme" %}</button>
+          </form>
+        {% endif %}
+      {% endif %}
     </div>
   {% endif %}
   <div class="account-shortcuts">

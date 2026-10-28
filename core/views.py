@@ -50,6 +50,18 @@ def _is_htmx(request):
     return request.headers.get("HX-Request") == "true"
 
 
+def _needs_account(request):
+    """Réponse quand une action exige un compte et que la personne n'en a pas : on l'envoie sur « Mon compte »
+    (avec HX-Redirect pour htmx, afin de ne pas injecter la page dans un fragment)."""
+    messages.info(request, _("Pour faire cela, ouvrez d'abord un compte."))
+    url = reverse("core:account")
+    if _is_htmx(request):
+        response = HttpResponse(status=204)
+        response["HX-Redirect"] = url
+        return response
+    return redirect(url)
+
+
 def _shortcut_ids(request):
     account = current_account(request)
     if account is None:
@@ -431,7 +443,7 @@ def mes_dons(request):
 
 @require_POST
 def faire_don(request):
-    acc = current_account(request, create=True)
+    acc = current_account(request, create=True, explicit=True)  # un don est un acte délibéré
     form = ContributionForm(request.POST)
     if form.is_valid():
         amount = form.cleaned_data["amount"]
@@ -648,7 +660,10 @@ def claim_entry_ownership(request, slug):
 
 
 def mes_fiches(request):
-    acc = current_account(request, create=True)
+    # Consulter la page ne crée jamais de compte (les robots en ouvraient un à chaque passage) ; créer une fiche, oui.
+    acc = current_account(request, create=request.method == "POST")
+    if request.method == "POST" and acc is None:
+        return _needs_account(request)
     if request.method == "POST":
         form = DirectoryEntryForm(request.POST, request.FILES)
         if form.is_valid():
@@ -669,15 +684,15 @@ def mes_fiches(request):
         # (nom, courriel), pour un compte nominatif — lui évite de les retaper alors
         # qu'elle vient de se connecter avec. Rien à pré-remplir pour un compte anonyme.
         initial = {}
-        if acc.user_id:
+        if acc is not None and acc.user_id:
             if acc.user.get_full_name():
                 initial["name_fr"] = acc.user.get_full_name()
             if acc.user.email:
                 initial["email"] = acc.user.email
         form = DirectoryEntryForm(initial=initial)
     return render(request, "core/mes_fiches.html", {
-        "entries": acc.directory_entries.order_by("name"),
-        "subscriptions": acc.entrysubscription_set.select_related("entry").order_by("entry__name"),
+        "entries": acc.directory_entries.order_by("name") if acc else [],
+        "subscriptions": acc.entrysubscription_set.select_related("entry").order_by("entry__name") if acc else [],
         "form": form,
     })
 
@@ -711,6 +726,8 @@ def fiche_supprimer(request, slug):
 def toggle_subscription(request, slug):
     entry = get_object_or_404(DirectoryEntry, slug=slug)
     acc = current_account(request, create=True)
+    if acc is None:
+        return _needs_account(request)
     _check_entry_visible(entry, acc)
     sub = EntrySubscription.objects.filter(account=acc, entry=entry).first()
     if sub:
@@ -799,6 +816,8 @@ def event_detail(request, pk):
 def toggle_event_interest(request, pk):
     event = get_object_or_404(Event, pk=pk, public=True)
     acc = current_account(request, create=True)
+    if acc is None:
+        return _needs_account(request)
     level = request.POST.get("level") or EventInterest.INTERESTED
     if level not in dict(EventInterest.LEVEL_CHOICES):
         raise Http404
@@ -904,6 +923,8 @@ def mes_evenements(request):
     # Seule la création d'un évènement ouvre un compte : consulter la page ne doit pas en
     # créer un (et donc ne pas imposer un numéro anonyme à qui regarde seulement).
     acc = current_account(request, create=request.method == "POST")
+    if request.method == "POST" and acc is None:
+        return _needs_account(request)
     if request.method == "POST":
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
@@ -1005,8 +1026,11 @@ def inscription(request):
 
 @require_POST
 def create_anonymous(request):
+    if settings.ANONYMOUS_ACCOUNTS == "ferme":
+        messages.info(request, _("L'ouverture de comptes anonymes n'est plus proposée. Créez un compte nommé."))
+        return redirect("core:account")
     if current_account(request) is None:
-        current_account(request, create=True)
+        current_account(request, create=True, explicit=True)
         messages.success(request, _("Compte anonyme créé."))
     return redirect("core:account")
 
@@ -1074,6 +1098,8 @@ def toggle_shortcut(request, slug):
     service = get_object_or_404(Service, slug=slug, active=True)
     had_account = current_account(request) is not None
     account = current_account(request, create=True)
+    if account is None:
+        return _needs_account(request)
 
     shortcut = Shortcut.objects.filter(account=account, service=service).first()
     if shortcut:
@@ -1192,6 +1218,8 @@ def toggle_membership(request, slug):
     audience = get_object_or_404(Audience, slug=slug)
     had_account = current_account(request) is not None
     account = current_account(request, create=True)
+    if account is None:
+        return _needs_account(request)
 
     membership = Membership.objects.filter(account=account, audience=audience).first()
     if membership:
@@ -1422,7 +1450,7 @@ def parcours_step(request, pk):
     account = current_account(request)
     if account is None:
         messages.info(request, _(
-            "Pour garder la trace de vos étapes, ouvrez d'abord un compte (nommé ou anonyme)."
+            "Pour garder la trace de vos étapes, ouvrez d'abord un compte."
         ))
         return redirect("core:account")
     completion = StepCompletion.objects.filter(account=account, step=step)

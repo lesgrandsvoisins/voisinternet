@@ -64,7 +64,7 @@ Elle refuse s'il manque une sauvegarde récente ou si des fichiers suivis sont m
 
 **6. Vérifier :** `deploy/smoke.sh https://www.lesgrandsvoisins.com`, puis regarder à la main l'accueil, « Mon compte » (créer un compte anonyme de test et le fermer), `/fr/account/parcours/`, `/fr/account/inscription/`. Lancer `./decomptes.sh` : les nombres doivent égaler ou dépasser ceux affichés par la mise à jour (« Décomptes AVANT »).
 
-**7. Une seule fois, après la première mise en ligne :** charger les parcours guidés d'exemple, `manage.py loaddata core.mission core.missionstep` (le parcours « Ma boîte courriel » y est masqué tant que `B-039` n'est pas résolu). Ne pas le refaire ensuite : cela écraserait les modifications faites dans l'administration.
+**7. Une seule fois, après la première mise en ligne :** charger les parcours guidés d'exemple, `manage.py loaddata core/fixtures/core.mission.json core/fixtures/core.missionstep.json` (noms de fichiers complets : `core.mission` seul est pris pour un format et échoue) (le parcours « Ma boîte courriel » y est masqué tant que `B-039` n'est pas résolu). Ne pas le refaire ensuite : cela écraserait les modifications faites dans l'administration.
 
 **Retour arrière du code :** `git checkout --detach <commit-avant.txt> && systemctl restart voisinter-django`. Si on veut aussi retirer les nouvelles tables : `manage.py migrate core 0033` **avant** de revenir au code précédent.
 

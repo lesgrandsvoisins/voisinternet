@@ -1,4 +1,5 @@
 """Retrouver le compte de la personne qui navigue, qu'il soit anonyme ou nominatif."""
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 from .models import Account
@@ -7,7 +8,14 @@ SESSION_KEY = "voisinternet_account"
 NEW_NUMBER_KEY = "voisinternet_new_number"
 
 
-def current_account(request, create=False):
+def anonymous_creation_allowed(explicit):
+    """Un compte anonyme peut-il être ouvert ? « explicit » : la personne l'a demandé elle-même (formulaire, don) ;
+    sinon c'est une création implicite (clic sur « ajouter un raccourci »…), réservée au réglage « ouvert »."""
+    policy = settings.ANONYMOUS_ACCOUNTS
+    return policy == "ouvert" or (policy == "discret" and explicit)
+
+
+def current_account(request, create=False, explicit=False):
     cached = getattr(request, "_voisinternet_account", None)
     if cached is not None:
         return cached
@@ -21,7 +29,7 @@ def current_account(request, create=False):
             account = Account.objects.filter(pk=account_id, user__isnull=True).first()
             if account is None:
                 request.session.pop(SESSION_KEY, None)
-        if account is None and create:
+        if account is None and create and anonymous_creation_allowed(explicit):
             account, digits = Account.create_anonymous()
             request.session[SESSION_KEY] = account.pk
             request.session[NEW_NUMBER_KEY] = digits

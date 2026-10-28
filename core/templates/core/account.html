@@ -250,35 +250,33 @@
                href="{% url 'core:connexion' %}?next={% url 'core:account' %}">{% trans "Se connecter" %}</a>
           {% endif %}
         </section>
-        <section class="card" aria-labelledby="anon-title">
-          <h2 id="anon-title">{% trans "Rester anonyme" %}</h2>
-          <p>
-            {% trans "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit pour retrouver vos raccourcis. Sans ce numéro, le compte est perdu : aucun courriel de secours n'existe." %}
-          </p>
-          <form method="post" action="{% url 'core:create_anonymous' %}">
-            {% csrf_token %}
-            <button class="btn btn-sun" type="submit">{% trans "Créer un compte anonyme" %}</button>
-          </form>
-          <form class="recover"
-                method="post"
-                action="{% url 'core:recover_anonymous' %}">
-            {% csrf_token %}
-            <label for="number">{% trans "J'ai déjà un numéro" %}</label>
-            <div class="field">
-              <input id="number"
-                     name="number"
-                     inputmode="numeric"
-                     autocomplete="off"
-                     placeholder="0000 0000 0000 0000"
-                     pattern="[0-9]{4} ?[0-9]{4} ?[0-9]{4} ?[0-9]{4}"
-                     maxlength="19"
-                     required
-                     x-data
-                     x-on:input="$el.value = $el.value.replace(/\D/g, '').slice(0, 16).replace(/(.{4})(?=.)/g, '$1 ')">
-              <button class="btn btn-line" type="submit">{% trans "Retrouver" %}</button>
-            </div>
-          </form>
-        </section>
+        {% if anon_visible or not OIDC_ENABLED %}
+          <section class="card" aria-labelledby="anon-title">
+            <h2 id="anon-title">{% trans "Rester anonyme" %}</h2>
+            <p>
+              {% trans "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit pour retrouver vos raccourcis. Sans ce numéro, le compte est perdu : aucun courriel de secours n'existe." %}
+            </p>
+            {% if anon_allowed %}
+              <form method="post" action="{% url 'core:create_anonymous' %}">
+                {% csrf_token %}
+                <button class="btn btn-sun" type="submit">{% trans "Créer un compte anonyme" %}</button>
+              </form>
+            {% endif %}
+            {% include "core/partials/anon_recover_form.html" %}
+          </section>
+        {% else %}
+          <details class="anon-discret">
+            <summary>{% trans "Autres options" %}</summary>
+            <p class="muted">{% trans "Un numéro de 16 chiffres à noter, sans nom ni courriel. Sans ce numéro, le compte est perdu." %}</p>
+            {% if anon_allowed %}
+              <form method="post" action="{% url 'core:create_anonymous' %}">
+                {% csrf_token %}
+                <button class="btn btn-line" type="submit">{% trans "Créer un compte anonyme" %}</button>
+              </form>
+            {% endif %}
+            {% include "core/partials/anon_recover_form.html" %}
+          </details>
+        {% endif %}
       </div>
     {% endif %}
   </div>

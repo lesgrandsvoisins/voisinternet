@@ -4240,3 +4240,20 @@ a.prevnext {
   font-weight: 600;
   margin: .5rem 0
 }
+
+/* Compte anonyme : volontairement discret (VOISINTERNET_ANON_ACCOUNTS=discret) */
+.anon-discret {
+  grid-column: 1 / -1;
+  margin-top: 2rem;
+  font-size: .8rem;
+  opacity: .65
+}
+
+.anon-discret summary {
+  cursor: pointer;
+  width: fit-content
+}
+
+.anon-discret[open] {
+  opacity: 1
+}

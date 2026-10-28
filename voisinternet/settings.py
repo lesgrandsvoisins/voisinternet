@@ -218,6 +218,14 @@ X_FRAME_OPTIONS = "DENY"
 # Sert à calculer l'empreinte des numéros de compte anonymes.
 # Ne JAMAIS la changer une fois des comptes créés : ils deviendraient introuvables.
 ANON_ACCOUNT_PEPPER = env("VOISINTERNET_ANON_PEPPER", SECRET_KEY)
+# Comptes anonymes (VOISINTERNET_ANON_ACCOUNTS) :
+#   "discret" (défaut) : aucun bouton visible, jamais créés à la simple visite ni par un clic sur « ajouter » ;
+#                        seul le formulaire caché au bas de « Mon compte » (et un don) en ouvre un ;
+#   "ouvert"           : comportement historique (boutons visibles, création implicite) ;
+#   "ferme"            : plus aucune création ; les numéros existants continuent de fonctionner.
+ANONYMOUS_ACCOUNTS = env("VOISINTERNET_ANON_ACCOUNTS", "discret")
+if ANONYMOUS_ACCOUNTS not in ("discret", "ouvert", "ferme"):
+    raise ImproperlyConfigured("VOISINTERNET_ANON_ACCOUNTS doit valoir discret, ouvert ou ferme.")
 # Derrière Caddy ou nginx, l'adresse du visiteur arrive dans X-Forwarded-For.
 BEHIND_PROXY = env_bool("VOISINTERNET_BEHIND_PROXY", False)
 # Formulaires « Contacter… » (envoi de courriel) : désactivés par défaut, à cause du spam.

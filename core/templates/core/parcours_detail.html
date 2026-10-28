@@ -28,7 +28,7 @@
     {% if not has_account %}
       <p class="card">
         {% trans "Vous pouvez lire le parcours sans compte. Pour cocher vos étapes et garder la trace de votre avancée," %}
-        <a href="{% url 'core:account' %}">{% trans "ouvrez un compte (nommé ou anonyme)" %}</a>.
+        <a href="{% url 'core:account' %}">{% trans "ouvrez un compte" %}</a>.
       </p>
     {% endif %}
     <ol class="mission-steps">

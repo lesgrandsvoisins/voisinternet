@@ -22,7 +22,12 @@ from .models import (
 )
 
 
-@override_settings(CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}})
+# Les tests historiques supposent la création implicite d'un compte anonyme (réglage « ouvert ») ; le comportement par
+# défaut, « discret », est couvert par AnonymeDiscretTests.
+@override_settings(
+    CACHES={"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}},
+    ANONYMOUS_ACCOUNTS="ouvert",
+)
 class Base(TestCase):
     fixtures = ["core.audience.json", "core.guidebook.json", "core.servicecategory.json", "core.service.json"]
 
@@ -1529,3 +1534,72 @@ class ParcoursTests(Base):
         # Décocher l'étape manuelle la remet à faire.
         self.client.post(reverse("core:parcours_step", args=[self.manual.pk]))
         self.assertContains(self.client.get(reverse("core:parcours_detail", args=["courriel"])), "1 sur 2")
+
+
+@override_settings(ANONYMOUS_ACCOUNTS="discret")
+class AnonymeDiscretTests(Base):
+    """Réglage par défaut : le compte anonyme existe mais ne se voit pas et ne se crée jamais tout seul."""
+
+    def test_visiting_pages_creates_no_account(self):
+        for name in ["home", "account", "agenda", "mes_fiches", "mes_evenements", "parcours"]:
+            with self.subTest(page=name):
+                self.assertEqual(self.client.get(reverse(f"core:{name}")).status_code, 200)
+        # « raccourcis » et « groupes » renvoient vers « Mon compte » tant qu'il n'y a pas de compte.
+        for name in ["raccourcis", "groupes"]:
+            with self.subTest(page=name):
+                self.assertEqual(self.client.get(reverse(f"core:{name}")).status_code, 302)
+        self.assertFalse(Account.objects.exists())
+
+    def test_clicking_add_shortcut_asks_for_an_account_instead_of_creating_one(self):
+        response = self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]))
+        self.assertRedirects(response, reverse("core:account"), fetch_redirect_response=False)
+        self.assertFalse(Account.objects.exists())
+        self.assertFalse(Shortcut.objects.exists())
+        # htmx : pas de page injectée dans un fragment, une redirection côté navigateur.
+        response = self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]), HTTP_HX_REQUEST="true")
+        self.assertEqual(response.status_code, 204)
+        self.assertEqual(response["HX-Redirect"], reverse("core:account"))
+        self.assertFalse(Account.objects.exists())
+
+    def test_same_for_groups_and_events_and_directory(self):
+        from core.models import Audience
+        audience = Audience.objects.first()
+        self.client.post(reverse("core:toggle_membership", args=[audience.slug]))
+        self.client.post(reverse("core:mes_fiches"), {"name_fr": "Une fiche"})
+        self.client.post(reverse("core:mes_evenements"), {"title_fr": "X", "start": "2026-10-01 10:00:00"})
+        self.assertFalse(Account.objects.exists())
+
+    def test_no_visible_anonymous_button_but_still_reachable_in_details(self):
+        for path in [reverse("core:home"), reverse("core:account")]:
+            page = self.client.get(path).content.decode()
+            self.assertNotIn("Rester anonyme", page)
+            self.assertNotIn("Me connecter ou rester anonyme", page)
+        account = self.client.get(reverse("core:account"))
+        self.assertContains(account, 'class="anon-discret"')   # discret, mais pas supprimé
+        self.assertContains(account, reverse("core:create_anonymous"))
+
+    def test_explicit_creation_still_works_and_shows_the_number(self):
+        self.client.post(reverse("core:create_anonymous"))
+        self.assertEqual(Account.objects.count(), 1)
+        self.assertContains(self.client.get(reverse("core:home")), "Votre numéro de compte anonyme")
+
+    def test_a_donation_is_a_deliberate_act_and_keeps_working(self):
+        self.client.post(reverse("core:faire_don"), {"amount": "10", "method": "cheque", "kind": "pledge", "date": "2026-10-28", "note": ""})
+        self.assertEqual(Account.objects.count(), 1)
+
+
+@override_settings(ANONYMOUS_ACCOUNTS="ferme")
+class AnonymeFermeTests(Base):
+    def test_no_creation_at_all_but_recovery_form_remains(self):
+        response = self.client.post(reverse("core:create_anonymous"))
+        self.assertRedirects(response, reverse("core:account"), fetch_redirect_response=False)
+        self.assertFalse(Account.objects.exists())
+        page = self.client.get(reverse("core:account"))
+        self.assertNotContains(page, reverse("core:create_anonymous"))
+        self.assertContains(page, reverse("core:recover_anonymous"))   # les numéros existants fonctionnent encore
+
+    def test_existing_anonymous_account_keeps_working(self):
+        account, digits = Account.create_anonymous()
+        self.client.post(reverse("core:recover_anonymous"), {"number": digits})
+        self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]))
+        self.assertTrue(Shortcut.objects.filter(account=account).exists())

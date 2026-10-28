@@ -17,16 +17,25 @@
 
 ## Recette (sauvegarde, mise à jour, vérification, retour arrière)
 
-Trois scripts dans `deploy/`, essayés sur une **simulation locale** (base SQLite, code de `main` puis de la branche de travail) : `sauvegarde.sh`, `mise-a-jour.sh`, `smoke.sh`. **Non essayés sur le vrai serveur.** Ils se lancent dans le conteneur, depuis `/var/voisinter/voisinter`, avec l'utilisateur du service. Le dépôt est public : le serveur récupère le code par `https://github.com/lesgrandsvoisins/voisinternet` sans clé.
+Trois scripts dans `deploy/`, essayés sur une **simulation locale** (base SQLite, code de `main` puis de la branche de travail) : `sauvegarde.sh`, `mise-a-jour.sh`, `smoke.sh`. **Non essayés sur le vrai serveur.** Ils se lancent dans le conteneur, depuis `/var/voisinter/voisinter`, avec l'utilisateur du service. **Le dépôt `voisinternet` est privé et le serveur n'a pas de clé GitHub** (`CARTE-DES-DEPOTS.md`) : le code et les scripts arrivent par un fichier (`git bundle`) copié à la main, voir 0a. (Une première version de cette page supposait un dépôt public : c'était faux, les `curl` sur `raw.githubusercontent.com` renvoient 404.)
 
 Ce qui change entre `main` (production d'après le dernier commit connu, `e8898fe`) et la branche de travail : 15 commits, 45 fichiers, **aucune dépendance Python nouvelle**, **une migration** (`core/migrations/0034`, trois nouvelles tables, aucune table existante modifiée), un réglage ajouté (`LOGIN_REDIRECT_URL_FAILURE`, sans variable d'environnement). Essayé en simulation : la migration s'applique sur l'ancien schéma sans toucher aux données, et `migrate core 0033` la retire (l'ancien code refonctionne ensuite).
 
-**0a. Récupérer les scripts d'abord** : le code en production (`main`) ne les contient pas encore. Dans le conteneur (par exemple `sudo nixos-container root-login voisinter-django`, puis `su -s /bin/bash voisinter-django` ; **non vérifié**) :
+**0a. Apporter les scripts et le code, à la main** (le code en production, `main`, ne contient pas les scripts, et le serveur ne peut pas lire GitHub). Sur une machine qui a accès au dépôt : `git fetch origin claude/lesgrandsvoisins-ux-klh29a`, puis
 ```
-cd ~ && for f in sauvegarde.sh mise-a-jour.sh smoke.sh decomptes.sh; do curl -fsSLO https://raw.githubusercontent.com/lesgrandsvoisins/voisinternet/claude/lesgrandsvoisins-ux-klh29a/deploy/$f; done; chmod +x *.sh
-export PROJET=/var/voisinter/voisinter        # puis lancer ./sauvegarde.sh, ./mise-a-jour.sh, ./smoke.sh au lieu de deploy/…
+git bundle create voisinternet.bundle claude/lesgrandsvoisins-ux-klh29a ^e8898fe
+git show claude/lesgrandsvoisins-ux-klh29a:deploy/sauvegarde.sh > sauvegarde.sh     # idem mise-a-jour.sh, smoke.sh, decomptes.sh
+sha256sum voisinternet.bundle *.sh                                                   # à noter, pour comparer après la copie
 ```
-Lire les scripts avant de les lancer : ce sont de courts fichiers texte.
+(`e8898fe` est le commit actuellement en production ; le bundle ne contient que les commits qui s'y ajoutent.) Copier ces fichiers sur la T330 (`scp`), puis, **en root sur l'hôte** (le conteneur est visible sous `/var/lib/nixos-containers/voisinter-django/`) :
+```
+D=/var/lib/nixos-containers/voisinter-django/home/voisinter-django
+install -o 1538 -g 500 -m 755 sauvegarde.sh mise-a-jour.sh smoke.sh decomptes.sh $D/
+install -o 1538 -g 500 -m 644 voisinternet.bundle $D/
+```
+Dans le conteneur, en tant que `voisinter-django` : `cd ~ && sha256sum voisinternet.bundle *.sh` (comparer), `export PROJET=/var/voisinter/voisinter`. La mise à jour prend ensuite le code dans le fichier : `SOURCE=$HOME/voisinternet.bundle ./mise-a-jour.sh claude/lesgrandsvoisins-ux-klh29a --essai`. Lire les scripts avant de les lancer : ce sont de courts fichiers texte.
+
+Entrer dans le conteneur sur NixOS : `sudo nixos-container root-login voisinter-django`, puis `su -s "$(command -v bash)" voisinter-django` (il n'y a pas de `/bin/bash`). `runuser` est réservé à root. Redémarrer le service se fait en root dans le conteneur.
 
 **0. Choisir le code à mettre en ligne.** Ne pas fusionner dans `main` pour « essayer » : la mise à jour se fait en tête détachée sur la branche de travail ; `main` n'est pas modifiée. Fusionner dans `main` seulement une fois la mise en ligne jugée bonne.
 

@@ -4,6 +4,7 @@ Changements notables de `www.lesgrandsvoisins.com` (voisinternet), branche de tr
 
 ## [Unreleased]
 ### Added
+- **Page d'un évènement** : le bloc « Modifier / Mes évènements » (et l'état de publication) passe à la fin de la page, après l'évènement lui-même.
 - **`.justfile`** à la racine : recettes de développement (`test`, `run`) et de production (`statut`, `decomptes`, `fumee`, `sauvegarde`, `essai`, `maj`, `manage`, `redemarrer`, `journal`) ; `deploy/manage.sh` lance `manage.py` avec l'environnement du site ; les scripts de `deploy/` acceptent la variable `PROJECT` (alias de `PROJET`).
 - `docs/DEPLOIEMENTS.md` : journal des mises en ligne.
 - **Anciennes adresses du vieux site** (`old.lesgrandsvoisins.com`) : table `LEGACY_REDIRECTS` (`core/urls.py`), redirections permanentes 301 qui gardent la langue. Première entrée : `/fr/association/` (404 vu dans le journal de production, demandé par Bing) → `/fr/grandsvoisins/` (page « Association », qui porte le manifeste).

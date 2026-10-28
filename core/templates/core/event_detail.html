@@ -18,22 +18,6 @@
   </div>
 </div>
 <div class="wrap page">
-  {% if is_manager %}
-    <aside class="card{% if not event.public %} card-sun{% endif %}" role="status">
-      {% if event.public %}
-        <p>{% trans "Publié : visible de tout le monde dans l'agenda." %}</p>
-      {% else %}
-        <p>
-          <strong>{% trans "En attente de publication." %}</strong>
-          {% trans "Vous seul·e (et les autres responsables) voyez cette page. Le groupe « Administration » a été prévenu par courriel et la publiera après relecture." %}
-        </p>
-      {% endif %}
-      <p class="actions">
-        <a class="btn btn-line" href="{% url 'core:evenement_modifier' event.pk %}">{% trans "Modifier" %}</a>
-        <a class="btn btn-line" href="{% url 'core:mes_evenements' %}">{% trans "Mes évènements" %}</a>
-      </p>
-    </aside>
-  {% endif %}
   <article class="blog-post">
     {% if event.photo %}<img class="hero" src="{{ event.photo.url }}" alt="">{% endif %}
     {% if event.location or event.online_url %}
@@ -122,5 +106,21 @@
   </nav>
   {% endif %}
   <p class="muted"><a href="{% url 'core:agenda' %}">{% trans "← Retour à l’agenda" %}</a></p>
+  {% if is_manager %}
+    <aside class="card{% if not event.public %} card-sun{% endif %}" role="status">
+      {% if event.public %}
+        <p>{% trans "Publié : visible de tout le monde dans l'agenda." %}</p>
+      {% else %}
+        <p>
+          <strong>{% trans "En attente de publication." %}</strong>
+          {% trans "Vous seul·e (et les autres responsables) voyez cette page. Le groupe « Administration » a été prévenu par courriel et la publiera après relecture." %}
+        </p>
+      {% endif %}
+      <p class="actions">
+        <a class="btn btn-line" href="{% url 'core:evenement_modifier' event.pk %}">{% trans "Modifier" %}</a>
+        <a class="btn btn-line" href="{% url 'core:mes_evenements' %}">{% trans "Mes évènements" %}</a>
+      </p>
+    </aside>
+  {% endif %}
 </div>
 {% endblock %}

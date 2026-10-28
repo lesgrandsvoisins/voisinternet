@@ -21,23 +21,13 @@ Trois scripts dans `deploy/`, essayés sur une **simulation locale** (base SQLit
 
 Ce qui change entre `main` (production d'après le dernier commit connu, `e8898fe`) et la branche de travail : 15 commits, 45 fichiers, **aucune dépendance Python nouvelle**, **une migration** (`core/migrations/0034`, trois nouvelles tables, aucune table existante modifiée), un réglage ajouté (`LOGIN_REDIRECT_URL_FAILURE`, sans variable d'environnement). Essayé en simulation : la migration s'applique sur l'ancien schéma sans toucher aux données, et `migrate core 0033` la retire (l'ancien code refonctionne ensuite).
 
-**0a. Apporter les scripts et le code, à la main** (le code en production, `main`, ne contient pas les scripts, et le serveur ne peut pas lire GitHub). Sur une machine qui a accès au dépôt : `git fetch origin claude/lesgrandsvoisins-ux-klh29a`, puis
-```
-git bundle create voisinternet.bundle claude/lesgrandsvoisins-ux-klh29a ^e8898fe
-git show claude/lesgrandsvoisins-ux-klh29a:deploy/sauvegarde.sh > sauvegarde.sh     # idem mise-a-jour.sh, smoke.sh, decomptes.sh
-sha256sum voisinternet.bundle *.sh                                                   # à noter, pour comparer après la copie
-```
-(`e8898fe` est le commit actuellement en production ; le bundle ne contient que les commits qui s'y ajoutent.) Copier ces fichiers sur la T330 (`scp`), puis, **en root sur l'hôte** (le conteneur est visible sous `/var/lib/nixos-containers/voisinter-django/`) :
-```
-D=/var/lib/nixos-containers/voisinter-django/home/voisinter-django
-install -o 1538 -g 500 -m 755 sauvegarde.sh mise-a-jour.sh smoke.sh decomptes.sh $D/
-install -o 1538 -g 500 -m 644 voisinternet.bundle $D/
-```
-Dans le conteneur, en tant que `voisinter-django` : `cd ~ && sha256sum voisinternet.bundle *.sh` (comparer), `export PROJET=/var/voisinter/voisinter`. La mise à jour prend ensuite le code dans le fichier : `SOURCE=$HOME/voisinternet.bundle ./mise-a-jour.sh claude/lesgrandsvoisins-ux-klh29a --essai`. Lire les scripts avant de les lancer : ce sont de courts fichiers texte.
+**0a. Les scripts et le code.** Depuis le 28/10, la production suit **`main`**, qui contient les scripts de `deploy/`, `deploy/manage.sh` et le `.justfile`. Dans le conteneur, en tant que `voisinter-django`, le serveur lit directement le dépôt (`origin`) ; `export PROJECT=/var/voisinter/voisinter` (dans `~/.bashrc`, et `~/.bash_profile` doit le lire) puis `$PROJECT/deploy/mise-a-jour.sh main --essai`.
 
-Entrer dans le conteneur sur NixOS : `sudo nixos-container root-login voisinter-django`, puis `su -s "$(command -v bash)" voisinter-django` (il n'y a pas de `/bin/bash`). `runuser` est réservé à root. Redémarrer le service se fait en root dans le conteneur.
+*Si le serveur ne pouvait pas lire GitHub* (dépôt redevenu privé sans clé), repli par fichier : sur une machine qui a accès au dépôt, `git bundle create voisinternet.bundle main ^<commit en production>`, copier le fichier sur la T330 (`scp`), le déposer dans le dossier personnel du conteneur (`/var/lib/nixos-containers/voisinter-django/home/voisinter-django/`, uid 1538, groupe 500) et lancer `SOURCE=$HOME/voisinternet.bundle $PROJECT/deploy/mise-a-jour.sh main --essai`. Noter les `sha256sum` avant et après la copie.
 
-**0. Choisir le code à mettre en ligne.** Ne pas fusionner dans `main` pour « essayer » : la mise à jour se fait en tête détachée sur la branche de travail ; `main` n'est pas modifiée. Fusionner dans `main` seulement une fois la mise en ligne jugée bonne.
+Entrer dans le conteneur : `machinectl shell voisinter-django` puis `su - voisinter-django`, ou `sudo nixos-container root-login voisinter-django` puis `su -s "$(command -v bash)" voisinter-django` (il n'y a pas de `/bin/bash` sur NixOS). `runuser` est réservé à root. Redémarrer le service se fait en root dans le conteneur.
+
+**0. Choisir le code à mettre en ligne.** On met en ligne ce qui est dans `main` (le travail se fait sur `main`, la branche de travail `claude/lesgrandsvoisins-ux-klh29a` a été supprimée le 28/10). La mise à jour se fait en tête détachée : `git checkout --detach <commit>`. Pour un essai sur autre chose que `main`, une branche temporaire convient, à supprimer ensuite.
 
 **1. Sauvegarder** (obligatoire). **Recommandée : la sauvegarde de l'hôte**, `sudo bash scripts/sauvegarde-www.sh` dans `flakeops` (root, sur la T330) : base PostgreSQL `voisinter-django` (contrôlée), code, médias et statiques, `/etc/voisinter-django` (secrets, dont `VOISINTERNET_ANON_PEPPER`), plus la base Keycloak et l'annuaire LDAP ; elle écrit `/mnt/casiers/backups/www/AAAA-MM-JJ-HHMM` avec des sommes SHA-256. Ensuite, la mise à jour se lance avec `SAUVEGARDE_FAITE=<ce dossier> ./mise-a-jour.sh …` (déclaration : le script ne peut pas la contrôler depuis le conteneur). Sans cette déclaration, la mise à jour refuse s'il n'y a pas de sauvegarde de moins d'une heure faite par `deploy/sauvegarde.sh`, l'alternative **depuis le conteneur** :
 ```
@@ -50,13 +40,13 @@ Elle sauvegarde la base (PostgreSQL si `POSTGRES_DB` est défini, sinon SQLite),
 
 **3. Voir ce qui va changer, sans rien modifier :**
 ```
-deploy/mise-a-jour.sh claude/lesgrandsvoisins-ux-klh29a --essai
+deploy/mise-a-jour.sh main --essai
 ```
 Elle liste les commits qui arrivent, l'état des dépendances et les migrations.
 
 **4. Mettre à jour le code** (sans redémarrer) :
 ```
-deploy/mise-a-jour.sh claude/lesgrandsvoisins-ux-klh29a
+deploy/mise-a-jour.sh main
 ```
 Elle refuse s'il manque une sauvegarde récente ou si des fichiers suivis sont modifiés, note le commit d'avant dans le dossier de sauvegarde, passe sur la branche en tête détachée, lance `manage.py check` et affiche la migration prévue.
 
@@ -80,3 +70,10 @@ puis redémarrer et relancer `smoke.sh`. **La restauration n'a jamais été essa
 - **Test de fumée du site en ligne** : `deploy/smoke.sh [URL]` (lecture seule, aucun compte créé). Vérifié contre une instance locale uniquement, **pas contre la production**. Un échec sur « inscription -> Keycloak » avec `prompt=create` signifie que `KEYCLOAK_REALM_URL` ou `OIDC_RP_CLIENT_ID` manque dans l'environnement du site.
 - **Côté serveur** : la suite `scripts/nonreg/` de `flakeops` ne contrôle pas `www.lesgrandsvoisins.com` aujourd'hui ; le test d'inscription dans un navigateur (`inscription-navigateur.py`, non vérifié, jamais lancé) couvre le parcours d'inscription de bout en bout.
 - Ce que rien ne teste encore : l'arrivée du courriel de vérification depuis `www`, l'affichage réel des messages du thème Keycloak, l'envoi des courriels de l'agenda (serveur SMTP réel).
+
+## Étiquettes (tags) de version
+Une étiquette donne un **nom lisible à un commit précis** : « ce qui tournait en production le 28/10 ». Elle sert de cible de retour arrière (`git checkout --detach prod-2026-10-28`) et de repère dans `docs/DEPLOIEMENTS.md`.
+- **Quand** : à chaque mise en ligne qui change le code du site (pas pour de la documentation seule), et à un jalon (« onboarding terminé », « qualification en place »).
+- **Nom proposé** : `prod-AAAA-MM-JJ` pour une mise en ligne (`prod-2026-10-28-2` s'il y en a deux le même jour) ; `v0.N.0` pour un jalon (0.1.0 = première version avec l'onboarding refait).
+- **Comment** (par la personne qui met en ligne, depuis un clone où elle peut pousser, ou par moi sur demande) : `git tag -a prod-2026-10-28 1f08e1d -m "Production du 28/10 12:38"` puis `git push origin prod-2026-10-28`. Une étiquette annotée garde l'auteur et la date. Ne jamais déplacer une étiquette déjà poussée.
+- **Rattrapage possible** : `prod-2026-10-28` sur `1f08e1d` (le code qui tourne depuis 12:38) et `prod-2026-10-28-avant` sur `e8898fe` (l'état d'avant). Non créées : à décider.

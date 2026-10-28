@@ -5,7 +5,9 @@
 #     deploy/mise-a-jour.sh BRANCHE_OU_COMMIT             # fait la mise à jour du code (pas le redémarrage)
 # Réglages (facultatifs) : PROJET, ENV_FILE, DEST (comme deploy/sauvegarde.sh) ;
 #   SOURCE=…   dépôt à récupérer (défaut : origin) ; un fichier « git bundle » convient s'il n'y a pas d'accès à GitHub ;
-#   OUI=1      ne pas demander de confirmation ;  SANS_SAUVEGARDE=1  passer outre la sauvegarde récente (à éviter).
+#   OUI=1      ne pas demander de confirmation ;  SANS_SAUVEGARDE=1  passer outre la sauvegarde (à éviter) ;
+#   SAUVEGARDE_FAITE="chemin ou texte"   déclare une sauvegarde faite AILLEURS, par exemple celle de l'hôte
+#              (scripts/sauvegarde-www.sh de flakeops : SAUVEGARDE_FAITE=/mnt/casiers/backups/www/2026-10-28-0955).
 # Garde-fous : refuse s'il n'y a pas de sauvegarde de moins d'une heure (deploy/sauvegarde.sh), refuse si le dossier a des
 # modifications locales, ne touche pas à la branche suivie (la mise à jour se fait en « tête détachée »), note le commit d'avant
 # pour le retour arrière. Ne redémarre PAS le service : c'est une étape à part, volontaire.
@@ -19,8 +21,9 @@ die() { echo "KO   $*"; exit 1; }
 
 # 1. Sauvegarde récente obligatoire.
 recente=$(find "$DEST" -maxdepth 1 -type d -name '*-avant-maj' -mmin -60 2>/dev/null | sort | tail -1)
-if [ -z "$recente" ] || [ ! -s "$recente/SHA256SUMS" ]; then
-  [ -n "${SANS_SAUVEGARDE:-}" ] && echo "WARN pas de sauvegarde récente : passé outre (SANS_SAUVEGARDE)" || die "aucune sauvegarde de moins d'une heure dans $DEST : lancer deploy/sauvegarde.sh d'abord"
+if [ -n "${SAUVEGARDE_FAITE:-}" ]; then echo "OK   sauvegarde déclarée faite : $SAUVEGARDE_FAITE (non contrôlée par ce script : vérifiez qu'elle date d'AVANT cette mise à jour)"
+elif [ -z "$recente" ] || [ ! -s "$recente/SHA256SUMS" ]; then
+  [ -n "${SANS_SAUVEGARDE:-}" ] && echo "WARN pas de sauvegarde récente : passé outre (SANS_SAUVEGARDE)" || die "aucune sauvegarde de moins d'une heure dans $DEST : lancer deploy/sauvegarde.sh, ou déclarer celle de l'hôte avec SAUVEGARDE_FAITE=…"
 else echo "OK   sauvegarde récente : $recente"; fi
 
 # 2. Dossier propre.
@@ -42,6 +45,9 @@ if [ "$ESSAI" -eq 1 ]; then echo; echo "ESSAI : rien n'a été modifié."; exit 
 # 4. Confirmation, puis mise à jour du code.
 if [ -z "${OUI:-}" ]; then read -r -p "Mettre à jour le code vers $cible ? [oui/NON] " r; [ "$r" = oui ] || die "abandon"; fi
 [ -n "$recente" ] && echo "$avant" > "$recente/commit-avant.txt"
+echo "--- Décomptes AVANT (à comparer après) :"; ( cd "$PROJET" && set -a && . "$ENV_FILE" && set +a && "$PY" manage.py shell -c "
+from core.models import Account, Shortcut, Event, DirectoryEntry
+print('  comptes', Account.objects.count(), '| anonymes', Account.objects.filter(user__isnull=True).count(), '| raccourcis', Shortcut.objects.count(), '| évènements', Event.objects.count(), '| fiches', DirectoryEntry.objects.count())" 2>&1 | grep -v 'imported automatically' )
 changed_req=1; git diff --quiet HEAD FETCH_HEAD -- requirements.txt && changed_req=0
 git checkout --detach FETCH_HEAD 2>&1 | tail -1 || die "git checkout a échoué : le code n'a pas changé"
 if [ "$changed_req" -eq 1 ]; then echo "Installation des dépendances…"; "$PROJET/.venv/bin/pip" install -r requirements.txt || die "pip a échoué : revenir en arrière (voir ci-dessous)"; fi
@@ -55,8 +61,8 @@ CODE MIS À JOUR (pas encore redémarré) : $cible
   1. redémarrer le service (applique les migrations et collecte les fichiers statiques) :  systemctl restart voisinter-django
      puis surveiller :                                                                      journalctl -u voisinter-django -f
   2. test de fumée :   deploy/smoke.sh https://www.lesgrandsvoisins.com
-  3. comparer les décomptes avec ceux de la sauvegarde (${recente:-sauvegarde}/enregistrements.txt)
+  3. comparer les décomptes : ./decomptes.sh (doivent égaler ou dépasser ceux affichés plus haut, « Décomptes AVANT »)
 RETOUR ARRIÈRE si quelque chose ne va pas :
-  git checkout --detach $avant && systemctl restart voisinter-django
+  git checkout --detach $avant && systemctl restart voisinter-django     (le commit d'avant est aussi dans git-etat.txt de la sauvegarde de l'hôte)
   (les nouvelles tables de la migration 0034 peuvent rester ; pour les retirer : $PY manage.py migrate core 0033 AVANT de revenir au code précédent)
 FIN

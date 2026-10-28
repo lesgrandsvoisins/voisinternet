@@ -23,21 +23,21 @@ Ce qui change entre `main` (production d'après le dernier commit connu, `e8898f
 
 **0a. Récupérer les scripts d'abord** : le code en production (`main`) ne les contient pas encore. Dans le conteneur (par exemple `sudo nixos-container root-login voisinter-django`, puis `su -s /bin/bash voisinter-django` ; **non vérifié**) :
 ```
-cd ~ && for f in sauvegarde.sh mise-a-jour.sh smoke.sh; do curl -fsSLO https://raw.githubusercontent.com/lesgrandsvoisins/voisinternet/claude/lesgrandsvoisins-ux-klh29a/deploy/$f; done; chmod +x *.sh
+cd ~ && for f in sauvegarde.sh mise-a-jour.sh smoke.sh decomptes.sh; do curl -fsSLO https://raw.githubusercontent.com/lesgrandsvoisins/voisinternet/claude/lesgrandsvoisins-ux-klh29a/deploy/$f; done; chmod +x *.sh
 export PROJET=/var/voisinter/voisinter        # puis lancer ./sauvegarde.sh, ./mise-a-jour.sh, ./smoke.sh au lieu de deploy/…
 ```
 Lire les scripts avant de les lancer : ce sont de courts fichiers texte.
 
 **0. Choisir le code à mettre en ligne.** Ne pas fusionner dans `main` pour « essayer » : la mise à jour se fait en tête détachée sur la branche de travail ; `main` n'est pas modifiée. Fusionner dans `main` seulement une fois la mise en ligne jugée bonne.
 
-**1. Sauvegarder** (obligatoire, la mise à jour refuse sans sauvegarde de moins d'une heure) :
+**1. Sauvegarder** (obligatoire). **Recommandée : la sauvegarde de l'hôte**, `sudo bash scripts/sauvegarde-www.sh` dans `flakeops` (root, sur la T330) : base PostgreSQL `voisinter-django` (contrôlée), code, médias et statiques, `/etc/voisinter-django` (secrets, dont `VOISINTERNET_ANON_PEPPER`), plus la base Keycloak et l'annuaire LDAP ; elle écrit `/mnt/casiers/backups/www/AAAA-MM-JJ-HHMM` avec des sommes SHA-256. Ensuite, la mise à jour se lance avec `SAUVEGARDE_FAITE=<ce dossier> ./mise-a-jour.sh …` (déclaration : le script ne peut pas la contrôler depuis le conteneur). Sans cette déclaration, la mise à jour refuse s'il n'y a pas de sauvegarde de moins d'une heure faite par `deploy/sauvegarde.sh`, l'alternative **depuis le conteneur** :
 ```
 cd /var/voisinter/voisinter
 deploy/sauvegarde.sh        # dossier ~/sauvegardes/AAAAMMJJ-HHMMSS-avant-maj
 ```
 Elle sauvegarde la base (PostgreSQL si `POSTGRES_DB` est défini, sinon SQLite), les médias, le **fichier d'environnement** (droits 600, **secrets** : il contient `VOISINTERNET_ANON_PEPPER`, qui ne doit jamais être perdu ni changé, sinon plus aucun compte anonyme n'est récupérable), le commit déployé, des décomptes (comptes, raccourcis, évènements, fiches) et des sommes SHA-256, puis **vérifie** ce qu'elle a écrit. Elle se termine par « SAUVEGARDE OK » ou « INCOMPLÈTE ».
 
-**2. Copier la sauvegarde hors de la machine** (aujourd'hui aucune copie hors du domicile n'existe) puis vérifier la copie : `scp -r <machine>:~/sauvegardes/<dossier> ~/` puis `cd <dossier> && sha256sum -c SHA256SUMS`. Le dossier contient des secrets : ne le publier nulle part, ne jamais le mettre dans git.
+**2. Copier la sauvegarde hors de la machine** (`/mnt/casiers` est sur la même machine : en cas de panne ou de vol de la T330, la sauvegarde disparaît avec elle ; aucune copie hors du domicile n'existe aujourd'hui) puis vérifier la copie : `scp -r <machine>:~/sauvegardes/<dossier> ~/` puis `cd <dossier> && sha256sum -c SHA256SUMS`. Le dossier contient des secrets : ne le publier nulle part, ne jamais le mettre dans git.
 
 **3. Voir ce qui va changer, sans rien modifier :**
 ```
@@ -53,7 +53,7 @@ Elle refuse s'il manque une sauvegarde récente ou si des fichiers suivis sont m
 
 **5. Redémarrer** (applique la migration et collecte les fichiers statiques) : `systemctl restart voisinter-django`, en surveillant `journalctl -u voisinter-django -f`.
 
-**6. Vérifier :** `deploy/smoke.sh https://www.lesgrandsvoisins.com`, puis regarder à la main l'accueil, « Mon compte » (créer un compte anonyme de test et le fermer), `/fr/account/parcours/`, `/fr/account/inscription/`. Les décomptes de `enregistrements.txt` doivent être identiques ou supérieurs.
+**6. Vérifier :** `deploy/smoke.sh https://www.lesgrandsvoisins.com`, puis regarder à la main l'accueil, « Mon compte » (créer un compte anonyme de test et le fermer), `/fr/account/parcours/`, `/fr/account/inscription/`. Lancer `./decomptes.sh` : les nombres doivent égaler ou dépasser ceux affichés par la mise à jour (« Décomptes AVANT »).
 
 **7. Une seule fois, après la première mise en ligne :** charger les parcours guidés d'exemple, `manage.py loaddata core.mission core.missionstep` (le parcours « Ma boîte courriel » y est masqué tant que `B-039` n'est pas résolu). Ne pas le refaire ensuite : cela écraserait les modifications faites dans l'administration.
 

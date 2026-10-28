@@ -15,27 +15,52 @@
 - Le moteur de base de données de production (SQLite ou PostgreSQL ; `CUTOVER-web.md` parle d'une base `voisinter-django` en PostgreSQL). **Non vérifié.**
 - L'utilisateur qui lance les commandes dans le conteneur.
 
-## Recette proposée (à valider)
-**Avant**
-1. Fusionner le travail dans la branche de production (par une demande de fusion relue ; la branche de travail actuelle est `claude/lesgrandsvoisins-ux-klh29a`). Ne pas déployer une branche de travail directement.
-2. Lire `CHANGELOG.md` : qu'est-ce qui change, y a-t-il une migration (la dernière : `core/migrations/0034_mission_missionstep_stepcompletion.py`, nouvelles tables seulement, sans toucher aux anciennes).
-3. Sauvegarder la base et les médias (`pg_dump -Fc voisinter-django` si PostgreSQL ; copie de `/var/www/voisinter-django/media`).
+## Recette (sauvegarde, mise à jour, vérification, retour arrière)
 
-**Pendant** (dans le conteneur, en tant qu'utilisateur du service)
-4. `cd /var/voisinter/voisinter && git fetch && git log --oneline HEAD..origin/<branche>` pour voir ce qui arrive, puis `git pull --ff-only`.
-5. Si `requirements.txt` a changé : `.venv/bin/pip install -r requirements.txt`.
-6. Redémarrer : `systemctl restart voisinter-django` (applique migrations et fichiers statiques). Surveiller `journalctl -u voisinter-django -f`.
-7. **Première mise en ligne des parcours guidés seulement** : `.venv/bin/python manage.py loaddata core.mission core.missionstep` (trois parcours d'exemple). À ne pas refaire ensuite : cela écraserait les modifications faites dans l'administration.
+Trois scripts dans `deploy/`, essayés sur une **simulation locale** (base SQLite, code de `main` puis de la branche de travail) : `sauvegarde.sh`, `mise-a-jour.sh`, `smoke.sh`. **Non essayés sur le vrai serveur.** Ils se lancent dans le conteneur, depuis `/var/voisinter/voisinter`, avec l'utilisateur du service. Le dépôt est public : le serveur récupère le code par `https://github.com/lesgrandsvoisins/voisinternet` sans clé.
 
-**Après**
-8. Lancer le test de fumée : `deploy/smoke.sh https://www.lesgrandsvoisins.com` (voir ci-dessous). Puis regarder à la main : l'accueil, « Mon compte », un parcours, l'écran d'inscription Keycloak (`/fr/account/inscription/`).
-9. Vérifier dans l'administration (`/fr/admin/`) que les parcours existent et que `KEYCLOAK_REALM_URL`, `OIDC_RP_CLIENT_ID` sont bien définis dans le fichier d'environnement (aucun nouveau réglage n'est requis par ces changements).
+Ce qui change entre `main` (production d'après le dernier commit connu, `e8898fe`) et la branche de travail : 15 commits, 45 fichiers, **aucune dépendance Python nouvelle**, **une migration** (`core/migrations/0034`, trois nouvelles tables, aucune table existante modifiée), un réglage ajouté (`LOGIN_REDIRECT_URL_FAILURE`, sans variable d'environnement). Essayé en simulation : la migration s'applique sur l'ancien schéma sans toucher aux données, et `migrate core 0033` la retire (l'ancien code refonctionne ensuite).
 
-**Retour arrière**
-10. `git checkout <commit précédent>` puis `systemctl restart voisinter-django`. Les migrations de cette série ne créent que de nouvelles tables : les laisser en place est sans danger ; pour les retirer, `manage.py migrate core 0033`. Restaurer la base seulement en cas de corruption.
+**0. Choisir le code à mettre en ligne.** Ne pas fusionner dans `main` pour « essayer » : la mise à jour se fait en tête détachée sur la branche de travail ; `main` n'est pas modifiée. Fusionner dans `main` seulement une fois la mise en ligne jugée bonne.
+
+**1. Sauvegarder** (obligatoire, la mise à jour refuse sans sauvegarde de moins d'une heure) :
+```
+cd /var/voisinter/voisinter
+deploy/sauvegarde.sh        # dossier ~/sauvegardes/AAAAMMJJ-HHMMSS-avant-maj
+```
+Elle sauvegarde la base (PostgreSQL si `POSTGRES_DB` est défini, sinon SQLite), les médias, le **fichier d'environnement** (droits 600, **secrets** : il contient `VOISINTERNET_ANON_PEPPER`, qui ne doit jamais être perdu ni changé, sinon plus aucun compte anonyme n'est récupérable), le commit déployé, des décomptes (comptes, raccourcis, évènements, fiches) et des sommes SHA-256, puis **vérifie** ce qu'elle a écrit. Elle se termine par « SAUVEGARDE OK » ou « INCOMPLÈTE ».
+
+**2. Copier la sauvegarde hors de la machine** (aujourd'hui aucune copie hors du domicile n'existe) puis vérifier la copie : `scp -r <machine>:~/sauvegardes/<dossier> ~/` puis `cd <dossier> && sha256sum -c SHA256SUMS`. Le dossier contient des secrets : ne le publier nulle part, ne jamais le mettre dans git.
+
+**3. Voir ce qui va changer, sans rien modifier :**
+```
+deploy/mise-a-jour.sh claude/lesgrandsvoisins-ux-klh29a --essai
+```
+Elle liste les commits qui arrivent, l'état des dépendances et les migrations.
+
+**4. Mettre à jour le code** (sans redémarrer) :
+```
+deploy/mise-a-jour.sh claude/lesgrandsvoisins-ux-klh29a
+```
+Elle refuse s'il manque une sauvegarde récente ou si des fichiers suivis sont modifiés, note le commit d'avant dans le dossier de sauvegarde, passe sur la branche en tête détachée, lance `manage.py check` et affiche la migration prévue.
+
+**5. Redémarrer** (applique la migration et collecte les fichiers statiques) : `systemctl restart voisinter-django`, en surveillant `journalctl -u voisinter-django -f`.
+
+**6. Vérifier :** `deploy/smoke.sh https://www.lesgrandsvoisins.com`, puis regarder à la main l'accueil, « Mon compte » (créer un compte anonyme de test et le fermer), `/fr/account/parcours/`, `/fr/account/inscription/`. Les décomptes de `enregistrements.txt` doivent être identiques ou supérieurs.
+
+**7. Une seule fois, après la première mise en ligne :** charger les parcours guidés d'exemple, `manage.py loaddata core.mission core.missionstep` (le parcours « Ma boîte courriel » y est masqué tant que `B-039` n'est pas résolu). Ne pas le refaire ensuite : cela écraserait les modifications faites dans l'administration.
+
+**Retour arrière du code :** `git checkout --detach <commit-avant.txt> && systemctl restart voisinter-django`. Si on veut aussi retirer les nouvelles tables : `manage.py migrate core 0033` **avant** de revenir au code précédent.
+
+**Restauration complète (si la base est abîmée)** : arrêter le service (`systemctl stop voisinter-django`), puis
+- SQLite : copier `base.sqlite3` à l'emplacement de la base (`DJANGO_SQLITE_PATH` ou `var/db.sqlite3`) ;
+- PostgreSQL : `pg_restore --clean --if-exists -d <base> base.dump` (ou restaurer dans une base neuve et pointer `POSTGRES_DB` dessus) ;
+- médias : `tar -xzf media.tar.gz -C <dossier parent des médias>` ;
+- environnement : remettre `environnement.env` en place (droits restreints), **sans modifier** `VOISINTERNET_ANON_PEPPER` ;
+puis redémarrer et relancer `smoke.sh`. **La restauration n'a jamais été essayée sur le vrai serveur** : en faire une répétition dans une base de test est la meilleure preuve qu'une sauvegarde vaut quelque chose.
 
 ## Tests de non-régression
 - **Tests unitaires** : `make test` (149 tests : pages, comptes anonymes et nommés, agenda, annuaire, parcours, Keycloak simulé). À lancer avant toute fusion. **Aucune intégration continue n'existe** pour l'instant : ils ne tournent que si quelqu'un les lance.
-- **Test de fumée du site en ligne** : `deploy/smoke.sh [URL]` (lecture seule, aucun compte créé). Vérifié contre une instance locale uniquement, **pas contre la production**.
+- **Test de fumée du site en ligne** : `deploy/smoke.sh [URL]` (lecture seule, aucun compte créé). Vérifié contre une instance locale uniquement, **pas contre la production**. Un échec sur « inscription -> Keycloak » avec `prompt=create` signifie que `KEYCLOAK_REALM_URL` ou `OIDC_RP_CLIENT_ID` manque dans l'environnement du site.
 - **Côté serveur** : la suite `scripts/nonreg/` de `flakeops` ne contrôle pas `www.lesgrandsvoisins.com` aujourd'hui ; le test d'inscription dans un navigateur (`inscription-navigateur.py`, non vérifié, jamais lancé) couvre le parcours d'inscription de bout en bout.
 - Ce que rien ne teste encore : l'arrivée du courriel de vérification depuis `www`, l'affichage réel des messages du thème Keycloak, l'envoi des courriels de l'agenda (serveur SMTP réel).

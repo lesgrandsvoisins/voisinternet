@@ -11,6 +11,18 @@
 # (droits 600 : SECRETS, ne jamais le publier ni le mettre dans git), commit déployé, nombre d'enregistrements, sommes SHA-256.
 # La sauvegarde est VÉRIFIÉE avant de conclure : un échec de vérification donne un code de retour non nul.
 set -uo pipefail
+# Charge un fichier d'environnement au format systemd (CLE=valeur, sans interprétation : un « $ » dans une valeur reste littéral).
+# Ne PAS faire « . fichier » : le shell prendrait les « $… » pour des variables.
+charger_env() {
+  local f=$1 l k v
+  while IFS= read -r l || [ -n "$l" ]; do
+    case "$l" in ''|'#'*|';'*) continue;; esac
+    k=${l%%=*}; v=${l#*=}; k=${k#export }; k=${k// /}
+    [[ "$k" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]] || continue
+    case "$v" in \"*\") v=${v#\"}; v=${v%\"};; \'*\') v=${v#\'}; v=${v%\'};; esac
+    export "$k=$v"
+  done < "$f"
+}
 PROJET=${PROJET:-$(pwd)}; ENV_FILE=${ENV_FILE:-/etc/voisinter-django/voisinter-django.env}; DEST=${DEST:-$HOME/sauvegardes}
 PY="$PROJET/.venv/bin/python"; [ -x "$PY" ] || PY=$(command -v python3)
 cd "$PROJET" || { echo "KO   dossier du projet introuvable : $PROJET"; exit 2; }
@@ -22,7 +34,7 @@ umask 077; mkdir -p "$OUT" || { echo "KO   impossible de créer $OUT"; exit 2; }
 echo "Sauvegarde dans $OUT"
 
 # Charge les réglages du site sans rien afficher (les valeurs restent dans ce processus).
-set -a; . "$ENV_FILE"; set +a
+charger_env "$ENV_FILE"
 
 # 1. Code déployé : de quoi revenir en arrière.
 { echo "date: $(date -Is)"; echo "commit: $(git rev-parse HEAD 2>/dev/null)"; echo "branche: $(git rev-parse --abbrev-ref HEAD 2>/dev/null)"; echo "--- modifications locales non validées :"; git status --short -uno 2>/dev/null; } > "$OUT/etat-code.txt"

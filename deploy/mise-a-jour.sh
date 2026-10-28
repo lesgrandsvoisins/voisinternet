@@ -12,6 +12,18 @@
 # modifications locales, ne touche pas à la branche suivie (la mise à jour se fait en « tête détachée »), note le commit d'avant
 # pour le retour arrière. Ne redémarre PAS le service : c'est une étape à part, volontaire.
 set -uo pipefail
+# Charge un fichier d'environnement au format systemd (CLE=valeur, sans interprétation : un « $ » dans une valeur reste littéral).
+# Ne PAS faire « . fichier » : le shell prendrait les « $… » pour des variables.
+charger_env() {
+  local f=$1 l k v
+  while IFS= read -r l || [ -n "$l" ]; do
+    case "$l" in ''|'#'*|';'*) continue;; esac
+    k=${l%%=*}; v=${l#*=}; k=${k#export }; k=${k// /}
+    [[ "$k" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]] || continue
+    case "$v" in \"*\") v=${v#\"}; v=${v%\"};; \'*\') v=${v#\'}; v=${v%\'};; esac
+    export "$k=$v"
+  done < "$f"
+}
 REF=${1:-}; ESSAI=0; [ "${2:-}" = "--essai" ] && ESSAI=1
 [ -n "$REF" ] || { sed -n 2,13p "$0"; exit 2; }
 PROJET=${PROJET:-$(pwd)}; ENV_FILE=${ENV_FILE:-/etc/voisinter-django/voisinter-django.env}; DEST=${DEST:-$HOME/sauvegardes}; SOURCE=${SOURCE:-origin}
@@ -45,13 +57,13 @@ if [ "$ESSAI" -eq 1 ]; then echo; echo "ESSAI : rien n'a été modifié."; exit 
 # 4. Confirmation, puis mise à jour du code.
 if [ -z "${OUI:-}" ]; then read -r -p "Mettre à jour le code vers $cible ? [oui/NON] " r; [ "$r" = oui ] || die "abandon"; fi
 [ -n "$recente" ] && echo "$avant" > "$recente/commit-avant.txt"
-echo "--- Décomptes AVANT (à comparer après) :"; ( cd "$PROJET" && set -a && . "$ENV_FILE" && set +a && "$PY" manage.py shell -c "
+echo "--- Décomptes AVANT (à comparer après) :"; ( cd "$PROJET" && charger_env "$ENV_FILE" && "$PY" manage.py shell -c "
 from core.models import Account, Shortcut, Event, DirectoryEntry
 print('  comptes', Account.objects.count(), '| anonymes', Account.objects.filter(user__isnull=True).count(), '| raccourcis', Shortcut.objects.count(), '| évènements', Event.objects.count(), '| fiches', DirectoryEntry.objects.count())" 2>&1 | grep -v 'imported automatically' )
 changed_req=1; git diff --quiet HEAD FETCH_HEAD -- requirements.txt && changed_req=0
 git checkout --detach FETCH_HEAD 2>&1 | tail -1 || die "git checkout a échoué : le code n'a pas changé"
 if [ "$changed_req" -eq 1 ]; then echo "Installation des dépendances…"; "$PROJET/.venv/bin/pip" install -r requirements.txt || die "pip a échoué : revenir en arrière (voir ci-dessous)"; fi
-set -a; . "$ENV_FILE"; set +a
+charger_env "$ENV_FILE"
 "$PY" manage.py check || die "manage.py check a échoué : revenir en arrière (voir ci-dessous)"
 echo "--- Migrations qui seront appliquées au redémarrage :"; "$PY" manage.py migrate --plan | sed 's/^/  /'
 cat <<FIN

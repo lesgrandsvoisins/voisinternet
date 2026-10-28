@@ -10,6 +10,7 @@ Changements notables de `www.lesgrandsvoisins.com` (voisinternet), branche de tr
 - Outil `tools/export_contenu.py` : extraction du contenu public (pages Wagtail, redirections, agenda, annuaire public) en JSON Lines, pour comparer `old`, `www` et le blog. `deploy/smoke.sh` et `docs/DEPLOIEMENT.md` (brouillon).
 - `deploy/sauvegarde.sh` (base, médias, environnement dont `VOISINTERNET_ANON_PEPPER`, vérifiée) et `deploy/mise-a-jour.sh` (garde-fous, essai à blanc, retour arrière) ; `docs/DEPLOIEMENT.md` réécrit avec restauration. Essayés en simulation locale seulement. Le dépôt est privé : le code et les scripts se livrent par `git bundle` (docs/DEPLOIEMENT.md, 0a).
 ### Fixed
+- Scripts de déploiement : le fichier d'environnement (format systemd) était lu comme un script shell, ce qui échouait dès qu'une valeur contenait un « $ » (`unbound variable`) ; il est maintenant chargé sans interprétation (`charger_env`). Défaut vu au premier essai sur le serveur.
 - Parcours courriel et Vikunja : retiré ce qui n'est pas vérifié (connexion de Vikunja par `key.gv.je`, libellé « Indésirables » seul) ; la relecture ar/ko dit maintenant « demandez-nous un accès ».
 - En arabe (droite à gauche), les groupes de chiffres du numéro de compte anonyme s'affichaient à l'envers : le numéro est maintenant toujours lu de gauche à droite.
 - Interface des parcours guidés traduite en en/es/ar/ko (le contenu des parcours reste en français tant qu'il n'est pas traduit dans l'administration).

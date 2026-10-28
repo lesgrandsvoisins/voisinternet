@@ -4,6 +4,12 @@ from . import views
 
 app_name = "core"
 
+# Anciennes adresses du vieux site (old.lesgrandsvoisins.com, Sites Faciles) -> équivalent ici. À compléter à partir de la liste des
+# pages de l'ancien site. Les redirections sont permanentes (301) et gardent la langue : /fr/association/ -> /fr/grandsvoisins/.
+LEGACY_REDIRECTS = {
+    "association/": "/grandsvoisins/",
+}
+
 urlpatterns = [
     path("", views.home, name="home"),
     path("account/", views.account, name="account"),
@@ -89,4 +95,7 @@ urlpatterns = [
         "administration/dons/<int:pk>/",
         views.administration_review_contribution, name="administration_review_contribution",
     ),
+] + [
+    path(old, views.legacy_redirect, {"target": new}, name="legacy_" + old.strip("/").replace("/", "_"))
+    for old, new in LEGACY_REDIRECTS.items()
 ]

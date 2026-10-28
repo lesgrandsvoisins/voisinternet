@@ -21,7 +21,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.text import Truncator, slugify
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext as _, get_language
 from django.views.decorators.http import require_POST
 
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
@@ -1486,3 +1486,9 @@ def robots_txt(request):
         "Disallow: /*&mois=",
     ]
     return HttpResponse("\n".join(lines) + "\n", content_type="text/plain; charset=utf-8")
+
+
+def legacy_redirect(request, target):
+    """Ancienne adresse du vieux site (old.lesgrandsvoisins.com) : redirection permanente vers son équivalent ici, dans la
+    langue courante. La table est dans core/urls.py (LEGACY_REDIRECTS)."""
+    return redirect(f"/{get_language()}{target}", permanent=True)

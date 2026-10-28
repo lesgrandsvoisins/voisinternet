@@ -4,6 +4,7 @@ Changements notables de `www.lesgrandsvoisins.com` (voisinternet), branche de tr
 
 ## [Unreleased]
 ### Added
+- **Anciennes adresses du vieux site** (`old.lesgrandsvoisins.com`) : table `LEGACY_REDIRECTS` (`core/urls.py`), redirections permanentes 301 qui gardent la langue. Première entrée : `/fr/association/` (404 vu dans le journal de production, demandé par Bing) → `/fr/grandsvoisins/` (page « Association », qui porte le manifeste).
 - **`robots.txt`** (absent jusqu'ici : 404 dans le journal) : tient les robots à l'écart du compte, de l'administration, des formulaires et des mois du calendrier. Les pages portant `?mois=` et « Mon compte » sont aussi `noindex, nofollow`.
 - **Calendrier borné** : le paramètre `?mois=` n'accepte plus que 5 ans en arrière et 3 ans en avant (au-delà : mois courant). Le journal de production du 28/10 montrait des robots (ClaudeBot, DotBot, bingbot) parcourant des mois comme `?mois=1997-07`, soit un nombre illimité de pages.
 - **Adresses de la boîte** : `www` lit le claim `lgvmail` (multivalué) du compte Keycloak et l'affiche dans « Mon profil » et dans le message de bienvenue ; **aucun domaine n'est écrit dans `www`**, sans claim rien n'est affiché. Demande côté Keycloak : `docs/DEMANDES-UX.md` n°9 (`flakeops`).

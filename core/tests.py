@@ -1660,3 +1660,13 @@ class RobotsEtCalendrierTests(Base):
         self.assertContains(self.client.get(reverse("core:home") + "?mois=2026-10"), 'name="robots" content="noindex, nofollow"')
         self.assertNotContains(self.client.get(reverse("core:home")), 'name="robots"')
         self.assertContains(self.client.get(reverse("core:account")), 'name="robots" content="noindex, nofollow"')
+
+
+class AnciennesAdressesTests(Base):
+    def test_old_site_addresses_redirect_permanently_and_keep_the_language(self):
+        self.addCleanup(translation.activate, "fr")  # les requêtes /en/ et /ar/ activent leur langue pour le fil
+        for langue in ["fr", "en", "ar"]:
+            with self.subTest(langue=langue):
+                response = self.client.get(f"/{langue}/association/")
+                self.assertEqual(response.status_code, 301)
+                self.assertEqual(response["Location"], f"/{langue}/grandsvoisins/")

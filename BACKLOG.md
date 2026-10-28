@@ -32,6 +32,8 @@ Les besoins côté serveur passent par `docs/DEMANDES-UX.md` (dépôt `flakeops`
 | U-029 | a_faire | **Purger les comptes anonymes** (1 973 comptes dont 1 956 anonymes au 28/10, presque tous vides) : à faire plus tard (décision de Chris). Prudence : supprimer un compte supprime ses raccourcis, groupes, intérêts et dons ; ne purger que les comptes **sans aucune donnée liée** et anciens. Commande à écrire (essai à blanc par défaut). | UX / Chris | Comptes vides supprimés, décomptes avant/après notés. |
 | U-030 | a_faire | **Environnement de qualification** : proposition dans `docs/QUALIFICATION.md` ; la partie serveur est à évaluer par l'Admin. | Chris / Admin | Décision ; si oui, demande dans `DEMANDES-UX.md`. |
 
+| U-031 | a_faire | Inscription Keycloak (demande Admin du 28/10, `B-043`) : (1) champ identifiant en lecture seule « calculé pour vous » : thème 0.2.0 écrit (`flakeops` `ux/inscription-lecture-seule`, `a8280db`), **non déployé, non essayé dans Keycloak** ; (2) textes du royaume proposés dans `docs/TEXTES-ROYAUME.md`, à appliquer par Chris ; (3) adresses lues dans le claim `lgvmail` (demande n°9 : protocol mapper) ; (4) test navigateur adapté (5+5 sans numéro, deux `mail`) ; (5) le lien d'inscription de `www` part de `client_id=<OIDC_RP_CLIENT_ID>` (voisinternet), pas de la console d'administration : voir réponse à l'Admin. | UX / Admin / Chris | Une inscription test sur la qualification ou la production : identifiant lu en lecture seule, deux adresses affichées, arrivée sur `www`. |
+
 ## P2 — À faire côté UX
 | ID | État | Tâche | Resp. | Terminé quand |
 |---|---|---|---|---|

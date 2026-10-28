@@ -163,6 +163,11 @@
                   <strong>{% trans "Identifiant de connexion" %}</strong><span>{{ login_identifier }}</span>
                 </li>
               {% endif %}
+              {% if mail_addresses %}
+                <li>
+                  <strong>{% trans "Adresses de courriel (une seule boîte)" %}</strong><span>{{ mail_addresses|join:", " }}</span>
+                </li>
+              {% endif %}
               <li>
                 <strong>{% trans "Nom" %}</strong><span>{{ user.get_full_name|default:_("Non renseigné") }}</span>
               </li>

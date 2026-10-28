@@ -412,6 +412,38 @@ class AnonymousAccountTests(Base):
         session.save()
         self.assertContains(self.client.get(reverse("core:account")), "dupojean2@gv.je")
 
+    def test_mail_addresses_are_read_from_the_account_never_written_in_code(self):
+        user = get_user_model().objects.create_user("sub-456", first_name="Lucie")
+        self.client.force_login(user)
+        page = self.client.get(reverse("core:account"))
+        self.assertNotContains(page, "Adresses de courriel")           # sans claim : rien d'affiché, aucun domaine inventé
+        session = self.client.session
+        session["voisinternet_mail_addresses"] = ["duponlucie@exemple.test", "duponlucie@autre.test"]
+        session.save()
+        page = self.client.get(reverse("core:account"))
+        self.assertContains(page, "duponlucie@exemple.test, duponlucie@autre.test")
+
+    @override_settings(OIDC_ENABLED=True, OIDC_RP_CLIENT_ID="voisinternet", OIDC_RP_CLIENT_SECRET="x",
+                       OIDC_OP_AUTHORIZATION_ENDPOINT="https://key.example/auth", OIDC_OP_TOKEN_ENDPOINT="https://key.example/token",
+                       OIDC_OP_USER_ENDPOINT="https://key.example/user", OIDC_OP_JWKS_ENDPOINT="https://key.example/certs")
+    def test_userinfo_keeps_identifier_and_all_mail_addresses_from_claims(self):
+        from django.test import RequestFactory
+        from core.auth import KeycloakBackend
+
+        request = RequestFactory().get("/")
+        request.session = self.client.session
+        backend = KeycloakBackend()
+        backend.request = request
+        claims = {"sub": "s1", "preferred_username": "duponlucie@a.test", "lgvmail": ["duponlucie@a.test", "duponlucie@b.test"]}
+        with mock.patch("mozilla_django_oidc.auth.OIDCAuthenticationBackend.get_userinfo", return_value=claims):
+            backend.get_userinfo("t", "i", {})
+        self.assertEqual(request.session["voisinternet_login_identifier"], "duponlucie@a.test")
+        self.assertEqual(request.session["voisinternet_mail_addresses"], ["duponlucie@a.test", "duponlucie@b.test"])
+        # Un claim absent efface les adresses d'une connexion précédente (pas d'adresse périmée affichée).
+        with mock.patch("mozilla_django_oidc.auth.OIDCAuthenticationBackend.get_userinfo", return_value={"sub": "s1"}):
+            backend.get_userinfo("t", "i", {})
+        self.assertNotIn("voisinternet_mail_addresses", request.session)
+
     def test_connexion_is_404_without_oidc(self):
         with override_settings(OIDC_ENABLED=False):
             self.assertEqual(self.client.get(reverse("core:inscription")).status_code, 404)

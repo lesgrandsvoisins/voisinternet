@@ -11,6 +11,7 @@ from mozilla_django_oidc.views import OIDCAuthenticationRequestView
 
 
 LOGIN_IDENTIFIER_KEY = "voisinternet_login_identifier"
+MAIL_ADDRESSES_KEY = "voisinternet_mail_addresses"
 
 
 class KeycloakBackend(OIDCAuthenticationBackend):
@@ -36,6 +37,17 @@ class KeycloakBackend(OIDCAuthenticationBackend):
         request = getattr(self, "request", None)
         if request is not None and username:
             request.session[LOGIN_IDENTIFIER_KEY] = username
+        # Adresses de la boîte (attribut lgvmail, claim multivalué) : lues dans le compte, jamais devinées ni écrites en dur
+        # (le domaine principal et les domaines supplémentaires se règlent côté serveur). Sans claim, on n'affiche rien.
+        adresses = claims.get("lgvmail") or []
+        if isinstance(adresses, str):
+            adresses = [adresses]
+        adresses = [a for a in adresses if isinstance(a, str) and "@" in a]
+        if request is not None:
+            if adresses:
+                request.session[MAIL_ADDRESSES_KEY] = adresses
+            else:
+                request.session.pop(MAIL_ADDRESSES_KEY, None)
         return claims
 
     def create_user(self, claims):
@@ -45,6 +57,14 @@ class KeycloakBackend(OIDCAuthenticationBackend):
                 "Bienvenue ! Votre identifiant de connexion est %(identifier)s : notez-le, "
                 "il ne change pas."
             ) % {"identifier": claims["preferred_username"]})
+            adresses = claims.get("lgvmail") or []
+            if isinstance(adresses, str):
+                adresses = [adresses]
+            adresses = [a for a in adresses if isinstance(a, str) and "@" in a]
+            if adresses:
+                messages.success(request, _(
+                    "Vos adresses de courriel (une seule boîte) : %(addresses)s."
+                ) % {"addresses": ", ".join(adresses)})
         return get_user_model().objects.create_user(
             username=claims["sub"],
             email=claims.get("email", ""),

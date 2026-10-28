@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-28 11:36+0100\n"
+"POT-Creation-Date: 2026-10-28 11:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -743,7 +743,7 @@ msgstr "iniciar sesión"
 msgid "compte anonyme"
 msgstr "cuenta anónima"
 
-#: core/auth.py:45
+#: core/auth.py:57
 #, python-format
 msgid ""
 "Bienvenue ! Votre identifiant de connexion est %(identifier)s : notez-le, il "
@@ -751,6 +751,11 @@ msgid ""
 msgstr ""
 "¡Bienvenido! Su identificador de inicio de sesión es %(identifier)s: anótelo,"
 " no cambia."
+
+#: core/auth.py:66
+#, python-format
+msgid "Vos adresses de courriel (une seule boîte) : %(addresses)s."
+msgstr "Sus direcciones de correo (un solo buzón): %(addresses)s."
 
 #: core/forms.py:22
 msgid "Général"
@@ -1994,55 +1999,59 @@ msgstr "Gestionado por su cuenta única Grands Voisins"
 msgid "Identifiant de connexion"
 msgstr "Identificador de inicio de sesión"
 
-#: core/templates/core/account.html:167
+#: core/templates/core/account.html:168
+msgid "Adresses de courriel (une seule boîte)"
+msgstr "Direcciones de correo (un solo buzón)"
+
+#: core/templates/core/account.html:172
 msgid "Nom"
 msgstr "Nombre"
 
-#: core/templates/core/account.html:167 core/templates/core/account.html:170
+#: core/templates/core/account.html:172 core/templates/core/account.html:175
 msgid "Non renseigné"
 msgstr "No indicado"
 
-#: core/templates/core/account.html:170
+#: core/templates/core/account.html:175
 msgid "Courriel"
 msgstr "Correo electrónico"
 
-#: core/templates/core/account.html:175
+#: core/templates/core/account.html:180
 msgid "Modifier mon profil"
 msgstr "Modificar mi perfil"
 
-#: core/templates/core/account.html:183 core/templates/core/mes_dons.html:11
+#: core/templates/core/account.html:188 core/templates/core/mes_dons.html:11
 #: core/templates/core/mes_dons.html:14
 #, fuzzy
 #| msgid "Mes groupes"
 msgid "Mes dons"
 msgstr "Mis grupos"
 
-#: core/templates/core/account.html:192 core/templates/core/mes_dons.html:30
+#: core/templates/core/account.html:197 core/templates/core/mes_dons.html:30
 msgid "déductible fiscalement"
 msgstr "deducible fiscalmente"
 
-#: core/templates/core/account.html:196 core/templates/core/mes_dons.html:34
+#: core/templates/core/account.html:201 core/templates/core/mes_dons.html:34
 #, fuzzy
 #| msgid "Statuts de l'association"
 msgid "en attente de validation"
 msgstr "Estatutos de la asociación"
 
-#: core/templates/core/account.html:203 core/templates/core/mes_dons.html:41
+#: core/templates/core/account.html:208 core/templates/core/mes_dons.html:41
 msgid "Aucune contribution enregistrée pour l'instant."
 msgstr "Todavía no hay ninguna contribución registrada."
 
-#: core/templates/core/account.html:227 core/templates/core/mes_dons.html:47
+#: core/templates/core/account.html:232 core/templates/core/mes_dons.html:47
 #: core/templates/core/mes_dons.html:71
 msgid "Faire un don"
 msgstr "Hacer una donación"
 
-#: core/templates/core/account.html:234 core/templates/core/account.html:240
+#: core/templates/core/account.html:239 core/templates/core/account.html:245
 #: core/templates/core/home.html:26
 #: core/templates/core/partials/account_panel_body.html:7
 msgid "Créer mon compte"
 msgstr "Crear mi cuenta"
 
-#: core/templates/core/account.html:236
+#: core/templates/core/account.html:241
 msgid ""
 "Un compte unique des Grands Voisins, le même pour tous les outils de "
 "l'association. Il retrouve vos raccourcis, groupes, fiches et évènements sur "
@@ -2052,7 +2061,7 @@ msgstr ""
 "de la asociación. Recupera tus accesos directos, grupos, fichas y eventos en "
 "todos tus dispositivos, y puedes recuperar tu contraseña por correo."
 
-#: core/templates/core/account.html:242
+#: core/templates/core/account.html:247
 msgid ""
 "La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
 "serveur."
@@ -2060,12 +2069,12 @@ msgstr ""
 "El inicio de sesión con cuenta de Grands Voisins aún no está configurado en "
 "este servidor."
 
-#: core/templates/core/account.html:246
+#: core/templates/core/account.html:251
 #: core/templates/core/partials/account_panel_body.html:9
 msgid "J'ai déjà un compte"
 msgstr "Ya tengo una cuenta"
 
-#: core/templates/core/account.html:247
+#: core/templates/core/account.html:252
 msgid ""
 "Connectez-vous avec le compte que vous utilisez déjà pour les autres outils "
 "des Grands Voisins."
@@ -2073,16 +2082,16 @@ msgstr ""
 "Inicia sesión con la cuenta que ya usas para las demás herramientas de Les "
 "Grands Voisins."
 
-#: core/templates/core/account.html:250 core/templates/core/home.html:30
+#: core/templates/core/account.html:255 core/templates/core/home.html:30
 msgid "Se connecter"
 msgstr "Iniciar sesión"
 
-#: core/templates/core/account.html:255
+#: core/templates/core/account.html:260
 #: core/templates/core/partials/account_panel_body.html:16
 msgid "Rester anonyme"
 msgstr "Seguir anónimo"
 
-#: core/templates/core/account.html:257
+#: core/templates/core/account.html:262
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit pour"
 " retrouver vos raccourcis. Sans ce numéro, le compte est perdu : aucun "
@@ -2092,20 +2101,15 @@ msgstr ""
 "tus accesos directos. Sin este número la cuenta se pierde: no existe correo "
 "de recuperación."
 
-#: core/templates/core/account.html:262 core/templates/core/account.html:274
+#: core/templates/core/account.html:267 core/templates/core/account.html:279
 msgid "Créer un compte anonyme"
 msgstr "Crear una cuenta anónima"
 
-#: core/templates/core/account.html:269
-#| msgid "Autres parcours"
+#: core/templates/core/account.html:274
 msgid "Autres options"
 msgstr "Otras opciones"
 
-#: core/templates/core/account.html:270
-#| msgid ""
-#| "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit pour"
-#| " retrouver vos raccourcis. Sans ce numéro, le compte est perdu : aucun "
-#| "courriel de secours n'existe."
+#: core/templates/core/account.html:275
 msgid ""
 "Un numéro de 16 chiffres à noter, sans nom ni courriel. Sans ce numéro, le "
 "compte est perdu."
@@ -3087,7 +3091,6 @@ msgstr ""
 "avance,"
 
 #: core/templates/core/parcours_detail.html:31
-#| msgid "Voir mon compte"
 msgid "ouvrez un compte"
 msgstr "abra una cuenta"
 
@@ -3549,9 +3552,6 @@ msgid "Nous rejoindre, nous soutenir, nous contacter."
 msgstr "Únete, apóyanos, contáctanos."
 
 #: core/views.py:56
-#| msgid ""
-#| "Pour garder la trace de vos étapes, ouvrez d'abord un compte (nommé ou "
-#| "anonyme)."
 msgid "Pour faire cela, ouvrez d'abord un compte."
 msgstr "Para hacer esto, abra primero una cuenta."
 
@@ -3852,9 +3852,6 @@ msgid "« %(name)s » ajouté à vos groupes."
 msgstr "«%(name)s» añadido a tus grupos."
 
 #: core/views.py:1453
-#| msgid ""
-#| "Pour garder la trace de vos étapes, ouvrez d'abord un compte (nommé ou "
-#| "anonyme)."
 msgid "Pour garder la trace de vos étapes, ouvrez d'abord un compte."
 msgstr "Para conservar el rastro de sus pasos, abra primero una cuenta."
 

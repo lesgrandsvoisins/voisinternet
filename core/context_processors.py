@@ -56,6 +56,7 @@ def site(request):
     return {
         "anon_visible": settings.ANONYMOUS_ACCOUNTS == "ouvert",
         "anon_allowed": settings.ANONYMOUS_ACCOUNTS != "ferme",
+        "mail_addresses": request.session.get("voisinternet_mail_addresses", []),
         "login_identifier": request.session.get("voisinternet_login_identifier", ""),
         "pending_number": format_number(pending_number) if pending_number else None,
         "conj": {i["entry"].key: i for i in entries},

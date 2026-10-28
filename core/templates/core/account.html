@@ -90,6 +90,16 @@
             {% endif %}
           </p>
         </div>
+        {% if user.is_authenticated and login_identifier or mail_addresses %}
+          <ul class="docs">
+            {% if login_identifier %}
+              <li><strong>{% trans "Identifiant de connexion" %}</strong><span>{{ login_identifier }}</span></li>
+            {% endif %}
+            {% if mail_addresses %}
+              <li><strong>{% trans "Adresses de courriel (une seule boîte)" %}</strong><span>{{ mail_addresses|join:", " }}</span></li>
+            {% endif %}
+          </ul>
+        {% endif %}
         <div class="actions">
           {% if is_administration %}
             <a class="btn btn-line" href="{% url 'core:administration' %}">{% trans "Administration" %}</a>

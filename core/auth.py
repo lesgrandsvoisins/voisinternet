@@ -1,4 +1,5 @@
 """Connexion par Keycloak (compte unique des Grands Voisins)."""
+import json
 from urllib.parse import urlencode
 
 from django.conf import settings
@@ -8,6 +9,14 @@ from django.utils.translation import get_language
 from django.utils.translation import gettext as _
 from mozilla_django_oidc.auth import OIDCAuthenticationBackend
 from mozilla_django_oidc.views import OIDCAuthenticationRequestView
+
+
+def _adresses(claims):
+    """Adresses de la boîte lues dans le claim « lgvmail » (une chaîne ou une liste) ; rien d'inventé si le claim manque."""
+    adresses = claims.get("lgvmail") or []
+    if isinstance(adresses, str):
+        adresses = [adresses]
+    return [a for a in adresses if isinstance(a, str) and "@" in a]
 
 
 LOGIN_IDENTIFIER_KEY = "voisinternet_login_identifier"
@@ -28,21 +37,27 @@ class KeycloakBackend(OIDCAuthenticationBackend):
 
     def get_userinfo(self, access_token, id_token, payload):
         """
-        Garde l'identifiant de connexion Keycloak (« preferred_username », fabriqué à
-        l'inscription : jusqu'à 5 lettres du nom + 5 du prénom + @gv.je, un numéro seulement s'il est déjà pris) en session pour
-        l'afficher à la personne : elle ne l'a pas tapé, donc elle ne le connaît pas.
+        Garde en session l'identifiant de connexion Keycloak (« preferred_username », calculé à l'inscription : jusqu'à
+        5 lettres du nom + 5 du prénom, un numéro seulement s'il est déjà pris) et les adresses de la boîte (claim
+        multivalué « lgvmail » : domaine principal et domaines supplémentaires, réglés côté serveur, jamais écrits ici),
+        pour les montrer à la personne. Les claims sont lus dans `userinfo` d'abord, puis dans le jeton d'identité : selon
+        la configuration du mapper Keycloak (« Add to userinfo » / « Add to ID token »), l'un ou l'autre peut manquer.
         """
-        claims = super().get_userinfo(access_token, id_token, payload)
+        claims = dict(super().get_userinfo(access_token, id_token, payload))
+        if isinstance(payload, (bytes, str)):
+            try:
+                payload = json.loads(payload)
+            except ValueError:
+                payload = {}
+        payload = payload if isinstance(payload, dict) else {}
+        for name in ("preferred_username", "lgvmail"):
+            if not claims.get(name) and payload.get(name):
+                claims[name] = payload[name]   # create_user() lit ces claims : même source des deux côtés
         username = claims.get("preferred_username", "")
         request = getattr(self, "request", None)
         if request is not None and username:
             request.session[LOGIN_IDENTIFIER_KEY] = username
-        # Adresses de la boîte (attribut lgvmail, claim multivalué) : lues dans le compte, jamais devinées ni écrites en dur
-        # (le domaine principal et les domaines supplémentaires se règlent côté serveur). Sans claim, on n'affiche rien.
-        adresses = claims.get("lgvmail") or []
-        if isinstance(adresses, str):
-            adresses = [adresses]
-        adresses = [a for a in adresses if isinstance(a, str) and "@" in a]
+        adresses = _adresses(claims)
         if request is not None:
             if adresses:
                 request.session[MAIL_ADDRESSES_KEY] = adresses
@@ -57,10 +72,7 @@ class KeycloakBackend(OIDCAuthenticationBackend):
                 "Bienvenue ! Votre identifiant de connexion est %(identifier)s : notez-le, "
                 "il ne change pas."
             ) % {"identifier": claims["preferred_username"]})
-            adresses = claims.get("lgvmail") or []
-            if isinstance(adresses, str):
-                adresses = [adresses]
-            adresses = [a for a in adresses if isinstance(a, str) and "@" in a]
+            adresses = _adresses(claims)
             if adresses:
                 messages.success(request, _(
                     "Vos adresses de courriel (une seule boîte) : %(addresses)s."

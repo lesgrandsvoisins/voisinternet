@@ -422,6 +422,9 @@ class AnonymousAccountTests(Base):
         session.save()
         page = self.client.get(reverse("core:account"))
         self.assertContains(page, "duponlucie@exemple.test, duponlucie@autre.test")
+        # Visible d'emblée en haut de « Mon compte » (et non seulement dans la rubrique « Mon profil », repliée).
+        haut = page.content.decode().split('id="sc2-title"')[0]
+        self.assertIn("duponlucie@exemple.test, duponlucie@autre.test", haut)
 
     @override_settings(OIDC_ENABLED=True, OIDC_RP_CLIENT_ID="voisinternet", OIDC_RP_CLIENT_SECRET="x",
                        OIDC_OP_AUTHORIZATION_ENDPOINT="https://key.example/auth", OIDC_OP_TOKEN_ENDPOINT="https://key.example/token",
@@ -439,6 +442,14 @@ class AnonymousAccountTests(Base):
             backend.get_userinfo("t", "i", {})
         self.assertEqual(request.session["voisinternet_login_identifier"], "duponlucie@a.test")
         self.assertEqual(request.session["voisinternet_mail_addresses"], ["duponlucie@a.test", "duponlucie@b.test"])
+        # Mapper Keycloak seulement dans le JETON D'IDENTITÉ (pas dans userinfo) : lu quand même.
+        request.session.pop("voisinternet_mail_addresses", None)
+        request.session.pop("voisinternet_login_identifier", None)
+        with mock.patch("mozilla_django_oidc.auth.OIDCAuthenticationBackend.get_userinfo", return_value={"sub": "s1"}):
+            retour = backend.get_userinfo("t", "i", {"preferred_username": "x@a.test", "lgvmail": ["x@a.test", "x@b.test"]})
+        self.assertEqual(request.session["voisinternet_mail_addresses"], ["x@a.test", "x@b.test"])
+        self.assertEqual(request.session["voisinternet_login_identifier"], "x@a.test")
+        self.assertEqual(retour["lgvmail"], ["x@a.test", "x@b.test"])   # create_user() verra le même claim
         # Un claim absent efface les adresses d'une connexion précédente (pas d'adresse périmée affichée).
         with mock.patch("mozilla_django_oidc.auth.OIDCAuthenticationBackend.get_userinfo", return_value={"sub": "s1"}):
             backend.get_userinfo("t", "i", {})

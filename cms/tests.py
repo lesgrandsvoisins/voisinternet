@@ -776,3 +776,31 @@ class ImportMediasAncienSiteTests(TestCase):
                 self.assertIn("absente.jpg", out.getvalue())
                 doc = get_document_model().objects.get()
                 self.assertEqual(cible_vieux_site("/documents/3/statuts.pdf"), doc.url)
+
+
+class CompleterImagesEntetesTests(TestCase):
+    def test_missing_header_images_are_filled_but_existing_ones_kept(self):
+        import tempfile
+        from pathlib import Path
+
+        from django.core.management import call_command
+        from django.test import override_settings
+        from wagtail.images import get_image_model
+        fr = Locale.get_default()
+        index = BlogIndexPage.objects.get(locale=fr)
+        sans = index.add_child(instance=BlogPostPage(title="Sans", slug="sans", date=timezone.now()))
+        with tempfile.TemporaryDirectory() as media, tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp) / "images" / "2023").mkdir(parents=True)
+            (Path(tmp) / "images" / "2023" / "une.png").write_bytes(_PNG_1X1)
+            export = Path(tmp) / "ghost.json"
+            export.write_text(json.dumps({"db": [{"data": {"posts": [
+                {"slug": "sans", "status": "published", "feature_image": "__GHOST_URL__/content/images/2023/une.png"},
+                {"slug": "sans2", "status": "published", "feature_image": "__GHOST_URL__/content/images/2023/absente.png"},
+            ]}}]}), encoding="utf-8")
+            with override_settings(MEDIA_ROOT=media):
+                out = StringIO()
+                call_command("completer_images_entetes", "--ghost", str(export), "--dossier", tmp, stdout=out)
+                call_command("completer_images_entetes", "--ghost", str(export), "--dossier", tmp, stdout=out)
+                sans.refresh_from_db()
+                self.assertIsNotNone(sans.featured_image_id)
+                self.assertEqual(get_image_model().objects.count(), 1)  # pas de doublon à la relance

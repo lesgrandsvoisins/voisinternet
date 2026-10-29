@@ -1,5 +1,5 @@
 import base64
-from io import BytesIO
+from io import BytesIO, StringIO
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
@@ -652,3 +652,45 @@ class QmdAdminViewsTests(TestCase):
         qmd_in_zip = zf.read("fr/article.qmd").decode()
         self.assertIn(f'(media/images/{image.pk}-', qmd_in_zip)
         self.assertIn(f'"wagtail-image:{image.pk}:fullwidth"', qmd_in_zip)
+
+
+class ImportGhostPagesTests(TestCase):
+    def setUp(self):
+        self.fr = Locale.get_default()
+
+    def _export(self, tmp):
+        import json
+        chemin = tmp / "ghost.json"
+        html = (
+            '<p>Bonjour <a href="__GHOST_URL__/gazette-2">suite</a></p>'
+            '<figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://x.example/">'
+            '<div class="kg-bookmark-title">Un titre</div></a></figure>'
+            '<figure><img src="__GHOST_URL__/content/images/size/w600/2023/05/a.jpg" alt=""></figure><script>x()</script>'
+        )
+        posts = [
+            {"slug": "gazette-1", "title": "Gazette Voisine #1", "status": "published", "published_at": "2021-07-28T10:00:00.000Z",
+             "html": html, "custom_excerpt": None},
+            {"slug": "brouillon", "title": "Brouillon", "status": "draft", "published_at": None, "html": "", "custom_excerpt": None},
+        ]
+        chemin.write_text(json.dumps({"db": [{"data": {"posts": posts}}]}), encoding="utf-8")
+        return chemin
+
+    def test_pages_are_imported_as_drafts_once(self):
+        import tempfile
+        from pathlib import Path
+
+        from django.core.management import call_command
+        with tempfile.TemporaryDirectory() as d:
+            export = self._export(Path(d))
+            call_command("import_ghost_pages", str(export), "--slugs", "gazette-1,brouillon", stdout=StringIO(), stderr=StringIO())
+            call_command("import_ghost_pages", str(export), "--slugs", "gazette-1", stdout=StringIO())
+        page = BlogPostPage.objects.get(slug="gazette-1")
+        self.assertFalse(page.live)
+        self.assertEqual(BlogPostPage.objects.filter(slug="gazette-1").count(), 1)
+        self.assertFalse(BlogPostPage.objects.filter(slug="brouillon").exists())
+        self.assertEqual(page.date.year, 2021)
+        self.assertIn('href="/fr/blog/gazette-2/"', page.body)
+        self.assertIn('<a href="https://x.example/">Un titre</a>', page.body)
+        self.assertIn("/ghost-import/images/2023/05/a.jpg", page.body)
+        self.assertNotIn("script", page.body.replace("&lt;", ""))
+        self.assertNotIn("kg-", page.body)

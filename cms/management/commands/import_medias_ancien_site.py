@@ -5,8 +5,8 @@ fichiers copiés dans MEDIA_ROOT/old-import/ (sous-dossiers original_images/ et 
 
     manage.py import_medias_ancien_site /chemin/contenu.jsonl [--dossier MEDIA_ROOT/old-import]
 
-Idempotent : un fichier déjà repris (même titre et même nom de fichier) est laissé tel quel. Les images vectorielles (SVG)
-ne sont pas gérées par la médiathèque : elles sont signalées, pas reprises. Ensuite, `import_ancien_association --refaire`
+Idempotent : un fichier déjà repris (même titre et même nom de fichier) est laissé tel quel. Les formats que la médiathèque
+refuse (réglage WAGTAILIMAGES_EXTENSIONS ; le SVG y est autorisé ici) sont signalés, pas repris. Ensuite, `import_ancien_association --refaire`
 place les images dans les pages et `reecrire_liens` remplace les liens vers les anciens documents.
 """
 import json
@@ -18,7 +18,9 @@ from django.core.management.base import BaseCommand, CommandError
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 
-RASTER = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
+def extensions_acceptees():
+    """Extensions que la médiathèque accepte (réglage WAGTAILIMAGES_EXTENSIONS : le SVG y est ajouté explicitement)."""
+    return {f".{e.lower().lstrip('.')}" for e in settings.WAGTAILIMAGES_EXTENSIONS}
 
 
 def index_fichiers(racine):
@@ -48,7 +50,7 @@ class Command(BaseCommand):
 
         for e in (l for l in lignes if l.get("type") == "image"):
             nom = e["fichier"]
-            if Path(nom).suffix.lower() not in RASTER:
+            if Path(nom).suffix.lower() not in extensions_acceptees():
                 stats["svg"].append(nom)
                 continue
             source = fichiers_images.get(nom)
@@ -83,7 +85,7 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS(
             f"{stats['images']} image(s) et {stats['documents']} document(s) repris, {stats['deja']} déjà présent(s)."))
-        for cle, titre in (("svg", "Images vectorielles non reprises"), ("absents", "Fichiers absents du dossier"),
+        for cle, titre in (("svg", "Images dont le format n'est pas accepté (WAGTAILIMAGES_EXTENSIONS)"), ("absents", "Fichiers absents du dossier"),
                            ("erreurs", "Erreurs")):
             if stats[cle]:
                 self.stdout.write(f"{titre} ({len(stats[cle])}) :")

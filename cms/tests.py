@@ -757,6 +757,8 @@ class ImportMediasAncienSiteTests(TestCase):
             (racine / "original_images").mkdir(parents=True)
             (racine / "documents").mkdir()
             (racine / "original_images" / "photo.png").write_bytes(_PNG_1X1)
+            (racine / "original_images" / "logo.svg").write_text(
+                '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><rect width="10" height="10"/></svg>')
             (racine / "documents" / "statuts.pdf").write_bytes(b"%PDF-1.4 test")
             export = Path(tmp) / "contenu.jsonl"
             export.write_text("\n".join(json.dumps(x) for x in [
@@ -769,9 +771,8 @@ class ImportMediasAncienSiteTests(TestCase):
                 out = StringIO()
                 call_command("import_medias_ancien_site", str(export), "--dossier", str(racine), stdout=out)
                 call_command("import_medias_ancien_site", str(export), "--dossier", str(racine), stdout=out)
-                self.assertEqual(get_image_model().objects.count(), 1)
+                self.assertEqual(get_image_model().objects.count(), 2)  # photo.png et logo.svg (SVG autorisé par réglage)
                 self.assertEqual(get_document_model().objects.count(), 1)
-                self.assertIn("logo.svg", out.getvalue())
                 self.assertIn("absente.jpg", out.getvalue())
                 doc = get_document_model().objects.get()
                 self.assertEqual(cible_vieux_site("/documents/3/statuts.pdf"), doc.url)

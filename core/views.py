@@ -26,6 +26,7 @@ from django.views.decorators.http import require_POST
 
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
 from .forms import ContactMessageForm, ContributionForm, DirectoryEntryForm, EventForm
+from .legacy import equivalent_ancien_site
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntryMessage, EntrySubscription, Event,
@@ -1497,74 +1498,17 @@ def robots_txt(request):
     return HttpResponse("\n".join(lines) + "\n", content_type="text/plain; charset=utf-8")
 
 
-# Rubriques du vieux site (old.lesgrandsvoisins.com, adresses /fr-fr/<rubrique>/…) -> adresse équivalente ici.
-OLD_SITE_SECTIONS = {
-    "association": "/grandsvoisins/",
-    "activités": "/activites/",
-    "activites": "/activites/",
-    "civisme": "/civisme/",
-    "numerique": "/numerique/",
-    "contact": "/contact/",
-    "agenda": "/agenda/",
-    "annuaire": "/annuaire/",
-    "blog": "/blog/",
-}
-
-
-# Billets de blog dont l'adresse a changé à la reprise (même titre, autre identifiant) : ancien -> nouveau.
-OLD_BLOG_RENAMED = {
-    "17e-conseil-des-voisins": "17e-conseil",
-    "18e-conseil-des-voisins": "18e-conseil",
-    "20e-conseil-des-voisins": "20e-conseil-des-voisins-lun-18-dec-paris-14e-et-visio",
-    "a-propos-de-lesgrandsvoisinscom": "a-propos-de-lesgrandsvoisins-com",
-    "essai-video-entretien-handicap-france-soudan-darfour-international": "essai-video-entretien",
-    "inclusivday-au-cnit-10-mai": "nous-a-inclusivday-cnit-10-mai-2023",
-    "interet-general": "notre-qualite-dinteret-general",
-    "la-marque-les-grands-voisins-est-une-responsabilite-pour-nimporte-qui": "la-marque-est-une-responsabilite-pour-nimporte-qui",
-    "lettre-ouverte-son-excellence-mohamed-ould-cheikh-ghazouani": "lettre-ouverte-a-son-excellence-monsieur-mohamed-ould-cheikh-ghazouani-president-de-la-republique-islamique-de-mauritanie",
-    "manifeste-des-grands-voisins": "manifeste-2023",
-    "nom-les-grands-voisins": "les-grands-voisins-par-un-autre-nom-est-toujours-lesgrandsvoisins-com",
-    "obtention-du-statut-cooperative": "coop-2023",
-    "point-davancements-en-mars-2022": "points-avancement-mars-2022",
-    "point-sur-les-avancements-en-mai-2022": "avancements-mai-2022",
-    "qui-est-expert-etou-legitime": "qui-est-expert-et-ou-legitime",
-    "retour-sur-ghostio-comme-techno-de-site-web": "revenu-sur-ghost-io",
-    "sites-faciles": "refonte-web-avec-sites-faciles",
-    "thoughts-about-creative-commons-cc-by-nc-sa-en": "baldart-article",
-}
-
-
 def ancien_site(request, rest=""):
     """Ancienne adresse du vieux site, sous /fr-fr/ : redirection permanente vers la page équivalente quand elle existe
     (fiche d'annuaire, billet de blog, évènement de même titre), sinon vers la rubrique correspondante. Une adresse
-    sans équivalent connu donne 404. Voir `tools/export_ancien_site.py` pour la liste des pages d'origine."""
+    sans équivalent connu donne 404. Voir `core/legacy.py` et `tools/export_ancien_site.py`."""
     from urllib.parse import unquote
 
-    from cms.models import BlogPostPage
-
     parts = [p for p in unquote(rest).split("/") if p]
-    if not parts:
-        return redirect("/fr/", permanent=True)
-    section, leaf = parts[0].lower(), parts[1] if len(parts) > 1 else ""
-    base = OLD_SITE_SECTIONS.get(section)
-    if base is None:
+    target = equivalent_ancien_site(parts, exact=False)
+    if target is None:
         raise Http404
-    target = base
-    if len(parts) == 2:
-        slug = slugify(leaf)
-        if section == "annuaire" and DirectoryEntry.objects.filter(slug=slug).exists():
-            target = f"/annuaire/{slug}/"
-        elif section == "blog":
-            post = BlogPostPage.objects.live().filter(slug=OLD_BLOG_RENAMED.get(slug, slug)).first()
-            if post:
-                return redirect(post.url, permanent=True)
-        elif section == "agenda":
-            for event in Event.objects.filter(public=True):
-                titre = slugify(event.title_fr or event.title)
-                if titre and (titre == slug or titre.startswith(slug) or slug.startswith(titre)):
-                    target = f"/agenda/{event.pk}/"
-                    break
-    return redirect(f"/fr{target}", permanent=True)
+    return redirect(target, permanent=True)
 
 
 def legacy_redirect(request, target):

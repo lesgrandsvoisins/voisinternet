@@ -1707,3 +1707,24 @@ class AnciennesAdressesTests(Base):
 
     def test_old_blog_post_renamed_on_migration(self):
         self.assertEqual(self.client.get("/fr-fr/blog/sites-faciles/")["Location"], "/fr/blog/")  # billet absent ici : rubrique
+
+
+class ReecrireLiensTests(Base):
+    def test_links_to_old_site_and_ghost_are_rewritten_only_when_an_equivalent_exists(self):
+        from django.core.management import call_command
+        from io import StringIO
+        DirectoryEntry.objects.create(name="Carton Plein", slug="carton-plein")
+        service = Service.objects.create(
+            name="Test", slug="test-liens", summary="x",
+            description='Voir [la fiche](https://old.lesgrandsvoisins.com/fr-fr/annuaire/carton-plein/) '
+                        'et [les votes](https://old.lesgrandsvoisins.com/fr-fr/association/conseils-des-voisins/27/vote/).',
+        )
+        out = StringIO()
+        call_command("reecrire_liens", stdout=out)  # simulation : rien n'est écrit
+        service.refresh_from_db()
+        self.assertIn("old.lesgrandsvoisins.com/fr-fr/annuaire/carton-plein", service.description)
+        call_command("reecrire_liens", "--appliquer", stdout=out)
+        service.refresh_from_db()
+        self.assertIn("(/fr/annuaire/carton-plein/)", service.description)
+        self.assertIn("https://old.lesgrandsvoisins.com/fr-fr/association/conseils-des-voisins/27/vote/", service.description)
+        self.assertIn("conseils-des-voisins/27/vote/", out.getvalue())  # signalé comme sans équivalent

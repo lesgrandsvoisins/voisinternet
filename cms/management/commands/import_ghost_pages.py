@@ -1,6 +1,7 @@
 """
-Importe dans le blog Wagtail les « pages » (et non les billets) de l'export JSON de l'ancien blog Ghost : par défaut les
-Gazettes Voisines (`gazette`, `gazette-1` … `gazette-11`), jamais reprises avec les billets (`import_ghost_posts`).
+Importe dans le blog Wagtail les « pages » (et non les billets) de l'export JSON de l'ancien blog Ghost : par défaut TOUTES
+les pages publiées (Gazettes Voisines, Mission, Historique, Coop, Intérêt général, Conseils des voisins…), jamais reprises
+avec les billets (`import_ghost_posts`). Les brouillons de Ghost ne sont pas repris.
 
     manage.py import_ghost_pages /chemin/blog-des-grands-voisins.ghost.<date>.json [--slugs a,b] [--publier]
 
@@ -20,9 +21,8 @@ from django.utils.dateparse import parse_datetime
 from wagtail.models import Locale
 
 from cms.models import BlogIndexPage, BlogPostPage
-from core.views import OLD_BLOG_RENAMED
+from core.legacy import OLD_BLOG_RENAMED
 
-GAZETTES = ["gazette"] + [f"gazette-{n}" for n in range(1, 12)]
 ALLOWED_TAGS = ["p", "br", "hr", "strong", "em", "b", "i", "s", "a", "ul", "ol", "li", "blockquote", "h2", "h3", "h4", "img"]
 ALLOWED_ATTRIBUTES = {"a": ["href", "title"], "img": ["src", "alt", "title"]}
 
@@ -52,11 +52,11 @@ def convertir(html, slugs_blog):
 
 
 class Command(BaseCommand):
-    help = "Importe les pages Ghost (par défaut les Gazettes Voisines) comme billets de blog, en brouillon."
+    help = "Importe les pages Ghost publiées comme billets de blog, en brouillon."
 
     def add_arguments(self, parser):
         parser.add_argument("export", help="Export JSON de Ghost")
-        parser.add_argument("--slugs", default=",".join(GAZETTES), help="Identifiants à importer, séparés par des virgules")
+        parser.add_argument("--slugs", default="", help="Identifiants à importer, séparés par des virgules (défaut : toutes les pages publiées)")
         parser.add_argument("--publier", action="store_true", help="Publier directement (sinon brouillon)")
 
     def handle(self, *args, export, slugs, publier, **options):
@@ -64,8 +64,10 @@ class Command(BaseCommand):
         if not chemin.is_file():
             raise CommandError(f"Fichier introuvable : {chemin}")
         data = json.loads(chemin.read_text(encoding="utf-8"))["db"][0]["data"]
-        voulus = [s.strip() for s in slugs.split(",") if s.strip()]
         par_slug = {p["slug"]: p for p in data["posts"] if p["status"] == "published"}
+        voulus = [s.strip() for s in slugs.split(",") if s.strip()] or [
+            p["slug"] for p in data["posts"] if p["status"] == "published" and p["type"] == "page"
+        ]
         slugs_blog = set(par_slug)
         index = BlogIndexPage.objects.filter(locale=Locale.get_default()).first()
         if index is None:

@@ -1704,6 +1704,7 @@ class AnciennesAdressesTests(Base):
                 self.assertEqual(response.status_code, 301)
                 self.assertEqual(response["Location"], attendu)
         self.assertEqual(self.client.get("/fr-fr/rien-du-tout/").status_code, 404)
+        self.assertEqual(self.client.get("/fr-fr/documents/5/introuvable.pdf").status_code, 404)
 
     def test_old_blog_post_renamed_on_migration(self):
         self.assertEqual(self.client.get("/fr-fr/blog/sites-faciles/")["Location"], "/fr/blog/")  # billet absent ici : rubrique

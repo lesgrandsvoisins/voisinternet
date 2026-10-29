@@ -1505,6 +1505,14 @@ def ancien_site(request, rest=""):
     from urllib.parse import unquote
 
     parts = [p for p in unquote(rest).split("/") if p]
+    if len(parts) == 3 and parts[0] == "documents":
+        # /documents/<ancien id>/<fichier> : le même fichier, repris dans les documents d'ici (par nom de fichier).
+        from wagtail.documents import get_document_model
+
+        doc = get_document_model().objects.filter(file__endswith=parts[2]).first()
+        if doc is None:
+            raise Http404
+        return redirect(doc.url, permanent=True)
     target = equivalent_ancien_site(parts, exact=False)
     if target is None:
         raise Http404

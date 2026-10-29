@@ -1,10 +1,13 @@
 """Connexion par Keycloak (compte unique des Grands Voisins)."""
 import json
 from urllib.parse import urlencode
+from urllib.request import urlopen
 
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
+from django.urls import reverse
 from django.utils.translation import get_language
 from django.utils.translation import gettext as _
 from mozilla_django_oidc.auth import OIDCAuthenticationBackend
@@ -92,13 +95,42 @@ class KeycloakBackend(OIDCAuthenticationBackend):
         return user
 
 
+def _end_session_endpoint():
+    """Adresse de déconnexion de Keycloak : `end_session_endpoint` de la découverte OIDC du royaume (mise en cache), sinon
+    l'adresse standard du royaume — la même source que les adresses d'autorisation et de jeton du réglage."""
+    defaut = f"{settings.KEYCLOAK_REALM_URL}/protocol/openid-connect/logout"
+    cle = "oidc-end-session-endpoint"
+    trouve = cache.get(cle)
+    if trouve:
+        return trouve
+    try:
+        with urlopen(f"{settings.KEYCLOAK_REALM_URL}/.well-known/openid-configuration", timeout=3) as reponse:
+            trouve = json.loads(reponse.read().decode("utf-8")).get("end_session_endpoint") or defaut
+        cache.set(cle, trouve, 3600)
+    except (OSError, ValueError):
+        trouve = defaut
+        cache.set(cle, trouve, 300)  # injoignable : on réessaie dans 5 minutes, sans retarder chaque déconnexion
+    return trouve
+
+
 def keycloak_logout_url(request):
-    """Déconnexion aussi côté Keycloak, puis retour à l'accueil."""
-    params = urlencode({
-        "client_id": settings.OIDC_RP_CLIENT_ID,
-        "post_logout_redirect_uri": request.build_absolute_uri("/"),
-    })
-    return f"{settings.KEYCLOAK_REALM_URL}/protocol/openid-connect/logout?{params}"
+    """
+    Adresse où envoyer le navigateur après avoir effacé la session locale : déconnexion à l'initiative de l'application
+    (OpenID Connect « RP-initiated logout »). Avec l'id_token gardé à la connexion (`id_token_hint`), Keycloak déconnecte
+    sans page de confirmation ; sans lui (session ancienne), repli sur `client_id`. L'id_token n'est ni journalisé ni
+    montré au navigateur ailleurs que dans cette adresse de redirection, à l'adresse de Keycloak.
+    Réglage VOISINTERNET_DECONNEXION_KEYCLOAK=non : retour à l'accueil sans toucher à la session Keycloak.
+    """
+    accueil = request.build_absolute_uri(reverse("core:home"))
+    if not settings.DECONNEXION_KEYCLOAK:
+        return accueil
+    params = {"post_logout_redirect_uri": accueil}
+    id_token = request.session.get("oidc_id_token")
+    if id_token:
+        params["id_token_hint"] = id_token
+    else:
+        params["client_id"] = settings.OIDC_RP_CLIENT_ID
+    return f"{_end_session_endpoint()}?{urlencode(params)}"
 
 
 class KeycloakAuthRequestView(OIDCAuthenticationRequestView):

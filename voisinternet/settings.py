@@ -159,6 +159,11 @@ if OIDC_ENABLED:
     OIDC_OP_USER_ENDPOINT = f"{KEYCLOAK_REALM_URL}/protocol/openid-connect/userinfo"
     OIDC_OP_JWKS_ENDPOINT = f"{KEYCLOAK_REALM_URL}/protocol/openid-connect/certs"
     OIDC_OP_LOGOUT_URL_METHOD = "core.auth.keycloak_logout_url"
+    # Garde l'id_token dans la session (côté serveur) pour la déconnexion unique : id_token_hint (core.auth).
+    OIDC_STORE_ID_TOKEN = True
+
+# « Se déconnecter » ferme aussi la session Keycloak (sinon « Se connecter » rouvre le compte sans mot de passe).
+DECONNEXION_KEYCLOAK = env_bool("VOISINTERNET_DECONNEXION_KEYCLOAK", True)
 
 # Échec de la connexion Keycloak : retour sur « Mon compte », qui l'explique (core.views.account).
 LOGIN_REDIRECT_URL_FAILURE = "/account/?connexion=echec"

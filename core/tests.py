@@ -1903,3 +1903,79 @@ class InventaireContenuTests(Base):
         fiche = next(l for l in lignes if l["titre"] == "Fiche courte")
         self.assertIn("non-publique", fiche["alertes"])
         self.assertEqual(fiche["décision"], "")
+
+
+class DeconnexionKeycloakTests(Base):
+    """Déconnexion unique (RP-initiated logout) : adresse construite, id_token, repli, réglage, session locale effacée."""
+    ENDPOINT = "https://key.example/realms/master/protocol/openid-connect/logout"
+
+    def setUp(self):
+        super().setUp()
+        self.o = override_settings(KEYCLOAK_REALM_URL="https://key.example/realms/master", OIDC_RP_CLIENT_ID="voisinternet",
+                                   DECONNEXION_KEYCLOAK=True, ALLOWED_HOSTS=["www.lesgrandsvoisins.com", "testserver"])
+        self.o.enable()
+        self.addCleanup(self.o.disable)
+        patcher = mock.patch("core.auth.urlopen", side_effect=OSError("découverte injoignable"))
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def requete(self, id_token=None):
+        from django.test import RequestFactory
+        from django.contrib.sessions.backends.db import SessionStore
+        r = RequestFactory().get("/", HTTP_HOST="www.lesgrandsvoisins.com", secure=True)
+        r.session = SessionStore()
+        if id_token:
+            r.session["oidc_id_token"] = id_token
+        return r
+
+    def test_url_with_id_token_hint(self):
+        from urllib.parse import parse_qs, urlsplit
+        from .auth import keycloak_logout_url
+        url = keycloak_logout_url(self.requete("tok.en.secret"))
+        parts = urlsplit(url)
+        self.assertEqual(f"{parts.scheme}://{parts.netloc}{parts.path}", self.ENDPOINT)
+        q = parse_qs(parts.query)
+        self.assertEqual(q["id_token_hint"], ["tok.en.secret"])
+        self.assertTrue(q["post_logout_redirect_uri"][0].startswith("https://www.lesgrandsvoisins.com/"))
+        self.assertNotIn("client_id", q)
+
+    def test_fallback_without_id_token(self):
+        from urllib.parse import parse_qs, urlsplit
+        from .auth import keycloak_logout_url
+        q = parse_qs(urlsplit(keycloak_logout_url(self.requete())).query)
+        self.assertEqual(q["client_id"], ["voisinternet"])
+        self.assertNotIn("id_token_hint", q)
+
+    def test_parameters_are_encoded(self):
+        from .auth import keycloak_logout_url
+        url = keycloak_logout_url(self.requete("a b&c=d"))
+        self.assertIn("id_token_hint=a+b%26c%3Dd", url)
+
+    def test_discovery_end_session_endpoint_is_used_when_available(self):
+        import io
+        from .auth import keycloak_logout_url
+        reponse = io.BytesIO(json.dumps({"end_session_endpoint": "https://key.example/autre/logout"}).encode())
+        reponse.__enter__ = lambda s: s
+        reponse.__exit__ = lambda *a: None
+        with mock.patch("core.auth.urlopen", return_value=reponse):
+            self.assertTrue(keycloak_logout_url(self.requete("t")).startswith("https://key.example/autre/logout?"))
+
+    def test_setting_off_returns_home_without_touching_keycloak(self):
+        from .auth import keycloak_logout_url
+        with override_settings(DECONNEXION_KEYCLOAK=False):
+            url = keycloak_logout_url(self.requete("tok"))
+        self.assertTrue(url.startswith("https://www.lesgrandsvoisins.com/"))
+        self.assertNotIn("tok", url)
+
+    def test_logout_view_clears_local_session_and_redirects_to_keycloak(self):
+        from mozilla_django_oidc.views import OIDCLogoutView
+        user = get_user_model().objects.create_user("sub-x")
+        r = self.requete("tok")
+        r.method = "POST"
+        r.user = user
+        with override_settings(OIDC_OP_LOGOUT_URL_METHOD="core.auth.keycloak_logout_url"):
+            reponse = OIDCLogoutView.as_view()(r)
+        self.assertEqual(reponse.status_code, 302)
+        self.assertTrue(reponse["Location"].startswith(self.ENDPOINT))
+        self.assertIn("id_token_hint=tok", reponse["Location"])
+        self.assertIsNone(r.session.get("oidc_id_token"))  # session locale effacée

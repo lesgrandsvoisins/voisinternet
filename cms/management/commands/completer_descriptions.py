@@ -6,6 +6,7 @@ existante et ne touche pas une page qui a des modifications non publiées (on ne
     manage.py completer_descriptions              # simulation : liste ce qui serait posé
     manage.py completer_descriptions --appliquer  # écrit (nouvelle révision publiée par page)
 """
+import html
 import re
 
 from django.core.management.base import BaseCommand
@@ -16,16 +17,42 @@ CHAMPS = ("excerpt", "lead", "intro", "summary", "body", "cards", "description")
 LONGUEUR = 155
 
 
+CLES_TEXTE = {"text", "value", "body", "content", "intro", "lead", "description", "paragraph"}
+IGNORER = ("Questions posées",)
+
+
+def _textes(donnees):
+    """Valeurs de texte d'un StreamField (blocs et sous-blocs), dans l'ordre, sans les noms de champs ni les identifiants."""
+    if isinstance(donnees, str):
+        yield donnees
+    elif isinstance(donnees, list):
+        for element in donnees:
+            yield from _textes(element)
+    elif isinstance(donnees, dict):
+        for cle, valeur in donnees.items():
+            if cle in CLES_TEXTE or isinstance(valeur, (list, dict)):
+                yield from _textes(valeur)
+
+
+def _propre(brut):
+    return re.sub(r"\s+", " ", html.unescape(strip_tags(brut.replace("<", " <")))).strip()
+
+
 def texte_de(page):
     for nom in CHAMPS:
         valeur = getattr(page, nom, None)
         if not valeur:
             continue
         try:
-            brut = str(valeur)
+            if hasattr(valeur, "raw_data"):
+                brut = " ".join(_textes(list(valeur.raw_data)))
+            else:
+                brut = str(valeur)
         except Exception:
             continue
-        texte = re.sub(r"\s+", " ", strip_tags(brut.replace("<", " <"))).strip()
+        texte = _propre(brut)
+        if texte.startswith(IGNORER):
+            return ""
         if len(texte) >= 40:
             return texte
     return ""

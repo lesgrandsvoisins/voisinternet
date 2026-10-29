@@ -876,3 +876,23 @@ class CompleterDescriptionsTests(TestCase):
         self.assertTrue(a.search_description.startswith("Un long texte de présentation"))
         self.assertLessEqual(len(a.search_description), 160)
         self.assertEqual(b.search_description, "Déjà là")
+
+
+    def test_streamfield_text_has_no_field_names_or_entities(self):
+        from django.core.management import call_command
+        from .models import AssociationPage
+        fr = Locale.get_default()
+        racine = AssociationPage.objects.filter(locale=fr).first() or HomePage.objects.get(locale=fr).add_child(
+            instance=AssociationPage(title="Association", slug="grandsvoisins"))
+        racine.lead = ""
+        racine.body = json.dumps([{"type": "card", "value": {"title": "Notre raison d'être", "text": "<p>Une association de voisins &amp; d&#x27;amis qui partagent leurs outils numériques ensemble.</p>"}}])
+        racine.save_revision().publish()
+        racine.refresh_from_db()
+        racine.search_description = ""
+        racine.save()
+        out = StringIO()
+        call_command("completer_descriptions", stdout=out)
+        sortie = out.getvalue()
+        self.assertIn("Une association de voisins & d'amis", sortie)
+        self.assertNotIn("title", sortie)
+        self.assertNotIn("&#x27;", sortie)

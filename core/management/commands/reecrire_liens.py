@@ -71,8 +71,14 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument("--appliquer", action="store_true", help="Écrire les changements (sinon simulation)")
+        parser.add_argument("--reparer-hote", metavar="HOTE",
+                            help="Répare des liens déjà réécrits avec un hôte erroné (ex. www.lesgrandsvoisins.fr, "
+                                 "hôte du site Wagtail) : les rend relatifs (/fr/blog/…), pour les seuls chemins d'ici")
 
-    def handle(self, *args, appliquer, **options):
+    def handle(self, *args, appliquer, reparer_hote=None, **options):
+        self.re_hote = re.compile(
+            r"https?://" + re.escape(reparer_hote) + r"(?P<path>/(?:fr|en|es|ar|ko)/(?:blog|grandsvoisins|annuaire|etiquettes|agenda)/"
+            + FIN + r")") if reparer_hote else None
         self.reecrits = Counter()
         self.restes = defaultdict(Counter)  # URL non réécrite -> {modèle.champ: occurrences}
         total = 0
@@ -118,6 +124,11 @@ class Command(BaseCommand):
                 self.restes[m.group(0)][nom] += 1
                 return m.group(0)
             return f
+        if self.re_hote:
+            def relatif(m):
+                self.reecrits[nom] += 1
+                return m.group("path")
+            texte = self.re_hote.sub(relatif, texte)
         texte = RE_OLD.sub(sub(cible_vieux_site), texte)
         return RE_BLOG.sub(sub(cible_blog), texte)
 

@@ -1738,3 +1738,10 @@ class ReecrireLiensTests(Base):
         self.assertEqual(cible_blog("/tag/inconnue/"), "/fr/recherche/?q=inconnue")
         self.assertIn("https://old.lesgrandsvoisins.com/fr-fr/association/conseils-des-voisins/27/vote/", service.description)
         self.assertIn("conseils-des-voisins/27/vote/", out.getvalue())  # signalé comme sans équivalent
+        # Réparation de liens écrits avec l'hôte du site Wagtail : rendus relatifs.
+        service.description = "[x](https://www.lesgrandsvoisins.fr/fr/blog/un-billet/) [y](https://www.lesgrandsvoisins.fr/ailleurs/)"
+        service.save()
+        call_command("reecrire_liens", "--appliquer", "--reparer-hote", "www.lesgrandsvoisins.fr", stdout=out)
+        service.refresh_from_db()
+        self.assertIn("(/fr/blog/un-billet/)", service.description)
+        self.assertIn("https://www.lesgrandsvoisins.fr/ailleurs/", service.description)  # hors chemins d'ici : intact

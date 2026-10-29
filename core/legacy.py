@@ -42,13 +42,23 @@ OLD_BLOG_RENAMED = {
 }
 
 
+def chemin_page(page):
+    """Chemin public d'une page Wagtail, TOUJOURS relatif (/fr/blog/…). `page.url` renvoie une adresse absolue dès que
+    plusieurs sites Wagtail existent (hôte du site Wagtail, pas forcément celui d'ici) : ne jamais l'utiliser pour une
+    redirection ni pour réécrire un lien."""
+    parts = page.get_url_parts()
+    if parts and parts[2]:
+        return parts[2]
+    return page.url or None
+
+
 def equivalent_blog(slug):
     """Adresse ici d'un billet de l'ancien blog (Ghost ou vieux site), ou None s'il n'existe pas (publié)."""
     from cms.models import BlogPostPage
 
     slug = slugify(slug)
     post = BlogPostPage.objects.live().filter(slug=OLD_BLOG_RENAMED.get(slug, slug)).first()
-    return post.url if post else None
+    return chemin_page(post) if post else None
 
 
 def equivalent_ancien_site(parts, exact=False):
@@ -98,4 +108,4 @@ def equivalent_association(slugs):
         if page is None:
             return None
         page = page.get_children().live().filter(slug__in={slug, slugify(slug, allow_unicode=True)}).first()
-    return page.url if page else None
+    return chemin_page(page) if page else None

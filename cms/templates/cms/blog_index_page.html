@@ -48,12 +48,12 @@
         {% if posts.has_previous %}
           <a href="?{% if search_query %}q={{ search_query|urlencode }}&amp;{% endif %}page={{ posts.previous_page_number }}">{% trans "← Précédent" %}</a>
           {% else %}
-          <a href="#"></a>
+          <span></span>
         {% endif %}
         {% if posts.has_next %}
           <a href="?{% if search_query %}q={{ search_query|urlencode }}&amp;{% endif %}page={{ posts.next_page_number }}">{% trans "Suivant →" %}</a>
           {% else %}
-          <a href="#"></a>
+          <span></span>
         {% endif %}
       </nav>
       {% endif %}

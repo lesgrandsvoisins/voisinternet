@@ -1885,3 +1885,21 @@ class RedirectionCourrierTests(Base):
         from .models import RedirectionAudit
         self.demander()
         self.assertEqual(list(RedirectionAudit.objects.values_list("action", flat=True)), ["demande"])
+
+
+class InventaireContenuTests(Base):
+    def test_inventory_lists_content_with_alerts(self):
+        import csv as _csv
+        import tempfile
+        from pathlib import Path
+        from django.core.management import call_command
+        DirectoryEntry.objects.create(name="Fiche courte", slug="fiche-courte")
+        with tempfile.TemporaryDirectory() as d:
+            call_command("inventaire_contenu", "--sortie", d, stdout=__import__("io").StringIO())
+            lignes = list(_csv.DictReader(open(Path(d) / "inventaire.csv", encoding="utf-8-sig")))
+            self.assertTrue((Path(d) / "resume.md").exists())
+        types = {l["type"] for l in lignes}
+        self.assertIn("Service", types)
+        fiche = next(l for l in lignes if l["titre"] == "Fiche courte")
+        self.assertIn("non-publique", fiche["alertes"])
+        self.assertEqual(fiche["décision"], "")

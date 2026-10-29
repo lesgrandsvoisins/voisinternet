@@ -717,7 +717,7 @@ class ImportAncienAssociationTests(TestCase):
         lignes = [
             page("", "association", "Association", "<p>racine</p>"),
             page("conseils-des-voisins/", "conseils-des-voisins", "Conseils", '<p data-block-key="x">Texte <a href="https://old.lesgrandsvoisins.com/">a</a></p>'),
-            page("conseils-des-voisins/27/", "27", "27e Conseil", "<h1>Titre</h1><script>x()</script>"),
+            page("conseils-des-voisins/27/", "27", "27e Conseil", "<h1>Titre</h1><p>a<br>b</p><script>x()</script>"),
         ]
         with tempfile.TemporaryDirectory() as d:
             f = Path(d) / "contenu.jsonl"
@@ -732,7 +732,9 @@ class ImportAncienAssociationTests(TestCase):
         self.assertEqual(StandardPage.objects.filter(slug="27").count(), 1)  # pas de doublon à la relance
         html = str(trente.body)
         self.assertIn("<h2>Titre</h2>", html)
+        self.assertIn("a<br/>b", html)  # balise vide fermée : sinon l'éditeur (Draftail) plante à l'ouverture
         self.assertNotIn("script", html)
+        call_command("import_ancien_association", str(f), "--refaire", stdout=out) if f.exists() else None
         self.assertIsNone(equivalent_association(["conseils-des-voisins", "27"]))  # brouillon : pas de redirection
         trente.get_latest_revision().publish()
         conseils.get_latest_revision().publish()

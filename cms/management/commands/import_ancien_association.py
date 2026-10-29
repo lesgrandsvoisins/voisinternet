@@ -29,7 +29,10 @@ ATTRS = {"a": ["href", "title"]}
 
 def html_propre(html):
     html = re.sub(r"<(/?)h1\b", r"<\1h2", html or "")
-    return bleach.clean(html, tags=TAGS, attributes=ATTRS, protocols=["http", "https", "mailto"], strip=True).strip()
+    html = bleach.clean(html, tags=TAGS, attributes=ATTRS, protocols=["http", "https", "mailto"], strip=True).strip()
+    # L'éditeur riche (Draftail) exige des balises vides fermées : « <br> » donne « Unmatched tags » (erreur 500 à
+    # l'ouverture de la page dans /cms/), voir aussi import_ghost_posts.self_close_void_tags.
+    return re.sub(r"<(br|hr)\s*/?>", r"<\1/>", html)
 
 
 def vers_html(valeur, rapport):
@@ -101,8 +104,10 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument("export", help="contenu.jsonl produit par tools/export_ancien_site.py")
         parser.add_argument("--publier", action="store_true")
+        parser.add_argument("--refaire", action="store_true",
+                            help="Recalcule le texte des pages déjà importées qui sont encore en BROUILLON (jamais celles publiées)")
 
-    def handle(self, *args, export, publier, **options):
+    def handle(self, *args, export, publier, refaire, **options):
         chemin = Path(export)
         if not chemin.is_file():
             raise CommandError(f"Fichier introuvable : {chemin}")
@@ -122,11 +127,17 @@ class Command(BaseCommand):
             if parent is None:  # parent non repris : remonter au plus proche ancêtre repris
                 parent = racine
             existante = parent.get_children().filter(slug=p["slug"]).first()
+            corps = corps_html(c, rapport, p["url_path"])
             if existante:
-                creees[relatif] = existante.specific
+                existante = existante.specific
+                if refaire and not existante.live:
+                    existante.body = json.dumps([{"type": "prose", "value": corps}] if corps else [])
+                    existante.save_revision()
+                    existante.save()
+                    self.stdout.write(f"refaite : association/{relatif}/")
+                creees[relatif] = existante
                 presentes += 1
                 continue
-            corps = corps_html(c, rapport, p["url_path"])
             page = StandardPage(
                 title=c.get("title") or p["title"], draft_title=c.get("title") or p["title"], slug=p["slug"], live=False,
                 excerpt=(c.get("search_description") or "")[:300],

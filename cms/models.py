@@ -285,7 +285,7 @@ class StandardPage(Page):
         FieldPanel("header_image"),
     ]
 
-    parent_page_types = ["cms.HomePage", "cms.StandardPage", "cms.PolePage"]
+    parent_page_types = ["cms.HomePage", "cms.StandardPage", "cms.PolePage", "cms.AssociationPage"]
     subpage_types = ["cms.StandardPage"]
 
     def get_pole_ancestor(self):
@@ -596,7 +596,8 @@ class AssociationPage(Page):
     ]
 
     parent_page_types = ["cms.HomePage"]
-    subpage_types = []
+    # Sous-pages : conseils des voisins, statuts, équipe… (reprise de la section Association de l'ancien site).
+    subpage_types = ["cms.StandardPage"]
 
 
 class DonationPage(Page):

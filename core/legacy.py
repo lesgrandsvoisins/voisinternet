@@ -77,6 +77,24 @@ def equivalent_ancien_site(parts, exact=False):
                 titre = slugify(event.title_fr or event.title)
                 if titre and (titre == slug or titre.startswith(slug) or slug.startswith(titre)):
                     return f"/fr/agenda/{event.pk}/"
+    if section == "association" and len(parts) > 1:
+        url = equivalent_association(parts[1:])
+        if url:
+            return url
     if exact:
         return f"/fr{base}" if len(parts) == 1 else None
     return f"/fr{base}"
+
+
+def equivalent_association(slugs):
+    """Page publiée ici, sous la page Association, qui reprend la page `association/<slugs…>/` du vieux site."""
+    from wagtail.models import Locale
+
+    from cms.models import AssociationPage
+
+    page = AssociationPage.objects.live().filter(locale=Locale.get_default()).first()
+    for slug in slugs:
+        if page is None:
+            return None
+        page = page.get_children().live().filter(slug__in={slug, slugify(slug, allow_unicode=True)}).first()
+    return page.url if page else None

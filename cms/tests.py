@@ -1,4 +1,5 @@
 import base64
+import json
 from io import BytesIO, StringIO
 
 from django.contrib.auth import get_user_model
@@ -10,7 +11,7 @@ from django.urls import reverse
 from django.utils import timezone
 from wagtail.models import Locale
 
-from .models import Author, BlogIndexPage, BlogPostPage, HomePage, PolePage, ProjectPage, StandardPage
+from .models import AssociationPage, Author, BlogIndexPage, BlogPostPage, HomePage, PolePage, ProjectPage, StandardPage
 from .qmd import (
     export_blogpost_qmd, export_polepage_qmd, export_projectpage_qmd, export_standardpage_qmd, import_blogpost_qmd,
     import_polepage_qmd, import_projectpage_qmd, import_standardpage_qmd,
@@ -694,3 +695,45 @@ class ImportGhostPagesTests(TestCase):
         self.assertIn("/ghost-import/images/2023/05/a.jpg", page.body)
         self.assertNotIn("script", page.body.replace("&lt;", ""))
         self.assertNotIn("kg-", page.body)
+
+
+class ImportAncienAssociationTests(TestCase):
+    def test_association_section_is_imported_as_drafts_with_hierarchy(self):
+        import tempfile
+        from pathlib import Path
+
+        from django.core.management import call_command
+
+        from core.legacy import equivalent_association
+        fr = Locale.get_default()
+        if not AssociationPage.objects.filter(locale=fr).exists():
+            HomePage.objects.get(locale=fr).add_child(instance=AssociationPage(title="Association", slug="grandsvoisins"))
+        base = "/wwwlesgrandsvoisinscom/association/"
+
+        def page(chemin, slug, titre, corps):
+            return {"type": "page", "url_path": base + chemin, "slug": slug, "title": titre,
+                    "contenu": {"title": titre, "body": json.dumps([{"type": "paragraph", "value": corps}]),
+                                "search_description": ""}}
+        lignes = [
+            page("", "association", "Association", "<p>racine</p>"),
+            page("conseils-des-voisins/", "conseils-des-voisins", "Conseils", '<p data-block-key="x">Texte <a href="https://old.lesgrandsvoisins.com/">a</a></p>'),
+            page("conseils-des-voisins/27/", "27", "27e Conseil", "<h1>Titre</h1><script>x()</script>"),
+        ]
+        with tempfile.TemporaryDirectory() as d:
+            f = Path(d) / "contenu.jsonl"
+            f.write_text("\n".join(json.dumps(x) for x in lignes), encoding="utf-8")
+            out = StringIO()
+            call_command("import_ancien_association", str(f), stdout=out)
+            call_command("import_ancien_association", str(f), stdout=out)
+        racine = AssociationPage.objects.get(locale=fr)
+        conseils = racine.get_children().get(slug="conseils-des-voisins")
+        trente = conseils.get_children().get(slug="27").specific
+        self.assertFalse(conseils.live)
+        self.assertEqual(StandardPage.objects.filter(slug="27").count(), 1)  # pas de doublon à la relance
+        html = str(trente.body)
+        self.assertIn("<h2>Titre</h2>", html)
+        self.assertNotIn("script", html)
+        self.assertIsNone(equivalent_association(["conseils-des-voisins", "27"]))  # brouillon : pas de redirection
+        trente.get_latest_revision().publish()
+        conseils.get_latest_revision().publish()
+        self.assertTrue(equivalent_association(["conseils-des-voisins", "27"]).endswith("/27/"))

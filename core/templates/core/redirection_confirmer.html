@@ -1,0 +1,21 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block robots %}<meta name="robots" content="noindex, nofollow">{% endblock %}
+{% block title %}{% trans "Confirmer la redirection de courrier — lesgrandsvoisins.com" %}{% endblock %}
+{% block content %}
+<div class="page-head"><div class="wrap"><h1>{% trans "Confirmer la redirection de courrier" %}</h1></div></div>
+<div class="wrap page">
+  {% if invalid %}
+    <p>{% trans "Ce lien n'est plus valable (déjà utilisé ou expiré). Si vous êtes concerné·e, demandez à la personne de refaire sa demande." %}</p>
+  {% elif done %}
+    <p><strong>{% trans "Merci : la redirection est activée." %}</strong></p>
+  {% else %}
+    {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+    <p>{% blocktrans with identifier=identifier %}{{ identifier }}, membre de Les Grands Voisins, demande que son courrier soit transféré à cette adresse.{% endblocktrans %}</p>
+    <form method="post">{% csrf_token %}
+      <button class="btn btn-sun" type="submit">{% trans "J'accepte de recevoir ce courrier" %}</button>
+    </form>
+    <p class="muted">{% trans "Si vous n'êtes pas concerné·e, fermez simplement cette page : rien ne sera transféré." %}</p>
+  {% endif %}
+</div>
+{% endblock %}

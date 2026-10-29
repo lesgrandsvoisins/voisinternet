@@ -1,0 +1,66 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Redirection de mes courriels — lesgrandsvoisins.com" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+      <ol>
+        <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+        <li><a href="{% url 'core:account' %}">{% trans "Compte" %}</a></li>
+        <li aria-current="page">{% trans "Redirection de mes courriels" %}</li>
+      </ol>
+    </nav>
+    <h1>{% trans "Redirection de mes courriels" %}</h1>
+    <p class="lead">{% trans "Faites suivre le courrier de votre boîte Grands Voisins vers une autre adresse." %}</p>
+  </div>
+</div>
+<div class="wrap page">
+  {% if managed %}
+    <aside class="card" role="status"><p>{% trans "La redirection de cette adresse est gérée par l'administration." %}</p></aside>
+  {% elif no_mailbox %}
+    <aside class="card card-sun" role="status"><p>{% trans "Votre boîte courriel n'a pas pu être identifiée : déconnectez-vous puis reconnectez-vous." %}</p></aside>
+  {% else %}
+    <section aria-labelledby="etat">
+      <h2 id="etat">{% trans "État" %}</h2>
+      {% if active %}
+        <p><strong>{% trans "Redirection active" %}</strong> : {% blocktrans with cible=active_masked %}votre courrier est transféré à {{ cible }}.{% endblocktrans %}</p>
+        <form method="post">{% csrf_token %}
+          <input type="hidden" name="action" value="copie">
+          <label><input type="checkbox" name="copie" {% if active.keep_copy %}checked{% endif %}> {% trans "Garder une copie dans ma boîte" %}</label>
+          <button class="btn btn-line" type="submit">{% trans "Enregistrer" %}</button>
+        </form>
+        <form method="post">{% csrf_token %}
+          <input type="hidden" name="action" value="desactiver">
+          <button class="btn btn-line" type="submit">{% trans "Désactiver la redirection" %}</button>
+        </form>
+      {% else %}
+        <p>{% trans "Aucune redirection active." %}</p>
+      {% endif %}
+      {% if pending %}
+        <p class="chip">{% blocktrans with cible=pending_masked %}En attente de confirmation par {{ cible }} (le lien est valable 24 heures).{% endblocktrans %}</p>
+      {% endif %}
+    </section>
+    <section aria-labelledby="changer">
+      <h2 id="changer">{% if active %}{% trans "Changer d'adresse de destination" %}{% else %}{% trans "Choisir une adresse de destination" %}{% endif %}</h2>
+      <form method="post">{% csrf_token %}
+        <input type="hidden" name="action" value="demander">
+        <p>
+          <label for="cible">{% trans "Adresse de destination (une seule)" %}</label><br>
+          <input id="cible" type="email" name="cible" required autocomplete="off">
+        </p>
+        <p><label><input type="checkbox" name="copie" checked> {% trans "Garder une copie dans ma boîte" %}</label></p>
+        <button class="btn btn-sun" type="submit">{% trans "Envoyer le courriel de confirmation" %}</button>
+      </form>
+      <p class="muted">{% trans "Un courriel part vers cette adresse : la redirection ne démarre que lorsque la personne qui la possède a confirmé. L'ancienne redirection reste en place d'ici là." %}</p>
+    </section>
+    <section aria-labelledby="bon-a-savoir">
+      <h2 id="bon-a-savoir">{% trans "Bon à savoir" %}</h2>
+      <ul>
+        <li>{% blocktrans %}Au plus {{ daily_limit }} messages transférés par jour : au-delà, la redirection est suspendue jusqu'au lendemain et le courrier reste dans votre boîte.{% endblocktrans %}</li>
+        <li>{% trans "Un message transféré peut arriver dans le dossier « courrier indésirable » de l'adresse de destination." %}</li>
+      </ul>
+    </section>
+  {% endif %}
+</div>
+{% endblock %}

@@ -105,6 +105,9 @@
             <a class="btn btn-line" href="{% url 'core:administration' %}">{% trans "Administration" %}</a>
           {% endif %}
           {% if user.is_authenticated %}
+            {% if REDIRECTIONS_ENABLED %}
+              <a class="btn btn-line" href="{% url 'core:redirection_courrier' %}">{% trans "Redirection de mes courriels" %}</a>
+            {% endif %}
             {% if OIDC_ENABLED %}
               <form method="post" action="{% url 'oidc_logout' %}">
                 {% csrf_token %}

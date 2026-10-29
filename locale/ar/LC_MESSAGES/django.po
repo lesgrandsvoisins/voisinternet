@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 13:08+0100\n"
+"POT-Creation-Date: 2026-10-29 14:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -397,6 +397,7 @@ msgstr "إلغاء"
 #: core/templates/core/mes_fiches.html:7 core/templates/core/parcours.html:7
 #: core/templates/core/parcours_detail.html:7
 #: core/templates/core/partials/page_head.html:3
+#: core/templates/core/redirection_courrier.html:7
 #: core/templates/core/search.html:7 core/templates/core/tag_detail.html:7
 #: core/templates/core/tag_list.html:7
 msgid "Fil d’Ariane"
@@ -422,6 +423,7 @@ msgstr "مسار التنقل"
 #: core/templates/core/mes_fiches.html:9 core/templates/core/parcours.html:9
 #: core/templates/core/parcours_detail.html:9
 #: core/templates/core/partials/page_head.html:5
+#: core/templates/core/redirection_courrier.html:9
 #: core/templates/core/search.html:9 core/templates/core/tag_detail.html:9
 #: core/templates/core/tag_list.html:9
 msgid "Accueil"
@@ -820,7 +822,7 @@ msgstr "الخدمات التي اخترتها، للإضافة أو الإزا�
 msgid "se connecter, créer un compte, retrouver mes liens"
 msgstr "تسجيل الدخول، إنشاء حساب، استعادة روابطي"
 
-#: core/menu.py:66 core/templates/core/account.html:137
+#: core/menu.py:66 core/templates/core/account.html:140
 #: core/templates/core/groupes.html:12
 msgid "Mes groupes"
 msgstr "مجموعاتي"
@@ -1686,6 +1688,109 @@ msgstr "خطوة مكتملة"
 msgid "étapes accomplies"
 msgstr "خطوات مكتملة"
 
+#: core/models.py:741 core/models.py:756
+msgid "adresse de destination"
+msgstr "عنوان الوجهة"
+
+#: core/models.py:742 core/models.py:757
+msgid "garder une copie"
+msgstr "الاحتفاظ بنسخة"
+
+#: core/models.py:743
+msgid "activée le"
+msgstr "تم التفعيل في"
+
+#: core/models.py:746
+msgid "redirection de courrier"
+msgstr "إعادة توجيه البريد"
+
+#: core/models.py:747
+msgid "redirections de courrier"
+msgstr "عمليات إعادة توجيه البريد"
+
+#: core/models.py:758
+msgid "adresses de la boîte"
+msgstr "عناوين صندوق البريد"
+
+#: core/models.py:765
+msgid "demande de redirection de courrier"
+msgstr "طلب إعادة توجيه البريد"
+
+#: core/models.py:766
+msgid "demandes de redirection de courrier"
+msgstr "طلبات إعادة توجيه البريد"
+
+#: core/models.py:776 core/models.py:777
+msgid "journal des redirections"
+msgstr "سجل إعادة التوجيه"
+
+#: core/redirections.py:71
+msgid "Cette adresse de courriel n'est pas valide."
+msgstr "عنوان البريد الإلكتروني هذا غير صالح."
+
+#: core/redirections.py:75
+msgid ""
+"Choisissez une adresse extérieure à Les Grands Voisins : rediriger vers nos "
+"propres domaines n'a pas de sens."
+msgstr ""
+"اختر عنوانًا خارج Les Grands Voisins: لا معنى لإعادة التوجيه إلى نطاقاتنا "
+"نفسها."
+
+#: core/redirections.py:77
+msgid ""
+"Cette adresse est l'une des vôtres : la rediriger vers elle-même ferait une "
+"boucle."
+msgstr "هذا العنوان أحد عناوينك: إعادة توجيهه إلى نفسه ستسبب حلقة لا نهائية."
+
+#: core/redirections.py:79
+msgid "Cette adresse est réservée à un usage technique."
+msgstr "هذا العنوان مخصص للاستخدام التقني."
+
+#: core/redirections.py:93 core/redirections.py:133
+msgid "Le service de redirection est momentanément indisponible."
+msgstr "خدمة إعادة التوجيه غير متاحة مؤقتًا."
+
+#: core/redirections.py:103 core/redirections.py:109
+msgid "Votre boîte courriel n'a pas pu être identifiée."
+msgstr "تعذّر التعرف على صندوق بريدك."
+
+#: core/redirections.py:152
+msgid "Trop de demandes aujourd'hui. Réessayez demain."
+msgstr "طلبات كثيرة اليوم. حاول مرة أخرى غدًا."
+
+#: core/redirections.py:154
+msgid "Cette adresse a reçu trop de demandes aujourd'hui. Réessayez demain."
+msgstr "تلقّى هذا العنوان طلبات كثيرة اليوم. حاول مرة أخرى غدًا."
+
+#: core/redirections.py:161
+msgid "Confirmer la redirection de courrier vers cette adresse"
+msgstr "تأكيد إعادة توجيه البريد إلى هذا العنوان"
+
+#: core/redirections.py:163
+#, python-format
+msgid ""
+"Bonjour,\n"
+"\n"
+"%(identifier)s, membre de Les Grands Voisins, demande à ce que son courrier soit transféré à cette adresse.\n"
+"Pour accepter, ouvrez ce lien dans les 24 heures :\n"
+"\n"
+"%(url)s\n"
+"\n"
+"Rien ne sera transféré tant que vous n'aurez pas confirmé. Si vous n'êtes pas concerné·e, ignorez ce message : il expirera tout seul.\n"
+msgstr ""
+"مرحبًا،\n"
+"\n"
+"يطلب %(identifier)s، العضو في Les Grands Voisins، أن يُحوَّل بريده إلى هذا العنوان.\n"
+"للموافقة، افتح هذا الرابط خلال 24 ساعة:\n"
+"\n"
+"%(url)s\n"
+"\n"
+"لن يُحوَّل أي شيء ما لم تؤكد. إذا كان الأمر لا يعنيك، تجاهل هذه الرسالة: ستنتهي صلاحيتها من تلقاء نفسها.\n"
+
+#: core/redirections.py:210
+msgid "Aucune redirection n'est active."
+msgstr "لا توجد إعادة توجيه نشطة."
+
 #: core/templates/core/account.html:5
 msgid "mon Compte — lesgrandsvoisins.com"
 msgstr "حسابي — lesgrandsvoisins.com"
@@ -1766,11 +1871,11 @@ msgstr "متصل"
 msgid "Compte anonyme"
 msgstr "حساب مجهول"
 
-#: core/templates/core/account.html:96 core/templates/core/account.html:174
+#: core/templates/core/account.html:96 core/templates/core/account.html:177
 msgid "Identifiant de connexion"
 msgstr "اسم المستخدم لتسجيل الدخول"
 
-#: core/templates/core/account.html:99 core/templates/core/account.html:179
+#: core/templates/core/account.html:99 core/templates/core/account.html:182
 msgid "Adresses de courriel (une seule boîte)"
 msgstr "عناوين البريد الإلكتروني (صندوق واحد)"
 
@@ -1780,102 +1885,108 @@ msgstr "عناوين البريد الإلكتروني (صندوق واحد)"
 msgid "Administration"
 msgstr "الإدارة"
 
-#: core/templates/core/account.html:111
+#: core/templates/core/account.html:109
+#: core/templates/core/redirection_courrier.html:11
+#: core/templates/core/redirection_courrier.html:14
+msgid "Redirection de mes courriels"
+msgstr "إعادة توجيه بريدي الإلكتروني"
+
+#: core/templates/core/account.html:114
 #: core/templates/core/partials/account_panel_body.html:55
 msgid "Se déconnecter"
 msgstr "تسجيل الخروج"
 
-#: core/templates/core/account.html:117
+#: core/templates/core/account.html:120
 msgid "Rattacher à mon compte Grands Voisins"
 msgstr "الربط بحساب Grands Voisins الخاص بي"
 
-#: core/templates/core/account.html:121
+#: core/templates/core/account.html:124
 #: core/templates/core/partials/account_panel_body.html:62
 msgid "Fermer ce compte sur cet appareil"
 msgstr "إغلاق هذا الحساب على هذا الجهاز"
 
-#: core/templates/core/account.html:128 core/templates/core/raccourcis.html:12
+#: core/templates/core/account.html:131 core/templates/core/raccourcis.html:12
 msgid "Mes liens"
 msgstr "روابطي"
 
-#: core/templates/core/account.html:131
+#: core/templates/core/account.html:134
 msgid "Ajouter un lien"
 msgstr "إضافة رابط"
 
-#: core/templates/core/account.html:140 core/views.py:397
+#: core/templates/core/account.html:143 core/views.py:398
 msgid "Rejoindre un groupe"
 msgstr "انضم إلى مجموعة"
 
-#: core/templates/core/account.html:146 core/templates/core/mes_fiches.html:14
+#: core/templates/core/account.html:149 core/templates/core/mes_fiches.html:14
 msgid "Mes fiches dans l'annuaire"
 msgstr "بطاقاتي في الدليل"
 
-#: core/templates/core/account.html:149 core/templates/core/mes_fiches.html:35
+#: core/templates/core/account.html:152 core/templates/core/mes_fiches.html:35
 msgid "Créer une fiche"
 msgstr "إنشاء بطاقة"
 
-#: core/templates/core/account.html:155
+#: core/templates/core/account.html:158
 msgid "Mes évènements dans l'agenda"
 msgstr "فعالياتي في الأجندة"
 
-#: core/templates/core/account.html:158
+#: core/templates/core/account.html:161
 #: core/templates/core/mes_evenements.html:21
 msgid "Créer un évènement"
 msgstr "إنشاء فعالية"
 
-#: core/templates/core/account.html:165
+#: core/templates/core/account.html:168
 msgid "Mon profil"
 msgstr "ملفي الشخصي"
 
-#: core/templates/core/account.html:168
+#: core/templates/core/account.html:171
 msgid "Géré par votre compte unique Grands Voisins"
 msgstr "تتم إدارته عبر حسابك الموحّد لدى Grands Voisins"
 
-#: core/templates/core/account.html:183
+#: core/templates/core/account.html:186
 msgid "Nom"
 msgstr "الاسم"
 
-#: core/templates/core/account.html:183 core/templates/core/account.html:186
+#: core/templates/core/account.html:186 core/templates/core/account.html:189
 msgid "Non renseigné"
 msgstr "غير محدد"
 
-#: core/templates/core/account.html:186
+#: core/templates/core/account.html:189
 msgid "Courriel"
 msgstr "البريد الإلكتروني"
 
-#: core/templates/core/account.html:191
+#: core/templates/core/account.html:194
 msgid "Modifier mon profil"
 msgstr "تعديل ملفي الشخصي"
 
-#: core/templates/core/account.html:199 core/templates/core/mes_dons.html:11
+#: core/templates/core/account.html:202 core/templates/core/mes_dons.html:11
 #: core/templates/core/mes_dons.html:14
 msgid "Mes dons"
 msgstr "تبرعاتي"
 
-#: core/templates/core/account.html:208 core/templates/core/mes_dons.html:30
+#: core/templates/core/account.html:211 core/templates/core/mes_dons.html:30
 msgid "déductible fiscalement"
 msgstr "قابل للخصم الضريبي"
 
-#: core/templates/core/account.html:212 core/templates/core/mes_dons.html:34
+#: core/templates/core/account.html:215 core/templates/core/mes_dons.html:34
 msgid "en attente de validation"
 msgstr "قيد انتظار التحقق"
 
-#: core/templates/core/account.html:219 core/templates/core/mes_dons.html:41
+#: core/templates/core/account.html:222 core/templates/core/mes_dons.html:41
 msgid "Aucune contribution enregistrée pour l'instant."
 msgstr "لا توجد مساهمة مسجلة حتى الآن."
 
-#: core/templates/core/account.html:243 core/templates/core/mes_dons.html:47
+#: core/templates/core/account.html:246 core/templates/core/mes_dons.html:47
 #: core/templates/core/mes_dons.html:71
 msgid "Faire un don"
 msgstr "التبرع"
 
-#: core/templates/core/account.html:250 core/templates/core/account.html:256
+#: core/templates/core/account.html:253 core/templates/core/account.html:259
 #: core/templates/core/home.html:26
 #: core/templates/core/partials/account_panel_body.html:7
 msgid "Créer mon compte"
 msgstr "إنشاء حسابي"
 
-#: core/templates/core/account.html:252
+#: core/templates/core/account.html:255
 msgid ""
 "Un compte unique des Grands Voisins, le même pour tous les outils de "
 "l'association. Il retrouve vos liens, groupes, fiches et évènements sur tous"
@@ -1885,34 +1996,34 @@ msgstr ""
 "ومجموعاتك وبطاقاتك وفعالياتك على جميع أجهزتك، ويمكنك استرداد كلمة المرور عبر"
 " البريد الإلكتروني."
 
-#: core/templates/core/account.html:258
+#: core/templates/core/account.html:261
 msgid ""
 "La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
 "serveur."
 msgstr "لم يتم بعد إعداد تسجيل الدخول عبر حساب Grands Voisins على هذا الخادم."
 
-#: core/templates/core/account.html:262
+#: core/templates/core/account.html:265
 #: core/templates/core/partials/account_panel_body.html:9
 msgid "J'ai déjà un compte"
 msgstr "لدي حساب بالفعل"
 
-#: core/templates/core/account.html:263
+#: core/templates/core/account.html:266
 msgid ""
 "Connectez-vous avec le compte que vous utilisez déjà pour les autres outils "
 "des Grands Voisins."
 msgstr ""
 "سجّل الدخول بالحساب الذي تستخدمه بالفعل لأدوات Les Grands Voisins الأخرى."
 
-#: core/templates/core/account.html:266 core/templates/core/home.html:30
+#: core/templates/core/account.html:269 core/templates/core/home.html:30
 msgid "Se connecter"
 msgstr "تسجيل الدخول"
 
-#: core/templates/core/account.html:271
+#: core/templates/core/account.html:274
 #: core/templates/core/partials/account_panel_body.html:16
 msgid "Rester anonyme"
 msgstr "البقاء مجهولًا"
 
-#: core/templates/core/account.html:273
+#: core/templates/core/account.html:276
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
 "pour retrouver vos liens. Sans ce numéro, le compte est perdu : aucun "
@@ -1921,15 +2032,15 @@ msgstr ""
 "رقم من 16 خانة، بلا اسم ولا بريد إلكتروني. دوّنه، فهو يكفي لاستعادة روابطك. "
 "بدون هذا الرقم يضيع الحساب: لا يوجد بريد إلكتروني للاسترداد."
 
-#: core/templates/core/account.html:278 core/templates/core/account.html:290
+#: core/templates/core/account.html:281 core/templates/core/account.html:293
 msgid "Créer un compte anonyme"
 msgstr "إنشاء حساب مجهول"
 
-#: core/templates/core/account.html:285
+#: core/templates/core/account.html:288
 msgid "Autres options"
 msgstr "خيارات أخرى"
 
-#: core/templates/core/account.html:286
+#: core/templates/core/account.html:289
 msgid ""
 "Un numéro de 16 chiffres à noter, sans nom ni courriel. Sans ce numéro, le "
 "compte est perdu."
@@ -2171,6 +2282,7 @@ msgstr "بحث…"
 
 #: core/templates/core/base.html:122
 #: core/templates/core/partials/account_panel_body.html:27
+#: core/templates/core/redirection_courrier.html:10
 msgid "Compte"
 msgstr "الحساب"
 
@@ -2296,6 +2408,7 @@ msgstr "← فعالياتي"
 
 #: core/templates/core/evenement_modifier.html:27
 #: core/templates/core/fiche_modifier.html:27
+#: core/templates/core/redirection_courrier.html:31
 msgid "Enregistrer"
 msgstr "حفظ"
 
@@ -3209,6 +3322,143 @@ msgstr "خدمات لإضافتها إلى روابطي"
 msgid "Ceux déjà ajoutés restent affichés : cliquez pour les retirer."
 msgstr "تبقى الخدمات المضافة ظاهرة: انقر لإزالتها."
 
+#: core/templates/core/redirection_confirmer.html:4
+msgid "Confirmer la redirection de courrier — lesgrandsvoisins.com"
+msgstr "تأكيد إعادة توجيه البريد — lesgrandsvoisins.com"
+
+#: core/templates/core/redirection_confirmer.html:6
+msgid "Confirmer la redirection de courrier"
+msgstr "تأكيد إعادة توجيه البريد"
+
+#: core/templates/core/redirection_confirmer.html:9
+msgid ""
+"Ce lien n'est plus valable (déjà utilisé ou expiré). Si vous êtes "
+"concerné·e, demandez à la personne de refaire sa demande."
+msgstr ""
+"لم يعد هذا الرابط صالحًا (مستخدم أو منتهي الصلاحية). إذا كان الأمر يعنيك، "
+"اطلب من الشخص تكرار طلبه."
+
+#: core/templates/core/redirection_confirmer.html:11
+msgid "Merci : la redirection est activée."
+msgstr "شكرًا: تم تفعيل إعادة التوجيه."
+
+#: core/templates/core/redirection_confirmer.html:14
+#, python-format
+msgid ""
+"%(identifier)s, membre de Les Grands Voisins, demande que son courrier soit "
+"transféré à cette adresse."
+msgstr ""
+"يطلب %(identifier)s، العضو في Les Grands Voisins، أن يُحوَّل بريده إلى هذا "
+"العنوان."
+
+#: core/templates/core/redirection_confirmer.html:16
+msgid "J'accepte de recevoir ce courrier"
+msgstr "أوافق على استلام هذا البريد"
+
+#: core/templates/core/redirection_confirmer.html:18
+msgid ""
+"Si vous n'êtes pas concerné·e, fermez simplement cette page : rien ne sera "
+"transféré."
+msgstr "إذا كان الأمر لا يعنيك، أغلق هذه الصفحة ببساطة: لن يُحوَّل أي شيء."
+
+#: core/templates/core/redirection_courrier.html:3
+msgid "Redirection de mes courriels — lesgrandsvoisins.com"
+msgstr "إعادة توجيه بريدي الإلكتروني — lesgrandsvoisins.com"
+
+#: core/templates/core/redirection_courrier.html:15
+msgid ""
+"Faites suivre le courrier de votre boîte Grands Voisins vers une autre "
+"adresse."
+msgstr "حوّل بريد صندوقك في Grands Voisins إلى عنوان آخر."
+
+#: core/templates/core/redirection_courrier.html:20 core/views.py:1557
+msgid "La redirection de cette adresse est gérée par l'administration."
+msgstr "تتولى الإدارة إدارة إعادة توجيه هذا العنوان."
+
+#: core/templates/core/redirection_courrier.html:22
+msgid ""
+"Votre boîte courriel n'a pas pu être identifiée : déconnectez-vous puis "
+"reconnectez-vous."
+msgstr "تعذّر التعرف على صندوق بريدك: سجّل الخروج ثم سجّل الدخول مرة أخرى."
+
+#: core/templates/core/redirection_courrier.html:25
+msgid "État"
+msgstr "الحالة"
+
+#: core/templates/core/redirection_courrier.html:27
+msgid "Redirection active"
+msgstr "إعادة التوجيه نشطة"
+
+#: core/templates/core/redirection_courrier.html:27
+#, python-format
+msgid "votre courrier est transféré à %(cible)s."
+msgstr "يُحوَّل بريدك إلى %(cible)s."
+
+#: core/templates/core/redirection_courrier.html:30
+#: core/templates/core/redirection_courrier.html:52
+msgid "Garder une copie dans ma boîte"
+msgstr "الاحتفاظ بنسخة في صندوق بريدي"
+
+#: core/templates/core/redirection_courrier.html:35
+msgid "Désactiver la redirection"
+msgstr "إيقاف إعادة التوجيه"
+
+#: core/templates/core/redirection_courrier.html:38
+msgid "Aucune redirection active."
+msgstr "لا توجد إعادة توجيه نشطة."
+
+#: core/templates/core/redirection_courrier.html:41
+#, python-format
+msgid ""
+"En attente de confirmation par %(cible)s (le lien est valable 24 heures)."
+msgstr "في انتظار تأكيد %(cible)s (الرابط صالح لمدة 24 ساعة)."
+
+#: core/templates/core/redirection_courrier.html:45
+msgid "Changer d'adresse de destination"
+msgstr "تغيير عنوان الوجهة"
+
+#: core/templates/core/redirection_courrier.html:45
+msgid "Choisir une adresse de destination"
+msgstr "اختيار عنوان الوجهة"
+
+#: core/templates/core/redirection_courrier.html:49
+msgid "Adresse de destination (une seule)"
+msgstr "عنوان الوجهة (واحد فقط)"
+
+#: core/templates/core/redirection_courrier.html:53
+msgid "Envoyer le courriel de confirmation"
+msgstr "إرسال رسالة التأكيد"
+
+#: core/templates/core/redirection_courrier.html:55
+msgid ""
+"Un courriel part vers cette adresse : la redirection ne démarre que lorsque "
+"la personne qui la possède a confirmé. L'ancienne redirection reste en place"
+" d'ici là."
+msgstr ""
+"تُرسل رسالة إلى هذا العنوان: لا تبدأ إعادة التوجيه إلا بعد أن يؤكد صاحب "
+"العنوان. تبقى إعادة التوجيه السابقة قائمة حتى ذلك الحين."
+
+#: core/templates/core/redirection_courrier.html:58
+msgid "Bon à savoir"
+msgstr "معلومات مفيدة"
+
+#: core/templates/core/redirection_courrier.html:60
+#, python-format
+msgid ""
+"Au plus %(daily_limit)s messages transférés par jour : au-delà, la "
+"redirection est suspendue jusqu'au lendemain et le courrier reste dans votre"
+" boîte."
+msgstr ""
+"بحد أقصى %(daily_limit)s رسالة محوَّلة في اليوم: وبعد ذلك تُعلَّق إعادة "
+"التوجيه حتى اليوم التالي ويبقى البريد في صندوقك."
+
+#: core/templates/core/redirection_courrier.html:61
+msgid ""
+"Un message transféré peut arriver dans le dossier « courrier indésirable » "
+"de l'adresse de destination."
+msgstr ""
+"قد تصل الرسالة المحوَّلة إلى مجلد «البريد غير المرغوب فيه» في عنوان الوجهة."
+
 #: core/templates/core/search.html:3 core/templates/core/search.html:10
 #: core/templates/core/search.html:13
 msgid "Recherche"
@@ -3254,34 +3504,34 @@ msgstr "كلمة مفتاحية واحدة تجمع المقالات وسجلا�
 msgid "Aucune étiquette pour l'instant."
 msgstr "لا توجد وسوم حتى الآن."
 
-#: core/views.py:45
+#: core/views.py:46
 msgid ""
 "Les rendez-vous et les ressources pour s'y retrouver dans la communauté."
 msgstr "المواعيد والموارد للاهتداء داخل المجتمع."
 
-#: core/views.py:46
+#: core/views.py:47
 msgid "Nos trois pôles d'action, portés ensemble par les bénévoles."
 msgstr "مجالاتنا الثلاثة للعمل، يقودها المتطوعون معًا."
 
-#: core/views.py:47
+#: core/views.py:48
 msgid "Nous rejoindre, nous soutenir, nous contacter."
 msgstr "انضم إلينا، ادعمنا، تواصل معنا."
 
-#: core/views.py:57
+#: core/views.py:58
 msgid "Pour faire cela, ouvrez d'abord un compte."
 msgstr "للقيام بذلك، افتح حسابًا أولًا."
 
-#: core/views.py:322
+#: core/views.py:323
 msgid ""
 "Trop de messages envoyés récemment depuis cet appareil. Réessayez plus tard."
 msgstr "تم إرسال عدد كبير من الرسائل مؤخرًا من هذا الجهاز. حاول لاحقًا."
 
-#: core/views.py:331
+#: core/views.py:332
 #, python-format
 msgid "Message via lesgrandsvoisins.com de %(name)s"
 msgstr "رسالة عبر lesgrandsvoisins.com من %(name)s"
 
-#: core/views.py:339
+#: core/views.py:340
 #, python-format
 msgid ""
 "Nom : %(name)s\n"
@@ -3294,137 +3544,137 @@ msgstr ""
 "\n"
 "%(message)s"
 
-#: core/views.py:341
+#: core/views.py:342
 msgid "(non renseigné)"
 msgstr "(غير محدد)"
 
-#: core/views.py:376 core/views.py:623
+#: core/views.py:377 core/views.py:624
 #, python-format
 msgid "Message envoyé à %(name)s."
 msgstr "تم إرسال الرسالة إلى %(name)s."
 
-#: core/views.py:380 core/views.py:627
+#: core/views.py:381 core/views.py:628
 msgid ""
 "Votre message a été enregistré, mais son envoi par e-mail a échoué. "
 "Réessayez plus tard."
 msgstr ""
 "تم تسجيل رسالتك، لكن إرسالها بالبريد الإلكتروني فشل. أعد المحاولة لاحقًا."
 
-#: core/views.py:395
+#: core/views.py:396
 msgid "Ajouter un lien vers un outil"
 msgstr "إضافة رابط إلى أداة"
 
-#: core/views.py:399
+#: core/views.py:400
 msgid "Présenter votre activité dans l'annuaire"
 msgstr "قدّم نشاطك في الدليل"
 
-#: core/views.py:404
+#: core/views.py:405
 msgid "Créer un compte nommé pour ne jamais perdre l'accès"
 msgstr "أنشئ حسابًا باسمك كي لا تفقد الوصول أبدًا"
 
-#: core/views.py:414
+#: core/views.py:415
 msgid ""
 "La connexion n'a pas abouti. Réessayez, ou continuez avec un compte anonyme."
 msgstr "لم يكتمل تسجيل الدخول. أعد المحاولة أو تابع بحساب مجهول."
 
-#: core/views.py:471
+#: core/views.py:472
 msgid "Merci ! Votre contribution a été enregistrée."
 msgstr "شكرًا! تم تسجيل مساهمتك."
 
-#: core/views.py:473
+#: core/views.py:474
 msgid "Le formulaire de don contient une erreur : montant ou date invalide."
 msgstr "يحتوي نموذج التبرع على خطأ: المبلغ أو التاريخ غير صالح."
 
-#: core/views.py:647
+#: core/views.py:648
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cette fiche."
 msgstr ""
 "تم إرسال الطلب: سيراجعه أحد المسؤولين قبل أن يجعلك مسؤولاً عن هذا السجل."
 
-#: core/views.py:650
+#: core/views.py:651
 msgid "Vous avez déjà demandé à être responsable de cette fiche."
 msgstr "لقد سبق أن طلبت تولي مسؤولية هذا السجل."
 
-#: core/views.py:668
+#: core/views.py:669
 msgid ""
 "Connectez-vous pour finaliser votre demande de responsabilité de cette "
 "fiche."
 msgstr "سجّل الدخول لإتمام طلب تولي مسؤولية هذا السجل."
 
-#: core/views.py:695
+#: core/views.py:696
 msgid "Fiche créée."
 msgstr "تم إنشاء البطاقة."
 
-#: core/views.py:724
+#: core/views.py:725
 msgid "Fiche mise à jour."
 msgstr "تم تحديث البطاقة."
 
-#: core/views.py:736
+#: core/views.py:737
 msgid "Fiche supprimée."
 msgstr "تم حذف البطاقة."
 
-#: core/views.py:750
+#: core/views.py:751
 #, python-format
 msgid "Abonnement à « %(name)s » retiré."
 msgstr "تمت إزالة الاشتراك في «%(name)s»."
 
-#: core/views.py:753
+#: core/views.py:754
 #, python-format
 msgid "Abonné à « %(name)s »."
 msgstr "تم الاشتراك في «%(name)s»."
 
-#: core/views.py:779
+#: core/views.py:780
 msgid "Fiche dépubliée."
 msgstr "تم إلغاء نشر البطاقة."
 
-#: core/views.py:779
+#: core/views.py:780
 msgid "Demande de publication annulée."
 msgstr "تم إلغاء طلب النشر."
 
-#: core/views.py:785
+#: core/views.py:786
 msgid ""
 "Fiche envoyée pour validation : elle sera publique une fois validée par un "
 "administrateur."
 msgstr "تم إرسال السجل للموافقة: سيصبح عامًا بمجرد موافقة أحد المسؤولين عليه."
 
-#: core/views.py:842
+#: core/views.py:843
 #, python-format
 msgid "Intérêt enregistré pour « %(title)s »."
 msgstr "تم تسجيل الاهتمام بـ«%(title)s»."
 
-#: core/views.py:845
+#: core/views.py:846
 #, python-format
 msgid "Intérêt retiré pour « %(title)s »."
 msgstr "تم إلغاء الاهتمام بـ«%(title)s»."
 
-#: core/views.py:849
+#: core/views.py:850
 #, python-format
 msgid "Intention mise à jour pour « %(title)s »."
 msgstr "تم تحديث النية بخصوص «%(title)s»."
 
-#: core/views.py:869
+#: core/views.py:870
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cet évènement."
 msgstr ""
 "تم إرسال الطلب: سيراجعه أحد المسؤولين قبل أن يجعلك مسؤولاً عن هذه الفعالية."
 
-#: core/views.py:872
+#: core/views.py:873
 msgid "Vous avez déjà demandé à gérer cet évènement."
 msgstr "لقد سبق أن طلبت إدارة هذه الفعالية."
 
-#: core/views.py:887
+#: core/views.py:888
 msgid ""
 "Connectez-vous pour finaliser votre demande de gestion de cet évènement."
 msgstr "سجّل الدخول لإتمام طلب إدارة هذه الفعالية."
 
-#: core/views.py:912
+#: core/views.py:913
 #, python-format
 msgid "Évènement à publier : %(title)s"
 msgstr "فعالية بانتظار النشر: %(title)s"
 
-#: core/views.py:913
+#: core/views.py:914
 #, python-format
 msgid ""
 "Un évènement attend votre validation dans l'agenda.\n"
@@ -3439,17 +3689,17 @@ msgstr ""
 "\n"
 "راجعوها وانشروها: %(url)s"
 
-#: core/views.py:928
+#: core/views.py:929
 #, python-format
 msgid "Votre évènement est publié : %(title)s"
 msgstr "تم نشر فعاليتك: %(title)s"
 
-#: core/views.py:929
+#: core/views.py:930
 #, python-format
 msgid "« %(title)s » est maintenant visible dans l'agenda : %(url)s"
 msgstr "«%(title)s» أصبحت ظاهرة الآن في الأجندة: %(url)s"
 
-#: core/views.py:959
+#: core/views.py:960
 msgid ""
 "Évènement enregistré. Il reste visible de vous seul·e jusqu'à sa publication"
 " par le groupe « Administration », prévenu par courriel."
@@ -3457,31 +3707,31 @@ msgstr ""
 "تم حفظ الفعالية. لا يراها غيرك حتى تنشرها مجموعة «الإدارة» التي أُبلغت "
 "بالبريد الإلكتروني."
 
-#: core/views.py:980
+#: core/views.py:981
 msgid "Évènement mis à jour."
 msgstr "تم تحديث الفعالية."
 
-#: core/views.py:992
+#: core/views.py:993
 msgid "Évènement supprimé."
 msgstr "تم حذف الفعالية."
 
-#: core/views.py:1045
+#: core/views.py:1046
 msgid ""
 "L'ouverture de comptes anonymes n'est plus proposée. Créez un compte nommé."
 msgstr "لم يعد فتح الحسابات المجهولة متاحًا. أنشئ حسابًا باسمك."
 
-#: core/views.py:1049
+#: core/views.py:1050
 msgid "Compte anonyme créé."
 msgstr "تم إنشاء حساب مجهول."
 
-#: core/views.py:1057
+#: core/views.py:1058
 msgid ""
 "Merci. Gardez ce numéro précieusement : il est la seule façon de retrouver "
 "ce compte."
 msgstr ""
 "شكرًا. احتفظ بهذا الرقم جيدًا: إنه الطريقة الوحيدة لاستعادة هذا الحساب."
 
-#: core/views.py:1067
+#: core/views.py:1068
 #, python-format
 msgid ""
 "Numéro de compte anonyme lesgrandsvoisins.com : %(number)s\n"
@@ -3490,65 +3740,93 @@ msgstr ""
 "رقم الحساب المجهول في lesgrandsvoisins.com: %(number)s\n"
 "يكفي وحده لاستعادة روابطك على جهاز آخر. نحتفظ ببصمته فقط: لن نتمكن من إعادته إليك.\n"
 
-#: core/views.py:1080
+#: core/views.py:1081
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "عدد كبير جدًا من المحاولات من هذا الجهاز. أعد المحاولة بعد ربع ساعة."
 
-#: core/views.py:1084
+#: core/views.py:1085
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "لا يوجد حساب مطابق لهذا الرقم. تحقق من الخانات الـ16."
 
-#: core/views.py:1087
+#: core/views.py:1088
 msgid "Compte retrouvé. Vos liens sont de retour."
 msgstr "تم العثور على الحساب. عادت روابطك."
 
-#: core/views.py:1094
+#: core/views.py:1095
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
 msgstr "لم يعد هذا الحساب مفتوحًا على هذا الجهاز. رقمك يتيح لك استعادته."
 
-#: core/views.py:1105
+#: core/views.py:1106
 msgid "Vos liens anonymes ont rejoint votre compte."
 msgstr "انضمت روابطك المجهولة إلى حسابك."
 
-#: core/views.py:1123
+#: core/views.py:1124
 #, python-format
 msgid "« %(name)s » retiré de vos liens."
 msgstr "تمت إزالة «%(name)s» من روابطك."
 
-#: core/views.py:1130
+#: core/views.py:1131
 #, python-format
 msgid "« %(name)s » ajouté à vos liens."
 msgstr "تمت إضافة «%(name)s» إلى روابطك."
 
-#: core/views.py:1133
+#: core/views.py:1134
 #, python-format
 msgid ""
 "« %(name)s » ajouté à vos liens, en attente de validation par un "
 "administrateur."
 msgstr "تمت إضافة «%(name)s» إلى روابطك، في انتظار تحقق أحد المديرين."
 
-#: core/views.py:1243
+#: core/views.py:1244
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "تمت إزالة «%(name)s» من مجموعاتك."
 
-#: core/views.py:1247
+#: core/views.py:1248
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "تمت إضافة «%(name)s» إلى مجموعاتك."
 
-#: core/views.py:1468
+#: core/views.py:1469
 msgid "Pour garder la trace de vos étapes, ouvrez d'abord un compte."
 msgstr "لحفظ خطواتك افتح أولًا حسابًا."
 
-#: core/views.py:1478
+#: core/views.py:1479
 #, python-format
 msgid "Bravo ! Parcours « %(title)s » terminé. 🎉"
 msgstr "أحسنت! اكتمل المسار «%(title)s». 🎉"
 
-#: core/views.py:1480
+#: core/views.py:1481
 #, python-format
 msgid "Étape faite : %(title)s"
 msgstr "تمت الخطوة: %(title)s"
+
+#: core/views.py:1547
+msgid "Connectez-vous pour gérer la redirection de vos courriels."
+msgstr "سجّل الدخول لإدارة إعادة توجيه بريدك الإلكتروني."
+
+#: core/views.py:1552
+msgid "Trop de tentatives. Réessayez dans quelques minutes."
+msgstr "محاولات كثيرة. حاول مرة أخرى بعد بضع دقائق."
+
+#: core/views.py:1559
+msgid "Votre boîte courriel n'a pas pu être identifiée : reconnectez-vous."
+msgstr "تعذّر التعرف على صندوق بريدك: سجّل الدخول مرة أخرى."
+
+#: core/views.py:1565
+msgid ""
+"Un courriel de confirmation vient d'être envoyé à cette adresse. Tant "
+"qu'elle n'est pas confirmée, rien n'est transféré."
+msgstr ""
+"تم إرسال رسالة تأكيد إلى هذا العنوان للتو. لا يُحوَّل أي شيء حتى يتم "
+"التأكيد."
+
+#: core/views.py:1568
+msgid "Réglage enregistré."
+msgstr "تم حفظ الإعداد."
+
+#: core/views.py:1571
+msgid "Redirection désactivée."
+msgstr "تم إيقاف إعادة التوجيه."

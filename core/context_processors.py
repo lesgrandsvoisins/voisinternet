@@ -66,6 +66,7 @@ def site(request):
         "account_shortcuts": account_shortcuts,
         "account_sub": label,
         "OIDC_ENABLED": settings.OIDC_ENABLED,
+        "REDIRECTIONS_ENABLED": settings.REDIRECTIONS_ENABLED,
         "keycloak_login_url": keycloak_login_url,
         "keycloak_register_url": keycloak_register_url,
         "keycloak_account_url": keycloak_account_url,

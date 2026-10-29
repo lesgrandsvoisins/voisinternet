@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 13:08+0100\n"
+"POT-Creation-Date: 2026-10-29 14:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -396,6 +396,7 @@ msgstr "취소"
 #: core/templates/core/mes_fiches.html:7 core/templates/core/parcours.html:7
 #: core/templates/core/parcours_detail.html:7
 #: core/templates/core/partials/page_head.html:3
+#: core/templates/core/redirection_courrier.html:7
 #: core/templates/core/search.html:7 core/templates/core/tag_detail.html:7
 #: core/templates/core/tag_list.html:7
 msgid "Fil d’Ariane"
@@ -421,6 +422,7 @@ msgstr "이동 경로"
 #: core/templates/core/mes_fiches.html:9 core/templates/core/parcours.html:9
 #: core/templates/core/parcours_detail.html:9
 #: core/templates/core/partials/page_head.html:5
+#: core/templates/core/redirection_courrier.html:9
 #: core/templates/core/search.html:9 core/templates/core/tag_detail.html:9
 #: core/templates/core/tag_list.html:9
 msgid "Accueil"
@@ -808,7 +810,7 @@ msgstr "선택하신 서비스, 추가하거나 제거할 수 있습니다"
 msgid "se connecter, créer un compte, retrouver mes liens"
 msgstr "로그인, 계정 만들기, 내 링크 찾기"
 
-#: core/menu.py:66 core/templates/core/account.html:137
+#: core/menu.py:66 core/templates/core/account.html:140
 #: core/templates/core/groupes.html:12
 msgid "Mes groupes"
 msgstr "내 그룹"
@@ -1669,6 +1671,107 @@ msgstr "완료한 단계"
 msgid "étapes accomplies"
 msgstr "완료한 단계"
 
+#: core/models.py:741 core/models.py:756
+msgid "adresse de destination"
+msgstr "수신 주소"
+
+#: core/models.py:742 core/models.py:757
+msgid "garder une copie"
+msgstr "사본 보관"
+
+#: core/models.py:743
+msgid "activée le"
+msgstr "활성화 일시"
+
+#: core/models.py:746
+msgid "redirection de courrier"
+msgstr "메일 전달"
+
+#: core/models.py:747
+msgid "redirections de courrier"
+msgstr "메일 전달"
+
+#: core/models.py:758
+msgid "adresses de la boîte"
+msgstr "메일함 주소"
+
+#: core/models.py:765
+msgid "demande de redirection de courrier"
+msgstr "메일 전달 요청"
+
+#: core/models.py:766
+msgid "demandes de redirection de courrier"
+msgstr "메일 전달 요청"
+
+#: core/models.py:776 core/models.py:777
+msgid "journal des redirections"
+msgstr "전달 기록"
+
+#: core/redirections.py:71
+msgid "Cette adresse de courriel n'est pas valide."
+msgstr "이 이메일 주소가 올바르지 않습니다."
+
+#: core/redirections.py:75
+msgid ""
+"Choisissez une adresse extérieure à Les Grands Voisins : rediriger vers nos "
+"propres domaines n'a pas de sens."
+msgstr "Les Grands Voisins 외부의 주소를 선택하세요. 우리 도메인으로 전달하는 것은 의미가 없습니다."
+
+#: core/redirections.py:77
+msgid ""
+"Cette adresse est l'une des vôtres : la rediriger vers elle-même ferait une "
+"boucle."
+msgstr "이 주소는 본인의 주소입니다. 자기 자신으로 전달하면 순환이 생깁니다."
+
+#: core/redirections.py:79
+msgid "Cette adresse est réservée à un usage technique."
+msgstr "이 주소는 기술적 용도로 예약되어 있습니다."
+
+#: core/redirections.py:93 core/redirections.py:133
+msgid "Le service de redirection est momentanément indisponible."
+msgstr "전달 서비스를 일시적으로 사용할 수 없습니다."
+
+#: core/redirections.py:103 core/redirections.py:109
+msgid "Votre boîte courriel n'a pas pu être identifiée."
+msgstr "메일함을 확인할 수 없습니다."
+
+#: core/redirections.py:152
+msgid "Trop de demandes aujourd'hui. Réessayez demain."
+msgstr "오늘 요청이 너무 많습니다. 내일 다시 시도하세요."
+
+#: core/redirections.py:154
+msgid "Cette adresse a reçu trop de demandes aujourd'hui. Réessayez demain."
+msgstr "이 주소로 오늘 요청이 너무 많이 전송되었습니다. 내일 다시 시도하세요."
+
+#: core/redirections.py:161
+msgid "Confirmer la redirection de courrier vers cette adresse"
+msgstr "이 주소로의 메일 전달 확인"
+
+#: core/redirections.py:163
+#, python-format
+msgid ""
+"Bonjour,\n"
+"\n"
+"%(identifier)s, membre de Les Grands Voisins, demande à ce que son courrier soit transféré à cette adresse.\n"
+"Pour accepter, ouvrez ce lien dans les 24 heures :\n"
+"\n"
+"%(url)s\n"
+"\n"
+"Rien ne sera transféré tant que vous n'aurez pas confirmé. Si vous n'êtes pas concerné·e, ignorez ce message : il expirera tout seul.\n"
+msgstr ""
+"안녕하세요.\n"
+"\n"
+"Les Grands Voisins 회원 %(identifier)s 님이 자신의 메일을 이 주소로 전달해 달라고 요청했습니다.\n"
+"수락하시려면 24시간 안에 다음 링크를 여세요:\n"
+"\n"
+"%(url)s\n"
+"\n"
+"확인하시기 전에는 아무것도 전달되지 않습니다. 해당되지 않는다면 이 메시지를 무시하세요. 저절로 만료됩니다.\n"
+
+#: core/redirections.py:210
+msgid "Aucune redirection n'est active."
+msgstr "활성화된 전달이 없습니다."
+
 #: core/templates/core/account.html:5
 msgid "mon Compte — lesgrandsvoisins.com"
 msgstr "내 계정 — lesgrandsvoisins.com"
@@ -1749,11 +1852,11 @@ msgstr "로그인됨"
 msgid "Compte anonyme"
 msgstr "익명 계정"
 
-#: core/templates/core/account.html:96 core/templates/core/account.html:174
+#: core/templates/core/account.html:96 core/templates/core/account.html:177
 msgid "Identifiant de connexion"
 msgstr "로그인 사용자 이름"
 
-#: core/templates/core/account.html:99 core/templates/core/account.html:179
+#: core/templates/core/account.html:99 core/templates/core/account.html:182
 msgid "Adresses de courriel (une seule boîte)"
 msgstr "이메일 주소(사서함 하나)"
 
@@ -1763,102 +1866,108 @@ msgstr "이메일 주소(사서함 하나)"
 msgid "Administration"
 msgstr "관리"
 
-#: core/templates/core/account.html:111
+#: core/templates/core/account.html:109
+#: core/templates/core/redirection_courrier.html:11
+#: core/templates/core/redirection_courrier.html:14
+msgid "Redirection de mes courriels"
+msgstr "내 메일 전달"
+
+#: core/templates/core/account.html:114
 #: core/templates/core/partials/account_panel_body.html:55
 msgid "Se déconnecter"
 msgstr "로그아웃"
 
-#: core/templates/core/account.html:117
+#: core/templates/core/account.html:120
 msgid "Rattacher à mon compte Grands Voisins"
 msgstr "내 Grands Voisins 계정에 연결하기"
 
-#: core/templates/core/account.html:121
+#: core/templates/core/account.html:124
 #: core/templates/core/partials/account_panel_body.html:62
 msgid "Fermer ce compte sur cet appareil"
 msgstr "이 기기에서 계정 닫기"
 
-#: core/templates/core/account.html:128 core/templates/core/raccourcis.html:12
+#: core/templates/core/account.html:131 core/templates/core/raccourcis.html:12
 msgid "Mes liens"
 msgstr "내 링크"
 
-#: core/templates/core/account.html:131
+#: core/templates/core/account.html:134
 msgid "Ajouter un lien"
 msgstr "링크 추가"
 
-#: core/templates/core/account.html:140 core/views.py:397
+#: core/templates/core/account.html:143 core/views.py:398
 msgid "Rejoindre un groupe"
 msgstr "그룹 가입"
 
-#: core/templates/core/account.html:146 core/templates/core/mes_fiches.html:14
+#: core/templates/core/account.html:149 core/templates/core/mes_fiches.html:14
 msgid "Mes fiches dans l'annuaire"
 msgstr "내 디렉터리 항목"
 
-#: core/templates/core/account.html:149 core/templates/core/mes_fiches.html:35
+#: core/templates/core/account.html:152 core/templates/core/mes_fiches.html:35
 msgid "Créer une fiche"
 msgstr "항목 만들기"
 
-#: core/templates/core/account.html:155
+#: core/templates/core/account.html:158
 msgid "Mes évènements dans l'agenda"
 msgstr "일정에 있는 내 행사"
 
-#: core/templates/core/account.html:158
+#: core/templates/core/account.html:161
 #: core/templates/core/mes_evenements.html:21
 msgid "Créer un évènement"
 msgstr "행사 만들기"
 
-#: core/templates/core/account.html:165
+#: core/templates/core/account.html:168
 msgid "Mon profil"
 msgstr "내 프로필"
 
-#: core/templates/core/account.html:168
+#: core/templates/core/account.html:171
 msgid "Géré par votre compte unique Grands Voisins"
 msgstr "Grands Voisins 단일 계정으로 관리됩니다"
 
-#: core/templates/core/account.html:183
+#: core/templates/core/account.html:186
 msgid "Nom"
 msgstr "이름"
 
-#: core/templates/core/account.html:183 core/templates/core/account.html:186
+#: core/templates/core/account.html:186 core/templates/core/account.html:189
 msgid "Non renseigné"
 msgstr "미입력"
 
-#: core/templates/core/account.html:186
+#: core/templates/core/account.html:189
 msgid "Courriel"
 msgstr "이메일"
 
-#: core/templates/core/account.html:191
+#: core/templates/core/account.html:194
 msgid "Modifier mon profil"
 msgstr "프로필 수정"
 
-#: core/templates/core/account.html:199 core/templates/core/mes_dons.html:11
+#: core/templates/core/account.html:202 core/templates/core/mes_dons.html:11
 #: core/templates/core/mes_dons.html:14
 msgid "Mes dons"
 msgstr "내 후원"
 
-#: core/templates/core/account.html:208 core/templates/core/mes_dons.html:30
+#: core/templates/core/account.html:211 core/templates/core/mes_dons.html:30
 msgid "déductible fiscalement"
 msgstr "세액 공제 가능"
 
-#: core/templates/core/account.html:212 core/templates/core/mes_dons.html:34
+#: core/templates/core/account.html:215 core/templates/core/mes_dons.html:34
 msgid "en attente de validation"
 msgstr "승인 대기 중"
 
-#: core/templates/core/account.html:219 core/templates/core/mes_dons.html:41
+#: core/templates/core/account.html:222 core/templates/core/mes_dons.html:41
 msgid "Aucune contribution enregistrée pour l'instant."
 msgstr "아직 등록된 기여가 없습니다."
 
-#: core/templates/core/account.html:243 core/templates/core/mes_dons.html:47
+#: core/templates/core/account.html:246 core/templates/core/mes_dons.html:47
 #: core/templates/core/mes_dons.html:71
 msgid "Faire un don"
 msgstr "기부하기"
 
-#: core/templates/core/account.html:250 core/templates/core/account.html:256
+#: core/templates/core/account.html:253 core/templates/core/account.html:259
 #: core/templates/core/home.html:26
 #: core/templates/core/partials/account_panel_body.html:7
 msgid "Créer mon compte"
 msgstr "내 계정 만들기"
 
-#: core/templates/core/account.html:252
+#: core/templates/core/account.html:255
 msgid ""
 "Un compte unique des Grands Voisins, le même pour tous les outils de "
 "l'association. Il retrouve vos liens, groupes, fiches et évènements sur tous"
@@ -1867,33 +1976,33 @@ msgstr ""
 "Grands Voisins의 단일 계정으로, 협회의 모든 도구에서 동일하게 쓰입니다. 모든 기기에서 링크, 그룹, 항목, 행사를 다시 "
 "불러오며, 이메일로 비밀번호를 복구할 수 있습니다."
 
-#: core/templates/core/account.html:258
+#: core/templates/core/account.html:261
 msgid ""
 "La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
 "serveur."
 msgstr "이 서버에는 아직 Grands Voisins 계정 로그인이 설정되어 있지 않습니다."
 
-#: core/templates/core/account.html:262
+#: core/templates/core/account.html:265
 #: core/templates/core/partials/account_panel_body.html:9
 msgid "J'ai déjà un compte"
 msgstr "이미 계정이 있습니다"
 
-#: core/templates/core/account.html:263
+#: core/templates/core/account.html:266
 msgid ""
 "Connectez-vous avec le compte que vous utilisez déjà pour les autres outils "
 "des Grands Voisins."
 msgstr "다른 Les Grands Voisins 도구에 이미 쓰는 계정으로 로그인하세요."
 
-#: core/templates/core/account.html:266 core/templates/core/home.html:30
+#: core/templates/core/account.html:269 core/templates/core/home.html:30
 msgid "Se connecter"
 msgstr "로그인"
 
-#: core/templates/core/account.html:271
+#: core/templates/core/account.html:274
 #: core/templates/core/partials/account_panel_body.html:16
 msgid "Rester anonyme"
 msgstr "익명으로 계속"
 
-#: core/templates/core/account.html:273
+#: core/templates/core/account.html:276
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
 "pour retrouver vos liens. Sans ce numéro, le compte est perdu : aucun "
@@ -1902,15 +2011,15 @@ msgstr ""
 "이름이나 이메일 없이 16자리 숫자만 사용합니다. 적어 두세요. 이 숫자만 있으면 링크를 되찾을 수 있습니다. 이 숫자가 없으면 계정을 "
 "잃게 되며, 복구용 이메일은 없습니다."
 
-#: core/templates/core/account.html:278 core/templates/core/account.html:290
+#: core/templates/core/account.html:281 core/templates/core/account.html:293
 msgid "Créer un compte anonyme"
 msgstr "익명 계정 만들기"
 
-#: core/templates/core/account.html:285
+#: core/templates/core/account.html:288
 msgid "Autres options"
 msgstr "다른 옵션"
 
-#: core/templates/core/account.html:286
+#: core/templates/core/account.html:289
 msgid ""
 "Un numéro de 16 chiffres à noter, sans nom ni courriel. Sans ce numéro, le "
 "compte est perdu."
@@ -2145,6 +2254,7 @@ msgstr "검색…"
 
 #: core/templates/core/base.html:122
 #: core/templates/core/partials/account_panel_body.html:27
+#: core/templates/core/redirection_courrier.html:10
 msgid "Compte"
 msgstr "계정"
 
@@ -2267,6 +2377,7 @@ msgstr "← 내 행사"
 
 #: core/templates/core/evenement_modifier.html:27
 #: core/templates/core/fiche_modifier.html:27
+#: core/templates/core/redirection_courrier.html:31
 msgid "Enregistrer"
 msgstr "저장"
 
@@ -3162,6 +3273,135 @@ msgstr "내 링크에 추가할 서비스"
 msgid "Ceux déjà ajoutés restent affichés : cliquez pour les retirer."
 msgstr "이미 추가한 서비스도 계속 표시됩니다. 클릭하면 제거됩니다."
 
+#: core/templates/core/redirection_confirmer.html:4
+msgid "Confirmer la redirection de courrier — lesgrandsvoisins.com"
+msgstr "메일 전달 확인 — lesgrandsvoisins.com"
+
+#: core/templates/core/redirection_confirmer.html:6
+msgid "Confirmer la redirection de courrier"
+msgstr "메일 전달 확인"
+
+#: core/templates/core/redirection_confirmer.html:9
+msgid ""
+"Ce lien n'est plus valable (déjà utilisé ou expiré). Si vous êtes "
+"concerné·e, demandez à la personne de refaire sa demande."
+msgstr "이 링크는 더 이상 유효하지 않습니다(이미 사용되었거나 만료됨). 해당되는 경우 요청한 사람에게 다시 요청해 달라고 하세요."
+
+#: core/templates/core/redirection_confirmer.html:11
+msgid "Merci : la redirection est activée."
+msgstr "감사합니다. 전달이 활성화되었습니다."
+
+#: core/templates/core/redirection_confirmer.html:14
+#, python-format
+msgid ""
+"%(identifier)s, membre de Les Grands Voisins, demande que son courrier soit "
+"transféré à cette adresse."
+msgstr "Les Grands Voisins 회원 %(identifier)s 님이 자신의 메일을 이 주소로 전달해 달라고 요청했습니다."
+
+#: core/templates/core/redirection_confirmer.html:16
+msgid "J'accepte de recevoir ce courrier"
+msgstr "이 메일을 받는 데 동의합니다"
+
+#: core/templates/core/redirection_confirmer.html:18
+msgid ""
+"Si vous n'êtes pas concerné·e, fermez simplement cette page : rien ne sera "
+"transféré."
+msgstr "해당되지 않는다면 이 페이지를 닫기만 하세요. 아무것도 전달되지 않습니다."
+
+#: core/templates/core/redirection_courrier.html:3
+msgid "Redirection de mes courriels — lesgrandsvoisins.com"
+msgstr "내 메일 전달 — lesgrandsvoisins.com"
+
+#: core/templates/core/redirection_courrier.html:15
+msgid ""
+"Faites suivre le courrier de votre boîte Grands Voisins vers une autre "
+"adresse."
+msgstr "Grands Voisins 메일함의 메일을 다른 주소로 전달하세요."
+
+#: core/templates/core/redirection_courrier.html:20 core/views.py:1557
+msgid "La redirection de cette adresse est gérée par l'administration."
+msgstr "이 주소의 전달은 관리자가 관리합니다."
+
+#: core/templates/core/redirection_courrier.html:22
+msgid ""
+"Votre boîte courriel n'a pas pu être identifiée : déconnectez-vous puis "
+"reconnectez-vous."
+msgstr "메일함을 확인할 수 없습니다. 로그아웃한 뒤 다시 로그인하세요."
+
+#: core/templates/core/redirection_courrier.html:25
+msgid "État"
+msgstr "상태"
+
+#: core/templates/core/redirection_courrier.html:27
+msgid "Redirection active"
+msgstr "전달 활성"
+
+#: core/templates/core/redirection_courrier.html:27
+#, python-format
+msgid "votre courrier est transféré à %(cible)s."
+msgstr "메일이 %(cible)s(으)로 전달됩니다."
+
+#: core/templates/core/redirection_courrier.html:30
+#: core/templates/core/redirection_courrier.html:52
+msgid "Garder une copie dans ma boîte"
+msgstr "내 메일함에 사본 보관"
+
+#: core/templates/core/redirection_courrier.html:35
+msgid "Désactiver la redirection"
+msgstr "전달 끄기"
+
+#: core/templates/core/redirection_courrier.html:38
+msgid "Aucune redirection active."
+msgstr "활성화된 전달이 없습니다."
+
+#: core/templates/core/redirection_courrier.html:41
+#, python-format
+msgid ""
+"En attente de confirmation par %(cible)s (le lien est valable 24 heures)."
+msgstr "%(cible)s의 확인을 기다리는 중입니다(링크는 24시간 동안 유효)."
+
+#: core/templates/core/redirection_courrier.html:45
+msgid "Changer d'adresse de destination"
+msgstr "수신 주소 변경"
+
+#: core/templates/core/redirection_courrier.html:45
+msgid "Choisir une adresse de destination"
+msgstr "수신 주소 선택"
+
+#: core/templates/core/redirection_courrier.html:49
+msgid "Adresse de destination (une seule)"
+msgstr "수신 주소(하나만)"
+
+#: core/templates/core/redirection_courrier.html:53
+msgid "Envoyer le courriel de confirmation"
+msgstr "확인 메일 보내기"
+
+#: core/templates/core/redirection_courrier.html:55
+msgid ""
+"Un courriel part vers cette adresse : la redirection ne démarre que lorsque "
+"la personne qui la possède a confirmé. L'ancienne redirection reste en place"
+" d'ici là."
+msgstr "이 주소로 메일이 발송됩니다. 주소 소유자가 확인해야 전달이 시작되며, 그때까지는 기존 전달이 유지됩니다."
+
+#: core/templates/core/redirection_courrier.html:58
+msgid "Bon à savoir"
+msgstr "알아 두세요"
+
+#: core/templates/core/redirection_courrier.html:60
+#, python-format
+msgid ""
+"Au plus %(daily_limit)s messages transférés par jour : au-delà, la "
+"redirection est suspendue jusqu'au lendemain et le courrier reste dans votre"
+" boîte."
+msgstr ""
+"하루 최대 %(daily_limit)s개의 메시지가 전달됩니다. 초과하면 다음 날까지 전달이 중단되고 메일은 메일함에 남습니다."
+
+#: core/templates/core/redirection_courrier.html:61
+msgid ""
+"Un message transféré peut arriver dans le dossier « courrier indésirable » "
+"de l'adresse de destination."
+msgstr "전달된 메시지가 수신 주소의 ‘스팸 메일함’으로 들어갈 수 있습니다."
+
 #: core/templates/core/search.html:3 core/templates/core/search.html:10
 #: core/templates/core/search.html:13
 msgid "Recherche"
@@ -3207,34 +3447,34 @@ msgstr "하나의 키워드로 글, 디렉토리 항목, 서비스, 거점을 �
 msgid "Aucune étiquette pour l'instant."
 msgstr "아직 태그가 없습니다."
 
-#: core/views.py:45
+#: core/views.py:46
 msgid ""
 "Les rendez-vous et les ressources pour s'y retrouver dans la communauté."
 msgstr "커뮤니티 안에서 길을 찾기 위한 모임과 자료입니다."
 
-#: core/views.py:46
+#: core/views.py:47
 msgid "Nos trois pôles d'action, portés ensemble par les bénévoles."
 msgstr "자원봉사자들이 함께 이끄는 우리의 세 가지 활동 분야입니다."
 
-#: core/views.py:47
+#: core/views.py:48
 msgid "Nous rejoindre, nous soutenir, nous contacter."
 msgstr "함께하기, 후원하기, 연락하기."
 
-#: core/views.py:57
+#: core/views.py:58
 msgid "Pour faire cela, ouvrez d'abord un compte."
 msgstr "이 작업을 하려면 먼저 계정을 만드세요."
 
-#: core/views.py:322
+#: core/views.py:323
 msgid ""
 "Trop de messages envoyés récemment depuis cet appareil. Réessayez plus tard."
 msgstr "최근 이 기기에서 너무 많은 메시지를 보냈습니다. 나중에 다시 시도하세요."
 
-#: core/views.py:331
+#: core/views.py:332
 #, python-format
 msgid "Message via lesgrandsvoisins.com de %(name)s"
 msgstr "%(name)s 님이 lesgrandsvoisins.com을 통해 보낸 메시지"
 
-#: core/views.py:339
+#: core/views.py:340
 #, python-format
 msgid ""
 "Nom : %(name)s\n"
@@ -3247,134 +3487,134 @@ msgstr ""
 "\n"
 "%(message)s"
 
-#: core/views.py:341
+#: core/views.py:342
 msgid "(non renseigné)"
 msgstr "(미입력)"
 
-#: core/views.py:376 core/views.py:623
+#: core/views.py:377 core/views.py:624
 #, python-format
 msgid "Message envoyé à %(name)s."
 msgstr "%(name)s에게 메시지를 보냈습니다."
 
-#: core/views.py:380 core/views.py:627
+#: core/views.py:381 core/views.py:628
 msgid ""
 "Votre message a été enregistré, mais son envoi par e-mail a échoué. "
 "Réessayez plus tard."
 msgstr "메시지는 저장되었지만 이메일 전송에 실패했습니다. 나중에 다시 시도해 주세요."
 
-#: core/views.py:395
+#: core/views.py:396
 msgid "Ajouter un lien vers un outil"
 msgstr "도구 링크 추가"
 
-#: core/views.py:399
+#: core/views.py:400
 msgid "Présenter votre activité dans l'annuaire"
 msgstr "안내 목록에 활동 소개하기"
 
-#: core/views.py:404
+#: core/views.py:405
 msgid "Créer un compte nommé pour ne jamais perdre l'accès"
 msgstr "접근을 잃지 않도록 실명 계정 만들기"
 
-#: core/views.py:414
+#: core/views.py:415
 msgid ""
 "La connexion n'a pas abouti. Réessayez, ou continuez avec un compte anonyme."
 msgstr "로그인이 완료되지 않았습니다. 다시 시도하거나 익명 계정으로 계속하세요."
 
-#: core/views.py:471
+#: core/views.py:472
 msgid "Merci ! Votre contribution a été enregistrée."
 msgstr "감사합니다! 기여가 등록되었습니다."
 
-#: core/views.py:473
+#: core/views.py:474
 msgid "Le formulaire de don contient une erreur : montant ou date invalide."
 msgstr "기부 양식에 오류가 있습니다: 금액 또는 날짜가 유효하지 않습니다."
 
-#: core/views.py:647
+#: core/views.py:648
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cette fiche."
 msgstr "요청을 보냈습니다. 관리자가 검토한 후 이 항목의 관리자로 지정해 드립니다."
 
-#: core/views.py:650
+#: core/views.py:651
 msgid "Vous avez déjà demandé à être responsable de cette fiche."
 msgstr "이미 이 항목의 관리자 권한을 요청하셨습니다."
 
-#: core/views.py:668
+#: core/views.py:669
 msgid ""
 "Connectez-vous pour finaliser votre demande de responsabilité de cette "
 "fiche."
 msgstr "이 항목의 관리자 권한 요청을 완료하려면 로그인하세요."
 
-#: core/views.py:695
+#: core/views.py:696
 msgid "Fiche créée."
 msgstr "항목이 생성되었습니다."
 
-#: core/views.py:724
+#: core/views.py:725
 msgid "Fiche mise à jour."
 msgstr "항목이 업데이트되었습니다."
 
-#: core/views.py:736
+#: core/views.py:737
 msgid "Fiche supprimée."
 msgstr "항목이 삭제되었습니다."
 
-#: core/views.py:750
+#: core/views.py:751
 #, python-format
 msgid "Abonnement à « %(name)s » retiré."
 msgstr "“%(name)s” 구독이 해지되었습니다."
 
-#: core/views.py:753
+#: core/views.py:754
 #, python-format
 msgid "Abonné à « %(name)s »."
 msgstr "“%(name)s”에 구독했습니다."
 
-#: core/views.py:779
+#: core/views.py:780
 msgid "Fiche dépubliée."
 msgstr "항목 게시가 취소되었습니다."
 
-#: core/views.py:779
+#: core/views.py:780
 msgid "Demande de publication annulée."
 msgstr "게시 요청이 취소되었습니다."
 
-#: core/views.py:785
+#: core/views.py:786
 msgid ""
 "Fiche envoyée pour validation : elle sera publique une fois validée par un "
 "administrateur."
 msgstr "항목이 승인을 위해 제출되었습니다. 관리자가 승인하면 공개됩니다."
 
-#: core/views.py:842
+#: core/views.py:843
 #, python-format
 msgid "Intérêt enregistré pour « %(title)s »."
 msgstr "“%(title)s”에 대한 관심이 등록되었습니다."
 
-#: core/views.py:845
+#: core/views.py:846
 #, python-format
 msgid "Intérêt retiré pour « %(title)s »."
 msgstr "“%(title)s”에 대한 관심이 취소되었습니다."
 
-#: core/views.py:849
+#: core/views.py:850
 #, python-format
 msgid "Intention mise à jour pour « %(title)s »."
 msgstr "“%(title)s”에 대한 참여 의사가 업데이트되었습니다."
 
-#: core/views.py:869
+#: core/views.py:870
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cet évènement."
 msgstr "요청을 보냈습니다. 관리자가 검토한 후 이 행사의 관리자로 지정해 드립니다."
 
-#: core/views.py:872
+#: core/views.py:873
 msgid "Vous avez déjà demandé à gérer cet évènement."
 msgstr "이미 이 행사의 관리 권한을 요청하셨습니다."
 
-#: core/views.py:887
+#: core/views.py:888
 msgid ""
 "Connectez-vous pour finaliser votre demande de gestion de cet évènement."
 msgstr "이 행사의 관리 요청을 완료하려면 로그인하세요."
 
-#: core/views.py:912
+#: core/views.py:913
 #, python-format
 msgid "Évènement à publier : %(title)s"
 msgstr "게시 대기 행사: %(title)s"
 
-#: core/views.py:913
+#: core/views.py:914
 #, python-format
 msgid ""
 "Un évènement attend votre validation dans l'agenda.\n"
@@ -3389,46 +3629,46 @@ msgstr ""
 "\n"
 "검토 후 게시하기: %(url)s"
 
-#: core/views.py:928
+#: core/views.py:929
 #, python-format
 msgid "Votre évènement est publié : %(title)s"
 msgstr "행사가 게시되었습니다: %(title)s"
 
-#: core/views.py:929
+#: core/views.py:930
 #, python-format
 msgid "« %(title)s » est maintenant visible dans l'agenda : %(url)s"
 msgstr "“%(title)s” 이(가) 이제 일정표에 표시됩니다: %(url)s"
 
-#: core/views.py:959
+#: core/views.py:960
 msgid ""
 "Évènement enregistré. Il reste visible de vous seul·e jusqu'à sa publication"
 " par le groupe « Administration », prévenu par courriel."
 msgstr "행사가 저장되었습니다. 이메일로 안내받은 '관리' 그룹이 게시할 때까지 본인만 볼 수 있습니다."
 
-#: core/views.py:980
+#: core/views.py:981
 msgid "Évènement mis à jour."
 msgstr "행사가 업데이트되었습니다."
 
-#: core/views.py:992
+#: core/views.py:993
 msgid "Évènement supprimé."
 msgstr "행사가 삭제되었습니다."
 
-#: core/views.py:1045
+#: core/views.py:1046
 msgid ""
 "L'ouverture de comptes anonymes n'est plus proposée. Créez un compte nommé."
 msgstr "익명 계정 만들기는 더 이상 제공되지 않습니다. 실명 계정을 만드세요."
 
-#: core/views.py:1049
+#: core/views.py:1050
 msgid "Compte anonyme créé."
 msgstr "익명 계정이 생성되었습니다."
 
-#: core/views.py:1057
+#: core/views.py:1058
 msgid ""
 "Merci. Gardez ce numéro précieusement : il est la seule façon de retrouver "
 "ce compte."
 msgstr "감사합니다. 이 번호를 잘 보관하세요. 이 계정을 되찾는 유일한 방법입니다."
 
-#: core/views.py:1067
+#: core/views.py:1068
 #, python-format
 msgid ""
 "Numéro de compte anonyme lesgrandsvoisins.com : %(number)s\n"
@@ -3437,65 +3677,91 @@ msgstr ""
 "lesgrandsvoisins.com 익명 계정 번호: %(number)s\n"
 "이 번호만 있으면 다른 기기에서도 링크를 되찾을 수 있습니다. 우리는 이 번호의 지문만 보관하므로 다시 알려 드릴 수 없습니다.\n"
 
-#: core/views.py:1080
+#: core/views.py:1081
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr "이 기기에서 시도 횟수가 너무 많습니다. 15분 후 다시 시도해 주세요."
 
-#: core/views.py:1084
+#: core/views.py:1085
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "이 번호와 일치하는 계정이 없습니다. 16자리 숫자를 확인해 주세요."
 
-#: core/views.py:1087
+#: core/views.py:1088
 msgid "Compte retrouvé. Vos liens sont de retour."
 msgstr "계정을 찾았습니다. 링크가 복원되었습니다."
 
-#: core/views.py:1094
+#: core/views.py:1095
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
 msgstr "이 기기에서는 더 이상 계정이 열려 있지 않습니다. 번호를 이용해 다시 찾을 수 있습니다."
 
-#: core/views.py:1105
+#: core/views.py:1106
 msgid "Vos liens anonymes ont rejoint votre compte."
 msgstr "익명 링크가 내 계정에 합쳐졌습니다."
 
-#: core/views.py:1123
+#: core/views.py:1124
 #, python-format
 msgid "« %(name)s » retiré de vos liens."
 msgstr "「%(name)s」이(가) 내 링크에서 제거되었습니다."
 
-#: core/views.py:1130
+#: core/views.py:1131
 #, python-format
 msgid "« %(name)s » ajouté à vos liens."
 msgstr "「%(name)s」이(가) 내 링크에 추가되었습니다."
 
-#: core/views.py:1133
+#: core/views.py:1134
 #, python-format
 msgid ""
 "« %(name)s » ajouté à vos liens, en attente de validation par un "
 "administrateur."
 msgstr "「%(name)s」이(가) 내 링크에 추가되었으며 관리자의 승인을 기다리고 있습니다."
 
-#: core/views.py:1243
+#: core/views.py:1244
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "“%(name)s”이(가) 그룹에서 제거되었습니다."
 
-#: core/views.py:1247
+#: core/views.py:1248
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "“%(name)s”이(가) 그룹에 추가되었습니다."
 
-#: core/views.py:1468
+#: core/views.py:1469
 msgid "Pour garder la trace de vos étapes, ouvrez d'abord un compte."
 msgstr "단계를 기록하려면 먼저 계정을 만드세요."
 
-#: core/views.py:1478
+#: core/views.py:1479
 #, python-format
 msgid "Bravo ! Parcours « %(title)s » terminé. 🎉"
 msgstr "축하합니다! “%(title)s” 코스를 마쳤습니다. 🎉"
 
-#: core/views.py:1480
+#: core/views.py:1481
 #, python-format
 msgid "Étape faite : %(title)s"
 msgstr "단계 완료: %(title)s"
+
+#: core/views.py:1547
+msgid "Connectez-vous pour gérer la redirection de vos courriels."
+msgstr "메일 전달을 관리하려면 로그인하세요."
+
+#: core/views.py:1552
+msgid "Trop de tentatives. Réessayez dans quelques minutes."
+msgstr "시도가 너무 많습니다. 몇 분 후에 다시 시도하세요."
+
+#: core/views.py:1559
+msgid "Votre boîte courriel n'a pas pu être identifiée : reconnectez-vous."
+msgstr "메일함을 확인할 수 없습니다. 다시 로그인하세요."
+
+#: core/views.py:1565
+msgid ""
+"Un courriel de confirmation vient d'être envoyé à cette adresse. Tant "
+"qu'elle n'est pas confirmée, rien n'est transféré."
+msgstr "이 주소로 확인 메일을 보냈습니다. 확인되기 전에는 아무것도 전달되지 않습니다."
+
+#: core/views.py:1568
+msgid "Réglage enregistré."
+msgstr "설정이 저장되었습니다."
+
+#: core/views.py:1571
+msgid "Redirection désactivée."
+msgstr "전달이 꺼졌습니다."

@@ -1745,3 +1745,143 @@ class ReecrireLiensTests(Base):
         service.refresh_from_db()
         self.assertIn("(/fr/blog/un-billet/)", service.description)
         self.assertIn("https://www.lesgrandsvoisins.fr/ailleurs/", service.description)  # hors chemins d'ici : intact
+
+
+class RedirectionCourrierTests(Base):
+    """Redirection de courrier : annuaire LDAP simulé (ldap3 MOCK_SYNC), aucun accès réel."""
+    ADRESSES = ["duponlucie@gv.je", "duponlucie@lesgrandsvoisins.com"]
+
+    def setUp(self):
+        super().setUp()
+        import tempfile
+        from ldap3 import MOCK_SYNC, Connection, Server
+        self.override = override_settings(REDIRECTIONS_ENABLED=True)
+        self.override.enable()
+        self.addCleanup(self.override.disable)
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.dn = "cn=duponlucie@gv.je,ou=users,dc=lesgrandsvoisins,dc=com"
+        self.conn = Connection(Server("fake"), user="cn=x", password="x", client_strategy=MOCK_SYNC)
+        self.conn.strategy.add_entry(self.dn, {
+            "objectClass": ["inetOrgPerson", "inetLocalMailRecipient"], "cn": "duponlucie@gv.je", "sn": "Dupont",
+            "mail": self.ADRESSES, "userPassword": "x",
+        })
+        self.conn.bind()
+        patcher = mock.patch("core.redirections._connection", side_effect=lambda: (self.conn.bind(), self.conn)[1])
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        self.user = get_user_model().objects.create_user("sub-lucie")
+        self.client.force_login(self.user)
+        from .auth import LOGIN_IDENTIFIER_KEY, MAIL_ADDRESSES_KEY
+        session = self.client.session
+        session[MAIL_ADDRESSES_KEY] = self.ADRESSES
+        session[LOGIN_IDENTIFIER_KEY] = "duponlucie@gv.je"
+        session.save()
+        self.url = reverse("core:redirection_courrier")
+
+    def attrs(self):
+        self.conn.bind()  # le code testé se déconnecte après chaque usage
+        self.conn.search(self.dn, "(objectClass=*)", search_scope="BASE", attributes=["mailRoutingAddress", "mailLocalAddress"])
+        e = self.conn.entries[0]
+        return (e.mailRoutingAddress.values if "mailRoutingAddress" in e else [],
+                e.mailLocalAddress.values if "mailLocalAddress" in e else [])
+
+    def demander(self, cible="lucie@exemple.org", copie=True):
+        data = {"action": "demander", "cible": cible}
+        if copie:
+            data["copie"] = "on"
+        return self.client.post(self.url, data)
+
+    def lien(self):
+        return re.search(r"https?://\S+/confirmer/\S+/", mail.outbox[-1].body).group(0)
+
+    def test_disabled_by_default(self):
+        with override_settings(REDIRECTIONS_ENABLED=False):
+            self.assertEqual(self.client.get(self.url).status_code, 404)
+
+    def test_requires_login(self):
+        self.client.logout()
+        self.assertEqual(self.client.get(self.url).status_code, 302)
+
+    def test_refused_targets_send_nothing(self):
+        for cible in ["pas une adresse", "x@gv.je", "x@sous.lesgrandsvoisins.com", "duponlucie@gv.je", "postmaster@exemple.org"]:
+            with self.subTest(cible=cible):
+                self.demander(cible)
+        self.assertEqual(len(mail.outbox), 0)
+        self.assertEqual(self.attrs(), ([], []))
+
+    def test_request_confirm_then_directory_is_written(self):
+        self.demander()
+        self.assertEqual(mail.outbox[-1].to, ["lucie@exemple.org"])
+        self.assertEqual(self.attrs(), ([], []))  # rien dans l'annuaire avant confirmation
+        lien = self.lien()
+        from .models import RedirectionRequest
+        token = lien.rstrip("/").rsplit("/", 1)[1]
+        self.assertNotEqual(RedirectionRequest.objects.get().token_digest, token)  # seul le condensé est conservé
+        self.client.logout()  # la personne qui confirme n'est pas connectée
+        self.assertEqual(self.client.get(lien).status_code, 200)
+        self.assertEqual(self.attrs(), ([], []))  # un simple GET (antivirus) ne confirme rien
+        self.assertEqual(self.client.post(lien).status_code, 200)
+        self.assertEqual(self.attrs(), (["lucie@exemple.org"], ["duponlucie@gv.je"]))
+        self.assertEqual(self.client.get(lien).status_code, 404)  # usage unique
+
+    def test_without_copy_and_toggle_copy_and_disable(self):
+        self.demander(copie=False)
+        self.client.post(self.lien())
+        self.assertEqual(self.attrs(), (["lucie@exemple.org"], []))
+        self.client.force_login(self.user)
+        self.client.post(self.url, {"action": "copie", "copie": "on"})
+        self.assertEqual(self.attrs(), (["lucie@exemple.org"], ["duponlucie@gv.je"]))
+        self.client.post(self.url, {"action": "desactiver"})
+        self.assertEqual(self.attrs(), ([], []))
+        self.assertContains(self.client.get(self.url), "Aucune redirection active")
+
+    def test_displayed_target_is_masked(self):
+        self.demander()
+        self.client.post(self.lien())
+        self.client.force_login(self.user)
+        page = self.client.get(self.url)
+        self.assertContains(page, "l***@exemple.org")
+        self.assertNotContains(page, "lucie@exemple.org")
+
+    def test_expired_token_is_refused(self):
+        from datetime import timedelta
+        from .models import RedirectionRequest
+        self.demander()
+        RedirectionRequest.objects.update(expires=timezone.now() - timedelta(minutes=1))
+        self.assertEqual(self.client.get(self.lien()).status_code, 404)
+
+    def test_rate_limits(self):
+        for i in range(5):
+            self.demander(f"a{i}@exemple.org")
+        self.assertEqual(len(mail.outbox), 5)
+        self.demander("autre@exemple.org")  # 6e demande du jour pour ce membre
+        self.assertEqual(len(mail.outbox), 5)
+
+    def test_per_target_limit(self):
+        for _ in range(3):
+            self.demander("meme@exemple.org")
+        self.demander("meme@exemple.org")
+        self.assertEqual(len(mail.outbox), 3)
+
+    def test_managed_by_admin_cannot_be_changed(self):
+        statiques = f"{self.tmp.name}/statiques.txt"
+        open(statiques, "w").write("# redirections statiques\nDuponLucie@gv.je\n")
+        with override_settings(REDIRECTIONS_STATIC_FILE=statiques):
+            self.assertContains(self.client.get(self.url), "gérée par l'administration")
+            self.demander()
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_ambiguous_or_missing_mailbox_is_refused_without_writing(self):
+        self.demander()
+        self.conn.strategy.add_entry("cn=autre,ou=users,dc=lesgrandsvoisins,dc=com", {
+            "objectClass": ["inetOrgPerson", "inetLocalMailRecipient"], "cn": "autre", "sn": "A", "mail": ["duponlucie@gv.je"]})
+        self.client.logout()
+        response = self.client.post(self.lien())
+        self.assertEqual(response.status_code, 503)  # deux entrées : refus
+        self.assertEqual(self.attrs(), ([], []))
+
+    def test_audit_never_contains_the_target(self):
+        from .models import RedirectionAudit
+        self.demander()
+        self.assertEqual(list(RedirectionAudit.objects.values_list("action", flat=True)), ["demande"])

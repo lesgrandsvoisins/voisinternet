@@ -730,3 +730,49 @@ class StepCompletion(models.Model):
 
     def __str__(self):
         return f"{self.account} ✓ {self.step}"
+
+
+class MailRedirection(models.Model):
+    """
+    Redirection de courrier ACTIVE d'un membre : miroir de ce qui est écrit dans l'annuaire (mailRoutingAddress et, si le
+    membre garde une copie, mailLocalAddress). L'annuaire reste la référence ; ceci évite de le lire pour afficher l'état.
+    """
+    account = models.OneToOneField(Account, on_delete=models.CASCADE, related_name="mail_redirection")
+    target = models.EmailField(_("adresse de destination"))
+    keep_copy = models.BooleanField(_("garder une copie"), default=True)
+    activated = models.DateTimeField(_("activée le"), default=timezone.now)
+
+    class Meta:
+        verbose_name = _("redirection de courrier")
+        verbose_name_plural = _("redirections de courrier")
+
+
+class RedirectionRequest(models.Model):
+    """
+    Demande de redirection en attente de confirmation par la personne qui possède l'adresse CIBLE. Seul le condensé du jeton
+    est conservé ; usage unique, valable 24 h. Rien n'est écrit dans l'annuaire avant la confirmation.
+    """
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="redirection_requests")
+    target = models.EmailField(_("adresse de destination"))
+    keep_copy = models.BooleanField(_("garder une copie"), default=True)
+    member_addresses = models.JSONField(_("adresses de la boîte"), default=list, editable=False)
+    token_digest = models.CharField(max_length=64, unique=True, editable=False)
+    created = models.DateTimeField(default=timezone.now)
+    expires = models.DateTimeField()
+    used = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = _("demande de redirection de courrier")
+        verbose_name_plural = _("demandes de redirection de courrier")
+
+
+class RedirectionAudit(models.Model):
+    """Journal d'audit des redirections : qui, quand, quelle action. L'adresse de destination n'y figure jamais."""
+    account = models.ForeignKey(Account, null=True, on_delete=models.SET_NULL, related_name="+")
+    action = models.CharField(max_length=40)
+    at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        verbose_name = _("journal des redirections")
+        verbose_name_plural = _("journal des redirections")
+        ordering = ["-at"]

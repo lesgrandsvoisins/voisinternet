@@ -4,7 +4,7 @@ from modeltranslation.admin import TranslationAdmin, TranslationStackedInline, T
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectoryEntryPhoto, DirectorySector, Donor, EntryMessage,
     EntrySubscription, Event, EventInterest, EventManagementRequest, GuideBook,
-    Membership, Mission, MissionStep, OwnershipClaim, Service, ServiceCategory, Shortcut, StepCompletion, Tag,
+    MailRedirection, Membership, Mission, MissionStep, OwnershipClaim, RedirectionAudit, Service, ServiceCategory, Shortcut, StepCompletion, Tag,
 )
 
 admin.site.site_header = "lesgrandsvoisins.com"
@@ -243,3 +243,30 @@ class MissionAdmin(TranslationAdmin):
 class StepCompletionAdmin(admin.ModelAdmin):
     list_display = ("account", "step", "created")
     list_filter = ("step__mission",)
+
+
+class _LectureSeule(admin.ModelAdmin):
+    """Journal consultable, jamais modifiable depuis l'administration."""
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(RedirectionAudit)
+class RedirectionAuditAdmin(_LectureSeule):
+    list_display = ("at", "account", "action")
+    list_filter = ("action",)
+
+
+@admin.register(MailRedirection)
+class MailRedirectionAdmin(_LectureSeule):
+    """Qui redirige, avec ou sans copie, depuis quand. L'adresse de destination est masquée."""
+    list_display = ("account", "target_masked", "keep_copy", "activated")
+    exclude = ("target",)
+
+    @admin.display(description="destination")
+    def target_masked(self, obj):
+        from .redirections import mask
+        return mask(obj.target)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 13:08+0100\n"
+"POT-Creation-Date: 2026-10-29 14:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -400,6 +400,7 @@ msgstr "Cancelar"
 #: core/templates/core/mes_fiches.html:7 core/templates/core/parcours.html:7
 #: core/templates/core/parcours_detail.html:7
 #: core/templates/core/partials/page_head.html:3
+#: core/templates/core/redirection_courrier.html:7
 #: core/templates/core/search.html:7 core/templates/core/tag_detail.html:7
 #: core/templates/core/tag_list.html:7
 msgid "Fil d’Ariane"
@@ -425,6 +426,7 @@ msgstr "Ruta de navegación"
 #: core/templates/core/mes_fiches.html:9 core/templates/core/parcours.html:9
 #: core/templates/core/parcours_detail.html:9
 #: core/templates/core/partials/page_head.html:5
+#: core/templates/core/redirection_courrier.html:9
 #: core/templates/core/search.html:9 core/templates/core/tag_detail.html:9
 #: core/templates/core/tag_list.html:9
 msgid "Accueil"
@@ -825,7 +827,7 @@ msgstr "los servicios que ha elegido, para añadir o quitar"
 msgid "se connecter, créer un compte, retrouver mes liens"
 msgstr "iniciar sesión, crear una cuenta, recuperar mis enlaces"
 
-#: core/menu.py:66 core/templates/core/account.html:137
+#: core/menu.py:66 core/templates/core/account.html:140
 #: core/templates/core/groupes.html:12
 msgid "Mes groupes"
 msgstr "Mis grupos"
@@ -1705,6 +1707,112 @@ msgstr "paso completado"
 msgid "étapes accomplies"
 msgstr "pasos completados"
 
+#: core/models.py:741 core/models.py:756
+msgid "adresse de destination"
+msgstr "dirección de destino"
+
+#: core/models.py:742 core/models.py:757
+msgid "garder une copie"
+msgstr "guardar una copia"
+
+#: core/models.py:743
+msgid "activée le"
+msgstr "activada el"
+
+#: core/models.py:746
+msgid "redirection de courrier"
+msgstr "redirección de correo"
+
+#: core/models.py:747
+msgid "redirections de courrier"
+msgstr "redirecciones de correo"
+
+#: core/models.py:758
+msgid "adresses de la boîte"
+msgstr "direcciones del buzón"
+
+#: core/models.py:765
+msgid "demande de redirection de courrier"
+msgstr "solicitud de redirección de correo"
+
+#: core/models.py:766
+msgid "demandes de redirection de courrier"
+msgstr "solicitudes de redirección de correo"
+
+#: core/models.py:776 core/models.py:777
+msgid "journal des redirections"
+msgstr "registro de redirecciones"
+
+#: core/redirections.py:71
+msgid "Cette adresse de courriel n'est pas valide."
+msgstr "Esta dirección de correo no es válida."
+
+#: core/redirections.py:75
+msgid ""
+"Choisissez une adresse extérieure à Les Grands Voisins : rediriger vers nos "
+"propres domaines n'a pas de sens."
+msgstr ""
+"Elija una dirección externa a Les Grands Voisins: redirigir a nuestros "
+"propios dominios no tiene sentido."
+
+#: core/redirections.py:77
+msgid ""
+"Cette adresse est l'une des vôtres : la rediriger vers elle-même ferait une "
+"boucle."
+msgstr ""
+"Esta dirección es una de las suyas: redirigirla a sí misma crearía un bucle."
+
+#: core/redirections.py:79
+msgid "Cette adresse est réservée à un usage technique."
+msgstr "Esta dirección está reservada para uso técnico."
+
+#: core/redirections.py:93 core/redirections.py:133
+msgid "Le service de redirection est momentanément indisponible."
+msgstr "El servicio de redirección no está disponible momentáneamente."
+
+#: core/redirections.py:103 core/redirections.py:109
+msgid "Votre boîte courriel n'a pas pu être identifiée."
+msgstr "No se pudo identificar su buzón de correo."
+
+#: core/redirections.py:152
+msgid "Trop de demandes aujourd'hui. Réessayez demain."
+msgstr "Demasiadas solicitudes hoy. Inténtelo de nuevo mañana."
+
+#: core/redirections.py:154
+msgid "Cette adresse a reçu trop de demandes aujourd'hui. Réessayez demain."
+msgstr ""
+"Esta dirección ha recibido demasiadas solicitudes hoy. Inténtelo de nuevo "
+"mañana."
+
+#: core/redirections.py:161
+msgid "Confirmer la redirection de courrier vers cette adresse"
+msgstr "Confirmar la redirección de correo a esta dirección"
+
+#: core/redirections.py:163
+#, python-format
+msgid ""
+"Bonjour,\n"
+"\n"
+"%(identifier)s, membre de Les Grands Voisins, demande à ce que son courrier soit transféré à cette adresse.\n"
+"Pour accepter, ouvrez ce lien dans les 24 heures :\n"
+"\n"
+"%(url)s\n"
+"\n"
+"Rien ne sera transféré tant que vous n'aurez pas confirmé. Si vous n'êtes pas concerné·e, ignorez ce message : il expirera tout seul.\n"
+msgstr ""
+"Hola:\n"
+"\n"
+"%(identifier)s, miembro de Les Grands Voisins, solicita que su correo se reenvíe a esta dirección.\n"
+"Para aceptar, abra este enlace en un plazo de 24 horas:\n"
+"\n"
+"%(url)s\n"
+"\n"
+"No se reenviará nada hasta que usted confirme. Si no le concierne, ignore este mensaje: caducará por sí solo.\n"
+
+#: core/redirections.py:210
+msgid "Aucune redirection n'est active."
+msgstr "No hay ninguna redirección activa."
+
 #: core/templates/core/account.html:5
 msgid "mon Compte — lesgrandsvoisins.com"
 msgstr "Mi cuenta — lesgrandsvoisins.com"
@@ -1788,11 +1896,11 @@ msgstr "Conectado"
 msgid "Compte anonyme"
 msgstr "Cuenta anónima"
 
-#: core/templates/core/account.html:96 core/templates/core/account.html:174
+#: core/templates/core/account.html:96 core/templates/core/account.html:177
 msgid "Identifiant de connexion"
 msgstr "Identificador de inicio de sesión"
 
-#: core/templates/core/account.html:99 core/templates/core/account.html:179
+#: core/templates/core/account.html:99 core/templates/core/account.html:182
 msgid "Adresses de courriel (une seule boîte)"
 msgstr "Direcciones de correo (un solo buzón)"
 
@@ -1802,102 +1910,108 @@ msgstr "Direcciones de correo (un solo buzón)"
 msgid "Administration"
 msgstr "Administración"
 
-#: core/templates/core/account.html:111
+#: core/templates/core/account.html:109
+#: core/templates/core/redirection_courrier.html:11
+#: core/templates/core/redirection_courrier.html:14
+msgid "Redirection de mes courriels"
+msgstr "Redirección de mis correos"
+
+#: core/templates/core/account.html:114
 #: core/templates/core/partials/account_panel_body.html:55
 msgid "Se déconnecter"
 msgstr "Cerrar sesión"
 
-#: core/templates/core/account.html:117
+#: core/templates/core/account.html:120
 msgid "Rattacher à mon compte Grands Voisins"
 msgstr "Vincular a mi cuenta de Grands Voisins"
 
-#: core/templates/core/account.html:121
+#: core/templates/core/account.html:124
 #: core/templates/core/partials/account_panel_body.html:62
 msgid "Fermer ce compte sur cet appareil"
 msgstr "Cerrar esta cuenta en este dispositivo"
 
-#: core/templates/core/account.html:128 core/templates/core/raccourcis.html:12
+#: core/templates/core/account.html:131 core/templates/core/raccourcis.html:12
 msgid "Mes liens"
 msgstr "Mis enlaces"
 
-#: core/templates/core/account.html:131
+#: core/templates/core/account.html:134
 msgid "Ajouter un lien"
 msgstr "Añadir un enlace"
 
-#: core/templates/core/account.html:140 core/views.py:397
+#: core/templates/core/account.html:143 core/views.py:398
 msgid "Rejoindre un groupe"
 msgstr "Unirse a un grupo"
 
-#: core/templates/core/account.html:146 core/templates/core/mes_fiches.html:14
+#: core/templates/core/account.html:149 core/templates/core/mes_fiches.html:14
 msgid "Mes fiches dans l'annuaire"
 msgstr "Mis fichas en el directorio"
 
-#: core/templates/core/account.html:149 core/templates/core/mes_fiches.html:35
+#: core/templates/core/account.html:152 core/templates/core/mes_fiches.html:35
 msgid "Créer une fiche"
 msgstr "Crear una ficha"
 
-#: core/templates/core/account.html:155
+#: core/templates/core/account.html:158
 msgid "Mes évènements dans l'agenda"
 msgstr "Mis eventos en la agenda"
 
-#: core/templates/core/account.html:158
+#: core/templates/core/account.html:161
 #: core/templates/core/mes_evenements.html:21
 msgid "Créer un évènement"
 msgstr "Crear un evento"
 
-#: core/templates/core/account.html:165
+#: core/templates/core/account.html:168
 msgid "Mon profil"
 msgstr "Mi perfil"
 
-#: core/templates/core/account.html:168
+#: core/templates/core/account.html:171
 msgid "Géré par votre compte unique Grands Voisins"
 msgstr "Gestionado por su cuenta única Grands Voisins"
 
-#: core/templates/core/account.html:183
+#: core/templates/core/account.html:186
 msgid "Nom"
 msgstr "Nombre"
 
-#: core/templates/core/account.html:183 core/templates/core/account.html:186
+#: core/templates/core/account.html:186 core/templates/core/account.html:189
 msgid "Non renseigné"
 msgstr "No indicado"
 
-#: core/templates/core/account.html:186
+#: core/templates/core/account.html:189
 msgid "Courriel"
 msgstr "Correo electrónico"
 
-#: core/templates/core/account.html:191
+#: core/templates/core/account.html:194
 msgid "Modifier mon profil"
 msgstr "Modificar mi perfil"
 
-#: core/templates/core/account.html:199 core/templates/core/mes_dons.html:11
+#: core/templates/core/account.html:202 core/templates/core/mes_dons.html:11
 #: core/templates/core/mes_dons.html:14
 msgid "Mes dons"
 msgstr "Mis donaciones"
 
-#: core/templates/core/account.html:208 core/templates/core/mes_dons.html:30
+#: core/templates/core/account.html:211 core/templates/core/mes_dons.html:30
 msgid "déductible fiscalement"
 msgstr "deducible fiscalmente"
 
-#: core/templates/core/account.html:212 core/templates/core/mes_dons.html:34
+#: core/templates/core/account.html:215 core/templates/core/mes_dons.html:34
 msgid "en attente de validation"
 msgstr "pendiente de validación"
 
-#: core/templates/core/account.html:219 core/templates/core/mes_dons.html:41
+#: core/templates/core/account.html:222 core/templates/core/mes_dons.html:41
 msgid "Aucune contribution enregistrée pour l'instant."
 msgstr "Todavía no hay ninguna contribución registrada."
 
-#: core/templates/core/account.html:243 core/templates/core/mes_dons.html:47
+#: core/templates/core/account.html:246 core/templates/core/mes_dons.html:47
 #: core/templates/core/mes_dons.html:71
 msgid "Faire un don"
 msgstr "Hacer una donación"
 
-#: core/templates/core/account.html:250 core/templates/core/account.html:256
+#: core/templates/core/account.html:253 core/templates/core/account.html:259
 #: core/templates/core/home.html:26
 #: core/templates/core/partials/account_panel_body.html:7
 msgid "Créer mon compte"
 msgstr "Crear mi cuenta"
 
-#: core/templates/core/account.html:252
+#: core/templates/core/account.html:255
 msgid ""
 "Un compte unique des Grands Voisins, le même pour tous les outils de "
 "l'association. Il retrouve vos liens, groupes, fiches et évènements sur tous"
@@ -1907,7 +2021,7 @@ msgstr ""
 " de la asociación. Recupera sus enlaces, grupos, fichas y eventos en todos "
 "sus dispositivos, y puede recuperar su contraseña por correo electrónico."
 
-#: core/templates/core/account.html:258
+#: core/templates/core/account.html:261
 msgid ""
 "La connexion par compte Grands Voisins n'est pas encore configurée sur ce "
 "serveur."
@@ -1915,12 +2029,12 @@ msgstr ""
 "El inicio de sesión con cuenta de Grands Voisins aún no está configurado en "
 "este servidor."
 
-#: core/templates/core/account.html:262
+#: core/templates/core/account.html:265
 #: core/templates/core/partials/account_panel_body.html:9
 msgid "J'ai déjà un compte"
 msgstr "Ya tengo una cuenta"
 
-#: core/templates/core/account.html:263
+#: core/templates/core/account.html:266
 msgid ""
 "Connectez-vous avec le compte que vous utilisez déjà pour les autres outils "
 "des Grands Voisins."
@@ -1928,16 +2042,16 @@ msgstr ""
 "Inicia sesión con la cuenta que ya usas para las demás herramientas de Les "
 "Grands Voisins."
 
-#: core/templates/core/account.html:266 core/templates/core/home.html:30
+#: core/templates/core/account.html:269 core/templates/core/home.html:30
 msgid "Se connecter"
 msgstr "Iniciar sesión"
 
-#: core/templates/core/account.html:271
+#: core/templates/core/account.html:274
 #: core/templates/core/partials/account_panel_body.html:16
 msgid "Rester anonyme"
 msgstr "Seguir anónimo"
 
-#: core/templates/core/account.html:273
+#: core/templates/core/account.html:276
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
 "pour retrouver vos liens. Sans ce numéro, le compte est perdu : aucun "
@@ -1947,15 +2061,15 @@ msgstr ""
 "para recuperar sus enlaces. Sin este número la cuenta se pierde: no existe "
 "ningún correo de recuperación."
 
-#: core/templates/core/account.html:278 core/templates/core/account.html:290
+#: core/templates/core/account.html:281 core/templates/core/account.html:293
 msgid "Créer un compte anonyme"
 msgstr "Crear una cuenta anónima"
 
-#: core/templates/core/account.html:285
+#: core/templates/core/account.html:288
 msgid "Autres options"
 msgstr "Otras opciones"
 
-#: core/templates/core/account.html:286
+#: core/templates/core/account.html:289
 msgid ""
 "Un numéro de 16 chiffres à noter, sans nom ni courriel. Sans ce numéro, le "
 "compte est perdu."
@@ -2200,6 +2314,7 @@ msgstr "Buscar…"
 
 #: core/templates/core/base.html:122
 #: core/templates/core/partials/account_panel_body.html:27
+#: core/templates/core/redirection_courrier.html:10
 msgid "Compte"
 msgstr "Cuenta"
 
@@ -2326,6 +2441,7 @@ msgstr "← Mis eventos"
 
 #: core/templates/core/evenement_modifier.html:27
 #: core/templates/core/fiche_modifier.html:27
+#: core/templates/core/redirection_courrier.html:31
 msgid "Enregistrer"
 msgstr "Guardar"
 
@@ -3254,6 +3370,149 @@ msgstr "Servicios para añadir a mis enlaces"
 msgid "Ceux déjà ajoutés restent affichés : cliquez pour les retirer."
 msgstr "Los ya añadidos siguen visibles: haga clic para quitarlos."
 
+#: core/templates/core/redirection_confirmer.html:4
+msgid "Confirmer la redirection de courrier — lesgrandsvoisins.com"
+msgstr "Confirmar la redirección de correo — lesgrandsvoisins.com"
+
+#: core/templates/core/redirection_confirmer.html:6
+msgid "Confirmer la redirection de courrier"
+msgstr "Confirmar la redirección de correo"
+
+#: core/templates/core/redirection_confirmer.html:9
+msgid ""
+"Ce lien n'est plus valable (déjà utilisé ou expiré). Si vous êtes "
+"concerné·e, demandez à la personne de refaire sa demande."
+msgstr ""
+"Este enlace ya no es válido (ya utilizado o caducado). Si le concierne, pida"
+" a la persona que repita su solicitud."
+
+#: core/templates/core/redirection_confirmer.html:11
+msgid "Merci : la redirection est activée."
+msgstr "Gracias: la redirección está activada."
+
+#: core/templates/core/redirection_confirmer.html:14
+#, python-format
+msgid ""
+"%(identifier)s, membre de Les Grands Voisins, demande que son courrier soit "
+"transféré à cette adresse."
+msgstr ""
+"%(identifier)s, miembro de Les Grands Voisins, solicita que su correo se "
+"reenvíe a esta dirección."
+
+#: core/templates/core/redirection_confirmer.html:16
+msgid "J'accepte de recevoir ce courrier"
+msgstr "Acepto recibir este correo"
+
+#: core/templates/core/redirection_confirmer.html:18
+msgid ""
+"Si vous n'êtes pas concerné·e, fermez simplement cette page : rien ne sera "
+"transféré."
+msgstr ""
+"Si no le concierne, simplemente cierre esta página: no se reenviará nada."
+
+#: core/templates/core/redirection_courrier.html:3
+msgid "Redirection de mes courriels — lesgrandsvoisins.com"
+msgstr "Redirección de mis correos — lesgrandsvoisins.com"
+
+#: core/templates/core/redirection_courrier.html:15
+msgid ""
+"Faites suivre le courrier de votre boîte Grands Voisins vers une autre "
+"adresse."
+msgstr "Reenvíe el correo de su buzón de Grands Voisins a otra dirección."
+
+#: core/templates/core/redirection_courrier.html:20 core/views.py:1557
+msgid "La redirection de cette adresse est gérée par l'administration."
+msgstr "La redirección de esta dirección la gestiona la administración."
+
+#: core/templates/core/redirection_courrier.html:22
+msgid ""
+"Votre boîte courriel n'a pas pu être identifiée : déconnectez-vous puis "
+"reconnectez-vous."
+msgstr "No se pudo identificar su buzón: cierre sesión y vuelva a iniciarla."
+
+#: core/templates/core/redirection_courrier.html:25
+msgid "État"
+msgstr "Estado"
+
+#: core/templates/core/redirection_courrier.html:27
+msgid "Redirection active"
+msgstr "Redirección activa"
+
+#: core/templates/core/redirection_courrier.html:27
+#, python-format
+msgid "votre courrier est transféré à %(cible)s."
+msgstr "su correo se reenvía a %(cible)s."
+
+#: core/templates/core/redirection_courrier.html:30
+#: core/templates/core/redirection_courrier.html:52
+msgid "Garder une copie dans ma boîte"
+msgstr "Guardar una copia en mi buzón"
+
+#: core/templates/core/redirection_courrier.html:35
+msgid "Désactiver la redirection"
+msgstr "Desactivar la redirección"
+
+#: core/templates/core/redirection_courrier.html:38
+msgid "Aucune redirection active."
+msgstr "Ninguna redirección activa."
+
+#: core/templates/core/redirection_courrier.html:41
+#, python-format
+msgid ""
+"En attente de confirmation par %(cible)s (le lien est valable 24 heures)."
+msgstr ""
+"Pendiente de confirmación por %(cible)s (el enlace es válido durante 24 "
+"horas)."
+
+#: core/templates/core/redirection_courrier.html:45
+msgid "Changer d'adresse de destination"
+msgstr "Cambiar la dirección de destino"
+
+#: core/templates/core/redirection_courrier.html:45
+msgid "Choisir une adresse de destination"
+msgstr "Elegir una dirección de destino"
+
+#: core/templates/core/redirection_courrier.html:49
+msgid "Adresse de destination (une seule)"
+msgstr "Dirección de destino (solo una)"
+
+#: core/templates/core/redirection_courrier.html:53
+msgid "Envoyer le courriel de confirmation"
+msgstr "Enviar el correo de confirmación"
+
+#: core/templates/core/redirection_courrier.html:55
+msgid ""
+"Un courriel part vers cette adresse : la redirection ne démarre que lorsque "
+"la personne qui la possède a confirmé. L'ancienne redirection reste en place"
+" d'ici là."
+msgstr ""
+"Se envía un correo a esta dirección: la redirección solo empieza cuando la "
+"persona que la posee ha confirmado. La redirección anterior sigue activa "
+"hasta entonces."
+
+#: core/templates/core/redirection_courrier.html:58
+msgid "Bon à savoir"
+msgstr "Conviene saber"
+
+#: core/templates/core/redirection_courrier.html:60
+#, python-format
+msgid ""
+"Au plus %(daily_limit)s messages transférés par jour : au-delà, la "
+"redirection est suspendue jusqu'au lendemain et le courrier reste dans votre"
+" boîte."
+msgstr ""
+"Como máximo %(daily_limit)s mensajes reenviados por día: más allá, la "
+"redirección se suspende hasta el día siguiente y el correo permanece en su "
+"buzón."
+
+#: core/templates/core/redirection_courrier.html:61
+msgid ""
+"Un message transféré peut arriver dans le dossier « courrier indésirable » "
+"de l'adresse de destination."
+msgstr ""
+"Un mensaje reenviado puede llegar a la carpeta de «correo no deseado» de la "
+"dirección de destino."
+
 #: core/templates/core/search.html:3 core/templates/core/search.html:10
 #: core/templates/core/search.html:13
 msgid "Recherche"
@@ -3303,36 +3562,36 @@ msgstr ""
 msgid "Aucune étiquette pour l'instant."
 msgstr "Aún no hay etiquetas."
 
-#: core/views.py:45
+#: core/views.py:46
 msgid ""
 "Les rendez-vous et les ressources pour s'y retrouver dans la communauté."
 msgstr "Las citas y los recursos para orientarse en la comunidad."
 
-#: core/views.py:46
+#: core/views.py:47
 msgid "Nos trois pôles d'action, portés ensemble par les bénévoles."
 msgstr "Nuestros tres polos de acción, impulsados juntos por los voluntarios."
 
-#: core/views.py:47
+#: core/views.py:48
 msgid "Nous rejoindre, nous soutenir, nous contacter."
 msgstr "Únete, apóyanos, contáctanos."
 
-#: core/views.py:57
+#: core/views.py:58
 msgid "Pour faire cela, ouvrez d'abord un compte."
 msgstr "Para hacer esto, abra primero una cuenta."
 
-#: core/views.py:322
+#: core/views.py:323
 msgid ""
 "Trop de messages envoyés récemment depuis cet appareil. Réessayez plus tard."
 msgstr ""
 "Se han enviado demasiados mensajes recientemente desde este dispositivo. "
 "Inténtelo más tarde."
 
-#: core/views.py:331
+#: core/views.py:332
 #, python-format
 msgid "Message via lesgrandsvoisins.com de %(name)s"
 msgstr "Mensaje de %(name)s a través de lesgrandsvoisins.com"
 
-#: core/views.py:339
+#: core/views.py:340
 #, python-format
 msgid ""
 "Nom : %(name)s\n"
@@ -3345,16 +3604,16 @@ msgstr ""
 "\n"
 "%(message)s"
 
-#: core/views.py:341
+#: core/views.py:342
 msgid "(non renseigné)"
 msgstr "(no indicado)"
 
-#: core/views.py:376 core/views.py:623
+#: core/views.py:377 core/views.py:624
 #, python-format
 msgid "Message envoyé à %(name)s."
 msgstr "Mensaje enviado a %(name)s."
 
-#: core/views.py:380 core/views.py:627
+#: core/views.py:381 core/views.py:628
 msgid ""
 "Votre message a été enregistré, mais son envoi par e-mail a échoué. "
 "Réessayez plus tard."
@@ -3362,35 +3621,35 @@ msgstr ""
 "Su mensaje ha sido registrado, pero el envío por correo electrónico ha "
 "fallado. Vuelva a intentarlo más tarde."
 
-#: core/views.py:395
+#: core/views.py:396
 msgid "Ajouter un lien vers un outil"
 msgstr "Añadir un enlace a una herramienta"
 
-#: core/views.py:399
+#: core/views.py:400
 msgid "Présenter votre activité dans l'annuaire"
 msgstr "Presentar tu actividad en el directorio"
 
-#: core/views.py:404
+#: core/views.py:405
 msgid "Créer un compte nommé pour ne jamais perdre l'accès"
 msgstr "Crear una cuenta con nombre para no perder nunca el acceso"
 
-#: core/views.py:414
+#: core/views.py:415
 msgid ""
 "La connexion n'a pas abouti. Réessayez, ou continuez avec un compte anonyme."
 msgstr ""
 "No se pudo iniciar sesión. Inténtalo de nuevo o continúa con una cuenta "
 "anónima."
 
-#: core/views.py:471
+#: core/views.py:472
 msgid "Merci ! Votre contribution a été enregistrée."
 msgstr "¡Gracias! Su contribución se ha registrado."
 
-#: core/views.py:473
+#: core/views.py:474
 msgid "Le formulaire de don contient une erreur : montant ou date invalide."
 msgstr ""
 "El formulario de donación contiene un error: importe o fecha no válidos."
 
-#: core/views.py:647
+#: core/views.py:648
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cette fiche."
@@ -3398,48 +3657,48 @@ msgstr ""
 "Solicitud enviada: un administrador la revisará antes de hacerte responsable"
 " de esta ficha."
 
-#: core/views.py:650
+#: core/views.py:651
 msgid "Vous avez déjà demandé à être responsable de cette fiche."
 msgstr "Ya has solicitado ser responsable de esta ficha."
 
-#: core/views.py:668
+#: core/views.py:669
 msgid ""
 "Connectez-vous pour finaliser votre demande de responsabilité de cette "
 "fiche."
 msgstr ""
 "Inicia sesión para finalizar tu solicitud de responsabilidad de esta ficha."
 
-#: core/views.py:695
+#: core/views.py:696
 msgid "Fiche créée."
 msgstr "Ficha creada."
 
-#: core/views.py:724
+#: core/views.py:725
 msgid "Fiche mise à jour."
 msgstr "Ficha actualizada."
 
-#: core/views.py:736
+#: core/views.py:737
 msgid "Fiche supprimée."
 msgstr "Ficha eliminada."
 
-#: core/views.py:750
+#: core/views.py:751
 #, python-format
 msgid "Abonnement à « %(name)s » retiré."
 msgstr "Suscripción a «%(name)s» eliminada."
 
-#: core/views.py:753
+#: core/views.py:754
 #, python-format
 msgid "Abonné à « %(name)s »."
 msgstr "Suscrito a «%(name)s»."
 
-#: core/views.py:779
+#: core/views.py:780
 msgid "Fiche dépubliée."
 msgstr "Ficha despublicada."
 
-#: core/views.py:779
+#: core/views.py:780
 msgid "Demande de publication annulée."
 msgstr "Solicitud de publicación cancelada."
 
-#: core/views.py:785
+#: core/views.py:786
 msgid ""
 "Fiche envoyée pour validation : elle sera publique une fois validée par un "
 "administrateur."
@@ -3447,22 +3706,22 @@ msgstr ""
 "Ficha enviada para su validación: será pública una vez validada por un "
 "administrador."
 
-#: core/views.py:842
+#: core/views.py:843
 #, python-format
 msgid "Intérêt enregistré pour « %(title)s »."
 msgstr "Interés registrado para «%(title)s»."
 
-#: core/views.py:845
+#: core/views.py:846
 #, python-format
 msgid "Intérêt retiré pour « %(title)s »."
 msgstr "Interés retirado para «%(title)s»."
 
-#: core/views.py:849
+#: core/views.py:850
 #, python-format
 msgid "Intention mise à jour pour « %(title)s »."
 msgstr "Intención actualizada para «%(title)s»."
 
-#: core/views.py:869
+#: core/views.py:870
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cet évènement."
@@ -3470,21 +3729,21 @@ msgstr ""
 "Solicitud enviada: un administrador la revisará antes de hacerte responsable"
 " de este evento."
 
-#: core/views.py:872
+#: core/views.py:873
 msgid "Vous avez déjà demandé à gérer cet évènement."
 msgstr "Ya has solicitado gestionar este evento."
 
-#: core/views.py:887
+#: core/views.py:888
 msgid ""
 "Connectez-vous pour finaliser votre demande de gestion de cet évènement."
 msgstr "Inicia sesión para finalizar tu solicitud de gestión de este evento."
 
-#: core/views.py:912
+#: core/views.py:913
 #, python-format
 msgid "Évènement à publier : %(title)s"
 msgstr "Evento por publicar: %(title)s"
 
-#: core/views.py:913
+#: core/views.py:914
 #, python-format
 msgid ""
 "Un évènement attend votre validation dans l'agenda.\n"
@@ -3499,17 +3758,17 @@ msgstr ""
 "\n"
 "Revisarlo y publicarlo: %(url)s"
 
-#: core/views.py:928
+#: core/views.py:929
 #, python-format
 msgid "Votre évènement est publié : %(title)s"
 msgstr "Tu evento está publicado: %(title)s"
 
-#: core/views.py:929
+#: core/views.py:930
 #, python-format
 msgid "« %(title)s » est maintenant visible dans l'agenda : %(url)s"
 msgstr "«%(title)s» ya es visible en la agenda: %(url)s"
 
-#: core/views.py:959
+#: core/views.py:960
 msgid ""
 "Évènement enregistré. Il reste visible de vous seul·e jusqu'à sa publication"
 " par le groupe « Administration », prévenu par courriel."
@@ -3517,24 +3776,24 @@ msgstr ""
 "Evento guardado. Solo tú lo ves hasta que el grupo «Administración», avisado"
 " por correo, lo publique."
 
-#: core/views.py:980
+#: core/views.py:981
 msgid "Évènement mis à jour."
 msgstr "Evento actualizado."
 
-#: core/views.py:992
+#: core/views.py:993
 msgid "Évènement supprimé."
 msgstr "Evento eliminado."
 
-#: core/views.py:1045
+#: core/views.py:1046
 msgid ""
 "L'ouverture de comptes anonymes n'est plus proposée. Créez un compte nommé."
 msgstr "Ya no se ofrece abrir cuentas anónimas. Cree una cuenta con nombre."
 
-#: core/views.py:1049
+#: core/views.py:1050
 msgid "Compte anonyme créé."
 msgstr "Cuenta anónima creada."
 
-#: core/views.py:1057
+#: core/views.py:1058
 msgid ""
 "Merci. Gardez ce numéro précieusement : il est la seule façon de retrouver "
 "ce compte."
@@ -3542,7 +3801,7 @@ msgstr ""
 "Gracias. Guarda este número con cuidado: es la única forma de recuperar esta"
 " cuenta."
 
-#: core/views.py:1067
+#: core/views.py:1068
 #, python-format
 msgid ""
 "Numéro de compte anonyme lesgrandsvoisins.com : %(number)s\n"
@@ -3551,21 +3810,21 @@ msgstr ""
 "Número de cuenta anónima de lesgrandsvoisins.com: %(number)s\n"
 "Basta por sí solo para recuperar sus enlaces en otro dispositivo. Solo conservamos una huella suya: no podremos devolvérselo.\n"
 
-#: core/views.py:1080
+#: core/views.py:1081
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr ""
 "Demasiados intentos desde este dispositivo. Vuelve a intentarlo en un cuarto"
 " de hora."
 
-#: core/views.py:1084
+#: core/views.py:1085
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "Ninguna cuenta corresponde a este número. Verifica las 16 cifras."
 
-#: core/views.py:1087
+#: core/views.py:1088
 msgid "Compte retrouvé. Vos liens sont de retour."
 msgstr "Cuenta recuperada. Sus enlaces han vuelto."
 
-#: core/views.py:1094
+#: core/views.py:1095
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
@@ -3573,21 +3832,21 @@ msgstr ""
 "Esta cuenta ya no está abierta en este dispositivo. Tu número permite "
 "recuperarla."
 
-#: core/views.py:1105
+#: core/views.py:1106
 msgid "Vos liens anonymes ont rejoint votre compte."
 msgstr "Sus enlaces anónimos se han unido a su cuenta."
 
-#: core/views.py:1123
+#: core/views.py:1124
 #, python-format
 msgid "« %(name)s » retiré de vos liens."
 msgstr "«%(name)s» quitado de sus enlaces."
 
-#: core/views.py:1130
+#: core/views.py:1131
 #, python-format
 msgid "« %(name)s » ajouté à vos liens."
 msgstr "«%(name)s» añadido a sus enlaces."
 
-#: core/views.py:1133
+#: core/views.py:1134
 #, python-format
 msgid ""
 "« %(name)s » ajouté à vos liens, en attente de validation par un "
@@ -3596,26 +3855,54 @@ msgstr ""
 "«%(name)s» añadido a sus enlaces, pendiente de validación por un "
 "administrador."
 
-#: core/views.py:1243
+#: core/views.py:1244
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "«%(name)s» eliminado de tus grupos."
 
-#: core/views.py:1247
+#: core/views.py:1248
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "«%(name)s» añadido a tus grupos."
 
-#: core/views.py:1468
+#: core/views.py:1469
 msgid "Pour garder la trace de vos étapes, ouvrez d'abord un compte."
 msgstr "Para conservar el rastro de sus pasos, abra primero una cuenta."
 
-#: core/views.py:1478
+#: core/views.py:1479
 #, python-format
 msgid "Bravo ! Parcours « %(title)s » terminé. 🎉"
 msgstr "¡Bravo! Recorrido «%(title)s» terminado. 🎉"
 
-#: core/views.py:1480
+#: core/views.py:1481
 #, python-format
 msgid "Étape faite : %(title)s"
 msgstr "Paso hecho: %(title)s"
+
+#: core/views.py:1547
+msgid "Connectez-vous pour gérer la redirection de vos courriels."
+msgstr "Inicie sesión para gestionar la redirección de sus correos."
+
+#: core/views.py:1552
+msgid "Trop de tentatives. Réessayez dans quelques minutes."
+msgstr "Demasiados intentos. Inténtelo de nuevo en unos minutos."
+
+#: core/views.py:1559
+msgid "Votre boîte courriel n'a pas pu être identifiée : reconnectez-vous."
+msgstr "No se pudo identificar su buzón: vuelva a iniciar sesión."
+
+#: core/views.py:1565
+msgid ""
+"Un courriel de confirmation vient d'être envoyé à cette adresse. Tant "
+"qu'elle n'est pas confirmée, rien n'est transféré."
+msgstr ""
+"Se acaba de enviar un correo de confirmación a esta dirección. No se reenvía"
+" nada hasta que se confirme."
+
+#: core/views.py:1568
+msgid "Réglage enregistré."
+msgstr "Ajuste guardado."
+
+#: core/views.py:1571
+msgid "Redirection désactivée."
+msgstr "Redirección desactivada."

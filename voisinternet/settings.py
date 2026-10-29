@@ -223,6 +223,25 @@ ANON_ACCOUNT_PEPPER = env("VOISINTERNET_ANON_PEPPER", SECRET_KEY)
 #                        seul le formulaire caché au bas de « Mon compte » (et un don) en ouvre un ;
 #   "ouvert"           : comportement historique (boutons visibles, création implicite) ;
 #   "ferme"            : plus aucune création ; les numéros existants continuent de fonctionner.
+# Redirection de courrier choisie par le membre (core/redirections.py) : désactivée tant que l'administration n'a pas dit
+# que la réécriture d'expéditeur (SRS) est en place. L'annuaire est écrit par un compte de service dont le mot de passe
+# est dans un fichier (jamais dans une variable d'environnement ni dans un journal).
+REDIRECTIONS_ENABLED = env_bool("VOISINTERNET_REDIRECTIONS", False)
+LDAP_REDIRECTIONS_URI = env("VOISINTERNET_LDAP_URI", "ldap://127.0.0.1:14389")
+LDAP_REDIRECTIONS_BIND = env("VOISINTERNET_LDAP_BIND", "cn=redirections,ou=services,dc=lesgrandsvoisins,dc=com")
+LDAP_REDIRECTIONS_SECRET_FILE = env("VOISINTERNET_LDAP_SECRET_FILE", "/etc/voisinter-django/ldap-redirections.secret")
+LDAP_REDIRECTIONS_BASE = env("VOISINTERNET_LDAP_BASE", "ou=users,dc=lesgrandsvoisins,dc=com")
+# Redirections gérées par l'administration (une adresse par ligne) : non modifiables par le membre.
+REDIRECTIONS_STATIC_FILE = env("VOISINTERNET_REDIRECTIONS_STATIQUES", "/etc/voisinter-django/redirections-statiques.txt")
+# Domaines hébergés par nos soins (modules/mail/domains.nix de flakeops) : refusés comme cible (boucle).
+REDIRECTIONS_OUR_DOMAINS = env_list(
+    "VOISINTERNET_DOMAINES_COURRIER",
+    "maelanc.com,gvcoop.org,lesgrandsvoisins.com,mail.lesgrandsvoisins.com,resdigita.com,mail.resdigita.com,"
+    "lesgrandsvoisins.fr,parisle.com,parisle.org,paris14.cc,discourse.paris14.cc,yanlomsprod.org,lgv.info,"
+    "discourse.lgv.info,mm.lgv.info,gdvoisins.com,gv.style,gvstyle.org,gvplace.com,hopgv.com,hopgv.org,gafam.us,"
+    "gdvoisins.org,gv.je,mail.gv.je,libregood.com",
+)
+
 ANONYMOUS_ACCOUNTS = env("VOISINTERNET_ANON_ACCOUNTS", "discret")
 if ANONYMOUS_ACCOUNTS not in ("discret", "ouvert", "ferme"):
     raise ImproperlyConfigured("VOISINTERNET_ANON_ACCOUNTS doit valoir discret, ouvert ou ferme.")

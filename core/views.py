@@ -26,6 +26,7 @@ from django.views.decorators.http import require_POST
 
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
 from .forms import ContactMessageForm, ContributionForm, DirectoryEntryForm, EventForm
+from . import redirections
 from .legacy import equivalent_ancien_site
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
@@ -1523,3 +1524,83 @@ def legacy_redirect(request, target):
     """Ancienne adresse du vieux site (old.lesgrandsvoisins.com) : redirection permanente vers son équivalent ici, dans la
     langue courante. La table est dans core/urls.py (LEGACY_REDIRECTS)."""
     return redirect(f"/{get_language()}{target}", permanent=True)
+
+
+# --- Redirection de courrier (réglage VOISINTERNET_REDIRECTIONS, désactivé par défaut) --------------------------------
+
+def _redirection_context(request):
+    """(compte, adresses de la boîte, identifiant) d'un membre connecté ; 404 si la fonction est désactivée."""
+    from .auth import LOGIN_IDENTIFIER_KEY, MAIL_ADDRESSES_KEY
+
+    if not settings.REDIRECTIONS_ENABLED:
+        raise Http404
+    account = current_account(request, create=request.user.is_authenticated)
+    adresses = request.session.get(MAIL_ADDRESSES_KEY) or []
+    identifiant = request.session.get(LOGIN_IDENTIFIER_KEY) or str(request.user)
+    return account, adresses, identifiant
+
+
+def redirection_courrier(request):
+    if not settings.REDIRECTIONS_ENABLED:
+        raise Http404
+    if not request.user.is_authenticated:
+        messages.info(request, _("Connectez-vous pour gérer la redirection de vos courriels."))
+        return redirect("core:account")
+    account, adresses, identifiant = _redirection_context(request)
+    if request.method == "POST":
+        if _throttled(request, "redirection", limit=30, window=15 * 60):
+            messages.error(request, _("Trop de tentatives. Réessayez dans quelques minutes."))
+            return redirect("core:redirection_courrier")
+        action = request.POST.get("action")
+        try:
+            if redirections.managed_by_admin(adresses):
+                raise redirections.RedirectionError(_("La redirection de cette adresse est gérée par l'administration."))
+            if not adresses:
+                raise redirections.RedirectionError(_("Votre boîte courriel n'a pas pu être identifiée : reconnectez-vous."))
+            if action == "demander":
+                redirections.request_redirection(
+                    account, adresses, request.POST.get("cible", ""), bool(request.POST.get("copie")),
+                    lambda token: redirections.confirm_url(request, token), identifiant,
+                )
+                messages.success(request, _("Un courriel de confirmation vient d'être envoyé à cette adresse. Tant qu'elle n'est pas confirmée, rien n'est transféré."))
+            elif action == "copie":
+                redirections.set_copy(account, adresses, bool(request.POST.get("copie")))
+                messages.success(request, _("Réglage enregistré."))
+            elif action == "desactiver":
+                redirections.disable(account, adresses)
+                messages.success(request, _("Redirection désactivée."))
+        except redirections.RedirectionError as exc:
+            messages.error(request, str(exc))
+        return redirect("core:redirection_courrier")
+    active = getattr(account, "mail_redirection", None)
+    pending = redirections.pending_request(account)
+    return render(request, "core/redirection_courrier.html", {
+        "active": active,
+        "active_masked": redirections.mask(active.target) if active else "",
+        "pending": pending,
+        "pending_masked": redirections.mask(pending.target) if pending else "",
+        "managed": redirections.managed_by_admin(adresses),
+        "no_mailbox": not adresses,
+        "daily_limit": redirections.DAILY_LIMIT,
+    })
+
+
+def redirection_confirmer(request, token):
+    """Confirmation par la personne qui possède l'adresse cible (pas besoin d'être connecté : le jeton fait foi).
+    Un lien de courriel ne confirme jamais à lui seul (les antivirus ouvrent les liens) : il faut cliquer sur le bouton."""
+    if not settings.REDIRECTIONS_ENABLED:
+        raise Http404
+    if _throttled(request, "redirection-confirmer", limit=20, window=15 * 60):
+        return HttpResponse(status=429)
+    demande = redirections.find_request(token)
+    if demande is None:
+        return render(request, "core/redirection_confirmer.html", {"invalid": True}, status=404)
+    if request.method == "POST":
+        try:
+            redirections.confirm(demande)
+        except redirections.RedirectionError as exc:
+            return render(request, "core/redirection_confirmer.html", {"demande": demande, "error": str(exc)}, status=503)
+        return render(request, "core/redirection_confirmer.html", {"done": True})
+    return render(request, "core/redirection_confirmer.html", {
+        "demande": demande, "identifier": demande.account.user.get_username() if demande.account.user_id else "",
+    })

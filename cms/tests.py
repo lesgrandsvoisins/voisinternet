@@ -804,3 +804,24 @@ class CompleterImagesEntetesTests(TestCase):
                 sans.refresh_from_db()
                 self.assertIsNotNone(sans.featured_image_id)
                 self.assertEqual(get_image_model().objects.count(), 1)  # pas de doublon à la relance
+
+    def test_unreadable_image_is_reported_not_fatal(self):
+        import tempfile
+        from pathlib import Path
+
+        from django.core.management import call_command
+        from django.test import override_settings
+        fr = Locale.get_default()
+        index = BlogIndexPage.objects.get(locale=fr)
+        index.add_child(instance=BlogPostPage(title="Cassée", slug="cassee", date=timezone.now()))
+        with tempfile.TemporaryDirectory() as media, tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp) / "images").mkdir()
+            (Path(tmp) / "images" / "cassee.png").write_bytes(b"pas une image")
+            export = Path(tmp) / "ghost.json"
+            export.write_text(json.dumps({"db": [{"data": {"posts": [
+                {"slug": "cassee", "status": "published", "feature_image": "__GHOST_URL__/content/images/cassee.png"}]}}]}),
+                encoding="utf-8")
+            with override_settings(MEDIA_ROOT=media):
+                out = StringIO()
+                call_command("completer_images_entetes", "--ghost", str(export), "--dossier", tmp, stdout=out)
+        self.assertIn("illisible", out.getvalue())

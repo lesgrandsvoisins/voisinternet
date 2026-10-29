@@ -76,8 +76,38 @@ class Command(BaseCommand):
             return None
         if self.simulation:
             return True
-        with open(source, "rb") as f:
-            return Image.objects.create(title=Path(nom).stem, file=File(f, name=nom))
+        try:
+            with open(source, "rb") as f:
+                return Image.objects.create(title=Path(nom).stem, file=File(f, name=nom))
+        except Exception:
+            # Fichier que Pillow refuse tel quel (ex. PNG dont un bloc de métadonnées dépasse sa limite) : on le
+            # réenregistre sans ces métadonnées, depuis nos propres fichiers (de confiance), plutôt que d'abandonner.
+            try:
+                return Image.objects.create(title=Path(nom).stem, file=self.reencoder(source, nom))
+            except Exception as exc:
+                self.stats["absentes"].append(f"{nom} : illisible ({exc})")
+                return None
+
+    @staticmethod
+    def reencoder(source, nom):
+        from io import BytesIO
+
+        from django.core.files.base import ContentFile
+        from PIL import Image as PILImage
+        from PIL import ImageFile
+
+        # Pillow refuse l'image entière pour un bloc de métadonnées abîmé ; en tolérant les fichiers imparfaits, on lit
+        # les pixels et on réenregistre sans les métadonnées.
+        ancien = ImageFile.LOAD_TRUNCATED_IMAGES
+        ImageFile.LOAD_TRUNCATED_IMAGES = True
+        try:
+            sortie = BytesIO()
+            with PILImage.open(source) as im:
+                im.load()
+                im.save(sortie, format=im.format or "PNG")
+        finally:
+            ImageFile.LOAD_TRUNCATED_IMAGES = ancien
+        return ContentFile(sortie.getvalue(), name=nom)
 
     def poser(self, page, champ, relatif, etiquette):
         if getattr(page, f"{champ}_id"):

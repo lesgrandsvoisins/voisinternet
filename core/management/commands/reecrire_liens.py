@@ -11,7 +11,7 @@ Une sauvegarde de la base avant `--appliquer` est de rigueur (deploy/sauvegarde.
 import json
 import re
 from collections import Counter, defaultdict
-from urllib.parse import unquote, urlsplit
+from urllib.parse import quote, unquote, urlsplit
 
 from django.apps import apps
 from django.core.management.base import BaseCommand
@@ -47,7 +47,10 @@ def cible_blog(chemin):
     if not parts:
         return "/fr/blog/"
     if len(parts) == 2 and parts[0] == "tag":
-        return f"/fr/etiquettes/{parts[1]}/" if Tag.objects.filter(slug=parts[1]).exists() else None
+        if Tag.objects.filter(slug=parts[1]).exists():
+            return f"/fr/etiquettes/{parts[1]}/"
+        # Pas d'étiquette de ce nom ici : la recherche du site donne ce que listait la page d'étiquette de Ghost.
+        return f"/fr/recherche/?q={quote(parts[1])}"
     if len(parts) == 1 and parts[0] not in {"ghost", "tag", "author", "rss", "content"}:
         return equivalent_blog(parts[0])
     return None

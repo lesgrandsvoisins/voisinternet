@@ -1710,9 +1710,11 @@ class AnciennesAdressesTests(Base):
 
 
 class ReecrireLiensTests(Base):
+    # (cible_blog importé ci-dessous)
     def test_links_to_old_site_and_ghost_are_rewritten_only_when_an_equivalent_exists(self):
         from django.core.management import call_command
         from io import StringIO
+        from core.management.commands.reecrire_liens import cible_blog
         DirectoryEntry.objects.create(name="Carton Plein", slug="carton-plein")
         service = Service.objects.create(
             name="Test", slug="test-liens", summary="x",
@@ -1732,5 +1734,6 @@ class ReecrireLiensTests(Base):
         self.assertIn("(/fr/annuaire/carton-plein/)", service.description)
         self.assertIn("(/fr/etiquettes/resdigita/)", service.description)
         self.assertEqual(service.url, "https://old.lesgrandsvoisins.com/")
+        self.assertEqual(cible_blog("/tag/inconnue/"), "/fr/recherche/?q=inconnue")
         self.assertIn("https://old.lesgrandsvoisins.com/fr-fr/association/conseils-des-voisins/27/vote/", service.description)
         self.assertIn("conseils-des-voisins/27/vote/", out.getvalue())  # signalé comme sans équivalent

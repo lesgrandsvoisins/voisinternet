@@ -30,6 +30,7 @@ OLD_BLOG_RENAMED = {
     "la-marque-les-grands-voisins-est-une-responsabilite-pour-nimporte-qui": "la-marque-est-une-responsabilite-pour-nimporte-qui",
     "lettre-ouverte-son-excellence-mohamed-ould-cheikh-ghazouani": "lettre-ouverte-a-son-excellence-monsieur-mohamed-ould-cheikh-ghazouani-president-de-la-republique-islamique-de-mauritanie",
     "manifeste-des-grands-voisins": "manifeste-2023",
+    "manifeste": "manifeste-2023",
     "nom-les-grands-voisins": "les-grands-voisins-par-un-autre-nom-est-toujours-lesgrandsvoisins-com",
     "obtention-du-statut-cooperative": "coop-2023",
     "point-davancements-en-mars-2022": "points-avancement-mars-2022",

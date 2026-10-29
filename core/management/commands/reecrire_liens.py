@@ -23,6 +23,8 @@ from core.legacy import equivalent_ancien_site, equivalent_blog
 
 APPLIS = ("cms", "core", "wagtailcore")
 TYPES = {"TextField", "CharField", "URLField", "JSONField"}
+# Champs qui DÉSIGNENT l'ancien site ou Ghost (annuaire des services : « le blog », « l'ancien site ») : jamais réécrits.
+EXCLUS = {"core.Service.url"}
 FIN = r"""[^\s"'\\<>)\]]*"""
 RE_OLD = re.compile(r"https?://(?:old2?)\.lesgrandsvoisins\.(?:com|fr)(?P<path>/" + FIN + r")?")
 RE_BLOG = re.compile(r"https?://blog\.lesgrandsvoisins\.(?:com|fr)(?P<path>/" + FIN + r")?")
@@ -39,7 +41,13 @@ def cible_vieux_site(chemin):
 
 
 def cible_blog(chemin):
+    from core.models import Tag
+
     parts = [p for p in unquote(urlsplit(chemin or "/").path).split("/") if p]
+    if not parts:
+        return "/fr/blog/"
+    if len(parts) == 2 and parts[0] == "tag":
+        return f"/fr/etiquettes/{parts[1]}/" if Tag.objects.filter(slug=parts[1]).exists() else None
     if len(parts) == 1 and parts[0] not in {"ghost", "tag", "author", "rss", "content"}:
         return equivalent_blog(parts[0])
     return None
@@ -61,6 +69,8 @@ class Command(BaseCommand):
                     continue
                 for field in model._meta.concrete_fields:
                     if field.primary_key or field.is_relation or field.get_internal_type() not in TYPES:
+                        continue
+                    if f"{model._meta.label}.{field.name}" in EXCLUS:
                         continue
                     total += self.traiter(model, field, appliquer)
         mode = "réécrits" if appliquer else "à réécrire (simulation, --appliquer pour écrire)"

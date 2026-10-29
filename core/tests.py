@@ -1719,6 +1719,10 @@ class ReecrireLiensTests(Base):
             description='Voir [la fiche](https://old.lesgrandsvoisins.com/fr-fr/annuaire/carton-plein/) '
                         'et [les votes](https://old.lesgrandsvoisins.com/fr-fr/association/conseils-des-voisins/27/vote/).',
         )
+        Tag.objects.create(name="Resdigita", slug="resdigita")
+        service.description += " [étiquette](https://blog.lesgrandsvoisins.com/tag/resdigita/)"
+        service.url = "https://old.lesgrandsvoisins.com/"  # un service qui désigne l'ancien site : intact
+        service.save()
         out = StringIO()
         call_command("reecrire_liens", stdout=out)  # simulation : rien n'est écrit
         service.refresh_from_db()
@@ -1726,5 +1730,7 @@ class ReecrireLiensTests(Base):
         call_command("reecrire_liens", "--appliquer", stdout=out)
         service.refresh_from_db()
         self.assertIn("(/fr/annuaire/carton-plein/)", service.description)
+        self.assertIn("(/fr/etiquettes/resdigita/)", service.description)
+        self.assertEqual(service.url, "https://old.lesgrandsvoisins.com/")
         self.assertIn("https://old.lesgrandsvoisins.com/fr-fr/association/conseils-des-voisins/27/vote/", service.description)
         self.assertIn("conseils-des-voisins/27/vote/", out.getvalue())  # signalé comme sans équivalent

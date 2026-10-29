@@ -825,3 +825,31 @@ class CompleterImagesEntetesTests(TestCase):
                 out = StringIO()
                 call_command("completer_images_entetes", "--ghost", str(export), "--dossier", tmp, stdout=out)
         self.assertIn("illisible", out.getvalue())
+
+
+class FusionnerDoublonsMediasTests(TestCase):
+    def test_only_unused_identical_copies_are_deleted(self):
+        import tempfile
+
+        from django.core.management import call_command
+        from django.test import override_settings
+        from wagtail.images import get_image_model
+        fr = Locale.get_default()
+        with tempfile.TemporaryDirectory() as media, override_settings(MEDIA_ROOT=media):
+            Image = get_image_model()
+            autre = base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==")
+            a = Image.objects.create(title="a", file=ImageFile(BytesIO(_PNG_1X1), name="a.png"))
+            b = Image.objects.create(title="a", file=ImageFile(BytesIO(_PNG_1X1), name="a.png"))
+            c = Image.objects.create(title="a", file=ImageFile(BytesIO(_PNG_1X1), name="a.png"))
+            autre_image = Image.objects.create(title="a", file=ImageFile(BytesIO(autre), name="b.png"))
+            index = BlogIndexPage.objects.get(locale=fr)
+            index.add_child(instance=BlogPostPage(title="Utilise b", slug="utilise-b", date=timezone.now(), featured_image=b))
+            out = StringIO()
+            call_command("fusionner_doublons_medias", stdout=out)  # simulation
+            self.assertEqual(Image.objects.count(), 4)
+            call_command("fusionner_doublons_medias", "--appliquer", stdout=out)
+            restantes = set(Image.objects.values_list("pk", flat=True))
+        self.assertIn(b.pk, restantes)            # la copie utilisée est gardée
+        self.assertNotIn(a.pk, restantes)         # les copies inutilisées identiques sont supprimées
+        self.assertNotIn(c.pk, restantes)
+        self.assertIn(autre_image.pk, restantes)  # contenu différent : jamais touchée

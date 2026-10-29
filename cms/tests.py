@@ -739,3 +739,39 @@ class ImportAncienAssociationTests(TestCase):
         trente.get_latest_revision().publish()
         conseils.get_latest_revision().publish()
         self.assertTrue(equivalent_association(["conseils-des-voisins", "27"]).endswith("/27/"))
+
+
+class ImportMediasAncienSiteTests(TestCase):
+    def test_images_and_documents_are_imported_once_and_linked(self):
+        import tempfile
+        from pathlib import Path
+
+        from django.core.management import call_command
+        from django.test import override_settings
+        from wagtail.documents import get_document_model
+        from wagtail.images import get_image_model
+
+        from core.management.commands.reecrire_liens import cible_vieux_site
+        with tempfile.TemporaryDirectory() as media, tempfile.TemporaryDirectory() as tmp:
+            racine = Path(tmp) / "old-import"
+            (racine / "original_images").mkdir(parents=True)
+            (racine / "documents").mkdir()
+            (racine / "original_images" / "photo.png").write_bytes(_PNG_1X1)
+            (racine / "documents" / "statuts.pdf").write_bytes(b"%PDF-1.4 test")
+            export = Path(tmp) / "contenu.jsonl"
+            export.write_text("\n".join(json.dumps(x) for x in [
+                {"type": "image", "id": 7, "titre": "Photo", "fichier": "photo.png"},
+                {"type": "image", "id": 8, "titre": "Logo", "fichier": "logo.svg"},
+                {"type": "image", "id": 9, "titre": "Manquante", "fichier": "absente.jpg"},
+                {"type": "document", "id": 3, "titre": "Statuts", "fichier": "statuts.pdf"},
+            ]), encoding="utf-8")
+            with override_settings(MEDIA_ROOT=media):
+                out = StringIO()
+                call_command("import_medias_ancien_site", str(export), "--dossier", str(racine), stdout=out)
+                call_command("import_medias_ancien_site", str(export), "--dossier", str(racine), stdout=out)
+                self.assertEqual(get_image_model().objects.count(), 1)
+                self.assertEqual(get_document_model().objects.count(), 1)
+                self.assertIn("logo.svg", out.getvalue())
+                self.assertIn("absente.jpg", out.getvalue())
+                doc = get_document_model().objects.get()
+                self.assertEqual(cible_vieux_site("/documents/3/statuts.pdf"), doc.url)

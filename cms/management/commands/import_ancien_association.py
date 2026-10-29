@@ -23,8 +23,8 @@ from cms.models import AssociationPage, StandardPage
 from core.templatetags.markdown_filters import markdown_filter
 
 PREFIXE = "/wwwlesgrandsvoisinscom/association/"
-TAGS = ["p", "br", "hr", "strong", "em", "b", "i", "s", "a", "ul", "ol", "li", "blockquote", "h2", "h3", "h4"]
-ATTRS = {"a": ["href", "title"]}
+TAGS = ["p", "br", "hr", "strong", "em", "b", "i", "s", "a", "ul", "ol", "li", "blockquote", "h2", "h3", "h4", "embed"]
+ATTRS = {"a": ["href", "title"], "embed": ["embedtype", "id", "format", "alt"]}
 
 
 def html_propre(html):
@@ -55,6 +55,20 @@ def vers_html(valeur, rapport):
     return ""
 
 
+def image_integree(valeur, rapport):
+    """Bloc image de l'ancien site -> image intégrée (éditeur riche) si le fichier a été repris dans la médiathèque."""
+    from wagtail.images import get_image_model
+
+    ancien = valeur.get("image") if isinstance(valeur, dict) else None
+    nom = rapport["noms_images"].get(ancien)
+    image = get_image_model().objects.filter(file__endswith=nom).first() if nom else None
+    if image is None:
+        rapport["images"] += 1
+        return ""
+    alt = bleach.clean((valeur.get("alt") or image.title or "")[:200])
+    return f'<embed embedtype="image" id="{image.pk}" format="fullwidth" alt="{alt}"/>'
+
+
 def corps_html(contenu, rapport, url_path):
     brut = contenu.get("body") or []
     if isinstance(brut, str):
@@ -72,7 +86,7 @@ def corps_html(contenu, rapport, url_path):
         elif genre == "multicolumns":
             morceaux.append(vers_html(valeur, rapport))
         elif genre == "image":
-            rapport["images"] += 1
+            morceaux.append(image_integree(valeur, rapport))
         else:
             rapport["blocs_inconnus"].add(f"{genre} ({url_path})")
     questions = contenu.get("form_fields")
@@ -104,10 +118,12 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument("export", help="contenu.jsonl produit par tools/export_ancien_site.py")
         parser.add_argument("--publier", action="store_true")
+        parser.add_argument("--ecraser-publiees", action="store_true", dest="ecraser",
+                            help="Avec --refaire : recalcule AUSSI les pages déjà publiées (efface leurs retouches manuelles !)")
         parser.add_argument("--refaire", action="store_true",
                             help="Recalcule le texte des pages déjà importées qui sont encore en BROUILLON (jamais celles publiées)")
 
-    def handle(self, *args, export, publier, refaire, **options):
+    def handle(self, *args, export, publier, refaire, ecraser, **options):
         chemin = Path(export)
         if not chemin.is_file():
             raise CommandError(f"Fichier introuvable : {chemin}")
@@ -117,7 +133,9 @@ class Command(BaseCommand):
         pages = [json.loads(l) for l in chemin.read_text(encoding="utf-8").splitlines() if l.strip()]
         pages = sorted((p for p in pages if p.get("type") == "page" and p["url_path"].startswith(PREFIXE) and p["url_path"] != PREFIXE),
                        key=lambda p: p["url_path"])
-        rapport = {"images": 0, "formulaires": 0, "blocs_inconnus": set()}
+        noms_images = {l["id"]: l["fichier"] for l in (json.loads(x) for x in chemin.read_text(encoding="utf-8").splitlines() if x.strip())
+                       if l.get("type") == "image"}
+        rapport = {"images": 0, "formulaires": 0, "blocs_inconnus": set(), "noms_images": noms_images}
         creees, presentes = {}, 0
         for p in pages:
             c = p["contenu"]
@@ -130,10 +148,13 @@ class Command(BaseCommand):
             corps = corps_html(c, rapport, p["url_path"])
             if existante:
                 existante = existante.specific
-                if refaire and not existante.live:
+                if refaire and (not existante.live or ecraser):
                     existante.body = json.dumps([{"type": "prose", "value": corps}] if corps else [])
-                    existante.save_revision()
-                    existante.save()
+                    revision = existante.save_revision()
+                    if existante.live:
+                        revision.publish()
+                    else:
+                        existante.save()
                     self.stdout.write(f"refaite : association/{relatif}/")
                 creees[relatif] = existante
                 presentes += 1
@@ -152,7 +173,7 @@ class Command(BaseCommand):
             creees[relatif] = page
             self.stdout.write(f"importée ({'publiée' if publier else 'brouillon'}) : association/{relatif}/")
         self.stdout.write(self.style.SUCCESS(f"{len(creees) - presentes} page(s) importée(s), {presentes} déjà présente(s)."))
-        self.stdout.write(f"Non repris : {rapport['images']} image(s) (fichiers absents de l'export), "
+        self.stdout.write(f"Non repris : {rapport['images']} image(s) (pas encore dans la médiathèque : voir import_medias_ancien_site), "
                           f"{rapport['formulaires']} formulaire(s) (seules les questions sont reprises).")
         for inconnu in sorted(rapport["blocs_inconnus"]):
             self.stdout.write(f"Bloc non géré : {inconnu}")

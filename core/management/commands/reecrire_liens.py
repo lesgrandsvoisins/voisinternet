@@ -31,8 +31,18 @@ RE_BLOG = re.compile(r"https?://blog\.lesgrandsvoisins\.(?:com|fr)(?P<path>/" + 
 LANGUES_VIEUX_SITE = {"fr-fr", "fr"}
 
 
+def cible_document(parts):
+    """/documents/<id>/<fichier> de l'ancien site -> adresse du même fichier repris dans les documents d'ici."""
+    from wagtail.documents import get_document_model
+
+    doc = get_document_model().objects.filter(file__endswith=parts[-1]).first()
+    return doc.url if doc else None
+
+
 def cible_vieux_site(chemin):
     parts = [p for p in unquote(urlsplit(chemin or "/").path).split("/") if p]
+    if len(parts) == 3 and parts[0] == "documents":
+        return cible_document(parts)
     if parts and parts[0].lower() in LANGUES_VIEUX_SITE:
         parts = parts[1:]
     elif parts:

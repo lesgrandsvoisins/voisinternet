@@ -226,7 +226,7 @@ ANON_ACCOUNT_PEPPER = env("VOISINTERNET_ANON_PEPPER", SECRET_KEY)
 # Redirection de courrier choisie par le membre (core/redirections.py) : désactivée tant que l'administration n'a pas dit
 # que la réécriture d'expéditeur (SRS) est en place. L'annuaire est écrit par un compte de service dont le mot de passe
 # est dans un fichier (jamais dans une variable d'environnement ni dans un journal).
-REDIRECTIONS_ENABLED = env_bool("VOISINTERNET_REDIRECTIONS", False)
+REDIRECTIONS_ENABLED = env_bool("VOISINTERNET_REDIRECTIONS", True)
 LDAP_REDIRECTIONS_URI = env("VOISINTERNET_LDAP_URI", "ldap://127.0.0.1:14389")
 LDAP_REDIRECTIONS_BIND = env("VOISINTERNET_LDAP_BIND", "cn=redirections,ou=services,dc=lesgrandsvoisins,dc=com")
 LDAP_REDIRECTIONS_SECRET_FILE = env("VOISINTERNET_LDAP_SECRET_FILE", "/etc/voisinter-django/ldap-redirections.secret")

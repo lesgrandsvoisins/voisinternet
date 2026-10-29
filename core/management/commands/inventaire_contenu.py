@@ -34,8 +34,9 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument("--sortie", default="revue-contenu")
         parser.add_argument("--liens", action="store_true", help="Vérifier que les liens internes répondent")
+        parser.add_argument("--hote", help="Nom d'hôte à présenter pour la vérification des liens (défaut : le premier de ALLOWED_HOSTS)")
 
-    def handle(self, *args, sortie, liens, **options):
+    def handle(self, *args, sortie, liens, hote=None, **options):
         from wagtail.models import Page
 
         dossier = Path(sortie)
@@ -109,16 +110,28 @@ class Command(BaseCommand):
                            "_alertes": ([] if s.url else ["sans-adresse"]) + ([] if s.active else ["retiré"])})
 
         if liens:
+            from urllib.parse import unquote
+            from django.conf import settings
+
+            hote = hote or next((h for h in settings.ALLOWED_HOSTS if h and not h.startswith(".") and h != "*"), "localhost")
             client = Client()
             cache = {}
+            media = Path(settings.MEDIA_ROOT)
             for l in lignes:
                 for h in set(l["_liens"]):
                     chemin = h.split("#")[0]
                     if chemin not in cache:
-                        try:
-                            cache[chemin] = client.get(chemin, HTTP_HOST="localhost").status_code
-                        except Exception:
-                            cache[chemin] = 500
+                        if chemin.startswith("/static/"):
+                            cache[chemin] = 200  # servi par Caddy
+                        elif chemin.startswith("/media/"):
+                            # servi par Caddy : on vérifie seulement que le fichier existe
+                            relatif = unquote(chemin.split("?")[0])[len("/media/"):]
+                            cache[chemin] = 200 if (media / relatif).is_file() else 404
+                        else:
+                            try:
+                                cache[chemin] = client.get(chemin, HTTP_HOST=hote, secure=True).status_code
+                            except Exception:
+                                cache[chemin] = 500
                     if cache[chemin] >= 400 and cache[chemin] != 403:
                         l["_alertes"].append(f"lien-interne-cassé({chemin})")
 

@@ -69,7 +69,19 @@ signalées sans leur texte.
 5. **Arrêt de l'ancien site** quand les redirections de `old` et du blog Ghost sont en service et que le CSV ne
    montre plus de `lien-ancien-site`.
 
-## 6. Déjà repéré (avant même l'inventaire)
+## 6. Premier inventaire en production (29/10, 349 éléments)
+
+- **Arbre « transition » :** un second site Wagtail (`transition.lesgrandsvoisins.com`, racine `/transition/`) contient une
+  copie plus ancienne de l'ancien site (Association, Civisme, Numérique, Contact, Équipe, Statuts, Historique…). La
+  reprise de la section Association sous `/home/grandsvoisins/` en fait un doublon exact : **décider du sort de
+  l'arbre « transition »** (le garder comme copie de travail ou le retirer) avant de relire page par page.
+- **Billets Ghost devenus doublons :** `blog/dons`, `blog/historique`, `blog/conseils`, `blog/interetgeneral` (et
+  `notre-qualite-dinteret-general`) font double emploi avec des pages existantes (voir le reclassement des 27 pages
+  Ghost).
+- **Liens internes :** la première vérification présentait l'hôte `localhost`, refusé par le site, et signalait donc à
+  tort des liens valides ; corrigé (hôte réel, fichiers `/media/` vérifiés sur le disque).
+
+## 7. Déjà repéré (avant même l'inventaire)
 
 - **27 pages Ghost** importées comme billets de blog : à reclasser (voir `docs/…` / message du 29/10) ; seules les
   12 Gazettes devraient rester des billets.

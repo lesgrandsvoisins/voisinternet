@@ -853,3 +853,26 @@ class FusionnerDoublonsMediasTests(TestCase):
         self.assertNotIn(a.pk, restantes)         # les copies inutilisées identiques sont supprimées
         self.assertNotIn(c.pk, restantes)
         self.assertIn(autre_image.pk, restantes)  # contenu différent : jamais touchée
+
+
+class CompleterDescriptionsTests(TestCase):
+    def test_fills_missing_descriptions_only(self):
+        from django.core.management import call_command
+        fr = Locale.get_default()
+        index = BlogIndexPage.objects.get(locale=fr)
+        texte = "<p>" + "Un long texte de présentation du billet. " * 8 + "</p>"
+        a = index.add_child(instance=BlogPostPage(title="Sans", slug="sans-desc", date=timezone.now(), body=texte))
+        a.save_revision().publish()
+        b = index.add_child(instance=BlogPostPage(title="Avec", slug="avec-desc", date=timezone.now(), body=texte,
+                                                  search_description="Déjà là"))
+        b.save_revision().publish()
+        out = StringIO()
+        call_command("completer_descriptions", stdout=out)  # simulation
+        a.refresh_from_db()
+        self.assertEqual(a.search_description, "")
+        call_command("completer_descriptions", "--appliquer", stdout=out)
+        a.refresh_from_db()
+        b.refresh_from_db()
+        self.assertTrue(a.search_description.startswith("Un long texte de présentation"))
+        self.assertLessEqual(len(a.search_description), 160)
+        self.assertEqual(b.search_description, "Déjà là")

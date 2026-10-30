@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 14:05+0100\n"
+"POT-Creation-Date: 2026-10-30 10:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -469,15 +469,15 @@ msgstr "페이지"
 msgid "← Précédent"
 msgstr "← 이전"
 
-#: cms/templates/cms/blog_index_page.html:52
+#: cms/templates/cms/blog_index_page.html:54
 msgid "Suivant →"
 msgstr "다음 →"
 
-#: cms/templates/cms/blog_index_page.html:58
+#: cms/templates/cms/blog_index_page.html:62
 msgid "Aucun article ne correspond à votre recherche."
 msgstr "검색과 일치하는 글이 없습니다."
 
-#: cms/templates/cms/blog_index_page.html:58
+#: cms/templates/cms/blog_index_page.html:62
 msgid "Aucun article pour l'instant."
 msgstr "아직 글이 없습니다."
 
@@ -662,8 +662,8 @@ msgstr "이 .qmd 파일에는 다른 프로젝트의 키가 들어 있어 이 �
 
 #: core/accounts.py:56 core/accounts.py:61
 #, python-format
-msgid "mes liens (%d)"
-msgstr "내 링크 (%d)"
+msgid "mes services (%d)"
+msgstr "내 서비스 (%d)"
 
 #: core/accounts.py:56 core/menu.py:43 core/templates/core/home.html:255
 msgid "mon compte"
@@ -677,14 +677,14 @@ msgstr "로그인"
 msgid "compte anonyme"
 msgstr "익명 계정"
 
-#: core/auth.py:72
+#: core/auth.py:75
 #, python-format
 msgid ""
 "Bienvenue ! Votre identifiant de connexion est %(identifier)s : notez-le, il"
 " ne change pas."
 msgstr "환영합니다! 로그인 사용자 이름은 %(identifier)s 입니다. 적어 두세요. 바뀌지 않습니다."
 
-#: core/auth.py:78
+#: core/auth.py:81
 #, python-format
 msgid "Vos adresses de courriel (une seule boîte) : %(addresses)s."
 msgstr "이메일 주소(사서함 하나): %(addresses)s."
@@ -798,17 +798,18 @@ msgstr "분야"
 msgid "à propos"
 msgstr "소개"
 
-#: core/menu.py:56
-msgid "Services et liens"
-msgstr "서비스와 링크"
+#: core/menu.py:56 core/templates/core/account.html:60
+#: core/templates/core/search.html:95 core/templates/core/tag_detail.html:81
+msgid "Services"
+msgstr "서비스"
 
 #: core/menu.py:57
 msgid "les services que vous avez choisis, à ajouter ou retirer"
 msgstr "선택하신 서비스, 추가하거나 제거할 수 있습니다"
 
 #: core/menu.py:58
-msgid "se connecter, créer un compte, retrouver mes liens"
-msgstr "로그인, 계정 만들기, 내 링크 찾기"
+msgid "se connecter, créer un compte, retrouver mes services"
+msgstr "로그인, 계정 만들기, 내 서비스 찾기"
 
 #: core/menu.py:66 core/templates/core/account.html:140
 #: core/templates/core/groupes.html:12
@@ -1064,9 +1065,10 @@ msgstr "승인 필요"
 msgid ""
 "Une intervention d'un administrateur est nécessaire avant que le service ne "
 "soit actif pour la personne (ex. création manuelle d'une boîte courriel) : "
-"le lien reste « en attente » jusqu'à validation (groupe « Administration »)."
+"le service reste « en attente » jusqu'à validation (groupe « Administration "
+"»)."
 msgstr ""
-"서비스가 활성화되기 전에 관리자의 조치가 필요합니다(예: 메일함 수동 생성). 승인될 때까지 링크는 ‘대기 중’으로 남습니다(‘관리’ "
+"서비스가 활성화되기 전에 관리자의 조치가 필요합니다(예: 메일함 수동 생성). 승인될 때까지 서비스는 ‘대기 중’으로 남습니다(‘관리’ "
 "그룹)."
 
 #: core/models.py:104
@@ -1096,8 +1098,8 @@ msgid "validé"
 msgstr "승인됨"
 
 #: core/models.py:180 core/models.py:692
-msgid "lien"
-msgstr "링크"
+msgid "service choisi"
+msgstr "선택한 서비스"
 
 #: core/models.py:195
 msgid "appartenance"
@@ -1604,8 +1606,8 @@ msgid "détectée : compte nommé (connecté)"
 msgstr "자동 감지: 실명 계정(로그인됨)"
 
 #: core/models.py:678
-msgid "détectée : a un lien"
-msgstr "자동 감지: 링크 있음"
+msgid "détectée : a un service"
+msgstr "자동 감지: 서비스 있음"
 
 #: core/models.py:679
 msgid "détectée : a rejoint un groupe"
@@ -1793,13 +1795,13 @@ msgstr "이 기기에 익명 계정이 열려 있습니다"
 
 #: core/templates/core/account.html:26
 msgid ""
-"Voulez-vous rattacher ses liens à votre compte ? Le compte anonyme sera "
+"Voulez-vous rattacher ses services à votre compte ? Le compte anonyme sera "
 "ensuite supprimé."
-msgstr "이 계정의 링크를 내 계정에 연결하시겠습니까? 그 뒤 익명 계정은 삭제됩니다."
+msgstr "이 계정의 서비스를 내 계정에 연결하시겠습니까? 그 뒤 익명 계정은 삭제됩니다."
 
 #: core/templates/core/account.html:29
-msgid "Rattacher mes liens"
-msgstr "내 링크 연결"
+msgid "Rattacher mes services"
+msgstr "내 서비스 연결"
 
 #: core/templates/core/account.html:36
 msgid "Premiers pas"
@@ -1822,10 +1824,6 @@ msgstr "모든 안내 코스 보기"
 #: core/templates/core/account.html:57
 msgid "Aperçu de mon compte"
 msgstr "내 계정 한눈에 보기"
-
-#: core/templates/core/account.html:60
-msgid "Liens"
-msgstr "링크"
 
 #: core/templates/core/account.html:64
 msgid "Groupes"
@@ -1887,12 +1885,12 @@ msgid "Fermer ce compte sur cet appareil"
 msgstr "이 기기에서 계정 닫기"
 
 #: core/templates/core/account.html:131 core/templates/core/raccourcis.html:12
-msgid "Mes liens"
-msgstr "내 링크"
+msgid "Mes services"
+msgstr "내 서비스"
 
 #: core/templates/core/account.html:134
-msgid "Ajouter un lien"
-msgstr "링크 추가"
+msgid "Ajouter un service"
+msgstr "서비스 추가"
 
 #: core/templates/core/account.html:143 core/views.py:398
 msgid "Rejoindre un groupe"
@@ -1970,10 +1968,11 @@ msgstr "내 계정 만들기"
 #: core/templates/core/account.html:255
 msgid ""
 "Un compte unique des Grands Voisins, le même pour tous les outils de "
-"l'association. Il retrouve vos liens, groupes, fiches et évènements sur tous"
-" vos appareils, et vous pouvez récupérer votre mot de passe par courriel."
+"l'association. Il retrouve vos services, groupes, fiches et évènements sur "
+"tous vos appareils, et vous pouvez récupérer votre mot de passe par "
+"courriel."
 msgstr ""
-"Grands Voisins의 단일 계정으로, 협회의 모든 도구에서 동일하게 쓰입니다. 모든 기기에서 링크, 그룹, 항목, 행사를 다시 "
+"Grands Voisins의 단일 계정으로, 협회의 모든 도구에서 동일하게 쓰입니다. 모든 기기에서 서비스, 그룹, 항목, 행사를 다시 "
 "불러오며, 이메일로 비밀번호를 복구할 수 있습니다."
 
 #: core/templates/core/account.html:261
@@ -2005,11 +2004,11 @@ msgstr "익명으로 계속"
 #: core/templates/core/account.html:276
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
-"pour retrouver vos liens. Sans ce numéro, le compte est perdu : aucun "
+"pour retrouver vos services. Sans ce numéro, le compte est perdu : aucun "
 "courriel de secours n'existe."
 msgstr ""
-"이름이나 이메일 없이 16자리 숫자만 사용합니다. 적어 두세요. 이 숫자만 있으면 링크를 되찾을 수 있습니다. 이 숫자가 없으면 계정을 "
-"잃게 되며, 복구용 이메일은 없습니다."
+"이름이나 이메일 없이 16자리 숫자만 사용합니다. 적어 두세요. 이 숫자만 있으면 서비스를 되찾을 수 있습니다. 이 숫자가 없으면 계정을"
+" 잃게 되며, 복구용 이메일은 없습니다."
 
 #: core/templates/core/account.html:281 core/templates/core/account.html:293
 msgid "Créer un compte anonyme"
@@ -2676,6 +2675,7 @@ msgid ""
 msgstr "컴퓨터 전문가일 필요도, 기술 지원팀이 있을 필요도 없습니다. 약간의 호기심과 이웃 한 명이면 충분합니다."
 
 #: core/templates/core/home.html:233
+#: core/templates/core/partials/shortcut_list.html:56
 msgid "Choisissez vos services"
 msgstr "서비스 선택하기"
 
@@ -2722,9 +2722,9 @@ msgstr "서비스들"
 
 #: core/templates/core/home.html:258
 msgid ""
-"Ajoutez ceux qui vous intéressent. Ils rejoignent vos liens dans « mon "
+"Ajoutez ceux qui vous intéressent. Ils rejoignent vos services dans « mon "
 "Compte », même sans compte nominatif."
-msgstr "관심 있는 것을 추가하세요. 실명 계정이 없어도 ‘내 계정’의 링크에 추가됩니다."
+msgstr "관심 있는 것을 추가하세요. 실명 계정이 없어도 ‘내 계정’의 서비스에 추가됩니다."
 
 #: core/templates/core/home.html:262
 msgid "Tous les services, avec ce que chacun conserve"
@@ -3174,49 +3174,59 @@ msgstr "사회복지센터"
 msgid "Atelier"
 msgstr "공방"
 
-#: core/templates/core/partials/service_list.html:4
+#: core/templates/core/partials/service_list.html:11
 msgid "Autres"
 msgstr "기타"
 
-#: core/templates/core/partials/service_list.html:15
-#, python-format
-msgid "Ouvrir %(name)s"
-msgstr "%(name)s 열기"
+#: core/templates/core/partials/service_list.html:26
+msgid "Plus d'informations"
+msgstr "추가 정보"
 
-#: core/templates/core/partials/service_list.html:17
-#: core/templates/core/partials/shortcut_list.html:20
-msgid "Bientôt"
-msgstr "곧 제공"
-
-#: core/templates/core/partials/service_list.html:22
+#: core/templates/core/partials/service_list.html:29
 msgid "Ce qui reste anonyme, ce que nous conservons"
 msgstr "무엇이 익명으로 유지되는지, 우리가 보관하는 정보"
 
 #: core/templates/core/partials/service_list.html:36
+#, python-format
+msgid "Ouvrir %(name)s"
+msgstr "%(name)s 열기"
+
+#: core/templates/core/partials/service_list.html:36
+msgid "Ouvrir"
+msgstr "열기"
+
+#: core/templates/core/partials/service_list.html:38
+#: core/templates/core/partials/shortcut_list.html:20
+msgid "Bientôt"
+msgstr "곧 제공"
+
+#: core/templates/core/partials/service_list.html:51
+#: core/templates/core/partials/service_list.html:75
 msgid "Aucun service pour l'instant"
 msgstr "아직 서비스가 없습니다"
 
-#: core/templates/core/partials/service_list.html:37
+#: core/templates/core/partials/service_list.html:51
+#: core/templates/core/partials/service_list.html:76
 msgid "Les services apparaîtront ici dès qu'ils seront ouverts."
 msgstr "서비스가 제공되는 대로 여기에 표시됩니다."
 
 #: core/templates/core/partials/shortcut_button.html:3
 #, python-format
-msgid "Retirer %(name)s de mes liens"
-msgstr "내 링크에서 %(name)s 제거"
+msgid "Retirer %(name)s de mes services"
+msgstr "내 서비스에서 %(name)s 제거"
 
 #: core/templates/core/partials/shortcut_button.html:3
 #, python-format
-msgid "Ajouter %(name)s à mes liens"
-msgstr "내 링크에 %(name)s 추가"
+msgid "Ajouter %(name)s à mes services"
+msgstr "내 서비스에 %(name)s 추가"
 
 #: core/templates/core/partials/shortcut_button.html:3
-msgid "✓ Dans mes liens"
-msgstr "✓ 내 링크에 있음"
+msgid "✓ Dans mes services"
+msgstr "✓ 내 서비스에 있음"
 
 #: core/templates/core/partials/shortcut_button.html:3
-msgid "+ Ajouter à mes liens"
-msgstr "+ 내 링크에 추가"
+msgid "+ Ajouter à mes services"
+msgstr "+ 내 서비스에 추가"
 
 #: core/templates/core/partials/shortcut_list.html:3
 msgid "Réordonnez avec les flèches ↑ ↓ ou en glissant une carte."
@@ -3224,17 +3234,12 @@ msgstr "↑ ↓ 화살표를 누르거나 카드를 끌어서 순서를 바꾸�
 
 #: core/templates/core/partials/shortcut_list.html:23
 msgid ""
-"Un administrateur doit d'abord l'activer pour vous ; le lien apparaîtra "
-"ensuite."
-msgstr "먼저 관리자가 활성화해야 하며, 그 후 링크가 표시됩니다."
+"Un administrateur doit d'abord l'activer pour vous ; il apparaîtra ensuite."
+msgstr "먼저 관리자가 활성화해야 하며, 그 후 표시됩니다."
 
 #: core/templates/core/partials/shortcut_list.html:56
-msgid "Aucun lien pour l'instant."
-msgstr "아직 링크가 없습니다."
-
-#: core/templates/core/partials/shortcut_list.html:56
-msgid "Ajoutez des services à vos liens"
-msgstr "링크에 서비스를 추가하세요"
+msgid "Aucun service pour l'instant."
+msgstr "아직 서비스가 없습니다."
 
 #: core/templates/core/partials/subscribed_entry_list.html:15
 msgid "Se désabonner de cette fiche ?"
@@ -3257,8 +3262,8 @@ msgid "Voir mon compte"
 msgstr "보기"
 
 #: core/templates/core/raccourcis.html:3
-msgid "Services et liens — lesgrandsvoisins.com"
-msgstr "서비스와 링크 — lesgrandsvoisins.com"
+msgid "Services — lesgrandsvoisins.com"
+msgstr "서비스 — lesgrandsvoisins.com"
 
 #: core/templates/core/raccourcis.html:5
 msgid ""
@@ -3266,8 +3271,8 @@ msgid ""
 msgstr "선택하신 서비스, 언제든지 추가하거나 제거할 수 있습니다."
 
 #: core/templates/core/raccourcis.html:21
-msgid "Services à ajouter à mes liens"
-msgstr "내 링크에 추가할 서비스"
+msgid "Tous les services"
+msgstr "모든 서비스"
 
 #: core/templates/core/raccourcis.html:22
 msgid "Ceux déjà ajoutés restent affichés : cliquez pour les retirer."
@@ -3418,10 +3423,6 @@ msgstr "키워드를 입력하면 사이트 페이지, 디렉토리, 일정, 서
 msgid "Aucun résultat pour « %(query)s »."
 msgstr "“%(query)s”에 대한 검색 결과가 없습니다."
 
-#: core/templates/core/search.html:95 core/templates/core/tag_detail.html:81
-msgid "Services"
-msgstr "서비스"
-
 #: core/templates/core/tag_detail.html:3
 #: core/templates/core/tag_detail.html:10 core/templates/core/tag_list.html:3
 #: core/templates/core/tag_list.html:10 core/templates/core/tag_list.html:13
@@ -3503,8 +3504,8 @@ msgid ""
 msgstr "메시지는 저장되었지만 이메일 전송에 실패했습니다. 나중에 다시 시도해 주세요."
 
 #: core/views.py:396
-msgid "Ajouter un lien vers un outil"
-msgstr "도구 링크 추가"
+msgid "Ajouter un service à mon compte"
+msgstr "내 계정에 서비스 추가"
 
 #: core/views.py:400
 msgid "Présenter votre activité dans l'annuaire"
@@ -3672,10 +3673,10 @@ msgstr "감사합니다. 이 번호를 잘 보관하세요. 이 계정을 되찾
 #, python-format
 msgid ""
 "Numéro de compte anonyme lesgrandsvoisins.com : %(number)s\n"
-"Il suffit, seul, pour retrouver vos liens sur un autre appareil. Nous n'en gardons qu'une empreinte : nous ne pourrons pas vous le redonner.\n"
+"Il suffit, seul, pour retrouver vos services sur un autre appareil. Nous n'en gardons qu'une empreinte : nous ne pourrons pas vous le redonner.\n"
 msgstr ""
 "lesgrandsvoisins.com 익명 계정 번호: %(number)s\n"
-"이 번호만 있으면 다른 기기에서도 링크를 되찾을 수 있습니다. 우리는 이 번호의 지문만 보관하므로 다시 알려 드릴 수 없습니다.\n"
+"이 번호만 있으면 다른 기기에서도 서비스를 되찾을 수 있습니다. 우리는 이 번호의 지문만 보관하므로 다시 알려 드릴 수 없습니다.\n"
 
 #: core/views.py:1081
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
@@ -3686,8 +3687,8 @@ msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "이 번호와 일치하는 계정이 없습니다. 16자리 숫자를 확인해 주세요."
 
 #: core/views.py:1088
-msgid "Compte retrouvé. Vos liens sont de retour."
-msgstr "계정을 찾았습니다. 링크가 복원되었습니다."
+msgid "Compte retrouvé. Vos services sont de retour."
+msgstr "계정을 찾았습니다. 서비스가 복원되었습니다."
 
 #: core/views.py:1095
 msgid ""
@@ -3696,25 +3697,25 @@ msgid ""
 msgstr "이 기기에서는 더 이상 계정이 열려 있지 않습니다. 번호를 이용해 다시 찾을 수 있습니다."
 
 #: core/views.py:1106
-msgid "Vos liens anonymes ont rejoint votre compte."
-msgstr "익명 링크가 내 계정에 합쳐졌습니다."
+msgid "Vos services anonymes ont rejoint votre compte."
+msgstr "익명 서비스가 내 계정에 합쳐졌습니다."
 
 #: core/views.py:1124
 #, python-format
-msgid "« %(name)s » retiré de vos liens."
-msgstr "「%(name)s」이(가) 내 링크에서 제거되었습니다."
+msgid "« %(name)s » retiré de vos services."
+msgstr "「%(name)s」이(가) 내 서비스에서 제거되었습니다."
 
 #: core/views.py:1131
 #, python-format
-msgid "« %(name)s » ajouté à vos liens."
-msgstr "「%(name)s」이(가) 내 링크에 추가되었습니다."
+msgid "« %(name)s » ajouté à vos services."
+msgstr "「%(name)s」이(가) 내 서비스에 추가되었습니다."
 
 #: core/views.py:1134
 #, python-format
 msgid ""
-"« %(name)s » ajouté à vos liens, en attente de validation par un "
+"« %(name)s » ajouté à vos services, en attente de validation par un "
 "administrateur."
-msgstr "「%(name)s」이(가) 내 링크에 추가되었으며 관리자의 승인을 기다리고 있습니다."
+msgstr "「%(name)s」이(가) 내 서비스에 추가되었으며 관리자의 승인을 기다리고 있습니다."
 
 #: core/views.py:1244
 #, python-format

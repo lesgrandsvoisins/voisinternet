@@ -53,9 +53,9 @@ GROUP_PAGES = {
 ENTRIES = [
     Entry(
         "raccourcis",
-        _("Services et liens"),
+        _("Services"),
         _("les services que vous avez choisis, à ajouter ou retirer"),
-        _("se connecter, créer un compte, retrouver mes liens"),
+        _("se connecter, créer un compte, retrouver mes services"),
         "core:raccourcis",
         "compte",
         "_self",

@@ -99,7 +99,7 @@ class PagesTests(Base):
         self.assertIn(reverse("core:annuaire"), panel)
         self.assertIn('class="menu-sep"', panel)
         self.assertNotIn(reverse("core:activites"), panel)
-        self.assertNotIn("Mes liens", panel)
+        self.assertNotIn("Mes services", panel)
 
 
 class ContentPageQmdTests(Base):
@@ -593,7 +593,7 @@ class LinkingTests(Base):
         self.client.post(reverse("core:toggle_shortcut", args=[self.service.slug]))
         user = get_user_model().objects.create_user("voisine")
         self.client.force_login(user)
-        self.assertContains(self.client.get(reverse("core:account")), "Rattacher mes liens")
+        self.assertContains(self.client.get(reverse("core:account")), "Rattacher mes services")
         self.client.post(reverse("core:link_anonymous"))
         self.assertTrue(Shortcut.objects.filter(account__user=user, service=self.service).exists())
         self.assertFalse(Account.objects.filter(user__isnull=True).exists())

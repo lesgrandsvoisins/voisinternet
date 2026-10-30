@@ -4258,8 +4258,20 @@ a.prevnext {
   opacity: 1
 }
 
-/* Catalogue de raccourcis : catégories, lien « Ouvrir », raccourci en attente */
-.svc li.svc-cat { display: block; background: none; border: 0; box-shadow: none; padding: 1rem 0 0; }
-.svc li.svc-cat p { margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: .85rem; }
+/* Catalogue de services : une section par catégorie (titre pleine largeur), grille de cartes, détails repliés */
+.svc-group + .svc-group { margin-top: 2rem; }
+.svc-cat { margin: 0 0 .75rem; font-size: .9rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); }
+.svc.svc-cards { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1rem; background: none; border: 0; border-radius: 0; overflow: visible; }
+.svc-cards > .svc-card { border: 1px solid var(--line); border-radius: 14px; }
+.svc .svc-card { display: flex; flex-direction: column; align-items: flex-start; gap: .6rem; }
+.svc-card-head { display: flex; align-items: center; gap: .75rem; min-width: 0; }
+.svc-card h4 { margin: 0; font-size: 1.05rem; overflow-wrap: anywhere; }
+.svc-summary { margin: 0; }
+.svc-more { width: 100%; font-size: .95rem; }
+.svc-more summary { cursor: pointer; color: var(--ink-soft); }
+.svc-more .markdown { margin-top: .5rem; overflow-wrap: anywhere; }
+.svc-retention-title { margin: .75rem 0 .25rem; }
+.svc-card-foot { margin-top: auto; padding-top: .5rem; width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem .75rem; }
+.svc-card-foot .shortcut { margin: 0; }
 .svc .pending { opacity: .65; }
-.open-link { font-weight: 600; }
+.open-link { font-weight: 600; overflow-wrap: anywhere; }

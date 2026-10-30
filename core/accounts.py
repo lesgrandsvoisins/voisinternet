@@ -10,7 +10,7 @@ NEW_NUMBER_KEY = "voisinternet_new_number"
 
 def anonymous_creation_allowed(explicit):
     """Un compte anonyme peut-il être ouvert ? « explicit » : la personne l'a demandé elle-même (formulaire, don) ;
-    sinon c'est une création implicite (clic sur « ajouter un lien »…), réservée au réglage « ouvert »."""
+    sinon c'est une création implicite (clic sur « ajouter un service »…), réservée au réglage « ouvert »."""
     policy = settings.ANONYMOUS_ACCOUNTS
     return policy == "ouvert" or (policy == "discret" and explicit)
 
@@ -53,9 +53,9 @@ def account_label(request):
     """Sous-titre de « je Vois » selon l'état de la personne."""
     if request.user.is_authenticated:
         count = current_account(request).shortcut_set.count()
-        return (_("mes liens (%d)") % count if count else _("mon compte")), count
+        return (_("mes services (%d)") % count if count else _("mon compte")), count
     account = current_account(request)
     if account is None:
         return _("se connecter"), 0
     count = account.shortcut_set.count()
-    return (_("mes liens (%d)") % count if count else _("compte anonyme")), count
+    return (_("mes services (%d)") % count if count else _("compte anonyme")), count

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 14:05+0100\n"
+"POT-Creation-Date: 2026-10-30 10:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -473,15 +473,15 @@ msgstr "Páginas"
 msgid "← Précédent"
 msgstr "← Anterior"
 
-#: cms/templates/cms/blog_index_page.html:52
+#: cms/templates/cms/blog_index_page.html:54
 msgid "Suivant →"
 msgstr "Siguiente →"
 
-#: cms/templates/cms/blog_index_page.html:58
+#: cms/templates/cms/blog_index_page.html:62
 msgid "Aucun article ne correspond à votre recherche."
 msgstr "Ningún artículo coincide con su búsqueda."
 
-#: cms/templates/cms/blog_index_page.html:58
+#: cms/templates/cms/blog_index_page.html:62
 msgid "Aucun article pour l'instant."
 msgstr "Aún no hay artículos."
 
@@ -676,8 +676,8 @@ msgstr ""
 
 #: core/accounts.py:56 core/accounts.py:61
 #, python-format
-msgid "mes liens (%d)"
-msgstr "mis enlaces (%d)"
+msgid "mes services (%d)"
+msgstr "mis servicios (%d)"
 
 #: core/accounts.py:56 core/menu.py:43 core/templates/core/home.html:255
 msgid "mon compte"
@@ -691,7 +691,7 @@ msgstr "iniciar sesión"
 msgid "compte anonyme"
 msgstr "cuenta anónima"
 
-#: core/auth.py:72
+#: core/auth.py:75
 #, python-format
 msgid ""
 "Bienvenue ! Votre identifiant de connexion est %(identifier)s : notez-le, il"
@@ -700,7 +700,7 @@ msgstr ""
 "¡Bienvenido! Su identificador de inicio de sesión es %(identifier)s: "
 "anótelo, no cambia."
 
-#: core/auth.py:78
+#: core/auth.py:81
 #, python-format
 msgid "Vos adresses de courriel (une seule boîte) : %(addresses)s."
 msgstr "Sus direcciones de correo (un solo buzón): %(addresses)s."
@@ -815,17 +815,18 @@ msgstr "polos"
 msgid "à propos"
 msgstr "acerca de"
 
-#: core/menu.py:56
-msgid "Services et liens"
-msgstr "Servicios y enlaces"
+#: core/menu.py:56 core/templates/core/account.html:60
+#: core/templates/core/search.html:95 core/templates/core/tag_detail.html:81
+msgid "Services"
+msgstr "Servicios"
 
 #: core/menu.py:57
 msgid "les services que vous avez choisis, à ajouter ou retirer"
 msgstr "los servicios que ha elegido, para añadir o quitar"
 
 #: core/menu.py:58
-msgid "se connecter, créer un compte, retrouver mes liens"
-msgstr "iniciar sesión, crear una cuenta, recuperar mis enlaces"
+msgid "se connecter, créer un compte, retrouver mes services"
+msgstr "iniciar sesión, crear una cuenta, recuperar mis servicios"
 
 #: core/menu.py:66 core/templates/core/account.html:140
 #: core/templates/core/groupes.html:12
@@ -1091,11 +1092,12 @@ msgstr "requiere validación"
 msgid ""
 "Une intervention d'un administrateur est nécessaire avant que le service ne "
 "soit actif pour la personne (ex. création manuelle d'une boîte courriel) : "
-"le lien reste « en attente » jusqu'à validation (groupe « Administration »)."
+"le service reste « en attente » jusqu'à validation (groupe « Administration "
+"»)."
 msgstr ""
 "Se necesita la intervención de un administrador antes de que el servicio "
 "esté activo para la persona (p. ej. creación manual de un buzón de correo): "
-"el enlace queda «pendiente» hasta su validación (grupo «Administración»)."
+"el servicio queda «pendiente» hasta su validación (grupo «Administración»)."
 
 #: core/models.py:104
 msgid "service"
@@ -1124,8 +1126,8 @@ msgid "validé"
 msgstr "validado"
 
 #: core/models.py:180 core/models.py:692
-msgid "lien"
-msgstr "enlace"
+msgid "service choisi"
+msgstr "servicio elegido"
 
 #: core/models.py:195
 msgid "appartenance"
@@ -1640,8 +1642,8 @@ msgid "détectée : compte nommé (connecté)"
 msgstr "detectada: cuenta nominativa (conectada)"
 
 #: core/models.py:678
-msgid "détectée : a un lien"
-msgstr "detectada: tiene un enlace"
+msgid "détectée : a un service"
+msgstr "detectada: tiene un servicio"
 
 #: core/models.py:679
 msgid "détectée : a rejoint un groupe"
@@ -1835,15 +1837,15 @@ msgstr "Hay una cuenta anónima abierta en este dispositivo"
 
 #: core/templates/core/account.html:26
 msgid ""
-"Voulez-vous rattacher ses liens à votre compte ? Le compte anonyme sera "
+"Voulez-vous rattacher ses services à votre compte ? Le compte anonyme sera "
 "ensuite supprimé."
 msgstr ""
-"¿Quiere asociar sus enlaces a su cuenta? La cuenta anónima se eliminará "
+"¿Quiere asociar sus servicios a su cuenta? La cuenta anónima se eliminará "
 "después."
 
 #: core/templates/core/account.html:29
-msgid "Rattacher mes liens"
-msgstr "Asociar mis enlaces"
+msgid "Rattacher mes services"
+msgstr "Asociar mis servicios"
 
 #: core/templates/core/account.html:36
 msgid "Premiers pas"
@@ -1866,10 +1868,6 @@ msgstr "Ver todos los recorridos guiados"
 #: core/templates/core/account.html:57
 msgid "Aperçu de mon compte"
 msgstr "Resumen de mi cuenta"
-
-#: core/templates/core/account.html:60
-msgid "Liens"
-msgstr "Enlaces"
 
 #: core/templates/core/account.html:64
 msgid "Groupes"
@@ -1931,12 +1929,12 @@ msgid "Fermer ce compte sur cet appareil"
 msgstr "Cerrar esta cuenta en este dispositivo"
 
 #: core/templates/core/account.html:131 core/templates/core/raccourcis.html:12
-msgid "Mes liens"
-msgstr "Mis enlaces"
+msgid "Mes services"
+msgstr "Mis servicios"
 
 #: core/templates/core/account.html:134
-msgid "Ajouter un lien"
-msgstr "Añadir un enlace"
+msgid "Ajouter un service"
+msgstr "Añadir un servicio"
 
 #: core/templates/core/account.html:143 core/views.py:398
 msgid "Rejoindre un groupe"
@@ -2014,12 +2012,13 @@ msgstr "Crear mi cuenta"
 #: core/templates/core/account.html:255
 msgid ""
 "Un compte unique des Grands Voisins, le même pour tous les outils de "
-"l'association. Il retrouve vos liens, groupes, fiches et évènements sur tous"
-" vos appareils, et vous pouvez récupérer votre mot de passe par courriel."
+"l'association. Il retrouve vos services, groupes, fiches et évènements sur "
+"tous vos appareils, et vous pouvez récupérer votre mot de passe par "
+"courriel."
 msgstr ""
 "Una única cuenta de los Grands Voisins, la misma para todas las herramientas"
-" de la asociación. Recupera sus enlaces, grupos, fichas y eventos en todos "
-"sus dispositivos, y puede recuperar su contraseña por correo electrónico."
+" de la asociación. Recupera sus servicios, grupos, fichas y eventos en todos"
+" sus dispositivos, y puede recuperar su contraseña por correo electrónico."
 
 #: core/templates/core/account.html:261
 msgid ""
@@ -2054,12 +2053,12 @@ msgstr "Seguir anónimo"
 #: core/templates/core/account.html:276
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
-"pour retrouver vos liens. Sans ce numéro, le compte est perdu : aucun "
+"pour retrouver vos services. Sans ce numéro, le compte est perdu : aucun "
 "courriel de secours n'existe."
 msgstr ""
 "Un número de 16 cifras, sin nombre ni correo electrónico. Anótelo: basta "
-"para recuperar sus enlaces. Sin este número la cuenta se pierde: no existe "
-"ningún correo de recuperación."
+"para recuperar sus servicios. Sin este número la cuenta se pierde: no existe"
+" ningún correo de recuperación."
 
 #: core/templates/core/account.html:281 core/templates/core/account.html:293
 msgid "Créer un compte anonyme"
@@ -2749,6 +2748,7 @@ msgstr ""
 "poco de curiosidad y un vecino."
 
 #: core/templates/core/home.html:233
+#: core/templates/core/partials/shortcut_list.html:56
 msgid "Choisissez vos services"
 msgstr "Elige tus servicios"
 
@@ -2800,10 +2800,10 @@ msgstr "los servicios"
 
 #: core/templates/core/home.html:258
 msgid ""
-"Ajoutez ceux qui vous intéressent. Ils rejoignent vos liens dans « mon "
+"Ajoutez ceux qui vous intéressent. Ils rejoignent vos services dans « mon "
 "Compte », même sans compte nominatif."
 msgstr ""
-"Añada los que le interesen. Se unen a sus enlaces en «Mi cuenta», incluso "
+"Añada los que le interesen. Se unen a sus servicios en «Mi cuenta», incluso "
 "sin una cuenta nominativa."
 
 #: core/templates/core/home.html:262
@@ -3268,49 +3268,59 @@ msgstr "Centro social"
 msgid "Atelier"
 msgstr "Taller"
 
-#: core/templates/core/partials/service_list.html:4
+#: core/templates/core/partials/service_list.html:11
 msgid "Autres"
 msgstr "Otros"
 
-#: core/templates/core/partials/service_list.html:15
-#, python-format
-msgid "Ouvrir %(name)s"
-msgstr "Abrir %(name)s"
+#: core/templates/core/partials/service_list.html:26
+msgid "Plus d'informations"
+msgstr "Más información"
 
-#: core/templates/core/partials/service_list.html:17
-#: core/templates/core/partials/shortcut_list.html:20
-msgid "Bientôt"
-msgstr "Próximamente"
-
-#: core/templates/core/partials/service_list.html:22
+#: core/templates/core/partials/service_list.html:29
 msgid "Ce qui reste anonyme, ce que nous conservons"
 msgstr "Lo que permanece anónimo, lo que conservamos"
 
 #: core/templates/core/partials/service_list.html:36
+#, python-format
+msgid "Ouvrir %(name)s"
+msgstr "Abrir %(name)s"
+
+#: core/templates/core/partials/service_list.html:36
+msgid "Ouvrir"
+msgstr "Abrir"
+
+#: core/templates/core/partials/service_list.html:38
+#: core/templates/core/partials/shortcut_list.html:20
+msgid "Bientôt"
+msgstr "Próximamente"
+
+#: core/templates/core/partials/service_list.html:51
+#: core/templates/core/partials/service_list.html:75
 msgid "Aucun service pour l'instant"
 msgstr "Sin servicios por el momento"
 
-#: core/templates/core/partials/service_list.html:37
+#: core/templates/core/partials/service_list.html:51
+#: core/templates/core/partials/service_list.html:76
 msgid "Les services apparaîtront ici dès qu'ils seront ouverts."
 msgstr "Los servicios aparecerán aquí en cuanto estén disponibles."
 
 #: core/templates/core/partials/shortcut_button.html:3
 #, python-format
-msgid "Retirer %(name)s de mes liens"
-msgstr "Quitar %(name)s de mis enlaces"
+msgid "Retirer %(name)s de mes services"
+msgstr "Quitar %(name)s de mis servicios"
 
 #: core/templates/core/partials/shortcut_button.html:3
 #, python-format
-msgid "Ajouter %(name)s à mes liens"
-msgstr "Añadir %(name)s a mis enlaces"
+msgid "Ajouter %(name)s à mes services"
+msgstr "Añadir %(name)s a mis servicios"
 
 #: core/templates/core/partials/shortcut_button.html:3
-msgid "✓ Dans mes liens"
-msgstr "✓ En mis enlaces"
+msgid "✓ Dans mes services"
+msgstr "✓ En mis servicios"
 
 #: core/templates/core/partials/shortcut_button.html:3
-msgid "+ Ajouter à mes liens"
-msgstr "+ Añadir a mis enlaces"
+msgid "+ Ajouter à mes services"
+msgstr "+ Añadir a mis servicios"
 
 #: core/templates/core/partials/shortcut_list.html:3
 msgid "Réordonnez avec les flèches ↑ ↓ ou en glissant une carte."
@@ -3318,19 +3328,13 @@ msgstr "Reordene con las flechas ↑ ↓ o arrastrando una tarjeta."
 
 #: core/templates/core/partials/shortcut_list.html:23
 msgid ""
-"Un administrateur doit d'abord l'activer pour vous ; le lien apparaîtra "
-"ensuite."
+"Un administrateur doit d'abord l'activer pour vous ; il apparaîtra ensuite."
 msgstr ""
-"Un administrador debe activarlo primero para usted; el enlace aparecerá "
-"después."
+"Un administrador debe activarlo primero para usted; aparecerá después."
 
 #: core/templates/core/partials/shortcut_list.html:56
-msgid "Aucun lien pour l'instant."
-msgstr "Aún no hay enlaces."
-
-#: core/templates/core/partials/shortcut_list.html:56
-msgid "Ajoutez des services à vos liens"
-msgstr "Añada servicios a sus enlaces"
+msgid "Aucun service pour l'instant."
+msgstr "Aún no hay servicios."
 
 #: core/templates/core/partials/subscribed_entry_list.html:15
 msgid "Se désabonner de cette fiche ?"
@@ -3353,8 +3357,8 @@ msgid "Voir mon compte"
 msgstr "Ver"
 
 #: core/templates/core/raccourcis.html:3
-msgid "Services et liens — lesgrandsvoisins.com"
-msgstr "Servicios y enlaces — lesgrandsvoisins.com"
+msgid "Services — lesgrandsvoisins.com"
+msgstr "Servicios — lesgrandsvoisins.com"
 
 #: core/templates/core/raccourcis.html:5
 msgid ""
@@ -3363,8 +3367,8 @@ msgstr ""
 "Los servicios que ha elegido, para añadir o quitar en cualquier momento."
 
 #: core/templates/core/raccourcis.html:21
-msgid "Services à ajouter à mes liens"
-msgstr "Servicios para añadir a mis enlaces"
+msgid "Tous les services"
+msgstr "Todos los servicios"
 
 #: core/templates/core/raccourcis.html:22
 msgid "Ceux déjà ajoutés restent affichés : cliquez pour les retirer."
@@ -3531,10 +3535,6 @@ msgstr ""
 msgid "Aucun résultat pour « %(query)s »."
 msgstr "No hay resultados para «%(query)s»."
 
-#: core/templates/core/search.html:95 core/templates/core/tag_detail.html:81
-msgid "Services"
-msgstr "Servicios"
-
 #: core/templates/core/tag_detail.html:3
 #: core/templates/core/tag_detail.html:10 core/templates/core/tag_list.html:3
 #: core/templates/core/tag_list.html:10 core/templates/core/tag_list.html:13
@@ -3622,8 +3622,8 @@ msgstr ""
 "fallado. Vuelva a intentarlo más tarde."
 
 #: core/views.py:396
-msgid "Ajouter un lien vers un outil"
-msgstr "Añadir un enlace a una herramienta"
+msgid "Ajouter un service à mon compte"
+msgstr "Añadir un servicio a mi cuenta"
 
 #: core/views.py:400
 msgid "Présenter votre activité dans l'annuaire"
@@ -3805,10 +3805,10 @@ msgstr ""
 #, python-format
 msgid ""
 "Numéro de compte anonyme lesgrandsvoisins.com : %(number)s\n"
-"Il suffit, seul, pour retrouver vos liens sur un autre appareil. Nous n'en gardons qu'une empreinte : nous ne pourrons pas vous le redonner.\n"
+"Il suffit, seul, pour retrouver vos services sur un autre appareil. Nous n'en gardons qu'une empreinte : nous ne pourrons pas vous le redonner.\n"
 msgstr ""
 "Número de cuenta anónima de lesgrandsvoisins.com: %(number)s\n"
-"Basta por sí solo para recuperar sus enlaces en otro dispositivo. Solo conservamos una huella suya: no podremos devolvérselo.\n"
+"Basta por sí solo para recuperar sus servicios en otro dispositivo. Solo conservamos una huella suya: no podremos devolvérselo.\n"
 
 #: core/views.py:1081
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
@@ -3821,8 +3821,8 @@ msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "Ninguna cuenta corresponde a este número. Verifica las 16 cifras."
 
 #: core/views.py:1088
-msgid "Compte retrouvé. Vos liens sont de retour."
-msgstr "Cuenta recuperada. Sus enlaces han vuelto."
+msgid "Compte retrouvé. Vos services sont de retour."
+msgstr "Cuenta recuperada. Sus servicios han vuelto."
 
 #: core/views.py:1095
 msgid ""
@@ -3833,26 +3833,26 @@ msgstr ""
 "recuperarla."
 
 #: core/views.py:1106
-msgid "Vos liens anonymes ont rejoint votre compte."
-msgstr "Sus enlaces anónimos se han unido a su cuenta."
+msgid "Vos services anonymes ont rejoint votre compte."
+msgstr "Sus servicios anónimos se han unido a su cuenta."
 
 #: core/views.py:1124
 #, python-format
-msgid "« %(name)s » retiré de vos liens."
-msgstr "«%(name)s» quitado de sus enlaces."
+msgid "« %(name)s » retiré de vos services."
+msgstr "«%(name)s» quitado de sus servicios."
 
 #: core/views.py:1131
 #, python-format
-msgid "« %(name)s » ajouté à vos liens."
-msgstr "«%(name)s» añadido a sus enlaces."
+msgid "« %(name)s » ajouté à vos services."
+msgstr "«%(name)s» añadido a sus servicios."
 
 #: core/views.py:1134
 #, python-format
 msgid ""
-"« %(name)s » ajouté à vos liens, en attente de validation par un "
+"« %(name)s » ajouté à vos services, en attente de validation par un "
 "administrateur."
 msgstr ""
-"«%(name)s» añadido a sus enlaces, pendiente de validación por un "
+"«%(name)s» añadido a sus servicios, pendiente de validación por un "
 "administrador."
 
 #: core/views.py:1244

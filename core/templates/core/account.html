@@ -23,10 +23,10 @@
     {% if pending %}
       <section class="card" aria-labelledby="link-title">
         <h2 id="link-title">{% trans "Un compte anonyme est ouvert sur cet appareil" %}</h2>
-        <p>{% trans "Voulez-vous rattacher ses liens à votre compte ? Le compte anonyme sera ensuite supprimé." %}</p>
+        <p>{% trans "Voulez-vous rattacher ses services à votre compte ? Le compte anonyme sera ensuite supprimé." %}</p>
         <form method="post" action="{% url 'core:link_anonymous' %}">
           {% csrf_token %}
-          <button class="btn btn-sun" type="submit">{% trans "Rattacher mes liens" %}</button>
+          <button class="btn btn-sun" type="submit">{% trans "Rattacher mes services" %}</button>
         </form>
       </section>
     {% endif %}
@@ -57,7 +57,7 @@
                aria-label="{% trans "Aperçu de mon compte" %}">
         <a class="stat-tile" href="{% url 'core:raccourcis' %}">
           <span class="stat-number">{{ shortcuts|length }}</span>
-          <span class="stat-label">{% trans "Liens" %}</span>
+          <span class="stat-label">{% trans "Services" %}</span>
         </a>
         <a class="stat-tile" href="{% url 'core:groupes' %}">
           <span class="stat-number">{{ memberships|length }}</span>
@@ -128,10 +128,10 @@
       </section>
       <details class="account-accordion" id="sc2-title">
         <summary class="accordion-summary">
-          <h2>{% trans "Mes liens" %}</h2>
+          <h2>{% trans "Mes services" %}</h2>
           <a class="accordion-manage"
              href="{% url 'core:raccourcis' %}#available-services"
-             onclick="event.stopPropagation()">{% trans "Ajouter un lien" %}</a>
+             onclick="event.stopPropagation()">{% trans "Ajouter un service" %}</a>
         </summary>
         <div id="shortcuts-list">{% include "core/partials/shortcut_list.html" %}</div>
       </details>
@@ -252,7 +252,7 @@
         <section class="card" aria-labelledby="register-title">
           <h2 id="register-title">{% trans "Créer mon compte" %}</h2>
           <p>
-            {% trans "Un compte unique des Grands Voisins, le même pour tous les outils de l'association. Il retrouve vos liens, groupes, fiches et évènements sur tous vos appareils, et vous pouvez récupérer votre mot de passe par courriel." %}
+            {% trans "Un compte unique des Grands Voisins, le même pour tous les outils de l'association. Il retrouve vos services, groupes, fiches et évènements sur tous vos appareils, et vous pouvez récupérer votre mot de passe par courriel." %}
           </p>
           {% if OIDC_ENABLED %}
             <a class="btn btn-sun"
@@ -273,7 +273,7 @@
           <section class="card" aria-labelledby="anon-title">
             <h2 id="anon-title">{% trans "Rester anonyme" %}</h2>
             <p>
-              {% trans "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit pour retrouver vos liens. Sans ce numéro, le compte est perdu : aucun courriel de secours n'existe." %}
+              {% trans "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit pour retrouver vos services. Sans ce numéro, le compte est perdu : aucun courriel de secours n'existe." %}
             </p>
             {% if anon_allowed %}
               <form method="post" action="{% url 'core:create_anonymous' %}">

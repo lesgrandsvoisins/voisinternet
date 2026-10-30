@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 14:05+0100\n"
+"POT-Creation-Date: 2026-10-30 10:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -470,15 +470,15 @@ msgstr "الصفحات"
 msgid "← Précédent"
 msgstr "← السابق"
 
-#: cms/templates/cms/blog_index_page.html:52
+#: cms/templates/cms/blog_index_page.html:54
 msgid "Suivant →"
 msgstr "التالي →"
 
-#: cms/templates/cms/blog_index_page.html:58
+#: cms/templates/cms/blog_index_page.html:62
 msgid "Aucun article ne correspond à votre recherche."
 msgstr "لا توجد مقالات تطابق بحثك."
 
-#: cms/templates/cms/blog_index_page.html:58
+#: cms/templates/cms/blog_index_page.html:62
 msgid "Aucun article pour l'instant."
 msgstr "لا توجد مقالات حتى الآن."
 
@@ -673,8 +673,8 @@ msgstr ""
 
 #: core/accounts.py:56 core/accounts.py:61
 #, python-format
-msgid "mes liens (%d)"
-msgstr "روابطي (%d)"
+msgid "mes services (%d)"
+msgstr "خدماتي (%d)"
 
 #: core/accounts.py:56 core/menu.py:43 core/templates/core/home.html:255
 msgid "mon compte"
@@ -688,7 +688,7 @@ msgstr "تسجيل الدخول"
 msgid "compte anonyme"
 msgstr "حساب مجهول"
 
-#: core/auth.py:72
+#: core/auth.py:75
 #, python-format
 msgid ""
 "Bienvenue ! Votre identifiant de connexion est %(identifier)s : notez-le, il"
@@ -696,7 +696,7 @@ msgid ""
 msgstr ""
 "مرحبًا! اسم المستخدم لتسجيل الدخول هو %(identifier)s: دوّنه، فهو لا يتغيّر."
 
-#: core/auth.py:78
+#: core/auth.py:81
 #, python-format
 msgid "Vos adresses de courriel (une seule boîte) : %(addresses)s."
 msgstr "عناوين بريدك الإلكتروني (صندوق واحد): %(addresses)s."
@@ -810,17 +810,18 @@ msgstr "المحاور"
 msgid "à propos"
 msgstr "حول"
 
-#: core/menu.py:56
-msgid "Services et liens"
-msgstr "الخدمات والروابط"
+#: core/menu.py:56 core/templates/core/account.html:60
+#: core/templates/core/search.html:95 core/templates/core/tag_detail.html:81
+msgid "Services"
+msgstr "الخدمات"
 
 #: core/menu.py:57
 msgid "les services que vous avez choisis, à ajouter ou retirer"
 msgstr "الخدمات التي اخترتها، للإضافة أو الإزالة"
 
 #: core/menu.py:58
-msgid "se connecter, créer un compte, retrouver mes liens"
-msgstr "تسجيل الدخول، إنشاء حساب، استعادة روابطي"
+msgid "se connecter, créer un compte, retrouver mes services"
+msgstr "تسجيل الدخول، إنشاء حساب، استعادة خدماتي"
 
 #: core/menu.py:66 core/templates/core/account.html:140
 #: core/templates/core/groupes.html:12
@@ -1078,10 +1079,11 @@ msgstr "يتطلب الموافقة"
 msgid ""
 "Une intervention d'un administrateur est nécessaire avant que le service ne "
 "soit actif pour la personne (ex. création manuelle d'une boîte courriel) : "
-"le lien reste « en attente » jusqu'à validation (groupe « Administration »)."
+"le service reste « en attente » jusqu'à validation (groupe « Administration "
+"»)."
 msgstr ""
 "يلزم تدخل أحد المديرين قبل أن تصبح الخدمة فعّالة للشخص (مثل إنشاء صندوق بريد"
-" يدويًا): يبقى الرابط «قيد الانتظار» حتى التحقق منه (مجموعة «الإدارة»)."
+" يدويًا): يبقى الخدمة «قيد الانتظار» حتى التحقق منه (مجموعة «الإدارة»)."
 
 #: core/models.py:104
 msgid "service"
@@ -1110,8 +1112,8 @@ msgid "validé"
 msgstr "تمت الموافقة"
 
 #: core/models.py:180 core/models.py:692
-msgid "lien"
-msgstr "رابط"
+msgid "service choisi"
+msgstr "خدمة مختارة"
 
 #: core/models.py:195
 msgid "appartenance"
@@ -1621,8 +1623,8 @@ msgid "détectée : compte nommé (connecté)"
 msgstr "يُكتشف تلقائيًا: حساب باسم (مسجّل الدخول)"
 
 #: core/models.py:678
-msgid "détectée : a un lien"
-msgstr "يُكتشف تلقائيًا: لديه رابط"
+msgid "détectée : a un service"
+msgstr "يُكتشف تلقائيًا: لديه خدمة"
 
 #: core/models.py:679
 msgid "détectée : a rejoint un groupe"
@@ -1812,13 +1814,13 @@ msgstr "هناك حساب مجهول مفتوح على هذا الجهاز"
 
 #: core/templates/core/account.html:26
 msgid ""
-"Voulez-vous rattacher ses liens à votre compte ? Le compte anonyme sera "
+"Voulez-vous rattacher ses services à votre compte ? Le compte anonyme sera "
 "ensuite supprimé."
-msgstr "هل تريد ربط روابطه بحسابك؟ سيُحذف الحساب المجهول بعد ذلك."
+msgstr "هل تريد ربط خدماته بحسابك؟ سيُحذف الحساب المجهول بعد ذلك."
 
 #: core/templates/core/account.html:29
-msgid "Rattacher mes liens"
-msgstr "ربط روابطي"
+msgid "Rattacher mes services"
+msgstr "ربط خدماتي"
 
 #: core/templates/core/account.html:36
 msgid "Premiers pas"
@@ -1841,10 +1843,6 @@ msgstr "عرض كل المسارات الإرشادية"
 #: core/templates/core/account.html:57
 msgid "Aperçu de mon compte"
 msgstr "نظرة عامة على حسابي"
-
-#: core/templates/core/account.html:60
-msgid "Liens"
-msgstr "الروابط"
 
 #: core/templates/core/account.html:64
 msgid "Groupes"
@@ -1906,12 +1904,12 @@ msgid "Fermer ce compte sur cet appareil"
 msgstr "إغلاق هذا الحساب على هذا الجهاز"
 
 #: core/templates/core/account.html:131 core/templates/core/raccourcis.html:12
-msgid "Mes liens"
-msgstr "روابطي"
+msgid "Mes services"
+msgstr "خدماتي"
 
 #: core/templates/core/account.html:134
-msgid "Ajouter un lien"
-msgstr "إضافة رابط"
+msgid "Ajouter un service"
+msgstr "إضافة خدمة"
 
 #: core/templates/core/account.html:143 core/views.py:398
 msgid "Rejoindre un groupe"
@@ -1989,10 +1987,11 @@ msgstr "إنشاء حسابي"
 #: core/templates/core/account.html:255
 msgid ""
 "Un compte unique des Grands Voisins, le même pour tous les outils de "
-"l'association. Il retrouve vos liens, groupes, fiches et évènements sur tous"
-" vos appareils, et vous pouvez récupérer votre mot de passe par courriel."
+"l'association. Il retrouve vos services, groupes, fiches et évènements sur "
+"tous vos appareils, et vous pouvez récupérer votre mot de passe par "
+"courriel."
 msgstr ""
-"حساب واحد لـ Grands Voisins، هو نفسه لجميع أدوات الجمعية. يستعيد روابطك "
+"حساب واحد لـ Grands Voisins، هو نفسه لجميع أدوات الجمعية. يستعيد خدماتك "
 "ومجموعاتك وبطاقاتك وفعالياتك على جميع أجهزتك، ويمكنك استرداد كلمة المرور عبر"
 " البريد الإلكتروني."
 
@@ -2026,10 +2025,10 @@ msgstr "البقاء مجهولًا"
 #: core/templates/core/account.html:276
 msgid ""
 "Un numéro de 16 chiffres, sans nom ni courriel. Vous le notez, il suffit "
-"pour retrouver vos liens. Sans ce numéro, le compte est perdu : aucun "
+"pour retrouver vos services. Sans ce numéro, le compte est perdu : aucun "
 "courriel de secours n'existe."
 msgstr ""
-"رقم من 16 خانة، بلا اسم ولا بريد إلكتروني. دوّنه، فهو يكفي لاستعادة روابطك. "
+"رقم من 16 خانة، بلا اسم ولا بريد إلكتروني. دوّنه، فهو يكفي لاستعادة خدماتك. "
 "بدون هذا الرقم يضيع الحساب: لا يوجد بريد إلكتروني للاسترداد."
 
 #: core/templates/core/account.html:281 core/templates/core/account.html:293
@@ -2713,6 +2712,7 @@ msgstr ""
 "الفضول وجار."
 
 #: core/templates/core/home.html:233
+#: core/templates/core/partials/shortcut_list.html:56
 msgid "Choisissez vos services"
 msgstr "اختر خدماتك"
 
@@ -2763,9 +2763,9 @@ msgstr "الخدمات"
 
 #: core/templates/core/home.html:258
 msgid ""
-"Ajoutez ceux qui vous intéressent. Ils rejoignent vos liens dans « mon "
+"Ajoutez ceux qui vous intéressent. Ils rejoignent vos services dans « mon "
 "Compte », même sans compte nominatif."
-msgstr "أضف ما يهمك. ينضم إلى روابطك في «حسابي»، حتى بدون حساب باسمك."
+msgstr "أضف ما يهمك. ينضم إلى خدماتك في «حسابي»، حتى بدون حساب باسمك."
 
 #: core/templates/core/home.html:262
 msgid "Tous les services, avec ce que chacun conserve"
@@ -3223,49 +3223,59 @@ msgstr "مركز اجتماعي"
 msgid "Atelier"
 msgstr "ورشة"
 
-#: core/templates/core/partials/service_list.html:4
+#: core/templates/core/partials/service_list.html:11
 msgid "Autres"
 msgstr "أخرى"
 
-#: core/templates/core/partials/service_list.html:15
-#, python-format
-msgid "Ouvrir %(name)s"
-msgstr "فتح %(name)s"
+#: core/templates/core/partials/service_list.html:26
+msgid "Plus d'informations"
+msgstr "مزيد من المعلومات"
 
-#: core/templates/core/partials/service_list.html:17
-#: core/templates/core/partials/shortcut_list.html:20
-msgid "Bientôt"
-msgstr "قريبًا"
-
-#: core/templates/core/partials/service_list.html:22
+#: core/templates/core/partials/service_list.html:29
 msgid "Ce qui reste anonyme, ce que nous conservons"
 msgstr "ما يبقى مجهولاً، وما نحتفظ به"
 
 #: core/templates/core/partials/service_list.html:36
+#, python-format
+msgid "Ouvrir %(name)s"
+msgstr "فتح %(name)s"
+
+#: core/templates/core/partials/service_list.html:36
+msgid "Ouvrir"
+msgstr "فتح"
+
+#: core/templates/core/partials/service_list.html:38
+#: core/templates/core/partials/shortcut_list.html:20
+msgid "Bientôt"
+msgstr "قريبًا"
+
+#: core/templates/core/partials/service_list.html:51
+#: core/templates/core/partials/service_list.html:75
 msgid "Aucun service pour l'instant"
 msgstr "لا توجد خدمة حتى الآن"
 
-#: core/templates/core/partials/service_list.html:37
+#: core/templates/core/partials/service_list.html:51
+#: core/templates/core/partials/service_list.html:76
 msgid "Les services apparaîtront ici dès qu'ils seront ouverts."
 msgstr "ستظهر الخدمات هنا فور توفرها."
 
 #: core/templates/core/partials/shortcut_button.html:3
 #, python-format
-msgid "Retirer %(name)s de mes liens"
-msgstr "إزالة %(name)s من روابطي"
+msgid "Retirer %(name)s de mes services"
+msgstr "إزالة %(name)s من خدماتي"
 
 #: core/templates/core/partials/shortcut_button.html:3
 #, python-format
-msgid "Ajouter %(name)s à mes liens"
-msgstr "إضافة %(name)s إلى روابطي"
+msgid "Ajouter %(name)s à mes services"
+msgstr "إضافة %(name)s إلى خدماتي"
 
 #: core/templates/core/partials/shortcut_button.html:3
-msgid "✓ Dans mes liens"
-msgstr "✓ ضمن روابطي"
+msgid "✓ Dans mes services"
+msgstr "✓ ضمن خدماتي"
 
 #: core/templates/core/partials/shortcut_button.html:3
-msgid "+ Ajouter à mes liens"
-msgstr "+ إضافة إلى روابطي"
+msgid "+ Ajouter à mes services"
+msgstr "+ إضافة إلى خدماتي"
 
 #: core/templates/core/partials/shortcut_list.html:3
 msgid "Réordonnez avec les flèches ↑ ↓ ou en glissant une carte."
@@ -3273,17 +3283,12 @@ msgstr "أعد الترتيب بالسهمين ↑ ↓ أو بسحب بطاقة.
 
 #: core/templates/core/partials/shortcut_list.html:23
 msgid ""
-"Un administrateur doit d'abord l'activer pour vous ; le lien apparaîtra "
-"ensuite."
-msgstr "يجب أن يفعّله لك أحد المديرين أولًا؛ ثم يظهر الرابط."
+"Un administrateur doit d'abord l'activer pour vous ; il apparaîtra ensuite."
+msgstr "يجب أن يفعّله لك أحد المديرين أولًا؛ ثم يظهر."
 
 #: core/templates/core/partials/shortcut_list.html:56
-msgid "Aucun lien pour l'instant."
-msgstr "لا توجد روابط حتى الآن."
-
-#: core/templates/core/partials/shortcut_list.html:56
-msgid "Ajoutez des services à vos liens"
-msgstr "أضف خدمات إلى روابطك"
+msgid "Aucun service pour l'instant."
+msgstr "لا توجد خدمات حتى الآن."
 
 #: core/templates/core/partials/subscribed_entry_list.html:15
 msgid "Se désabonner de cette fiche ?"
@@ -3306,8 +3311,8 @@ msgid "Voir mon compte"
 msgstr "عرض"
 
 #: core/templates/core/raccourcis.html:3
-msgid "Services et liens — lesgrandsvoisins.com"
-msgstr "الخدمات والروابط — lesgrandsvoisins.com"
+msgid "Services — lesgrandsvoisins.com"
+msgstr "الخدمات — lesgrandsvoisins.com"
 
 #: core/templates/core/raccourcis.html:5
 msgid ""
@@ -3315,8 +3320,8 @@ msgid ""
 msgstr "الخدمات التي اخترتها، للإضافة أو الإزالة في أي وقت."
 
 #: core/templates/core/raccourcis.html:21
-msgid "Services à ajouter à mes liens"
-msgstr "خدمات لإضافتها إلى روابطي"
+msgid "Tous les services"
+msgstr "جميع الخدمات"
 
 #: core/templates/core/raccourcis.html:22
 msgid "Ceux déjà ajoutés restent affichés : cliquez pour les retirer."
@@ -3475,10 +3480,6 @@ msgstr "اكتب كلمة مفتاحية للبحث في صفحات الموقع
 msgid "Aucun résultat pour « %(query)s »."
 msgstr "لا توجد نتائج لـ«%(query)s»."
 
-#: core/templates/core/search.html:95 core/templates/core/tag_detail.html:81
-msgid "Services"
-msgstr "الخدمات"
-
 #: core/templates/core/tag_detail.html:3
 #: core/templates/core/tag_detail.html:10 core/templates/core/tag_list.html:3
 #: core/templates/core/tag_list.html:10 core/templates/core/tag_list.html:13
@@ -3561,8 +3562,8 @@ msgstr ""
 "تم تسجيل رسالتك، لكن إرسالها بالبريد الإلكتروني فشل. أعد المحاولة لاحقًا."
 
 #: core/views.py:396
-msgid "Ajouter un lien vers un outil"
-msgstr "إضافة رابط إلى أداة"
+msgid "Ajouter un service à mon compte"
+msgstr "إضافة خدمة إلى حسابي"
 
 #: core/views.py:400
 msgid "Présenter votre activité dans l'annuaire"
@@ -3735,10 +3736,10 @@ msgstr ""
 #, python-format
 msgid ""
 "Numéro de compte anonyme lesgrandsvoisins.com : %(number)s\n"
-"Il suffit, seul, pour retrouver vos liens sur un autre appareil. Nous n'en gardons qu'une empreinte : nous ne pourrons pas vous le redonner.\n"
+"Il suffit, seul, pour retrouver vos services sur un autre appareil. Nous n'en gardons qu'une empreinte : nous ne pourrons pas vous le redonner.\n"
 msgstr ""
 "رقم الحساب المجهول في lesgrandsvoisins.com: %(number)s\n"
-"يكفي وحده لاستعادة روابطك على جهاز آخر. نحتفظ ببصمته فقط: لن نتمكن من إعادته إليك.\n"
+"يكفي وحده لاستعادة خدماتك على جهاز آخر. نحتفظ ببصمته فقط: لن نتمكن من إعادته إليك.\n"
 
 #: core/views.py:1081
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
@@ -3749,8 +3750,8 @@ msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "لا يوجد حساب مطابق لهذا الرقم. تحقق من الخانات الـ16."
 
 #: core/views.py:1088
-msgid "Compte retrouvé. Vos liens sont de retour."
-msgstr "تم العثور على الحساب. عادت روابطك."
+msgid "Compte retrouvé. Vos services sont de retour."
+msgstr "تم العثور على الحساب. عادت خدماتك."
 
 #: core/views.py:1095
 msgid ""
@@ -3759,25 +3760,25 @@ msgid ""
 msgstr "لم يعد هذا الحساب مفتوحًا على هذا الجهاز. رقمك يتيح لك استعادته."
 
 #: core/views.py:1106
-msgid "Vos liens anonymes ont rejoint votre compte."
-msgstr "انضمت روابطك المجهولة إلى حسابك."
+msgid "Vos services anonymes ont rejoint votre compte."
+msgstr "انضمت خدماتك المجهولة إلى حسابك."
 
 #: core/views.py:1124
 #, python-format
-msgid "« %(name)s » retiré de vos liens."
-msgstr "تمت إزالة «%(name)s» من روابطك."
+msgid "« %(name)s » retiré de vos services."
+msgstr "تمت إزالة «%(name)s» من خدماتك."
 
 #: core/views.py:1131
 #, python-format
-msgid "« %(name)s » ajouté à vos liens."
-msgstr "تمت إضافة «%(name)s» إلى روابطك."
+msgid "« %(name)s » ajouté à vos services."
+msgstr "تمت إضافة «%(name)s» إلى خدماتك."
 
 #: core/views.py:1134
 #, python-format
 msgid ""
-"« %(name)s » ajouté à vos liens, en attente de validation par un "
+"« %(name)s » ajouté à vos services, en attente de validation par un "
 "administrateur."
-msgstr "تمت إضافة «%(name)s» إلى روابطك، في انتظار تحقق أحد المديرين."
+msgstr "تمت إضافة «%(name)s» إلى خدماتك، في انتظار تحقق أحد المديرين."
 
 #: core/views.py:1244
 #, python-format

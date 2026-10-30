@@ -20,7 +20,7 @@
               {% if not shortcut.approved %}<span class="chip">{% trans "En attente de validation" %}</span>{% elif not service.url %}<span class="chip">{% trans "Bientôt" %}</span>{% endif %}
             </h3>
             <p>{{ service.summary }}</p>
-            {% if not shortcut.approved %}<p class="muted">{% trans "Un administrateur doit d'abord l'activer pour vous ; le lien apparaîtra ensuite." %}</p>{% endif %}
+            {% if not shortcut.approved %}<p class="muted">{% trans "Un administrateur doit d'abord l'activer pour vous ; il apparaîtra ensuite." %}</p>{% endif %}
           </div>
           <div class="shortcut-tools">
             <form method="post"
@@ -53,6 +53,6 @@
   </ul>
 {% else %}
   <p class="intro">
-    {% trans "Aucun lien pour l'instant." %} <a href="{% url 'core:raccourcis' %}#available-services">{% trans "Ajoutez des services à vos liens" %}</a>, {% trans "ils apparaîtront ici." %}
+    {% trans "Aucun service pour l'instant." %} <a href="{% url 'core:raccourcis' %}#available-services">{% trans "Choisissez vos services" %}</a>, {% trans "ils apparaîtront ici." %}
   </p>
 {% endif %}

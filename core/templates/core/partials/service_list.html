@@ -1,41 +1,81 @@
 {% load i18n markdown_filters %}
-<ul class="svc">
-  {% for service in services %}
-    {% if details %}{% ifchanged service.category_id %}<li class="svc-cat" role="presentation"><p>{% if service.category %}{{ service.category.name }}{% else %}{% trans "Autres" %}{% endif %}</p></li>{% endifchanged %}{% endif %}
-    <li {% if service.featured %}class="feat"{% endif %}>
-      {% if service.icon %}
-        <img class="svc-icon" src="{{ service.icon.url }}" alt="">
-      {% else %}
-        <span class="led" aria-hidden="true"></span>
-      {% endif %}
-      <div>
-        <h3>{{ service.name }}</h3>
-        <p>{{ service.summary }}</p>
-        {% if service.url %}
-          <p><a class="open-link" href="{{ service.url }}" target="_blank" rel="noopener">{% blocktrans with name=service.name %}Ouvrir {{ name }}{% endblocktrans %} <span aria-hidden="true">↗</span></a></p>
-        {% else %}
-          <p><span class="chip">{% trans "Bientôt" %}</span></p>
-        {% endif %}
-        {% if details and service.description %}<div class="markdown">{{ service.description|markdown }}</div>{% endif %}
-        {% if details and service.retention %}
-          <details class="retention">
-            <summary>{% trans "Ce qui reste anonyme, ce que nous conservons" %}</summary>
-            <div class="markdown">{{ service.retention|markdown }}</div>
-          </details>
-        {% endif %}
-      </div>
-      {% if service.pk in shortcut_ids %}
-        {% include "core/partials/shortcut_button.html" with added=True %}
-      {% else %}
-        {% include "core/partials/shortcut_button.html" with added=False %}
-      {% endif %}
-    </li>
+{% comment %}
+Deux présentations : compacte (accueil : une ligne par service) et, avec « details », catalogue en cartes rangées par
+catégorie — chaque catégorie est sa propre section (titre pleine largeur, grille de cartes), jamais une cellule de la
+grille ; la description et ce que l'association conserve sont repliées dans « Plus d'informations ».
+{% endcomment %}
+{% if details %}
+  {% regroup services by category as groupes %}
+  {% for groupe in groupes %}
+    <section class="svc-group" {% if groupe.grouper %}aria-labelledby="cat-{{ groupe.grouper.slug }}"{% endif %}>
+      <h3 class="svc-cat" {% if groupe.grouper %}id="cat-{{ groupe.grouper.slug }}"{% endif %}>{% if groupe.grouper %}{{ groupe.grouper.name }}{% else %}{% trans "Autres" %}{% endif %}</h3>
+      <ul class="svc svc-cards">
+        {% for service in groupe.list %}
+          <li class="svc-card{% if service.featured %} feat{% endif %}">
+            <div class="svc-card-head">
+              {% if service.icon %}
+                <img class="svc-icon" src="{{ service.icon.url }}" alt="">
+              {% else %}
+                <span class="led" aria-hidden="true"></span>
+              {% endif %}
+              <h4>{{ service.name }}</h4>
+            </div>
+            <p class="svc-summary">{{ service.summary }}</p>
+            {% if service.description or service.retention %}
+              <details class="svc-more">
+                <summary>{% trans "Plus d'informations" %}</summary>
+                {% if service.description %}<div class="markdown">{{ service.description|markdown }}</div>{% endif %}
+                {% if service.retention %}
+                  <p class="svc-retention-title"><strong>{% trans "Ce qui reste anonyme, ce que nous conservons" %}</strong></p>
+                  <div class="markdown">{{ service.retention|markdown }}</div>
+                {% endif %}
+              </details>
+            {% endif %}
+            <div class="svc-card-foot">
+              {% if service.url %}
+                <a class="open-link" href="{{ service.url }}" target="_blank" rel="noopener" aria-label="{% blocktrans with name=service.name %}Ouvrir {{ name }}{% endblocktrans %}">{% trans "Ouvrir" %} <span aria-hidden="true">↗</span></a>
+              {% else %}
+                <span class="chip">{% trans "Bientôt" %}</span>
+              {% endif %}
+              {% if service.pk in shortcut_ids %}
+                {% include "core/partials/shortcut_button.html" with added=True %}
+              {% else %}
+                {% include "core/partials/shortcut_button.html" with added=False %}
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
   {% empty %}
-    <li class="empty">
-      <div>
-        <h3>{% trans "Aucun service pour l'instant" %}</h3>
-        <p>{% trans "Les services apparaîtront ici dès qu'ils seront ouverts." %}</p>
-      </div>
-    </li>
+    <p class="intro">{% trans "Aucun service pour l'instant" %}. {% trans "Les services apparaîtront ici dès qu'ils seront ouverts." %}</p>
   {% endfor %}
-</ul>
+{% else %}
+  <ul class="svc">
+    {% for service in services %}
+      <li {% if service.featured %}class="feat"{% endif %}>
+        {% if service.icon %}
+          <img class="svc-icon" src="{{ service.icon.url }}" alt="">
+        {% else %}
+          <span class="led" aria-hidden="true"></span>
+        {% endif %}
+        <div>
+          <h3><a target="_new" href="{{ service.url }}">{{ service.name }}</a></h3>
+          <p>{{ service.summary }}</p>
+        </div>
+        {% if service.pk in shortcut_ids %}
+          {% include "core/partials/shortcut_button.html" with added=True %}
+        {% else %}
+          {% include "core/partials/shortcut_button.html" with added=False %}
+        {% endif %}
+      </li>
+    {% empty %}
+      <li class="empty">
+        <div>
+          <h3>{% trans "Aucun service pour l'instant" %}</h3>
+          <p>{% trans "Les services apparaîtront ici dès qu'ils seront ouverts." %}</p>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

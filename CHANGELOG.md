@@ -2,6 +2,8 @@
 
 Changements notables de `www.lesgrandsvoisins.com` (voisinternet), branche de travail UX. Format inspiré de *Keep a Changelog* ; rubriques *Added*, *Changed*, *Fixed*, *Security*, *Removed*, contenu en français. Les décisions et ce qui reste à faire sont dans [BACKLOG.md](BACKLOG.md). Les besoins côté serveur passent par `docs/DEMANDES-UX.md` du dépôt `chris2fr/flakeops` (branche `ux/demandes-ux`).
 
+- `deploy/verifier-env.sh` : contrôle du fichier d'environnement sans afficher les secrets (format, doublons, clés requises, hôtes, pepper vide).
+
 ## [Unreleased]
 ### Added
 - **`manage.py purger_comptes_anonymes [--jours N] [--appliquer]`** (BACKLOG U-029) : supprime les comptes ANONYMES inutilisés (aucune donnée rattachée : services, groupes, fiches, dons, évènements, parcours, redirections… — contrôlé sur toutes les relations du modèle — et pas vus depuis N jours, 30 par défaut). Ne touche jamais un compte nommé, un compte anonyme qui a la moindre donnée, ni un compte récent. Simulation par défaut, avec le détail de ce qui est gardé et pourquoi. +1 test.

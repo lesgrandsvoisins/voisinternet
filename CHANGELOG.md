@@ -3,6 +3,7 @@
 Changements notables de `www.lesgrandsvoisins.com` (voisinternet), branche de travail UX. Format inspiré de *Keep a Changelog* ; rubriques *Added*, *Changed*, *Fixed*, *Security*, *Removed*, contenu en français. Les décisions et ce qui reste à faire sont dans [BACKLOG.md](BACKLOG.md). Les besoins côté serveur passent par `docs/DEMANDES-UX.md` du dépôt `chris2fr/flakeops` (branche `ux/demandes-ux`).
 
 - `deploy/verifier-env.sh` : contrôle du fichier d'environnement sans afficher les secrets (format, doublons, clés requises, hôtes, pepper vide).
+- `verifier-env.sh` : une origine CSRF `http://` sur adresse interne n'est plus une erreur.
 
 ## [Unreleased]
 ### Added

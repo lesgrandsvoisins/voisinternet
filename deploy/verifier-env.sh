@@ -42,6 +42,6 @@ for h in www.lesgrandsvoisins.com; do [[ ",${hotes:-}," == *",$h,"* ]] && echo "
 for h in www.resdigita.com; do [[ ",${hotes:-}," == *",$h,"* ]] && echo "INFO $h est dans DJANGO_ALLOWED_HOSTS (prêt pour le tableau de bord)" || echo "INFO $h n'est pas encore dans DJANGO_ALLOWED_HOSTS"; done
 for o in https://www.lesgrandsvoisins.com; do [[ ",${origines:-}," == *",$o,"* ]] && echo "OK   $o dans DJANGO_CSRF_TRUSTED_ORIGINS" || echo "AVERT $o absent de DJANGO_CSRF_TRUSTED_ORIGINS"; done
 [[ ",${origines:-}," == *",https://www.resdigita.com,"* ]] && echo "INFO https://www.resdigita.com est dans DJANGO_CSRF_TRUSTED_ORIGINS" || echo "INFO https://www.resdigita.com n'est pas encore dans DJANGO_CSRF_TRUSTED_ORIGINS"
-IFS=',' read -ra lst <<< "${origines:-}"; for o in "${lst[@]}"; do [[ -z "$o" || "$o" == https://* ]] || { echo "KO   origine CSRF sans https:// : $o"; ko=1; }; done
+IFS=',' read -ra lst <<< "${origines:-}"; for o in "${lst[@]}"; do [[ -z "$o" || "$o" == https://* ]] || { [[ "$o" =~ ^http://(192\.168|10\.|127\.)[0-9.]*$ ]] && echo "INFO origine CSRF http:// sur adresse interne : $o (normal)" || { echo "KO   origine CSRF sans https:// : $o"; ko=1; }; }; done
 echo "--- $([ $ko -eq 0 ] && echo 'Aucune erreur' || echo 'ERREURS à corriger')$([ $avert -eq 1 ] && echo ', avec des avertissements')"
 exit $ko

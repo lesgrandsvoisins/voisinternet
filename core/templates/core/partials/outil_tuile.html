@@ -1,0 +1,12 @@
+{% load i18n %}
+<li class="outil">
+  {% if service.url %}
+    <a href="{{ service.url }}" target="_blank" rel="noopener" title="{{ service.summary }}">
+  {% else %}
+    <span class="outil-sans-adresse" title="{% trans "Bientôt" %}">
+  {% endif %}
+    {% if service.icon %}<img class="svc-icon" src="{{ service.icon.url }}" alt="">{% else %}<span class="led" aria-hidden="true"></span>{% endif %}
+    <span class="outil-nom">{{ service.name }}</span>
+    <span class="outil-resume">{{ service.summary }}</span>
+  {% if service.url %}</a>{% else %}</span>{% endif %}
+</li>

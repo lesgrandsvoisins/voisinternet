@@ -164,7 +164,7 @@ def home(request):
     recent_posts = BlogPostPage.objects.live().filter(locale_id=active_lang.id).order_by("-date")[:3]
 
     return render(request, "core/home.html", {
-        "services": Service.objects.filter(active=True)[:6],
+        "services": _visible_services(request.user)[:6],
         "shortcut_ids": _shortcut_ids(request),
         "books": GuideBook.objects.filter(published=True)[:4],
         "posts": recent_posts,
@@ -254,9 +254,8 @@ def search(request):
         for event in events:
             event.search_lead = _text_lead(event.description) or event.location
 
-        services = list(Service.objects.filter(
+        services = list(_visible_services(request.user).filter(
             Q(name__icontains=query) | Q(summary__icontains=query) | Q(description__icontains=query),
-            active=True,
         )[:20])
 
         from .wikijs import search as wikijs_search
@@ -284,7 +283,7 @@ def tag_detail(request, slug):
     
     tag = get_object_or_404(Tag, slug=slug)
     entries = tag.directory_entries.filter(visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True)
-    services = tag.services.filter(active=True)
+    services = tag.services.filter(active=True, **({} if _is_administration(request.user) else {"administration_only": False}))
     events = tag.events.filter(public=True, start__gte=timezone.now()).order_by("start")
     from cms.models import BlogPostPage, PolePage, ProjectPage
 
@@ -510,10 +509,18 @@ def faire_don_merci(request):
     })
 
 
-def _catalogue():
+def _visible_services(user):
+    """Services proposés que cette personne a le droit de voir (les outils d'administration sont réservés au groupe)."""
+    qs = Service.objects.filter(active=True)
+    if not _is_administration(user):
+        qs = qs.filter(administration_only=False)
+    return qs
+
+
+def _catalogue(user=None):
     """Services proposés, rangés par catégorie (celles sans catégorie à la fin)."""
     return sorted(
-        Service.objects.filter(active=True).select_related("category"),
+        _visible_services(user).select_related("category"),
         key=lambda s: (s.category is None, s.category.order if s.category else 0,
                        s.category.name if s.category else "", s.order, s.name),
     )
@@ -527,7 +534,7 @@ def raccourcis(request):
     shortcut_ids = set(shortcuts.values_list("service_id", flat=True))
     # Reste dans la liste une fois ajouté (bouton « Dans mes liens », qui permet de le retirer) :
     # la carte ne doit pas disparaître d'un coup sous le pointeur au moment du clic.
-    available_services = _catalogue()
+    available_services = _catalogue(request.user)
     return render(request, "core/raccourcis.html", {
         "account": acc,
         "shortcuts": shortcuts,
@@ -1142,7 +1149,7 @@ def toggle_shortcut(request, slug):
         account = current_account(request)
         shortcut_ids = set(account.shortcut_set.values_list("service_id", flat=True)) if account else set()
         shortcuts = account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name") if account else []
-        available_services = _catalogue()
+        available_services = _catalogue(request.user)
         return render(request, "core/partials/shortcut_response.html", {
             "service": service,
             "added": added,
@@ -1603,4 +1610,22 @@ def redirection_confirmer(request, token):
         return render(request, "core/redirection_confirmer.html", {"done": True})
     return render(request, "core/redirection_confirmer.html", {
         "demande": demande, "identifier": demande.account.user.get_username() if demande.account.user_id else "",
+    })
+
+
+
+# --- Tableau de bord des outils (domaine « côté ordinateur », ex. www.resdigita.com ; réglage OUTILS_HOSTS) --------------
+
+def outils(request):
+    """
+    Tableau de bord public de TOUS les outils : une grille compacte par catégorie, un clic pour ouvrir, sans connexion.
+    Les outils d'administration n'y figurent que pour le groupe « Administration ». Les services choisis par la personne
+    (si elle a un compte) sont rappelés en tête.
+    """
+    services = _catalogue(request.user)
+    acc = current_account(request)
+    mes_ids = set(acc.shortcut_set.values_list("service_id", flat=True)) if acc else set()
+    return render(request, "core/outils.html", {
+        "services": services,
+        "mes_services": [s for s in services if s.pk in mes_ids],
     })

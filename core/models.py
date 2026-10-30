@@ -89,6 +89,10 @@ class Service(models.Model):
     tags = models.ManyToManyField("Tag", blank=True, related_name="services", verbose_name=_("étiquettes"))
     featured = models.BooleanField(_("mis en avant"), default=False)
     active = models.BooleanField(_("proposé"), default=True)
+    administration_only = models.BooleanField(
+        _("réservé à l'administration"), default=False,
+        help_text=_("Outil d'administration (Keycloak, listes de diffusion…) : visible seulement du groupe « Administration »."),
+    )
     requires_approval = models.BooleanField(
         _("nécessite une validation"), default=False,
         help_text=_(

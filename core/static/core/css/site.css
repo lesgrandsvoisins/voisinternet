@@ -4275,3 +4275,13 @@ a.prevnext {
 .svc-card-foot .shortcut { margin: 0; }
 .svc .pending { opacity: .65; }
 .open-link { font-weight: 600; overflow-wrap: anywhere; }
+
+/* Tableau de bord des outils : tuiles compactes, un clic */
+.outils-group + .outils-group { margin-top: 1.75rem; }
+.outils-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: .75rem; }
+.outil > a, .outil > .outil-sans-adresse { display: grid; grid-template-columns: auto 1fr; column-gap: .65rem; align-items: center; height: 100%; padding: .75rem .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; color: inherit; text-decoration: none; }
+.outil > a:hover, .outil > a:focus-visible { background: var(--hover); border-color: var(--ink); }
+.outil .outil-nom { font-weight: 700; overflow-wrap: anywhere; }
+.outil .outil-resume { grid-column: 2; font-size: .85rem; color: var(--ink-soft); overflow-wrap: anywhere; }
+.outil-sans-adresse { opacity: .6; }
+.outils-group h2.svc-cat { font-family: inherit; font-size: .9rem; margin-bottom: .75rem; }

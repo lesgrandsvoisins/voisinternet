@@ -1986,3 +1986,29 @@ class CatalogueServicesTests(Base):
         for slug in ["guichet", "ghost", "discourse"]:
             self.assertFalse(Service.objects.get(slug=slug).active, slug)
         self.assertEqual(Service.objects.get(slug="blog-lesgrandsvoisins-com").url, "https://www.lesgrandsvoisins.com/fr/blog/")
+
+
+class TableauDeBordOutilsTests(Base):
+    def test_dashboard_is_public_and_groups_by_category(self):
+        response = self.client.get(reverse("core:outils"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Tous les outils")
+        self.assertContains(response, self.service.name)
+
+    def test_administration_tools_are_hidden_from_others(self):
+        from django.contrib.auth.models import Group
+        Service.objects.create(name="Keycloak admin", slug="kc-admin", summary="x", url="https://key.example/admin",
+                               administration_only=True)
+        self.assertNotContains(self.client.get(reverse("core:outils")), "Keycloak admin")
+        self.assertNotContains(self.client.get(reverse("core:search") + "?q=Keycloak"), "Keycloak admin")
+        user = get_user_model().objects.create_user("sub-adm")
+        user.groups.add(Group.objects.get_or_create(name="Administration")[0])
+        self.client.force_login(user)
+        self.assertContains(self.client.get(reverse("core:outils")), "Keycloak admin")
+
+    @override_settings(OUTILS_HOSTS=["outils.example"], ALLOWED_HOSTS=["outils.example", "testserver"])
+    def test_home_of_the_tools_host_is_the_dashboard(self):
+        response = self.client.get("/fr/", HTTP_HOST="outils.example")
+        self.assertContains(response, "Tous les outils")
+        autre = self.client.get("/fr/", HTTP_HOST="testserver")
+        self.assertNotContains(autre, "Tous les outils")

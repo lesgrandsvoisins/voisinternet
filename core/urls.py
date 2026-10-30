@@ -28,6 +28,7 @@ urlpatterns = [
     path("account/parcours/", views.parcours, name="parcours"),
     path("account/parcours/etape/<int:pk>/", views.parcours_step, name="parcours_step"),
     path("account/parcours/<slug:slug>/", views.parcours_detail, name="parcours_detail"),
+    path("outils/", views.outils, name="outils"),
     path("account/raccourcis/", views.raccourcis, name="raccourcis"),
     path("account/courriel/redirection/", views.redirection_courrier, name="redirection_courrier"),
     path("account/courriel/redirection/confirmer/<str:token>/", views.redirection_confirmer, name="redirection_confirmer"),

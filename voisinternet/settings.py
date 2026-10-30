@@ -78,11 +78,15 @@ INSTALLED_APPS = [
 if OIDC_ENABLED:
     INSTALLED_APPS.append("mozilla_django_oidc")
 
+# Noms de domaine dont la page d'accueil est le tableau de bord des outils (core.middleware.HoteOutilsMiddleware).
+OUTILS_HOSTS = env_list("VOISINTERNET_OUTILS_HOSTS")
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "core.middleware.HoteOutilsMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",

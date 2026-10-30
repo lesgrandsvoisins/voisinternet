@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-30 10:13+0100\n"
+"POT-Creation-Date: 2026-10-30 11:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,8 +57,8 @@ msgstr "Grande, a la derecha"
 msgid "Métadonnées héritées (import .qmd)"
 msgstr "Metadatos heredados (importación .qmd)"
 
-#: cms/models.py:71 cms/models.py:144 cms/models.py:887 core/models.py:460
-#: core/models.py:655 core/models.py:685
+#: cms/models.py:71 cms/models.py:144 cms/models.py:887 core/models.py:464
+#: core/models.py:659 core/models.py:689
 msgid "titre"
 msgstr "título"
 
@@ -72,7 +72,7 @@ msgid "carte"
 msgstr "tarjeta"
 
 #: cms/models.py:80 cms/models.py:687 core/models.py:56 core/models.py:70
-#: core/models.py:207 core/models.py:221 core/models.py:244
+#: core/models.py:211 core/models.py:225 core/models.py:248
 msgid "nom"
 msgstr "nombre"
 
@@ -104,7 +104,7 @@ msgstr "autor·a"
 msgid "témoignage"
 msgstr "testimonio"
 
-#: cms/models.py:113 core/models.py:389
+#: cms/models.py:113 core/models.py:393
 msgid "légende"
 msgstr "pie de foto"
 
@@ -136,7 +136,7 @@ msgstr "Advertencia"
 msgid "Attention"
 msgstr "Atención"
 
-#: cms/models.py:143 core/models.py:583 core/models.py:633
+#: cms/models.py:143 core/models.py:587 core/models.py:637
 msgid "type"
 msgstr "tipo"
 
@@ -212,7 +212,7 @@ msgstr ""
 "Etiqueta de Ghost cuyos últimos artículos aparecen al final de la página."
 
 #: cms/models.py:325 cms/models.py:398 cms/models.py:478 cms/models.py:790
-#: core/models.py:89 core/models.py:213 core/models.py:255 core/models.py:484
+#: core/models.py:89 core/models.py:217 core/models.py:259 core/models.py:488
 msgid "étiquettes"
 msgstr "etiquetas"
 
@@ -224,7 +224,7 @@ msgstr "fecha de inicio"
 msgid "date de fin"
 msgstr "fecha de fin"
 
-#: cms/models.py:393 core/models.py:466
+#: cms/models.py:393 core/models.py:470
 msgid "lieu"
 msgstr "lugar"
 
@@ -256,7 +256,7 @@ msgstr "introducción"
 msgid "biographie"
 msgstr "biografía"
 
-#: cms/models.py:690 core/models.py:388 core/models.py:467
+#: cms/models.py:690 core/models.py:392 core/models.py:471
 msgid "photo"
 msgstr "foto"
 
@@ -264,11 +264,11 @@ msgstr "foto"
 msgid "site web"
 msgstr "sitio web"
 
-#: cms/models.py:694 core/models.py:310
+#: cms/models.py:694 core/models.py:314
 msgid "ville"
 msgstr "ciudad"
 
-#: cms/models.py:695 core/models.py:308
+#: cms/models.py:695 core/models.py:312
 msgid "pays"
 msgstr "país"
 
@@ -290,19 +290,19 @@ msgstr ""
 msgid "auteur·ices"
 msgstr "autores·as"
 
-#: cms/models.py:735 core/models.py:368
+#: cms/models.py:735 core/models.py:372
 msgid "nom de l'expéditeur·ice"
 msgstr "nombre de quien envía"
 
-#: cms/models.py:736 core/models.py:369
+#: cms/models.py:736 core/models.py:373
 msgid "e-mail de l'expéditeur·ice"
 msgstr "correo electrónico de quien envía"
 
-#: cms/models.py:737 core/models.py:370
+#: cms/models.py:737 core/models.py:374
 msgid "message"
 msgstr "mensaje"
 
-#: cms/models.py:738 core/models.py:371
+#: cms/models.py:738 core/models.py:375
 msgid "envoyé le"
 msgstr "enviado el"
 
@@ -314,7 +314,7 @@ msgstr "mensaje a un autor o autora"
 msgid "messages aux auteur·ices"
 msgstr "mensajes a autores y autoras"
 
-#: cms/models.py:770 core/models.py:90 core/models.py:483
+#: cms/models.py:770 core/models.py:90 core/models.py:487
 msgid "mis en avant"
 msgstr "destacado"
 
@@ -856,7 +856,7 @@ msgstr "pequeñas misiones para aprender a usar las herramientas, paso a paso"
 msgid "courriel, relecture, premiers pas : une étape à la fois"
 msgstr "correo, revisión, primeros pasos: un paso a la vez"
 
-#: core/menu.py:86 core/models.py:630
+#: core/menu.py:86 core/models.py:634
 msgid "Association"
 msgstr "Asociación"
 
@@ -1011,7 +1011,7 @@ msgstr "Por ejemplo: «Una asociación»."
 msgid "qui est concerné"
 msgstr "a quién va dirigido"
 
-#: core/models.py:37 core/models.py:72 core/models.py:656
+#: core/models.py:37 core/models.py:72 core/models.py:660
 msgid "en une phrase"
 msgstr "en una frase"
 
@@ -1031,8 +1031,8 @@ msgstr ""
 "Para actores públicos y sociales: la página propone una asociación, sin "
 "botón «Añadir»."
 
-#: core/models.py:43 core/models.py:58 core/models.py:100 core/models.py:223
-#: core/models.py:343 core/models.py:390 core/models.py:659
+#: core/models.py:43 core/models.py:58 core/models.py:104 core/models.py:227
+#: core/models.py:347 core/models.py:394 core/models.py:663
 msgid "ordre"
 msgstr "orden"
 
@@ -1040,7 +1040,7 @@ msgstr "orden"
 msgid "public"
 msgstr "público"
 
-#: core/models.py:48 core/models.py:86 core/models.py:252
+#: core/models.py:48 core/models.py:86 core/models.py:256
 msgid "publics"
 msgstr "públicos"
 
@@ -1080,15 +1080,27 @@ msgstr "categoría"
 msgid "Laisser vide si le service s'adresse à tout le monde."
 msgstr "Dejar vacío si el servicio está dirigido a todo el mundo."
 
-#: core/models.py:91 core/models.py:660
+#: core/models.py:91 core/models.py:664
 msgid "proposé"
 msgstr "disponible"
 
 #: core/models.py:93
+msgid "réservé à l'administration"
+msgstr "reservado a la administración"
+
+#: core/models.py:94
+msgid ""
+"Outil d'administration (Keycloak, listes de diffusion…) : visible seulement "
+"du groupe « Administration »."
+msgstr ""
+"Herramienta de administración (Keycloak, listas de correo…): visible solo "
+"para el grupo «Administración»."
+
+#: core/models.py:97
 msgid "nécessite une validation"
 msgstr "requiere validación"
 
-#: core/models.py:95
+#: core/models.py:99
 msgid ""
 "Une intervention d'un administrateur est nécessaire avant que le service ne "
 "soit actif pour la personne (ex. création manuelle d'une boîte courriel) : "
@@ -1099,139 +1111,139 @@ msgstr ""
 "esté activo para la persona (p. ej. creación manual de un buzón de correo): "
 "el servicio queda «pendiente» hasta su validación (grupo «Administración»)."
 
-#: core/models.py:104
+#: core/models.py:108
 msgid "service"
 msgstr "servicio"
 
-#: core/models.py:126
+#: core/models.py:130
 msgid "compte"
 msgstr "cuenta"
 
-#: core/models.py:130
+#: core/models.py:134
 #, python-format
 msgid "Compte de %(user)s"
 msgstr "Cuenta de %(user)s"
 
-#: core/models.py:131
+#: core/models.py:135
 #, python-format
 msgid "Compte anonyme n° %(pk)s"
 msgstr "Cuenta anónima n.º %(pk)s"
 
-#: core/models.py:165 core/models.py:189
+#: core/models.py:169 core/models.py:193
 msgid "ordre personnel"
 msgstr "orden personal"
 
-#: core/models.py:169
+#: core/models.py:173
 msgid "validé"
 msgstr "validado"
 
-#: core/models.py:180 core/models.py:692
+#: core/models.py:184 core/models.py:696
 msgid "service choisi"
 msgstr "servicio elegido"
 
-#: core/models.py:195
+#: core/models.py:199
 msgid "appartenance"
 msgstr "afiliación"
 
-#: core/models.py:212
+#: core/models.py:216
 msgid "étiquette"
 msgstr "etiqueta"
 
-#: core/models.py:227
+#: core/models.py:231
 msgid "secteur d'activité"
 msgstr "sector de actividad"
 
-#: core/models.py:228
+#: core/models.py:232
 msgid "secteurs d'activité"
 msgstr "sectores de actividad"
 
-#: core/models.py:241
+#: core/models.py:245
 msgid "Individuel"
 msgstr "Individual"
 
-#: core/models.py:242
+#: core/models.py:246
 msgid "Collectif"
 msgstr "Colectivo"
 
-#: core/models.py:246
+#: core/models.py:250
 msgid "individuel ou collectif"
 msgstr "individual o colectivo"
 
-#: core/models.py:249
+#: core/models.py:253
 msgid "secteur"
 msgstr "sector"
 
-#: core/models.py:253
+#: core/models.py:257
 msgid "Laisser vide si la fiche s'adresse à tout le monde."
 msgstr "Dejar vacío si la ficha está dirigida a todo el mundo."
 
-#: core/models.py:258
+#: core/models.py:262
 msgid "Classique"
 msgstr "Clásico"
 
-#: core/models.py:259
+#: core/models.py:263
 msgid "Carte de visite"
 msgstr "Tarjeta de visita"
 
-#: core/models.py:260
+#: core/models.py:264
 msgid "Magazine"
 msgstr "Revista"
 
-#: core/models.py:261
+#: core/models.py:265
 msgid "Minimal"
 msgstr "Minimalista"
 
-#: core/models.py:262
+#: core/models.py:266
 msgid "Vitrine"
 msgstr "Escaparate"
 
-#: core/models.py:263
+#: core/models.py:267
 msgid "Profil"
 msgstr "Perfil"
 
-#: core/models.py:264
+#: core/models.py:268
 msgid "Affiche"
 msgstr "Cartel"
 
-#: core/models.py:267
+#: core/models.py:271
 msgid "présentation"
 msgstr "presentación"
 
-#: core/models.py:268
+#: core/models.py:272
 msgid ""
 "L'habillage visuel de votre fiche : choisissez celui qui vous ressemble le "
 "plus."
 msgstr "El estilo visual de tu ficha: elige el que más se te parezca."
 
-#: core/models.py:273
+#: core/models.py:277
 msgid "compte propriétaire"
 msgstr "cuenta propietaria"
 
-#: core/models.py:275
+#: core/models.py:279
 msgid "titre de la page"
 msgstr "título de la página"
 
-#: core/models.py:276
+#: core/models.py:280
 msgid "texte d'accroche"
 msgstr "eslogan"
 
-#: core/models.py:277 core/models.py:463
+#: core/models.py:281 core/models.py:467
 msgid "description"
 msgstr "descripción"
 
-#: core/models.py:279
+#: core/models.py:283
 msgid "logo"
 msgstr "logotipo"
 
-#: core/models.py:280
+#: core/models.py:284
 msgid "photo promotionnelle"
 msgstr "foto promocional"
 
-#: core/models.py:282
+#: core/models.py:286
 msgid "vidéo promotionnelle"
 msgstr "vídeo promocional"
 
-#: core/models.py:283
+#: core/models.py:287
 msgid ""
 "Lien vers une vidéo (YouTube, PeerTube…) : affiché en lien, jamais intégré "
 "en cadre."
@@ -1239,230 +1251,230 @@ msgstr ""
 "Enlace a un vídeo (YouTube, PeerTube…): se muestra como enlace, nunca "
 "integrado en un marco."
 
-#: core/models.py:286
+#: core/models.py:290
 msgid "courriel"
 msgstr "correo electrónico"
 
-#: core/models.py:287
+#: core/models.py:291
 msgid "téléphone"
 msgstr "teléfono"
 
-#: core/models.py:288
+#: core/models.py:292
 msgid "site ou lien"
 msgstr "sitio o enlace"
 
-#: core/models.py:291
+#: core/models.py:295
 msgid "France"
 msgstr "Francia"
 
-#: core/models.py:292
+#: core/models.py:296
 msgid "Belgique"
 msgstr "Bélgica"
 
-#: core/models.py:293
+#: core/models.py:297
 msgid "Suisse"
 msgstr "Suiza"
 
-#: core/models.py:294
+#: core/models.py:298
 msgid "Luxembourg"
 msgstr "Luxemburgo"
 
-#: core/models.py:295
+#: core/models.py:299
 msgid "Allemagne"
 msgstr "Alemania"
 
-#: core/models.py:296
+#: core/models.py:300
 msgid "Espagne"
 msgstr "España"
 
-#: core/models.py:297
+#: core/models.py:301
 msgid "Italie"
 msgstr "Italia"
 
-#: core/models.py:298
+#: core/models.py:302
 msgid "Portugal"
 msgstr "Portugal"
 
-#: core/models.py:299
+#: core/models.py:303
 msgid "Royaume-Uni"
 msgstr "Reino Unido"
 
-#: core/models.py:300
+#: core/models.py:304
 msgid "Maroc"
 msgstr "Marruecos"
 
-#: core/models.py:301
+#: core/models.py:305
 msgid "Algérie"
 msgstr "Argelia"
 
-#: core/models.py:302
+#: core/models.py:306
 msgid "Tunisie"
 msgstr "Túnez"
 
-#: core/models.py:303
+#: core/models.py:307
 msgid "Sénégal"
 msgstr "Senegal"
 
-#: core/models.py:304
+#: core/models.py:308
 msgid "Côte d'Ivoire"
 msgstr "Costa de Marfil"
 
-#: core/models.py:305
+#: core/models.py:309
 msgid "Canada"
 msgstr "Canadá"
 
-#: core/models.py:306 core/models.py:580
+#: core/models.py:310 core/models.py:584
 msgid "Autre"
 msgstr "Otro"
 
-#: core/models.py:309
+#: core/models.py:313
 msgid "région"
 msgstr "región"
 
-#: core/models.py:311
+#: core/models.py:315
 msgid "code postal"
 msgstr "código postal"
 
-#: core/models.py:313
+#: core/models.py:317
 msgid "adresse"
 msgstr "dirección"
 
-#: core/models.py:314
+#: core/models.py:318
 msgid "Numéro, type et nom de voie : « 12, rue de la Paix »."
 msgstr "Número, tipo y nombre de la vía: «12, rue de la Paix»."
 
-#: core/models.py:316 core/models.py:468
+#: core/models.py:320 core/models.py:472
 msgid "latitude"
 msgstr "latitud"
 
-#: core/models.py:317 core/models.py:469
+#: core/models.py:321 core/models.py:473
 msgid "longitude"
 msgstr "longitud"
 
-#: core/models.py:319
+#: core/models.py:323
 msgid "introduction de l'appel à l'action"
 msgstr "introducción de la llamada a la acción"
 
-#: core/models.py:320
+#: core/models.py:324
 msgid "texte du bouton d'appel à l'action"
 msgstr "texto del botón de llamada a la acción"
 
-#: core/models.py:321
+#: core/models.py:325
 msgid "lien de l'appel à l'action"
 msgstr "enlace de la llamada a la acción"
 
-#: core/models.py:327 core/templates/core/partials/my_event_list.html:6
+#: core/models.py:331 core/templates/core/partials/my_event_list.html:6
 msgid "Publié"
 msgstr "Publicado"
 
-#: core/models.py:328
+#: core/models.py:332
 msgid "Brouillon protégé"
 msgstr "Borrador protegido"
 
-#: core/models.py:329
+#: core/models.py:333
 msgid "Non publié"
 msgstr "No publicado"
 
-#: core/models.py:332
+#: core/models.py:336
 msgid "visibilité"
 msgstr "visibilidad"
 
-#: core/models.py:334
+#: core/models.py:338
 msgid ""
 "Publié : visible de tout le monde et référencé dans l'annuaire. Brouillon "
 "protégé : absent de l'annuaire, visible uniquement par les personnes ayant "
 "un compte sur le site. Non publié : visible uniquement par vous."
 msgstr "Publicado: visible para todo el mundo en la agenda."
 
-#: core/models.py:342 core/models.py:591
+#: core/models.py:346 core/models.py:595
 msgid "validée par l'administration"
 msgstr "validada por la administración"
 
-#: core/models.py:347
+#: core/models.py:351
 msgid "page de l'annuaire"
 msgstr "página del directorio"
 
-#: core/models.py:348
+#: core/models.py:352
 msgid "pages de l'annuaire"
 msgstr "páginas del directorio"
 
-#: core/models.py:367
+#: core/models.py:371
 msgid "fiche"
 msgstr "ficha"
 
-#: core/models.py:374
+#: core/models.py:378
 msgid "message à une fiche de l'annuaire"
 msgstr "mensaje a una ficha del directorio"
 
-#: core/models.py:375
+#: core/models.py:379
 msgid "messages aux fiches de l'annuaire"
 msgstr "mensajes a fichas del directorio"
 
-#: core/models.py:394
+#: core/models.py:398
 msgid "photo de l'annuaire"
 msgstr "foto del directorio"
 
-#: core/models.py:395
+#: core/models.py:399
 msgid "photos de l'annuaire"
 msgstr "fotos del directorio"
 
-#: core/models.py:407 core/models.py:547
+#: core/models.py:411 core/models.py:551
 msgid "notifications par courriel"
 msgstr "notificaciones por correo electrónico"
 
-#: core/models.py:413
+#: core/models.py:417
 msgid "abonnement à une fiche"
 msgstr "suscripción a una ficha"
 
-#: core/models.py:414
+#: core/models.py:418
 msgid "abonnements aux fiches"
 msgstr "suscripciones a fichas"
 
-#: core/models.py:430 core/models.py:515
+#: core/models.py:434 core/models.py:519
 msgid "validée"
 msgstr "validada"
 
-#: core/models.py:435
+#: core/models.py:439
 msgid "demande de responsabilité de fiche"
 msgstr "solicitud de responsabilidad de la ficha"
 
-#: core/models.py:436
+#: core/models.py:440
 msgid "demandes de responsabilité de fiche"
 msgstr "solicitudes de responsabilidad de la ficha"
 
-#: core/models.py:462
+#: core/models.py:466
 msgid "slug"
 msgstr "slug"
 
-#: core/models.py:464
+#: core/models.py:468
 msgid "début"
 msgstr "inicio"
 
-#: core/models.py:465
+#: core/models.py:469
 msgid "fin"
 msgstr "fin"
 
-#: core/models.py:471
+#: core/models.py:475
 msgid "lien en ligne"
 msgstr "enlace en línea"
 
-#: core/models.py:472
+#: core/models.py:476
 msgid "Pour une participation à distance (visioconférence…)."
 msgstr "Para participar a distancia (videollamada…)."
 
-#: core/models.py:475
+#: core/models.py:479
 msgid "lien source"
 msgstr "enlace de origen"
 
-#: core/models.py:476
+#: core/models.py:480
 msgid "Page de l'évènement sur l'agenda source (OpenAgenda…)."
 msgstr "Página del evento en la agenda de origen (OpenAgenda…)."
 
-#: core/models.py:479
+#: core/models.py:483
 msgid "identifiant source"
 msgstr "identificador de origen"
 
-#: core/models.py:480
+#: core/models.py:484
 msgid ""
 "Identifiant de l'évènement dans l'agenda source, pour réimporter sans "
 "dupliquer."
@@ -1470,15 +1482,15 @@ msgstr ""
 "Identificador del evento en la agenda de origen, para reimportar sin "
 "duplicar."
 
-#: core/models.py:482
+#: core/models.py:486
 msgid "publié"
 msgstr "publicado"
 
-#: core/models.py:486
+#: core/models.py:490
 msgid "responsables"
 msgstr "responsables"
 
-#: core/models.py:487
+#: core/models.py:491
 msgid ""
 "Comptes autorisés à gérer cet évènement, en plus du groupe « Administration "
 "»."
@@ -1486,262 +1498,262 @@ msgstr ""
 "Cuentas autorizadas para gestionar este evento, además del grupo "
 "«Administration»."
 
-#: core/models.py:492
+#: core/models.py:496
 msgid "évènement"
 msgstr "evento"
 
-#: core/models.py:493
+#: core/models.py:497
 msgid "évènements"
 msgstr "eventos"
 
-#: core/models.py:520
+#: core/models.py:524
 msgid "demande de gestion d'évènement"
 msgstr "solicitud de gestión del evento"
 
-#: core/models.py:521
+#: core/models.py:525
 msgid "demandes de gestion d'évènement"
 msgstr "solicitudes de gestión de eventos"
 
-#: core/models.py:541 core/templates/core/partials/event_interest_list.html:9
+#: core/models.py:545 core/templates/core/partials/event_interest_list.html:9
 msgid "Intéressé·e"
 msgstr "Interesado·a"
 
-#: core/models.py:542 core/templates/core/event_detail.html:60
+#: core/models.py:546 core/templates/core/event_detail.html:60
 #: core/templates/core/partials/event_interest_list.html:9
 msgid "J'y vais"
 msgstr "Voy a ir"
 
-#: core/models.py:546
+#: core/models.py:550
 msgid "intention"
 msgstr "intención"
 
-#: core/models.py:553
+#: core/models.py:557
 msgid "intérêt pour un évènement"
 msgstr "interés en un evento"
 
-#: core/models.py:554
+#: core/models.py:558
 msgid "intérêts pour un évènement"
 msgstr "intereses por un evento"
 
-#: core/models.py:570
+#: core/models.py:574
 msgid "Promesse"
 msgstr "Promesa"
 
-#: core/models.py:571
+#: core/models.py:575
 msgid "Paiement"
 msgstr "Pago"
 
-#: core/models.py:577
+#: core/models.py:581
 msgid "Espèces"
 msgstr "Efectivo"
 
-#: core/models.py:578
+#: core/models.py:582
 msgid "Chèque"
 msgstr "Cheque"
 
-#: core/models.py:579
+#: core/models.py:583
 msgid "Virement"
 msgstr "Transferencia bancaria"
 
-#: core/models.py:584
+#: core/models.py:588
 msgid "montant"
 msgstr "importe"
 
-#: core/models.py:585
+#: core/models.py:589
 msgid "moyen"
 msgstr "medio"
 
-#: core/models.py:586
+#: core/models.py:590
 msgid "date"
 msgstr "fecha"
 
-#: core/models.py:593
+#: core/models.py:597
 msgid "déduction fiscale"
 msgstr "deducción fiscal"
 
-#: core/models.py:594
+#: core/models.py:598
 msgid "Éligible à un reçu fiscal (don à une association loi 1901)."
 msgstr ""
 "Elegible para un recibo fiscal (donación a una asociación sin fines de lucro"
 " francesa, «loi 1901»)."
 
-#: core/models.py:596
+#: core/models.py:600
 msgid "note"
 msgstr "nota"
 
-#: core/models.py:600
+#: core/models.py:604
 msgid "contribution financière"
 msgstr "contribución financiera"
 
-#: core/models.py:601
+#: core/models.py:605
 msgid "contributions financières"
 msgstr "contribuciones financieras"
 
-#: core/models.py:626
+#: core/models.py:630
 msgid "Particulier"
 msgstr "Particular"
 
-#: core/models.py:627
+#: core/models.py:631
 msgid "Entreprise"
 msgstr "Empresa"
 
-#: core/models.py:628
+#: core/models.py:632
 msgid "Fondation"
 msgstr "Fundación"
 
-#: core/models.py:629
+#: core/models.py:633
 msgid "Collectivité"
 msgstr "Entidad pública"
 
-#: core/models.py:632
+#: core/models.py:636
 msgid "nom affiché"
 msgstr "nombre mostrado"
 
-#: core/models.py:635
+#: core/models.py:639
 msgid "apparaît publiquement"
 msgstr "aparece públicamente"
 
-#: core/models.py:636
+#: core/models.py:640
 msgid "Uniquement avec le consentement explicite du donateur (RGPD)."
 msgstr "Solo con el consentimiento explícito del donante (RGPD)."
 
-#: core/models.py:638
+#: core/models.py:642
 msgid "soutien depuis"
 msgstr "apoya desde"
 
-#: core/models.py:642
+#: core/models.py:646
 msgid "donateur"
 msgstr "donante"
 
-#: core/models.py:657
+#: core/models.py:661
 msgid "emoji"
 msgstr "emoji"
 
-#: core/models.py:658
+#: core/models.py:662
 msgid "durée estimée (minutes)"
 msgstr "duración estimada (minutos)"
 
-#: core/models.py:664
+#: core/models.py:668
 msgid "parcours guidé"
 msgstr "recorrido guiado"
 
-#: core/models.py:665
+#: core/models.py:669
 msgid "parcours guidés"
 msgstr "recorridos guiados"
 
-#: core/models.py:675
+#: core/models.py:679
 msgid "à cocher par la personne"
 msgstr "a marcar por la persona"
 
-#: core/models.py:676
+#: core/models.py:680
 msgid "détectée : a un compte"
 msgstr "detectada: tiene una cuenta"
 
-#: core/models.py:677
+#: core/models.py:681
 msgid "détectée : compte nommé (connecté)"
 msgstr "detectada: cuenta nominativa (conectada)"
 
-#: core/models.py:678
+#: core/models.py:682
 msgid "détectée : a un service"
 msgstr "detectada: tiene un servicio"
 
-#: core/models.py:679
+#: core/models.py:683
 msgid "détectée : a rejoint un groupe"
 msgstr "detectada: se ha unido a un grupo"
 
-#: core/models.py:680
+#: core/models.py:684
 msgid "détectée : a une fiche d'annuaire"
 msgstr "detectada: tiene una ficha de directorio"
 
-#: core/models.py:681
+#: core/models.py:685
 msgid "détectée : gère un évènement"
 msgstr "detectada: gestiona un evento"
 
-#: core/models.py:683
+#: core/models.py:687
 msgid "parcours"
 msgstr "recorrido"
 
-#: core/models.py:684
+#: core/models.py:688
 msgid "position"
 msgstr "posición"
 
-#: core/models.py:686
+#: core/models.py:690
 msgid "comment faire"
 msgstr "cómo hacerlo"
 
-#: core/models.py:686
+#: core/models.py:690
 msgid "Markdown."
 msgstr "Markdown."
 
-#: core/models.py:688
+#: core/models.py:692
 msgid "pourquoi"
 msgstr "por qué"
 
-#: core/models.py:689
+#: core/models.py:693
 msgid "Ce que la personne apprend en le faisant. Markdown."
 msgstr "Lo que la persona aprende al hacerlo. Markdown."
 
-#: core/models.py:693
+#: core/models.py:697
 msgid "Adresse complète, ou chemin du site (/ar/account/)."
 msgstr "Dirección completa o ruta del sitio (/ar/account/)."
 
-#: core/models.py:695
+#: core/models.py:699
 msgid "texte du lien"
 msgstr "texto del enlace"
 
-#: core/models.py:696
+#: core/models.py:700
 msgid "détection"
 msgstr "detección"
 
-#: core/models.py:700
+#: core/models.py:704
 msgid "étape de parcours"
 msgstr "paso de recorrido"
 
-#: core/models.py:701
+#: core/models.py:705
 msgid "étapes de parcours"
 msgstr "pasos de recorrido"
 
-#: core/models.py:728
+#: core/models.py:732
 msgid "étape accomplie"
 msgstr "paso completado"
 
-#: core/models.py:729
+#: core/models.py:733
 msgid "étapes accomplies"
 msgstr "pasos completados"
 
-#: core/models.py:741 core/models.py:756
+#: core/models.py:745 core/models.py:760
 msgid "adresse de destination"
 msgstr "dirección de destino"
 
-#: core/models.py:742 core/models.py:757
+#: core/models.py:746 core/models.py:761
 msgid "garder une copie"
 msgstr "guardar una copia"
 
-#: core/models.py:743
+#: core/models.py:747
 msgid "activée le"
 msgstr "activada el"
 
-#: core/models.py:746
+#: core/models.py:750
 msgid "redirection de courrier"
 msgstr "redirección de correo"
 
-#: core/models.py:747
+#: core/models.py:751
 msgid "redirections de courrier"
 msgstr "redirecciones de correo"
 
-#: core/models.py:758
+#: core/models.py:762
 msgid "adresses de la boîte"
 msgstr "direcciones del buzón"
 
-#: core/models.py:765
+#: core/models.py:769
 msgid "demande de redirection de courrier"
 msgstr "solicitud de redirección de correo"
 
-#: core/models.py:766
+#: core/models.py:770
 msgid "demandes de redirection de courrier"
 msgstr "solicitudes de redirección de correo"
 
-#: core/models.py:776 core/models.py:777
+#: core/models.py:780 core/models.py:781
 msgid "journal des redirections"
 msgstr "registro de redirecciones"
 
@@ -1928,7 +1940,8 @@ msgstr "Vincular a mi cuenta de Grands Voisins"
 msgid "Fermer ce compte sur cet appareil"
 msgstr "Cerrar esta cuenta en este dispositivo"
 
-#: core/templates/core/account.html:131 core/templates/core/raccourcis.html:12
+#: core/templates/core/account.html:131 core/templates/core/outils.html:14
+#: core/templates/core/raccourcis.html:12
 msgid "Mes services"
 msgstr "Mis servicios"
 
@@ -1936,7 +1949,7 @@ msgstr "Mis servicios"
 msgid "Ajouter un service"
 msgstr "Añadir un servicio"
 
-#: core/templates/core/account.html:143 core/views.py:398
+#: core/templates/core/account.html:143 core/views.py:397
 msgid "Rejoindre un groupe"
 msgstr "Unirse a un grupo"
 
@@ -2914,6 +2927,27 @@ msgstr "Fichas a las que estoy suscrito·a"
 msgid "Créer la fiche"
 msgstr "Crear la ficha"
 
+#: core/templates/core/outils.html:3
+msgid "Tous les outils — lesgrandsvoisins.com"
+msgstr "Todas las herramientas — lesgrandsvoisins.com"
+
+#: core/templates/core/outils.html:7
+msgid "Tous les outils"
+msgstr "Todas las herramientas"
+
+#: core/templates/core/outils.html:8
+msgid "Les outils numériques des Grands Voisins, en un clic."
+msgstr "Las herramientas digitales de los Grands Voisins, a un clic."
+
+#: core/templates/core/outils.html:25
+#: core/templates/core/partials/service_list.html:11
+msgid "Autres"
+msgstr "Otros"
+
+#: core/templates/core/outils.html:33
+msgid "Choisir mes services et les retrouver sur tous mes appareils"
+msgstr "Elegir mis servicios y encontrarlos en todos mis dispositivos"
+
 #: core/templates/core/parcours.html:14
 msgid ""
 "De petites missions, quelques minutes chacune, pour apprendre à se servir "
@@ -3228,6 +3262,12 @@ msgstr "Copiado"
 msgid "J'ai noté mon numéro"
 msgstr "He anotado mi número"
 
+#: core/templates/core/partials/outil_tuile.html:6
+#: core/templates/core/partials/service_list.html:38
+#: core/templates/core/partials/shortcut_list.html:20
+msgid "Bientôt"
+msgstr "Próximamente"
+
 #: core/templates/core/partials/scene.html:1
 msgid ""
 "Une rue de quartier au soleil : café, galerie, théâtre et salle de concert, "
@@ -3268,10 +3308,6 @@ msgstr "Centro social"
 msgid "Atelier"
 msgstr "Taller"
 
-#: core/templates/core/partials/service_list.html:11
-msgid "Autres"
-msgstr "Otros"
-
 #: core/templates/core/partials/service_list.html:26
 msgid "Plus d'informations"
 msgstr "Más información"
@@ -3288,11 +3324,6 @@ msgstr "Abrir %(name)s"
 #: core/templates/core/partials/service_list.html:36
 msgid "Ouvrir"
 msgstr "Abrir"
-
-#: core/templates/core/partials/service_list.html:38
-#: core/templates/core/partials/shortcut_list.html:20
-msgid "Bientôt"
-msgstr "Próximamente"
 
 #: core/templates/core/partials/service_list.html:51
 #: core/templates/core/partials/service_list.html:75
@@ -3424,7 +3455,7 @@ msgid ""
 "adresse."
 msgstr "Reenvíe el correo de su buzón de Grands Voisins a otra dirección."
 
-#: core/templates/core/redirection_courrier.html:20 core/views.py:1557
+#: core/templates/core/redirection_courrier.html:20 core/views.py:1564
 msgid "La redirection de cette adresse est gérée par l'administration."
 msgstr "La redirección de esta dirección la gestiona la administración."
 
@@ -3579,19 +3610,19 @@ msgstr "Únete, apóyanos, contáctanos."
 msgid "Pour faire cela, ouvrez d'abord un compte."
 msgstr "Para hacer esto, abra primero una cuenta."
 
-#: core/views.py:323
+#: core/views.py:322
 msgid ""
 "Trop de messages envoyés récemment depuis cet appareil. Réessayez plus tard."
 msgstr ""
 "Se han enviado demasiados mensajes recientemente desde este dispositivo. "
 "Inténtelo más tarde."
 
-#: core/views.py:332
+#: core/views.py:331
 #, python-format
 msgid "Message via lesgrandsvoisins.com de %(name)s"
 msgstr "Mensaje de %(name)s a través de lesgrandsvoisins.com"
 
-#: core/views.py:340
+#: core/views.py:339
 #, python-format
 msgid ""
 "Nom : %(name)s\n"
@@ -3604,16 +3635,16 @@ msgstr ""
 "\n"
 "%(message)s"
 
-#: core/views.py:342
+#: core/views.py:341
 msgid "(non renseigné)"
 msgstr "(no indicado)"
 
-#: core/views.py:377 core/views.py:624
+#: core/views.py:376 core/views.py:631
 #, python-format
 msgid "Message envoyé à %(name)s."
 msgstr "Mensaje enviado a %(name)s."
 
-#: core/views.py:381 core/views.py:628
+#: core/views.py:380 core/views.py:635
 msgid ""
 "Votre message a été enregistré, mais son envoi par e-mail a échoué. "
 "Réessayez plus tard."
@@ -3621,35 +3652,35 @@ msgstr ""
 "Su mensaje ha sido registrado, pero el envío por correo electrónico ha "
 "fallado. Vuelva a intentarlo más tarde."
 
-#: core/views.py:396
+#: core/views.py:395
 msgid "Ajouter un service à mon compte"
 msgstr "Añadir un servicio a mi cuenta"
 
-#: core/views.py:400
+#: core/views.py:399
 msgid "Présenter votre activité dans l'annuaire"
 msgstr "Presentar tu actividad en el directorio"
 
-#: core/views.py:405
+#: core/views.py:404
 msgid "Créer un compte nommé pour ne jamais perdre l'accès"
 msgstr "Crear una cuenta con nombre para no perder nunca el acceso"
 
-#: core/views.py:415
+#: core/views.py:414
 msgid ""
 "La connexion n'a pas abouti. Réessayez, ou continuez avec un compte anonyme."
 msgstr ""
 "No se pudo iniciar sesión. Inténtalo de nuevo o continúa con una cuenta "
 "anónima."
 
-#: core/views.py:472
+#: core/views.py:471
 msgid "Merci ! Votre contribution a été enregistrée."
 msgstr "¡Gracias! Su contribución se ha registrado."
 
-#: core/views.py:474
+#: core/views.py:473
 msgid "Le formulaire de don contient une erreur : montant ou date invalide."
 msgstr ""
 "El formulario de donación contiene un error: importe o fecha no válidos."
 
-#: core/views.py:648
+#: core/views.py:655
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cette fiche."
@@ -3657,48 +3688,48 @@ msgstr ""
 "Solicitud enviada: un administrador la revisará antes de hacerte responsable"
 " de esta ficha."
 
-#: core/views.py:651
+#: core/views.py:658
 msgid "Vous avez déjà demandé à être responsable de cette fiche."
 msgstr "Ya has solicitado ser responsable de esta ficha."
 
-#: core/views.py:669
+#: core/views.py:676
 msgid ""
 "Connectez-vous pour finaliser votre demande de responsabilité de cette "
 "fiche."
 msgstr ""
 "Inicia sesión para finalizar tu solicitud de responsabilidad de esta ficha."
 
-#: core/views.py:696
+#: core/views.py:703
 msgid "Fiche créée."
 msgstr "Ficha creada."
 
-#: core/views.py:725
+#: core/views.py:732
 msgid "Fiche mise à jour."
 msgstr "Ficha actualizada."
 
-#: core/views.py:737
+#: core/views.py:744
 msgid "Fiche supprimée."
 msgstr "Ficha eliminada."
 
-#: core/views.py:751
+#: core/views.py:758
 #, python-format
 msgid "Abonnement à « %(name)s » retiré."
 msgstr "Suscripción a «%(name)s» eliminada."
 
-#: core/views.py:754
+#: core/views.py:761
 #, python-format
 msgid "Abonné à « %(name)s »."
 msgstr "Suscrito a «%(name)s»."
 
-#: core/views.py:780
+#: core/views.py:787
 msgid "Fiche dépubliée."
 msgstr "Ficha despublicada."
 
-#: core/views.py:780
+#: core/views.py:787
 msgid "Demande de publication annulée."
 msgstr "Solicitud de publicación cancelada."
 
-#: core/views.py:786
+#: core/views.py:793
 msgid ""
 "Fiche envoyée pour validation : elle sera publique une fois validée par un "
 "administrateur."
@@ -3706,22 +3737,22 @@ msgstr ""
 "Ficha enviada para su validación: será pública una vez validada por un "
 "administrador."
 
-#: core/views.py:843
+#: core/views.py:850
 #, python-format
 msgid "Intérêt enregistré pour « %(title)s »."
 msgstr "Interés registrado para «%(title)s»."
 
-#: core/views.py:846
+#: core/views.py:853
 #, python-format
 msgid "Intérêt retiré pour « %(title)s »."
 msgstr "Interés retirado para «%(title)s»."
 
-#: core/views.py:850
+#: core/views.py:857
 #, python-format
 msgid "Intention mise à jour pour « %(title)s »."
 msgstr "Intención actualizada para «%(title)s»."
 
-#: core/views.py:870
+#: core/views.py:877
 msgid ""
 "Demande envoyée : un administrateur va l'examiner avant de vous rendre "
 "responsable de cet évènement."
@@ -3729,21 +3760,21 @@ msgstr ""
 "Solicitud enviada: un administrador la revisará antes de hacerte responsable"
 " de este evento."
 
-#: core/views.py:873
+#: core/views.py:880
 msgid "Vous avez déjà demandé à gérer cet évènement."
 msgstr "Ya has solicitado gestionar este evento."
 
-#: core/views.py:888
+#: core/views.py:895
 msgid ""
 "Connectez-vous pour finaliser votre demande de gestion de cet évènement."
 msgstr "Inicia sesión para finalizar tu solicitud de gestión de este evento."
 
-#: core/views.py:913
+#: core/views.py:920
 #, python-format
 msgid "Évènement à publier : %(title)s"
 msgstr "Evento por publicar: %(title)s"
 
-#: core/views.py:914
+#: core/views.py:921
 #, python-format
 msgid ""
 "Un évènement attend votre validation dans l'agenda.\n"
@@ -3758,17 +3789,17 @@ msgstr ""
 "\n"
 "Revisarlo y publicarlo: %(url)s"
 
-#: core/views.py:929
+#: core/views.py:936
 #, python-format
 msgid "Votre évènement est publié : %(title)s"
 msgstr "Tu evento está publicado: %(title)s"
 
-#: core/views.py:930
+#: core/views.py:937
 #, python-format
 msgid "« %(title)s » est maintenant visible dans l'agenda : %(url)s"
 msgstr "«%(title)s» ya es visible en la agenda: %(url)s"
 
-#: core/views.py:960
+#: core/views.py:967
 msgid ""
 "Évènement enregistré. Il reste visible de vous seul·e jusqu'à sa publication"
 " par le groupe « Administration », prévenu par courriel."
@@ -3776,24 +3807,24 @@ msgstr ""
 "Evento guardado. Solo tú lo ves hasta que el grupo «Administración», avisado"
 " por correo, lo publique."
 
-#: core/views.py:981
+#: core/views.py:988
 msgid "Évènement mis à jour."
 msgstr "Evento actualizado."
 
-#: core/views.py:993
+#: core/views.py:1000
 msgid "Évènement supprimé."
 msgstr "Evento eliminado."
 
-#: core/views.py:1046
+#: core/views.py:1053
 msgid ""
 "L'ouverture de comptes anonymes n'est plus proposée. Créez un compte nommé."
 msgstr "Ya no se ofrece abrir cuentas anónimas. Cree una cuenta con nombre."
 
-#: core/views.py:1050
+#: core/views.py:1057
 msgid "Compte anonyme créé."
 msgstr "Cuenta anónima creada."
 
-#: core/views.py:1058
+#: core/views.py:1065
 msgid ""
 "Merci. Gardez ce numéro précieusement : il est la seule façon de retrouver "
 "ce compte."
@@ -3801,7 +3832,7 @@ msgstr ""
 "Gracias. Guarda este número con cuidado: es la única forma de recuperar esta"
 " cuenta."
 
-#: core/views.py:1068
+#: core/views.py:1075
 #, python-format
 msgid ""
 "Numéro de compte anonyme lesgrandsvoisins.com : %(number)s\n"
@@ -3810,21 +3841,21 @@ msgstr ""
 "Número de cuenta anónima de lesgrandsvoisins.com: %(number)s\n"
 "Basta por sí solo para recuperar sus servicios en otro dispositivo. Solo conservamos una huella suya: no podremos devolvérselo.\n"
 
-#: core/views.py:1081
+#: core/views.py:1088
 msgid "Trop d'essais depuis cet appareil. Réessayez dans un quart d'heure."
 msgstr ""
 "Demasiados intentos desde este dispositivo. Vuelve a intentarlo en un cuarto"
 " de hora."
 
-#: core/views.py:1085
+#: core/views.py:1092
 msgid "Aucun compte ne correspond à ce numéro. Vérifiez les 16 chiffres."
 msgstr "Ninguna cuenta corresponde a este número. Verifica las 16 cifras."
 
-#: core/views.py:1088
+#: core/views.py:1095
 msgid "Compte retrouvé. Vos services sont de retour."
 msgstr "Cuenta recuperada. Sus servicios han vuelto."
 
-#: core/views.py:1095
+#: core/views.py:1102
 msgid ""
 "Ce compte n'est plus ouvert sur cet appareil. Votre numéro permet de le "
 "retrouver."
@@ -3832,21 +3863,21 @@ msgstr ""
 "Esta cuenta ya no está abierta en este dispositivo. Tu número permite "
 "recuperarla."
 
-#: core/views.py:1106
+#: core/views.py:1113
 msgid "Vos services anonymes ont rejoint votre compte."
 msgstr "Sus servicios anónimos se han unido a su cuenta."
 
-#: core/views.py:1124
+#: core/views.py:1131
 #, python-format
 msgid "« %(name)s » retiré de vos services."
 msgstr "«%(name)s» quitado de sus servicios."
 
-#: core/views.py:1131
+#: core/views.py:1138
 #, python-format
 msgid "« %(name)s » ajouté à vos services."
 msgstr "«%(name)s» añadido a sus servicios."
 
-#: core/views.py:1134
+#: core/views.py:1141
 #, python-format
 msgid ""
 "« %(name)s » ajouté à vos services, en attente de validation par un "
@@ -3855,43 +3886,43 @@ msgstr ""
 "«%(name)s» añadido a sus servicios, pendiente de validación por un "
 "administrador."
 
-#: core/views.py:1244
+#: core/views.py:1251
 #, python-format
 msgid "« %(name)s » retiré de vos groupes."
 msgstr "«%(name)s» eliminado de tus grupos."
 
-#: core/views.py:1248
+#: core/views.py:1255
 #, python-format
 msgid "« %(name)s » ajouté à vos groupes."
 msgstr "«%(name)s» añadido a tus grupos."
 
-#: core/views.py:1469
+#: core/views.py:1476
 msgid "Pour garder la trace de vos étapes, ouvrez d'abord un compte."
 msgstr "Para conservar el rastro de sus pasos, abra primero una cuenta."
 
-#: core/views.py:1479
+#: core/views.py:1486
 #, python-format
 msgid "Bravo ! Parcours « %(title)s » terminé. 🎉"
 msgstr "¡Bravo! Recorrido «%(title)s» terminado. 🎉"
 
-#: core/views.py:1481
+#: core/views.py:1488
 #, python-format
 msgid "Étape faite : %(title)s"
 msgstr "Paso hecho: %(title)s"
 
-#: core/views.py:1547
+#: core/views.py:1554
 msgid "Connectez-vous pour gérer la redirection de vos courriels."
 msgstr "Inicie sesión para gestionar la redirección de sus correos."
 
-#: core/views.py:1552
+#: core/views.py:1559
 msgid "Trop de tentatives. Réessayez dans quelques minutes."
 msgstr "Demasiados intentos. Inténtelo de nuevo en unos minutos."
 
-#: core/views.py:1559
+#: core/views.py:1566
 msgid "Votre boîte courriel n'a pas pu être identifiée : reconnectez-vous."
 msgstr "No se pudo identificar su buzón: vuelva a iniciar sesión."
 
-#: core/views.py:1565
+#: core/views.py:1572
 msgid ""
 "Un courriel de confirmation vient d'être envoyé à cette adresse. Tant "
 "qu'elle n'est pas confirmée, rien n'est transféré."
@@ -3899,10 +3930,10 @@ msgstr ""
 "Se acaba de enviar un correo de confirmación a esta dirección. No se reenvía"
 " nada hasta que se confirme."
 
-#: core/views.py:1568
+#: core/views.py:1575
 msgid "Réglage enregistré."
 msgstr "Ajuste guardado."
 
-#: core/views.py:1571
+#: core/views.py:1578
 msgid "Redirection désactivée."
 msgstr "Redirección desactivada."

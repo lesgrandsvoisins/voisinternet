@@ -1,63 +1,55 @@
-# Transition de www.gv.je : cadrage
+# Transition de www.gv.je : plan (décisions du 30/10/2026)
 
-*Cadrage du 29/10/2026, à trancher par Chris. Rien n'est modifié tant qu'une option n'est pas choisie.*
+## Décisions prises
 
-## Ce qu'est www.gv.je aujourd'hui
+1. **Deux noms, deux rôles.** `lesgrandsvoisins.com` : le nom public, qu'on dit à voix haute (marque, site, blog, agenda,
+   annuaire). **`resdigita.com`** : le domaine « côté ordinateur » (outils, tableau de bord, connexion, adresses de
+   courrier). Décision de l'association, confirmée par Chris.
+2. **`gv.je` n'est pas mémorable** : il cesse d'être le nom mis en avant. Il reste une **adresse alias** (les boîtes déjà
+   créées gardent `@gv.je`) et ses anciens liens redirigent ; rien ne casse.
+3. **`www.gv.je` a une fonction à garder : le tableau de bord** de l'ensemble des outils, ce qui manque sur
+   `lesgrandsvoisins.com`. Il est repris par `voisinternet`, au domaine des outils.
 
-Un **tableau de bord Homepage** (service NixOS `homepage-dashboard`, port 8082, derrière Caddy), décrit dans `flakeops`
-(`modules/homepage-dashboard.nix` et `modules/homepage-dashboard/*.nix`). Titre : « GV.je Tableau de bord ! ». `gv.je`
-redirige vers lui, ainsi que d'autres noms (`dash.gdvoisins.com`…). Il affiche **50 tuiles** réparties en 16 rubriques :
-compte unifié, courriel, tâches (Vikunja), fichiers (SFTPGo, Copyparty, Oxicloud, Immich), forum, discussions, listes de
-diffusion, dons, sites publics, médias sociaux, administration système (Keycloak, ListMonk, SFTPGo…), et d'anciens
-services. Il n'a ni compte, ni personnalisation, ni traduction (français seulement).
+## Ce que le tableau de bord devient
 
-Ne pas confondre : le **domaine** `gv.je` porte aussi l'identité (`key.gv.je`, adresses `@gv.je`, `sftpgo.gv.je`,
-`memos.gv.je`…). La transition ne concerne que **l'hôte `www.gv.je`** (le tableau de bord), pas ces services.
+La même application (`voisinternet`) sert les deux noms. Sur `www.resdigita.com`, la page d'accueil est le **tableau de
+bord des outils** (`/fr/outils/`) : grille compacte par catégorie, un clic pour ouvrir, **sans connexion** ; si la
+personne est connectée, ses services (« Mes services ») sont rappelés en tête ; les outils d'administration (Keycloak,
+ListMonk, SFTPGo…) n'apparaissent qu'au groupe « Administration ». Le reste (compte, services, connexion) fonctionne à
+l'identique sur les deux noms.
 
-## Ce que fait déjà www.lesgrandsvoisins.com pour le même besoin
+## Fait dans le code (voisinternet, prêt, inactif)
 
-La page **Services et liens** (`/fr/account/raccourcis/`) : catalogue de services par catégorie, liste personnelle « Mes
-liens » qui se retrouve sur tous les appareils, services « en attente » d'activation, traduit en 5 langues, accessible
-au clavier. **47 des 50 tuiles** correspondent déjà, par nom de domaine, à un service du catalogue de `www`. Il manque
-seulement `immich.gv.je`, `vikunja.gv.je` et `wagtail.resdigita.com`.
+- Page `/outils/` (tableau de bord), tuiles compactes, traduite en 5 langues.
+- Réglage `VOISINTERNET_OUTILS_HOSTS` (liste de noms de domaine) : sur ces noms, `/fr/`, `/en/`… affichent le tableau de
+  bord. Vide par défaut : aucun effet.
+- Champ « réservé à l'administration » sur chaque service (administration, migration 0038) ; masqué du public dans le
+  tableau de bord, le catalogue, l'accueil, la recherche et les étiquettes.
 
-## Les options
+## À faire, dans l'ordre
 
-| | Option | Ce qui change | Avantages | Risques / coût |
-|---|---|---|---|---|
-| **A** | **Remplacer** le tableau de bord par « Services et liens » ; `www.gv.je` redirige vers `www.lesgrandsvoisins.com/fr/account/raccourcis/` | Un seul endroit, une seule liste à tenir ; les membres personnalisent ; 5 langues | Une seule source de vérité ; moins de services à maintenir (Homepage retiré) ; cohérence avec le reste | La page demande un clic de plus pour un accès anonyme ; les tuiles d'administration (Keycloak, ListMonk…) doivent aller ailleurs (voir ci-dessous) ; habitudes des personnes qui ont `www.gv.je` en favori |
-| **B** | **Garder** le tableau de bord, mais l'aligner : liens vers les parcours, textes revus, tuiles obsolètes retirées | Rien ne bouge côté adresses | Aucun risque ; rapide | Deux listes de services à tenir en parallèle (déjà 47 sur 50 en double) |
-| **C** | **Fusion progressive** : `www.gv.je` devient une page publique de `www` (vue du catalogue sans compte), et le tableau de bord ne sert plus qu'aux administrateurs (nouvelle adresse, accès restreint) | Le public voit le catalogue sans se connecter ; les outils d'administration sortent de la vitrine | Meilleur des deux ; réversible par étapes | Plus de travail (page publique, restriction d'accès côté Caddy / Keycloak) |
-| **D** | **Retirer** `www.gv.je` sans remplaçant | — | Rien à maintenir | Casse les favoris et les liens ; déconseillé |
+| # | Étape | Qui | Remarque |
+|---|---|---|---|
+| 1 | **Ajouter au catalogue les 3 outils manquants** (`immich.gv.je`, `vikunja.gv.je`, `wagtail.resdigita.com`) et **cocher « réservé à l'administration »** sur Keycloak, ListMonk, SFTPGo (admin), Ghost (admin) | Chris, dans `/admin/` (ou moi sur demande) | 47 des 50 tuiles de Homepage sont déjà dans le catalogue |
+| 2 | **Décider du sort des « anciens services »** (Homarr, Copyparty, Vikunja ancien, KeeWeb, Crabfit, Wikijs…) : lesquels sont encore en service ? Les autres sortent du catalogue | Chris | Se règle en décochant « proposé » |
+| 3 | **Que devient le site actuellement derrière `www.resdigita.com` ?** Aujourd'hui `resdigita.com` et `www.resdigita.com` redirigent vers `wagtail.resdigita.com` (un autre site Wagtail). Il garde son nom `wagtail.resdigita.com` ; seul `www.resdigita.com` changerait de destination | Chris / administration | **À trancher avant l'étape 4** |
+| 4 | **Serveur** : `www.resdigita.com` pointe vers `voisinternet` (comme `www.lesgrandsvoisins.com`), `DJANGO_ALLOWED_HOSTS` et `DJANGO_CSRF_TRUSTED_ORIGINS` complétés, `VOISINTERNET_OUTILS_HOSTS=www.resdigita.com`, adresses de retour de connexion et de déconnexion déclarées dans le client Keycloak (`https://www.resdigita.com/*`) | Administration (demande n°16) | Une seule application, deux noms |
+| 5 | **Redirections 301** de `www.gv.je`, `gv.je` et des autres noms de l'ancien tableau de bord (`dash.gdvoisins.com`…) vers `https://www.resdigita.com/` | Administration | Après vérification de l'étape 4 |
+| 6 | **Arrêter Homepage** (service `homepage-dashboard`, port 8082) après quelques semaines | Administration | Les tuiles sont conservées dans `flakeops` (historique) |
+| 7 | **Courrier** : proposer `@resdigita.com` comme adresse (le domaine est déjà hébergé pour le courrier) ; `@gv.je` reste valable | Chris + administration | Décision séparée, touche Keycloak et le courrier |
 
-## Ma recommandation : C, en deux temps
+## Ce qui est perdu avec Homepage, à savoir
 
-1. **Maintenant, sans risque** : ajouter à `www` les 3 services manquants, retirer les tuiles « Anciens services » devenues
-   inutiles, et ne **rien rediriger** encore.
-2. **Ensuite** : une page publique « Services » sur `www` (catalogue sans connexion, avec « Ouvrir »), puis
-   `www.gv.je` → redirection 301 vers cette page. Les tuiles d'administration passent sur un hôte restreint
-   (par exemple `admin.gv.je`, derrière Keycloak, groupe « Administration »), ou dans la page d'administration de `www`.
+Le tableau de bord actuel affiche aussi des **widgets** (agenda, mémos « Twitter des GV », météo) et une barre de titre
+propre. Les tuiles d'outils se retrouvent toutes ; l'agenda existe déjà sur `lesgrandsvoisins.com`. Les mémos
+(`memos.gv.je`) restent atteignables comme outil, pas comme flux dans la page.
 
-Pourquoi C plutôt que A : un tableau de bord sert deux publics (les membres, qui veulent leurs outils ; les
-administrateurs, qui veulent l'administration). `www` sert déjà bien les premiers, pas encore les seconds ; les mélanger
-dans une même page, c'est ce qui rend `www.gv.je` difficile à ranger aujourd'hui.
+## Points de vigilance
 
-## Décisions à prendre
-
-1. **Option** : A, B, C (recommandée) ou D ?
-2. **Tuiles d'administration** (Keycloak, ListMonk, SFTPGo, Ghost…) : où doivent-elles vivre ? (page d'administration de
-   `www` réservée au groupe « Administration », hôte restreint, ou rester dans Homepage ?)
-3. **« Anciens services »** (Homarr, Copyparty, Vikunja ancien, KeeWeb, Crabfit, Wikijs…) : lesquels sont encore en
-   service ? Les autres sont retirés de la liste, pas redirigés.
-4. **Redirections des autres noms** (`gv.je`, `dash.gdvoisins.com`, `homepage-dashboard.gv.je`…) : suivent `www.gv.je`
-   (recommandé) ou restent à part ?
-5. **Calendrier** : avant ou après le retrait de `old.lesgrandsvoisins.com` ?
-
-## Ce que je peux faire sans attendre
-
-- Écrire la comparaison **tuile par tuile / service par service** (fichier prêt à relire) et les 3 services à ajouter.
-- Préparer la page publique « Services » de `www` (option C, étape 2) sans la brancher.
-- Rédiger la demande à l'administration (Caddy) pour la redirection, **à n'appliquer qu'après votre décision**.
-
-*Hors périmètre sans demande de l'administration :* toute modification de `flakeops` hors des branches `ux/…`, de
-Keycloak ou de Caddy.
+- **Connexion sur deux noms** : `www.resdigita.com` et `www.lesgrandsvoisins.com` sont deux sites pour le navigateur,
+  donc deux sessions. Grâce à Keycloak (une seule connexion unique), la deuxième connexion est immédiate, sans mot de
+  passe redemandé.
+- **Marque** : `resdigita` et `lesartsvoisins` évitent de rapprocher le domaine d'outils de la marque d'origine du site
+  de Saint-Vincent-de-Paul ; pour tout nom contenant « grands voisins », une vérification auprès de l'INPI/EUIPO est
+  prudente avant d'en faire un domaine principal.
+- **Courrier** : un domaine déjà en usage pour le courrier (`resdigita.com`) a une réputation à entretenir (voir B-011).

@@ -1,0 +1,35 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Tous les outils — lesgrandsvoisins.com" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="wrap">
+    <h1>{% trans "Tous les outils" %}</h1>
+    <p class="lead">{% trans "Les outils numériques des Grands Voisins, en un clic." %}</p>
+  </div>
+</div>
+<div class="wrap page">
+  {% if mes_services %}
+    <section class="outils-group" aria-labelledby="outils-mes">
+      <h2 class="svc-cat" id="outils-mes">{% trans "Mes services" %}</h2>
+      <ul class="outils-grid">
+        {% for service in mes_services %}
+          {% include "core/partials/outil_tuile.html" %}
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+  {% regroup services by category as groupes %}
+  {% for groupe in groupes %}
+    <section class="outils-group" {% if groupe.grouper %}aria-labelledby="outils-{{ groupe.grouper.slug }}"{% endif %}>
+      <h2 class="svc-cat" {% if groupe.grouper %}id="outils-{{ groupe.grouper.slug }}"{% endif %}>{% if groupe.grouper %}{{ groupe.grouper.name }}{% else %}{% trans "Autres" %}{% endif %}</h2>
+      <ul class="outils-grid">
+        {% for service in groupe.list %}
+          {% include "core/partials/outil_tuile.html" %}
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
+  <p class="muted"><a href="{% url 'core:raccourcis' %}">{% trans "Choisir mes services et les retrouver sur tous mes appareils" %}</a></p>
+</div>
+{% endblock %}

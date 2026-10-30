@@ -63,4 +63,3 @@ Les besoins côté serveur passent par `docs/DEMANDES-UX.md` (dépôt `flakeops`
 - Test d'inscription dans un navigateur écrit et fusionné (`flakeops`, `scripts/nonreg/inscription-navigateur.py`).
 - Parcours guidés (interface traduite en en/es/ar/ko), bandeau du numéro anonyme, boutons inscription/connexion, identifiant affiché : voir [CHANGELOG.md](CHANGELOG.md).
 
-- **B-065** — Le pepper des comptes anonymes est vide en production (`VOISINTERNET_ANON_PEPPER=`) : à migrer vers un pepper secret par une migration planifiée (ne jamais le remplir sans migrer). Qui : Chris + session de travail.

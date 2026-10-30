@@ -1979,3 +1979,10 @@ class DeconnexionKeycloakTests(Base):
         self.assertTrue(reponse["Location"].startswith(self.ENDPOINT))
         self.assertIn("id_token_hint=tok", reponse["Location"])
         self.assertIsNone(r.session.get("oidc_id_token"))  # session locale effacée
+
+
+class CatalogueServicesTests(Base):
+    def test_services_out_of_order_are_not_offered_and_blog_points_here(self):
+        for slug in ["guichet", "ghost", "discourse"]:
+            self.assertFalse(Service.objects.get(slug=slug).active, slug)
+        self.assertEqual(Service.objects.get(slug="blog-lesgrandsvoisins-com").url, "https://www.lesgrandsvoisins.com/fr/blog/")

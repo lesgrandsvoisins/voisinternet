@@ -3,6 +3,8 @@
 > **Mise à jour du 30/10 (soir) :** après avoir envisagé de laisser Homepage sur `www.resdigita.org` (le même tableau de bord que `www.gv.je`, en parallèle), **Chris veut que le tableau de bord de `voisinternet` (`/outils/`) le remplace sur ce nom**. Le site Wagtail qui s'y trouvait est sous `www.libregood.com` (déployé 12:38). Les étapes (a) à (c) ci-dessous redeviennent d'actualité, **après le « go » de Chris** ; Homepage reste sur `www.gv.je` jusqu'aux 301 (étape 5).
 >
 > **Mise à jour du 30/10 (nuit) : le domaine d'outils devient `resdigita.org` (et non `.com`), plus cohérent.** Les noms ci-dessous ont été réécrits en `.org`. Tant que l'administration n'a pas créé le domaine (DNS, certificats, courrier, sous-domaines `guichet.`, `keeweb.`, `crabfit.`, `quartz.`, `wagtail.`), les services existants restent sur `resdigita.com` : les adresses du catalogue (`core.service.json`) ne changent qu'à ce moment-là, et `resdigita.com` redirigera vers `.org`.
+>
+> **Ordre proposé par l'administration (rien n'est actif)** : (1) Chris publie la zone `resdigita.org` chez ClouDNS (A apex et joker, MX, SPF, DMARC) ; (2) l'administration ajoute les noms dans Caddy ; (3) Chris ajoute `www.resdigita.org` / `https://www.resdigita.org` à `DJANGO_ALLOWED_HOSTS` / `DJANGO_CSRF_TRUSTED_ORIGINS` et redémarre ; (4) Chris ajoute `https://www.resdigita.org/*` aux adresses de retour de connexion **et** de déconnexion du client Keycloak `voisinternet` ; (5) Chris prépare le catalogue ; (6) sur son « go », l'administration active le module (pose `VOISINTERNET_OUTILS_HOSTS=www.resdigita.org`) ; (7) 301 de `resdigita.com` vers `.org`, puis de `www.gv.je` / `gv.je`. Le site Wagtail reste sous `www.libregood.com`.
 
 ## Décisions prises
 

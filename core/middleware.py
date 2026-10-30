@@ -5,7 +5,7 @@ from django.conf import settings
 
 class HoteOutilsMiddleware:
     """
-    Sur les noms de domaine de OUTILS_HOSTS (le domaine « côté ordinateur », ex. www.resdigita.com), la page d'accueil de
+    Sur les noms de domaine de OUTILS_HOSTS (le domaine « côté ordinateur », ex. www.resdigita.org), la page d'accueil de
     chaque langue (/fr/, /en/…) est le tableau de bord des outils (/fr/outils/), sans changer l'adresse affichée.
     Le reste du site (compte, services, connexion) fonctionne à l'identique ; aucun effet si OUTILS_HOSTS est vide.
     """

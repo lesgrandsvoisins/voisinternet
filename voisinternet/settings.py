@@ -245,7 +245,7 @@ REDIRECTIONS_STATIC_FILE = env("VOISINTERNET_REDIRECTIONS_STATIQUES", "/etc/vois
 # Domaines hébergés par nos soins (modules/mail/domains.nix de flakeops) : refusés comme cible (boucle).
 REDIRECTIONS_OUR_DOMAINS = env_list(
     "VOISINTERNET_DOMAINES_COURRIER",
-    "maelanc.com,gvcoop.org,lesgrandsvoisins.com,mail.lesgrandsvoisins.com,resdigita.com,mail.resdigita.com,"
+    "maelanc.com,gvcoop.org,lesgrandsvoisins.com,mail.lesgrandsvoisins.com,resdigita.com,mail.resdigita.com,resdigita.org,mail.resdigita.org,"
     "lesgrandsvoisins.fr,parisle.com,parisle.org,paris14.cc,discourse.paris14.cc,yanlomsprod.org,lgv.info,"
     "discourse.lgv.info,mm.lgv.info,gdvoisins.com,gv.style,gvstyle.org,gvplace.com,hopgv.com,hopgv.org,gafam.us,"
     "gdvoisins.org,gv.je,mail.gv.je,libregood.com",

@@ -1614,7 +1614,7 @@ def redirection_confirmer(request, token):
 
 
 
-# --- Tableau de bord des outils (domaine « côté ordinateur », ex. www.resdigita.com ; réglage OUTILS_HOSTS) --------------
+# --- Tableau de bord des outils (domaine « côté ordinateur », ex. www.resdigita.org ; réglage OUTILS_HOSTS) --------------
 
 def outils(request):
     """

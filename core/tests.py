@@ -2012,3 +2012,27 @@ class TableauDeBordOutilsTests(Base):
         self.assertContains(response, "Tous les outils")
         autre = self.client.get("/fr/", HTTP_HOST="testserver")
         self.assertNotContains(autre, "Tous les outils")
+
+
+class PurgerComptesAnonymesTests(Base):
+    def test_only_old_empty_anonymous_accounts_are_deleted(self):
+        from datetime import timedelta
+        from io import StringIO
+        from django.core.management import call_command
+        vieux = timezone.now() - timedelta(days=90)
+        vide = Account.objects.create(number_digest="a" * 64)
+        avec_service = Account.objects.create(number_digest="b" * 64)
+        Shortcut.objects.create(account=avec_service, service=self.service)
+        recent = Account.objects.create(number_digest="c" * 64)
+        nomme = Account.objects.create(user=get_user_model().objects.create_user("sub-n"))
+        Account.objects.filter(pk__in=[vide.pk, avec_service.pk, nomme.pk]).update(last_seen=vieux)  # contourne auto_now
+        out = StringIO()
+        call_command("purger_comptes_anonymes", stdout=out)  # simulation
+        self.assertEqual(Account.objects.count(), 4)
+        self.assertIn("à supprimer : 1", out.getvalue())
+        call_command("purger_comptes_anonymes", "--appliquer", stdout=out)
+        restants = set(Account.objects.values_list("pk", flat=True))
+        self.assertNotIn(vide.pk, restants)           # vide et ancien : supprimé
+        self.assertIn(avec_service.pk, restants)      # a un service : gardé
+        self.assertIn(recent.pk, restants)            # récent : gardé
+        self.assertIn(nomme.pk, restants)             # compte nommé : jamais touché

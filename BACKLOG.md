@@ -47,7 +47,7 @@ Les besoins côté serveur passent par `docs/DEMANDES-UX.md` (dépôt `flakeops`
 | U-021 | a_faire | Relecture de l'arabe et du coréen du thème Keycloak et de l'interface du site. | Relecteurs natifs | Relecture notée. |
 | U-022 | a_faire | Parcours « documents » (selon `U-003`) et parcours Vikunja plus précis (nom du projet de relecture à confirmer). | UX | Parcours publiés. |
 | U-023 | a_faire | Doublons d'inscription : message qui oriente vers la connexion sans bloquer (homonymes possibles). Côté thème Keycloak, les messages existent ; reste le cas « même nom » sur `www`. | UX | Message en place. |
-| U-024 | a_faire | Audit d'accessibilité : navigation au clavier, contraste restant, arabe (droite à gauche), `prefers-reduced-motion`. | UX | Anomalies corrigées. |
+| U-024 | en_cours | Audit d'accessibilité : **automatique fait le 30/10 (38 → 0 violations)**, corrections livrées. Reste à faire par une personne : lecteur d'écran (NVDA/VoiceOver), arabe/coréen (relecteurs natifs), formulaires avec erreurs réelles, textes alternatifs éditoriaux, déclaration d'accessibilité. Voir `docs/AUDIT-ACCESSIBILITE.md`. | Chris + relecteurs | Parcours testés au lecteur d'écran ; déclaration publiée. |
 | U-025 | a_faire | Courriel de bienvenue (contenu, à envoyer par Keycloak) et écran de bienvenue après la première connexion. | UX / Admin | Contenu écrit ; envoi configuré. |
 | U-026 | a_faire | Un évènement publié puis modifié reste publié sans relecture : décider si la modification le repasse en attente. | UX / Chris | Décision appliquée. |
 | U-027 | a_faire | Proposer en premier la création d'un compte nommé (le numéro anonyme est difficile à garder pour ce public). | UX | Ordre et textes changés. |

@@ -36,7 +36,7 @@
                 </p>
               </div> 
               {% endcomment %}
-              <a class="agenda-date" href="{% url 'core:event_detail' event.pk %}" aria-hidden="true">
+              <a class="agenda-date" href="{% url 'core:event_detail' event.pk %}" aria-hidden="true" tabindex="-1">
                 <div>
                 <span class="agenda-date-year">{{ event.start|date:"Y" }}</span>
                 <span class="agenda-date-weekday">{{ event.start|date:"l" }}</span>

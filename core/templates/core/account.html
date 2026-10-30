@@ -126,49 +126,53 @@
           {% endif %}
         </div>
       </section>
-      <details class="account-accordion" id="sc2-title">
+      <div class="account-accordion-wrap">
+        <a class="accordion-manage"
+             href="{% url 'core:raccourcis' %}#available-services">{% trans "Ajouter un service" %}</a>
+        <details class="account-accordion" id="sc2-title">
         <summary class="accordion-summary">
           <h2>{% trans "Mes services" %}</h2>
-          <a class="accordion-manage"
-             href="{% url 'core:raccourcis' %}#available-services"
-             onclick="event.stopPropagation()">{% trans "Ajouter un service" %}</a>
         </summary>
         <div id="shortcuts-list">{% include "core/partials/shortcut_list.html" %}</div>
-      </details>
-      <details class="account-accordion" id="mb2-title">
+        </details>
+      </div>
+      <div class="account-accordion-wrap">
+        <a class="accordion-manage"
+             href="{% url 'core:groupes' %}#available-groups">{% trans "Rejoindre un groupe" %}</a>
+        <details class="account-accordion" id="mb2-title">
         <summary class="accordion-summary">
           <h2>{% trans "Mes groupes" %}</h2>
-          <a class="accordion-manage"
-             href="{% url 'core:groupes' %}#available-groups"
-             onclick="event.stopPropagation()">{% trans "Rejoindre un groupe" %}</a>
         </summary>
         <div id="memberships-list">{% include "core/partials/membership_list.html" %}</div>
-      </details>
-      <details class="account-accordion" id="fiches2-title">
+        </details>
+      </div>
+      <div class="account-accordion-wrap">
+        <a class="accordion-manage"
+             href="{% url 'core:mes_fiches' %}">{% trans "Créer une fiche" %}</a>
+        <details class="account-accordion" id="fiches2-title">
         <summary class="accordion-summary">
           <h2>{% trans "Mes fiches dans l'annuaire" %}</h2>
-          <a class="accordion-manage"
-             href="{% url 'core:mes_fiches' %}"
-             onclick="event.stopPropagation()">{% trans "Créer une fiche" %}</a>
         </summary>
         <div>{% include "core/partials/entry_list.html" with entries=owned_entries %}</div>
-      </details>
-      <details class="account-accordion" id="events2-title">
+        </details>
+      </div>
+      <div class="account-accordion-wrap">
+        <a class="accordion-manage"
+             href="{% url 'core:mes_evenements' %}">{% trans "Créer un évènement" %}</a>
+        <details class="account-accordion" id="events2-title">
         <summary class="accordion-summary">
           <h2>{% trans "Mes évènements dans l'agenda" %}</h2>
-          <a class="accordion-manage"
-             href="{% url 'core:mes_evenements' %}"
-             onclick="event.stopPropagation()">{% trans "Créer un évènement" %}</a>
         </summary>
         <div>{% include "core/partials/my_event_list.html" with events=managed_events %}</div>
-      </details>
+        </details>
+      </div>
       {% if user.is_authenticated %}
+        <div class="account-accordion-wrap">
+        <a class="accordion-manage"
+           href="{{ keycloak_account_url }}">{% trans "Géré par votre compte unique Grands Voisins" %}</a>
         <details class="account-accordion" id="profile2-title">
           <summary class="accordion-summary">
             <h2 id="profile-title">{% trans "Mon profil" %}</h2>
-            <a class="accordion-manage"
-               href="{{ keycloak_account_url }}"
-               onclick="event.stopPropagation()">{% trans "Géré par votre compte unique Grands Voisins" %}</a>
           </summary>
           <div>
             <ul class="docs">
@@ -196,6 +200,7 @@
             {% endif %}
           </div>
         </details>
+        </div>
       {% endif %}
       <details class="account-accordion" id="fin-title">
         <summary class="accordion-summary">

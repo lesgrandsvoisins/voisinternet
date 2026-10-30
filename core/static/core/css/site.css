@@ -4285,3 +4285,28 @@ a.prevnext {
 .outil .outil-resume { grid-column: 2; font-size: .85rem; color: var(--ink-soft); overflow-wrap: anywhere; }
 .outil-sans-adresse { opacity: .6; }
 .outils-group h2.svc-cat { font-family: inherit; font-size: .9rem; margin-bottom: .75rem; }
+
+/* Accessibilité (audit du 30/10) */
+/* Les liens « Ajouter / Rejoindre… » ne sont plus DANS le résumé repliable (contrôle interactif imbriqué) : ils le surplombent. */
+.account-accordion-wrap { position: relative; }
+.account-accordion-wrap > .accordion-manage { position: absolute; top: 1.1rem; inset-inline-end: 1.25rem; z-index: 1; font-size: .95rem; }
+.account-accordion-wrap .accordion-summary { padding-inline-end: 9.5rem; }
+@media (max-width: 40rem) {
+  .account-accordion-wrap > .accordion-manage { position: static; display: block; padding: 0 0 .4rem .25rem; }
+  .account-accordion-wrap .accordion-summary { padding-inline-end: 0; }
+}
+/* Cible tactile d'au moins 24 px pour les évènements du calendrier (WCAG 2.5.8). */
+.cal-event { width: 1.5rem; height: 1.5rem; }
+/* Jours des mois voisins : lisibles (contraste), distingués par le fond et non par une transparence qui efface le texte. */
+.cal-day.out { opacity: 1; background: color-mix(in srgb, var(--paper) 60%, var(--line)); }
+/* Champ de recherche du blog : ne déborde pas à 320 px, et garde un contour de focus visible. */
+.blog-search { flex-wrap: wrap; }
+.blog-search input { min-width: 0; }
+.blog-search input:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+/* Pastilles de date de l'agenda : texte foncé sur le fond jaune (le blanc ne faisait que 1,8:1). */
+.agenda-date-year, .agenda-date-weekday { color: #1C2A35; }
+/* Liens « Ajouter… » des rubriques repliables : cible tactile d'au moins 24 px. */
+.accordion-manage { display: inline-block; min-height: 1.75rem; line-height: 1.75rem; }
+/* Le code en ligne ne doit jamais élargir la page (320 px, arabe de droite à gauche). */
+code { overflow-wrap: anywhere; }
+pre { max-width: 100%; overflow-x: auto; }

@@ -4,9 +4,9 @@
   {% if not account and not user.is_authenticated %}
     <div class="account-actions">
       {% if keycloak_register_url %}
-        <a class="account-action" href="{{ keycloak_register_url }}">{% trans "Créer mon compte" %}</a>
+        <a class="account-action" href="{{ keycloak_login_url }}">{% trans "J'ai déjà un compte" %}</a>
         <a class="account-action account-action-secondary"
-           href="{{ keycloak_login_url }}">{% trans "J'ai déjà un compte" %}</a>
+           href="{{ keycloak_register_url }}">{% trans "Créer mon compte" %}</a>
       {% endif %}
       {% if anon_visible or not keycloak_register_url %}
         {% if anon_allowed %}

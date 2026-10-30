@@ -249,24 +249,24 @@
       </details>
     {% else %}
       <div class="choices">
+        <section class="card" aria-labelledby="login-title">
+          <h2 id="login-title">{% trans "J'ai déjà un compte" %}</h2>
+          <p>{% trans "Connectez-vous avec le compte que vous utilisez déjà pour les autres outils des Grands Voisins." %}</p>
+          {% if OIDC_ENABLED %}
+            <a class="btn btn-sun"
+               href="{% url 'core:connexion' %}?next={% url 'core:account' %}">{% trans "Se connecter" %}</a>
+          {% endif %}
+        </section>
         <section class="card" aria-labelledby="register-title">
           <h2 id="register-title">{% trans "Créer mon compte" %}</h2>
           <p>
             {% trans "Un compte unique des Grands Voisins, le même pour tous les outils de l'association. Il retrouve vos services, groupes, fiches et évènements sur tous vos appareils, et vous pouvez récupérer votre mot de passe par courriel." %}
           </p>
           {% if OIDC_ENABLED %}
-            <a class="btn btn-sun"
+            <a class="btn btn-line"
                href="{% url 'core:inscription' %}?next={% url 'core:account' %}">{% trans "Créer mon compte" %}</a>
           {% else %}
             <p class="muted">{% trans "La connexion par compte Grands Voisins n'est pas encore configurée sur ce serveur." %}</p>
-          {% endif %}
-        </section>
-        <section class="card" aria-labelledby="login-title">
-          <h2 id="login-title">{% trans "J'ai déjà un compte" %}</h2>
-          <p>{% trans "Connectez-vous avec le compte que vous utilisez déjà pour les autres outils des Grands Voisins." %}</p>
-          {% if OIDC_ENABLED %}
-            <a class="btn btn-line"
-               href="{% url 'core:connexion' %}?next={% url 'core:account' %}">{% trans "Se connecter" %}</a>
           {% endif %}
         </section>
         {% if anon_visible or not OIDC_ENABLED %}

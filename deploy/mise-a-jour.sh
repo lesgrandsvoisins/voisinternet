@@ -3,6 +3,7 @@
 # du projet, avec l'utilisateur du service :
 #     deploy/mise-a-jour.sh BRANCHE_OU_COMMIT --essai     # montre ce qui changerait, ne modifie RIEN
 #     deploy/mise-a-jour.sh BRANCHE_OU_COMMIT             # fait la mise à jour du code (pas le redémarrage)
+#     deploy/mise-a-jour.sh BRANCHE_OU_COMMIT --redemarrer  # idem, puis redémarre (deploy/redemarrer.sh : sans root) et teste
 # Réglages (facultatifs) : PROJET, ENV_FILE, DEST (comme deploy/sauvegarde.sh) ;
 #   SOURCE=…   dépôt à récupérer (défaut : origin) ; un fichier « git bundle » convient s'il n'y a pas d'accès à GitHub ;
 #   OUI=1      ne pas demander de confirmation ;  SANS_SAUVEGARDE=1  passer outre la sauvegarde (à éviter) ;
@@ -10,7 +11,7 @@
 #              (scripts/sauvegarde-www.sh de flakeops : SAUVEGARDE_FAITE=/mnt/casiers/backups/www/2026-10-28-0955).
 # Garde-fous : refuse s'il n'y a pas de sauvegarde de moins d'une heure (deploy/sauvegarde.sh), refuse si le dossier a des
 # modifications locales, ne touche pas à la branche suivie (la mise à jour se fait en « tête détachée »), note le commit d'avant
-# pour le retour arrière. Ne redémarre PAS le service : c'est une étape à part, volontaire.
+# pour le retour arrière. Ne redémarre PAS le service sauf avec --redemarrer : c'est une étape volontaire.
 set -uo pipefail
 # Charge un fichier d'environnement au format systemd (CLE=valeur, sans interprétation : un « $ » dans une valeur reste littéral).
 # Ne PAS faire « . fichier » : le shell prendrait les « $… » pour des variables.
@@ -24,8 +25,8 @@ charger_env() {
     export "$k=$v"
   done < "$f"
 }
-REF=${1:-}; ESSAI=0; [ "${2:-}" = "--essai" ] && ESSAI=1
-[ -n "$REF" ] || { sed -n 2,13p "$0"; exit 2; }
+REF=${1:-}; ESSAI=0; REDEMARRER=0; [ "${2:-}" = "--essai" ] && ESSAI=1; [ "${2:-}" = "--redemarrer" ] && REDEMARRER=1
+[ -n "$REF" ] || { sed -n 2,14p "$0"; exit 2; }
 PROJET=${PROJET:-${PROJECT:-$(pwd)}}; ENV_FILE=${ENV_FILE:-/etc/voisinter-django/voisinter-django.env}; DEST=${DEST:-$HOME/sauvegardes}; SOURCE=${SOURCE:-origin}
 PY="$PROJET/.venv/bin/python"; [ -x "$PY" ] || PY=$(command -v python3)
 cd "$PROJET" || { echo "KO dossier du projet introuvable : $PROJET"; exit 2; }
@@ -70,11 +71,13 @@ cat <<FIN
 
 CODE MIS À JOUR (pas encore redémarré) : $cible
 Étapes suivantes, à la main :
-  1. redémarrer le service (applique les migrations et collecte les fichiers statiques) :  systemctl restart voisinter-django
-     puis surveiller :                                                                      journalctl -u voisinter-django -f
-  2. test de fumée :   deploy/smoke.sh https://www.lesgrandsvoisins.com
+  1. redémarrer le service (applique les migrations et collecte les fichiers statiques), sans root :  deploy/redemarrer.sh
+     (attend que le service réponde, puis lance le test de fumée ; en cas de souci, en root : journalctl -u voisinter-django -f)
+  2. test de fumée seul (déjà fait par l'étape 1) :   deploy/smoke.sh https://www.lesgrandsvoisins.com
   3. comparer les décomptes : ./decomptes.sh (doivent égaler ou dépasser ceux affichés plus haut, « Décomptes AVANT »)
 RETOUR ARRIÈRE si quelque chose ne va pas :
-  git checkout --detach $avant && systemctl restart voisinter-django     (le commit d'avant est aussi dans git-etat.txt de la sauvegarde de l'hôte)
+  git checkout --detach $avant && deploy/redemarrer.sh     (le commit d'avant est aussi dans git-etat.txt de la sauvegarde de l'hôte)
   (les nouvelles tables de la migration 0034 peuvent rester ; pour les retirer : $PY manage.py migrate core 0033 AVANT de revenir au code précédent)
 FIN
+
+[ "$REDEMARRER" -eq 1 ] && exec "$PROJET/deploy/redemarrer.sh"

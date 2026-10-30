@@ -42,7 +42,7 @@ sauvegarde:
 essai dossier ref=branche:
     SAUVEGARDE_FAITE={{dossier}} PROJET={{project}} {{project}}/deploy/mise-a-jour.sh {{ref}} --essai
 
-# Mettre à jour le code (demande confirmation ; ne redémarre PAS : voir `redemarrer`, en root)
+# Mettre à jour le code (demande confirmation ; ne redémarre PAS : voir `redemarrer`)
 maj dossier ref=branche:
     SAUVEGARDE_FAITE={{dossier}} PROJET={{project}} {{project}}/deploy/mise-a-jour.sh {{ref}}
 
@@ -50,11 +50,12 @@ maj dossier ref=branche:
 manage *args:
     PROJET={{project}} {{project}}/deploy/manage.sh {{args}}
 
-# ----- À lancer en root dans le conteneur ---------------------------------------------------------------------------
-
-# Redémarrer le service (applique les migrations et collecte les statiques). Root uniquement.
+# Redémarrer le service (applique les migrations et collecte les statiques), attendre qu'il réponde, puis test de fumée.
+# Sans root : repose sur la règle sudo de l'administration (demande UX n°15).
 redemarrer:
-    systemctl restart voisinter-django
+    PROJET={{project}} {{project}}/deploy/redemarrer.sh
+
+# ----- À lancer en root dans le conteneur ---------------------------------------------------------------------------
 
 # Dernières lignes du journal du service. Root uniquement.
 journal n="60":

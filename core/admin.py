@@ -37,10 +37,10 @@ class TagAdmin(TranslationAdmin):
 
 @admin.register(Service)
 class ServiceAdmin(TranslationAdmin):
-    list_display = ["name", "summary", "category", "featured", "active", "requires_approval", "order"]
-    list_filter = ["category", "requires_approval"]
+    list_display = ["name", "summary", "category", "featured", "active", "administration_only", "requires_approval", "order"]
+    list_filter = ["category", "active", "administration_only", "requires_approval"]
     filter_horizontal = ["audiences", "tags"]
-    list_editable = ["featured", "active", "order"]
+    list_editable = ["featured", "active", "administration_only", "order"]
     prepopulated_fields = {"slug": ["name"]}
     search_fields = ["name", "summary"]
     autocomplete_fields = ["category"]

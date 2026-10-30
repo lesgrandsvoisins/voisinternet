@@ -1,5 +1,7 @@
 # Transition de www.gv.je : plan (décisions du 30/10/2026)
 
+> **Mise à jour du 30/10 (après-midi) :** décision de Chris : *« www.resdigita.com peut reprendre ce qui est aujourd'hui sur www.gv.je »*. `www.resdigita.com` sert donc, côté serveur, **le même tableau de bord Homepage** que `www.gv.je` (port 8082, en parallèle ; `www.gv.je` n'est pas touché), et le site Wagtail qui s'y trouvait est sous `www.libregood.com`. **Le tableau de bord de `voisinternet` (`/outils/`, `OUTILS_HOSTS`) est donc mis de côté** : le code reste en place, inactif ; ne PAS poser `VOISINTERNET_OUTILS_HOSTS` ni ajouter `www.resdigita.com` aux hôtes de Django tant que Chris n'a pas dit que `voisinternet` remplace Homepage sur ce nom. Les étapes (a) à (c) du tableau ci-dessous ne sont plus d'actualité ; les 301 de `www.gv.je` et `gv.je` vers `www.resdigita.com` viendront quand Chris le dira.
+
 ## Décisions prises
 
 1. **Deux noms, deux rôles.** `lesgrandsvoisins.com` : le nom public, qu'on dit à voix haute (marque, site, blog, agenda,

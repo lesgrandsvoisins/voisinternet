@@ -2036,3 +2036,22 @@ class PurgerComptesAnonymesTests(Base):
         self.assertIn(avec_service.pk, restants)      # a un service : gardé
         self.assertIn(recent.pk, restants)            # récent : gardé
         self.assertIn(nomme.pk, restants)             # compte nommé : jamais touché
+
+    def test_preparer_catalogue_outils(self):
+        """Simulation sans effet ; application : adresse de Vikunja, outils d'administration, Immich ajouté ; idempotent."""
+        from io import StringIO
+        from django.core.management import call_command
+
+        Service.objects.filter(slug__in=["vikunja", "keycloak", "immich"]).update(administration_only=False, url="https://x.test/")
+        Service.objects.filter(slug="immich").delete()
+        out = StringIO()
+        call_command("preparer_catalogue_outils", stdout=out)
+        self.assertIn("Simulation", out.getvalue())
+        self.assertFalse(Service.objects.filter(slug="immich").exists())
+        call_command("preparer_catalogue_outils", "--appliquer", stdout=out)
+        self.assertEqual(Service.objects.get(slug="vikunja").url, "https://vikunja.gv.je/login")
+        self.assertTrue(Service.objects.get(slug="keycloak").administration_only)
+        self.assertTrue(Service.objects.filter(slug="immich", active=True).exists())
+        out = StringIO()
+        call_command("preparer_catalogue_outils", stdout=out)
+        self.assertIn("déjà prêt", out.getvalue())

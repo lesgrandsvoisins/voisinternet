@@ -1,0 +1,49 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Modération — lesgrandsvoisins.com" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="wrap">
+    <h1>{% trans "Modération" %}</h1>
+    <p class="lead">{% trans "Demandes d'adresses et de droits d'envoi à approuver ou refuser." %}</p>
+  </div>
+</div>
+<div class="wrap page">
+  <section aria-labelledby="attente">
+    <h2 id="attente">{% trans "En attente" %}</h2>
+    {% for d in en_attente %}
+    <article class="card">
+      <p><strong>{{ d.address }}</strong> — {{ d.get_kind_display }}<br>
+      <span class="muted">{% blocktrans with qui=d.demandeur quand=d.created|date:"j F Y H:i" %}Demandé par {{ qui }} le {{ quand }}{% endblocktrans %}</span></p>
+      {% if d.reason %}<p>{{ d.reason }}</p>{% endif %}
+      <form method="post">{% csrf_token %}
+        <input type="hidden" name="demande" value="{{ d.pk }}">
+        <p>
+          <label for="commentaire-{{ d.pk }}">{% trans "Commentaire (facultatif, vu par la personne)" %}</label><br>
+          <textarea id="commentaire-{{ d.pk }}" name="commentaire" rows="2" maxlength="1000"></textarea>
+        </p>
+        <button class="btn btn-sun" type="submit" name="decision" value="approuver">{% trans "Approuver" %}</button>
+        <button class="btn btn-line" type="submit" name="decision" value="refuser">{% trans "Refuser" %}</button>
+      </form>
+    </article>
+    {% empty %}
+    <p>{% trans "Aucune demande en attente." %}</p>
+    {% endfor %}
+  </section>
+  <section aria-labelledby="recentes">
+    <h2 id="recentes">{% trans "Décisions récentes" %}</h2>
+    <ul class="list-plain">
+      {% for d in recentes %}
+      <li><strong>{{ d.address }}</strong> — {{ d.get_kind_display }} — <span class="chip">{{ d.get_state_display }}</span>
+        {% if d.result_message %}<span class="muted">({{ d.result_message }})</span>{% endif %}</li>
+      {% empty %}<li>{% trans "Rien pour l'instant." %}</li>{% endfor %}
+    </ul>
+  </section>
+  <section aria-labelledby="journal">
+    <h2 id="journal">{% trans "Journal" %}</h2>
+    <ul class="list-plain">
+      {% for j in journal %}<li>{{ j.at|date:"j F Y H:i" }} — {{ j.acteur }} — {{ j.action }} — {{ j.demande.address }}</li>{% endfor %}
+    </ul>
+  </section>
+</div>
+{% endblock %}

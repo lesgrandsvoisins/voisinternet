@@ -1,0 +1,65 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Mes demandes — lesgrandsvoisins.com" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+      <ol>
+        <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
+        <li><a href="{% url 'core:account' %}">{% trans "Compte" %}</a></li>
+        <li aria-current="page">{% trans "Mes demandes" %}</li>
+      </ol>
+    </nav>
+    <h1>{% trans "Mes demandes" %}</h1>
+    <p class="lead">{% trans "Demandez une adresse de courrier ou le droit d'envoyer depuis une adresse. Un modérateur décide, puis l'administration applique." %}</p>
+  </div>
+</div>
+<div class="wrap page">
+  <section aria-labelledby="nouvelle">
+    <h2 id="nouvelle">{% trans "Nouvelle demande" %}</h2>
+    <form method="post">{% csrf_token %}
+      <p>
+        <label for="type">{% trans "Je demande…" %}</label><br>
+        <select id="type" name="type">
+          <option value="adresse">{% trans "une nouvelle adresse de réception" %}</option>
+          <option value="envoi">{% trans "le droit d'envoyer depuis une adresse" %}</option>
+        </select>
+      </p>
+      <p>
+        <label for="local_part">{% trans "Adresse souhaitée" %}</label><br>
+        <input id="local_part" name="local_part" required maxlength="64" pattern="[a-z0-9][a-z0-9._\-]*" autocomplete="off" aria-describedby="aide-adresse">
+        @
+        <select id="domaine" name="domaine" aria-label="{% trans "Domaine" %}">
+          {% for d in domaines %}<option value="{{ d }}">{{ d }}</option>{% endfor %}
+        </select>
+      </p>
+      <p id="aide-adresse" class="muted">{% trans "Lettres minuscules, chiffres, points, tirets ou tirets bas ; commencez par une lettre ou un chiffre." %}</p>
+      <p>
+        <label for="motif">{% trans "Pourquoi ? (facultatif)" %}</label><br>
+        <textarea id="motif" name="motif" rows="3" maxlength="1000"></textarea>
+      </p>
+      <button class="btn btn-sun" type="submit">{% trans "Envoyer la demande" %}</button>
+    </form>
+    <p class="muted">{% blocktrans %}Une demande en attente à la fois, au plus {{ par_jour }} par jour.{% endblocktrans %}</p>
+  </section>
+  <section aria-labelledby="liste">
+    <h2 id="liste">{% trans "Mes demandes" %}</h2>
+    {% if demandes %}
+    <ul class="list-plain">
+      {% for d in demandes %}
+      <li>
+        <strong>{{ d.address }}</strong> — {{ d.get_kind_display }} —
+        <span class="chip">{{ d.get_state_display }}</span>
+        <span class="muted">({{ d.created|date:"j F Y" }})</span>
+        {% if d.moderator_comment %}<br><span class="muted">{% trans "Modération :" %} {{ d.moderator_comment }}</span>{% endif %}
+        {% if d.result_message %}<br><span class="muted">{{ d.result_message }}</span>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>{% trans "Aucune demande pour l'instant." %}</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

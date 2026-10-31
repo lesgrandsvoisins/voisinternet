@@ -104,7 +104,11 @@
           {% if is_administration %}
             <a class="btn btn-line" href="{% url 'core:administration' %}">{% trans "Administration" %}</a>
           {% endif %}
+          {% if is_moderateur %}
+            <a class="btn btn-line" href="{% url 'core:moderation' %}">{% trans "Modération" %}</a>
+          {% endif %}
           {% if user.is_authenticated %}
+            <a class="btn btn-line" href="{% url 'core:mes_demandes' %}">{% trans "Mes demandes" %}</a>
             {% if REDIRECTIONS_ENABLED %}
               <a class="btn btn-line" href="{% url 'core:redirection_courrier' %}">{% trans "Redirection de mes courriels" %}</a>
             {% endif %}

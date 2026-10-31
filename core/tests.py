@@ -2055,3 +2055,81 @@ class PurgerComptesAnonymesTests(Base):
         out = StringIO()
         call_command("preparer_catalogue_outils", stdout=out)
         self.assertIn("déjà prêt", out.getvalue())
+
+
+class DemandesTests(Base):
+    """Demandes soumises à la modération : validation, plafonds, décision, accès."""
+
+    def setUp(self):
+        from django.contrib.auth.models import Group
+        from .models import Account
+
+        cache.clear()  # la notification groupée de la modération passe par le cache
+
+        self.membre = get_user_model().objects.create_user("membre@gv.je", email="membre@gv.je")
+        self.account = Account.objects.create(user=self.membre)
+        self.modo = get_user_model().objects.create_user("chris@gv.je", email="chris@gv.je")
+        self.modo.groups.add(Group.objects.get(name="Modération"))
+
+    def test_validation(self):
+        from . import demandes
+        from .models import Demande
+
+        for mauvais in ("Admin", "a b", "-x", "x@y", "", "postmaster", "bienvenue", "x" * 65):
+            with self.assertRaises(demandes.DemandeError):
+                demandes.valider(Demande.ADRESSE, mauvais, "resdigita.org")
+        with self.assertRaises(demandes.DemandeError):
+            demandes.valider(Demande.ADRESSE, "projet", "autre.org")  # domaine hors liste fermée
+        self.assertEqual(demandes.valider(Demande.ADRESSE, "Projet.X ", " resdigita.org"), ("projet.x", "resdigita.org"))
+
+    def test_une_seule_en_attente_et_adresse_prise(self):
+        from . import demandes
+        from .models import Account, Demande
+
+        demandes.creer(self.account, "membre@gv.je", Demande.ADRESSE, "projet", "resdigita.org", "")
+        with self.assertRaises(demandes.DemandeError):  # une demande en attente à la fois
+            demandes.creer(self.account, "membre@gv.je", Demande.ADRESSE, "autre", "resdigita.org", "")
+        autre = Account.objects.create(user=get_user_model().objects.create_user("b@gv.je"))
+        with self.assertRaises(demandes.DemandeError):  # adresse déjà demandée par quelqu'un d'autre
+            demandes.creer(autre, "b@gv.je", Demande.ENVOI, "projet", "resdigita.org", "")
+
+    def test_plafond_par_jour(self):
+        from . import demandes
+        from .models import Demande
+
+        with override_settings(DEMANDES_PAR_JOUR=2):
+            for i in range(2):
+                d = demandes.creer(self.account, "membre@gv.je", Demande.ADRESSE, f"a{i}", "resdigita.org", "")
+                demandes.decider(d, self.modo, False)
+            with self.assertRaises(demandes.DemandeError):
+                demandes.creer(self.account, "membre@gv.je", Demande.ADRESSE, "a3", "resdigita.org", "")
+
+    def test_decision_une_seule_fois_et_courriels(self):
+        from . import demandes
+        from .models import Demande
+
+        d = demandes.creer(self.account, "membre@gv.je", Demande.ENVOI, "projet", "resdigita.org", "pour le projet")
+        self.assertEqual([m.to for m in mail.outbox], [["chris@gv.je"]])  # modération prévenue
+        demandes.decider(d, self.modo, True, "ok")
+        d.refresh_from_db()
+        self.assertEqual((d.state, d.moderator, d.moderator_comment), ("approuvee", "chris@gv.je", "ok"))
+        self.assertEqual(mail.outbox[-1].to, ["membre@gv.je"])
+        with self.assertRaises(demandes.DemandeError):
+            demandes.decider(d, self.modo, False)
+        self.assertEqual(d.journal.count(), 2)
+
+    def test_acces(self):
+        from .models import Demande
+
+        self.assertEqual(self.client.get(reverse("core:moderation")).status_code, 404)
+        self.client.force_login(self.membre)
+        self.assertEqual(self.client.get(reverse("core:moderation")).status_code, 404)  # pas modérateur
+        self.assertEqual(self.client.get(reverse("core:mes_demandes")).status_code, 200)
+        self.client.post(reverse("core:mes_demandes"), {"type": "adresse", "local_part": "projet", "domaine": "resdigita.org"})
+        d = Demande.objects.get()
+        self.client.force_login(self.modo)
+        r = self.client.get(reverse("core:moderation"))
+        self.assertContains(r, "projet@resdigita.org")
+        self.client.post(reverse("core:moderation"), {"demande": d.pk, "decision": "refuser", "commentaire": "non"})
+        d.refresh_from_db()
+        self.assertEqual(d.state, "refusee")

@@ -63,3 +63,5 @@ Les besoins côté serveur passent par `docs/DEMANDES-UX.md` (dépôt `flakeops`
 - Test d'inscription dans un navigateur écrit et fusionné (`flakeops`, `scripts/nonreg/inscription-navigateur.py`).
 - Parcours guidés (interface traduite en en/es/ar/ko), bandeau du numéro anonyme, boutons inscription/connexion, identifiant affiché : voir [CHANGELOG.md](CHANGELOG.md).
 
+
+- **U-037** — Demandes à la modération : traductions en/es/ar/ko (`make messages`), ajouter `chris@gv.je` au groupe « Modération » dans /admin/, essai de bout en bout avec l'administration (rôle `lgv_demandes`) sur une base d'essai. Qui : Chris + administration.

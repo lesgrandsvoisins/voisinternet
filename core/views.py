@@ -26,11 +26,12 @@ from django.views.decorators.http import require_POST
 
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
 from .forms import ContactMessageForm, ContributionForm, DirectoryEntryForm, EventForm
+from . import demandes as demandes_module
 from . import redirections
 from .legacy import equivalent_ancien_site
 from .menu import ENTRIES, GROUPS, entry_href
 from .models import (
-    Account, Audience, Contribution, DirectoryEntry, DirectorySector, EntryMessage, EntrySubscription, Event,
+    Account, Audience, Contribution, Demande, DemandeJournal, DirectoryEntry, DirectorySector, EntryMessage, EntrySubscription, Event,
     EventInterest, EventManagementRequest, GuideBook, Membership, Mission, MissionStep, OwnershipClaim, Service,
     Shortcut, StepCompletion, Tag,
     format_number,
@@ -432,6 +433,7 @@ def account(request):
         "first_steps": first_steps,
         "first_steps_done": sum(1 for step in first_steps if step["done"]),
         "is_administration": _is_administration(request.user),
+        "is_moderateur": demandes_module.est_moderateur(request.user),
         "contribution_form": ContributionForm(),
     })
 
@@ -1612,6 +1614,53 @@ def redirection_confirmer(request, token):
         "demande": demande, "identifier": demande.account.user.get_username() if demande.account.user_id else "",
     })
 
+
+
+# --- Demandes soumises à la modération (adresses de courrier, droit d'envoi) ------------------------------------------
+
+def mes_demandes(request):
+    if not request.user.is_authenticated:
+        messages.info(request, _("Connectez-vous pour faire une demande."))
+        return redirect("core:account")
+    from .auth import LOGIN_IDENTIFIER_KEY
+
+    account = current_account(request, create=True)
+    identifiant = request.session.get(LOGIN_IDENTIFIER_KEY) or str(request.user)
+    if request.method == "POST":
+        if _throttled(request, "demandes", limit=30, window=15 * 60):
+            messages.error(request, _("Trop de tentatives. Réessayez dans quelques minutes."))
+            return redirect("core:mes_demandes")
+        try:
+            demandes_module.creer(
+                account, identifiant, request.POST.get("type"), request.POST.get("local_part"),
+                request.POST.get("domaine"), request.POST.get("motif"),
+            )
+            messages.success(request, _("Demande enregistrée. Un modérateur la traitera."))
+        except demandes_module.DemandeError as exc:
+            messages.error(request, str(exc))
+        return redirect("core:mes_demandes")
+    return render(request, "core/mes_demandes.html", {
+        "demandes": account.demandes.all()[:50], "domaines": demandes_module.domaines(),
+        "par_jour": settings.DEMANDES_PAR_JOUR,
+    })
+
+
+def moderation(request):
+    if not demandes_module.est_moderateur(request.user):
+        raise Http404
+    if request.method == "POST":
+        demande = get_object_or_404(Demande, pk=request.POST.get("demande"))
+        try:
+            demandes_module.decider(demande, request.user, request.POST.get("decision") == "approuver", request.POST.get("commentaire"))
+            messages.success(request, _("Décision enregistrée."))
+        except demandes_module.DemandeError as exc:
+            messages.error(request, str(exc))
+        return redirect("core:moderation")
+    return render(request, "core/moderation.html", {
+        "en_attente": Demande.objects.filter(state=Demande.ATTENTE).order_by("created"),
+        "recentes": Demande.objects.exclude(state=Demande.ATTENTE)[:30],
+        "journal": DemandeJournal.objects.select_related("demande")[:50],
+    })
 
 
 # --- Tableau de bord des outils (domaine « côté ordinateur », ex. www.resdigita.org ; réglage OUTILS_HOSTS) --------------

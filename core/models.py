@@ -780,3 +780,63 @@ class RedirectionAudit(models.Model):
         verbose_name = _("journal des redirections")
         verbose_name_plural = _("journal des redirections")
         ordering = ["-at"]
+
+
+class Demande(models.Model):
+    """
+    Demande d'un membre (adresse de courrier, droit d'envoi) soumise à l'approbation d'un modérateur. voisinternet ne
+    touche jamais à l'annuaire : l'administration lit les demandes « approuvées » (vue SQL v_demandes_a_appliquer, migration
+    0041) et renvoie le résultat par la fonction demande_marquer.
+    """
+    ADRESSE, ENVOI = "adresse", "envoi"
+    TYPES = [(ADRESSE, _("nouvelle adresse de réception")), (ENVOI, _("droit d'envoyer depuis une adresse"))]
+    ATTENTE, APPROUVEE, REFUSEE, APPLIQUEE, ECHEC = "attente", "approuvee", "refusee", "appliquee", "echec"
+    ETATS = [
+        (ATTENTE, _("en attente")), (APPROUVEE, _("approuvée")), (REFUSEE, _("refusée")),
+        (APPLIQUEE, _("appliquée")), (ECHEC, _("échec")),
+    ]
+    EN_COURS = (ATTENTE, APPROUVEE)  # l'adresse est « prise » tant que la demande n'est pas close
+
+    kind = models.CharField(_("type"), max_length=10, choices=TYPES)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="demandes")
+    demandeur = models.CharField(_("identifiant du demandeur"), max_length=150, editable=False)
+    local_part = models.CharField(_("partie locale"), max_length=64)
+    domain = models.CharField(_("domaine"), max_length=100)
+    reason = models.TextField(_("motif"), blank=True, max_length=1000)
+    state = models.CharField(_("état"), max_length=10, choices=ETATS, default=ATTENTE, db_index=True)
+    moderator = models.CharField(_("modérateur"), max_length=150, blank=True)
+    moderator_comment = models.TextField(_("commentaire du modérateur"), blank=True, max_length=1000)
+    result_message = models.CharField(_("résultat de l'application"), max_length=200, blank=True)
+    created = models.DateTimeField(default=timezone.now)
+    decided = models.DateTimeField(null=True, blank=True)
+    applied = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ["-created"]
+        verbose_name = _("demande")
+        constraints = [
+            models.UniqueConstraint(
+                fields=["local_part", "domain"], condition=models.Q(state__in=["attente", "approuvee"]),
+                name="demande_adresse_unique_en_cours",
+            ),
+        ]
+
+    @property
+    def address(self):
+        return f"{self.local_part}@{self.domain}"
+
+    def __str__(self):
+        return f"{self.get_kind_display()} : {self.address}"
+
+
+class DemandeJournal(models.Model):
+    """Journal des décisions : qui, quand, quoi. Aucune adresse de tiers, aucun secret."""
+    demande = models.ForeignKey(Demande, on_delete=models.CASCADE, related_name="journal")
+    acteur = models.CharField(max_length=150)
+    action = models.CharField(max_length=40)
+    at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ["-at"]
+        verbose_name = _("journal des demandes")
+        verbose_name_plural = _("journal des demandes")

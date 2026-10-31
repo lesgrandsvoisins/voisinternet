@@ -1,0 +1,8 @@
+# Demandes soumises à la modération (n°17)
+
+Un membre demande (adresse de réception ou droit d'envoyer depuis une adresse `@resdigita.org`), un modérateur décide, l'administration applique. **voisinternet n'écrit jamais dans l'annuaire.**
+
+- **Membre** : « Mes demandes » (`/fr/account/demandes/`, lien dans « Mon compte »). Une demande en attente à la fois, 5 par jour (`VOISINTERNET_DEMANDES_PAR_JOUR`). Domaines : liste fermée `VOISINTERNET_DEMANDES_DOMAINES` (`resdigita.org`).
+- **Modération** : groupe « Modération » (créé par la migration 0040), page `/fr/moderation/` (approuver ou refuser avec commentaire, journal). Pour ajouter Chris : dans `/fr/admin/`, utilisateur `chris@gv.je` → groupes → « Modération » (l'utilisateur doit s'être connecté une fois). Courriel groupé aux modérateurs (au plus un par heure) ; courriel au demandeur à la décision.
+- **Validation** : partie locale `[a-z0-9][a-z0-9._-]{0,63}`, noms réservés refusés (`core/demandes.py::RESERVES`, slugs de services compris), adresse déjà demandée refusée.
+- **Contrat avec l'administration** (migration 0041, PostgreSQL seulement) : vue `v_demandes_a_appliquer(id, type, demandeur, adresse, approuvee_le)` (demandes approuvées uniquement, adresse en `@resdigita.org`), fonction `demande_marquer(id, resultat, message)` (approuvée → appliquée/échec, jamais l'inverse), rôle `lgv_demandes` (SELECT sur la vue + EXECUTE sur la fonction) créé par l'administration. Essais sur une base d'essai.

@@ -4,7 +4,7 @@ from modeltranslation.admin import TranslationAdmin, TranslationStackedInline, T
 from .models import (
     Account, Audience, Contribution, DirectoryEntry, DirectoryEntryPhoto, DirectorySector, Donor, EntryMessage,
     EntrySubscription, Event, EventInterest, EventManagementRequest, GuideBook,
-    MailRedirection, Membership, Mission, MissionStep, OwnershipClaim, RedirectionAudit, Service, ServiceCategory, Shortcut, StepCompletion, Tag,
+    Demande, DemandeJournal, MailRedirection, Membership, Mission, MissionStep, OwnershipClaim, RedirectionAudit, Service, ServiceCategory, Shortcut, StepCompletion, Tag,
 )
 
 admin.site.site_header = "lesgrandsvoisins.com"
@@ -270,3 +270,15 @@ class MailRedirectionAdmin(_LectureSeule):
     def target_masked(self, obj):
         from .redirections import mask
         return mask(obj.target)
+
+
+@admin.register(Demande)
+class DemandeAdmin(_LectureSeule):
+    """Lecture seule : les décisions passent par la page « Modération », le résultat par l'administration."""
+    list_display = ("local_part", "domain", "kind", "state", "demandeur", "moderator", "created")
+    list_filter = ("kind", "state")
+
+
+@admin.register(DemandeJournal)
+class DemandeJournalAdmin(_LectureSeule):
+    list_display = ("at", "acteur", "action", "demande")

@@ -310,3 +310,7 @@ DEMANDES_PAR_JOUR = int(env("VOISINTERNET_DEMANDES_PAR_JOUR", "5"))
 
 # Adresse du site principal : les pages Wagtail de lesgrandsvoisins.com y sont renvoyées depuis un autre site Wagtail (resdigita.org).
 SITE_PRINCIPAL = env("VOISINTERNET_SITE_PRINCIPAL", "https://www.lesgrandsvoisins.com")
+
+# Si défini (ex. https://www.resdigita.org), les pages « Mes services » et « Tous les outils » vivent sur ce site : les autres
+# noms de domaine y renvoient (302). Vide : elles restent là où elles sont.
+SERVICES_URL = env("VOISINTERNET_SERVICES_URL", "").rstrip("/")

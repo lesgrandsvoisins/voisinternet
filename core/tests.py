@@ -2220,3 +2220,20 @@ class SiteResdigitaTests(Base):
         r = self.client.get("/fr/", HTTP_HOST="testserver")
         self.assertNotContains(r, "theme-numerique")
         self.assertNotContains(r, "outils-informatiques.svg")
+
+
+@override_settings(ALLOWED_HOSTS=["*"], SERVICES_URL="https://www.resdigita.org")
+class SitesDesServicesTests(Base):
+    def test_services_renvoyes_vers_resdigita(self):
+        for chemin in ("/fr/outils/", "/fr/account/raccourcis/"):
+            r = self.client.get(chemin, HTTP_HOST="www.lesgrandsvoisins.com")
+            self.assertRedirects(r, "https://www.resdigita.org" + chemin, fetch_redirect_response=False)
+        r = self.client.get("/fr/outils/", HTTP_HOST="www.resdigita.org")
+        self.assertEqual(r.status_code, 200)  # pas de boucle sur le site cible
+        r = self.client.post("/fr/outils/", HTTP_HOST="www.lesgrandsvoisins.com")
+        self.assertNotEqual(r.status_code, 302)  # seuls les GET sont renvoyés
+
+    @override_settings(SERVICES_URL="")
+    def test_desactive_par_defaut(self):
+        r = self.client.get("/fr/outils/", HTTP_HOST="www.lesgrandsvoisins.com")
+        self.assertEqual(r.status_code, 200)

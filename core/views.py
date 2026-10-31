@@ -5,7 +5,7 @@ import unicodedata
 from datetime import date, timedelta
 from decimal import Decimal, InvalidOperation
 from smtplib import SMTPException
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urlparse
 
 from django.conf import settings
 from django.contrib import messages
@@ -540,7 +540,18 @@ def _catalogue(user=None):
     )
 
 
+def _vers_site_des_services(request):
+    """Redirection vers le site des services (réglage SERVICES_URL) quand on est sur un autre nom de domaine, sinon None."""
+    if not settings.SERVICES_URL or request.method != "GET":
+        return None
+    if request.get_host().split(":")[0] == urlparse(settings.SERVICES_URL).hostname:
+        return None
+    return redirect(settings.SERVICES_URL + request.get_full_path())
+
+
 def raccourcis(request):
+    if (autre := _vers_site_des_services(request)):
+        return autre
     acc = current_account(request)
     if acc is None:
         return redirect("core:account")
@@ -1702,4 +1713,6 @@ def outils(request):
     Les outils d'administration n'y figurent que pour le groupe « Administration ». Les services choisis par la personne
     (si elle a un compte) sont rappelés en tête.
     """
+    if (autre := _vers_site_des_services(request)):
+        return autre
     return render(request, "core/outils.html", outils_context(request))

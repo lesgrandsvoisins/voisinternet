@@ -14,10 +14,11 @@ Pour essayer `voisinternet` contre le clone de Keycloak (`key.resdigita.org`) **
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 .venv/bin/python manage.py migrate            # dont 0039 à 0042 : vue v_demandes_a_appliquer et demande_marquer
 .venv/bin/python manage.py collectstatic --noinput
-.venv/bin/python manage.py loaddata core/fixtures/*.json   # données d'exemple (services, parcours…), facultatif
+for i in auth.group core.audience core.guidebook core.servicecategory core.service core.directorysector core.mission core.missionstep; do
+  .venv/bin/python manage.py loaddata core/fixtures/$i.json; done   # catalogue et parcours, facultatif
 .venv/bin/gunicorn voisinternet.wsgi:application --bind 127.0.0.1:8092 --workers 2 --timeout 30
 ```
-(`make fixtures-load` charge les fixtures dans l'ordre voulu.) Contrôle : `deploy/smoke.sh https://essai.resdigita.org`.
+Ne PAS charger `auth.user` ni `core.account` (comptes d'exemple, dont des super-utilisateurs liés à de vrais identifiants Keycloak), ni `make fixtures-load` qui les charge. Contrôle : `deploy/smoke.sh https://essai.resdigita.org`.
 
 ## Côté clone Keycloak
 Pour le client `voisinternet`, sur le clone seulement : adresse de retour de connexion `https://essai.resdigita.org/oidc/callback/` ; adresses de retour de déconnexion et origines `https://essai.resdigita.org/*`.

@@ -2091,7 +2091,21 @@ class DemandesTests(Base):
             demandes.creer(self.account, "membre@gv.je", Demande.ADRESSE, "autre", "resdigita.org", "")
         autre = Account.objects.create(user=get_user_model().objects.create_user("b@gv.je"))
         with self.assertRaises(demandes.DemandeError):  # adresse déjà demandée par quelqu'un d'autre
-            demandes.creer(autre, "b@gv.je", Demande.ENVOI, "projet", "resdigita.org", "")
+            demandes.creer(autre, "b@gv.je", Demande.ADRESSE, "projet", "resdigita.org", "")
+
+    def test_envoi_limite_a_son_adresse_ou_a_un_alias_accorde(self):
+        from . import demandes
+        from .models import Demande
+
+        with self.assertRaises(demandes.DemandeError):  # pas l'adresse du membre, pas d'alias accordé
+            demandes.creer(self.account, "membre@gv.je", Demande.ENVOI, "projet", "resdigita.org", "")
+        with self.assertRaises(demandes.DemandeError):  # sa propre adresse n'est pas une « nouvelle » adresse de réception
+            demandes.creer(self.account, "membre@gv.je", Demande.ADRESSE, "membre", "resdigita.org", "")
+        demandes.creer(self.account, "membre@gv.je", Demande.ENVOI, "membre", "resdigita.org", "").delete()  # la sienne : oui
+        alias = Demande.objects.create(account=self.account, demandeur="membre@gv.je", kind=Demande.ADRESSE,
+                                       local_part="projet", domain="resdigita.org", state=Demande.APPLIQUEE)
+        demandes.creer(self.account, "membre@gv.je", Demande.ENVOI, "projet", "resdigita.org", "")  # alias accordé : oui
+        self.assertTrue(alias.pk)
 
     def test_plafond_par_jour(self):
         from . import demandes
@@ -2108,7 +2122,7 @@ class DemandesTests(Base):
         from . import demandes
         from .models import Demande
 
-        d = demandes.creer(self.account, "membre@gv.je", Demande.ENVOI, "projet", "resdigita.org", "pour le projet")
+        d = demandes.creer(self.account, "membre@gv.je", Demande.ENVOI, "membre", "resdigita.org", "pour le projet")
         self.assertEqual([m.to for m in mail.outbox], [["chris@gv.je"]])  # modération prévenue
         demandes.decider(d, self.modo, True, "ok")
         d.refresh_from_db()

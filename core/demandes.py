@@ -47,6 +47,11 @@ def est_moderateur(user):
     return user.is_authenticated and user.groups.filter(name=GROUPE).exists()
 
 
+def identifiant_local(demandeur):
+    """Partie locale de l'identifiant du membre (preferred_username sans « @gv.je »)."""
+    return (demandeur or "").split("@")[0].strip().lower()
+
+
 def valider(kind, local_part, domain):
     """(partie locale normalisée, domaine) ou DemandeError."""
     from .models import Demande, Service
@@ -69,6 +74,13 @@ def creer(account, demandeur, kind, local_part, domain, reason):
     from .models import Demande, DemandeJournal
 
     local_part, domain = valider(kind, local_part, domain)
+    propre = identifiant_local(demandeur)
+    if kind == Demande.ADRESSE and local_part == propre:
+        raise DemandeError(_("Cette adresse est déjà la vôtre."))
+    if kind == Demande.ENVOI and local_part != propre and not Demande.objects.filter(
+        account=account, kind=Demande.ADRESSE, state=Demande.APPLIQUEE, local_part=local_part, domain=domain,
+    ).exists():
+        raise DemandeError(_("Vous pouvez demander à envoyer depuis votre propre adresse (%(adresse)s) ou depuis une adresse de réception qui vous a déjà été accordée.") % {"adresse": f"{propre}@{domain}"})
     depuis = timezone.now() - timedelta(days=1)
     if Demande.objects.filter(account=account, created__gte=depuis).count() >= settings.DEMANDES_PAR_JOUR:
         raise DemandeError(_("Trop de demandes aujourd'hui. Réessayez demain."))

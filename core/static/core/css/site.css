@@ -4310,3 +4310,9 @@ a.prevnext {
 /* Le code en ligne ne doit jamais élargir la page (320 px, arabe de droite à gauche). */
 code { overflow-wrap: anywhere; }
 pre { max-width: 100%; overflow-x: auto; }
+
+/* Site resdigita.org (« Numérique des Grands Voisins ») : même base que lesgrandsvoisins.com, une teinte propre. */
+.numerique-intro { display: grid; gap: 1.5rem; align-items: center; }
+@media (min-width: 800px) { .numerique-intro { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.numerique-visuel { width: 100%; height: auto; max-width: 36rem; }
+.numerique-message { font-size: 1.125rem; }

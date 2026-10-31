@@ -31,7 +31,7 @@
     <script src="{% static 'core/js/alpine.min.js' %}" defer></script>
     <script src="{% static 'core/js/site.js' %}" defer></script>
   </head>
-  <body>
+  <body{% if SITE_THEME %} class="theme-{{ SITE_THEME }}"{% endif %}>
     <a class="skip" href="#contenu">{% trans "Aller au contenu" %}</a>
     <!-- HEADER -->
     <header class="top">

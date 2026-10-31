@@ -148,7 +148,13 @@ def _month_calendar(request):
 # --- Pages
 
 def home(request):
-    from cms.models import BlogPostPage, PolePage
+    from cms.models import BlogPostPage, NumeriquePage, PolePage
+
+    # Site Wagtail distinct (resdigita.org) : son accueil est sa propre page racine, pas l'accueil de lesgrandsvoisins.com.
+    racine = Site.find_for_request(request)
+    racine = racine.root_page.specific if racine else None
+    if isinstance(racine, NumeriquePage) and racine.live:
+        return racine.serve(request)
     
     active_lang = Locale.get_active()
     
@@ -1671,16 +1677,18 @@ def moderation(request):
 
 # --- Tableau de bord des outils (domaine « côté ordinateur », ex. www.resdigita.org ; réglage OUTILS_HOSTS) --------------
 
+def outils_context(request):
+    """Contexte du tableau de bord (page /outils/ et accueil du site resdigita.org)."""
+    services = _catalogue(request.user)
+    acc = current_account(request)
+    mes_ids = set(acc.shortcut_set.values_list("service_id", flat=True)) if acc else set()
+    return {"services": services, "mes_services": [s for s in services if s.pk in mes_ids]}
+
+
 def outils(request):
     """
     Tableau de bord public de TOUS les outils : une grille compacte par catégorie, un clic pour ouvrir, sans connexion.
     Les outils d'administration n'y figurent que pour le groupe « Administration ». Les services choisis par la personne
     (si elle a un compte) sont rappelés en tête.
     """
-    services = _catalogue(request.user)
-    acc = current_account(request)
-    mes_ids = set(acc.shortcut_set.values_list("service_id", flat=True)) if acc else set()
-    return render(request, "core/outils.html", {
-        "services": services,
-        "mes_services": [s for s in services if s.pk in mes_ids],
-    })
+    return render(request, "core/outils.html", outils_context(request))

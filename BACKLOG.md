@@ -65,3 +65,5 @@ Les besoins côté serveur passent par `docs/DEMANDES-UX.md` (dépôt `flakeops`
 
 
 - **U-037** — Demandes à la modération : traductions en/es/ar/ko (`make messages`), ajouter `chris@gv.je` au groupe « Modération » dans /admin/, essai de bout en bout avec l'administration (rôle `lgv_demandes`) sur une base d'essai. Qui : Chris + administration.
+
+- **U-038** — Site Wagtail resdigita.org : créer le site (`creer_site_resdigita`), remplacer la redirection 302 par le service du nom (administration), `www.resdigita.org` dans ALLOWED_HOSTS/CSRF/Keycloak (Chris), variation du dessin « Numérique des Grands Voisins » (Chris), pages éditoriales. Qui : Chris + administration.

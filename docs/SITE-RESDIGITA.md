@@ -2,7 +2,11 @@
 
 Idée de Chris (31/10) : un site Wagtail distinct pour `resdigita.org`, servi par la même application et le même serveur que `lesgrandsvoisins.com`. Il remplace la décision du 30/10 (soir) de rediriger `resdigita.org` vers `/fr/outils/`. Message : **la sociabilité numérique** — les personnes se retrouvent d'abord dans la vie réelle, l'ordinateur en fait partie. Visuel : variation du dessin de `lesgrandsvoisins.com`, reconnaissable (`core/static/core/img/outils-informatiques.svg`, fourni par Chris).
 
-## Ce qu'il faut (rien n'est fait, hors le visuel)
+## État (31/10) : le code est prêt, rien n'est activé
+Poussé : type de page `cms.NumeriquePage` (migration cms 0035), accueil servi par nom de domaine (`core.views.home`), thème `theme-numerique` et liens absolus vers le site principal (`core/context_processors.py`, réglage `VOISINTERNET_SITE_PRINCIPAL`), gabarit `cms/templates/cms/numerique_page.html` (visuel, message, tableau de bord dessous), commande `creer_site_resdigita` (simulation par défaut).
+À faire sur le serveur : `git pull && deploy/redemarrer.sh`, puis `deploy/manage.sh creer_site_resdigita` (simulation) et `--appliquer`. Le site ne répond qu'une fois les points 4 et 5 ci-dessous faits.
+
+## Ce qu'il faut
 1. **Wagtail** : un second `Site` (`www.resdigita.org`) avec sa propre `HomePage` (« Numérique des Grands Voisins »). L'arbre actuel n'est pas touché. Commande de préparation en simulation d'abord.
 2. **Identité** : nom et visuel propres au site (`SITE_NAME`, logo, en-tête, pied de page), choisis d'après le nom de domaine ; mêmes styles de base pour rester visiblement apparentés.
 3. **Contenu de la page d'accueil** : le visuel, le message (sociabilité numérique), puis le tableau de bord des outils (`/fr/outils/`) en dessous ; pages éditoriales ensuite.

@@ -13,14 +13,14 @@ from django.contrib.sites.shortcuts import get_current_site
 
 
 @lru_cache(maxsize=256)
-def _menu_context(language_code, current):
+def _menu_context(language_code, current, base=""):
     # ENTRIES/GROUPS sont des données statiques (core/menu.py) : à langue et page active
     # égales, ce calcul (reverse() compris) donne toujours le même résultat — inutile de
     # le refaire à chaque requête. `language_code` n'est pas utilisé ici directement, mais
     # fait partie de la clé du cache : entry_href()/reverse() dépendent de get_language().
     group_captions = dict(GROUPS)
     entries = [
-        {"entry": e, "href": entry_href(e), "external": e.target.startswith("setting:"),
+        {"entry": e, "href": (base + entry_href(e)) if e.target.startswith("path:") else entry_href(e), "external": e.target.startswith("setting:"),
          "current": current in {e.target, f"{e.target}_pour"}, "group_caption": group_captions[e.group]}
         for e in ENTRIES
     ]
@@ -35,10 +35,23 @@ def _menu_context(language_code, current):
     return entries, groups, header_groups
 
 
+def _theme(request):
+    """(thème, préfixe des liens vers les pages Wagtail du site principal). Un site Wagtail distinct (resdigita.org) a son
+    arbre de pages : les pages de lesgrandsvoisins.com n'y existent pas, on y renvoie par une adresse absolue."""
+    from cms.models import NumeriquePage
+    from wagtail.models import Site
+
+    racine = Site.find_for_request(request)
+    if racine is not None and racine.root_page.specific_class is NumeriquePage:
+        return "numerique", settings.SITE_PRINCIPAL
+    return "", ""
+
+
 def site(request):
     match = getattr(request, "resolver_match", None)
     current = match.view_name if match else None
-    entries, groups, header_groups = _menu_context(get_language(), current)
+    theme, base = _theme(request)
+    entries, groups, header_groups = _menu_context(get_language(), current, base)
     account = current_account(request)
     account_shortcuts = []
     if account:
@@ -74,5 +87,6 @@ def site(request):
         "GUIDE_URL": settings.GUIDE_URL,
         "CONTACT_EMAIL": settings.CONTACT_EMAIL,
         "CONTACT_FORMS_ENABLED": settings.CONTACT_FORMS_ENABLED,
-        "SITE_NAME": get_current_site(request).name,
+        "SITE_NAME": "Numérique des Grands Voisins" if theme else get_current_site(request).name,
+        "SITE_THEME": theme,
     }

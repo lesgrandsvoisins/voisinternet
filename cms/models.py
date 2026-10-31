@@ -65,6 +65,39 @@ class HomePage(Page):
     ]
 
 
+class NumeriquePage(Page):
+    """
+    Page d'accueil du site resdigita.org (« Numérique des Grands Voisins »), racine de son propre arbre Wagtail : sociabilité
+    numérique — les personnes se retrouvent d'abord dans la vie réelle, l'ordinateur en fait partie. Sous le message,
+    le tableau de bord des outils (même catalogue que /fr/outils/).
+    """
+
+    message = RichTextField(_("message"), blank=True, default="")
+    visuel_alt = models.CharField(
+        _("description du visuel"), max_length=250, blank=True,
+        default="Dessin à la main : outils informatiques mis à disposition des Grands Voisins (courriel, visioconférence, listes de diffusion…).",
+    )
+
+    parent_page_types = ["wagtailcore.Page"]
+    subpage_types = ["cms.StandardPage", "cms.ContactPage"]
+    max_count = 1
+
+    content_panels = Page.content_panels + [
+        FieldPanel("message"),
+        FieldPanel("visuel_alt"),
+    ]
+
+    class Meta:
+        verbose_name = _("accueil du numérique")
+
+    def get_context(self, request, *args, **kwargs):
+        from core.views import outils_context
+
+        context = super().get_context(request, *args, **kwargs)
+        context.update(outils_context(request))
+        return context
+
+
 class CardBlock(blocks.StructBlock):
     """Une carte éditoriale (titre + texte enrichi) : réutilisée par plusieurs types de page."""
 

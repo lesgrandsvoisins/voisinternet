@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}
+{% load static i18n wagtailcore_tags %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block content %}
+  <section class="block numerique-hero">
+    <div class="wrap">
+      <h1>{{ page.title }}</h1>
+      <div class="numerique-intro">
+        <img class="numerique-visuel" src="{% static 'core/img/outils-informatiques.svg' %}" alt="{{ page.visuel_alt }}" width="457" height="256">
+        <div class="numerique-message">{{ page.message|richtext }}</div>
+      </div>
+    </div>
+  </section>
+  <section class="block" aria-labelledby="outils-titre">
+    <div class="wrap page">
+      <h2 id="outils-titre">{% trans "Tous les outils" %}</h2>
+      {% include "core/partials/outils_grille.html" %}
+      <p class="muted"><a href="{% url 'core:raccourcis' %}">{% trans "Choisir mes services et les retrouver sur tous mes appareils" %}</a></p>
+    </div>
+  </section>
+{% endblock %}

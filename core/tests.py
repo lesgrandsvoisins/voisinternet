@@ -2161,3 +2161,34 @@ class CatalogueOrdreTests(Base):
 
         noms = [s.name for s in _catalogue(AnonymousUser()) if s.category_id == c.pk]
         self.assertEqual(noms, ["Alpha", "dauphin", "Écran", "zèbre-outil"])
+
+
+@override_settings(ALLOWED_HOSTS=["*"])
+class SiteResdigitaTests(Base):
+    """Site Wagtail distinct pour resdigita.org : sa propre page d'accueil, le tableau de bord dessous, liens absolus."""
+
+    def test_creation_et_accueil_par_nom_de_domaine(self):
+        from io import StringIO
+        from django.core.management import call_command
+        from cms.models import NumeriquePage
+        from wagtail.models import Site
+
+        out = StringIO()
+        call_command("creer_site_resdigita", stdout=out)  # simulation
+        self.assertFalse(NumeriquePage.objects.exists())
+        call_command("creer_site_resdigita", "--appliquer", stdout=out)
+        call_command("creer_site_resdigita", stdout=out)
+        self.assertIn("déjà", out.getvalue())
+        self.assertEqual(Site.objects.filter(hostname="www.resdigita.org").count(), 1)
+
+        r = self.client.get("/fr/", HTTP_HOST="www.resdigita.org")
+        self.assertContains(r, "Numérique des Grands Voisins")
+        self.assertContains(r, "outils-informatiques.svg")
+        self.assertContains(r, "outils-grid")  # le tableau de bord, sous le message
+        self.assertContains(r, 'class="theme-numerique"')
+        # les pages Wagtail du site principal n'existent pas ici : liens absolus vers lesgrandsvoisins.com
+        self.assertContains(r, "https://www.lesgrandsvoisins.com/fr/")
+        # le site principal est inchangé
+        r = self.client.get("/fr/", HTTP_HOST="testserver")
+        self.assertNotContains(r, "theme-numerique")
+        self.assertNotContains(r, "outils-informatiques.svg")

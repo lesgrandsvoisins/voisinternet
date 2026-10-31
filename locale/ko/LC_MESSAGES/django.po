@@ -3795,3 +3795,20 @@ msgstr "설정이 저장되었습니다."
 #: core/views.py:1578
 msgid "Redirection désactivée."
 msgstr "전달이 꺼졌습니다."
+
+msgid "le numérique des Grands Voisins"
+msgstr "Les Grands Voisins의 디지털"
+
+msgid "Resdigita, le numérique des Grands Voisins"
+msgstr "Resdigita, Les Grands Voisins의 디지털"
+
+msgid "Resdigita, le numérique des Grands Voisins — accueil"
+msgstr "Resdigita, Les Grands Voisins의 디지털 — 홈"
+
+msgid ""
+"Les personnes se retrouvent d'abord dans la vie réelle ; l'ordinateur en "
+"fait partie."
+msgstr "사람들은 먼저 현실에서 만나며, 컴퓨터는 그 일부입니다."
+
+msgid "Les Grands Voisins"
+msgstr "Les Grands Voisins"

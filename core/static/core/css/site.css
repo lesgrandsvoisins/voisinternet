@@ -4316,3 +4316,6 @@ pre { max-width: 100%; overflow-x: auto; }
 @media (min-width: 800px) { .numerique-intro { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
 .numerique-visuel { width: 100%; height: auto; max-width: 36rem; }
 .numerique-message { font-size: 1.125rem; }
+.brand-texte { display: flex; flex-direction: column; line-height: 1.15; text-decoration: none; color: inherit; }
+.brand-texte .brand-nom { font-size: 1.5rem; font-weight: 700; }
+.brand-texte .brand-devise { font-size: 0.9rem; }

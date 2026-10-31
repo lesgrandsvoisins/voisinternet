@@ -2205,12 +2205,17 @@ class SiteResdigitaTests(Base):
         self.assertEqual(Site.objects.filter(hostname="www.resdigita.org").count(), 1)
 
         r = self.client.get("/fr/", HTTP_HOST="www.resdigita.org")
-        self.assertContains(r, "Numérique des Grands Voisins")
+        self.assertContains(r, "Resdigita, le numérique des Grands Voisins")
+        self.assertContains(r, "brand-texte")
+        self.assertNotContains(r, 'id="main-menu-panel"')  # pas la navigation des Grands Voisins
+        self.assertNotContains(r, "menu-annuaire")
         self.assertContains(r, "outils-informatiques.svg")
         self.assertContains(r, "outils-grid")  # le tableau de bord, sous le message
         self.assertContains(r, 'class="theme-numerique"')
-        # les pages Wagtail du site principal n'existent pas ici : liens absolus vers lesgrandsvoisins.com
+        # un seul lien vers le site principal, dans le pied de page
         self.assertContains(r, "https://www.lesgrandsvoisins.com/fr/")
+        r = self.client.get("/en/", HTTP_HOST="www.resdigita.org")
+        self.assertContains(r, "Resdigita, the digital side of Les Grands Voisins")
         # le site principal est inchangé
         r = self.client.get("/fr/", HTTP_HOST="testserver")
         self.assertNotContains(r, "theme-numerique")

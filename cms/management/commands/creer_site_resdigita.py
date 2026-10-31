@@ -1,5 +1,5 @@
 """
-Crée le site Wagtail de resdigita.org (« Numérique des Grands Voisins ») : une page d'accueil `NumeriquePage` à la racine de
+Crée le site Wagtail de resdigita.org (« Resdigita, le numérique des Grands Voisins ») : une page d'accueil `NumeriquePage` à la racine de
 l'arbre et un `Site` pour www.resdigita.org, sans toucher à l'arbre de lesgrandsvoisins.com.
 
     manage.py creer_site_resdigita               # simulation : rapport seulement
@@ -33,7 +33,7 @@ class Command(BaseCommand):
         if page and site and site.root_page_id == page.pk:
             self.stdout.write("Le site resdigita.org existe déjà : rien à faire.")
             return
-        self.stdout.write(f"  {'page « Numérique des Grands Voisins » : existe' if page else 'page « Numérique des Grands Voisins » : à créer'}")
+        self.stdout.write(f"  {'page « Resdigita » : existe' if page else 'page « Resdigita » : à créer'}")
         self.stdout.write(f"  {'site ' + HOTE + ' : existe (racine à rattacher)' if site else 'site ' + HOTE + ' : à créer'}")
         if not appliquer:
             self.stdout.write("Simulation : rien n'a été écrit (--appliquer pour créer).")
@@ -41,11 +41,11 @@ class Command(BaseCommand):
         if page is None:
             racine = Page.get_first_root_node()
             page = racine.add_child(instance=NumeriquePage(
-                title="Numérique des Grands Voisins", slug="numerique", message=MESSAGE,
+                title="Resdigita, le numérique des Grands Voisins", slug="numerique", message=MESSAGE,
                 locale=Locale.objects.get(language_code="fr"), live=True,
             ))
         if site is None:
-            Site.objects.create(hostname=HOTE, port=443, site_name="Numérique des Grands Voisins", root_page=page)
+            Site.objects.create(hostname=HOTE, port=443, site_name="Resdigita, le numérique des Grands Voisins", root_page=page)
         else:
             site.root_page = page
             site.save()

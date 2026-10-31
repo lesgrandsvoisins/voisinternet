@@ -3,7 +3,7 @@ from urllib.parse import urlencode
 
 from django.conf import settings
 from django.urls import reverse
-from django.utils.translation import get_language
+from django.utils.translation import get_language, gettext as _t
 
 from .accounts import NEW_NUMBER_KEY, account_label, current_account
 from .models import format_number
@@ -87,6 +87,7 @@ def site(request):
         "GUIDE_URL": settings.GUIDE_URL,
         "CONTACT_EMAIL": settings.CONTACT_EMAIL,
         "CONTACT_FORMS_ENABLED": settings.CONTACT_FORMS_ENABLED,
-        "SITE_NAME": "Numérique des Grands Voisins" if theme else get_current_site(request).name,
+        "SITE_NAME": _t("Resdigita, le numérique des Grands Voisins") if theme else get_current_site(request).name,
         "SITE_THEME": theme,
+        "SITE_PRINCIPAL": settings.SITE_PRINCIPAL,
     }

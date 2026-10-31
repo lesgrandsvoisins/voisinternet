@@ -1,12 +1,12 @@
 {% extends "core/base.html" %}
 {% load static i18n wagtailcore_tags %}
 
-{% block title %}{{ page.title }}{% endblock %}
+{% block title %}Resdigita, {% trans "le numérique des Grands Voisins" %}{% endblock %}
 
 {% block content %}
   <section class="block numerique-hero">
     <div class="wrap">
-      <h1>{{ page.title }}</h1>
+      <h1>Resdigita, {% trans "le numérique des Grands Voisins" %}</h1>
       <div class="numerique-intro">
         <img class="numerique-visuel" src="{% static 'core/img/outils-informatiques.svg' %}" alt="{{ page.visuel_alt }}" width="457" height="256">
         <div class="numerique-message">{{ page.message|richtext }}</div>

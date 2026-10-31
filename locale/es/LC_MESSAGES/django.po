@@ -3937,3 +3937,22 @@ msgstr "Ajuste guardado."
 #: core/views.py:1578
 msgid "Redirection désactivée."
 msgstr "Redirección desactivada."
+
+msgid "le numérique des Grands Voisins"
+msgstr "lo digital de Les Grands Voisins"
+
+msgid "Resdigita, le numérique des Grands Voisins"
+msgstr "Resdigita, lo digital de Les Grands Voisins"
+
+msgid "Resdigita, le numérique des Grands Voisins — accueil"
+msgstr "Resdigita, lo digital de Les Grands Voisins — inicio"
+
+msgid ""
+"Les personnes se retrouvent d'abord dans la vie réelle ; l'ordinateur en "
+"fait partie."
+msgstr ""
+"Las personas se encuentran primero en la vida real; el ordenador forma parte"
+" de ello."
+
+msgid "Les Grands Voisins"
+msgstr "Les Grands Voisins"

@@ -13,3 +13,6 @@ Poussé : type de page `cms.NumeriquePage` (migration cms 0035), accueil servi p
 4. **Serveur (administration, DEMANDES-UX)** : remplacer la redirection 302 de `resdigita.org` / `www.resdigita.org` par le service par l'application (module `lgv.voisinternet.outils` déjà préparé) ; `www.resdigita.com` et `www.gv.je` continuent de rediriger vers `https://www.resdigita.org/`.
 5. **Réglages** : `www.resdigita.org` dans `DJANGO_ALLOWED_HOSTS` et `DJANGO_CSRF_TRUSTED_ORIGINS` ; adresses de retour de connexion et de déconnexion du client Keycloak `voisinternet`.
 6. **À savoir** : connexion et session distinctes d'un nom de domaine à l'autre (le compte Keycloak est le même).
+
+## Synonymes (31/10)
+`lesgv.org` et `lesgv.com` sont des synonymes de `resdigita.org` : leurs adresses (apex, `www.` et joker) redirigent en 301 vers `https://www.resdigita.org/` en gardant le chemin. À faire : zones DNS chez ClouDNS (Chris), noms et certificats dans Caddy et redirections (administration). Le courrier de ces noms n'est pas décidé : en attendant, ils sont comptés parmi nos domaines (`VOISINTERNET_DOMAINES_COURRIER`), donc refusés comme cibles de redirection de courrier.

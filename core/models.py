@@ -798,7 +798,8 @@ class Demande(models.Model):
     EN_COURS = (ATTENTE, APPROUVEE)  # l'adresse est « prise » tant que la demande n'est pas close
 
     kind = models.CharField(_("type"), max_length=10, choices=TYPES)
-    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="demandes")
+    # Vide pour une autorisation donnée directement par la modération à une personne qui n'a pas de compte ici.
+    account = models.ForeignKey(Account, null=True, blank=True, on_delete=models.CASCADE, related_name="demandes")
     demandeur = models.CharField(_("identifiant du demandeur"), max_length=150, editable=False)
     local_part = models.CharField(_("partie locale"), max_length=64)
     domain = models.CharField(_("domaine"), max_length=100)

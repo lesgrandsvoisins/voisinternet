@@ -1660,6 +1660,16 @@ def mes_demandes(request):
 def moderation(request):
     if not demandes_module.est_moderateur(request.user):
         raise Http404
+    if request.method == "POST" and request.POST.get("autoriser"):
+        try:
+            d = demandes_module.autoriser(
+                request.user, request.POST.get("identifiant"), request.POST.get("type"),
+                request.POST.get("local_part"), request.POST.get("domaine"), request.POST.get("motif"),
+            )
+            messages.success(request, _("Autorisation enregistrée pour %(adresse)s : l'administration l'applique dans les minutes qui suivent.") % {"adresse": d.address})
+        except demandes_module.DemandeError as exc:
+            messages.error(request, str(exc))
+        return redirect("core:moderation")
     if request.method == "POST":
         demande = get_object_or_404(Demande, pk=request.POST.get("demande"))
         try:
@@ -1672,6 +1682,7 @@ def moderation(request):
         "en_attente": Demande.objects.filter(state=Demande.ATTENTE).order_by("created"),
         "recentes": Demande.objects.exclude(state=Demande.ATTENTE)[:30],
         "journal": DemandeJournal.objects.select_related("demande")[:50],
+        "domaines": demandes_module.domaines(),
     })
 
 

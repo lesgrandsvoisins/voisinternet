@@ -9,6 +9,38 @@
   </div>
 </div>
 <div class="wrap page">
+  <section aria-labelledby="autoriser">
+    <h2 id="autoriser">{% trans "Autoriser directement" %}</h2>
+    <p class="muted">{% trans "Donnez à une personne le droit d'envoyer du courrier depuis notre serveur, ou une adresse de réception, sans attendre sa demande. L'administration l'applique dans les minutes qui suivent." %}</p>
+    <form method="post">{% csrf_token %}
+      <input type="hidden" name="autoriser" value="1">
+      <p>
+        <label for="aut-type">{% trans "Je donne…" %}</label><br>
+        <select id="aut-type" name="type">
+          <option value="envoi">{% trans "le droit d'envoyer depuis une adresse" %}</option>
+          <option value="adresse">{% trans "une nouvelle adresse de réception" %}</option>
+        </select>
+      </p>
+      <p>
+        <label for="aut-id">{% trans "Identifiant de la personne" %}</label><br>
+        <input id="aut-id" name="identifiant" required maxlength="150" autocomplete="off" placeholder="prenom.nom@gv.je">
+      </p>
+      <p>
+        <label for="aut-local">{% trans "Adresse (avant « @ »)" %}</label><br>
+        <input id="aut-local" name="local_part" maxlength="64" autocomplete="off" aria-describedby="aut-aide">
+        @
+        <select id="aut-domaine" name="domaine" aria-label="{% trans "Domaine" %}">
+          {% for d in domaines %}<option value="{{ d }}">{{ d }}</option>{% endfor %}
+        </select>
+      </p>
+      <p id="aut-aide" class="muted">{% trans "Pour l'envoi, laissez vide : ce sera l'adresse propre à la personne (son identifiant), ou indiquez une adresse de réception qui lui a déjà été accordée." %}</p>
+      <p>
+        <label for="aut-motif">{% trans "Motif (facultatif, gardé dans le journal)" %}</label><br>
+        <textarea id="aut-motif" name="motif" rows="2" maxlength="1000"></textarea>
+      </p>
+      <button class="btn btn-sun" type="submit">{% trans "Autoriser" %}</button>
+    </form>
+  </section>
   <section aria-labelledby="attente">
     <h2 id="attente">{% trans "En attente" %}</h2>
     {% for d in en_attente %}

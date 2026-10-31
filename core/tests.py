@@ -2107,6 +2107,29 @@ class DemandesTests(Base):
         demandes.creer(self.account, "membre@gv.je", Demande.ENVOI, "projet", "resdigita.org", "")  # alias accordé : oui
         self.assertTrue(alias.pk)
 
+    def test_autorisation_directe_par_la_moderation(self):
+        from . import demandes
+        from .models import Demande
+
+        d = demandes.autoriser(self.modo, "Quelquun@gv.je", Demande.ENVOI, "", "resdigita.org", "décision du CA")
+        self.assertEqual((d.state, d.local_part, d.address, d.moderator, d.account), ("approuvee", "quelquun", "quelquun@resdigita.org", "chris@gv.je", None))
+        self.assertEqual(d.journal.get().action, "autorisee")
+        with self.assertRaises(demandes.DemandeError):  # déjà accordée
+            demandes.autoriser(self.modo, "quelquun@gv.je", Demande.ENVOI, "", "resdigita.org")
+        with self.assertRaises(demandes.DemandeError):  # envoi depuis l'adresse d'un autre : refusé
+            demandes.autoriser(self.modo, "autre@gv.je", Demande.ENVOI, "projet", "resdigita.org")
+        with self.assertRaises(demandes.DemandeError):  # identifiant invalide
+            demandes.autoriser(self.modo, "pas un identifiant", Demande.ENVOI, "", "resdigita.org")
+
+    def test_page_moderation_autoriser(self):
+        from .models import Demande
+
+        self.client.force_login(self.modo)
+        self.client.post(reverse("core:moderation"), {"autoriser": "1", "type": "envoi", "identifiant": "x@gv.je", "local_part": "", "domaine": "resdigita.org"})
+        self.assertEqual(Demande.objects.get().state, "approuvee")
+        self.client.force_login(self.membre)  # un simple membre n'a pas accès
+        self.assertEqual(self.client.post(reverse("core:moderation"), {"autoriser": "1", "identifiant": "y@gv.je"}).status_code, 404)
+
     def test_plafond_par_jour(self):
         from . import demandes
         from .models import Demande

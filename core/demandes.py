@@ -69,6 +69,48 @@ def valider(kind, local_part, domain):
     return local_part, domain
 
 
+def _verifier_envoi(kind, demandeur, local_part, domain):
+    """L'envoi n'est possible que depuis l'adresse du membre (son identifiant) ou une adresse de réception déjà accordée."""
+    from .models import Demande
+
+    propre = identifiant_local(demandeur)
+    if kind == Demande.ENVOI and local_part != propre and not Demande.objects.filter(
+        demandeur=demandeur, kind=Demande.ADRESSE, state=Demande.APPLIQUEE, local_part=local_part, domain=domain,
+    ).exists():
+        raise DemandeError(_("Envoi possible depuis l'adresse propre à la personne (%(adresse)s) ou depuis une adresse de réception déjà accordée.") % {"adresse": f"{propre}@{domain}"})
+
+
+IDENTIFIANT_RE = re.compile(r"^[a-z0-9][a-z0-9._@-]{0,148}$")
+
+
+def autoriser(moderateur, demandeur, kind, local_part, domain, reason=""):
+    """Autorisation donnée DIRECTEMENT par la modération (déjà « approuvée »), sans demande préalable de la personne. Même
+    validation et même contrat que les demandes : l'administration applique, voisinternet n'écrit jamais dans l'annuaire."""
+    from .models import Account, Demande, DemandeJournal
+
+    demandeur = (demandeur or "").strip().lower()
+    if not IDENTIFIANT_RE.match(demandeur):
+        raise DemandeError(_("Identifiant invalide : indiquez l'identifiant de la personne (par exemple prenom.nom@gv.je)."))
+    local_part = (local_part or "").strip().lower() or identifiant_local(demandeur)
+    local_part, domain = valider(kind, local_part, domain)
+    if kind == Demande.ADRESSE and local_part == identifiant_local(demandeur):
+        raise DemandeError(_("Cette adresse est déjà celle de la personne."))
+    _verifier_envoi(kind, demandeur, local_part, domain)
+    account = Account.objects.filter(user__username=demandeur).first()
+    try:
+        with transaction.atomic():
+            demande = Demande.objects.create(
+                kind=kind, account=account, demandeur=demandeur, local_part=local_part, domain=domain,
+                reason=(reason or "").strip()[:1000], state=Demande.APPROUVEE, moderator=str(moderateur),
+                decided=timezone.now(),
+            )
+    except IntegrityError:
+        raise DemandeError(_("Cette adresse fait déjà l'objet d'une demande."))
+    DemandeJournal.objects.create(demande=demande, acteur=str(moderateur), action="autorisee")
+    logger.info("demandes: %s autorisée directement (%s)", demande.pk, demande.kind)
+    return demande
+
+
 def creer(account, demandeur, kind, local_part, domain, reason):
     """Crée la demande (en attente), sinon DemandeError. Une seule demande en attente par membre et par adresse."""
     from .models import Demande, DemandeJournal
@@ -77,10 +119,7 @@ def creer(account, demandeur, kind, local_part, domain, reason):
     propre = identifiant_local(demandeur)
     if kind == Demande.ADRESSE and local_part == propre:
         raise DemandeError(_("Cette adresse est déjà la vôtre."))
-    if kind == Demande.ENVOI and local_part != propre and not Demande.objects.filter(
-        account=account, kind=Demande.ADRESSE, state=Demande.APPLIQUEE, local_part=local_part, domain=domain,
-    ).exists():
-        raise DemandeError(_("Vous pouvez demander à envoyer depuis votre propre adresse (%(adresse)s) ou depuis une adresse de réception qui vous a déjà été accordée.") % {"adresse": f"{propre}@{domain}"})
+    _verifier_envoi(kind, demandeur, local_part, domain)
     depuis = timezone.now() - timedelta(days=1)
     if Demande.objects.filter(account=account, created__gte=depuis).count() >= settings.DEMANDES_PAR_JOUR:
         raise DemandeError(_("Trop de demandes aujourd'hui. Réessayez demain."))
@@ -119,7 +158,7 @@ def decider(demande, moderateur, approuver, commentaire=""):
 
 
 def _courriel_demandeur(demande):
-    user = demande.account.user
+    user = demande.account.user if demande.account else None
     return user.email if user and user.email else ""
 
 

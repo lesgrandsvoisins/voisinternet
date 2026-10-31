@@ -2147,3 +2147,17 @@ class DemandesTests(Base):
         self.client.post(reverse("core:moderation"), {"demande": d.pk, "decision": "refuser", "commentaire": "non"})
         d.refresh_from_db()
         self.assertEqual(d.state, "refusee")
+
+
+class CatalogueOrdreTests(Base):
+    def test_ordre_alphabetique_dans_chaque_categorie(self):
+        from .models import Service, ServiceCategory
+        from .views import _catalogue
+
+        c = ServiceCategory.objects.create(name="Zèbre", slug="zebre", order=99)
+        for nom, ordre in (("Écran", 1), ("zèbre-outil", 2), ("Alpha", 3), ("dauphin", 4)):
+            Service.objects.create(name=nom, slug=nom.lower().replace("é", "e").replace("è", "e"), summary="x", category=c, order=ordre)
+        from django.contrib.auth.models import AnonymousUser
+
+        noms = [s.name for s in _catalogue(AnonymousUser()) if s.category_id == c.pk]
+        self.assertEqual(noms, ["Alpha", "dauphin", "Écran", "zèbre-outil"])

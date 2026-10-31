@@ -1,6 +1,7 @@
 import calendar
 import logging
 import re
+import unicodedata
 from datetime import date, timedelta
 from decimal import Decimal, InvalidOperation
 from smtplib import SMTPException
@@ -519,12 +520,17 @@ def _visible_services(user):
     return qs
 
 
+def _cle_alpha(texte):
+    """Clé de tri alphabétique : sans majuscules ni accents (« Écran » après « Dauphin », avant « Fax »)."""
+    return unicodedata.normalize("NFKD", texte or "").encode("ascii", "ignore").decode().casefold()
+
+
 def _catalogue(user=None):
-    """Services proposés, rangés par catégorie (celles sans catégorie à la fin)."""
+    """Services proposés, rangés par catégorie (celles sans catégorie à la fin), puis par ordre alphabétique."""
     return sorted(
         _visible_services(user).select_related("category"),
         key=lambda s: (s.category is None, s.category.order if s.category else 0,
-                       s.category.name if s.category else "", s.order, s.name),
+                       s.category.name if s.category else "", _cle_alpha(s.name), s.pk),
     )
 
 

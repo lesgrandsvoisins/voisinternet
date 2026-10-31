@@ -2237,3 +2237,22 @@ class SitesDesServicesTests(Base):
     def test_desactive_par_defaut(self):
         r = self.client.get("/fr/outils/", HTTP_HOST="www.lesgrandsvoisins.com")
         self.assertEqual(r.status_code, 200)
+
+
+class DeconnexionChangementDeNomTests(TestCase):
+    def test_id_token_d_un_ancien_nom_du_royaume_est_ignore(self):
+        import base64, json as _json
+        from django.test import RequestFactory
+        from .auth import keycloak_logout_url
+
+        def jeton(iss):
+            charge = base64.urlsafe_b64encode(_json.dumps({"iss": iss}).encode()).decode().rstrip("=")
+            return f"x.{charge}.y"
+
+        with override_settings(KEYCLOAK_REALM_URL="https://key.resdigita.org/realms/master", OIDC_RP_CLIENT_ID="voisinternet"):
+            req = RequestFactory().get("/")
+            req.session = {"oidc_id_token": jeton("https://key.gv.je/realms/master")}
+            self.assertIn("client_id=voisinternet", keycloak_logout_url(req))
+            self.assertNotIn("id_token_hint", keycloak_logout_url(req))
+            req.session = {"oidc_id_token": jeton("https://key.resdigita.org/realms/master")}
+            self.assertIn("id_token_hint", keycloak_logout_url(req))

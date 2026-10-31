@@ -1,4 +1,5 @@
 """Connexion par Keycloak (compte unique des Grands Voisins)."""
+import base64
 import json
 from urllib.parse import urlencode
 from urllib.request import urlopen
@@ -99,7 +100,7 @@ def _end_session_endpoint():
     """Adresse de déconnexion de Keycloak : `end_session_endpoint` de la découverte OIDC du royaume (mise en cache), sinon
     l'adresse standard du royaume — la même source que les adresses d'autorisation et de jeton du réglage."""
     defaut = f"{settings.KEYCLOAK_REALM_URL}/protocol/openid-connect/logout"
-    cle = "oidc-end-session-endpoint"
+    cle = f"oidc-end-session-endpoint:{settings.KEYCLOAK_REALM_URL}"  # par royaume : un changement de nom ne sert pas l'ancien
     trouve = cache.get(cle)
     if trouve:
         return trouve
@@ -111,6 +112,16 @@ def _end_session_endpoint():
         trouve = defaut
         cache.set(cle, trouve, 300)  # injoignable : on réessaie dans 5 minutes, sans retarder chaque déconnexion
     return trouve
+
+
+def _emetteur(id_token):
+    """Émetteur (`iss`) annoncé par un id_token, lu SANS vérification (il ne sert qu'à choisir le paramètre de déconnexion)."""
+    try:
+        charge = id_token.split(".")[1]
+        charge += "=" * (-len(charge) % 4)
+        return str(json.loads(base64.urlsafe_b64decode(charge)).get("iss", "")).rstrip("/")
+    except (IndexError, ValueError, TypeError):
+        return ""
 
 
 def keycloak_logout_url(request):
@@ -126,6 +137,8 @@ def keycloak_logout_url(request):
         return accueil
     params = {"post_logout_redirect_uri": accueil}
     id_token = request.session.get("oidc_id_token")
+    if id_token and _emetteur(id_token) not in ("", settings.KEYCLOAK_REALM_URL):
+        id_token = None  # jeton délivré sous un ancien nom du royaume (changement de domaine) : repli sur client_id
     if id_token:
         params["id_token_hint"] = id_token
     else:

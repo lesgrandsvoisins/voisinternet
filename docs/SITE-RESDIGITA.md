@@ -16,3 +16,8 @@ Poussé : type de page `cms.NumeriquePage` (migration cms 0035), accueil servi p
 
 ## Synonymes (31/10)
 `lesgv.org` et `lesgv.com` sont des synonymes de `resdigita.org` : leurs adresses (apex, `www.` et joker) redirigent en 301 vers `https://www.resdigita.org/` en gardant le chemin. À faire : zones DNS chez ClouDNS (Chris), noms et certificats dans Caddy et redirections (administration). Le courrier de ces noms n'est pas décidé : en attendant, ils sont comptés parmi nos domaines (`VOISINTERNET_DOMAINES_COURRIER`), donc refusés comme cibles de redirection de courrier.
+
+## Répartition des sites (décision de Chris, 31/10)
+- **Compte** : Keycloak passe de `key.gv.je` à `key.resdigita.org` (demande n°18 à l'administration ; côté voisinternet seul `KEYCLOAK_REALM_URL` change, au même moment que le client).
+- **Services** : `https://www.resdigita.org` (« Mes services » et « Tous les outils » ; réglage `VOISINTERNET_SERVICES_URL`).
+- **Le reste** (évènements, annuaire, blog, association, demandes, modération…) : `https://www.lesgrandsvoisins.com`.

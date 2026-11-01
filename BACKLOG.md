@@ -69,3 +69,5 @@ Les besoins côté serveur passent par `docs/DEMANDES-UX.md` (dépôt `flakeops`
 - **U-038** — Site Wagtail resdigita.org : créer le site (`creer_site_resdigita`), remplacer la redirection 302 par le service du nom (administration), `www.resdigita.org` dans ALLOWED_HOSTS/CSRF/Keycloak (Chris), variation du dessin « Numérique des Grands Voisins » (Chris), pages éditoriales. Qui : Chris + administration.
 
 - **U-039** — Retrait d'un droit d'envoi ou d'une adresse : nouveau type de demande (`retrait`) à définir avec l'administration (le contrat actuel ne sait qu'ajouter). Qui : UX + administration.
+
+- **U-040** — **À partir du mercredi 4 novembre 2026 (ou plus tard)** : séparer les applications `core` -> `grandwww` (public), `grandportal` (annuaire et agenda), `granduser` (données personnelles), dans cet ordre : `granduser` d'abord, puis `grandportal`, puis `grandwww` ; noms de tables conservés ; rôle PostgreSQL en lecture seule sur les tables publiées. Voir `docs/SEPARATION-WWW-USER.md`. À ne commencer qu'après la bascule de Keycloak (n°18) et l'essai du contrat des demandes (n°17). Qui : session de travail + Chris.

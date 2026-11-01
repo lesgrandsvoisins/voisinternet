@@ -166,11 +166,11 @@ class Account(models.Model):
         return cls.objects.filter(number_digest=number_digest(digits), user__isnull=True).first()
 
     def ordered_shortcuts(self):
-        """Services choisis, dans l'ordre de la personne : alphabétique (par défaut, sans accents ni majuscules) ou personnalisé."""
+        """Services choisis, dans l'ordre de la personne : alphabétique (par défaut, sans accents ni majuscules, les services mis en avant d'abord) ou personnalisé."""
         liste = list(self.shortcut_set.select_related("service"))
         if self.shortcut_order == self.MANUEL:
             return sorted(liste, key=lambda sc: (sc.position, sc.service.order, sc.service.name))
-        return sorted(liste, key=lambda sc: (alpha_key(sc.service.name), sc.pk))
+        return sorted(liste, key=lambda sc: (not sc.service.featured, alpha_key(sc.service.name), sc.pk))  # mis en avant d'abord
 
     def absorb(self, other):
         """Rattache les services et appartenances d'un compte anonyme à ce compte, puis supprime l'anonyme."""

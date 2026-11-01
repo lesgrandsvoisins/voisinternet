@@ -526,11 +526,11 @@ def _visible_services(user):
 
 
 def _catalogue(user=None):
-    """Services proposés, rangés par catégorie (celles sans catégorie à la fin), puis par ordre alphabétique."""
+    """Services proposés, rangés par catégorie (celles sans catégorie à la fin) ; dans chacune, les services mis en avant d'abord, puis par ordre alphabétique."""
     return sorted(
         _visible_services(user).select_related("category"),
         key=lambda s: (s.category is None, s.category.order if s.category else 0,
-                       s.category.name if s.category else "", alpha_key(s.name), s.pk),
+                       s.category.name if s.category else "", not s.featured, alpha_key(s.name), s.pk),
     )
 
 

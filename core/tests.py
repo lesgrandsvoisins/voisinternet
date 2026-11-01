@@ -519,6 +519,9 @@ class AnonymousAccountTests(Base):
         Shortcut.objects.create(account=account, service=agenda, position=2)
         noms = lambda: [sc.service.name for sc in account.ordered_shortcuts()]
         self.assertEqual(noms(), ["agenda", "Écran", "Roundcube Webmail"])  # sans accents ni majuscules
+        Service.objects.filter(pk=self.service.pk).update(featured=True)  # mis en avant : d'abord
+        self.assertEqual(noms(), ["Roundcube Webmail", "agenda", "Écran"])
+        Service.objects.filter(pk=self.service.pk).update(featured=False)
         self.client.force_login(user)
         self.client.post(reverse("core:reorder_shortcut", args=["ecran", "up"]))   # sans effet en alphabétique
         self.assertEqual(noms(), ["agenda", "Écran", "Roundcube Webmail"])
@@ -2208,6 +2211,9 @@ class CatalogueOrdreTests(Base):
 
         noms = [s.name for s in _catalogue(AnonymousUser()) if s.category_id == c.pk]
         self.assertEqual(noms, ["Alpha", "dauphin", "Écran", "zèbre-outil"])
+        Service.objects.filter(name="zèbre-outil").update(featured=True)  # mis en avant : d'abord
+        noms = [s.name for s in _catalogue(AnonymousUser()) if s.category_id == c.pk]
+        self.assertEqual(noms, ["zèbre-outil", "Alpha", "dauphin", "Écran"])
 
 
 @override_settings(ALLOWED_HOSTS=["*"])

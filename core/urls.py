@@ -72,6 +72,7 @@ urlpatterns = [
         "account/raccourcis/<slug:slug>/raccourci/<str:direction>/",
         views.reorder_shortcut, name="reorder_shortcut",
     ),
+    path("account/raccourcis/ordre/", views.ordre_raccourcis, name="ordre_raccourcis"),
     path("account/raccourcis/glisser/", views.reorder_shortcuts, name="reorder_shortcuts"),
     path("account/groupes/<slug:slug>/adherer/", views.toggle_membership, name="toggle_membership"),
     path(

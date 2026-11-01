@@ -55,7 +55,7 @@ def site(request):
     account = current_account(request)
     account_shortcuts = []
     if account:
-        account_shortcuts = account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name")
+        account_shortcuts = account.ordered_shortcuts()
     label, _ = account_label(request)
     keycloak_login_url = ""
     keycloak_register_url = ""

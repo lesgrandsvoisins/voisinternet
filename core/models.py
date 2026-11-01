@@ -1,4 +1,5 @@
 import hashlib
+import unicodedata
 import hmac
 import re
 import secrets
@@ -111,6 +112,11 @@ class Service(models.Model):
         return self.name
 
 
+def alpha_key(texte):
+    """Clé de tri alphabétique : sans majuscules ni accents."""
+    return unicodedata.normalize("NFKD", texte or "").encode("ascii", "ignore").decode().casefold()
+
+
 class Account(models.Model):
     """
     Un compte lesgrandsvoisins.com : soit rattaché à un compte Grands Voisins (user),
@@ -125,6 +131,11 @@ class Account(models.Model):
     groups = models.ManyToManyField(Audience, through="Membership", related_name="accounts")
     created = models.DateTimeField(default=timezone.now, editable=False)
     last_seen = models.DateTimeField(auto_now=True)
+    ALPHA, MANUEL = "alpha", "manuel"
+    shortcut_order = models.CharField(
+        _("ordre des services choisis"), max_length=6, default=ALPHA,
+        choices=[(ALPHA, _("alphabétique")), (MANUEL, _("personnalisé"))],
+    )
 
     class Meta:
         verbose_name = _("compte")
@@ -153,6 +164,13 @@ class Account(models.Model):
         if not digits:
             return None
         return cls.objects.filter(number_digest=number_digest(digits), user__isnull=True).first()
+
+    def ordered_shortcuts(self):
+        """Services choisis, dans l'ordre de la personne : alphabétique (par défaut, sans accents ni majuscules) ou personnalisé."""
+        liste = list(self.shortcut_set.select_related("service"))
+        if self.shortcut_order == self.MANUEL:
+            return sorted(liste, key=lambda sc: (sc.position, sc.service.order, sc.service.name))
+        return sorted(liste, key=lambda sc: (alpha_key(sc.service.name), sc.pk))
 
     def absorb(self, other):
         """Rattache les services et appartenances d'un compte anonyme à ce compte, puis supprime l'anonyme."""

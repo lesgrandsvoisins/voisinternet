@@ -508,9 +508,33 @@ class AnonymousAccountTests(Base):
         self.assertEqual(first.service.name, "Roundcube Webmail")
         self.assertEqual(second.service.name, "Agenda")
 
-    def test_shortcuts_reorder_via_personal_action(self):
+    def test_ordre_alphabetique_par_defaut_et_ordre_personnalise(self):
         user = get_user_model().objects.create_user("user")
         account = Account.objects.create(user=user)
+        self.assertEqual(account.shortcut_order, "alpha")
+        ecran = Service.objects.create(name="Écran", slug="ecran", summary="x")
+        agenda = Service.objects.create(name="agenda", slug="agenda2", summary="x")
+        Shortcut.objects.create(account=account, service=self.service, position=0)   # Roundcube Webmail
+        Shortcut.objects.create(account=account, service=ecran, position=1)
+        Shortcut.objects.create(account=account, service=agenda, position=2)
+        noms = lambda: [sc.service.name for sc in account.ordered_shortcuts()]
+        self.assertEqual(noms(), ["agenda", "Écran", "Roundcube Webmail"])  # sans accents ni majuscules
+        self.client.force_login(user)
+        self.client.post(reverse("core:reorder_shortcut", args=["ecran", "up"]))   # sans effet en alphabétique
+        self.assertEqual(noms(), ["agenda", "Écran", "Roundcube Webmail"])
+        self.client.post(reverse("core:ordre_raccourcis"), {"mode": "manuel"})
+        account.refresh_from_db()
+        self.assertEqual(account.shortcut_order, "manuel")
+        self.assertEqual(noms(), ["agenda", "Écran", "Roundcube Webmail"])  # rien ne bouge en passant en personnalisé
+        self.client.post(reverse("core:reorder_shortcut", args=["ecran", "up"]))
+        self.assertEqual(noms(), ["Écran", "agenda", "Roundcube Webmail"])  # ordre personnel gardé
+        self.client.post(reverse("core:ordre_raccourcis"), {"mode": "alpha"})
+        account.refresh_from_db()
+        self.assertEqual(noms(), ["agenda", "Écran", "Roundcube Webmail"])
+
+    def test_shortcuts_reorder_via_personal_action(self):
+        user = get_user_model().objects.create_user("user")
+        account = Account.objects.create(user=user, shortcut_order="manuel")  # l'ordre alphabétique ne se réordonne pas
         service_two = Service.objects.create(name="Agenda", slug="agenda", summary="Agenda personnel.")
         first = Shortcut.objects.create(account=account, service=self.service, position=10)
         second = Shortcut.objects.create(account=account, service=service_two, position=20)
@@ -527,7 +551,7 @@ class AnonymousAccountTests(Base):
 
     def test_htmx_reorder_returns_partial_without_full_reload(self):
         user = get_user_model().objects.create_user("user")
-        account = Account.objects.create(user=user)
+        account = Account.objects.create(user=user, shortcut_order="manuel")  # l'ordre alphabétique ne se réordonne pas
         service_two = Service.objects.create(name="Agenda", slug="agenda", summary="Agenda personnel.")
         Shortcut.objects.create(account=account, service=self.service, position=10)
         Shortcut.objects.create(account=account, service=service_two, position=20)
@@ -546,7 +570,7 @@ class AnonymousAccountTests(Base):
 
     def test_reorder_shortcuts_drag_and_drop(self):
         user = get_user_model().objects.create_user("user")
-        account = Account.objects.create(user=user)
+        account = Account.objects.create(user=user, shortcut_order="manuel")  # l'ordre alphabétique ne se réordonne pas
         service_two = Service.objects.create(name="Agenda", slug="agenda", summary="Agenda personnel.")
         Shortcut.objects.create(account=account, service=self.service, position=10)
         Shortcut.objects.create(account=account, service=service_two, position=20)

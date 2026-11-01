@@ -35,7 +35,7 @@ from .models import (
     Account, Audience, Contribution, Demande, DemandeJournal, DirectoryEntry, DirectorySector, EntryMessage, EntrySubscription, Event,
     EventInterest, EventManagementRequest, GuideBook, Membership, Mission, MissionStep, OwnershipClaim, Service,
     Shortcut, StepCompletion, Tag,
-    format_number,
+    alpha_key, format_number,
 )
 
 from wagtail.models import Locale, Site
@@ -422,9 +422,7 @@ def account(request):
             "La connexion n'a pas abouti. Réessayez, ou continuez avec un compte anonyme."
         ))
     acc = current_account(request)
-    shortcuts = acc.shortcut_set.select_related("service").order_by(
-        "position", "service__order", "service__name",
-    ) if acc else []
+    shortcuts = acc.ordered_shortcuts() if acc else []
     memberships = acc.membership_set.select_related("audience").order_by(
         "position", "audience__order", "audience__name",
     ) if acc else []
@@ -433,6 +431,7 @@ def account(request):
         "account": acc,
         "account_contributions": acc.contributions.all() if acc else [],
         "shortcuts": shortcuts,
+        "shortcut_order": acc.shortcut_order if acc else Account.ALPHA,
         "memberships": memberships,
         "owned_entries": acc.directory_entries.order_by("name") if acc else [],
         "managed_events": acc.managed_events.order_by("-start") if acc else [],
@@ -526,17 +525,12 @@ def _visible_services(user):
     return qs
 
 
-def _cle_alpha(texte):
-    """Clé de tri alphabétique : sans majuscules ni accents (« Écran » après « Dauphin », avant « Fax »)."""
-    return unicodedata.normalize("NFKD", texte or "").encode("ascii", "ignore").decode().casefold()
-
-
 def _catalogue(user=None):
     """Services proposés, rangés par catégorie (celles sans catégorie à la fin), puis par ordre alphabétique."""
     return sorted(
         _visible_services(user).select_related("category"),
         key=lambda s: (s.category is None, s.category.order if s.category else 0,
-                       s.category.name if s.category else "", _cle_alpha(s.name), s.pk),
+                       s.category.name if s.category else "", alpha_key(s.name), s.pk),
     )
 
 
@@ -555,14 +549,15 @@ def raccourcis(request):
     acc = current_account(request)
     if acc is None:
         return redirect("core:account")
-    shortcuts = acc.shortcut_set.select_related("service").order_by("position", "service__order", "service__name")
-    shortcut_ids = set(shortcuts.values_list("service_id", flat=True))
+    shortcuts = acc.ordered_shortcuts()
+    shortcut_ids = {sc.service_id for sc in shortcuts}
     # Reste dans la liste une fois ajouté (bouton « Dans mes liens », qui permet de le retirer) :
     # la carte ne doit pas disparaître d'un coup sous le pointeur au moment du clic.
     available_services = _catalogue(request.user)
     return render(request, "core/raccourcis.html", {
         "account": acc,
         "shortcuts": shortcuts,
+        "shortcut_order": acc.shortcut_order,
         "shortcut_ids": shortcut_ids,
         "available_services": available_services,
     })
@@ -1173,7 +1168,7 @@ def toggle_shortcut(request, slug):
     if _is_htmx(request):
         account = current_account(request)
         shortcut_ids = set(account.shortcut_set.values_list("service_id", flat=True)) if account else set()
-        shortcuts = account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name") if account else []
+        shortcuts = account.ordered_shortcuts() if account else []
         available_services = _catalogue(request.user)
         return render(request, "core/partials/shortcut_response.html", {
             "service": service,
@@ -1182,6 +1177,7 @@ def toggle_shortcut(request, slug):
             "new_number": format_number(new_number) if new_number else None,
             "next": request.POST.get("next", ""),
             "shortcuts": shortcuts,
+            "shortcut_order": account.shortcut_order if account else Account.ALPHA,
             "available_services": available_services,
             "shortcut_ids": shortcut_ids,
         })
@@ -1211,7 +1207,9 @@ def reorder_shortcut(request, slug, direction):
             return HttpResponse(status=400)
         return redirect("core:raccourcis")
 
-    shortcuts = list(account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name"))
+    if account.shortcut_order != Account.MANUEL:  # l'ordre alphabétique ne se réordonne pas : passer d'abord en « personnalisé »
+        return _reponse_ordre(request, account)
+    shortcuts = account.ordered_shortcuts()
     index = next((i for i, item in enumerate(shortcuts) if item.pk == shortcut.pk), None)
     if index is None:
         if _is_htmx(request):
@@ -1228,10 +1226,7 @@ def reorder_shortcut(request, slug, direction):
         shortcut.save(update_fields=["position"])
         target.save(update_fields=["position"])
 
-    if _is_htmx(request):
-        return render(request, "core/partials/shortcut_list.html", {
-            "shortcuts": account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name"),
-        })
+    return _reponse_ordre(request, account)
 
     return redirect("core:raccourcis")
 
@@ -1247,6 +1242,8 @@ def reorder_shortcuts(request):
     if account is None:
         return HttpResponse(status=403)
 
+    if account.shortcut_order != Account.MANUEL:
+        return _reponse_ordre(request, account)
     shortcuts_by_slug = {sc.service.slug: sc for sc in account.shortcut_set.select_related("service")}
     for position, slug in enumerate(request.POST.get("order", "").split(",")):
         shortcut = shortcuts_by_slug.get(slug)
@@ -1254,9 +1251,35 @@ def reorder_shortcuts(request):
             shortcut.position = position
             shortcut.save(update_fields=["position"])
 
-    return render(request, "core/partials/shortcut_list.html", {
-        "shortcuts": account.shortcut_set.select_related("service").order_by("position", "service__order", "service__name"),
-    })
+    return _reponse_ordre(request, account, force_partial=True)
+
+
+def _reponse_ordre(request, account, force_partial=False):
+    """Liste des services choisis (partiel htmx) ou retour à la page « Mes services »."""
+    if force_partial or _is_htmx(request):
+        return render(request, "core/partials/shortcut_list.html", {
+            "shortcuts": account.ordered_shortcuts(), "shortcut_order": account.shortcut_order,
+        })
+    return redirect("core:raccourcis")
+
+
+@require_POST
+def ordre_raccourcis(request):
+    """Choix de l'ordre des services choisis : alphabétique (par défaut) ou personnalisé. En passant à « personnalisé »,
+    l'ordre actuellement affiché devient l'ordre personnel : rien ne bouge, on peut ensuite réordonner."""
+    account = current_account(request)
+    if account is None:
+        return HttpResponse(status=403)
+    mode = request.POST.get("mode")
+    if mode in (Account.ALPHA, Account.MANUEL) and mode != account.shortcut_order:
+        if mode == Account.MANUEL:
+            for position, sc in enumerate(account.ordered_shortcuts()):
+                if sc.position != position:
+                    sc.position = position
+                    sc.save(update_fields=["position"])
+        account.shortcut_order = mode
+        account.save(update_fields=["shortcut_order"])
+    return _reponse_ordre(request, account)
 
 
 # --- Appartenances

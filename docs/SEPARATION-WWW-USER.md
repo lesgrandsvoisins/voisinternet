@@ -2,6 +2,9 @@
 
 Idée de Chris (1/11) : séparer les applications Django : `www` peut contenir des données publiques, alors qu'il faut être prudent avec les données des personnes (`user`, qui dépend de `www`). Précision du même jour : **l'annuaire et l'agenda deviennent une application à part, `portal`.** **Proposition à valider : rien n'est fait.**
 
+## Noms (décision de Chris, 1/11)
+Les trois applications s'appellent **`grandwww`**, **`grandportal`** et **`granduser`** (dans ce document, `www`, `portal` et `user` désignent ces rôles). Ces noms évitent la confusion avec le modèle d'utilisateur de Django (`user`) et avec des noms génériques. Ils servent d'étiquette d'application : on garde les noms de tables actuels (`db_table`) pour ne rien renommer en base.
+
 ## Règle
 Sens des dépendances : `user` → `portal` → `www`. Une application n'importe JAMAIS une application plus haut dans cette chaîne (`www` ne connaît ni `portal` ni `user` ; `portal` ne connaît pas `user`) : ni modèle, ni clé étrangère. Ce qui est public et sert à tout le monde est dans `www` ; l'annuaire et l'agenda (publics, mais vivants et gérés par des personnes) dans `portal` ; tout ce qui rattache une donnée à une personne est dans `user`.
 

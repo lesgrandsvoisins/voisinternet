@@ -2083,6 +2083,7 @@ class PurgerComptesAnonymesTests(Base):
         self.assertEqual(Service.objects.get(slug="vikunja").url, "https://vikunja.gv.je/login")
         self.assertTrue(Service.objects.get(slug="keycloak").administration_only)
         self.assertTrue(Service.objects.filter(slug="immich", active=True).exists())
+        self.assertTrue(Service.objects.get(slug="vikunja").requires_approval)
         out = StringIO()
         call_command("preparer_catalogue_outils", stdout=out)
         self.assertIn("déjà prêt", out.getvalue())

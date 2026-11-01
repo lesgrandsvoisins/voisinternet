@@ -896,3 +896,38 @@ class CompleterDescriptionsTests(TestCase):
         self.assertIn("Une association de voisins & d'amis", sortie)
         self.assertNotIn("title", sortie)
         self.assertNotIn("&#x27;", sortie)
+
+
+class EtiquettesGhostTests(TestCase):
+    """rattacher_etiquettes_ghost : étiquettes publiques de Ghost rattachées aux articles déjà importés."""
+
+    def test_rattachement(self):
+        import json
+        import tempfile
+        from io import StringIO
+        from django.core.management import call_command
+        from core.models import Tag
+
+        fr = Locale.objects.get(language_code="fr")
+        blog = BlogIndexPage.objects.get(locale=fr)
+        author = Author.objects.create(name="Voisine", locale=fr)
+        page = BlogPostPage(title="A", slug="a", date=timezone.now(), author=author, excerpt="x", body="<p>x</p>")
+        blog.add_child(instance=page)
+        export = {"db": [{"data": {
+            "tags": [{"id": "t1", "slug": "conseils", "name": "Conseils", "visibility": "public"},
+                     {"id": "t2", "slug": "hash-import", "name": "#import", "visibility": "internal"}],
+            "posts": [{"id": "p1", "slug": "a", "status": "published"}, {"id": "p2", "slug": "absent", "status": "published"}],
+            "posts_tags": [{"post_id": "p1", "tag_id": "t1"}, {"post_id": "p1", "tag_id": "t2"}, {"post_id": "p2", "tag_id": "t1"}],
+        }}]}
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8") as f:
+            json.dump(export, f)
+        out = StringIO()
+        call_command("rattacher_etiquettes_ghost", "--fichier", f.name, stdout=out)  # simulation
+        self.assertFalse(page.tags.exists())
+        self.assertIn("1 étiquette(s) à rattacher", out.getvalue())
+        call_command("rattacher_etiquettes_ghost", "--fichier", f.name, "--appliquer", stdout=out)
+        self.assertEqual(list(page.tags.values_list("slug", flat=True)), ["conseils"])  # l'interne est ignorée
+        self.assertTrue(Tag.objects.filter(slug="conseils").exists())
+        out = StringIO()
+        call_command("rattacher_etiquettes_ghost", "--fichier", f.name, stdout=out)
+        self.assertIn("0 étiquette(s)", out.getvalue())  # idempotent

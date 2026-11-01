@@ -5,7 +5,9 @@ bord Homepage de www.gv.je :
   - Vikunja : l'adresse mène directement à la page de connexion ;
   - Keycloak, ListMonk, SftpGo, Ghost (administration) : « réservé à l'administration » (visibles du groupe
     « Administration » seulement) ;
-  - Immich (photos) : ajouté s'il manque.
+  - Immich (photos) : ajouté s'il manque ;
+  - Vikunja : « nécessite une validation » (un administrateur active l'accès, parcours de relecture : « Ajoutez Vikunja à vos
+    services ») et texte de l'étape du parcours en conséquence.
 
     manage.py preparer_catalogue_outils               # simulation : rapport seulement
     manage.py preparer_catalogue_outils --appliquer   # écrit
@@ -16,10 +18,13 @@ from django.core.management.base import BaseCommand
 from django.db.models import Max
 from django.utils import translation
 
-from core.models import Service
+from core.models import MissionStep, Service
 
 ADRESSES = {"vikunja": "https://vikunja.gv.je/login"}
 ADMINISTRATION = ["keycloak", "listmonk", "sftpgo", "ghost"]
+ETAPE_ANCIEN = "**Demandez-nous un accès** (écrivez à la personne qui vous a invité·e, ou via la page Contact), puis connectez-vous"
+ETAPE_NOUVEAU = ("**Ajoutez Vikunja à vos services** : un administrateur doit d'abord activer l'accès pour vous (vous verrez "
+                 "« en attente de validation »), puis connectez-vous")
 A_CREER = [{
     "slug": "immich", "name": "Immich", "url": "https://immich.gv.je",
     "summary": "Photos et vidéos partagées, hébergées par l'association.",
@@ -55,6 +60,19 @@ class Command(BaseCommand):
                     if appliquer:
                         s.administration_only = True
                         s.save(update_fields=["administration_only"])
+            vikunja = Service.objects.filter(slug="vikunja").first()
+            if vikunja and not vikunja.requires_approval:
+                self.stdout.write("  Vikunja : nécessite une validation (un administrateur active l'accès)")
+                faits += 1
+                if appliquer:
+                    vikunja.requires_approval = True
+                    vikunja.save(update_fields=["requires_approval"])
+            for etape in MissionStep.objects.filter(body_fr__contains=ETAPE_ANCIEN):
+                self.stdout.write(f"  parcours : texte de l'étape « {etape.title} » mis à jour")
+                faits += 1
+                if appliquer:
+                    etape.body_fr = etape.body_fr.replace(ETAPE_ANCIEN, ETAPE_NOUVEAU)
+                    etape.save()
             for spec in A_CREER:
                 if Service.objects.filter(slug=spec["slug"]).exists():
                     continue

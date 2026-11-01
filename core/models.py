@@ -5,6 +5,7 @@ import re
 import secrets
 
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -89,6 +90,10 @@ class Service(models.Model):
     )
     tags = models.ManyToManyField("Tag", blank=True, related_name="services", verbose_name=_("étiquettes"))
     featured = models.BooleanField(_("mis en avant"), default=False)
+    demoted = models.BooleanField(
+        _("mis en retrait"), default=False,
+        help_text=_("Contraire de « mis en avant » : le service passe après les autres dans l'ordre alphabétique."),
+    )
     active = models.BooleanField(_("proposé"), default=True)
     administration_only = models.BooleanField(
         _("réservé à l'administration"), default=False,
@@ -110,6 +115,15 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def rang(self):
+        """0 : mis en avant (d'abord), 1 : ordinaire, 2 : mis en retrait (à la fin)."""
+        return 0 if self.featured else 2 if self.demoted else 1
+
+    def clean(self):
+        if self.featured and self.demoted:
+            raise ValidationError(_("Un service ne peut pas être à la fois mis en avant et mis en retrait."))
 
 
 def alpha_key(texte):
@@ -170,7 +184,7 @@ class Account(models.Model):
         liste = list(self.shortcut_set.select_related("service"))
         if self.shortcut_order == self.MANUEL:
             return sorted(liste, key=lambda sc: (sc.position, sc.service.order, sc.service.name))
-        return sorted(liste, key=lambda sc: (not sc.service.featured, alpha_key(sc.service.name), sc.pk))  # mis en avant d'abord
+        return sorted(liste, key=lambda sc: (sc.service.rang, alpha_key(sc.service.name), sc.pk))  # mis en avant d'abord, mis en retrait à la fin
 
     def absorb(self, other):
         """Rattache les services et appartenances d'un compte anonyme à ce compte, puis supprime l'anonyme."""

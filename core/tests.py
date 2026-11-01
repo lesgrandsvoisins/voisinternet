@@ -521,7 +521,11 @@ class AnonymousAccountTests(Base):
         self.assertEqual(noms(), ["agenda", "Écran", "Roundcube Webmail"])  # sans accents ni majuscules
         Service.objects.filter(pk=self.service.pk).update(featured=True)  # mis en avant : d'abord
         self.assertEqual(noms(), ["Roundcube Webmail", "agenda", "Écran"])
-        Service.objects.filter(pk=self.service.pk).update(featured=False)
+        Service.objects.filter(pk=self.service.pk).update(featured=False, demoted=True)  # mis en retrait : à la fin
+        self.assertEqual(noms(), ["agenda", "Écran", "Roundcube Webmail"])
+        Service.objects.filter(pk=agenda.pk).update(demoted=True)
+        self.assertEqual(noms(), ["Écran", "agenda", "Roundcube Webmail"])
+        Service.objects.filter(pk__in=[self.service.pk, agenda.pk]).update(demoted=False)
         self.client.force_login(user)
         self.client.post(reverse("core:reorder_shortcut", args=["ecran", "up"]))   # sans effet en alphabétique
         self.assertEqual(noms(), ["agenda", "Écran", "Roundcube Webmail"])
@@ -2214,6 +2218,12 @@ class CatalogueOrdreTests(Base):
         Service.objects.filter(name="zèbre-outil").update(featured=True)  # mis en avant : d'abord
         noms = [s.name for s in _catalogue(AnonymousUser()) if s.category_id == c.pk]
         self.assertEqual(noms, ["zèbre-outil", "Alpha", "dauphin", "Écran"])
+        Service.objects.filter(name="Alpha").update(demoted=True)  # mis en retrait : à la fin
+        noms = [s.name for s in _catalogue(AnonymousUser()) if s.category_id == c.pk]
+        self.assertEqual(noms, ["zèbre-outil", "dauphin", "Écran", "Alpha"])
+        from django.core.exceptions import ValidationError
+        with self.assertRaises(ValidationError):
+            Service(name="x", slug="x", summary="x", featured=True, demoted=True).clean()
 
 
 @override_settings(ALLOWED_HOSTS=["*"])

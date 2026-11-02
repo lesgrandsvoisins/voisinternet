@@ -13,12 +13,21 @@ from pathlib import Path
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
+from django.utils import translation
 from django.utils.text import slugify
 
 from cms.models import BlogPostPage
 from core.models import Tag
 
 EXPORT = Path(settings.BASE_DIR) / "deploy" / "ghost-export" / "blog.json"
+
+
+def trouver_ou_creer(slug, nom):
+    """L'étiquette du site de même adresse, sinon de même nom (sans tenir compte des majuscules : « Arts platiques » existait
+    déjà sous une autre adresse), sinon une nouvelle."""
+    with translation.override("fr"):
+        tag = Tag.objects.filter(slug=slug).first() or Tag.objects.filter(name__iexact=nom).first()
+        return tag or Tag.objects.create(slug=slug, name=nom)
 
 
 class Command(BaseCommand):
@@ -51,7 +60,7 @@ class Command(BaseCommand):
                 ajouts += 1
                 self.stdout.write(f"  {slug} : #{tslug}")
                 if appliquer:
-                    tag, _ = Tag.objects.get_or_create(slug=tslug, defaults={"name": t["name"]})
+                    tag = trouver_ou_creer(tslug, t["name"])
                     page.tags.add(tag)
         self.stdout.write(f"{ajouts} étiquette(s) {'rattachée(s)' if appliquer else 'à rattacher'} ; "
                           f"{absents} article(s) de l'export absent(s) du site.")

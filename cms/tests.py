@@ -911,6 +911,7 @@ class EtiquettesGhostTests(TestCase):
         fr = Locale.objects.get(language_code="fr")
         blog = BlogIndexPage.objects.get(locale=fr)
         author = Author.objects.create(name="Voisine", locale=fr)
+        Tag.objects.create(name="Conseils", slug="les-conseils")  # même nom, autre adresse : réutilisée, pas de doublon
         page = BlogPostPage(title="A", slug="a", date=timezone.now(), author=author, excerpt="x", body="<p>x</p>")
         blog.add_child(instance=page)
         export = {"db": [{"data": {
@@ -926,8 +927,8 @@ class EtiquettesGhostTests(TestCase):
         self.assertFalse(page.tags.exists())
         self.assertIn("1 étiquette(s) à rattacher", out.getvalue())
         call_command("rattacher_etiquettes_ghost", "--fichier", f.name, "--appliquer", stdout=out)
-        self.assertEqual(list(page.tags.values_list("slug", flat=True)), ["conseils"])  # l'interne est ignorée
-        self.assertTrue(Tag.objects.filter(slug="conseils").exists())
+        self.assertEqual(list(page.tags.values_list("slug", flat=True)), ["les-conseils"])  # l'interne est ignorée
+        self.assertEqual(Tag.objects.filter(name__iexact="conseils").count(), 1)  # pas de doublon
         out = StringIO()
         call_command("rattacher_etiquettes_ghost", "--fichier", f.name, stdout=out)
         self.assertIn("0 étiquette(s)", out.getvalue())  # idempotent

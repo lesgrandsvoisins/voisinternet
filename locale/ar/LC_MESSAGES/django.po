@@ -3877,3 +3877,6 @@ msgstr "يلتقي الناس أولًا في الحياة الواقعية، و
 
 msgid "Les Grands Voisins"
 msgstr "Les Grands Voisins"
+
+msgid "Aller à lesgrandsvoisins.com"
+msgstr "الانتقال إلى lesgrandsvoisins.com"

@@ -201,6 +201,19 @@
           </a>
         </div>
         {% endif %}
+        {% if SITE_THEME %}
+        <div class="menu-autre-site">
+          <a href="{{ SITE_PRINCIPAL }}/{{ LANGUAGE_CODE }}/" aria-label="{% trans "Aller à lesgrandsvoisins.com" %}" title="{% trans "Aller à lesgrandsvoisins.com" %}">
+            {% include "core/icons/maison-svg.html" %}
+          </a>
+        </div>
+        {% elif SERVICES_URL %}
+        <div class="menu-autre-site">
+          <a href="{{ SERVICES_URL }}/{{ LANGUAGE_CODE }}/" aria-label="{% trans "Resdigita, le numérique des Grands Voisins" %}" title="{% trans "Resdigita, le numérique des Grands Voisins" %}">
+            {% include "core/icons/ordinateur-svg.html" %}
+          </a>
+        </div>
+        {% endif %}
         <div class="lang-dropdown"
              x-data="{ open: false }"
              x-on:keydown.escape.window="open = false"

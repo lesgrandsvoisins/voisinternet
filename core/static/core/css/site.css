@@ -4319,3 +4319,16 @@ pre { max-width: 100%; overflow-x: auto; }
 .brand-texte { display: flex; flex-direction: column; line-height: 1.15; text-decoration: none; color: inherit; }
 .brand-texte .brand-nom { font-size: 1.5rem; font-weight: 700; }
 .brand-texte .brand-devise { font-size: 0.9rem; }
+
+/* Lien vers l'autre site (resdigita.org <-> lesgrandsvoisins.com) : toujours visible, même sur téléphone. */
+.menu-autre-site a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  color: var(--ink);
+}
+.menu-autre-site a:hover { background: var(--hover); }

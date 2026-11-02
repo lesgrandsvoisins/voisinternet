@@ -90,4 +90,5 @@ def site(request):
         "SITE_NAME": _t("Resdigita, le numérique des Grands Voisins") if theme else get_current_site(request).name,
         "SITE_THEME": theme,
         "SITE_PRINCIPAL": settings.SITE_PRINCIPAL,
+        "SERVICES_URL": settings.SERVICES_URL,
     }

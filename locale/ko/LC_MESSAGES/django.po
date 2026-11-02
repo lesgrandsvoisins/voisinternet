@@ -3812,3 +3812,6 @@ msgstr "사람들은 먼저 현실에서 만나며, 컴퓨터는 그 일부입�
 
 msgid "Les Grands Voisins"
 msgstr "Les Grands Voisins"
+
+msgid "Aller à lesgrandsvoisins.com"
+msgstr "lesgrandsvoisins.com으로 이동"

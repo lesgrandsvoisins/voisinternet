@@ -3938,3 +3938,6 @@ msgstr "People first meet in real life; the computer is part of it."
 
 msgid "Les Grands Voisins"
 msgstr "Les Grands Voisins"
+
+msgid "Aller à lesgrandsvoisins.com"
+msgstr "Go to lesgrandsvoisins.com"

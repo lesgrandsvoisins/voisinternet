@@ -2253,6 +2253,7 @@ class SiteResdigitaTests(Base):
         self.assertContains(r, "outils-informatiques.svg")
         self.assertContains(r, "outils-grid")  # le tableau de bord, sous le message
         self.assertContains(r, 'class="theme-numerique"')
+        self.assertContains(r, "menu-autre-site")  # retour vers lesgrandsvoisins.com depuis le menu
         # traduction Wagtail de la page d'accueil : servie dans la langue du préfixe
         from wagtail.models import Locale
         from cms.models import NumeriquePage as NP
@@ -2283,6 +2284,8 @@ class SitesDesServicesTests(Base):
             self.assertRedirects(r, "https://www.resdigita.org" + chemin, fetch_redirect_response=False)
         r = self.client.get("/fr/outils/", HTTP_HOST="www.resdigita.org")
         self.assertEqual(r.status_code, 200)  # pas de boucle sur le site cible
+        r = self.client.get("/fr/", HTTP_HOST="www.lesgrandsvoisins.com")
+        self.assertContains(r, 'href="https://www.resdigita.org/fr/"')  # et inversement, depuis lesgrandsvoisins.com
         r = self.client.post("/fr/outils/", HTTP_HOST="www.lesgrandsvoisins.com")
         self.assertNotEqual(r.status_code, 302)  # seuls les GET sont renvoyés
 
@@ -2290,6 +2293,7 @@ class SitesDesServicesTests(Base):
     def test_desactive_par_defaut(self):
         r = self.client.get("/fr/outils/", HTTP_HOST="www.lesgrandsvoisins.com")
         self.assertEqual(r.status_code, 200)
+        self.assertNotContains(r, "menu-autre-site")  # pas de lien vers resdigita tant que le réglage est vide
 
 
 class DeconnexionChangementDeNomTests(TestCase):

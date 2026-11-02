@@ -2253,6 +2253,18 @@ class SiteResdigitaTests(Base):
         self.assertContains(r, "outils-informatiques.svg")
         self.assertContains(r, "outils-grid")  # le tableau de bord, sous le message
         self.assertContains(r, 'class="theme-numerique"')
+        # traduction Wagtail de la page d'accueil : servie dans la langue du préfixe
+        from wagtail.models import Locale
+        from cms.models import NumeriquePage as NP
+        en = Locale.objects.get_or_create(language_code="en")[0]
+        fr_page = NP.objects.get(locale__language_code="fr")
+        trad = fr_page.copy_for_translation(en)
+        trad.message = "<p>People first meet in real life.</p>"
+        trad.save_revision().publish()
+        r = self.client.get("/en/", HTTP_HOST="www.resdigita.org")
+        self.assertContains(r, "People first meet in real life.")
+        r = self.client.get("/fr/", HTTP_HOST="www.resdigita.org")
+        self.assertNotContains(r, "People first meet in real life.")
         # un seul lien vers le site principal, dans le pied de page
         self.assertContains(r, "https://www.lesgrandsvoisins.com/fr/")
         r = self.client.get("/en/", HTTP_HOST="www.resdigita.org")

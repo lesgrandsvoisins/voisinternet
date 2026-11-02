@@ -22,12 +22,16 @@ from core.models import Tag
 EXPORT = Path(settings.BASE_DIR) / "deploy" / "ghost-export" / "blog.json"
 
 
-def trouver_ou_creer(slug, nom):
+def trouver(slug, nom):
     """L'étiquette du site de même adresse, sinon de même nom (sans tenir compte des majuscules : « Arts platiques » existait
-    déjà sous une autre adresse), sinon une nouvelle."""
+    déjà sous une autre adresse), sinon None."""
     with translation.override("fr"):
-        tag = Tag.objects.filter(slug=slug).first() or Tag.objects.filter(name__iexact=nom).first()
-        return tag or Tag.objects.create(slug=slug, name=nom)
+        return Tag.objects.filter(slug=slug).first() or Tag.objects.filter(name__iexact=nom).first()
+
+
+def trouver_ou_creer(slug, nom):
+    with translation.override("fr"):
+        return trouver(slug, nom) or Tag.objects.create(slug=slug, name=nom)
 
 
 class Command(BaseCommand):
@@ -52,10 +56,11 @@ class Command(BaseCommand):
             if page is None:
                 absents += 1
                 continue
-            deja = set(page.tags.values_list("slug", flat=True))
+            deja = set(page.tags.values_list("pk", flat=True))
             for t in tags:
                 tslug = t["slug"] or slugify(t["name"])
-                if tslug in deja:
+                existante = trouver(tslug, t["name"])
+                if existante is not None and existante.pk in deja:
                     continue
                 ajouts += 1
                 self.stdout.write(f"  {slug} : #{tslug}")

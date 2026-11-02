@@ -3959,3 +3959,6 @@ msgstr "Les Grands Voisins"
 
 msgid "Aller à lesgrandsvoisins.com"
 msgstr "Ir a lesgrandsvoisins.com"
+
+msgid "Ou continuer avec un compte que vous avez déjà :"
+msgstr "O continuar con una cuenta que ya tienes:"

@@ -3815,3 +3815,6 @@ msgstr "Les Grands Voisins"
 
 msgid "Aller à lesgrandsvoisins.com"
 msgstr "lesgrandsvoisins.com으로 이동"
+
+msgid "Ou continuer avec un compte que vous avez déjà :"
+msgstr "또는 이미 가지고 있는 계정으로 계속하기:"

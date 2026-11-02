@@ -91,4 +91,5 @@ def site(request):
         "SITE_THEME": theme,
         "SITE_PRINCIPAL": settings.SITE_PRINCIPAL,
         "SERVICES_URL": settings.SERVICES_URL,
+        "FOURNISSEURS": settings.FOURNISSEURS,
     }

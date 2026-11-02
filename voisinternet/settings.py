@@ -314,3 +314,7 @@ SITE_PRINCIPAL = env("VOISINTERNET_SITE_PRINCIPAL", "https://www.lesgrandsvoisin
 # Si défini (ex. https://www.resdigita.org), les pages « Mes services » et « Tous les outils » vivent sur ce site : les autres
 # noms de domaine y renvoient (302). Vide : elles restent là où elles sont.
 SERVICES_URL = env("VOISINTERNET_SERVICES_URL", "").rstrip("/")
+
+# Fournisseurs d'identité proposés sur la page « Mon compte » (alias Keycloak, ex. google,microsoft). Vide : aucun bouton.
+# Ne les activer qu'une fois le flux « first broker login » de Keycloak branché sur le générateur d'identifiant.
+FOURNISSEURS = env_list("VOISINTERNET_FOURNISSEURS", "")

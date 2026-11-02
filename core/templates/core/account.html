@@ -274,6 +274,14 @@
           {% if OIDC_ENABLED %}
             <a class="btn btn-line"
                href="{% url 'core:inscription' %}?next={% url 'core:account' %}">{% trans "Créer mon compte" %}</a>
+            {% if FOURNISSEURS %}
+              <p class="muted">{% trans "Ou continuer avec un compte que vous avez déjà :" %}</p>
+              <p class="actions">
+                {% for f in FOURNISSEURS %}
+                  <a class="btn btn-line" href="{% url 'core:connexion' %}?idp={{ f|urlencode }}&amp;next={% url 'core:account' %}">{% if f == "google" %}Google (Gmail){% elif f == "microsoft" %}Microsoft (Outlook, Hotmail){% else %}{{ f|capfirst }}{% endif %}</a>
+                {% endfor %}
+              </p>
+            {% endif %}
           {% else %}
             <p class="muted">{% trans "La connexion par compte Grands Voisins n'est pas encore configurée sur ce serveur." %}</p>
           {% endif %}

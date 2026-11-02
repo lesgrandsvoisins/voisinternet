@@ -474,6 +474,25 @@ class AnonymousAccountTests(Base):
         login = self.client.get("/es/account/connexion/")
         self.assertNotIn("prompt=create", login["Location"])
 
+    @override_settings(OIDC_ENABLED=True, KEYCLOAK_REALM_URL="https://key.example/realms/gv",
+                       OIDC_RP_CLIENT_ID="voisinternet",
+                       OIDC_OP_AUTHORIZATION_ENDPOINT="https://key.example/auth",
+                       OIDC_OP_TOKEN_ENDPOINT="https://key.example/token",
+                       OIDC_OP_USER_ENDPOINT="https://key.example/user",
+                       OIDC_RP_CLIENT_SECRET="x", FOURNISSEURS=["google", "microsoft"])
+    def test_connexion_par_fournisseur(self):
+        self.addCleanup(translation.activate, "fr")
+        r = self.client.get("/fr/account/connexion/?idp=google")
+        self.assertIn("kc_idp_hint=google", r["Location"])
+        self.assertNotIn("prompt=create", r["Location"])
+        self.assertNotIn("kc_idp_hint", self.client.get("/fr/account/connexion/?idp=yahoo")["Location"])  # liste fermée
+        self.assertNotIn("kc_idp_hint", self.client.get("/fr/account/connexion/")["Location"])
+        page = self.client.get("/fr/account/")
+        self.assertContains(page, "idp=google")
+        self.assertContains(page, "Microsoft (Outlook, Hotmail)")
+        with override_settings(FOURNISSEURS=[]):
+            self.assertNotContains(self.client.get("/fr/account/"), "idp=google")
+
     def test_number_is_never_stored_in_clear(self):
         account, digits = Account.create_anonymous()
         self.assertNotIn(digits, account.number_digest)

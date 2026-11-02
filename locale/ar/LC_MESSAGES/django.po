@@ -3880,3 +3880,6 @@ msgstr "Les Grands Voisins"
 
 msgid "Aller à lesgrandsvoisins.com"
 msgstr "الانتقال إلى lesgrandsvoisins.com"
+
+msgid "Ou continuer avec un compte que vous avez déjà :"
+msgstr "أو المتابعة بحساب لديك بالفعل:"

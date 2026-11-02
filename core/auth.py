@@ -160,6 +160,9 @@ class KeycloakAuthRequestView(OIDCAuthenticationRequestView):
         language = get_language() or settings.LANGUAGE_CODE
         params["ui_locales"] = language
         params["kc_locale"] = language
-        if self.register:
+        fournisseur = self.request.GET.get("idp", "")
+        if fournisseur and fournisseur in settings.FOURNISSEURS:
+            params["kc_idp_hint"] = fournisseur  # départ direct chez le fournisseur (Google, Microsoft…), liste fermée par réglage
+        elif self.register:
             params["prompt"] = "create"
         return params

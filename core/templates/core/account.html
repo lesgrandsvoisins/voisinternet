@@ -96,9 +96,7 @@
             <a class="btn btn-line" href="{% url 'core:home' %}#outils-titre">{% trans "Services" %}</a>
             <!-- PROFILE BUTTON -->
             {% if keycloak_account_url %}
-              <p class="btn btn-line">
-                <a href="{{ keycloak_account_url }}" target="_new">{% trans "Modifier mon profil" %}</a>
-              </p>
+              <a class="btn btn-line" href="{{ keycloak_account_url }}" target="_new">{% trans "Modifier mon profil" %}</a>
             {% endif %}
             <!-- MY REQUESTS BUTTON -->
             <a class="btn btn-line" href="{% url 'core:mes_demandes' %}">{% trans "Mes demandes" %}</a>

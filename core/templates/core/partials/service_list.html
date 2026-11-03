@@ -7,8 +7,16 @@ grille ; la description et ce que l'association conserve sont repliées dans « 
 {% if details %}
   {% regroup services by category as groupes %}
   {% for groupe in groupes %}
-    <section class="svc-group" {% if groupe.grouper %}aria-labelledby="cat-{{ groupe.grouper.slug }}"{% endif %}>
-      <h3 class="svc-cat" {% if groupe.grouper %}id="cat-{{ groupe.grouper.slug }}"{% endif %}>{% if groupe.grouper %}{{ groupe.grouper.name }}{% else %}{% trans "Autres" %}{% endif %}</h3>
+    <section class="svc-group"
+             {% if groupe.grouper %}aria-labelledby="cat-{{ groupe.grouper.slug }}"{% endif %}>
+      <h3 class="svc-cat"
+          {% if groupe.grouper %}id="cat-{{ groupe.grouper.slug }}"{% endif %}>
+        {% if groupe.grouper %}
+          {{ groupe.grouper.name }}
+        {% else %}
+          {% trans "Autres" %}
+        {% endif %}
+      </h3>
       <ul class="svc svc-cards">
         {% for service in groupe.list %}
           <li class="svc-card{% if service.featured %} feat{% endif %}">
@@ -26,14 +34,20 @@ grille ; la description et ce que l'association conserve sont repliées dans « 
                 <summary>{% trans "Plus d'informations" %}</summary>
                 {% if service.description %}<div class="markdown">{{ service.description|markdown }}</div>{% endif %}
                 {% if service.retention %}
-                  <p class="svc-retention-title"><strong>{% trans "Ce qui reste anonyme, ce que nous conservons" %}</strong></p>
+                  <p class="svc-retention-title">
+                    <strong>{% trans "Ce qui reste anonyme, ce que nous conservons" %}</strong>
+                  </p>
                   <div class="markdown">{{ service.retention|markdown }}</div>
                 {% endif %}
               </details>
             {% endif %}
             <div class="svc-card-foot">
               {% if service.url %}
-                <a class="open-link" href="{{ service.url }}" target="_blank" rel="noopener" aria-label="{% blocktrans with name=service.name %}Ouvrir {{ name }}{% endblocktrans %}">{% trans "Ouvrir" %} <span aria-hidden="true">↗</span></a>
+                <a class="open-link"
+                   href="{{ service.url }}"
+                   target="_blank"
+                   rel="noopener"
+                   aria-label="{% blocktrans with name=service.name %}Ouvrir {{ name }}{% endblocktrans %}">{% trans "Ouvrir" %} <span aria-hidden="true">↗</span></a>
               {% else %}
                 <span class="chip">{% trans "Bientôt" %}</span>
               {% endif %}
@@ -48,7 +62,9 @@ grille ; la description et ce que l'association conserve sont repliées dans « 
       </ul>
     </section>
   {% empty %}
-    <p class="intro">{% trans "Aucun service pour l'instant" %}. {% trans "Les services apparaîtront ici dès qu'ils seront ouverts." %}</p>
+    <p class="intro">
+      {% trans "Aucun service pour l'instant" %}. {% trans "Les services apparaîtront ici dès qu'ils seront ouverts." %}
+    </p>
   {% endfor %}
 {% else %}
   <ul class="svc">
@@ -60,7 +76,9 @@ grille ; la description et ce que l'association conserve sont repliées dans « 
           <span class="led" aria-hidden="true"></span>
         {% endif %}
         <div>
-          <h3><a target="_new" href="{{ service.url }}">{{ service.name }}</a></h3>
+          <h3>
+            <a target="_new" href="{{ service.url }}">{{ service.name }}</a>
+          </h3>
           <p>{{ service.summary }}</p>
         </div>
         {% if service.pk in shortcut_ids %}

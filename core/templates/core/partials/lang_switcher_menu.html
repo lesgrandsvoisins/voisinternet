@@ -12,7 +12,9 @@
       {% csrf_token %}
       <input type="hidden" name="next" value="{{ next }}">
       <input type="hidden" name="language" value="{{ lang.code }}">
-      <button type="submit" role="menuitem" class="lang-dropdown-item{% if lang.code == current_language %} current{% endif %}">
+      <button type="submit"
+              role="menuitem"
+              class="lang-dropdown-item{% if lang.code == current_language %} current{% endif %}">
         {{ lang.name_local }}
       </button>
     </form>

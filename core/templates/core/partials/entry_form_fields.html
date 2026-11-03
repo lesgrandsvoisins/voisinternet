@@ -1,46 +1,63 @@
-{% load i18n markdown_filters %}{% if form.non_field_errors %}<ul class="errorlist">{{ form.non_field_errors }}</ul>{% endif %}
-<div class="tabs" role="group" aria-label="{% trans "Sections du formulaire" %}">
+{% load i18n markdown_filters %}
+{% if form.non_field_errors %}
+  <ul class="errorlist">
+    {{ form.non_field_errors }}
+  </ul>
+{% endif %}
+<div class="tabs"
+     role="group"
+     aria-label="{% trans "Sections du formulaire" %}">
   {% for group in form.fieldsets %}
-  <input type="radio" name="fiche-tab" id="fiche-tab-{{ forloop.counter }}" class="tabs-input" {% if group.active %}checked{% endif %}>
-  <label for="fiche-tab-{{ forloop.counter }}" class="tabs-label{% if group.has_error %} has-error{% endif %}">{{ group.label }}</label>
-  <div class="tabs-panel">
-    {% for field in group.fields %}
-    <div class="form-row">
-      {{ field.label_tag }}
-      {% if field.name == "description_fr" %}
-      <div class="wysiwyg">
-        <div class="wysiwyg-toolbar" hidden>
-          <button type="button" data-cmd="bold">{% trans "Gras" %}</button>
-          <button type="button" data-cmd="italic">{% trans "Italique" %}</button>
-          <button type="button" data-cmd="formatBlock" data-value="&lt;h2&gt;">{% trans "Titre" %}</button>
-          <button type="button" data-cmd="formatBlock" data-value="&lt;blockquote&gt;">{% trans "Citation" %}</button>
-          <button type="button" data-cmd="insertUnorderedList">{% trans "Liste à puces" %}</button>
-          <button type="button" data-cmd="insertOrderedList">{% trans "Liste numérotée" %}</button>
-          <button type="button" data-cmd="formatBlock" data-value="&lt;p&gt;">{% trans "Normal" %}</button>
-          <button type="button" data-cmd="link">{% trans "Lien" %}</button>
-          <button type="button" data-cmd="unlink">{% trans "Retirer le lien" %}</button>
+    <input type="radio"
+           name="fiche-tab"
+           id="fiche-tab-{{ forloop.counter }}"
+           class="tabs-input"
+           {% if group.active %}checked{% endif %}>
+    <label for="fiche-tab-{{ forloop.counter }}"
+           class="tabs-label{% if group.has_error %} has-error{% endif %}">{{ group.label }}</label>
+    <div class="tabs-panel">
+      {% for field in group.fields %}
+        <div class="form-row">
+          {{ field.label_tag }}
+          {% if field.name == "description_fr" %}
+            <div class="wysiwyg">
+              <div class="wysiwyg-toolbar" hidden>
+                <button type="button" data-cmd="bold">{% trans "Gras" %}</button>
+                <button type="button" data-cmd="italic">{% trans "Italique" %}</button>
+                <button type="button" data-cmd="formatBlock" data-value="&lt;h2&gt;">{% trans "Titre" %}</button>
+                <button type="button" data-cmd="formatBlock" data-value="&lt;blockquote&gt;">{% trans "Citation" %}</button>
+                <button type="button" data-cmd="insertUnorderedList">{% trans "Liste à puces" %}</button>
+                <button type="button" data-cmd="insertOrderedList">{% trans "Liste numérotée" %}</button>
+                <button type="button" data-cmd="formatBlock" data-value="&lt;p&gt;">{% trans "Normal" %}</button>
+                <button type="button" data-cmd="link">{% trans "Lien" %}</button>
+                <button type="button" data-cmd="unlink">{% trans "Retirer le lien" %}</button>
+              </div>
+              {{ field }}
+              <div class="wysiwyg-editor"
+                   contenteditable="true"
+                   role="textbox"
+                   aria-multiline="true"
+                   aria-label="{{ field.label }}"
+                   hidden></div>
+            </div>
+            <div class="markdown-fallback">
+              <p class="help">
+                {% trans "Markdown ou HTML acceptés : **gras**, _italique_, [lien](https://…), listes avec « - »." %}
+              </p>
+              <p class="preview-label">{% trans "Aperçu" %}</p>
+              <div id="description-preview" class="markdown-preview">{{ form.instance.description_fr|default:""|markdown }}</div>
+            </div>
+          {% elif field.name == "logo" or field.name == "photo_promo" %}
+            {% if field.value %}<img class="form-photo-current" src="{{ field.value.url }}" alt="">{% endif %}
+            {{ field }}
+            {% if field.help_text %}<p class="help">{{ field.help_text }}</p>{% endif %}
+          {% else %}
+            {{ field }}
+            {% if field.help_text %}<p class="help">{{ field.help_text }}</p>{% endif %}
+          {% endif %}
+          {{ field.errors }}
         </div>
-        {{ field }}
-        <div class="wysiwyg-editor" contenteditable="true" role="textbox" aria-multiline="true" aria-label="{{ field.label }}" hidden></div>
-      </div>
-      <div class="markdown-fallback">
-        <p class="help">{% trans "Markdown ou HTML acceptés : **gras**, _italique_, [lien](https://…), listes avec « - »." %}</p>
-        <p class="preview-label">{% trans "Aperçu" %}</p>
-        <div id="description-preview" class="markdown-preview">{{ form.instance.description_fr|default:""|markdown }}</div>
-      </div>
-      {% elif field.name == "logo" or field.name == "photo_promo" %}
-      {% if field.value %}
-      <img class="form-photo-current" src="{{ field.value.url }}" alt="">
-      {% endif %}
-      {{ field }}
-      {% if field.help_text %}<p class="help">{{ field.help_text }}</p>{% endif %}
-      {% else %}
-      {{ field }}
-      {% if field.help_text %}<p class="help">{{ field.help_text }}</p>{% endif %}
-      {% endif %}
-      {{ field.errors }}
+      {% endfor %}
     </div>
-    {% endfor %}
-  </div>
   {% endfor %}
 </div>

@@ -1,63 +1,77 @@
 {% load i18n %}
 {% if shortcuts %}
-  <form class="ordre-choix" method="post" action="{% url 'core:ordre_raccourcis' %}"
-        hx-post="{% url 'core:ordre_raccourcis' %}" hx-target="#shortcuts-list" hx-swap="innerHTML">
+  <form class="ordre-choix"
+        method="post"
+        action="{% url 'core:ordre_raccourcis' %}"
+        hx-post="{% url 'core:ordre_raccourcis' %}"
+        hx-target="#shortcuts-list"
+        hx-swap="innerHTML">
     {% csrf_token %}
     <p class="muted">
       {% if shortcut_order == "manuel" %}
         {% trans "Ordre personnalisé : réordonnez avec les flèches ↑ ↓ ou en glissant une carte." %}
-        <button class="btn btn-line" type="submit" name="mode" value="alpha">{% trans "Revenir à l'ordre alphabétique" %}</button>
+        <button class="btn btn-line" type="submit" name="mode" value="alpha">
+          {% trans "Revenir à l'ordre alphabétique" %}
+        </button>
       {% else %}
         {% trans "Ordre alphabétique." %}
         <button class="btn btn-line" type="submit" name="mode" value="manuel">{% trans "Choisir mon propre ordre" %}</button>
       {% endif %}
     </p>
   </form>
-  <ul class="svc svc-actions"{% if shortcut_order == "manuel" %} data-reorder data-reorder-url="{% url 'core:reorder_shortcuts' %}"{% endif %}>
+  <ul class="svc svc-actions"
+      {% if shortcut_order == "manuel" %} data-reorder data-reorder-url="{% url 'core:reorder_shortcuts' %}"{% endif %}>
     {% for shortcut in shortcuts %}
       {% with service=shortcut.service %}
-        <li data-slug="{{ service.slug }}"{% if shortcut_order == "manuel" %} draggable="true"{% endif %}>
+        <li data-slug="{{ service.slug }}"
+            {% if shortcut_order == "manuel" %}draggable="true"{% endif %}>
           {% if service.icon %}
             <img class="svc-icon" src="{{ service.icon.url }}" alt="">
           {% else %}
             <span class="led" aria-hidden="true"></span>
           {% endif %}
-          <div{% if not shortcut.approved %} class="pending"{% endif %}>
+          <div {% if not shortcut.approved %}class="pending"{% endif %}>
             <h3>
               {% if service.url and shortcut.approved %}
                 <a href="{{ service.url }}" target="_blank" rel="noopener">{{ service.name }} <span aria-hidden="true">↗</span></a>
               {% else %}
                 {{ service.name }}
               {% endif %}
-              {% if not shortcut.approved %}<span class="chip">{% trans "En attente de validation" %}</span>{% elif not service.url %}<span class="chip">{% trans "Bientôt" %}</span>{% endif %}
+              {% if not shortcut.approved %}
+                <span class="chip">{% trans "En attente de validation" %}</span>
+              {% elif not service.url %}
+                <span class="chip">{% trans "Bientôt" %}</span>
+              {% endif %}
             </h3>
             <p>{{ service.summary }}</p>
-            {% if not shortcut.approved %}<p class="muted">{% trans "Un administrateur doit d'abord l'activer pour vous ; il apparaîtra ensuite." %}</p>{% endif %}
+            {% if not shortcut.approved %}
+              <p class="muted">{% trans "Un administrateur doit d'abord l'activer pour vous ; il apparaîtra ensuite." %}</p>
+            {% endif %}
           </div>
           <div class="shortcut-tools">
             {% if shortcut_order == "manuel" %}
-            <form method="post"
-                  action="{% url 'core:reorder_shortcut' service.slug 'up' %}"
-                  hx-post="{% url 'core:reorder_shortcut' service.slug 'up' %}"
-                  hx-target="#shortcuts-list"
-                  hx-swap="innerHTML">
-              {% csrf_token %}
-              <button class="move-btn"
-                      type="submit"
-                      aria-label="{% blocktrans with name=service.name %}Monter {{ name }}{% endblocktrans %}"
-                      {% if forloop.first %}disabled{% endif %}>↑</button>
-            </form>
-            <form method="post"
-                  action="{% url 'core:reorder_shortcut' service.slug 'down' %}"
-                  hx-post="{% url 'core:reorder_shortcut' service.slug 'down' %}"
-                  hx-target="#shortcuts-list"
-                  hx-swap="innerHTML">
-              {% csrf_token %}
-              <button class="move-btn"
-                      type="submit"
-                      aria-label="{% blocktrans with name=service.name %}Descendre {{ name }}{% endblocktrans %}"
-                      {% if forloop.last %}disabled{% endif %}>↓</button>
-            </form>
+              <form method="post"
+                    action="{% url 'core:reorder_shortcut' service.slug 'up' %}"
+                    hx-post="{% url 'core:reorder_shortcut' service.slug 'up' %}"
+                    hx-target="#shortcuts-list"
+                    hx-swap="innerHTML">
+                {% csrf_token %}
+                <button class="move-btn"
+                        type="submit"
+                        aria-label="{% blocktrans with name=service.name %}Monter {{ name }}{% endblocktrans %}"
+                        {% if forloop.first %}disabled{% endif %}>↑</button>
+              </form>
+              <form method="post"
+                    action="{% url 'core:reorder_shortcut' service.slug 'down' %}"
+                    hx-post="{% url 'core:reorder_shortcut' service.slug 'down' %}"
+                    hx-target="#shortcuts-list"
+                    hx-swap="innerHTML">
+                {% csrf_token %}
+                <button class="move-btn"
+                        type="submit"
+                        aria-label="{% blocktrans with name=service.name %}Descendre {{ name }}{% endblocktrans %}"
+                        {% if forloop.last %}disabled{% endif %}>↓</button>
+              </form>
             {% endif %}
             {% include "core/partials/shortcut_button.html" with added=True %}
           </div>

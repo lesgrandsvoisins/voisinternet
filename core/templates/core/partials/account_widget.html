@@ -10,8 +10,7 @@
           x-on:click="open = !open"
           x-bind:aria-expanded="open.toString()"
           aria-controls="account-menu"
-          aria-label="{% blocktrans %}Mon compte : {{ account_sub }}{% endblocktrans %}"
-          >
+          aria-label="{% blocktrans %}Mon compte : {{ account_sub }}{% endblocktrans %}">
     {% include "core/icons/account-svg.html" %}
     {% comment %} <b>{% trans "mon Compte" %}</b> {% endcomment %}
     {% comment %} <small>{{ account_sub }}</small> {% endcomment %}

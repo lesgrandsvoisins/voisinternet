@@ -1,25 +1,31 @@
-{% load i18n markdown_filters %}<ul class="svc">
+{% load i18n markdown_filters %}
+<ul class="svc">
   {% for audience in audiences %}
-  <li>
-    <span class="led" aria-hidden="true"></span>
-    <div>
-      <h3>{{ audience.name }}</h3>
-      <p>{{ audience.pitch }}</p>
-      {% if details and audience.who %}
-      <p class="muted">{{ audience.who }}</p>
+    <li>
+      <span class="led" aria-hidden="true"></span>
+      <div>
+        <h3>{{ audience.name }}</h3>
+        <p>{{ audience.pitch }}</p>
+        {% if details and audience.who %}<p class="muted">{{ audience.who }}</p>{% endif %}
+        {% if details and audience.note %}<div class="markdown">{{ audience.note|markdown }}</div>{% endif %}
+      </div>
+      {% if audience.partnership %}
+        {% trans "Partenariat lesgrandsvoisins.com" as partnership_subject %}
+        <a class="btn btn-line"
+           href="mailto:{{ CONTACT_EMAIL }}?subject={{ partnership_subject|urlencode }}">{% trans "Proposer un partenariat" %}</a>
+      {% else %}
+        {% if audience.pk in membership_ids %}
+          {% include "core/partials/membership_button.html" with added=True %}
+        {% else %}
+          {% include "core/partials/membership_button.html" with added=False %}
+        {% endif %}
       {% endif %}
-      {% if details and audience.note %}
-      <div class="markdown">{{ audience.note|markdown }}</div>
-      {% endif %}
-    </div>
-    {% if audience.partnership %}
-    {% trans "Partenariat lesgrandsvoisins.com" as partnership_subject %}
-    <a class="btn btn-line" href="mailto:{{ CONTACT_EMAIL }}?subject={{ partnership_subject|urlencode }}">{% trans "Proposer un partenariat" %}</a>
-    {% else %}
-    {% if audience.pk in membership_ids %}{% include "core/partials/membership_button.html" with added=True %}{% else %}{% include "core/partials/membership_button.html" with added=False %}{% endif %}
-    {% endif %}
-  </li>
+    </li>
   {% empty %}
-  <li class="empty"><div><h3>{% trans "Aucun groupe pour l'instant" %}</h3></div></li>
+    <li class="empty">
+      <div>
+        <h3>{% trans "Aucun groupe pour l'instant" %}</h3>
+      </div>
+    </li>
   {% endfor %}
 </ul>

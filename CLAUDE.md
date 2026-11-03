@@ -15,7 +15,8 @@ follow that convention when adding to existing files.
 ## Commands
 
 Everything goes through the `Makefile` (loads `.env` automatically). See `make help`
-for the full list.
+for the full list. `.justfile` exposes the same recipes under `just`, delegating to
+`make` (single source of truth: the Makefile).
 
 ```sh
 make setup           # venv + install + migrate + fixtures, first-time setup

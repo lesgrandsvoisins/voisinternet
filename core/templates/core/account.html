@@ -42,7 +42,7 @@
       </section>
     {% endif %}
     {% if user.is_authenticated or account %} {# USER ACCOUNT DASHBOARD #}
-      <!-- DASHBOARD SUMMARY -->
+      <!-- DASHBOARD STATS -->
       <section class="dashboard-summary" aria-label="{% trans "Aperçu de mon compte" %}">
         <a class="stat-tile" href="{% url 'core:raccourcis' %}">
           <span class="stat-number">{{ shortcuts|length }}</span>
@@ -67,42 +67,59 @@
           </a>
         {% endif %}
       </section>
-      <!-- ACCOUNT MENU -->
-      <section aria-labelledby="sc-title" id="account-menu">
+      <!-- ACCOUNT USER DASHBOARD PANELS -->
+      <section aria-labelledby="sc-title" id="account-menu-sec">
+        <!-- ACCOUNT DASHBOARD HEADING -->
         <div class="split">
           <h2 id="sc-title">{% trans "Mon compte" %}</h2>
           <p class="muted">
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated %} {# USER NAME #}
               {% trans "Connecté" %}
               {% if user.first_name %}: {{ user.first_name }}{% endif %}
-            {% else %}
+            {% else %} {# USER ANON #}
               {% trans "Compte anonyme" %}
             {% endif %}
           </p>
         </div>
+        <!-- ACCOUNT DASHBOARD MENU OF MAIN ACTIONS -->
         <div class="actions">
-          {% if is_administration %}
+          <!-- ADMIN BUTTON -->
+          {% if is_administration %} {# ADMIN BUTTON #}
             <a class="btn btn-line" href="{% url 'core:administration' %}">{% trans "Administration" %}</a>
           {% endif %}
-          {% if is_moderateur %}
+          <!-- MODERATOR BUTTON -->
+          {% if is_moderateur %} {# MODERATOR BUTTON #}
             <a class="btn btn-line" href="{% url 'core:moderation' %}">{% trans "Modération" %}</a>
           {% endif %}
-          {% if user.is_authenticated %}
+          <!-- USER BUTTONS -->
+          {% if user.is_authenticated %} {# USER BUTTONS #}
+            <a class="btn btn-line" href="{% url 'core:home' %}#outils-titre">{% trans "Services" %}</a>
+            <!-- PROFILE BUTTON -->
+            {% if keycloak_account_url %}
+              <p class="btn btn-line">
+                <a href="{{ keycloak_account_url }}" target="_new">{% trans "Modifier mon profil" %}</a>
+              </p>
+            {% endif %}
+            <!-- MY REQUESTS BUTTON -->
             <a class="btn btn-line" href="{% url 'core:mes_demandes' %}">{% trans "Mes demandes" %}</a>
-            {% if REDIRECTIONS_ENABLED %}
+            <!-- EMAIL REDIRECTIONS BUTTON -->
+            {% if REDIRECTIONS_ENABLED %} {# EMAIL REDIRECTIONS BUTTON #}
               <a class="btn btn-line" href="{% url 'core:redirection_courrier' %}">{% trans "Redirection de mes courriels" %}</a>
             {% endif %}
-            {% if OIDC_ENABLED %}
+            <!-- OIDC USER BUTTON -->
+            {% if OIDC_ENABLED %} {# OIDC USER BUTTON #}
               <form method="post" action="{% url 'oidc_logout' %}">
                 {% csrf_token %}
                 <button class="btn btn-line" type="submit">{% trans "Se déconnecter" %}</button>
               </form>
             {% endif %}
-          {% else %}
+          <!-- OIDC ANON ATTACH TO USER BUTTON -->
+          {% else %} {# OIDC ANON ATTACH TO USER BUTTON #}
             {% if OIDC_ENABLED %}
               <a class="btn btn-sun"
                  href="{% url 'core:connexion' %}?next={% url 'core:account' %}">{% trans "Rattacher à mon compte Grands Voisins" %}</a>
             {% endif %}
+            <!-- ANON LOGOUT BUTTON -->
             <form method="post" action="{% url 'core:forget_anonymous' %}">
               {% csrf_token %}
               <button class="btn btn-line" type="submit">{% trans "Fermer ce compte sur cet appareil" %}</button>
@@ -271,9 +288,8 @@
         <section class="card" aria-labelledby="login-title">
           <h2 id="login-title">{% trans "J'ai déjà un compte" %}</h2>
           <p>{% trans "Connectez-vous avec le compte que vous utilisez déjà pour les autres outils des Grands Voisins." %}</p>
-          {% if OIDC_ENABLED %}
-            <a class="btn btn-sun"
-               href="{% url 'core:connexion' %}?next={% url 'core:account' %}">{% trans "Se connecter" %}</a>
+          {% if OIDC_ENABLED %} {# LOGIN BUTTON #}
+            <a class="btn btn-sun" href="{% url 'core:connexion' %}?next={% url 'core:account' %}">{% trans "Se connecter" %}</a>
           {% endif %}
         </section>
         <!-- CREATE -->

@@ -6,10 +6,12 @@
   CONTEXT: user, account, pending, first_steps, first_steps_done, shortcuts, memberships, owned_entries, managed_events, account_contributions, contribution_form, login_identifier, mail_addresses, is_administration, is_moderateur, keycloak_account_url, OIDC_ENABLED, REDIRECTIONS_ENABLED, FOURNISSEURS, anon_visible, anon_allowed
   NOTE: Top-level branches: pending → user.is_authenticated or account → else. Do not reorder.
 #}
-{% block robots %}<meta name="robots" content="noindex, nofollow">{% endblock %}
+{% block robots %}
+  <meta name="robots" content="noindex, nofollow">
+{% endblock robots%}
 {% block title %}
   {% trans "mon Compte — lesgrandsvoisins.com" %}
-{% endblock %}
+{% endblock title %}
 {% block content %}
   <!-- BODY HEADER -->
   <div class="page-head">
@@ -92,7 +94,7 @@
         {% endif %}
       </section>
       <!-- ACCOUNT MENU -->
-      <section aria-labelledby="sc-title">
+      <section aria-labelledby="sc-title" id="account-menu">
         <div class="split">
           <h2 id="sc-title">{% trans "Mon compte" %}</h2>
           <p class="muted">
@@ -104,20 +106,6 @@
             {% endif %}
           </p>
         </div>
-        {% if user.is_authenticated and login_identifier or mail_addresses %}
-          <ul class="docs">
-            {% if login_identifier %}
-              <li>
-                <strong>{% trans "Identifiant de connexion" %}</strong><span>{{ login_identifier }}</span>
-              </li>
-            {% endif %}
-            {% if mail_addresses %}
-              <li>
-                <strong>{% trans "Adresses de courriel (une seule boîte)" %}</strong><span>{{ mail_addresses|join:", " }}</span>
-              </li>
-            {% endif %}
-          </ul>
-        {% endif %}
         <div class="actions">
           {% if is_administration %}
             <a class="btn btn-line" href="{% url 'core:administration' %}">{% trans "Administration" %}</a>
@@ -352,4 +340,4 @@
       </div>
     {% endif %}
   </div>
-{% endblock %}
+{% endblock content %}

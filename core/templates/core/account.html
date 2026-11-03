@@ -304,7 +304,7 @@
               <p class="actions">
                 {% for f in FOURNISSEURS %}
                   <a class="btn btn-line"
-                     href="{% url 'core:connexion' %}?idp={{ f|urlencode }}&amp;next={% url 'core:account' %}">
+                     href="{% url 'core:connexion' %}?idp={{ f|urlencode }}&next={% url 'core:account' %}">
                     {% if f == "google" %} {# OIDC GOOGLE #}
                       Google (Gmail)
                     {% elif f == "microsoft" %} {# OIDC MICROSOFT #}

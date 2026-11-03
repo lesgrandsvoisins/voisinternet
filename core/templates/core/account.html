@@ -1,5 +1,11 @@
 {% extends "core/base.html" %}
 {% load i18n %}
+{#
+  PAGE: Mon compte
+  VIEW: core.views.account
+  CONTEXT: user, account, pending, first_steps, first_steps_done, shortcuts, memberships, owned_entries, managed_events, account_contributions, contribution_form, login_identifier, mail_addresses, is_administration, is_moderateur, keycloak_account_url, OIDC_ENABLED, REDIRECTIONS_ENABLED, FOURNISSEURS, anon_visible, anon_allowed
+  NOTE: Top-level branches: pending → user.is_authenticated or account → else. Do not reorder.
+#}
 {% block robots %}<meta name="robots" content="noindex, nofollow">{% endblock %}
 {% block title %}
   {% trans "mon Compte — lesgrandsvoisins.com" %}
@@ -22,8 +28,8 @@
   </div>
   <!-- BODY CONTENT -->
   <div class="wrap page">
-    <!-- NO NOMINAL ACCOUNT -->
     {% if pending %}
+      <!-- NO NOMINAL ACCOUNT -->
       <section class="card" aria-labelledby="link-title">
         <h2 id="link-title">{% trans "Un compte anonyme est ouvert sur cet appareil" %}</h2>
         <p>{% trans "Voulez-vous rattacher ses services à votre compte ? Le compte anonyme sera ensuite supprimé." %}</p>
@@ -33,10 +39,9 @@
         </form>
       </section>
     {% endif %}
-    <!-- LOGGED IN -->
     {% if user.is_authenticated or account %}
-      <!-- FIRST STEPS EDUCATIONAL -->
       {% if first_steps and first_steps_done < first_steps|length %}
+        <!-- FIRST STEPS -->
         <section class="card first-steps" aria-labelledby="steps-title">
           <h2 id="steps-title">{% trans "Premiers pas" %}</h2>
           <p class="muted">
@@ -60,7 +65,7 @@
           </p>
         </section>
       {% endif %}
-      <!-- BOXES TABLE OF CONTENTS -->
+      <!-- DASHBOARD SUMMARY -->
       <section class="dashboard-summary" aria-label="{% trans "Aperçu de mon compte" %}">
         <a class="stat-tile" href="{% url 'core:raccourcis' %}">
           <span class="stat-number">{{ shortcuts|length }}</span>
@@ -85,7 +90,7 @@
           </a>
         {% endif %}
       </section>
-      <!-- DASHBOARD BUTTONS / MENU -->
+      <!-- ACCOUNT MENU -->
       <section aria-labelledby="sc-title">
         <div class="split">
           <h2 id="sc-title">{% trans "Mon compte" %}</h2>
@@ -142,8 +147,8 @@
           {% endif %}
         </div>
       </section>
-      <!-- PROFILE -->
       {% if user.is_authenticated %}
+        <!-- PROFILE -->
         <div class="account-accordion-wrap" id="profile">
           <a class="accordion-manage" href="{{ keycloak_account_url }}">{% trans "Géré par votre compte unique Grands Voisins" %}</a>
           <details class="account-accordion" id="profile2-title">
@@ -272,7 +277,7 @@
         </details>
       </div>
     {% else %}
-      <!-- LOGIN CREATE ACCOUNT -->
+      <!-- LOGIN / CREATE / ANON CHOICES -->
       <div class="choices">
         <!-- LOGIN -->
         <section class="card" aria-labelledby="login-title">

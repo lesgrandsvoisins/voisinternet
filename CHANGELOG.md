@@ -77,6 +77,7 @@ Changements notables de `www.lesgrandsvoisins.com` (voisinternet), branche de tr
 - Liste « Premiers pas » en puces ; lien vers les parcours guidés.
 - **Fusion `.justfile` → `Makefile`** : les recettes de production (`statut`, `decomptes`, `fumee`, `sauvegarde`, `essai`, `maj`, `manage`, `redemarrer`, `journal`, `up`) sont maintenant des cibles du `Makefile` (variables `PROJECT`, `PROD`, `BRANCHE` ; paramètres `URL`, `DOSSIER`, `REF`, `ARGS`, `N`). `.justfile` supprimé : « just » n'est plus nécessaire.
 - **Restauration de `.justfile`** (facade) : `just` expose à nouveau les recettes, cette fois TOUTES celles du `Makefile` (développement + production), en déléguant à `make` ; la source unique reste le `Makefile`. `.justfile` et `CLAUDE.md` mis à jour.
+- **`.justfile` autonome** : les recettes y sont re-implémentées directement (bash + `manage.py` + scripts de `deploy/`), sans appeler `make` ; les paramètres passent en positionnel (just n'accepte pas `nom=valeur`). Les deux fichiers restent à synchroniser à la main.
 
 ## 2026-10-27
 ### Added

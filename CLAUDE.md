@@ -15,8 +15,9 @@ follow that convention when adding to existing files.
 ## Commands
 
 Everything goes through the `Makefile` (loads `.env` automatically). See `make help`
-for the full list. `.justfile` exposes the same recipes under `just`, delegating to
-`make` (single source of truth: the Makefile).
+for the full list. `.justfile` re-implements the same recipes directly (bash +
+`manage.py` + `deploy/` scripts), without calling `make`; note that `just` takes
+parameters positionally (not `nom=valeur`). Keep the two files' recipes in sync.
 
 ```sh
 make setup           # venv + install + migrate + fixtures, first-time setup

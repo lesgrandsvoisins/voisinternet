@@ -30,8 +30,8 @@
   </div>
   <!-- BODY CONTENT -->
   <div class="wrap page">
-    {% if pending %}
-      <!-- NO NOMINAL ACCOUNT -->
+    <!-- NO NOMINAL ACCOUNT -->
+    {% if pending %} {# ANON ACCOUNT DASHBOARD #}
       <section class="card" aria-labelledby="link-title">
         <h2 id="link-title">{% trans "Un compte anonyme est ouvert sur cet appareil" %}</h2>
         <p>{% trans "Voulez-vous rattacher ses services à votre compte ? Le compte anonyme sera ensuite supprimé." %}</p>
@@ -41,35 +41,9 @@
         </form>
       </section>
     {% endif %}
-    {% if user.is_authenticated or account %}
-      {% if first_steps and first_steps_done < first_steps|length %}
-        <!-- FIRST STEPS -->
-        <section class="card first-steps" aria-labelledby="steps-title">
-          <h2 id="steps-title">{% trans "Premiers pas" %}</h2>
-          <p class="muted">
-            {% blocktrans with done=first_steps_done total=first_steps|length %}{{ done }} sur {{ total }} faits{% endblocktrans %}
-          </p>
-          <ul class="steps">
-            {% for step in first_steps %}
-              <li {% if step.done %}class="done"{% endif %}>
-                {% if step.done %}
-                  <span aria-hidden="true">✓</span>
-                  <span class="sr-only">{% trans "Fait :" %}</span>
-                  {{ step.label }}
-                {% else %}
-                  <a href="{{ step.url }}">{{ step.label }}</a>
-                {% endif %}
-              </li>
-            {% endfor %}
-          </ul>
-          <p>
-            <a href="{% url 'core:parcours' %}">{% trans "Voir tous les parcours guidés" %}</a>
-          </p>
-        </section>
-      {% endif %}
+    {% if user.is_authenticated or account %} {# USER ACCOUNT DASHBOARD #}
       <!-- DASHBOARD SUMMARY -->
-      <section class="dashboard-summary"
-               aria-label="{% trans "Aperçu de mon compte" %}">
+      <section class="dashboard-summary" aria-label="{% trans "Aperçu de mon compte" %}">
         <a class="stat-tile" href="{% url 'core:raccourcis' %}">
           <span class="stat-number">{{ shortcuts|length }}</span>
           <span class="stat-label">{% trans "Services" %}</span>
@@ -136,8 +110,33 @@
           {% endif %}
         </div>
       </section>
+      <!-- FIRST STEPS -->
+      {% if first_steps and first_steps_done < first_steps|length %}
+        <section class="card first-steps" aria-labelledby="steps-title" id="first-steps-sec">
+          <h2 id="steps-title">{% trans "Premiers pas" %}</h2>
+          <p class="muted">
+            {% blocktrans with done=first_steps_done total=first_steps|length %}{{ done }} sur {{ total }} faits{% endblocktrans %}
+          </p>
+          <ul class="steps">
+            {% for step in first_steps %}
+              <li {% if step.done %}class="done"{% endif %}>
+                {% if step.done %}
+                  <span aria-hidden="true">✓</span>
+                  <span class="sr-only">{% trans "Fait :" %}</span>
+                  {{ step.label }}
+                {% else %}
+                  <a href="{{ step.url }}">{{ step.label }}</a>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+          <p>
+            <a href="{% url 'core:parcours' %}">{% trans "Voir tous les parcours guidés" %}</a>
+          </p>
+        </section>
+      {% endif %}
+      <!-- PROFILE -->
       {% if user.is_authenticated %}
-        <!-- PROFILE -->
         <div class="account-accordion-wrap" id="profile">
           <a class="accordion-manage" href="{{ keycloak_account_url }}">{% trans "Géré par votre compte unique Grands Voisins" %}</a>
           <details class="account-accordion" id="profile2-title">
@@ -265,7 +264,7 @@
           <div id="memberships-list">{% include "core/partials/membership_list.html" %}</div>
         </details>
       </div>
-    {% else %}
+    {% else %} {# LOGIN / CREATE / ANON CHOICES #}
       <!-- LOGIN / CREATE / ANON CHOICES -->
       <div class="choices">
         <!-- LOGIN -->
@@ -283,31 +282,31 @@
           <p>
             {% trans "Un compte unique des Grands Voisins, le même pour tous les outils de l'association. Il retrouve vos services, groupes, fiches et évènements sur tous vos appareils, et vous pouvez récupérer votre mot de passe par courriel." %}
           </p>
-          {% if OIDC_ENABLED %}
+          {% if OIDC_ENABLED %} {# OIDC ACCOUNT MANAGEMENT #}
             <a class="btn btn-line"
                href="{% url 'core:inscription' %}?next={% url 'core:account' %}">{% trans "Créer mon compte" %}</a>
-            {% if FOURNISSEURS %}
+            {% if FOURNISSEURS %} {# OIDC OUTSIDE PROVIDER #}
               <p class="muted">{% trans "Ou continuer avec un compte que vous avez déjà :" %}</p>
               <p class="actions">
                 {% for f in FOURNISSEURS %}
                   <a class="btn btn-line"
                      href="{% url 'core:connexion' %}?idp={{ f|urlencode }}&amp;next={% url 'core:account' %}">
-                    {% if f == "google" %}
+                    {% if f == "google" %} {# OIDC GOOGLE #}
                       Google (Gmail)
-                    {% elif f == "microsoft" %}
+                    {% elif f == "microsoft" %} {# OIDC MICROSOFT #}
                       Microsoft (Outlook, Hotmail)
-                    {% else %}
+                    {% else %} {# OIDC OTHER #}
                       {{ f|capfirst }}
                     {% endif %}
                   </a>
                 {% endfor %}
               </p>
             {% endif %}
-          {% else %}
+          {% else %} {# NO OIDC PROVIDER #}
             <p class="muted">{% trans "La connexion par compte Grands Voisins n'est pas encore configurée sur ce serveur." %}</p>
           {% endif %}
         </section>
-        {% if anon_visible or not OIDC_ENABLED %}
+        {% if anon_visible or not OIDC_ENABLED %} {# ANON OR NO OIDC #}
           <!-- STAY ANON -->
           <section class="card" aria-labelledby="anon-title">
             <h2 id="anon-title">{% trans "Rester anonyme" %}</h2>
@@ -322,7 +321,7 @@
             {% endif %}
             {% include "core/partials/anon_recover_form.html" %}
           </section>
-        {% else %}
+        {% else %} {# ANON  #}
           <details class="anon-discret">
             <summary>{% trans "Autres options" %}</summary>
             <p class="muted">

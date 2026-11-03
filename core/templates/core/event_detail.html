@@ -1,126 +1,180 @@
 {% extends "core/base.html" %}
 {% load i18n markdown_filters %}
-{% block title %}{{ event.title }} — {% trans "Agenda" %} — {{ SITE_NAME }}{% endblock %}
+{% block title %}
+  {{ event.title }} — {% trans "Agenda" %} — {{ SITE_NAME }}
+{% endblock %}
 {% block content %}
-<div class="page-head">
-  <div class="wrap">
-    <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
-      <ol>
-        <li><a href="{% url 'core:home' %}">{% trans "Accueil" %}</a></li>
-        <li><a href="{% url 'core:agenda' %}">{% trans "Agenda" %}</a></li>
-        <li aria-current="page">{{ event.title }}</li>
-      </ol>
-    </nav>
-    <h1>{{ event.title }}</h1>
-    <p class="lead">
-      <time datetime="{{ event.start|date:'c' }}">{{ event.start|date:"l j F Y, H:i" }}</time>{% if event.end %} – {{ event.end|date:"H:i" }}{% endif %}
-    </p>
-  </div>
-</div>
-<div class="wrap page">
-  <article class="blog-post">
-    {% if event.photo %}<img class="hero" src="{{ event.photo.url }}" alt="">{% endif %}
-    {% if event.location or event.online_url %}
-    <p class="pair">
-      {% if event.location %}<span>{{ event.location }}</span>{% endif %}
-      {% if event.online_url %}<a href="{{ event.online_url }}" target="_new">{% trans "Participer en ligne" %}</a>{% endif %}
-      {% if event.source_url %}<a href="{{ event.source_url }}" target="_new">{% trans "Page source" %}</a>{% endif %}
-    </p>
-    {% endif %}
-    {% if event.description %}<div class="markdown">{{ event.description|markdown }}</div>{% endif %}
-    {% if event.tags.all %}
-    <p class="chips-inline">{% for t in event.tags.all %}<a class="chip chip-tag" href="{% url 'core:tag_detail' t.slug %}">#{{ t.name }}</a>{% endfor %}</p>
-    {% endif %}
-    <div class="actions">
-      <a class="icon-btn" href="{{ event.google_calendar_url }}" target="_new" aria-label="{% trans "Ajouter à Google Agenda" %}" title="{% trans "Ajouter à Google Agenda" %}">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-          <!-- Icon downloaded from https://icon-sets.iconify.design/mdi/calendar-plus/ -->
-          <path fill="currentColor" d="M19 19V8H5v11zM16 1h2v2h1a2 2 0 0 1 2 2v14c0 1.11-.89 2-2 2H5a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8zm-5 8.5h2v3h3v2h-3v3h-2v-3H8v-2h3z" />
-        </svg>
-      </a>
-      <a class="icon-btn" href="{% url 'core:event_ics' event.pk %}" aria-label="{% trans "Ajouter à mon calendrier (.ics)" %}" title="{% trans "Ajouter à mon calendrier (.ics)" %}">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-          <!-- Icon downloaded from https://icon-sets.iconify.design/mdi/calendar-export/ -->
-          <path fill="currentColor" d="m12 22l4-4h-3v-6h-2v6H8zm7-19h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h3l-2-2H5V8h14v11h-1l-2 2h3c1.11 0 2-.89 2-2V5a2 2 0 0 0-2-2" />
-        </svg>
-      </a>
-      <form method="post" action="{% url 'core:toggle_event_interest' event.pk %}">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.get_full_path }}">
-        <input type="hidden" name="level" value="interested">
-        <button class="sub-btn{% if my_interest and my_interest.level == "interested" %} subscribed{% endif %}" type="submit">
-          {% if my_interest and my_interest.level == "interested" %}{% trans "Intéressé·e ✓" %}{% else %}{% trans "Ça m'intéresse" %}{% endif %}
-        </button>
-      </form>
-      <form method="post" action="{% url 'core:toggle_event_interest' event.pk %}">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.get_full_path }}">
-        <input type="hidden" name="level" value="going">
-        <button class="sub-btn{% if my_interest and my_interest.level == "going" %} subscribed{% endif %}" type="submit">
-          {% if my_interest and my_interest.level == "going" %}{% trans "J'y vais ✓" %}{% else %}{% trans "J'y vais" %}{% endif %}
-        </button>
-      </form>
-      {% if my_interest %}
-      <form method="post" action="{% url 'core:toggle_event_interest_notify' event.pk %}">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.get_full_path }}">
-        <button class="sub-btn" type="submit">
-          {% if my_interest.notify_email %}{% trans "Notifications par courriel ✓" %}{% else %}{% trans "Recevoir un courriel" %}{% endif %}
-        </button>
-      </form>
-      {% endif %}
-      {% if not is_manager %}
-        {% if request.user.is_authenticated or OIDC_ENABLED %}
-          {% comment %} 
- Pas besoin d'être déjà connecté·e pour lancer la demande : elle attend la
-             connexion Keycloak et se termine toute seule au retour (core:event_detail). {% endcomment %} 
-
-          {% if my_management_request is None %}
-          <form method="post" action="{% url 'core:claim_event_management' event.pk %}">
-            {% csrf_token %}
-            <button class="sub-btn" type="submit">{% trans "Demander à gérer cet évènement" %}</button>
-          </form>
-          {% elif my_management_request.approved is None %}
-          <span class="chip">{% trans "Demande de gestion en attente de validation" %}</span>
-          {% elif not my_management_request.approved %}
-          <span class="chip">{% trans "Demande de gestion refusée" %}</span>
-          {% endif %}
-        {% endif %}
-      {% endif %}
+  <div class="page-head">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
+        <ol>
+          <li>
+            <a href="{% url 'core:home' %}">{% trans "Accueil" %}</a>
+          </li>
+          <li>
+            <a href="{% url 'core:agenda' %}">{% trans "Agenda" %}</a>
+          </li>
+          <li aria-current="page">{{ event.title }}</li>
+        </ol>
+      </nav>
+      <h1>{{ event.title }}</h1>
+      <p class="lead">
+        <time datetime="{{ event.start|date:'c' }}">{{ event.start|date:"l j F Y, H:i" }}</time>
+        {% if event.end %}– {{ event.end|date:"H:i" }}{% endif %}
+      </p>
     </div>
-  </article>
-  {% if previous_event or next_event %}
-  <nav class="event-nav" aria-label="{% trans "Navigation entre évènements" %}">
-    {% if previous_event %}
-    <a class="event-nav-link event-nav-prev" href="{% url 'core:event_detail' previous_event.pk %}">
-      <span class="event-nav-label">{% trans "← Évènement précédent" %}</span>
-      <span class="event-nav-title">{{ previous_event.title }}</span>
-    </a>
-    {% else %}<span></span>{% endif %}
-    {% if next_event %}
-    <a class="event-nav-link event-nav-next" href="{% url 'core:event_detail' next_event.pk %}">
-      <span class="event-nav-label">{% trans "Évènement suivant →" %}</span>
-      <span class="event-nav-title">{{ next_event.title }}</span>
-    </a>
-    {% else %}<span></span>{% endif %}
-  </nav>
-  {% endif %}
-  <p class="muted"><a href="{% url 'core:agenda' %}">{% trans "← Retour à l’agenda" %}</a></p>
-  {% if is_manager %}
-    <aside class="card{% if not event.public %} card-sun{% endif %}" role="status">
-      {% if event.public %}
-        <p>{% trans "Publié : visible de tout le monde dans l'agenda." %}</p>
-      {% else %}
-        <p>
-          <strong>{% trans "En attente de publication." %}</strong>
-          {% trans "Vous seul·e (et les autres responsables) voyez cette page. Le groupe « Administration » a été prévenu par courriel et la publiera après relecture." %}
+  </div>
+  <div class="wrap page">
+    <article class="blog-post">
+      {% if event.photo %}<img class="hero" src="{{ event.photo.url }}" alt="">{% endif %}
+      {% if event.location or event.online_url %}
+        <p class="pair">
+          {% if event.location %}<span>{{ event.location }}</span>{% endif %}
+          {% if event.online_url %}
+            <a href="{{ event.online_url }}" target="_new">{% trans "Participer en ligne" %}</a>
+          {% endif %}
+          {% if event.source_url %}
+            <a href="{{ event.source_url }}" target="_new">{% trans "Page source" %}</a>
+          {% endif %}
         </p>
       {% endif %}
-      <p class="actions">
-        <a class="btn btn-line" href="{% url 'core:evenement_modifier' event.pk %}">{% trans "Modifier" %}</a>
-        <a class="btn btn-line" href="{% url 'core:mes_evenements' %}">{% trans "Mes évènements" %}</a>
-      </p>
-    </aside>
-  {% endif %}
-</div>
+      {% if event.description %}<div class="markdown">{{ event.description|markdown }}</div>{% endif %}
+      {% if event.tags.all %}
+        <p class="chips-inline">
+          {% for t in event.tags.all %}
+            <a class="chip chip-tag" href="{% url 'core:tag_detail' t.slug %}">#{{ t.name }}</a>
+          {% endfor %}
+        </p>
+      {% endif %}
+      <div class="actions">
+        <a class="icon-btn"
+           href="{{ event.google_calendar_url }}"
+           target="_new"
+           aria-label="{% trans "Ajouter à Google Agenda" %}"
+           title="{% trans "Ajouter à Google Agenda" %}">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 24 24"
+               aria-hidden="true">
+            <!-- Icon downloaded from https://icon-sets.iconify.design/mdi/calendar-plus/ -->
+            <path fill="currentColor" d="M19 19V8H5v11zM16 1h2v2h1a2 2 0 0 1 2 2v14c0 1.11-.89 2-2 2H5a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8zm-5 8.5h2v3h3v2h-3v3h-2v-3H8v-2h3z" />
+          </svg>
+        </a>
+        <a class="icon-btn"
+           href="{% url 'core:event_ics' event.pk %}"
+           aria-label="{% trans "Ajouter à mon calendrier (.ics)" %}"
+           title="{% trans "Ajouter à mon calendrier (.ics)" %}">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 24 24"
+               aria-hidden="true">
+            <!-- Icon downloaded from https://icon-sets.iconify.design/mdi/calendar-export/ -->
+            <path fill="currentColor" d="m12 22l4-4h-3v-6h-2v6H8zm7-19h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h3l-2-2H5V8h14v11h-1l-2 2h3c1.11 0 2-.89 2-2V5a2 2 0 0 0-2-2" />
+          </svg>
+        </a>
+        <form method="post"
+              action="{% url 'core:toggle_event_interest' event.pk %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+          <input type="hidden" name="level" value="interested">
+          <button class="sub-btn{% if my_interest and my_interest.level == "interested" %} subscribed{% endif %}"
+                  type="submit">
+            {% if my_interest and my_interest.level == "interested" %}
+              {% trans "Intéressé·e ✓" %}
+            {% else %}
+              {% trans "Ça m'intéresse" %}
+            {% endif %}
+          </button>
+        </form>
+        <form method="post"
+              action="{% url 'core:toggle_event_interest' event.pk %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+          <input type="hidden" name="level" value="going">
+          <button class="sub-btn{% if my_interest and my_interest.level == "going" %} subscribed{% endif %}"
+                  type="submit">
+            {% if my_interest and my_interest.level == "going" %}
+              {% trans "J'y vais ✓" %}
+            {% else %}
+              {% trans "J'y vais" %}
+            {% endif %}
+          </button>
+        </form>
+        {% if my_interest %}
+          <form method="post"
+                action="{% url 'core:toggle_event_interest_notify' event.pk %}">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+            <button class="sub-btn" type="submit">
+              {% if my_interest.notify_email %}
+                {% trans "Notifications par courriel ✓" %}
+              {% else %}
+                {% trans "Recevoir un courriel" %}
+              {% endif %}
+            </button>
+          </form>
+        {% endif %}
+        {% if not is_manager %}
+          {% if request.user.is_authenticated or OIDC_ENABLED %}
+            {% comment %}
+ Pas besoin d'être déjà connecté·e pour lancer la demande : elle attend la
+            connexion Keycloak et se termine toute seule au retour (core:event_detail). {% endcomment %}
+            {% if my_management_request is None %}
+              <form method="post"
+                    action="{% url 'core:claim_event_management' event.pk %}">
+                {% csrf_token %}
+                <button class="sub-btn" type="submit">{% trans "Demander à gérer cet évènement" %}</button>
+              </form>
+            {% elif my_management_request.approved is None %}
+              <span class="chip">{% trans "Demande de gestion en attente de validation" %}</span>
+            {% elif not my_management_request.approved %}
+              <span class="chip">{% trans "Demande de gestion refusée" %}</span>
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      </div>
+    </article>
+    {% if previous_event or next_event %}
+      <nav class="event-nav"
+           aria-label="{% trans "Navigation entre évènements" %}">
+        {% if previous_event %}
+          <a class="event-nav-link event-nav-prev"
+             href="{% url 'core:event_detail' previous_event.pk %}">
+            <span class="event-nav-label">{% trans "← Évènement précédent" %}</span>
+            <span class="event-nav-title">{{ previous_event.title }}</span>
+          </a>
+        {% else %}
+          <span></span>
+        {% endif %}
+        {% if next_event %}
+          <a class="event-nav-link event-nav-next"
+             href="{% url 'core:event_detail' next_event.pk %}">
+            <span class="event-nav-label">{% trans "Évènement suivant →" %}</span>
+            <span class="event-nav-title">{{ next_event.title }}</span>
+          </a>
+        {% else %}
+          <span></span>
+        {% endif %}
+      </nav>
+    {% endif %}
+    <p class="muted">
+      <a href="{% url 'core:agenda' %}">{% trans "← Retour à l’agenda" %}</a>
+    </p>
+    {% if is_manager %}
+      <aside class="card{% if not event.public %} card-sun{% endif %}"
+             role="status">
+        {% if event.public %}
+          <p>{% trans "Publié : visible de tout le monde dans l'agenda." %}</p>
+        {% else %}
+          <p>
+            <strong>{% trans "En attente de publication." %}</strong>
+            {% trans "Vous seul·e (et les autres responsables) voyez cette page. Le groupe « Administration » a été prévenu par courriel et la publiera après relecture." %}
+          </p>
+        {% endif %}
+        <p class="actions">
+          <a class="btn btn-line"
+             href="{% url 'core:evenement_modifier' event.pk %}">{% trans "Modifier" %}</a>
+          <a class="btn btn-line" href="{% url 'core:mes_evenements' %}">{% trans "Mes évènements" %}</a>
+        </p>
+      </aside>
+    {% endif %}
+  </div>
 {% endblock %}

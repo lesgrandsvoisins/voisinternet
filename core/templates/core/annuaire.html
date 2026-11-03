@@ -27,7 +27,9 @@
         <article class="directory-card">
           {% if entry.photos %}
             <a href="{% url 'core:entry_detail' entry.slug %}">
-              <img class="hero" src="{{ entry.photos.0.url }}" alt="{{ entry.name | escape }}">
+              <img class="hero"
+                   src="{{ entry.photos.0.url }}"
+                   alt="{{ entry.name | escape }}">
             </a>
           {% elif entry.logo %}
             <a class="hero-logo" href="{% url 'core:entry_detail' entry.slug %}">
@@ -50,7 +52,9 @@
           <div class="body">
             <div class="logo-row">
               {% if entry.logo %}
-                <img class="svc-icon" src="{{ entry.logo.url }}" alt="{{ entry.name | escape }}">
+                <img class="svc-icon"
+                     src="{{ entry.logo.url }}"
+                     alt="{{ entry.name | escape }}">
               {% else %}
                 <span class="led" aria-hidden="true"></span>
               {% endif %}

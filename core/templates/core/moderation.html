@@ -1,81 +1,115 @@
 {% extends "core/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Modération — lesgrandsvoisins.com" %}{% endblock %}
+{% block title %}
+  {% trans "Modération — lesgrandsvoisins.com" %}
+{% endblock %}
 {% block content %}
-<div class="page-head">
-  <div class="wrap">
-    <h1>{% trans "Modération" %}</h1>
-    <p class="lead">{% trans "Demandes d'adresses et de droits d'envoi à approuver ou refuser." %}</p>
+  <div class="page-head">
+    <div class="wrap">
+      <h1>{% trans "Modération" %}</h1>
+      <p class="lead">{% trans "Demandes d'adresses et de droits d'envoi à approuver ou refuser." %}</p>
+    </div>
   </div>
-</div>
-<div class="wrap page">
-  <section aria-labelledby="autoriser">
-    <h2 id="autoriser">{% trans "Autoriser directement" %}</h2>
-    <p class="muted">{% trans "Donnez à une personne le droit d'envoyer du courrier depuis notre serveur, ou une adresse de réception, sans attendre sa demande. L'administration l'applique dans les minutes qui suivent." %}</p>
-    <form method="post">{% csrf_token %}
-      <input type="hidden" name="autoriser" value="1">
-      <p>
-        <label for="aut-type">{% trans "Je donne…" %}</label><br>
-        <select id="aut-type" name="type">
-          <option value="envoi">{% trans "le droit d'envoyer depuis une adresse" %}</option>
-          <option value="adresse">{% trans "une nouvelle adresse de réception" %}</option>
-        </select>
+  <div class="wrap page">
+    <section aria-labelledby="autoriser">
+      <h2 id="autoriser">{% trans "Autoriser directement" %}</h2>
+      <p class="muted">
+        {% trans "Donnez à une personne le droit d'envoyer du courrier depuis notre serveur, ou une adresse de réception, sans attendre sa demande. L'administration l'applique dans les minutes qui suivent." %}
       </p>
-      <p>
-        <label for="aut-id">{% trans "Identifiant de la personne" %}</label><br>
-        <input id="aut-id" name="identifiant" required maxlength="150" autocomplete="off" placeholder="prenom.nom@gv.je">
-      </p>
-      <p>
-        <label for="aut-local">{% trans "Adresse (avant « @ »)" %}</label><br>
-        <input id="aut-local" name="local_part" maxlength="64" autocomplete="off" aria-describedby="aut-aide">
-        @
-        <select id="aut-domaine" name="domaine" aria-label="{% trans "Domaine" %}">
-          {% for d in domaines %}<option value="{{ d }}">{{ d }}</option>{% endfor %}
-        </select>
-      </p>
-      <p id="aut-aide" class="muted">{% trans "Pour l'envoi, laissez vide : ce sera l'adresse propre à la personne (son identifiant), ou indiquez une adresse de réception qui lui a déjà été accordée." %}</p>
-      <p>
-        <label for="aut-motif">{% trans "Motif (facultatif, gardé dans le journal)" %}</label><br>
-        <textarea id="aut-motif" name="motif" rows="2" maxlength="1000"></textarea>
-      </p>
-      <button class="btn btn-sun" type="submit">{% trans "Autoriser" %}</button>
-    </form>
-  </section>
-  <section aria-labelledby="attente">
-    <h2 id="attente">{% trans "En attente" %}</h2>
-    {% for d in en_attente %}
-    <article class="card">
-      <p><strong>{{ d.address }}</strong> — {{ d.get_kind_display }}<br>
-      <span class="muted">{% blocktrans with qui=d.demandeur quand=d.created|date:"j F Y H:i" %}Demandé par {{ qui }} le {{ quand }}{% endblocktrans %}</span></p>
-      {% if d.reason %}<p>{{ d.reason }}</p>{% endif %}
-      <form method="post">{% csrf_token %}
-        <input type="hidden" name="demande" value="{{ d.pk }}">
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="autoriser" value="1">
         <p>
-          <label for="commentaire-{{ d.pk }}">{% trans "Commentaire (facultatif, vu par la personne)" %}</label><br>
-          <textarea id="commentaire-{{ d.pk }}" name="commentaire" rows="2" maxlength="1000"></textarea>
+          <label for="aut-type">{% trans "Je donne…" %}</label>
+          <br>
+          <select id="aut-type" name="type">
+            <option value="envoi">{% trans "le droit d'envoyer depuis une adresse" %}</option>
+            <option value="adresse">{% trans "une nouvelle adresse de réception" %}</option>
+          </select>
         </p>
-        <button class="btn btn-sun" type="submit" name="decision" value="approuver">{% trans "Approuver" %}</button>
-        <button class="btn btn-line" type="submit" name="decision" value="refuser">{% trans "Refuser" %}</button>
+        <p>
+          <label for="aut-id">{% trans "Identifiant de la personne" %}</label>
+          <br>
+          <input id="aut-id"
+                 name="identifiant"
+                 required
+                 maxlength="150"
+                 autocomplete="off"
+                 placeholder="prenom.nom@gv.je">
+        </p>
+        <p>
+          <label for="aut-local">{% trans "Adresse (avant « @ »)" %}</label>
+          <br>
+          <input id="aut-local"
+                 name="local_part"
+                 maxlength="64"
+                 autocomplete="off"
+                 aria-describedby="aut-aide">
+          @
+          <select id="aut-domaine" name="domaine" aria-label="{% trans "Domaine" %}">
+            {% for d in domaines %}<option value="{{ d }}">{{ d }}</option>{% endfor %}
+          </select>
+        </p>
+        <p id="aut-aide" class="muted">
+          {% trans "Pour l'envoi, laissez vide : ce sera l'adresse propre à la personne (son identifiant), ou indiquez une adresse de réception qui lui a déjà été accordée." %}
+        </p>
+        <p>
+          <label for="aut-motif">{% trans "Motif (facultatif, gardé dans le journal)" %}</label>
+          <br>
+          <textarea id="aut-motif" name="motif" rows="2" maxlength="1000"></textarea>
+        </p>
+        <button class="btn btn-sun" type="submit">{% trans "Autoriser" %}</button>
       </form>
-    </article>
-    {% empty %}
-    <p>{% trans "Aucune demande en attente." %}</p>
-    {% endfor %}
-  </section>
-  <section aria-labelledby="recentes">
-    <h2 id="recentes">{% trans "Décisions récentes" %}</h2>
-    <ul class="list-plain">
-      {% for d in recentes %}
-      <li><strong>{{ d.address }}</strong> — {{ d.get_kind_display }} — <span class="chip">{{ d.get_state_display }}</span>
-        {% if d.result_message %}<span class="muted">({{ d.result_message }})</span>{% endif %}</li>
-      {% empty %}<li>{% trans "Rien pour l'instant." %}</li>{% endfor %}
-    </ul>
-  </section>
-  <section aria-labelledby="journal">
-    <h2 id="journal">{% trans "Journal" %}</h2>
-    <ul class="list-plain">
-      {% for j in journal %}<li>{{ j.at|date:"j F Y H:i" }} — {{ j.acteur }} — {{ j.action }} — {{ j.demande.address }}</li>{% endfor %}
-    </ul>
-  </section>
-</div>
+    </section>
+    <section aria-labelledby="attente">
+      <h2 id="attente">{% trans "En attente" %}</h2>
+      {% for d in en_attente %}
+        <article class="card">
+          <p>
+            <strong>{{ d.address }}</strong> — {{ d.get_kind_display }}
+            <br>
+            <span class="muted">{% blocktrans with qui=d.demandeur quand=d.created|date:"j F Y H:i" %}Demandé par {{ qui }} le {{ quand }}{% endblocktrans %}</span>
+          </p>
+          {% if d.reason %}<p>{{ d.reason }}</p>{% endif %}
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="demande" value="{{ d.pk }}">
+            <p>
+              <label for="commentaire-{{ d.pk }}">{% trans "Commentaire (facultatif, vu par la personne)" %}</label>
+              <br>
+              <textarea id="commentaire-{{ d.pk }}"
+                        name="commentaire"
+                        rows="2"
+                        maxlength="1000"></textarea>
+            </p>
+            <button class="btn btn-sun" type="submit" name="decision" value="approuver">{% trans "Approuver" %}</button>
+            <button class="btn btn-line" type="submit" name="decision" value="refuser">{% trans "Refuser" %}</button>
+          </form>
+        </article>
+      {% empty %}
+        <p>{% trans "Aucune demande en attente." %}</p>
+      {% endfor %}
+    </section>
+    <section aria-labelledby="recentes">
+      <h2 id="recentes">{% trans "Décisions récentes" %}</h2>
+      <ul class="list-plain">
+        {% for d in recentes %}
+          <li>
+            <strong>{{ d.address }}</strong> — {{ d.get_kind_display }} — <span class="chip">{{ d.get_state_display }}</span>
+            {% if d.result_message %}<span class="muted">({{ d.result_message }})</span>{% endif %}
+          </li>
+        {% empty %}
+          <li>{% trans "Rien pour l'instant." %}</li>
+        {% endfor %}
+      </ul>
+    </section>
+    <section aria-labelledby="journal">
+      <h2 id="journal">{% trans "Journal" %}</h2>
+      <ul class="list-plain">
+        {% for j in journal %}
+          <li>{{ j.at|date:"j F Y H:i" }} — {{ j.acteur }} — {{ j.action }} — {{ j.demande.address }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
 {% endblock %}

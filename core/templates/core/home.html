@@ -1,6 +1,8 @@
 {% extends "core/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "lesgrandsvoisins.com — L'Autre est une chance" %}{% endblock %}
+{% block title %}
+  {% trans "lesgrandsvoisins.com — L'Autre est une chance" %}
+{% endblock %}
 {% block content %}
   <section class="hero blob-bg">
     <div class="blob-canvas" aria-hidden="true">
@@ -41,15 +43,33 @@
         (déjà le plus pertinent grâce à ce tri) reste affiché, statique.{% endcomment %}
         <a class="quicklink accent-terracotta" href="{{ conj.annuaire.href }}">
           <strong>{% trans "Annuaire" %}</strong>
-          <span id="quicklink-annuaire" class="quicklink-cycle">{% if quicklink_entry_texts %}{{ quicklink_entry_texts.0 }}{% else %}{% trans "Bientôt de nouvelles fiches" %}{% endif %}</span>
+          <span id="quicklink-annuaire" class="quicklink-cycle">
+            {% if quicklink_entry_texts %}
+              {{ quicklink_entry_texts.0 }}
+            {% else %}
+              {% trans "Bientôt de nouvelles fiches" %}
+            {% endif %}
+          </span>
         </a>
         <a class="quicklink accent-indigo" href="{{ conj.grandzine.href }}">
           <strong>{% trans "Blog" %}</strong>
-          <span id="quicklink-blog" class="quicklink-cycle">{% if quicklink_post_texts %}{{ quicklink_post_texts.0 }}{% else %}{% trans "Bientôt un nouvel article" %}{% endif %}</span>
+          <span id="quicklink-blog" class="quicklink-cycle">
+            {% if quicklink_post_texts %}
+              {{ quicklink_post_texts.0 }}
+            {% else %}
+              {% trans "Bientôt un nouvel article" %}
+            {% endif %}
+          </span>
         </a>
         <a class="quicklink accent-gold" href="{% url 'core:agenda' %}">
           <strong>{% trans "Agenda" %}</strong>
-          <span id="quicklink-agenda" class="quicklink-cycle">{% if quicklink_event_texts %}{{ quicklink_event_texts.0 }}{% else %}{% trans "Rien de prévu pour l'instant" %}{% endif %}</span>
+          <span id="quicklink-agenda" class="quicklink-cycle">
+            {% if quicklink_event_texts %}
+              {{ quicklink_event_texts.0 }}
+            {% else %}
+              {% trans "Rien de prévu pour l'instant" %}
+            {% endif %}
+          </span>
         </a>
       </div>
       {{ quicklink_entry_texts|json_script:"quicklink-annuaire-data" }}
@@ -69,7 +89,7 @@
         {% if next_events %}
           <ul class="posts">
             {% for event in next_events %}
-              <li{% if event.featured %} class="feat"{% endif %}>
+              <li {% if event.featured %}class="feat"{% endif %}>
                 <a href="{% url 'core:event_detail' event.pk %}">
                   <h3>{{ event.title }}</h3>
                   <time datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>
@@ -115,7 +135,7 @@
         {% if posts %}
           <ul class="posts">
             {% for post in posts %}
-              <li{% if post.featured %} class="feat"{% endif %}>
+              <li {% if post.featured %}class="feat"{% endif %}>
                 <a href="{{ post.url }}">
                   <h3>{{ post.title }}</h3>
                   <time datetime="{{ post.date|date:'c' }}">{{ post.date|date:"j F Y" }}</time>
@@ -137,7 +157,9 @@
       </div>
       <div class="home-annuaire-panel">
         <h2>{% trans "Annuaire" %}</h2>
-        <p class="intro">{% trans "Qui fait partie de la communauté, et comment les joindre : personnes et structures, individuelles ou collectives, avec leur accord." %}</p>
+        <p class="intro">
+          {% trans "Qui fait partie de la communauté, et comment les joindre : personnes et structures, individuelles ou collectives, avec leur accord." %}
+        </p>
         {% if recent_entries %}
           <ul class="books">
             {% for entry in recent_entries %}
@@ -147,12 +169,12 @@
                 </a>
               </li>
             {% endfor %}
-             <li>
-                <a href="{{ conj.annuaire.href }}"><strong>...</strong></a>
-              </li>
-             <li>
-                <a href="{% url 'core:mes_fiches' %}"><strong>{% trans "Vous" %}</strong></a>
-              </li>
+            <li>
+              <a href="{{ conj.annuaire.href }}"><strong>...</strong></a>
+            </li>
+            <li>
+              <a href="{% url 'core:mes_fiches' %}"><strong>{% trans "Vous" %}</strong></a>
+            </li>
           </ul>
         {% else %}
           <p class="intro">{% trans "Les dernières fiches s'afficheront ici." %}</p>
@@ -222,7 +244,9 @@
         {% include "core/partials/sun_cloud.html" %}
         <div>
           <h2 id="how-title">{% trans "Le pôle Numérique, comment ça marche" %}</h2>
-          <p class="intro">{% trans "Pas besoin d'être informaticien, ni d'un service technique. Il suffit d'un peu de curiosité et d'un voisin." %}</p>
+          <p class="intro">
+            {% trans "Pas besoin d'être informaticien, ni d'un service technique. Il suffit d'un peu de curiosité et d'un voisin." %}
+          </p>
         </div>
       </div>
       <ol class="steps">
@@ -232,12 +256,16 @@
         </li>
         <li>
           <h3>{% trans "Installez chez vous, ou chez un voisin" %}</h3>
-          <p>{% trans "Un petit serveur consomme à peu près comme une box internet. Pas de place ? Un voisin de confiance, ou les locaux de votre association, peuvent l'héberger." %}</p>
+          <p>
+            {% trans "Un petit serveur consomme à peu près comme une box internet. Pas de place ? Un voisin de confiance, ou les locaux de votre association, peuvent l'héberger." %}
+          </p>
         </li>
         <li>
           {% include "core/partials/social_network.html" %}
           <h3>{% trans "Ne restez pas seul devant l'écran" %}</h3>
-          <p>{% trans "Des voisins bénévoles vous accompagnent, en atelier ou chez vous. Et un jour, peut-être, ce sera votre tour." %}</p>
+          <p>
+            {% trans "Des voisins bénévoles vous accompagnent, en atelier ou chez vous. Et un jour, peut-être, ce sera votre tour." %}
+          </p>
           <div class="pair">
             <a href="{% url 'core:agenda' %}">{% trans "Se faire accompagner" %}</a>
             <a href="/{{ LANGUAGE_CODE }}/contributions/">{% trans "Devenir bénévole" %}</a>
@@ -249,7 +277,7 @@
   <section class="block" aria-labelledby="svc-title">
     <div class="wrap">
       <h2 id="svc-title">
-                <span class="form">{% trans "mon compte" %}</span> : {% trans "les services" %}
+        <span class="form">{% trans "mon compte" %}</span> : {% trans "les services" %}
       </h2>
       <p class="intro">
         {% trans "Ajoutez ceux qui vous intéressent. Ils rejoignent vos services dans « mon Compte », même sans compte nominatif." %}
@@ -259,8 +287,8 @@
         <a href="{% url 'core:raccourcis' %}">{% trans "Tous les services, avec ce que chacun conserve" %}</a>
       </p>
     </div>
-    </section>
-  {% comment %} 
+  </section>
+  {% comment %}
   <section class="block quote" aria-labelledby="q-title">
     <div class="wrap">
       <figure>
@@ -282,12 +310,16 @@
     <div class="wrap two two-even">
       <div>
         <h2 id="story-title">{% trans "D'où l'on vient" %}</h2>
-        <p>{% trans "Les Grands Voisins sont nés entre 2015 et 2017 à l'hôpital Saint-Vincent-de-Paul, dans le 14ᵉ arrondissement de Paris. Depuis, nous nous demandons si un lieu physique est encore nécessaire pour rester voisins." %}</p>
+        <p>
+          {% trans "Les Grands Voisins sont nés entre 2015 et 2017 à l'hôpital Saint-Vincent-de-Paul, dans le 14ᵉ arrondissement de Paris. Depuis, nous nous demandons si un lieu physique est encore nécessaire pour rester voisins." %}
+        </p>
         <a class="more" href="{{ conj.grandsvoisins.href }}">{% trans "Notre histoire et notre manifeste" %}</a>
       </div>
       <div>
         <h2>{% trans "L'équipe" %}</h2>
-        <p>{% trans "Chris Mann (président), Sviatlana Viarbitskaya (trésorière) et Caroline Lhomme (vice-présidente) sont à votre service." %}</p>
+        <p>
+          {% trans "Chris Mann (président), Sviatlana Viarbitskaya (trésorière) et Caroline Lhomme (vice-présidente) sont à votre service." %}
+        </p>
         <a class="more" href="{{ conj.grandsvoisins.href }}#le-bureau">{% trans "Rencontrer le bureau" %}</a>
       </div>
     </div>

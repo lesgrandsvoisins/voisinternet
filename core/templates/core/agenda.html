@@ -7,7 +7,9 @@
   {% trans "Le rendez-vous collectif des Grands Voisins : décider ensemble, en présence ou à distance." as page_lead %}
   {% include "core/partials/page_head.html" with item=conj.agenda lead=page_lead %}
   <div class="wrap page">
-    <p class="muted"><a href="{% url 'core:mes_evenements' %}">{% trans "Gérer mes évènements" %}</a></p>
+    <p class="muted">
+      <a href="{% url 'core:mes_evenements' %}">{% trans "Gérer mes évènements" %}</a>
+    </p>
     <section aria-labelledby="upcoming-title">
       {% comment %}
      <div class="split">
@@ -48,7 +50,6 @@
           <h2 id="past-title">{% trans "Évènements passés" %}</h2>
         </div>
         {% include "core/partials/event_list.html" with events=past_events %}
-
         {% comment %} <ul class="docs">
           {% for event in past_events %}
             <li>
@@ -58,8 +59,8 @@
           </span>
         </li>
       {% endfor %}
-    </ul> {% endcomment %}
-  </section>
-{% endif %}
-</div>
+        </ul> {% endcomment %}
+      </section>
+    {% endif %}
+  </div>
 {% endblock %}

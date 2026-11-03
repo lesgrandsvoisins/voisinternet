@@ -1,27 +1,26 @@
 {% extends "core/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Services — lesgrandsvoisins.com" %}{% endblock %}
+{% block title %}
+  {% trans "Services — lesgrandsvoisins.com" %}
+{% endblock %}
 {% block content %}
-{% trans "Les services que vous avez choisis, à ajouter ou retirer à tout moment." as page_lead %}
-{% url 'core:account' as account_url %}
-{% trans "Mon compte" as account_title %}
-{% include "core/partials/page_head.html" with item=conj.raccourcis lead=page_lead parent_url=account_url parent_title=account_title %}
-<div class="wrap page">
-  <section aria-labelledby="sc-title">
-    <div class="split">
-      <h2 id="sc-title">{% trans "Mes services" %}</h2>
-    </div>
-    <div id="shortcuts-list">
-      {% include "core/partials/shortcut_list.html" %}
-    </div>
-  </section>
-
-  <section id="available-services" aria-labelledby="add-title">
-    <div class="split">
-      <h2 id="add-title">{% trans "Tous les services" %}</h2>
-      <p class="muted">{% trans "Ceux déjà ajoutés restent affichés : cliquez pour les retirer." %}</p>
-    </div>
-    {% include "core/partials/service_list.html" with services=available_services details=True %}
-  </section>
-</div>
+  {% trans "Les services que vous avez choisis, à ajouter ou retirer à tout moment." as page_lead %}
+  {% url 'core:account' as account_url %}
+  {% trans "Mon compte" as account_title %}
+  {% include "core/partials/page_head.html" with item=conj.raccourcis lead=page_lead parent_url=account_url parent_title=account_title %}
+  <div class="wrap page">
+    <section aria-labelledby="sc-title">
+      <div class="split">
+        <h2 id="sc-title">{% trans "Mes services" %}</h2>
+      </div>
+      <div id="shortcuts-list">{% include "core/partials/shortcut_list.html" %}</div>
+    </section>
+    <section id="available-services" aria-labelledby="add-title">
+      <div class="split">
+        <h2 id="add-title">{% trans "Tous les services" %}</h2>
+        <p class="muted">{% trans "Ceux déjà ajoutés restent affichés : cliquez pour les retirer." %}</p>
+      </div>
+      {% include "core/partials/service_list.html" with services=available_services details=True %}
+    </section>
+  </div>
 {% endblock %}

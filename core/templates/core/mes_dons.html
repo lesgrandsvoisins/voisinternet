@@ -1,9 +1,19 @@
 {% extends "core/base.html" %}
 {% load i18n %}
+{#
+  FILE: core/templates/core/mes_dons.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Mes dons
+  VIEW: core.views.mes_dons
+  CONTEXT: account, account_contributions, contribution_form, conj
+  NOTE: Duplicate of the donations block in account.html — could be extracted to partials/contribution_form.html if the layout grows.
+#}
 {% block title %}
   {% trans "Mes dons — lesgrandsvoisins.com" %}
-{% endblock %}
+{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -21,7 +31,9 @@
       <p class="lead">{% trans "L'historique de vos promesses et paiements, et un nouveau don." %}</p>
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
+    <!-- HISTORY -->
     <section aria-labelledby="dons-title">
       <div class="split">
         <h2 id="dons-title">{% trans "Historique" %}</h2>
@@ -49,6 +61,7 @@
         <p class="intro">{% trans "Aucune contribution enregistrée pour l'instant." %}</p>
       {% endif %}
     </section>
+    <!-- NEW DONATION FORM -->
     <section aria-labelledby="new-don-title">
       <div class="split">
         <h2 id="new-don-title">{% trans "Faire un don" %}</h2>
@@ -79,4 +92,4 @@
       </form>
     </section>
   </div>
-{% endblock %}
+{% endblock content %}

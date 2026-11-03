@@ -1,9 +1,19 @@
 {% extends "core/base.html" %}
 {% load i18n %}
+{#
+  FILE: core/templates/core/parcours.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Parcours guidés — liste
+  VIEW: core.views.parcours
+  CONTEXT: missions
+  NOTE: missions = list of {mission, finished, total, complete}. Computed in views._mission_progress per Mission.
+#}
 {% block title %}
   {% trans "Parcours guidés" %} — {{ SITE_NAME }}
-{% endblock %}
+{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -20,7 +30,9 @@
       </p>
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
+    <!-- MISSION LIST -->
     <ul class="missions">
       {% for item in missions %}
         <li class="card mission{% if item.complete %} mission-done{% endif %}">
@@ -57,4 +69,4 @@
       {% endfor %}
     </ul>
   </div>
-{% endblock %}
+{% endblock content %}

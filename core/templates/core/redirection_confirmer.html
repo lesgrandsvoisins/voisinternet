@@ -1,15 +1,26 @@
 {% extends "core/base.html" %}
 {% load i18n %}
-{% block robots %}<meta name="robots" content="noindex, nofollow">{% endblock %}
+{#
+  FILE: core/templates/core/redirection_confirmer.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Confirmer la redirection de courrier
+  VIEW: core.views.redirection_confirmer
+  CONTEXT: invalid, done, error, identifier
+  NOTE: Confirmation landing page for the email recipient (not the requesting member). A GET alone does nothing — POST is required (anti-antivirus-link-open). See views.redirection_confirmer.
+#}
+{% block robots %}<meta name="robots" content="noindex, nofollow">{% endblock robots %}
 {% block title %}
   {% trans "Confirmer la redirection de courrier — lesgrandsvoisins.com" %}
-{% endblock %}
+{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <h1>{% trans "Confirmer la redirection de courrier" %}</h1>
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
     {% if invalid %}
       <p>
@@ -33,4 +44,4 @@
       </p>
     {% endif %}
   </div>
-{% endblock %}
+{% endblock content %}

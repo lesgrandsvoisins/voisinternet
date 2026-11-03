@@ -1,6 +1,9 @@
 {% extends "core/base.html" %}
 {% load i18n %}
 {#
+  FILE: core/templates/core/account.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
   PAGE: Mon compte
   VIEW: core.views.account
   CONTEXT: user, account, pending, first_steps, first_steps_done, shortcuts, memberships, owned_entries, managed_events, account_contributions, contribution_form, login_identifier, mail_addresses, is_administration, is_moderateur, keycloak_account_url, OIDC_ENABLED, REDIRECTIONS_ENABLED, FOURNISSEURS, anon_visible, anon_allowed
@@ -8,7 +11,7 @@
 #}
 {% block robots %}
   <meta name="robots" content="noindex, nofollow">
-{% endblock robots%}
+{% endblock robots %}
 {% block title %}
   {% trans "mon Compte — lesgrandsvoisins.com" %}
 {% endblock title %}
@@ -31,7 +34,7 @@
   <!-- BODY CONTENT -->
   <div class="wrap page">
     <!-- NO NOMINAL ACCOUNT -->
-    {% if pending %} {# ANON ACCOUNT DASHBOARD #}
+    {% if pending %}
       <section class="card" aria-labelledby="link-title">
         <h2 id="link-title">{% trans "Un compte anonyme est ouvert sur cet appareil" %}</h2>
         <p>{% trans "Voulez-vous rattacher ses services à votre compte ? Le compte anonyme sera ensuite supprimé." %}</p>
@@ -41,58 +44,48 @@
         </form>
       </section>
     {% endif %}
-    {% if user.is_authenticated or account %} {# USER ACCOUNT DASHBOARD #}
-      <!-- ACCOUNT USER DASHBOARD PANELS -->
+    <!-- ACCOUNT DASHBOARD -->
+    {% if user.is_authenticated or account %}
+      <!-- ACCOUNT DASHBOARD MENU -->
       <section aria-labelledby="sc-title" id="account-menu-sec">
-        <!-- ACCOUNT DASHBOARD HEADING -->
         <div class="split">
           <h2 id="sc-title">{% trans "Mon compte" %}</h2>
           <p class="muted">
-            {% if user.is_authenticated %} {# USER NAME #}
+            {% if user.is_authenticated %}
               {% trans "Connecté" %}
               {% if user.first_name %}: {{ user.first_name }}{% endif %}
-            {% else %} {# USER ANON #}
+            {% else %}
               {% trans "Compte anonyme" %}
             {% endif %}
           </p>
         </div>
-        <!-- ACCOUNT DASHBOARD MENU OF MAIN ACTIONS -->
         <div class="actions">
-          <!-- ADMIN BUTTON -->
-          {% if is_administration %} {# ADMIN BUTTON #}
+          {% if is_administration %}
             <a class="btn btn-line" href="{% url 'core:administration' %}">{% trans "Administration" %}</a>
           {% endif %}
-          <!-- MODERATOR BUTTON -->
-          {% if is_moderateur %} {# MODERATOR BUTTON #}
+          {% if is_moderateur %}
             <a class="btn btn-line" href="{% url 'core:moderation' %}">{% trans "Modération" %}</a>
           {% endif %}
-          <!-- USER BUTTONS -->
-          {% if user.is_authenticated %} {# USER BUTTONS #}
+          {% if user.is_authenticated %}
             <a class="btn btn-line" href="{% url 'core:home' %}#outils-titre">{% trans "Services" %}</a>
-            <!-- PROFILE BUTTON -->
             {% if keycloak_account_url %}
               <a class="btn btn-line" href="{{ keycloak_account_url }}" target="_new">{% trans "Modifier mon profil" %}</a>
             {% endif %}
-            <!-- MY REQUESTS BUTTON -->
             <a class="btn btn-line" href="{% url 'core:mes_demandes' %}">{% trans "Mes demandes" %}</a>
-            <!-- EMAIL REDIRECTIONS BUTTON -->
-            {% if REDIRECTIONS_ENABLED %} {# EMAIL REDIRECTIONS BUTTON #}
+            {% if REDIRECTIONS_ENABLED %}
               <a class="btn btn-line" href="{% url 'core:redirection_courrier' %}">{% trans "Redirection de mes courriels" %}</a>
             {% endif %}
-            <!-- OIDC USER BUTTON -->
-            {% if OIDC_ENABLED %} {# OIDC USER BUTTON #}
+            {% if OIDC_ENABLED %}
               <form method="post" action="{% url 'oidc_logout' %}">
                 {% csrf_token %}
                 <button class="btn btn-line" type="submit">{% trans "Se déconnecter" %}</button>
               </form>
             {% endif %}
-          <!-- OIDC ANON ATTACH TO USER BUTTON -->
-          {% else %} {# OIDC ANON ATTACH TO USER BUTTON #}
+          {% else %}
             {% if OIDC_ENABLED %}
               <a class="btn btn-sun"
                  href="{% url 'core:connexion' %}?next={% url 'core:account' %}">{% trans "Rattacher à mon compte Grands Voisins" %}</a>
             {% endif %}
-            <!-- ANON LOGOUT BUTTON -->
             <form method="post" action="{% url 'core:forget_anonymous' %}">
               {% csrf_token %}
               <button class="btn btn-line" type="submit">{% trans "Fermer ce compte sur cet appareil" %}</button>
@@ -279,14 +272,14 @@
           </a>
         {% endif %}
       </section>
-    {% else %} {# LOGIN / CREATE / ANON CHOICES #}
-      <!-- LOGIN / CREATE / ANON CHOICES -->
+    <!-- LOGIN / CREATE / ANON CHOICES -->
+    {% else %}
       <div class="choices">
         <!-- LOGIN -->
         <section class="card" aria-labelledby="login-title">
           <h2 id="login-title">{% trans "J'ai déjà un compte" %}</h2>
           <p>{% trans "Connectez-vous avec le compte que vous utilisez déjà pour les autres outils des Grands Voisins." %}</p>
-          {% if OIDC_ENABLED %} {# LOGIN BUTTON #}
+          {% if OIDC_ENABLED %}
             <a class="btn btn-sun" href="{% url 'core:connexion' %}?next={% url 'core:account' %}">{% trans "Se connecter" %}</a>
           {% endif %}
         </section>
@@ -296,32 +289,32 @@
           <p>
             {% trans "Un compte unique des Grands Voisins, le même pour tous les outils de l'association. Il retrouve vos services, groupes, fiches et évènements sur tous vos appareils, et vous pouvez récupérer votre mot de passe par courriel." %}
           </p>
-          {% if OIDC_ENABLED %} {# OIDC ACCOUNT MANAGEMENT #}
+          {% if OIDC_ENABLED %}
             <a class="btn btn-line"
                href="{% url 'core:inscription' %}?next={% url 'core:account' %}">{% trans "Créer mon compte" %}</a>
-            {% if FOURNISSEURS %} {# OIDC OUTSIDE PROVIDER #}
+            {% if FOURNISSEURS %}
               <p class="muted">{% trans "Ou continuer avec un compte que vous avez déjà :" %}</p>
               <p class="actions">
                 {% for f in FOURNISSEURS %}
                   <a class="btn btn-line"
-                     href="{% url 'core:connexion' %}?idp={{ f|urlencode }}&next={% url 'core:account' %}">
-                    {% if f == "google" %} {# OIDC GOOGLE #}
+                     href="{% url 'core:connexion' %}?idp={{ f|urlencode }}&amp;next={% url 'core:account' %}">
+                    {% if f == "google" %}
                       Google (Gmail)
-                    {% elif f == "microsoft" %} {# OIDC MICROSOFT #}
+                    {% elif f == "microsoft" %}
                       Microsoft (Outlook, Hotmail)
-                    {% else %} {# OIDC OTHER #}
+                    {% else %}
                       {{ f|capfirst }}
                     {% endif %}
                   </a>
                 {% endfor %}
               </p>
             {% endif %}
-          {% else %} {# NO OIDC PROVIDER #}
+          {% else %}
             <p class="muted">{% trans "La connexion par compte Grands Voisins n'est pas encore configurée sur ce serveur." %}</p>
           {% endif %}
         </section>
-        {% if anon_visible or not OIDC_ENABLED %} {# ANON OR NO OIDC #}
-          <!-- STAY ANON -->
+        <!-- STAY ANON -->
+        {% if anon_visible or not OIDC_ENABLED %}
           <section class="card" aria-labelledby="anon-title">
             <h2 id="anon-title">{% trans "Rester anonyme" %}</h2>
             <p>
@@ -335,7 +328,7 @@
             {% endif %}
             {% include "core/partials/anon_recover_form.html" %}
           </section>
-        {% else %} {# ANON  #}
+        {% else %}
           <details class="anon-discret">
             <summary>{% trans "Autres options" %}</summary>
             <p class="muted">

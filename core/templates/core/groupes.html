@@ -1,20 +1,33 @@
 {% extends "core/base.html" %}
 {% load i18n %}
+{#
+  FILE: core/templates/core/groupes.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Mes groupes
+  VIEW: core.views.groupes
+  CONTEXT: account, memberships, membership_ids, available_audiences, conj
+  NOTE: Page head comes from include "core/partials/page_head.html" (hence {# BODY HEADER #} below, not an HTML landmark). Anchor #available-groups is linked to from home.html "Vous êtes…" tiles.
+#}
 {% block title %}
   {% trans "Mes groupes — lesgrandsvoisins.com" %}
-{% endblock %}
+{% endblock title %}
 {% block content %}
   {% trans "Les identités auxquelles vous adhérez, individuelles ou collectives." as page_lead %}
   {% url 'core:account' as account_url %}
   {% trans "Mon compte" as account_title %}
+  {# BODY HEADER #}
   {% include "core/partials/page_head.html" with item=conj.groupes lead=page_lead parent_url=account_url parent_title=account_title %}
+  <!-- BODY CONTENT -->
   <div class="wrap page">
+    <!-- MY MEMBERSHIPS -->
     <section aria-labelledby="mb-title">
       <div class="split">
         <h2 id="mb-title">{% trans "Mes groupes" %}</h2>
       </div>
       <div id="memberships-list">{% include "core/partials/membership_list.html" %}</div>
     </section>
+    <!-- AVAILABLE GROUPS -->
     <section id="available-groups" aria-labelledby="add-groups-title">
       <div class="split">
         <h2 id="add-groups-title">{% trans "Groupes disponibles" %}</h2>
@@ -23,4 +36,4 @@
       {% include "core/partials/group_list.html" with audiences=available_audiences details=True %}
     </section>
   </div>
-{% endblock %}
+{% endblock content %}

@@ -1,9 +1,19 @@
 {% extends "core/base.html" %}
 {% load i18n %}
+{#
+  FILE: core/templates/core/mes_demandes.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Mes demandes
+  VIEW: core.views.mes_demandes
+  CONTEXT: account, demandes, domaines, par_jour
+  NOTE: One pending request at a time, N per day — see views.mes_demandes throttle + Demande.constraint.
+#}
 {% block title %}
   {% trans "Mes demandes — lesgrandsvoisins.com" %}
-{% endblock %}
+{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -23,7 +33,9 @@
       </p>
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
+    <!-- NEW REQUEST -->
     <section aria-labelledby="nouvelle">
       <h2 id="nouvelle">{% trans "Nouvelle demande" %}</h2>
       <form method="post">
@@ -68,6 +80,7 @@
         {% blocktrans %}Une demande en attente à la fois, au plus {{ par_jour }} par jour.{% endblocktrans %}
       </p>
     </section>
+    <!-- MY REQUESTS -->
     <section aria-labelledby="liste">
       <h2 id="liste">{% trans "Mes demandes" %}</h2>
       {% if demandes %}
@@ -93,4 +106,4 @@
       {% endif %}
     </section>
   </div>
-{% endblock %}
+{% endblock content %}

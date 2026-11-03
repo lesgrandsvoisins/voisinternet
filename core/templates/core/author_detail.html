@@ -1,7 +1,17 @@
 {% extends "core/base.html" %}
 {% load i18n wagtailimages_tags %}
-{% block title %}{{ author.name }} — {{ SITE_NAME }}{% endblock %}
+{#
+  FILE: core/templates/core/author_detail.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Fiche auteur·ice
+  VIEW: core.views.author_detail
+  CONTEXT: author, posts, pages, form, CONTACT_FORMS_ENABLED
+  NOTE: Contact form is included only when the author has an email AND CONTACT_FORMS_ENABLED is on.
+#}
+{% block title %}{{ author.name }} — {{ SITE_NAME }}{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -28,6 +38,7 @@
       {% endif %}
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
     {% if author.bio %}
       <div class="markdown">
@@ -39,6 +50,7 @@
         <a href="{{ author.website }}" target="_new" rel="noopener">{{ author.website }}</a>
       </p>
     {% endif %}
+    <!-- AUTHOR PAGES -->
     {% if pages %}
       <section aria-labelledby="author-pages-title">
         <h2 id="author-pages-title">{% trans "Pages" %}</h2>
@@ -51,6 +63,7 @@
         </ul>
       </section>
     {% endif %}
+    <!-- AUTHOR POSTS -->
     {% if posts %}
       <section aria-labelledby="author-posts-title">
         <h2 id="author-posts-title">{% trans "Articles de blog" %}</h2>
@@ -66,6 +79,7 @@
     {% if not pages and not posts %}
       <p class="intro">{% trans "Aucun article publié pour l'instant." %}</p>
     {% endif %}
+    <!-- AUTHOR CONTACT -->
     {% if author.email and CONTACT_FORMS_ENABLED %}
       <section aria-labelledby="author-contact-title">
         <h2 id="author-contact-title">{% blocktrans with name=author.name %}Contacter {{ name }}{% endblocktrans %}</h2>
@@ -103,4 +117,4 @@
       </section>
     {% endif %}
   </div>
-{% endblock %}
+{% endblock content %}

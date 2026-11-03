@@ -1,9 +1,19 @@
 {% extends "core/base.html" %}
 {% load i18n %}
+{#
+  FILE: core/templates/core/home.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Accueil
+  VIEW: core.views.home
+  CONTEXT: services, shortcut_ids, books, posts, audiences, poles, recent_entries, agenda_calendar, next_event, next_events, quicklink_entry_texts, quicklink_post_texts, quicklink_event_texts, account, keycloak_login_url, keycloak_register_url, anon_visible, conj, conj_groups, GUIDE_URL, LANGUAGE_CODE
+  TODO: Quote block near the end is {%% comment %%}'d — re-enable or remove once the mission quote is finalized.
+#}
 {% block title %}
   {% trans "lesgrandsvoisins.com — L'Autre est une chance" %}
-{% endblock %}
+{% endblock title %}
 {% block content %}
+  <!-- HERO -->
   <section class="hero blob-bg">
     <div class="blob-canvas" aria-hidden="true">
       <span class="blob blob-a"></span>
@@ -38,9 +48,7 @@
         </div>
       </div>
       <div class="hero-quicklinks">
-        {% comment %}Chaque span défile parmi les 4 dernières (mises en avant d'abord),
-        voir views.home et site.js::armQuicklinkCycle — sans JS, seul le premier élément
-        (déjà le plus pertinent grâce à ce tri) reste affiché, statique.{% endcomment %}
+        {# Chaque span défile parmi les 4 dernières (mises en avant d'abord), voir views.home et site.js::armQuicklinkCycle — sans JS, seul le premier élément (déjà le plus pertinent grâce à ce tri) reste affiché, statique. #}
         <a class="quicklink accent-terracotta" href="{{ conj.annuaire.href }}">
           <strong>{% trans "Annuaire" %}</strong>
           <span id="quicklink-annuaire" class="quicklink-cycle">
@@ -79,6 +87,7 @@
     </div>
   </section>
   {% include "core/partials/announcement_card.html" %}
+  <!-- NEXT EVENTS -->
   <section class="block" aria-labelledby="next-title">
     <div class="wrap two two-even">
       <div>
@@ -106,6 +115,7 @@
       </div>
     </div>
   </section>
+  <!-- POLES -->
   {% if poles %}
     <section class="block" aria-labelledby="poles-title">
       <div class="wrap">
@@ -122,6 +132,7 @@
       </div>
     </section>
   {% endif %}
+  <!-- BLOG -->
   <section class="block" aria-label="{% trans 'Le blog' %}">
     <div class="wrap two two-even">
       <div>
@@ -149,6 +160,7 @@
       </div>
     </div>
   </section>
+  <!-- DIRECTORY PREVIEW -->
   <section class="block" aria-label="{% trans "L'annuaire" %}">
     <div class="wrap two two-even">
       <div>
@@ -183,6 +195,7 @@
       </div>
     </div>
   </section>
+  <!-- GUIDE -->
   <section class="block" aria-label="{% trans 'Le guide' %}">
     <div class="wrap">
       <h2>
@@ -204,6 +217,7 @@
       <a class="more" href="{{ GUIDE_URL }}">{% trans "Tout le guide" %}</a>
     </div>
   </section>
+  <!-- EXPLORE -->
   <section class="block" aria-labelledby="explore-title">
     <div class="wrap">
       <h2 id="explore-title">{% trans "Explorer le site" %}</h2>
@@ -224,6 +238,7 @@
       </div>
     </div>
   </section>
+  <!-- AUDIENCES -->
   {% if audiences %}
     <section class="block publics" aria-labelledby="pub-title">
       <div class="wrap">
@@ -238,6 +253,7 @@
       </div>
     </section>
   {% endif %}
+  <!-- HOW IT WORKS -->
   <section class="block" aria-labelledby="how-title">
     <div class="wrap">
       <div class="how-lead">
@@ -274,6 +290,7 @@
       </ol>
     </div>
   </section>
+  <!-- SERVICES PREVIEW -->
   <section class="block" aria-labelledby="svc-title">
     <div class="wrap">
       <h2 id="svc-title">
@@ -306,6 +323,7 @@
     </div>
   </section>
   {% endcomment %}
+  <!-- STORY -->
   <section class="block" aria-labelledby="story-title">
     <div class="wrap two two-even">
       <div>
@@ -324,4 +342,4 @@
       </div>
     </div>
   </section>
-{% endblock %}
+{% endblock content %}

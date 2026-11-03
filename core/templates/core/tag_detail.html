@@ -1,9 +1,19 @@
 {% extends "core/base.html" %}
 {% load i18n %}
+{#
+  FILE: core/templates/core/tag_detail.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Étiquette — détail
+  VIEW: core.views.tag_detail
+  CONTEXT: tag, entries, services, events, posts, poles, projects, total
+  NOTE: Six parallel result lists, each optional. total pre-summed in the view. Empty-state message fires only when all six are empty.
+#}
 {% block title %}
   #{{ tag.name }} — {% trans "Étiquettes" %} — {{ SITE_NAME }}
-{% endblock %}
+{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -20,10 +30,12 @@
       <h1>#{{ tag.name }}</h1>
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
     {% if not total %}
       <p class="intro">{% trans "Rien n'est encore étiqueté ainsi." %}</p>
     {% endif %}
+    <!-- TAGGED: POLES -->
     {% if poles %}
       <section class="search-section">
         <h2>{% trans "Pôles" %}</h2>
@@ -36,6 +48,7 @@
         </ul>
       </section>
     {% endif %}
+    <!-- TAGGED: PROJECTS -->
     {% if projects %}
       <section class="search-section">
         <h2>{% trans "Projets et évènements" %}</h2>
@@ -48,6 +61,7 @@
         </ul>
       </section>
     {% endif %}
+    <!-- TAGGED: BLOG POSTS -->
     {% if posts %}
       <section class="search-section">
         <h2>{% trans "Blog" %}</h2>
@@ -60,6 +74,7 @@
         </ul>
       </section>
     {% endif %}
+    <!-- TAGGED: EVENTS -->
     {% if events %}
       <section class="search-section">
         <h2>{% trans "Agenda" %}</h2>
@@ -73,6 +88,7 @@
         </ul>
       </section>
     {% endif %}
+    <!-- TAGGED: DIRECTORY ENTRIES -->
     {% if entries %}
       <section class="search-section">
         <h2>{% trans "Annuaire" %}</h2>
@@ -86,6 +102,7 @@
         </ul>
       </section>
     {% endif %}
+    <!-- TAGGED: SERVICES -->
     {% if services %}
       <section class="search-section">
         <h2>{% trans "Services" %}</h2>
@@ -100,4 +117,4 @@
       </section>
     {% endif %}
   </div>
-{% endblock %}
+{% endblock content %}

@@ -1,16 +1,28 @@
 {% extends "core/base.html" %}
 {% load i18n %}
+{#
+  FILE: core/templates/core/moderation.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Modération
+  VIEW: core.views.moderation
+  CONTEXT: en_attente, recentes, journal, domaines
+  NOTE: Guarded by demandes_module.est_moderateur. "Autoriser directement" bypasses the queue for trusted grants; the pending-list decision forms and the direct-grant form both POST to core:moderation.
+#}
 {% block title %}
   {% trans "Modération — lesgrandsvoisins.com" %}
-{% endblock %}
+{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <h1>{% trans "Modération" %}</h1>
       <p class="lead">{% trans "Demandes d'adresses et de droits d'envoi à approuver ou refuser." %}</p>
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
+    <!-- DIRECT GRANT -->
     <section aria-labelledby="autoriser">
       <h2 id="autoriser">{% trans "Autoriser directement" %}</h2>
       <p class="muted">
@@ -61,6 +73,7 @@
         <button class="btn btn-sun" type="submit">{% trans "Autoriser" %}</button>
       </form>
     </section>
+    <!-- PENDING -->
     <section aria-labelledby="attente">
       <h2 id="attente">{% trans "En attente" %}</h2>
       {% for d in en_attente %}
@@ -90,6 +103,7 @@
         <p>{% trans "Aucune demande en attente." %}</p>
       {% endfor %}
     </section>
+    <!-- RECENT DECISIONS -->
     <section aria-labelledby="recentes">
       <h2 id="recentes">{% trans "Décisions récentes" %}</h2>
       <ul class="list-plain">
@@ -103,6 +117,7 @@
         {% endfor %}
       </ul>
     </section>
+    <!-- JOURNAL -->
     <section aria-labelledby="journal">
       <h2 id="journal">{% trans "Journal" %}</h2>
       <ul class="list-plain">
@@ -112,4 +127,4 @@
       </ul>
     </section>
   </div>
-{% endblock %}
+{% endblock content %}

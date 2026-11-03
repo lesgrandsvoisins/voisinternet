@@ -1,9 +1,19 @@
 {% extends "core/base.html" %}
 {% load i18n markdown_filters %}
+{#
+  FILE: core/templates/core/parcours_detail.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Détail d'un parcours guidé
+  VIEW: core.views.parcours_detail
+  CONTEXT: mission, steps, finished, total, complete, has_account
+  NOTE: steps = list of {step, done, manual}. manual=False means detection is automatic (MissionStep.auto_check); the form is only rendered when manual=True. See views._mission_progress.
+#}
 {% block title %}
   {{ mission.title }} — {% trans "Parcours guidés" %} — {{ SITE_NAME }}
-{% endblock %}
+{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -29,6 +39,7 @@
       </p>
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
     {% if complete %}
       <section class="card card-sun" role="status">
@@ -45,6 +56,7 @@
         <a href="{% url 'core:account' %}">{% trans "ouvrez un compte" %}</a>.
       </p>
     {% endif %}
+    <!-- MISSION STEPS -->
     <ol class="mission-steps">
       {% for item in steps %}
         {% with step=item.step %}
@@ -91,4 +103,4 @@
       {% endfor %}
     </ol>
   </div>
-{% endblock %}
+{% endblock content %}

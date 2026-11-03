@@ -1,17 +1,29 @@
 {% extends "core/base.html" %}
 {% load i18n markdown_filters %}
+{#
+  FILE: core/templates/core/annuaire.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Annuaire
+  VIEW: core.views.annuaire
+  CONTEXT: entries, sectors, sector, subscribed_ids, conj
+  NOTE: Page head comes from include "core/partials/page_head.html" (hence {# BODY HEADER #} below, not an HTML landmark).
+#}
 {% block title %}
   {% trans "Annuaire" %}
   {% if sector %}— {{ sector.name }}{% endif %}
   — {{ SITE_NAME }}
-{% endblock %}
+{% endblock title %}
 {% block content %}
   {% trans "Qui fait partie de la communauté, et comment les joindre : personnes et structures, individuelles ou collectives, avec leur accord." as page_lead %}
+  {# BODY HEADER #}
   {% include "core/partials/page_head.html" with item=conj.annuaire lead=page_lead %}
+  <!-- BODY CONTENT -->
   <div class="wrap page">
     <p class="muted">
       <a href="{% url 'core:mes_fiches' %}">{% trans "Gérer mes fiches dans l'annuaire" %}</a>
     </p>
+    <!-- SECTOR FILTER -->
     {% if sectors %}
       <nav class="chips" aria-label="{% trans 'Secteurs d’activité' %}">
         <a href="{% url 'core:annuaire' %}"
@@ -22,6 +34,7 @@
         {% endfor %}
       </nav>
     {% endif %}
+    <!-- DIRECTORY GRID -->
     <div class="directory">
       {% for entry in entries %}
         <article class="directory-card">
@@ -103,4 +116,4 @@
       {% endfor %}
     </div>
   </div>
-{% endblock %}
+{% endblock content %}

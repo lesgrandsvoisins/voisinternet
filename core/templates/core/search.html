@@ -1,11 +1,21 @@
 {% extends "core/base.html" %}
 {% load i18n wagtailimages_tags %}
+{#
+  FILE: core/templates/core/search.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Recherche
+  VIEW: core.views.search
+  CONTEXT: query, pages, entries, events, services, wiki_results, total
+  NOTE: Five parallel result lists, each optional. The "no query" and "no results" branches bypass the whole section list.
+#}
 {% block title %}
   {% trans "Recherche" %}
   {% if query %}— {{ query }}{% endif %}
   — {{ SITE_NAME }}
-{% endblock %}
+{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -19,7 +29,9 @@
       <h1>{% trans "Recherche" %}</h1>
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
+    <!-- SEARCH FORM -->
     <form class="blog-search"
           method="get"
           action="{% url 'core:search' %}"
@@ -40,6 +52,7 @@
     {% elif not total %}
       <p class="muted">{% blocktrans %}Aucun résultat pour « {{ query }} ».{% endblocktrans %}</p>
     {% else %}
+      <!-- RESULTS: PAGES -->
       {% if pages %}
         <section class="search-section">
           <h2>{% trans "Pages" %}</h2>
@@ -61,6 +74,7 @@
           </ul>
         </section>
       {% endif %}
+      <!-- RESULTS: DIRECTORY -->
       {% if entries %}
         <section class="search-section">
           <h2>{% trans "Annuaire" %}</h2>
@@ -83,6 +97,7 @@
           </ul>
         </section>
       {% endif %}
+      <!-- RESULTS: AGENDA -->
       {% if events %}
         <section class="search-section">
           <h2>{% trans "Agenda" %}</h2>
@@ -104,6 +119,7 @@
           </ul>
         </section>
       {% endif %}
+      <!-- RESULTS: SERVICES -->
       {% if services %}
         <section class="search-section">
           <h2>{% trans "Services" %}</h2>
@@ -122,6 +138,7 @@
           </ul>
         </section>
       {% endif %}
+      <!-- RESULTS: WIKI -->
       {% if wiki_results %}
         <section class="search-section">
           <h2>{% trans "Wiki" %}</h2>
@@ -141,4 +158,4 @@
       {% endif %}
     {% endif %}
   </div>
-{% endblock %}
+{% endblock content %}

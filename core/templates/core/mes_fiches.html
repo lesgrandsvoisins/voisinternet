@@ -1,9 +1,19 @@
 {% extends "core/base.html" %}
 {% load i18n %}
+{#
+  FILE: core/templates/core/mes_fiches.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Mes fiches dans l'annuaire
+  VIEW: core.views.mes_fiches
+  CONTEXT: entries, subscriptions, form, conj
+  NOTE: On GET the view pre-fills name/email from Keycloak for named accounts (no-op for anonymous). Only POST creates an account.
+#}
 {% block title %}
   {% trans "Mes fiches dans l'annuaire — lesgrandsvoisins.com" %}
-{% endblock %}
+{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -23,19 +33,23 @@
       </p>
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
+    <!-- MY ENTRIES -->
     <section aria-labelledby="fiches-title">
       <div class="split">
         <h2 id="fiches-title">{% trans "Mes fiches" %}</h2>
       </div>
       {% include "core/partials/entry_list.html" %}
     </section>
+    <!-- MY SUBSCRIPTIONS -->
     <section aria-labelledby="subs-title">
       <div class="split">
         <h2 id="subs-title">{% trans "Fiches auxquelles je suis abonné·e" %}</h2>
       </div>
       {% include "core/partials/subscribed_entry_list.html" %}
     </section>
+    <!-- CREATE ENTRY FORM -->
     <section aria-labelledby="new-title">
       <div class="split">
         <h2 id="new-title">{% trans "Créer une fiche" %}</h2>
@@ -47,4 +61,4 @@
       </form>
     </section>
   </div>
-{% endblock %}
+{% endblock content %}

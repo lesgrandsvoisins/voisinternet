@@ -1,7 +1,18 @@
 {% extends "core/base.html" %}
 {% load i18n markdown_filters %}
-{% block title %}{{ entry.name }} — Annuaire — {{ SITE_NAME }}{% endblock %}
+{#
+  FILE: core/templates/core/directory_entry.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Fiche de l'annuaire
+  VIEW: core.views.entry_detail
+  CONTEXT: entry, my_subscription, my_claim, contact_form, account, OIDC_ENABLED, CONTACT_FORMS_ENABLED
+  NOTE: Two "why" comments inside {if} branches are kept deliberately (logo fallback chain, pre-login claim flow).
+  TODO: Inline comments preserved from earlier iteration — re-audit when the ownership-claim flow is refactored.
+#}
+{% block title %}{{ entry.name }} — Annuaire — {{ SITE_NAME }}{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -24,6 +35,7 @@
       {% if entry.tagline %}<p class="lead">{{ entry.tagline }}</p>{% endif %}
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
     <article class="directory-entry skin-{{ entry.layout }}">
       {% if entry.photos %}
@@ -34,9 +46,7 @@
           </div>
         {% endif %}
       {% elif entry.logo %}
-        {% comment %}
- Pas de photo promotionnelle ni de galerie : le logo (entry_form_fields.html),
-        déjà utilisé comme repli dans les listages (annuaire.html), sert ici de même. {% endcomment %}
+        {# Pas de photo promotionnelle ni de galerie : le logo (entry_form_fields.html), déjà utilisé comme repli dans les listages (annuaire.html), sert ici de même. #}
         <img class="hero" src="{{ entry.logo.url }}" alt="">
       {% endif %}
       <p class="chips-inline">
@@ -78,6 +88,7 @@
           <a class="btn btn-sun" href="{{ entry.cta_link }}">{{ entry.cta_label|default:_("En savoir plus") }}</a>
         </p>
       {% endif %}
+      <!-- ACTIONS -->
       <div class="actions">
         <form method="post"
               action="{% url 'core:toggle_subscription' entry.slug %}">
@@ -133,9 +144,7 @@
             <span class="chip">{% trans "Demande de responsabilité refusée" %}</span>
           {% endif %}
         {% elif not entry.owner_id and OIDC_ENABLED %}
-          {% comment %}
- Pas besoin d'être déjà connecté·e pour lancer la demande : elle attend la
-          connexion Keycloak et se termine toute seule au retour (core:entry_detail). {% endcomment %}
+          {# Pas besoin d'être déjà connecté·e pour lancer la demande : elle attend la connexion Keycloak et se termine toute seule au retour (core:entry_detail). #}
           <form method="post"
                 action="{% url 'core:claim_entry_ownership' entry.slug %}">
             {% csrf_token %}
@@ -143,6 +152,7 @@
           </form>
         {% endif %}
       </div>
+      <!-- ENTRY CONTACT -->
       {% if entry.email and CONTACT_FORMS_ENABLED %}
         <section aria-labelledby="entry-contact-title">
           <h2 id="entry-contact-title">{% blocktrans with name=entry.name %}Contacter {{ name }}{% endblocktrans %}</h2>
@@ -184,4 +194,4 @@
       </p>
     </article>
   </div>
-{% endblock %}
+{% endblock content %}

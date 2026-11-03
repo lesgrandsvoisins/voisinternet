@@ -1,9 +1,19 @@
 {% extends "core/base.html" %}
 {% load i18n %}
+{#
+  FILE: core/templates/core/redirection_courrier.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Redirection de mes courriels
+  VIEW: core.views.redirection_courrier
+  CONTEXT: active, active_masked, pending, pending_masked, managed, no_mailbox, daily_limit
+  NOTE: Two mutually exclusive states — "managed by admin" and "no mailbox identified" hide the whole form block. The rest is split into three sections: state, destination, help. Feature is gated by settings.REDIRECTIONS_ENABLED (404 if off).
+#}
 {% block title %}
   {% trans "Redirection de mes courriels — lesgrandsvoisins.com" %}
-{% endblock %}
+{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -21,6 +31,7 @@
       <p class="lead">{% trans "Faites suivre le courrier de votre boîte Grands Voisins vers une autre adresse." %}</p>
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
     {% if managed %}
       <aside class="card" role="status">
@@ -31,6 +42,7 @@
         <p>{% trans "Votre boîte courriel n'a pas pu être identifiée : déconnectez-vous puis reconnectez-vous." %}</p>
       </aside>
     {% else %}
+      <!-- STATE -->
       <section aria-labelledby="etat">
         <h2 id="etat">{% trans "État" %}</h2>
         {% if active %}
@@ -62,6 +74,7 @@
           </p>
         {% endif %}
       </section>
+      <!-- CHANGE DESTINATION -->
       <section aria-labelledby="changer">
         <h2 id="changer">
           {% if active %}
@@ -90,6 +103,7 @@
           {% trans "Un courriel part vers cette adresse : la redirection ne démarre que lorsque la personne qui la possède a confirmé. L'ancienne redirection reste en place d'ici là." %}
         </p>
       </section>
+      <!-- HELP -->
       <section aria-labelledby="bon-a-savoir">
         <h2 id="bon-a-savoir">{% trans "Bon à savoir" %}</h2>
         <ul>
@@ -103,4 +117,4 @@
       </section>
     {% endif %}
   </div>
-{% endblock %}
+{% endblock content %}

@@ -1,20 +1,33 @@
 {% extends "core/base.html" %}
 {% load i18n markdown_filters %}
+{#
+  FILE: core/templates/core/agenda.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Agenda — les Conseils des Voisins
+  VIEW: core.views.agenda
+  CONTEXT: upcoming_events, past_events, conj
+  NOTE: Page head comes from include "core/partials/page_head.html" (hence {# BODY HEADER #} below, not an HTML landmark).
+  TODO: Inline HTML is dead code from the pre-refactor event list. The {% comment %} block in "past events" is kept intentionally (per discussion); re-enable or delete when the partial's final shape is confirmed.
+#}
 {% block title %}
   {% trans "Agenda : les Conseils des Voisins — lesgrandsvoisins.com" %}
-{% endblock %}
+{% endblock title %}
 {% block content %}
   {% trans "Le rendez-vous collectif des Grands Voisins : décider ensemble, en présence ou à distance." as page_lead %}
+  {# BODY HEADER #}
   {% include "core/partials/page_head.html" with item=conj.agenda lead=page_lead %}
+  <!-- BODY CONTENT -->
   <div class="wrap page">
     <p class="muted">
       <a href="{% url 'core:mes_evenements' %}">{% trans "Gérer mes évènements" %}</a>
     </p>
+    <!-- UPCOMING EVENTS -->
     <section aria-labelledby="upcoming-title">
       {% comment %}
      <div class="split">
       <h2 id="upcoming-title">{% trans "Prochains évènements" %}</h2>
-    </div> 
+    </div>
       {% endcomment %}
       {% if upcoming_events %}
         {% include "core/partials/event_list.html" with events=upcoming_events %}
@@ -23,6 +36,7 @@
       {% endif %}
     </section>
   </div>
+  <!-- INFO CARDS -->
   <div class="wrap page cols">
     <section class="card">
       <h2>{% trans "Les Conseils des Voisins" %}</h2>
@@ -43,6 +57,7 @@
       </p>
     </section>
   </div>
+  <!-- PAST EVENTS -->
   <div class="wrap page">
     {% if past_events %}
       <section aria-labelledby="past-title">
@@ -63,4 +78,4 @@
       </section>
     {% endif %}
   </div>
-{% endblock %}
+{% endblock content %}

@@ -1,9 +1,19 @@
 {% extends "core/base.html" %}
 {% load i18n %}
+{#
+  FILE: core/templates/core/tag_list.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Étiquettes — liste
+  VIEW: core.views.tag_list
+  CONTEXT: tags
+  NOTE: Flat list — each tag links to its tag_detail. Filtering/paging deliberately not implemented (small set).
+#}
 {% block title %}
   {% trans "Étiquettes" %} — {{ SITE_NAME }}
-{% endblock %}
+{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -20,6 +30,7 @@
       </p>
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
     {% if tags %}
       <nav class="chips" aria-label="{% trans "Étiquettes" %}">
@@ -31,4 +42,4 @@
       <p class="intro">{% trans "Aucune étiquette pour l'instant." %}</p>
     {% endif %}
   </div>
-{% endblock %}
+{% endblock content %}

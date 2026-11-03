@@ -1,9 +1,22 @@
 {% extends "core/base.html" %}
 {% load i18n %}
+{#
+  FILE: core/templates/core/administration.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Administration
+  VIEW: core.views.administration
+  CONTEXT: pending_claims, pending_event_requests, pending_entries, pending_contributions, events
+  NOTE: Reserved for the "Administration" group. Five independent review sections, each a list + per-item approve/reject form.
+#}
+{% block robots %}
+  <meta name="robots" content="noindex, nofollow">
+{% endblock robots %}
 {% block title %}
   {% trans "Administration — lesgrandsvoisins.com" %}
-{% endblock %}
+{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -20,7 +33,9 @@
       </p>
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
+    <!-- PENDING CLAIMS -->
     <section aria-labelledby="claims-title">
       <div class="split">
         <h2 id="claims-title">{% trans "Demandes de responsabilité de fiche" %}</h2>
@@ -44,6 +59,7 @@
         <p class="intro">{% trans "Aucune demande en attente." %}</p>
       {% endif %}
     </section>
+    <!-- PENDING EVENT REQUESTS -->
     <section aria-labelledby="event-requests-title">
       <div class="split">
         <h2 id="event-requests-title">{% trans "Demandes de gestion d'évènement" %}</h2>
@@ -67,6 +83,7 @@
         <p class="intro">{% trans "Aucune demande en attente." %}</p>
       {% endif %}
     </section>
+    <!-- PENDING ENTRIES -->
     <section aria-labelledby="entries-title">
       <div class="split">
         <h2 id="entries-title">{% trans "Fiches de l'annuaire en attente de publication" %}</h2>
@@ -90,6 +107,7 @@
         <p class="intro">{% trans "Aucune fiche en attente." %}</p>
       {% endif %}
     </section>
+    <!-- PENDING CONTRIBUTIONS -->
     <section aria-labelledby="contributions-title">
       <div class="split">
         <h2 id="contributions-title">{% trans "Paiements de don en attente de validation" %}</h2>
@@ -115,6 +133,7 @@
         <p class="intro">{% trans "Aucun paiement en attente." %}</p>
       {% endif %}
     </section>
+    <!-- EVENTS -->
     <section aria-labelledby="events-title">
       <div class="split">
         <h2 id="events-title">{% trans "Évènements" %}</h2>
@@ -157,4 +176,4 @@
       {% endif %}
     </section>
   </div>
-{% endblock %}
+{% endblock content %}

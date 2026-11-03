@@ -1,9 +1,19 @@
 {% extends "core/base.html" %}
 {% load i18n %}
+{#
+  FILE: core/templates/core/mes_evenements.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Mes évènements
+  VIEW: core.views.mes_evenements
+  CONTEXT: account, events, interests, form, conj
+  NOTE: Only POST creates an account (visiting the page doesn't) — see views.mes_evenements. New events default to public=False until an admin publishes.
+#}
 {% block title %}
   {% trans "Mes évènements — lesgrandsvoisins.com" %}
-{% endblock %}
+{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -23,7 +33,9 @@
       </p>
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
+    <!-- CREATE EVENT FORM -->
     <section aria-labelledby="new-title">
       <div class="split">
         <h2 id="new-title">{% trans "Créer un évènement" %}</h2>
@@ -34,12 +46,14 @@
         <button class="btn btn-sun" type="submit">{% trans "Créer l'évènement" %}</button>
       </form>
     </section>
+    <!-- MY EVENTS -->
     <section aria-labelledby="events-title">
       <div class="split">
         <h2 id="events-title">{% trans "Mes évènements" %}</h2>
       </div>
       {% include "core/partials/my_event_list.html" %}
     </section>
+    <!-- MY INTERESTS -->
     <section aria-labelledby="interests-title">
       <div class="split">
         <h2 id="interests-title">{% trans "Évènements qui m'intéressent" %}</h2>
@@ -47,4 +61,4 @@
       {% include "core/partials/event_interest_list.html" %}
     </section>
   </div>
-{% endblock %}
+{% endblock content %}

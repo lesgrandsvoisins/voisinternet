@@ -1,20 +1,33 @@
 {% extends "core/base.html" %}
 {% load i18n %}
+{#
+  FILE: core/templates/core/raccourcis.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Mes services
+  VIEW: core.views.raccourcis
+  CONTEXT: account, shortcuts, shortcut_order, shortcut_ids, available_services, conj
+  NOTE: Page head comes from include "core/partials/page_head.html" (hence {# BODY HEADER #} below). Both lists are HTMX-refreshable (partials/shortcut_list.html, partials/service_list.html).
+#}
 {% block title %}
   {% trans "Services — lesgrandsvoisins.com" %}
-{% endblock %}
+{% endblock title %}
 {% block content %}
   {% trans "Les services que vous avez choisis, à ajouter ou retirer à tout moment." as page_lead %}
   {% url 'core:account' as account_url %}
   {% trans "Mon compte" as account_title %}
+  {# BODY HEADER #}
   {% include "core/partials/page_head.html" with item=conj.raccourcis lead=page_lead parent_url=account_url parent_title=account_title %}
+  <!-- BODY CONTENT -->
   <div class="wrap page">
+    <!-- MY SERVICES -->
     <section aria-labelledby="sc-title">
       <div class="split">
         <h2 id="sc-title">{% trans "Mes services" %}</h2>
       </div>
       <div id="shortcuts-list">{% include "core/partials/shortcut_list.html" %}</div>
     </section>
+    <!-- ALL SERVICES -->
     <section id="available-services" aria-labelledby="add-title">
       <div class="split">
         <h2 id="add-title">{% trans "Tous les services" %}</h2>
@@ -23,4 +36,4 @@
       {% include "core/partials/service_list.html" with services=available_services details=True %}
     </section>
   </div>
-{% endblock %}
+{% endblock content %}

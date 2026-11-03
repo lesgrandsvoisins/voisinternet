@@ -1,9 +1,19 @@
 {% extends "core/base.html" %}
 {% load i18n markdown_filters %}
+{#
+  FILE: core/templates/core/event_detail.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Fiche évènement
+  VIEW: core.views.event_detail
+  CONTEXT: event, is_manager, my_management_request, my_interest, previous_event, next_event, OIDC_ENABLED
+  NOTE: Non-public events are only visible to their managers — see views.event_detail. Two {# #} comments inside {if} branches explain the pre-login claim flow and the interest-toggle semantics; kept on purpose.
+#}
 {% block title %}
   {{ event.title }} — {% trans "Agenda" %} — {{ SITE_NAME }}
-{% endblock %}
+{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -24,6 +34,7 @@
       </p>
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
     <article class="blog-post">
       {% if event.photo %}<img class="hero" src="{{ event.photo.url }}" alt="">{% endif %}
@@ -46,6 +57,7 @@
           {% endfor %}
         </p>
       {% endif %}
+      <!-- ACTIONS -->
       <div class="actions">
         <a class="icon-btn"
            href="{{ event.google_calendar_url }}"
@@ -114,9 +126,7 @@
         {% endif %}
         {% if not is_manager %}
           {% if request.user.is_authenticated or OIDC_ENABLED %}
-            {% comment %}
- Pas besoin d'être déjà connecté·e pour lancer la demande : elle attend la
-            connexion Keycloak et se termine toute seule au retour (core:event_detail). {% endcomment %}
+            {# Pas besoin d'être déjà connecté·e pour lancer la demande : elle attend la connexion Keycloak et se termine toute seule au retour (core:event_detail). #}
             {% if my_management_request is None %}
               <form method="post"
                     action="{% url 'core:claim_event_management' event.pk %}">
@@ -132,6 +142,7 @@
         {% endif %}
       </div>
     </article>
+    <!-- EVENT NAVIGATION -->
     {% if previous_event or next_event %}
       <nav class="event-nav"
            aria-label="{% trans "Navigation entre évènements" %}">
@@ -158,6 +169,7 @@
     <p class="muted">
       <a href="{% url 'core:agenda' %}">{% trans "← Retour à l’agenda" %}</a>
     </p>
+    <!-- MANAGER INFO -->
     {% if is_manager %}
       <aside class="card{% if not event.public %} card-sun{% endif %}"
              role="status">
@@ -177,4 +189,4 @@
       </aside>
     {% endif %}
   </div>
-{% endblock %}
+{% endblock content %}

@@ -1,7 +1,17 @@
 {% extends "core/base.html" %}
 {% load i18n %}
-{% block title %}{{ group_caption }}  — {{ SITE_NAME }}{% endblock %}
+{#
+  FILE: core/templates/core/group_page.html
+  APP: github.com/lesgrandsvoisins/voisinternet
+  AUTHORS: Chris MANN
+  PAGE: Page de groupe du menu (Repères, Pôles, Association)
+  VIEW: core.views.group_page
+  CONTEXT: group_caption, group_intro, items
+  NOTE: Same template serves three URL names (activites, poles, a_propos) via the {key: ...} kwarg on the URL rule.
+#}
+{% block title %}{{ group_caption }} — {{ SITE_NAME }}{% endblock title %}
 {% block content %}
+  <!-- BODY HEADER -->
   <div class="page-head">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="{% trans "Fil d’Ariane" %}">
@@ -15,7 +25,9 @@
       {% if group_intro %}<p class="lead">{{ group_intro }}</p>{% endif %}
     </div>
   </div>
+  <!-- BODY CONTENT -->
   <div class="wrap page">
+    <!-- ITEM LIST -->
     <ul class="svc">
       {% for item in items %}
         <li>
@@ -30,4 +42,4 @@
       {% endfor %}
     </ul>
   </div>
-{% endblock %}
+{% endblock content %}

@@ -1,6 +1,13 @@
 PYTHON := .venv/bin/python
 LANGS  := en es ar ko
 
+# Recettes de production : à lancer dans le conteneur, avec l'utilisateur du
+# service (ex. PROJECT=/var/voisinter/voisinter). En développement, PROJECT vaut
+# le dossier du projet.
+PROJECT  ?= $(CURDIR)
+PROD     ?= https://www.lesgrandsvoisins.com
+BRANCHE  ?= main
+
 # Charge .env dans le shell de la recette, sans réinterpréter les caractères
 # spéciaux qu'il peut contenir (voir DJANGO_SECRET_KEY).
 LOADENV = export $$(grep -v '^\#' .env 2>/dev/null | xargs -d '\n');
@@ -13,7 +20,8 @@ LOADENV = export $$(grep -v '^\#' .env 2>/dev/null | xargs -d '\n');
         run test shell messages compilemessages collectstatic clean \
         fixtures-load fixtures-dump cms-load cms-dump blog-import qmd-export qmd-import \
         event-qmd-export event-qmd-import standard-qmd-export standard-qmd-import \
-        pole-qmd-export pole-qmd-import project-qmd-export project-qmd-import
+        pole-qmd-export pole-qmd-import project-qmd-export project-qmd-import \
+        statut decomptes fumee sauvegarde essai maj manage redemarrer journal up
 
 help: ## Affiche cette aide
 	@grep -E '^[a-zA-Z_-]+:.*## ' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'
@@ -132,3 +140,44 @@ collectstatic: ## Rassemble les fichiers statiques pour la production
 clean: ## Supprime les fichiers Python compilés
 	find . -name '__pycache__' -not -path './.venv/*' -exec rm -rf {} +
 	find . -name '*.pyc' -not -path './.venv/*' -delete
+
+# ----- Production : à lancer dans le conteneur, avec l'utilisateur du service -
+# (recettes autrefois portées par .justfile ; « just » n'est plus nécessaire).
+
+statut: ## Où en est le code déployé (commit, branche, fichiers modifiés)
+	@cd $(PROJECT) && echo "commit : $$(git rev-parse --short HEAD)  ($$(git rev-parse --abbrev-ref HEAD))" && git log --oneline -3 && git status --short -uno
+
+decomptes: ## Nombre d'enregistrements (comptes, anonymes, raccourcis, évènements, fiches) : à comparer avant / après une mise à jour
+	PROJET=$(PROJECT) $(PROJECT)/deploy/decomptes.sh
+
+fumee: URL ?= $(PROD)
+fumee: ## Test de fumée du site en ligne : make fumee [URL=https://www.lesgrandsvoisins.com]
+	$(PROJECT)/deploy/smoke.sh $(URL)
+
+sauvegarde: ## Sauvegarde faite DEPUIS le conteneur (base, médias, environnement). Préférer celle de l'hôte
+	PROJET=$(PROJECT) $(PROJECT)/deploy/sauvegarde.sh
+
+essai: DOSSIER ?=
+essai: REF ?= $(BRANCHE)
+essai: ## Montre ce qu'une mise à jour changerait sans rien modifier : make essai DOSSIER=/mnt/casiers/backups/www/2026-10-28-1052 [REF=main]
+	SAUVEGARDE_FAITE=$(DOSSIER) PROJET=$(PROJECT) $(PROJECT)/deploy/mise-a-jour.sh $(REF) --essai
+
+maj: DOSSIER ?=
+maj: REF ?= $(BRANCHE)
+maj: ## Met à jour le code (demande confirmation ; ne redémarre PAS : voir redemarrer) : make maj DOSSIER=/mnt/casiers/backups/www/2026-10-28-1052
+	SAUVEGARDE_FAITE=$(DOSSIER) PROJET=$(PROJECT) $(PROJECT)/deploy/mise-a-jour.sh $(REF)
+
+manage: ARGS ?=
+manage: ## manage.py avec l'environnement du site : make manage ARGS="check" (ou shell, loaddata …)
+	PROJET=$(PROJECT) $(PROJECT)/deploy/manage.sh $(ARGS)
+
+redemarrer: ## Redémarre le service (applique migrations + collecte statiques), attend la réponse, puis test de fumée
+	PROJET=$(PROJECT) $(PROJECT)/deploy/redemarrer.sh
+
+journal: N ?= 60
+journal: ## Dernières lignes du journal du service (root uniquement) : make journal N=120
+	journalctl -u voisinter-django -n $(N) --no-pager
+
+up: ## Git pull puis redémarre le service
+	git pull
+	./deploy/redemarrer.sh

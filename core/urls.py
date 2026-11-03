@@ -11,58 +11,33 @@ LEGACY_REDIRECTS = {
 }
 
 urlpatterns = [
-    # PUBLIC
     path("", views.home, name="home"),
+    path("account/", views.account, name="account"),
     path("recherche/", views.search, name="search"),
     path("etiquettes/", views.tag_list, name="tag_list"),
     path("etiquettes/<slug:slug>/", views.tag_detail, name="tag_detail"),
     path("auteur/<int:pk>/", views.author_detail, name="author_detail"),
-    path("outils/", views.outils, name="outils"),
-
-    # ACCOUNT
-    path("account/", views.account, name="account"),
     path("account/connexion/", views.connexion, name="connexion"),
     path("account/inscription/", views.inscription, name="inscription"),
-    path("account/raccourcis/", views.raccourcis, name="raccourcis"),
-    path("account/raccourcis/ordre/", views.ordre_raccourcis, name="ordre_raccourcis"),
-    path("account/raccourcis/glisser/", views.reorder_shortcuts, name="reorder_shortcuts"),
-    path(
-        "account/raccourcis/<slug:slug>/raccourci/<str:direction>/",
-        views.reorder_shortcut, name="reorder_shortcut",
-    ),
-    path("account/groupes/", views.groupes, name="groupes"),
-    path("account/groupes/glisser/", views.reorder_memberships, name="reorder_memberships"),
-    path("account/groupes/<slug:slug>/adherer/", views.toggle_membership, name="toggle_membership"),
-    path(
-        "account/groupes/<slug:slug>/adherer/<str:direction>/",
-        views.reorder_membership, name="reorder_membership",
-    ),
-    path("account/demandes/", views.mes_demandes, name="mes_demandes"),
-    path("account/courriel/redirection/", views.redirection_courrier, name="redirection_courrier"),
-    path(
-        "account/courriel/redirection/confirmer/<str:token>/",
-        views.redirection_confirmer, name="redirection_confirmer",
-    ),
-
-    # ANONYMOUS ACCOUNTS
-    path("account/anonyme/creer/", views.create_anonymous, name="create_anonymous"),
     path("account/anonyme/numero/", views.download_number, name="download_number"),
     path("account/anonyme/numero/note/", views.confirm_number, name="confirm_number"),
+    path("account/anonyme/creer/", views.create_anonymous, name="create_anonymous"),
     path("account/anonyme/retrouver/", views.recover_anonymous, name="recover_anonymous"),
     path("account/anonyme/oublier/", views.forget_anonymous, name="forget_anonymous"),
     path("account/anonyme/rattacher/", views.link_anonymous, name="link_anonymous"),
-
-    # GUIDED MISSIONS
     path("account/parcours/", views.parcours, name="parcours"),
-    path("account/parcours/<slug:slug>/", views.parcours_detail, name="parcours_detail"),
     path("account/parcours/etape/<int:pk>/", views.parcours_step, name="parcours_step"),
-
-    # DONATIONS
+    path("account/parcours/<slug:slug>/", views.parcours_detail, name="parcours_detail"),
+    path("outils/", views.outils, name="outils"),
+    path("account/raccourcis/", views.raccourcis, name="raccourcis"),
+    path("account/demandes/", views.mes_demandes, name="mes_demandes"),
+    path("moderation/", views.moderation, name="moderation"),
+    path("account/courriel/redirection/", views.redirection_courrier, name="redirection_courrier"),
+    path("account/courriel/redirection/confirmer/<str:token>/", views.redirection_confirmer, name="redirection_confirmer"),
+    path("account/groupes/", views.groupes, name="groupes"),
     path("contributions/dons/", views.mes_dons, name="mes_dons"),
     path("account/dons/", views.faire_don, name="faire_don"),
     path("dons/merci/", views.faire_don_merci, name="faire_don_merci"),
-
-    # AGENDA
     path("agenda/", views.agenda, name="agenda"),
     path("agenda/mes-evenements/", views.mes_evenements, name="mes_evenements"),
     path("agenda/mes-evenements/<int:pk>/modifier/", views.evenement_modifier, name="evenement_modifier"),
@@ -75,8 +50,9 @@ urlpatterns = [
         "agenda/<int:pk>/interet/notifications/",
         views.toggle_event_interest_notify, name="toggle_event_interest_notify",
     ),
-
-    # DIRECTORY
+    path("activites/", views.group_page, {"key": "reperes"}, name="activites"),
+    path("poles/", views.group_page, {"key": "poles"}, name="poles"),
+    path("a-propos/", views.group_page, {"key": "association"}, name="a_propos"),
     path("annuaire/", views.annuaire, name="annuaire"),
     path("annuaire/secteur/<slug:secteur>/", views.annuaire, name="annuaire_pour"),
     path("annuaire/mes-fiches/", views.mes_fiches, name="mes_fiches"),
@@ -92,16 +68,18 @@ urlpatterns = [
     ),
     path("annuaire/<slug:slug>/publication/", views.toggle_publication, name="toggle_publication"),
     path("annuaire/<slug:slug>/raccourci/", views.toggle_shortcut, name="toggle_shortcut"),
-
-    # MENU GROUPS
-    path("activites/", views.group_page, {"key": "reperes"}, name="activites"),
-    path("poles/", views.group_page, {"key": "poles"}, name="poles"),
-    path("a-propos/", views.group_page, {"key": "association"}, name="a_propos"),
-
-    # MODERATION
-    path("moderation/", views.moderation, name="moderation"),
-
-    # ADMINISTRATION
+    path(
+        "account/raccourcis/<slug:slug>/raccourci/<str:direction>/",
+        views.reorder_shortcut, name="reorder_shortcut",
+    ),
+    path("account/raccourcis/ordre/", views.ordre_raccourcis, name="ordre_raccourcis"),
+    path("account/raccourcis/glisser/", views.reorder_shortcuts, name="reorder_shortcuts"),
+    path("account/groupes/<slug:slug>/adherer/", views.toggle_membership, name="toggle_membership"),
+    path(
+        "account/groupes/<slug:slug>/adherer/<str:direction>/",
+        views.reorder_membership, name="reorder_membership",
+    ),
+    path("account/groupes/glisser/", views.reorder_memberships, name="reorder_memberships"),
     path("administration/", views.administration, name="administration"),
     path(
         "administration/fiches/<int:pk>/",
@@ -124,7 +102,6 @@ urlpatterns = [
         views.administration_review_contribution, name="administration_review_contribution",
     ),
 ] + [
-    # LEGACY
     path(old, views.legacy_redirect, {"target": new}, name="legacy_" + old.strip("/").replace("/", "_"))
     for old, new in LEGACY_REDIRECTS.items()
 ]

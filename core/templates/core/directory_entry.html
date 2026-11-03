@@ -7,7 +7,7 @@
   PAGE: Fiche de l'annuaire
   VIEW: core.views.entry_detail
   CONTEXT: entry, my_subscription, my_claim, contact_form, account, OIDC_ENABLED, CONTACT_FORMS_ENABLED
-  NOTE: Two "why" comments inside {if} branches are kept deliberately (logo fallback chain, pre-login claim flow).
+  NOTE: Two "why" comments inside if branches are kept deliberately (logo fallback chain, pre-login claim flow).
   TODO: Inline comments preserved from earlier iteration — re-audit when the ownership-claim flow is refactored.
 #}
 {% block title %}{{ entry.name }} — Annuaire — {{ SITE_NAME }}{% endblock title %}

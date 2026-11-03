@@ -7,7 +7,7 @@
   PAGE: Fiche évènement
   VIEW: core.views.event_detail
   CONTEXT: event, is_manager, my_management_request, my_interest, previous_event, next_event, OIDC_ENABLED
-  NOTE: Non-public events are only visible to their managers — see views.event_detail. Two {# #} comments inside {if} branches explain the pre-login claim flow and the interest-toggle semantics; kept on purpose.
+  NOTE: Non-public events are only visible to their managers — see views.event_detail. Two comments inside if branches explain the pre-login claim flow and the interest-toggle semantics; kept on purpose.
 #}
 {% block title %}
   {{ event.title }} — {% trans "Agenda" %} — {{ SITE_NAME }}

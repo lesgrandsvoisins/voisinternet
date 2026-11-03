@@ -172,6 +172,17 @@
           </details>
         </div>
       {% endif %}
+      <!-- SERVICES -->
+      <div class="account-accordion-wrap">
+        <a class="accordion-manage"
+           href="{% url 'core:raccourcis' %}#available-services">{% trans "Ajouter un service" %}</a>
+        <details class="account-accordion" id="sc2-title">
+          <summary class="accordion-summary">
+            <h2>{% trans "Mes services" %}</h2>
+          </summary>
+          <div id="shortcuts-list">{% include "core/partials/shortcut_list.html" %}</div>
+        </details>
+      </div>
       <!-- DONATIONS -->
       <details class="account-accordion" id="fin-title">
         <summary class="accordion-summary">
@@ -223,26 +234,14 @@
           </form>
         </div>
       </details>
-      <!-- SERVICES -->
+      <!-- EVENTS -->
       <div class="account-accordion-wrap">
-        <a class="accordion-manage"
-           href="{% url 'core:raccourcis' %}#available-services">{% trans "Ajouter un service" %}</a>
-        <details class="account-accordion" id="sc2-title">
+        <a class="accordion-manage" href="{% url 'core:mes_evenements' %}">{% trans "Créer un évènement" %}</a>
+        <details class="account-accordion" id="events2-title">
           <summary class="accordion-summary">
-            <h2>{% trans "Mes services" %}</h2>
+            <h2>{% trans "Mes évènements dans l'agenda" %}</h2>
           </summary>
-          <div id="shortcuts-list">{% include "core/partials/shortcut_list.html" %}</div>
-        </details>
-      </div>
-      <!-- GROUPS -->
-      <div class="account-accordion-wrap">
-        <a class="accordion-manage"
-           href="{% url 'core:groupes' %}#available-groups">{% trans "Rejoindre un groupe" %}</a>
-        <details class="account-accordion" id="mb2-title">
-          <summary class="accordion-summary">
-            <h2>{% trans "Mes groupes" %}</h2>
-          </summary>
-          <div id="memberships-list">{% include "core/partials/membership_list.html" %}</div>
+          <div>{% include "core/partials/my_event_list.html" with events=managed_events %}</div>
         </details>
       </div>
       <!-- DIRECTORY PAGES -->
@@ -255,14 +254,15 @@
           <div>{% include "core/partials/entry_list.html" with entries=owned_entries %}</div>
         </details>
       </div>
-      <!-- EVENTS -->
+      <!-- GROUPS -->
       <div class="account-accordion-wrap">
-        <a class="accordion-manage" href="{% url 'core:mes_evenements' %}">{% trans "Créer un évènement" %}</a>
-        <details class="account-accordion" id="events2-title">
+        <a class="accordion-manage"
+           href="{% url 'core:groupes' %}#available-groups">{% trans "Rejoindre un groupe" %}</a>
+        <details class="account-accordion" id="mb2-title">
           <summary class="accordion-summary">
-            <h2>{% trans "Mes évènements dans l'agenda" %}</h2>
+            <h2>{% trans "Mes groupes" %}</h2>
           </summary>
-          <div>{% include "core/partials/my_event_list.html" with events=managed_events %}</div>
+          <div id="memberships-list">{% include "core/partials/membership_list.html" %}</div>
         </details>
       </div>
     {% else %}

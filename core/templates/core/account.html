@@ -39,7 +39,7 @@
           </p>
           <ul class="steps">
             {% for step in first_steps %}
-              <li{% if step.done %} class="done"{% endif %}>
+              <li {% if step.done %}class="done"{% endif %}>
                 {% if step.done %}
                   <span aria-hidden="true">✓</span>
                   <span class="sr-only">{% trans "Fait :" %}</span>
@@ -50,7 +50,9 @@
               </li>
             {% endfor %}
           </ul>
-          <p><a href="{% url 'core:parcours' %}">{% trans "Voir tous les parcours guidés" %}</a></p>
+          <p>
+            <a href="{% url 'core:parcours' %}">{% trans "Voir tous les parcours guidés" %}</a>
+          </p>
         </section>
       {% endif %}
       <section class="dashboard-summary"
@@ -93,10 +95,14 @@
         {% if user.is_authenticated and login_identifier or mail_addresses %}
           <ul class="docs">
             {% if login_identifier %}
-              <li><strong>{% trans "Identifiant de connexion" %}</strong><span>{{ login_identifier }}</span></li>
+              <li>
+                <strong>{% trans "Identifiant de connexion" %}</strong><span>{{ login_identifier }}</span>
+              </li>
             {% endif %}
             {% if mail_addresses %}
-              <li><strong>{% trans "Adresses de courriel (une seule boîte)" %}</strong><span>{{ mail_addresses|join:", " }}</span></li>
+              <li>
+                <strong>{% trans "Adresses de courriel (une seule boîte)" %}</strong><span>{{ mail_addresses|join:", " }}</span>
+              </li>
             {% endif %}
           </ul>
         {% endif %}
@@ -130,82 +136,79 @@
           {% endif %}
         </div>
       </section>
-      <div class="account-accordion-wrap">
-        <a class="accordion-manage"
-             href="{% url 'core:raccourcis' %}#available-services">{% trans "Ajouter un service" %}</a>
-        <details class="account-accordion" id="sc2-title">
-        <summary class="accordion-summary">
-          <h2>{% trans "Mes services" %}</h2>
-        </summary>
-        <div id="shortcuts-list">{% include "core/partials/shortcut_list.html" %}</div>
-        </details>
-      </div>
-      <div class="account-accordion-wrap">
-        <a class="accordion-manage"
-             href="{% url 'core:groupes' %}#available-groups">{% trans "Rejoindre un groupe" %}</a>
-        <details class="account-accordion" id="mb2-title">
-        <summary class="accordion-summary">
-          <h2>{% trans "Mes groupes" %}</h2>
-        </summary>
-        <div id="memberships-list">{% include "core/partials/membership_list.html" %}</div>
-        </details>
-      </div>
-      <div class="account-accordion-wrap">
-        <a class="accordion-manage"
-             href="{% url 'core:mes_fiches' %}">{% trans "Créer une fiche" %}</a>
-        <details class="account-accordion" id="fiches2-title">
-        <summary class="accordion-summary">
-          <h2>{% trans "Mes fiches dans l'annuaire" %}</h2>
-        </summary>
-        <div>{% include "core/partials/entry_list.html" with entries=owned_entries %}</div>
-        </details>
-      </div>
-      <div class="account-accordion-wrap">
-        <a class="accordion-manage"
-             href="{% url 'core:mes_evenements' %}">{% trans "Créer un évènement" %}</a>
-        <details class="account-accordion" id="events2-title">
-        <summary class="accordion-summary">
-          <h2>{% trans "Mes évènements dans l'agenda" %}</h2>
-        </summary>
-        <div>{% include "core/partials/my_event_list.html" with events=managed_events %}</div>
-        </details>
-      </div>
       {% if user.is_authenticated %}
-        <div class="account-accordion-wrap">
-        <a class="accordion-manage"
-           href="{{ keycloak_account_url }}">{% trans "Géré par votre compte unique Grands Voisins" %}</a>
-        <details class="account-accordion" id="profile2-title">
-          <summary class="accordion-summary">
-            <h2 id="profile-title">{% trans "Mon profil" %}</h2>
-          </summary>
-          <div>
-            <ul class="docs">
-              {% if login_identifier %}
+        <div class="account-accordion-wrap" id="profile">
+          <a class="accordion-manage" href="{{ keycloak_account_url }}">{% trans "Géré par votre compte unique Grands Voisins" %}</a>
+          <details class="account-accordion" id="profile2-title">
+            <summary class="accordion-summary">
+              <h2 id="profile-title">{% trans "Mon profil" %}</h2>
+            </summary>
+            <div>
+              <ul class="docs">
+                {% if login_identifier %}
+                  <li>
+                    <strong>{% trans "Identifiant de connexion" %}</strong><span>{{ login_identifier }}</span>
+                  </li>
+                {% endif %}
+                {% if mail_addresses %}
+                  <li>
+                    <strong>{% trans "Adresses de courriel (une seule boîte)" %}</strong><span>{{ mail_addresses|join:", " }}</span>
+                  </li>
+                {% endif %}
                 <li>
-                  <strong>{% trans "Identifiant de connexion" %}</strong><span>{{ login_identifier }}</span>
+                  <strong>{% trans "Nom" %}</strong><span>{{ user.get_full_name|default:_("Non renseigné") }}</span>
                 </li>
-              {% endif %}
-              {% if mail_addresses %}
                 <li>
-                  <strong>{% trans "Adresses de courriel (une seule boîte)" %}</strong><span>{{ mail_addresses|join:", " }}</span>
+                  <strong>{% trans "Courriel" %}</strong><span>{{ user.email|default:_("Non renseigné") }}</span>
                 </li>
+              </ul>
+              {% if keycloak_account_url %}
+                <p class="note">
+                  <a href="{{ keycloak_account_url }}" target="_new">{% trans "Modifier mon profil" %}</a>
+                </p>
               {% endif %}
-              <li>
-                <strong>{% trans "Nom" %}</strong><span>{{ user.get_full_name|default:_("Non renseigné") }}</span>
-              </li>
-              <li>
-                <strong>{% trans "Courriel" %}</strong><span>{{ user.email|default:_("Non renseigné") }}</span>
-              </li>
-            </ul>
-            {% if keycloak_account_url %}
-              <p class="note">
-                <a href="{{ keycloak_account_url }}" target="_new">{% trans "Modifier mon profil" %}</a>
-              </p>
-            {% endif %}
-          </div>
-        </details>
+            </div>
+          </details>
         </div>
       {% endif %}
+      <div class="account-accordion-wrap">
+        <a class="accordion-manage"
+           href="{% url 'core:raccourcis' %}#available-services">{% trans "Ajouter un service" %}</a>
+        <details class="account-accordion" id="sc2-title">
+          <summary class="accordion-summary">
+            <h2>{% trans "Mes services" %}</h2>
+          </summary>
+          <div id="shortcuts-list">{% include "core/partials/shortcut_list.html" %}</div>
+        </details>
+      </div>
+      <div class="account-accordion-wrap">
+        <a class="accordion-manage"
+           href="{% url 'core:groupes' %}#available-groups">{% trans "Rejoindre un groupe" %}</a>
+        <details class="account-accordion" id="mb2-title">
+          <summary class="accordion-summary">
+            <h2>{% trans "Mes groupes" %}</h2>
+          </summary>
+          <div id="memberships-list">{% include "core/partials/membership_list.html" %}</div>
+        </details>
+      </div>
+      <div class="account-accordion-wrap">
+        <a class="accordion-manage" href="{% url 'core:mes_fiches' %}">{% trans "Créer une fiche" %}</a>
+        <details class="account-accordion" id="fiches2-title">
+          <summary class="accordion-summary">
+            <h2>{% trans "Mes fiches dans l'annuaire" %}</h2>
+          </summary>
+          <div>{% include "core/partials/entry_list.html" with entries=owned_entries %}</div>
+        </details>
+      </div>
+      <div class="account-accordion-wrap">
+        <a class="accordion-manage" href="{% url 'core:mes_evenements' %}">{% trans "Créer un évènement" %}</a>
+        <details class="account-accordion" id="events2-title">
+          <summary class="accordion-summary">
+            <h2>{% trans "Mes évènements dans l'agenda" %}</h2>
+          </summary>
+          <div>{% include "core/partials/my_event_list.html" with events=managed_events %}</div>
+        </details>
+      </div>
       <details class="account-accordion" id="fin-title">
         <summary class="accordion-summary">
           <h2>{% trans "Mes dons" %}</h2>
@@ -278,7 +281,16 @@
               <p class="muted">{% trans "Ou continuer avec un compte que vous avez déjà :" %}</p>
               <p class="actions">
                 {% for f in FOURNISSEURS %}
-                  <a class="btn btn-line" href="{% url 'core:connexion' %}?idp={{ f|urlencode }}&amp;next={% url 'core:account' %}">{% if f == "google" %}Google (Gmail){% elif f == "microsoft" %}Microsoft (Outlook, Hotmail){% else %}{{ f|capfirst }}{% endif %}</a>
+                  <a class="btn btn-line"
+                     href="{% url 'core:connexion' %}?idp={{ f|urlencode }}&amp;next={% url 'core:account' %}">
+                    {% if f == "google" %}
+                      Google (Gmail)
+                    {% elif f == "microsoft" %}
+                      Microsoft (Outlook, Hotmail)
+                    {% else %}
+                      {{ f|capfirst }}
+                    {% endif %}
+                  </a>
                 {% endfor %}
               </p>
             {% endif %}
@@ -303,7 +315,9 @@
         {% else %}
           <details class="anon-discret">
             <summary>{% trans "Autres options" %}</summary>
-            <p class="muted">{% trans "Un numéro de 16 chiffres à noter, sans nom ni courriel. Sans ce numéro, le compte est perdu." %}</p>
+            <p class="muted">
+              {% trans "Un numéro de 16 chiffres à noter, sans nom ni courriel. Sans ce numéro, le compte est perdu." %}
+            </p>
             {% if anon_allowed %}
               <form method="post" action="{% url 'core:create_anonymous' %}">
                 {% csrf_token %}

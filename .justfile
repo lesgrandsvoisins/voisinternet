@@ -60,3 +60,7 @@ redemarrer:
 # Dernières lignes du journal du service. Root uniquement.
 journal n="60":
     journalctl -u voisinter-django -n {{n}} --no-pager
+
+up:
+	git pull
+	./deploy/redemarrer.sh

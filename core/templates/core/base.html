@@ -212,9 +212,6 @@
             <a href="{{ SITE_PRINCIPAL }}/{{ LANGUAGE_CODE }}/"
                aria-label="{% trans "Aller à lesgrandsvoisins.com" %}"
                title="{% trans "Aller à lesgrandsvoisins.com" %}">{% include "core/icons/maison-svg.html" %}</a>
-            <a href="/{{ LANGUAGE_CODE }}/agence/"
-               aria-label="{% trans "Resdigita, l'agence numérique" %}"
-               title="{% trans "Resdigita, l'agence numérique" %}">{% include "core/icons/agence-svg.html" %}</a>
           </div>
         {% elif SERVICES_URL %}
           <div class="menu-autre-site">
@@ -224,6 +221,11 @@
               {% include "core/icons/ordinateur-svg.html" %}
             </a>
           </div>
+        {% endif %}
+        {% if SITE_THEME %}
+        <a href="/{{ LANGUAGE_CODE }}/agence/"
+           aria-label="{% trans "Resdigita, l'agence numérique" %}"
+           title="{% trans "Resdigita, l'agence numérique" %}">{% include "core/icons/agence-svg.html" %}</a>
         {% endif %}
         <div class="lang-dropdown"
              x-data="{ open: false }"

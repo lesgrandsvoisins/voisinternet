@@ -28,6 +28,7 @@ Changements notables de `www.lesgrandsvoisins.com` (voisinternet), branche de tr
 - Pied de page : `www.LesGrandsVoisins.com`. `preparer_catalogue_outils` : Vikunja « nécessite une validation » et texte du parcours (« Ajoutez Vikunja à vos services »). Commande `rattacher_etiquettes_ghost` (étiquettes de Ghost sur les articles importés, simulation par défaut).
 - Site resdigita.org : l'accueil sert la traduction Wagtail de la page dans la langue du préfixe (/en/…), au lieu de toujours servir la page française.
 - Une icône dans le menu du haut pour passer d'un site à l'autre : maison (retour vers lesgrandsvoisins.com) sur resdigita.org, ordinateur (vers resdigita.org) sur lesgrandsvoisins.com quand `VOISINTERNET_SERVICES_URL` est posé ; toujours visible, même sur téléphone.
+- Site resdigita.org : page « l'agence » (`cms.AgencyPage`, migration cms 0036) présentant Resdigita comme agence numérique des Grands Voisins (qui nous sommes, ce que nous faisons, comment nous travaillons, pour qui), sous la page d'accueil Numérique ; commande `creer_agence` (simulation par défaut) ; icône briefcase dans l'en-tête du site vers `/fr/agence/`, à côté de la maison. +1 test.
 - Boutons « continuer avec Google / Microsoft » sur « Mon compte » (`kc_idp_hint`), derrière le réglage `VOISINTERNET_FOURNISSEURS` (vide par défaut : rien n'apparaît).
 - Déconnexion Keycloak prête au changement de nom du royaume (`key.gv.je` -> `key.resdigita.org`) : adresse de déconnexion mise en cache par royaume, et un `id_token` délivré sous l'ancien nom est ignoré (repli sur `client_id`).
 

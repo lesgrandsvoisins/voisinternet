@@ -9,7 +9,7 @@ Poussé : type de page `cms.NumeriquePage` (migration cms 0035), accueil servi p
 ## Ce qu'il faut
 1. **Wagtail** : un second `Site` (`www.resdigita.org`) avec sa propre `HomePage` (« Numérique des Grands Voisins »). L'arbre actuel n'est pas touché. Commande de préparation en simulation d'abord.
 2. **Identité** : nom et visuel propres au site (`SITE_NAME`, logo, en-tête, pied de page), choisis d'après le nom de domaine ; mêmes styles de base pour rester visiblement apparentés.
-3. **Contenu de la page d'accueil** : le visuel, le message (sociabilité numérique), puis le tableau de bord des outils (`/fr/outils/`) en dessous ; pages éditoriales ensuite.
+3. **Contenu de la page d'accueil** : le visuel, le message (sociabilité numérique), puis le tableau de bord des outils (`/fr/outils/`) en dessous ; pages éditoriales ensuite. Première page éditoriale : « l'agence » (`cms.AgencyPage`, commande `creer_agence`), qui présente Resdigita comme agence numérique des Grands Voisins, sous `/fr/agence/`, avec une icône briefcase dans l'en-tête (à côté de la maison) — voir `CHANGELOG.md`.
 4. **Serveur (administration, DEMANDES-UX)** : remplacer la redirection 302 de `resdigita.org` / `www.resdigita.org` par le service par l'application (module `lgv.voisinternet.outils` déjà préparé) ; `www.resdigita.com` et `www.gv.je` continuent de rediriger vers `https://www.resdigita.org/`.
 5. **Réglages** : `www.resdigita.org` dans `DJANGO_ALLOWED_HOSTS` et `DJANGO_CSRF_TRUSTED_ORIGINS` ; adresses de retour de connexion et de déconnexion du client Keycloak `voisinternet`.
 6. **À savoir** : connexion et session distinctes d'un nom de domaine à l'autre (le compte Keycloak est le même).

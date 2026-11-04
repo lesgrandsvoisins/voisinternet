@@ -4319,6 +4319,9 @@ pre { max-width: 100%; overflow-x: auto; }
 .brand-texte { display: flex; flex-direction: column; line-height: 1.15; text-decoration: none; color: inherit; }
 .brand-texte .brand-nom { font-size: 1.5rem; font-weight: 700; }
 .brand-texte .brand-devise { font-size: 0.9rem; }
+/* Page « l'agence » de resdigita.org. */
+.agency-hero { padding-block: 2.5rem 1rem; }
+.agency-message { font-size: 1.125rem; max-width: 40rem; }
 
 /* Lien vers l'autre site (resdigita.org <-> lesgrandsvoisins.com) : toujours visible, même sur téléphone. */
 .menu-autre-site a {

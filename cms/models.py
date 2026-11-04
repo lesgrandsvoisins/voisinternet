@@ -79,7 +79,7 @@ class NumeriquePage(Page):
     )
 
     parent_page_types = ["wagtailcore.Page"]
-    subpage_types = ["cms.StandardPage", "cms.ContactPage"]
+    subpage_types = ["cms.StandardPage", "cms.ContactPage", "cms.AgencyPage"]
     max_count = 1
 
     content_panels = Page.content_panels + [
@@ -280,6 +280,29 @@ class ContentStreamBlock(_ContentStreamBlockLeaf):
     """
 
     generic_nesting = _generic_nesting_block(_ContentStreamBlockN2)()
+
+
+class AgencyPage(Page):
+    """
+    Page « l'agence » du site resdigita.org : présente Resdigita comme agence numérique des Grands Voisins —
+    qui nous sommes, ce que nous faisons, comment nous travaillons, pour qui.
+    """
+
+    lead = models.CharField(_("chapeau"), max_length=300, blank=True, default="")
+    message = RichTextField(_("message"), blank=True, default="")
+    body = StreamField(ContentStreamBlock(), blank=True)
+
+    parent_page_types = ["cms.NumeriquePage"]
+    subpage_types = []
+
+    content_panels = Page.content_panels + [
+        FieldPanel("lead"),
+        FieldPanel("message"),
+        FieldPanel("body"),
+    ]
+
+    class Meta:
+        verbose_name = _("l'agence")
 
 
 class StandardPage(Page):

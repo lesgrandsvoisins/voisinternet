@@ -2294,6 +2294,25 @@ class SiteResdigitaTests(Base):
         self.assertNotContains(r, "theme-numerique")
         self.assertNotContains(r, "outils-informatiques.svg")
 
+    def test_agence_rend_avec_icone_en_tete(self):
+        from io import StringIO
+        from django.core.management import call_command
+
+        out = StringIO()
+        call_command("creer_site_resdigita", "--appliquer", stdout=out)
+        call_command("creer_agence", "--appliquer", stdout=out)
+        call_command("creer_agence", stdout=out)
+        self.assertIn("déjà", out.getvalue())  # idempotente
+
+        r = self.client.get("/fr/agence/", HTTP_HOST="www.resdigita.org")
+        self.assertEqual(r.status_code, 200)
+        self.assertContains(r, "Resdigita, agence numérique des Grands Voisins")
+        self.assertContains(r, 'class="theme-numerique"')
+        self.assertContains(r, "brand-texte")
+        # icône « l'agence » (briefcase) présente dans l'en-tête du site resdigita.org
+        self.assertContains(r, "/fr/agence/")
+        self.assertContains(r, "l'agence numérique")
+
 
 @override_settings(ALLOWED_HOSTS=["*"], SERVICES_URL="https://www.resdigita.org")
 class SitesDesServicesTests(Base):

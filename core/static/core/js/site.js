@@ -358,6 +358,60 @@
 
   document.addEventListener("DOMContentLoaded", armQuicklinkCycle);
 
+  // Flèche circulaire « aller aux outils » (core/templates/core/outils.html) : ancrée
+  // en bas de l'en-tête (#tools-page-head-div), lien vers le contenu (#tools-content-div).
+  // Si l'en-tête est plus haute que l'écran, elle flotte juste au-dessus du bas de la
+  // fenêtre tant que le contenu n'est pas atteint. Défilement automatique après 5 s,
+  // comme un clic sur le bouton — annulé si la personne interagit d'abord.
+  function armScrollDown() {
+    var btn = document.querySelector(".scroll-down[href^='#']");
+    if (!btn || btn.dataset.armed) return;
+    btn.dataset.armed = "1";
+    var target = document.getElementById(btn.getAttribute("href").slice(1));
+    var head = document.getElementById("tools-page-head-div");
+    if (!target || !head) return;
+
+    var reduced = function () {
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    };
+    var go = function () {
+      target.scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "start" });
+    };
+
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      go();
+    });
+
+    var update = function () {
+      var tall = head.scrollHeight > window.innerHeight;
+      btn.classList.toggle("is-fixed", tall);
+      if (tall) {
+        var rect = target.getBoundingClientRect();
+        btn.classList.toggle("is-hidden", rect.top <= window.innerHeight);
+      } else {
+        btn.classList.remove("is-hidden");
+      }
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    var timer = setTimeout(go, 5000);
+    var cancel = function () {
+      clearTimeout(timer);
+      window.removeEventListener("wheel", cancel);
+      window.removeEventListener("touchstart", cancel);
+      window.removeEventListener("keydown", cancel);
+    };
+    window.addEventListener("wheel", cancel, { passive: true });
+    window.addEventListener("touchstart", cancel, { passive: true });
+    window.addEventListener("keydown", cancel);
+  }
+
+  document.addEventListener("DOMContentLoaded", armScrollDown);
+  document.addEventListener("htmx:afterSettle", armScrollDown);
+
   // Le menu principal et le widget du compte (en-tête) sont gérés par Alpine.js (voir base.html).
   document.addEventListener("DOMContentLoaded", armToasts);
   document.addEventListener("htmx:afterSettle", armToasts);

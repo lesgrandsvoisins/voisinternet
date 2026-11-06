@@ -4336,6 +4336,36 @@ pre { max-width: 100%; overflow-x: auto; }
 }
 .menu-autre-site a:hover { background: var(--hover); }
 
+/* Flèche circulaire « aller aux outils » (core/templates/core/outils.html) : ancrée en
+   bas de l'en-tête (#tools-page-head-div), lien vers le contenu (#tools-content-div).
+   Sans JavaScript, c'est un simple ancrage natif. Si l'en-tête est plus haute que
+   l'écran, site.js la fait flotter juste au-dessus du bas de la fenêtre (is-fixed). */
+#tools-page-head-div { position: relative; }
+.scroll-down {
+  position: absolute;
+  left: 50%;
+  bottom: -1.25rem;
+  transform: translateX(-50%);
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 2px 10px rgb(0 0 0 / .18);
+  transition: background .15s ease;
+}
+.scroll-down:hover { background: var(--hover); }
+.scroll-down svg { font-size: 1.5rem; }
+.scroll-down.is-fixed {
+  position: fixed;
+  bottom: 1.25rem;
+  z-index: 20;
+}
+.scroll-down.is-hidden { opacity: 0; pointer-events: none; }
+
 img.numerique-visuel {
   background-color: white;
   border-radius: 2rem;

@@ -2044,6 +2044,11 @@ class TableauDeBordOutilsTests(Base):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Tous les outils")
         self.assertContains(response, self.service.name)
+        # Flèche circulaire « aller aux outils » : ancrée en bas de l'en-tête, lien vers le contenu.
+        self.assertContains(response, 'id="tools-page-head-div"')
+        self.assertContains(response, 'id="tools-content-div"')
+        self.assertContains(response, 'class="scroll-down"')
+        self.assertContains(response, 'href="#tools-content-div"')
 
     def test_administration_tools_are_hidden_from_others(self):
         from django.contrib.auth.models import Group

@@ -4335,3 +4335,10 @@ pre { max-width: 100%; overflow-x: auto; }
   color: var(--ink);
 }
 .menu-autre-site a:hover { background: var(--hover); }
+
+img.numerique-visuel {
+  background-color: white;
+  border-radius: 2rem;
+  padding: 0.5rem;
+  opacity: 0.8;
+}

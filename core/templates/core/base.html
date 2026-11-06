@@ -163,22 +163,6 @@
                     aria-label="{% trans "Rechercher sur le site" %}">
               {% include "core/icons/search-svg.html" %}
             </button>
-            {% comment %} Même raison qu'au-dessus (pas de x-cloak) : le formulaire de
-            recherche doit rester utilisable sans JavaScript, pas caché en permanence. {% endcomment %}
-            <div class="search-dropdown-menu" id="search-dropdown-menu" x-show="open">
-              <form class="menu-site-search"
-                    method="get"
-                    action="{% url 'core:search' %}"
-                    role="search">
-                <label for="topbar-search-q" class="sr-only">{% trans "Rechercher sur le site" %}</label>
-                <input id="topbar-search-q"
-                       x-ref="topbarSearchInput"
-                       type="search"
-                       name="q"
-                       value="{{ request.GET.q }}"
-                       placeholder="{% trans "Rechercher…" %}">
-              </form>
-            </div>
           </div>
         {% endif %}
         {% if SITE_THEME %}
@@ -245,6 +229,24 @@
                x-show="open"
                aria-label="{% trans "Langue" %}">{% lang_switcher_menu %}</div>
         </div>
+
+        {% comment %} Même raison qu'au-dessus (pas de x-cloak) : le formulaire de
+        recherche doit rester utilisable sans JavaScript, pas caché en permanence. {% endcomment %}
+        <div class="search-dropdown-menu" id="search-dropdown-menu" x-show="open">
+          <form class="menu-site-search"
+                method="get"
+                action="{% url 'core:search' %}"
+                role="search">
+            <label for="topbar-search-q" class="sr-only">{% trans "Rechercher sur le site" %}</label>
+            <input id="topbar-search-q"
+                   x-ref="topbarSearchInput"
+                   type="search"
+                   name="q"
+                   value="{{ request.GET.q }}"
+                   placeholder="{% trans "Rechercher…" %}">
+          </form>
+        </div>
+
         {% include "core/partials/account_widget.html" %}
       </div>
     </header>

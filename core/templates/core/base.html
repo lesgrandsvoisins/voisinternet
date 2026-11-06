@@ -208,21 +208,18 @@
           </div>
         {% endif %}
 
-
-          <div class="menu-autre-site">
-            <a href="{{ SITE_PRINCIPAL }}/{{ LANGUAGE_CODE }}/"
-               aria-label="{% trans "Aller à lesgrandsvoisins.com" %}"
-               title="{% trans "Aller à lesgrandsvoisins.com" %}">{% include "core/icons/maison-svg.html" %}</a>
-          </div>
-
-          <div class="menu-autre-site">
-            <a href="{{ SERVICES_URL }}/{{ LANGUAGE_CODE }}/"
-               aria-label="{% trans "Resdigita, le numérique des Grands Voisins" %}"
-               title="{% trans "Resdigita, le numérique des Grands Voisins" %}">
-              {% include "core/icons/ordinateur-svg.html" %}
-            </a>
-          </div>
-
+        <div class="menu-autre-site">
+          <a href="{{ SITE_PRINCIPAL }}/{{ LANGUAGE_CODE }}/"
+              aria-label="{% trans "Aller à lesgrandsvoisins.com" %}"
+              title="{% trans "Aller à lesgrandsvoisins.com" %}">{% include "core/icons/maison-svg.html" %}</a>
+        </div>
+        <div class="menu-autre-site">
+          <a href="{{ SERVICES_URL }}/{{ LANGUAGE_CODE }}/#outils-titre"
+              aria-label="{% trans "Resdigita, le numérique des Grands Voisins" %}"
+              title="{% trans "Resdigita, le numérique des Grands Voisins" %}">
+            {% include "core/icons/ordinateur-svg.html" %}
+          </a>
+        </div>
 
         {% if SITE_THEME %}
         <a href="/{{ LANGUAGE_CODE }}/agence/"

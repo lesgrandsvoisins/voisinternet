@@ -4,22 +4,28 @@
 {% block title %}{{ page.title }} — {{ SITE_NAME }}{% endblock %}
 
 {% block content %}
-  <section class="block agency-hero">
+  <section class="block agency-hero" id="tools-page-head-div">
     <div class="wrap">
       <h1>{{ page.title }}</h1>
       {% if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
       {% if page.message %}<div class="agency-message">{{ page.message|richtext }}</div>{% endif %}
     </div>
+    <a class="scroll-down"
+       href="#tools-content-div"
+       data-scroll-head="#tools-page-head-div"
+       aria-label="{% trans "Aller au contenu" %}">
+      {% include "core/icons/chevron-down-svg.html" %}
+    </a>
   </section>
-  {% if page.body %}
-    <section class="block">
-      <div class="wrap">
+  <section class="block" id="tools-content-div">
+    <div class="wrap">
+      {% if page.body %}
         {% include "cms/partials/content_blocks.html" with blocks=page.body %}
-        <p class="muted">
-          {% trans "Écrivez-nous" %} :
-          <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>
-        </p>
-      </div>
-    </section>
-  {% endif %}
+      {% endif %}
+      <p class="muted">
+        {% trans "Écrivez-nous" %} :
+        <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>
+      </p>
+    </div>
+  </section>
 {% endblock %}

@@ -2351,6 +2351,11 @@ class SiteResdigitaTests(Base):
         # icône « l'agence » (briefcase) présente dans l'en-tête du site resdigita.org
         self.assertContains(r, "/fr/agence/")
         self.assertContains(r, "l'agence numérique")
+        # Flèche circulaire « aller au contenu » : de l'en-tête vers la section contenu.
+        self.assertContains(r, 'id="tools-page-head-div"')
+        self.assertContains(r, 'id="tools-content-div"')
+        self.assertContains(r, 'class="scroll-down"')
+        self.assertContains(r, 'href="#tools-content-div"')
 
 
 @override_settings(ALLOWED_HOSTS=["*"], SERVICES_URL="https://www.resdigita.org")

@@ -148,29 +148,12 @@
           {% include "core/partials/logo_mark.html" %}
           {% comment %} {% include "core/partials/wordmark.html" %} {% endcomment %}
         </a>
-        {% if SITE_THEME %}
-          <a class="brand brand-texte"
-             href="{% url 'core:home' %}"
-             aria-label="{% trans 'Resdigita, le numérique des Grands Voisins — accueil' %}">
-            <span class="brand-nom">Resdigita</span><span class="brand-devise">{% trans "le numérique des Grands Voisins" %}</span>
-          </a>
-        {% endif %}
 
-        {% if SITE_THEME %}
         <div class="menu-autre-site">
           <a href="{{ SITE_PRINCIPAL }}/{{ LANGUAGE_CODE }}/"
               aria-label="{% trans "Aller à lesgrandsvoisins.com" %}"
               title="{% trans "Aller à lesgrandsvoisins.com" %}">{% include "core/icons/maison-svg.html" %}</a>
         </div>
-        {% elif SERVICES_URL %}
-        <div class="menu-autre-site">
-          <a href="{{ SERVICES_URL }}/{{ LANGUAGE_CODE }}/"
-              aria-label="{% trans "Resdigita, le numérique des Grands Voisins" %}"
-              title="{% trans "Resdigita, le numérique des Grands Voisins" %}">
-            {% include "core/icons/ordinateur-svg.html" %}
-          </a>
-        </div>
-        {% endif %}
         {% if not SITE_THEME %}
         <div class="menu-agenda">
           <a href="{% url 'core:agenda' %}"
@@ -194,6 +177,23 @@
                title="{% trans "Wiki" %}">{% include "core/icons/wiki-svg.html" %}</a>
           </div>
           {% endcomment %}
+          {% if SERVICES_URL %}
+          <div class="menu-autre-site">
+            <a href="{{ SERVICES_URL }}/{{ LANGUAGE_CODE }}/"
+                aria-label="{% trans "Resdigita, le numérique des Grands Voisins" %}"
+                title="{% trans "Resdigita, le numérique des Grands Voisins" %}">
+              {% include "core/icons/ordinateur-svg.html" %}
+            </a>
+          </div>
+          {% endif %}
+        {% endif %}
+
+        {% if SITE_THEME %}
+          <a class="brand brand-texte"
+             href="{% url 'core:home' %}"
+             aria-label="{% trans 'Resdigita, le numérique des Grands Voisins — accueil' %}">
+            <span class="brand-nom">Resdigita</span><span class="brand-devise">{% trans "le numérique des Grands Voisins" %}</span>
+          </a>
         {% endif %}
 
         {% if SITE_THEME %}

@@ -155,6 +155,19 @@
             <span class="brand-nom">Resdigita</span><span class="brand-devise">{% trans "le numérique des Grands Voisins" %}</span>
           </a>
         {% endif %}
+
+        <div class="menu-autre-site">
+          <a href="{{ SITE_PRINCIPAL }}/{{ LANGUAGE_CODE }}/"
+              aria-label="{% trans "Aller à lesgrandsvoisins.com" %}"
+              title="{% trans "Aller à lesgrandsvoisins.com" %}">{% include "core/icons/maison-svg.html" %}</a>
+        </div>
+        <div class="menu-autre-site">
+          <a href="{{ SERVICES_URL }}/{{ LANGUAGE_CODE }}/#outils-titre"
+              aria-label="{% trans "Resdigita, le numérique des Grands Voisins" %}"
+              title="{% trans "Resdigita, le numérique des Grands Voisins" %}">
+            {% include "core/icons/ordinateur-svg.html" %}
+          </a>
+        </div>
         {% if not SITE_THEME %}
         <div class="menu-agenda">
           <a href="{% url 'core:agenda' %}"
@@ -171,33 +184,20 @@
                aria-label="{% trans "Blog" %}"
                title="{% trans "Blog" %}">{% include "core/icons/blog-svg.html" %}</a>
           </div>
+          {% comment %}
           <div class="menu-wiki">
             <a href="{{ GUIDE_URL }}"
                aria-label="{% trans "Wiki" %}"
                title="{% trans "Wiki" %}">{% include "core/icons/wiki-svg.html" %}</a>
           </div>
+          {% endcomment %}
         {% endif %}
-
-        <div class="menu-autre-site">
-          <a href="{{ SITE_PRINCIPAL }}/{{ LANGUAGE_CODE }}/"
-              aria-label="{% trans "Aller à lesgrandsvoisins.com" %}"
-              title="{% trans "Aller à lesgrandsvoisins.com" %}">{% include "core/icons/maison-svg.html" %}</a>
-        </div>
-        <div class="menu-autre-site">
-          <a href="{{ SERVICES_URL }}/{{ LANGUAGE_CODE }}/#outils-titre"
-              aria-label="{% trans "Resdigita, le numérique des Grands Voisins" %}"
-              title="{% trans "Resdigita, le numérique des Grands Voisins" %}">
-            {% include "core/icons/ordinateur-svg.html" %}
-          </a>
-        </div>
 
         {% if SITE_THEME %}
         <a href="/{{ LANGUAGE_CODE }}/agence/"
            aria-label="{% trans "Resdigita, l'agence numérique" %}"
            title="{% trans "Resdigita, l'agence numérique" %}">{% include "core/icons/agence-svg.html" %}</a>
         {% endif %}
-
-
 
         <div class="search-dropdown"
              x-data="{ open: false }"

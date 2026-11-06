@@ -4381,7 +4381,14 @@ pre { max-width: 100%; overflow-x: auto; }
    Sans JavaScript, c'est un simple ancrage natif. Si l'en-tête est plus haute que
    l'écran, site.js la fait flotter juste au-dessus du bas de la fenêtre (is-fixed). */
 #tools-page-head-div,
-#page-numerique-hero-section { position: relative; }
+#page-numerique-hero-section,
+#page-home-hero-section { position: relative; }
+
+/* L'en-tête de l'accueil a overflow: hidden (pour les blobs) : la flèche reste
+   visible au lieu de déborder sur la section suivante. En mode flottant (is-fixed),
+   elle survole le bas de la fenêtre comme ailleurs. */
+#page-home-hero-section .scroll-down { bottom: 0; }
+#page-home-hero-section .scroll-down.is-fixed { bottom: 1.25rem; }
 .scroll-down {
   position: absolute;
   left: 50%;

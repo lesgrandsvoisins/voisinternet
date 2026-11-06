@@ -101,6 +101,16 @@ class PagesTests(Base):
         self.assertNotIn(reverse("core:activites"), panel)
         self.assertNotIn("Mes services", panel)
 
+    def test_home_has_scroll_down_disc_without_timer(self):
+        # Flèche circulaire « aller au contenu » sur l'accueil : de l'en-tête vers la
+        # première section. Pas de défilement automatique (data-scroll-no-timer).
+        response = self.client.get(reverse("core:home"))
+        self.assertContains(response, 'id="page-home-hero-section"')
+        self.assertContains(response, 'id="page-home-content-section"')
+        self.assertContains(response, 'class="scroll-down"')
+        self.assertContains(response, 'href="#page-home-content-section"')
+        self.assertContains(response, "data-scroll-no-timer")
+
 
 class ContentPageQmdTests(Base):
     def setUp(self):

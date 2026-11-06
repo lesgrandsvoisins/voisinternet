@@ -14,7 +14,7 @@
 {% endblock title %}
 {% block content %}
   <!-- HERO -->
-  <section class="hero blob-bg">
+  <section class="hero blob-bg" id="page-home-hero-section">
     <div class="blob-canvas" aria-hidden="true">
       <span class="blob blob-a"></span>
       <span class="blob blob-b"></span>
@@ -85,10 +85,17 @@
       {{ quicklink_event_texts|json_script:"quicklink-agenda-data" }}
       {% comment %} {% include "core/partials/scene.html" %} {% endcomment %}
     </div>
+    <a class="scroll-down"
+       href="#page-home-content-section"
+       data-scroll-head="#page-home-hero-section"
+       data-scroll-no-timer
+       aria-label="{% trans "Aller au contenu" %}">
+      {% include "core/icons/chevron-down-svg.html" %}
+    </a>
   </section>
   {% include "core/partials/announcement_card.html" %}
   <!-- NEXT EVENTS -->
-  <section class="block" aria-labelledby="next-title">
+  <section class="block" aria-labelledby="next-title" id="page-home-content-section">
     <div class="wrap two two-even">
       <div>
         <h2 id="next-title">{% trans "Prochainement" %}</h2>

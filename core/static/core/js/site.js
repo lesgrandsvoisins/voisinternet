@@ -365,7 +365,8 @@
   // #page-numerique-content-section). Si l'en-tête est plus haute que l'écran, elle
   // flotte juste au-dessus du bas de la fenêtre tant que le contenu n'est pas atteint.
   // Défilement automatique après 5 s, comme un clic sur le bouton — annulé si la
-  // personne interagit d'abord.
+  // personne interagit d'abord. Un bouton portant data-scroll-no-timer n'a pas de
+  // minuterie (défilement uniquement au clic).
   function armScrollDown() {
     var btn = document.querySelector(".scroll-down[href^='#']");
     if (!btn || btn.dataset.armed) return;
@@ -401,16 +402,18 @@
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
 
-    var timer = setTimeout(go, 5000);
-    var cancel = function () {
-      clearTimeout(timer);
-      window.removeEventListener("wheel", cancel);
-      window.removeEventListener("touchstart", cancel);
-      window.removeEventListener("keydown", cancel);
-    };
-    window.addEventListener("wheel", cancel, { passive: true });
-    window.addEventListener("touchstart", cancel, { passive: true });
-    window.addEventListener("keydown", cancel);
+    if (!btn.hasAttribute("data-scroll-no-timer")) {
+      var timer = setTimeout(go, 5000);
+      var cancel = function () {
+        clearTimeout(timer);
+        window.removeEventListener("wheel", cancel);
+        window.removeEventListener("touchstart", cancel);
+        window.removeEventListener("keydown", cancel);
+      };
+      window.addEventListener("wheel", cancel, { passive: true });
+      window.addEventListener("touchstart", cancel, { passive: true });
+      window.addEventListener("keydown", cancel);
+    }
   }
 
   document.addEventListener("DOMContentLoaded", armScrollDown);

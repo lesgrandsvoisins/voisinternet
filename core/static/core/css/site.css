@@ -4342,3 +4342,8 @@ img.numerique-visuel {
   padding: 0.5rem;
   opacity: 0.8;
 }
+
+img.tool-icon {
+  background-color: black;
+  padding: 0.15rem;
+}

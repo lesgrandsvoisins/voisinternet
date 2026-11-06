@@ -4,12 +4,14 @@
     <a href="{{ service.url }}"
        target="_blank"
        rel="noopener"
-       title="{{ service.summary }}">
+       title="{{ service.summary }}"
+       class="tool-link"
+    >
     {% else %}
       <span class="outil-sans-adresse" title="{% trans "Bientôt" %}">
       {% endif %}
       {% if service.icon %}
-        <img class="svc-icon" src="{{ service.icon.url }}" alt="">
+        <img class="svc-icon tool-icon" src="{{ service.icon.url }}" alt="">
       {% else %}
         <span class="led" aria-hidden="true"></span>
       {% endif %}

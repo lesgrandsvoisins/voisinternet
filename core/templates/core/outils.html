@@ -14,14 +14,14 @@
 {% endblock title %}
 {% block content %}
   <!-- BODY HEADER -->
-  <div class="page-head">
+  <div class="page-head" id="tools-page-head-div">
     <div class="wrap">
       <h1>{% trans "Tous les outils" %}</h1>
       <p class="lead">{% trans "Les outils numériques des Grands Voisins, en un clic." %}</p>
     </div>
   </div>
   <!-- BODY CONTENT -->
-  <div class="wrap page">
+  <div class="wrap page" id="tools-content-div">
     {% include "core/partials/outils_grille.html" %}
     <p class="muted">
       <a href="{% url 'core:raccourcis' %}">{% trans "Choisir mes services et les retrouver sur tous mes appareils" %}</a>

@@ -141,32 +141,31 @@
               </div>
             </nav>
           </div>
-          <div class="menu-agenda">
-            <a href="{% url 'core:agenda' %}"
-               aria-label="{% trans "Agenda" %}"
-               title="{% trans "Agenda" %}">{% include "core/icons/agenda-svg.html" %}</a>
-          </div>
-          <div class="menu-annuaire">
-            <a href="{% url 'core:annuaire' %}"
-               aria-label="{% trans "Annuaire" %}"
-               title="{% trans "Annuaire" %}">{% include "core/icons/annuaire-svg.html" %}</a>
-          </div>
         {% endif %}
+        <a class="brand"
+           href="{% url 'core:home' %}"
+           aria-label="{% trans 'lesgrandsvoisins.com, accueil' %}">
+          {% include "core/partials/logo_mark.html" %}
+          {% comment %} {% include "core/partials/wordmark.html" %} {% endcomment %}
+        </a>
         {% if SITE_THEME %}
           <a class="brand brand-texte"
              href="{% url 'core:home' %}"
              aria-label="{% trans 'Resdigita, le numérique des Grands Voisins — accueil' %}">
             <span class="brand-nom">Resdigita</span><span class="brand-devise">{% trans "le numérique des Grands Voisins" %}</span>
           </a>
-        {% else %}
-          <a class="brand"
-             href="{% url 'core:home' %}"
-             aria-label="{% trans 'lesgrandsvoisins.com, accueil' %}">
-            {% include "core/partials/logo_mark.html" %}
-            {% comment %} {% include "core/partials/wordmark.html" %} {% endcomment %}
-          </a>
         {% endif %}
         {% if not SITE_THEME %}
+        <div class="menu-agenda">
+          <a href="{% url 'core:agenda' %}"
+             aria-label="{% trans "Agenda" %}"
+             title="{% trans "Agenda" %}">{% include "core/icons/agenda-svg.html" %}</a>
+        </div>
+        <div class="menu-annuaire">
+          <a href="{% url 'core:annuaire' %}"
+             aria-label="{% trans "Annuaire" %}"
+             title="{% trans "Annuaire" %}">{% include "core/icons/annuaire-svg.html" %}</a>
+        </div>
           <div class="menu-blog">
             <a href="/{{ LANGUAGE_CODE }}/blog/"
                aria-label="{% trans "Blog" %}"

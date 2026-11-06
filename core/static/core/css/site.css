@@ -4340,7 +4340,8 @@ pre { max-width: 100%; overflow-x: auto; }
    bas de l'en-tête (#tools-page-head-div), lien vers le contenu (#tools-content-div).
    Sans JavaScript, c'est un simple ancrage natif. Si l'en-tête est plus haute que
    l'écran, site.js la fait flotter juste au-dessus du bas de la fenêtre (is-fixed). */
-#tools-page-head-div { position: relative; }
+#tools-page-head-div,
+#page-numerique-hero-section { position: relative; }
 .scroll-down {
   position: absolute;
   left: 50%;

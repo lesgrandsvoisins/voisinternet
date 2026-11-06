@@ -2276,6 +2276,11 @@ class SiteResdigitaTests(Base):
         self.assertNotContains(r, "menu-annuaire")
         self.assertContains(r, "outils-informatiques.svg")
         self.assertContains(r, "outils-grid")  # le tableau de bord, sous le message
+        # Flèche circulaire « aller aux outils » : de l'en-tête vers le contenu.
+        self.assertContains(r, 'id="page-numerique-hero-section"')
+        self.assertContains(r, 'id="page-numerique-content-section"')
+        self.assertContains(r, 'class="scroll-down"')
+        self.assertContains(r, 'href="#page-numerique-content-section"')
         self.assertContains(r, 'class="theme-numerique"')
         self.assertContains(r, "menu-autre-site")  # retour vers lesgrandsvoisins.com depuis le menu
         # traduction Wagtail de la page d'accueil : servie dans la langue du préfixe

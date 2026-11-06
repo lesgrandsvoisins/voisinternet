@@ -358,17 +358,21 @@
 
   document.addEventListener("DOMContentLoaded", armQuicklinkCycle);
 
-  // Flèche circulaire « aller aux outils » (core/templates/core/outils.html) : ancrée
-  // en bas de l'en-tête (#tools-page-head-div), lien vers le contenu (#tools-content-div).
-  // Si l'en-tête est plus haute que l'écran, elle flotte juste au-dessus du bas de la
-  // fenêtre tant que le contenu n'est pas atteint. Défilement automatique après 5 s,
-  // comme un clic sur le bouton — annulé si la personne interagit d'abord.
+  // Flèche circulaire « aller aux outils » : ancrée en bas de l'en-tête, lien vers le
+  // contenu. Le bouton porte href="#cible" et data-scroll-head="#en-tête" — utilisé
+  // sur core/templates/core/outils.html (#tools-page-head-div -> #tools-content-div) et
+  // sur cms/templates/cms/numerique_page.html (#page-numerique-hero-section ->
+  // #page-numerique-content-section). Si l'en-tête est plus haute que l'écran, elle
+  // flotte juste au-dessus du bas de la fenêtre tant que le contenu n'est pas atteint.
+  // Défilement automatique après 5 s, comme un clic sur le bouton — annulé si la
+  // personne interagit d'abord.
   function armScrollDown() {
     var btn = document.querySelector(".scroll-down[href^='#']");
     if (!btn || btn.dataset.armed) return;
     btn.dataset.armed = "1";
     var target = document.getElementById(btn.getAttribute("href").slice(1));
-    var head = document.getElementById("tools-page-head-div");
+    var headQuery = btn.dataset.scrollHead;
+    var head = headQuery ? document.querySelector(headQuery) : null;
     if (!target || !head) return;
 
     var reduced = function () {

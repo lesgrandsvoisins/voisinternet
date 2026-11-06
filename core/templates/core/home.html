@@ -89,6 +89,7 @@
        href="#page-home-content-section"
        data-scroll-head="#page-home-hero-section"
        data-scroll-no-timer
+       data-scroll-flat
        aria-label="{% trans "Aller au contenu" %}">
       {% include "core/icons/chevron-down-svg.html" %}
     </a>
@@ -121,10 +122,17 @@
         <a class="more" href="{% url 'core:agenda' %}">{% trans "Tout l'agenda" %}</a>
       </div>
     </div>
+    <a class="scroll-down"
+       href="#page-home-poles-section"
+       data-scroll-head="#page-home-content-section"
+       data-scroll-flat
+       aria-label="{% trans "Aller à la suite" %}">
+      {% include "core/icons/chevron-down-svg.html" %}
+    </a>
   </section>
   <!-- POLES -->
   {% if poles %}
-    <section class="block" aria-labelledby="poles-title">
+    <section class="block" aria-labelledby="poles-title" id="page-home-poles-section">
       <div class="wrap">
         <h2 id="poles-title">{% trans "Nos trois pôles" %}</h2>
         <p class="intro">{% trans "Portés ensemble par les bénévoles, chacun avec sa couleur et ses rendez-vous." %}</p>
@@ -137,10 +145,17 @@
           {% endfor %}
         </div>
       </div>
+      <a class="scroll-down"
+         href="#page-home-blog-section"
+         data-scroll-head="#page-home-poles-section"
+         data-scroll-flat
+         aria-label="{% trans "Aller à la suite" %}">
+        {% include "core/icons/chevron-down-svg.html" %}
+      </a>
     </section>
   {% endif %}
   <!-- BLOG -->
-  <section class="block" aria-label="{% trans 'Le blog' %}">
+  <section class="block" aria-label="{% trans 'Le blog' %}" id="page-home-blog-section">
     <div class="wrap two two-even">
       <div>
         <h2>
@@ -166,9 +181,16 @@
         {% endif %}
       </div>
     </div>
+    <a class="scroll-down"
+       href="#page-home-annuaire-section"
+       data-scroll-head="#page-home-blog-section"
+       data-scroll-flat
+       aria-label="{% trans "Aller à la suite" %}">
+      {% include "core/icons/chevron-down-svg.html" %}
+    </a>
   </section>
   <!-- DIRECTORY PREVIEW -->
-  <section class="block" aria-label="{% trans "L'annuaire" %}">
+  <section class="block" aria-label="{% trans "L'annuaire" %}" id="page-home-annuaire-section">
     <div class="wrap two two-even">
       <div>
         <a href="{{ conj.annuaire.href }}">{% include "core/partials/scene.html" %}</a>
@@ -201,9 +223,16 @@
         <a class="more" href="{{ conj.annuaire.href }}">{% trans "Voir tout l'annuaire" %}</a>
       </div>
     </div>
+    <a class="scroll-down"
+       href="#page-home-guide-section"
+       data-scroll-head="#page-home-annuaire-section"
+       data-scroll-flat
+       aria-label="{% trans "Aller à la suite" %}">
+      {% include "core/icons/chevron-down-svg.html" %}
+    </a>
   </section>
   <!-- GUIDE -->
-  <section class="block" aria-label="{% trans 'Le guide' %}">
+  <section class="block" aria-label="{% trans 'Le guide' %}" id="page-home-guide-section">
     <div class="wrap">
       <h2>
         <span class="form">{% trans "Wiki" %}</span>
@@ -223,9 +252,16 @@
       {% endif %}
       <a class="more" href="{{ GUIDE_URL }}">{% trans "Tout le guide" %}</a>
     </div>
+    <a class="scroll-down"
+       href="#page-home-explore-section"
+       data-scroll-head="#page-home-guide-section"
+       data-scroll-flat
+       aria-label="{% trans "Aller à la suite" %}">
+      {% include "core/icons/chevron-down-svg.html" %}
+    </a>
   </section>
   <!-- EXPLORE -->
-  <section class="block" aria-labelledby="explore-title">
+  <section class="block" aria-labelledby="explore-title" id="page-home-explore-section">
     <div class="wrap">
       <h2 id="explore-title">{% trans "Explorer le site" %}</h2>
       <p class="intro">{% trans "Un aperçu de chaque rubrique, pour vous y retrouver." %}</p>
@@ -244,10 +280,17 @@
         </div>
       </div>
     </div>
+    <a class="scroll-down"
+       href="#page-home-audiences-section"
+       data-scroll-head="#page-home-explore-section"
+       data-scroll-flat
+       aria-label="{% trans "Aller à la suite" %}">
+      {% include "core/icons/chevron-down-svg.html" %}
+    </a>
   </section>
   <!-- AUDIENCES -->
   {% if audiences %}
-    <section class="block publics" aria-labelledby="pub-title">
+    <section class="block publics" aria-labelledby="pub-title" id="page-home-audiences-section">
       <div class="wrap">
         <h2 id="pub-title">{% trans "Vous êtes…" %}</h2>
         <ul class="aud">
@@ -258,10 +301,17 @@
           {% endfor %}
         </ul>
       </div>
+      <a class="scroll-down"
+         href="#page-home-how-section"
+         data-scroll-head="#page-home-audiences-section"
+         data-scroll-flat
+         aria-label="{% trans "Aller à la suite" %}">
+        {% include "core/icons/chevron-down-svg.html" %}
+      </a>
     </section>
   {% endif %}
   <!-- HOW IT WORKS -->
-  <section class="block" aria-labelledby="how-title">
+  <section class="block" aria-labelledby="how-title" id="page-home-how-section">
     <div class="wrap">
       <div class="how-lead">
         {% include "core/partials/sun_cloud.html" %}
@@ -296,9 +346,16 @@
         </li>
       </ol>
     </div>
+    <a class="scroll-down"
+       href="#page-home-services-section"
+       data-scroll-head="#page-home-how-section"
+       data-scroll-flat
+       aria-label="{% trans "Aller à la suite" %}">
+      {% include "core/icons/chevron-down-svg.html" %}
+    </a>
   </section>
   <!-- SERVICES PREVIEW -->
-  <section class="block" aria-labelledby="svc-title">
+  <section class="block" aria-labelledby="svc-title" id="page-home-services-section">
     <div class="wrap">
       <h2 id="svc-title">
         <span class="form">{% trans "mon compte" %}</span> : {% trans "les services" %}
@@ -311,6 +368,13 @@
         <a href="{% url 'core:raccourcis' %}">{% trans "Tous les services, avec ce que chacun conserve" %}</a>
       </p>
     </div>
+    <a class="scroll-down"
+       href="#page-home-story-section"
+       data-scroll-head="#page-home-services-section"
+       data-scroll-flat
+       aria-label="{% trans "Aller à la suite" %}">
+      {% include "core/icons/chevron-down-svg.html" %}
+    </a>
   </section>
   {% comment %}
   <section class="block quote" aria-labelledby="q-title">
@@ -331,7 +395,7 @@
   </section>
   {% endcomment %}
   <!-- STORY -->
-  <section class="block" aria-labelledby="story-title">
+  <section class="block" aria-labelledby="story-title" id="page-home-story-section">
     <div class="wrap two two-even">
       <div>
         <h2 id="story-title">{% trans "D'où l'on vient" %}</h2>

@@ -358,62 +358,69 @@
 
   document.addEventListener("DOMContentLoaded", armQuicklinkCycle);
 
-  // Flèche circulaire « aller aux outils » : ancrée en bas de l'en-tête, lien vers le
-  // contenu. Le bouton porte href="#cible" et data-scroll-head="#en-tête" — utilisé
-  // sur core/templates/core/outils.html (#tools-page-head-div -> #tools-content-div) et
-  // sur cms/templates/cms/numerique_page.html (#page-numerique-hero-section ->
-  // #page-numerique-content-section). Si l'en-tête est plus haute que l'écran, elle
-  // flotte juste au-dessus du bas de la fenêtre tant que le contenu n'est pas atteint.
-  // Défilement automatique après 5 s, comme un clic sur le bouton — annulé si la
-  // personne interagit d'abord. Un bouton portant data-scroll-no-timer n'a pas de
-  // minuterie (défilement uniquement au clic).
+  // Flèche circulaire « aller à la suite » : ancrée en bas d'une section (l'en-tête),
+  // lien vers la section suivante. Chaque bouton porte href="#cible" et
+  // data-scroll-head="#en-tête" — utilisé sur core/templates/core/outils.html
+  // (#tools-page-head-div -> #tools-content-div), sur cms/templates/cms/numerique_page.html
+  // (#page-numerique-hero-section -> #page-numerique-content-section) et, plusieurs fois,
+  // sur core/templates/core/home.html (une par section). Si l'en-tête est plus haute que
+  // l'écran, la flèche flotte juste au-dessus du bas de la fenêtre tant que le contenu
+  // n'est pas atteint. Défilement automatique après 5 s, comme un clic sur le bouton —
+  // annulé si la personne interagit d'abord. Un bouton portant data-scroll-no-timer n'a
+  // pas de minuterie (défilement uniquement au clic). Un bouton portant data-scroll-flat
+  // reste fixé à la fin de sa section (pas de flottement is-fixed ni de minuterie), pour
+  // que plusieurs flèches ne se chevauchent pas en bas de la fenêtre.
   function armScrollDown() {
-    var btn = document.querySelector(".scroll-down[href^='#']");
-    if (!btn || btn.dataset.armed) return;
-    btn.dataset.armed = "1";
-    var target = document.getElementById(btn.getAttribute("href").slice(1));
-    var headQuery = btn.dataset.scrollHead;
-    var head = headQuery ? document.querySelector(headQuery) : null;
-    if (!target || !head) return;
+    var btns = document.querySelectorAll(".scroll-down[href^='#']");
+    btns.forEach(function (btn) {
+      if (btn.dataset.armed) return;
+      btn.dataset.armed = "1";
+      var target = document.getElementById(btn.getAttribute("href").slice(1));
+      var headQuery = btn.dataset.scrollHead;
+      var head = headQuery ? document.querySelector(headQuery) : null;
+      if (!target || !head) return;
 
-    var reduced = function () {
-      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    };
-    var go = function () {
-      target.scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "start" });
-    };
-
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
-      go();
-    });
-
-    var update = function () {
-      var tall = head.scrollHeight > window.innerHeight;
-      btn.classList.toggle("is-fixed", tall);
-      if (tall) {
-        var rect = target.getBoundingClientRect();
-        btn.classList.toggle("is-hidden", rect.top <= window.innerHeight);
-      } else {
-        btn.classList.remove("is-hidden");
-      }
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-
-    if (!btn.hasAttribute("data-scroll-no-timer")) {
-      var timer = setTimeout(go, 5000);
-      var cancel = function () {
-        clearTimeout(timer);
-        window.removeEventListener("wheel", cancel);
-        window.removeEventListener("touchstart", cancel);
-        window.removeEventListener("keydown", cancel);
+      var reduced = function () {
+        return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       };
-      window.addEventListener("wheel", cancel, { passive: true });
-      window.addEventListener("touchstart", cancel, { passive: true });
-      window.addEventListener("keydown", cancel);
-    }
+      var go = function () {
+        target.scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "start" });
+      };
+
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        go();
+      });
+
+      if (btn.hasAttribute("data-scroll-flat")) return;
+
+      var update = function () {
+        var tall = head.scrollHeight > window.innerHeight;
+        btn.classList.toggle("is-fixed", tall);
+        if (tall) {
+          var rect = target.getBoundingClientRect();
+          btn.classList.toggle("is-hidden", rect.top <= window.innerHeight);
+        } else {
+          btn.classList.remove("is-hidden");
+        }
+      };
+      update();
+      window.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
+
+      if (!btn.hasAttribute("data-scroll-no-timer")) {
+        var timer = setTimeout(go, 5000);
+        var cancel = function () {
+          clearTimeout(timer);
+          window.removeEventListener("wheel", cancel);
+          window.removeEventListener("touchstart", cancel);
+          window.removeEventListener("keydown", cancel);
+        };
+        window.addEventListener("wheel", cancel, { passive: true });
+        window.addEventListener("touchstart", cancel, { passive: true });
+        window.addEventListener("keydown", cancel);
+      }
+    });
   }
 
   document.addEventListener("DOMContentLoaded", armScrollDown);

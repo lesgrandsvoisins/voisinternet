@@ -4382,7 +4382,17 @@ pre { max-width: 100%; overflow-x: auto; }
    l'écran, site.js la fait flotter juste au-dessus du bas de la fenêtre (is-fixed). */
 #tools-page-head-div,
 #page-numerique-hero-section,
-#page-home-hero-section { position: relative; }
+#page-home-hero-section,
+#page-home-content-section,
+#page-home-poles-section,
+#page-home-blog-section,
+#page-home-annuaire-section,
+#page-home-guide-section,
+#page-home-explore-section,
+#page-home-audiences-section,
+#page-home-how-section,
+#page-home-services-section,
+#page-home-story-section { position: relative; }
 
 /* L'en-tête de l'accueil a overflow: hidden (pour les blobs) : la flèche reste
    visible au lieu de déborder sur la section suivante. En mode flottant (is-fixed),

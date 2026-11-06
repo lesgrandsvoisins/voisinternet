@@ -1,14 +1,4 @@
 {% load i18n %}
-{% if mes_services %}
-  <section class="outils-group" aria-labelledby="outils-mes">
-    <h2 class="svc-cat" id="outils-mes">{% trans "Mes services" %}</h2>
-    <ul class="outils-grid">
-      {% for service in mes_services %}
-        {% include "core/partials/outil_tuile.html" %}
-      {% endfor %}
-    </ul>
-  </section>
-{% endif %}
 {% regroup services by category as groupes %}
 {% for groupe in groupes %}
   <section class="outils-group"
@@ -28,3 +18,14 @@
     </ul>
   </section>
 {% endfor %}
+
+{% if mes_services %}
+  <section class="outils-group" aria-labelledby="outils-mes">
+    <h2 class="svc-cat" id="outils-mes">{% trans "Mes services" %}</h2>
+    <ul class="outils-grid">
+      {% for service in mes_services %}
+        {% include "core/partials/outil_tuile.html" %}
+      {% endfor %}
+    </ul>
+  </section>
+{% endif %}

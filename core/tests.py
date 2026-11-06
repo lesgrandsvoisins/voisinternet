@@ -2049,6 +2049,35 @@ class TableauDeBordOutilsTests(Base):
         self.assertContains(response, 'id="tools-content-div"')
         self.assertContains(response, 'class="scroll-down"')
         self.assertContains(response, 'href="#tools-content-div"')
+        # Pas de compte : pas de cercle d'abonnement sur les tuiles.
+        self.assertNotContains(response, "outil-toggle")
+
+    def test_cercle_abonnement_pour_identifie(self):
+        user = get_user_model().objects.create_user("sub-cercle")
+        self.client.force_login(user)
+        url = reverse("core:toggle_shortcut", args=[self.service.slug])
+
+        # Non abonné : cercle vide (sans coche).
+        r = self.client.get(reverse("core:outils"))
+        self.assertContains(r, "outil-toggle")
+        self.assertContains(r, 'aria-pressed="false"')
+
+        # Ajout depuis la tuile : la réponse ne renvoie que le cercle (rep=tuile).
+        resp = self.client.post(url, {"rep": "tuile"}, HTTP_HX_REQUEST="true")
+        self.assertEqual(resp.status_code, 200)
+        self.assertContains(resp, 'class="outil-btn on"')
+        self.assertContains(resp, 'aria-pressed="true"')
+        self.assertTrue(Shortcut.objects.filter(account__user=user, service=self.service).exists())
+
+        # Après ajout : cercle plein sur la page.
+        r2 = self.client.get(reverse("core:outils"))
+        self.assertContains(r2, 'aria-pressed="true"')
+
+        # Retrait depuis la tuile.
+        resp = self.client.post(url, {"rep": "tuile"}, HTTP_HX_REQUEST="true")
+        self.assertContains(resp, 'class="outil-btn"')
+        self.assertContains(resp, 'aria-pressed="false"')
+        self.assertFalse(Shortcut.objects.filter(account__user=user, service=self.service).exists())
 
     def test_administration_tools_are_hidden_from_others(self):
         from django.contrib.auth.models import Group

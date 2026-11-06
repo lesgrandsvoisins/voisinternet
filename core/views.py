@@ -1172,6 +1172,13 @@ def toggle_shortcut(request, slug):
         shortcut_ids = set(account.shortcut_set.values_list("service_id", flat=True)) if account else set()
         shortcuts = account.ordered_shortcuts() if account else []
         available_services = _catalogue(request.user)
+        if request.POST.get("rep") == "tuile":
+            # Venu d'un cercle d'abonnement d'une tuile (outil_tuile.html) : ne
+            # renvoie que le cercle, pas tout le panneau « Mon compte ».
+            return render(request, "core/partials/outil_shortcut_button.html", {
+                "service": service,
+                "added": added,
+            })
         return render(request, "core/partials/shortcut_response.html", {
             "service": service,
             "added": added,
@@ -1729,7 +1736,11 @@ def outils_context(request):
     services = _catalogue(request.user)
     acc = current_account(request)
     mes_ids = set(acc.shortcut_set.values_list("service_id", flat=True)) if acc else set()
-    return {"services": services, "mes_services": [s for s in services if s.pk in mes_ids]}
+    return {
+        "services": services,
+        "mes_services": [s for s in services if s.pk in mes_ids],
+        "mes_ids": mes_ids,
+    }
 
 
 def outils(request):

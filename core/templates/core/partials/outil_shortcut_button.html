@@ -1,0 +1,23 @@
+{% load i18n %}
+<form class="outil-toggle"
+      method="post"
+      action="{% url 'core:toggle_shortcut' service.slug %}"
+      hx-post="{% url 'core:toggle_shortcut' service.slug %}"
+      hx-target="this"
+      hx-swap="outerHTML">
+  {% csrf_token %}
+  <input type="hidden" name="rep" value="tuile">
+  <input type="hidden" name="next" value="{{ next|default:request.get_full_path }}">
+  <button type="submit"
+          class="outil-btn{% if added %} on{% endif %}"
+          aria-pressed="{{ added|yesno:'true,false' }}"
+          aria-label="{% if added %}{% blocktrans with name=service.name %}Retirer {{ name }} de mes services{% endblocktrans %}{% else %}{% blocktrans with name=service.name %}Ajouter {{ name }} à mes services{% endblocktrans %}{% endif %}">
+    <span class="outil-btn-dot" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           width="1em" height="1em"
+           viewBox="0 0 24 24" focusable="false">
+        <path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"/>
+      </svg>
+    </span>
+  </button>
+</form>

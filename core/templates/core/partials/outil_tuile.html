@@ -22,4 +22,11 @@
     {% else %}
     </span>
   {% endif %}
+  {% if account %}
+    {% if service.pk in mes_ids %}
+      {% include "core/partials/outil_shortcut_button.html" with added=True %}
+    {% else %}
+      {% include "core/partials/outil_shortcut_button.html" with added=False %}
+    {% endif %}
+  {% endif %}
 </li>

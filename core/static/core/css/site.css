@@ -4285,6 +4285,46 @@ a.prevnext {
 .outil .outil-resume { grid-column: 2; font-size: .85rem; color: var(--ink-soft); overflow-wrap: anywhere; }
 .outil-sans-adresse { opacity: .6; }
 .outils-group h2.svc-cat { font-family: inherit; font-size: .9rem; margin-bottom: .75rem; }
+/* Cercle d'abonnement d'une tuile (outil_tuile.html) : vide si le service n'est pas
+   dans « Mes services », plein vert avec une coche sinon. Réservé aux personnes
+   identifiées (masqué sinon par le gabarit). */
+.outil { position: relative; }
+.outil-toggle {
+  position: absolute;
+  right: .5rem;
+  bottom: .5rem;
+  margin: 0;
+  z-index: 3;
+}
+.outil-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--ink);
+}
+.outil-btn-dot {
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+}
+.outil-btn svg { width: 1em; height: 1em; opacity: 0; transition: opacity .15s ease; }
+.outil-btn:hover .outil-btn-dot,
+.outil-btn:focus-visible .outil-btn-dot { transform: scale(1.18); }
+.outil-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 50%; }
+.outil-btn.on { color: #fff; }
+.outil-btn.on .outil-btn-dot { background: #2e7d32; border-color: #2e7d32; }
+.outil-btn.on svg { opacity: 1; }
 
 /* Accessibilité (audit du 30/10) */
 /* Les liens « Ajouter / Rejoindre… » ne sont plus DANS le résumé repliable (contrôle interactif imbriqué) : ils le surplombent. */

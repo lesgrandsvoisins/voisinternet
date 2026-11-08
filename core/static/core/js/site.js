@@ -365,10 +365,9 @@
   // (#page-numerique-hero-section -> #page-numerique-content-section) et, plusieurs fois,
   // sur core/templates/core/home.html (une par section). Si l'en-tête est plus haute que
   // l'écran, la flèche flotte juste au-dessus du bas de la fenêtre tant que le contenu
-  // n'est pas atteint. Défilement automatique après 5 s, comme un clic sur le bouton —
-  // annulé si la personne interagit d'abord. Un bouton portant data-scroll-no-timer n'a
-  // pas de minuterie (défilement uniquement au clic). Un bouton portant data-scroll-flat
-  // reste fixé à la fin de sa section (pas de flottement is-fixed ni de minuterie), pour
+  // n'est pas atteint. Le défilement ne se fait qu'au clic : plus
+  // aucun défilement automatique (supprimé à la demande de Chris, 8/11). Un bouton portant
+  // data-scroll-flat reste fixé à la fin de sa section (pas de flottement is-fixed), pour
   // que plusieurs flèches ne se chevauchent pas en bas de la fenêtre.
   function armScrollDown() {
     var btns = document.querySelectorAll(".scroll-down[href^='#']");
@@ -407,19 +406,6 @@
       update();
       window.addEventListener("scroll", update, { passive: true });
       window.addEventListener("resize", update);
-
-      if (!btn.hasAttribute("data-scroll-no-timer")) {
-        var timer = setTimeout(go, 5000);
-        var cancel = function () {
-          clearTimeout(timer);
-          window.removeEventListener("wheel", cancel);
-          window.removeEventListener("touchstart", cancel);
-          window.removeEventListener("keydown", cancel);
-        };
-        window.addEventListener("wheel", cancel, { passive: true });
-        window.addEventListener("touchstart", cancel, { passive: true });
-        window.addEventListener("keydown", cancel);
-      }
     });
   }
 

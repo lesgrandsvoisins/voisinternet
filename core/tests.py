@@ -111,7 +111,7 @@ class PagesTests(Base):
         self.assertContains(response, 'id="page-home-content-section"')
         self.assertContains(response, 'class="scroll-down"')
         self.assertContains(response, 'href="#page-home-content-section"')
-        self.assertContains(response, "data-scroll-no-timer")
+        self.assertNotContains(response, "data-scroll-no-timer")  # plus de minuterie : défilement au clic seulement
         self.assertContains(response, "data-scroll-flat")
         # Plusieurs flèches (haut de page + au moins deux sections), pas seulement une.
         self.assertGreater(response.content.count(b'class="scroll-down"'), 1)
@@ -2324,7 +2324,7 @@ class SiteResdigitaTests(Base):
         self.assertContains(r, 'id="page-numerique-hero-section"')
         self.assertContains(r, 'id="page-numerique-content-section"')
         self.assertContains(r, 'class="scroll-down"')
-        self.assertContains(r, 'href="#page-numerique-content-section"')
+        self.assertContains(r, 'href="#outils-titre"')
         self.assertContains(r, 'class="theme-numerique"')
         self.assertContains(r, "menu-autre-site")  # retour vers lesgrandsvoisins.com depuis le menu
         # traduction Wagtail de la page d'accueil : servie dans la langue du préfixe
@@ -2382,7 +2382,7 @@ class SitesDesServicesTests(Base):
         r = self.client.get("/fr/outils/", HTTP_HOST="www.resdigita.org")
         self.assertEqual(r.status_code, 200)  # pas de boucle sur le site cible
         r = self.client.get("/fr/", HTTP_HOST="www.lesgrandsvoisins.com")
-        self.assertContains(r, 'href="https://www.resdigita.org/fr/"')  # et inversement, depuis lesgrandsvoisins.com
+        self.assertContains(r, 'href="https://www.resdigita.org/fr/#outils-titre"')  # et inversement, depuis lesgrandsvoisins.com
         r = self.client.post("/fr/outils/", HTTP_HOST="www.lesgrandsvoisins.com")
         self.assertNotEqual(r.status_code, 302)  # seuls les GET sont renvoyés
 
@@ -2390,7 +2390,7 @@ class SitesDesServicesTests(Base):
     def test_desactive_par_defaut(self):
         r = self.client.get("/fr/outils/", HTTP_HOST="www.lesgrandsvoisins.com")
         self.assertEqual(r.status_code, 200)
-        self.assertNotContains(r, "menu-autre-site")  # pas de lien vers resdigita tant que le réglage est vide
+        self.assertNotContains(r, "Resdigita, le numérique des Grands Voisins")  # pas de lien vers resdigita tant que le réglage est vide
 
 
 class DeconnexionChangementDeNomTests(TestCase):

@@ -1,0 +1,62 @@
+{% load static i18n lang_switcher %}
+<div class="wrap">
+  {% if SITE_THEME %}
+    <div class="foot">
+      <div>
+        <p>
+          <strong>Resdigita</strong>, {% trans "le numérique des Grands Voisins" %}
+        </p>
+        <p>{% trans "Les personnes se retrouvent d'abord dans la vie réelle ; l'ordinateur en fait partie." %}</p>
+        <p>
+          {% trans "Seulement deux cookies techniques : votre session et la protection des formulaires. Aucun traceur, rien n'est chargé depuis un tiers." %}
+        </p>
+      </div>
+      <nav class="foot-nav" aria-label="{% trans 'Plan du site' %}">
+        <ul>
+          <li>
+            <a href="{% url 'core:home' %}">{% trans "Accueil" %}</a>
+          </li>
+          <li>
+            <a href="{% url 'core:raccourcis' %}">{% trans "Mes services" %}</a>
+          </li>
+          <li>
+            <a href="{{ SITE_PRINCIPAL }}/{{ LANGUAGE_CODE }}/">{% trans "Les Grands Voisins" %}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  {% else %}
+    <div class="foot">
+      <div>
+        {% include "core/partials/wordmark.html" with domain=True %}
+        <p>{% trans "Porté par Les Grands Voisins, à Fontenay-aux-Roses et dans le 14ᵉ arrondissement de Paris." %}</p>
+        <p>
+          {% trans "Seulement deux cookies techniques : votre session et la protection des formulaires. Aucun traceur, rien n'est chargé depuis un tiers." %}
+        </p>
+      </div>
+      <nav class="foot-nav" aria-label="{% trans 'Plan du site' %}">
+        {% for group in conj_groups %}
+          <ul>
+            {% for item in group.items %}
+              <li>
+                <a href="{{ item.href }}" aria-label="{{ item.entry.aria }}">{{ item.entry.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+      </nav>
+    </div>
+  {% endif %}
+  <div class="foot-bottom">
+    {% lang_switcher_footer %}
+    <span>
+      {% if SITE_THEME %}
+        resdigita.org
+      {% else %}
+        {% trans "lesgrandsvoisins.com" %}
+      {% endif %}
+    </span>
+    <a href="https://github.com/lesgrandsvoisins" rel="noopener noreferrer">GitHub</a>
+    <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>
+  </div>
+</div>

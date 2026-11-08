@@ -1,0 +1,110 @@
+{% load static i18n lang_switcher %}
+
+<a class="brand"
+   href="https://www.lesgrandsvoisins.com/{{ LANGUAGE_CODE }}/"
+   aria-label="{% trans 'lesgrandsvoisins.com, accueil' %}">
+  {% include "core/partials/logo_mark.html" %}
+  {% comment %} {% include "core/partials/wordmark.html" %} {% endcomment %}
+</a>
+<div class="menu-autre-site">
+  <a href="{{ SITE_PRINCIPAL }}/{{ LANGUAGE_CODE }}/"
+      aria-label="{% trans "Aller à lesgrandsvoisins.com" %}"
+      title="{% trans "Aller à lesgrandsvoisins.com" %}">{% include "core/icons/maison-svg.html" %}</a>
+</div>
+{% if not SITE_THEME %}
+  <div class="menu-agenda">
+    <a href="{% url 'core:agenda' %}"
+      aria-label="{% trans "Agenda" %}"
+      title="{% trans "Agenda" %}">{% include "core/icons/agenda-svg.html" %}</a>
+  </div>
+  <div class="menu-annuaire">
+    <a href="{% url 'core:annuaire' %}"
+      aria-label="{% trans "Annuaire" %}"
+      title="{% trans "Annuaire" %}">{% include "core/icons/annuaire-svg.html" %}</a>
+  </div>
+  <div class="menu-blog">
+    <a href="/{{ LANGUAGE_CODE }}/blog/"
+        aria-label="{% trans "Blog" %}"
+        title="{% trans "Blog" %}">{% include "core/icons/blog-svg.html" %}</a>
+  </div>
+  {% comment %}
+  <div class="menu-wiki">
+    <a href="{{ GUIDE_URL }}"
+        aria-label="{% trans "Wiki" %}"
+        title="{% trans "Wiki" %}">{% include "core/icons/wiki-svg.html" %}</a>
+  </div>
+  {% endcomment %}
+  {% if SERVICES_URL %}
+    <div class="menu-autre-site">
+      <a href="{{ SERVICES_URL }}/{{ LANGUAGE_CODE }}/"
+          aria-label="{% trans "Resdigita, le numérique des Grands Voisins" %}"
+          title="{% trans "Resdigita, le numérique des Grands Voisins" %}">
+        {% include "core/icons/ordinateur-svg.html" %}
+      </a>
+    </div>
+  {% endif %}
+{% endif %}
+
+{% if SITE_THEME %}
+  <a class="brand brand-texte"
+     href="{% url 'core:home' %}"
+     aria-label="{% trans 'Resdigita, le numérique des Grands Voisins — accueil' %}">
+    <span class="brand-nom">Resdigita</span><span class="brand-devise">{% trans "le numérique des Grands Voisins" %}</span>
+  </a>
+{% endif %}
+
+{% if SITE_THEME %}
+<a href="/{{ LANGUAGE_CODE }}/agence/"
+   aria-label="{% trans "Resdigita, l'agence numérique" %}"
+   title="{% trans "Resdigita, l'agence numérique" %}">{% include "core/icons/agence-svg.html" %}</a>
+{% endif %}
+
+<div class="search-dropdown"
+     x-data="{ open: false }"
+     x-on:keydown.escape.window="open = false"
+     x-on:click.outside="open = false">
+  <button type="button"
+          class="search-dropdown-btn"
+          x-on:click="open = !open; open && $nextTick(() => $refs.topbarSearchInput.focus())"
+          x-bind:aria-expanded="open.toString()"
+          aria-controls="search-dropdown-menu"
+          aria-label="{% trans "Rechercher sur le site" %}">
+    {% include "core/icons/search-svg.html" %}
+  </button>
+  {% comment %} Même raison qu'au-dessus (pas de x-cloak) : le formulaire de
+  recherche doit rester utilisable sans JavaScript, pas caché en permanence. {% endcomment %}
+  <div class="search-dropdown-menu" id="search-dropdown-menu" x-show="open">
+    <form class="menu-site-search"
+          method="get"
+          action="{% url 'core:search' %}"
+          role="search">
+      <label for="topbar-search-q" class="sr-only">{% trans "Rechercher sur le site" %}</label>
+      <input id="topbar-search-q"
+             x-ref="topbarSearchInput"
+             type="search"
+             name="q"
+             value="{{ request.GET.q }}"
+             placeholder="{% trans "Rechercher…" %}">
+    </form>
+  </div>
+</div>
+
+<div class="lang-dropdown"
+    x-data="{ open: false }"
+    x-on:keydown.escape.window="open = false"
+    x-on:click.outside="open = false">
+  <button type="button"
+          class="lang-dropdown-btn"
+          x-on:click="open = !open"
+          x-bind:aria-expanded="open.toString()"
+          aria-controls="lang-dropdown-menu"
+          aria-label="{% trans "Langue" %}">{% include "core/icons/lang-svg.html" %}</button>
+  {% comment %} Pas de x-cloak ici : sans JavaScript, Alpine ne masque jamais ce
+  panneau (au lieu de rester bloqué invisible pour toujours) — le sélecteur de
+  langue reste alors simplement dépliée en permanence, utilisable telle quelle. {% endcomment %}
+  <div class="lang-dropdown-menu"
+      id="lang-dropdown-menu"
+      role="menu"
+      x-show="open"
+      aria-label="{% trans "Langue" %}">{% lang_switcher_menu %}</div>
+</div>

@@ -1,0 +1,22 @@
+{% load i18n %}
+<section class="block" aria-labelledby="svc-title" id="page-home-services-section">
+  <div class="wrap">
+    <h2 id="svc-title">
+      <span class="form">{% trans "mon compte" %}</span> : {% trans "les services" %}
+    </h2>
+    <p class="intro">
+      {% trans "Ajoutez ceux qui vous intéressent. Ils rejoignent vos services dans « mon Compte », même sans compte nominatif." %}
+    </p>
+    {% include "core/partials/service_list.html" %}
+    <p class="note">
+      <a href="{% url 'core:raccourcis' %}">{% trans "Tous les services, avec ce que chacun conserve" %}</a>
+    </p>
+  </div>
+  <a class="scroll-down"
+     href="#page-home-story-section"
+     data-scroll-head="#page-home-services-section"
+     data-scroll-flat
+     aria-label="{% trans "Aller à la suite" %}">
+    {% include "core/icons/chevron-down-svg.html" %}
+  </a>
+</section>

@@ -8,13 +8,13 @@
     <div class="wrap">
       <h1>Resdigita, {% trans "le numérique des Grands Voisins" %}</h1>
       <div class="numerique-intro">
-        <img class="numerique-visuel" src="{% static 'core/img/outils-informatiques.svg' %}" alt="{{ page.visuel_alt }}" width="457" height="256">
+        <a href="#outils-titre"><img class="numerique-visuel" src="{% static 'core/img/outils-informatiques.svg' %}" alt="{{ page.visuel_alt }}" width="457" height="256"></a>
         <div class="numerique-message">{{ page.message|richtext }}</div>
       </div>
     </div>
     <a class="scroll-down"
-       href="#page-numerique-content-section"
-       data-scroll-head="#page-numerique-hero-section"
+       href="#outils-titre"
+       data-scroll-head="#outils-titre"
        aria-label="{% trans "Aller aux outils" %}">
       {% include "core/icons/chevron-down-svg.html" %}
     </a>

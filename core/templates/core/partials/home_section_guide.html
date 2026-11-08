@@ -1,0 +1,29 @@
+{% load i18n %}
+<section class="block" aria-label="{% trans 'Le guide' %}" id="page-home-guide-section">
+  <div class="wrap">
+    <h2>
+      <span class="form">{% trans "Wiki" %}</span>
+    </h2>
+    {% if books %}
+      <ul class="books">
+        {% for book in books %}
+          <li>
+            <a href="{{ book.url }}"><strong>{{ book.title }}</strong>
+              {% if book.summary %}<span>{{ book.summary }}</span>{% endif %}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="intro">{% trans "Les livres du guide s'afficheront ici." %}</p>
+    {% endif %}
+    <a class="more" href="{{ GUIDE_URL }}">{% trans "Tout le guide" %}</a>
+  </div>
+  <a class="scroll-down"
+     href="#page-home-explore-section"
+     data-scroll-head="#page-home-guide-section"
+     data-scroll-flat
+     aria-label="{% trans "Aller à la suite" %}">
+    {% include "core/icons/chevron-down-svg.html" %}
+  </a>
+</section>

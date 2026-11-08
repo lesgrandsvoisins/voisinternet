@@ -1,0 +1,43 @@
+{% load i18n %}
+
+<section class="block" aria-label="{% trans "L'annuaire" %}" id="page-home-annuaire-section">
+  <div class="wrap two two-even">
+    <div>
+      <a href="{{ conj.annuaire.href }}">{% include "core/partials/scene.html" %}</a>
+      <a class="more" href="{{ conj.annuaire.href }}">{% trans "Voir tout l'annuaire" %}</a>
+    </div>
+    <div class="home-annuaire-panel">
+      <h2>{% trans "Annuaire" %}</h2>
+      <p class="intro">
+        {% trans "Qui fait partie de la communauté, et comment les joindre : personnes et structures, individuelles ou collectives, avec leur accord." %}
+      </p>
+      {% if recent_entries %}
+        <ul class="books">
+          {% for entry in recent_entries %}
+            <li>
+              <a href="{% url 'core:entry_detail' entry.slug %}"><strong>{{ entry.name }}</strong>
+                {% if entry.sector %}<span>{{ entry.sector.name }}</span>{% endif %}
+              </a>
+            </li>
+          {% endfor %}
+          <li>
+            <a href="{{ conj.annuaire.href }}"><strong>...</strong></a>
+          </li>
+          <li>
+            <a href="{% url 'core:mes_fiches' %}"><strong>{% trans "Vous" %}</strong></a>
+          </li>
+        </ul>
+      {% else %}
+        <p class="intro">{% trans "Les dernières fiches s'afficheront ici." %}</p>
+      {% endif %}
+      <a class="more" href="{{ conj.annuaire.href }}">{% trans "Voir tout l'annuaire" %}</a>
+    </div>
+  </div>
+  <a class="scroll-down"
+     href="#page-home-guide-section"
+     data-scroll-head="#page-home-annuaire-section"
+     data-scroll-flat
+     aria-label="{% trans "Aller à la suite" %}">
+    {% include "core/icons/chevron-down-svg.html" %}
+  </a>
+</section>

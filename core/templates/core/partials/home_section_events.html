@@ -1,0 +1,36 @@
+{% load i18n %}
+
+<section class="block" aria-labelledby="next-title" id="page-home-content-section">
+  <div class="wrap two two-even">
+    <div>
+      <h2 id="next-title">{% trans "Prochainement" %}</h2>
+      <p class="intro">
+        {% blocktrans %}Permanence chaque lundi de 12h à 19h30, en personne (93 av. du Général Leclerc, 75014 Paris — métro Alésia, Atelier de la Ressourcerie Créative) ou en ligne sur meet.lesgrandsvoisins.com.{% endblocktrans %}
+      </p>
+      {% if next_events %}
+        <ul class="posts">
+          {% for event in next_events %}
+            <li {% if event.featured %}class="feat"{% endif %}>
+              <a href="{% url 'core:event_detail' event.pk %}">
+                <h3>{{ event.title }}</h3>
+                <time datetime="{{ event.start|date:'c' }}">{{ event.start|date:"j F Y, H:i" }}</time>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      <a class="more" href="{% url 'core:agenda' %}">{% trans "Tout l'agenda" %}</a>
+    </div>
+    <div>
+      {% include "core/partials/agenda_calendar.html" %}
+      <a class="more" href="{% url 'core:agenda' %}">{% trans "Tout l'agenda" %}</a>
+    </div>
+  </div>
+  <a class="scroll-down"
+     href="#page-home-poles-section"
+     data-scroll-head="#page-home-content-section"
+     data-scroll-flat
+     aria-label="{% trans "Aller à la suite" %}">
+    {% include "core/icons/chevron-down-svg.html" %}
+  </a>
+</section>

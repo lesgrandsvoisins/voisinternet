@@ -1,0 +1,28 @@
+{% load i18n %}
+<section class="block" aria-labelledby="explore-title" id="page-home-explore-section">
+  <div class="wrap">
+    <h2 id="explore-title">{% trans "Explorer le site" %}</h2>
+    <p class="intro">{% trans "Un aperçu de chaque rubrique, pour vous y retrouver." %}</p>
+    <div class="conj">
+      <div class="conj-grid">
+        {% for group in conj_groups %}
+          <div>
+            <p class="col-cap cap-{{ group.key }}">{{ group.caption }}</p>
+            <ul>
+              {% for item in group.items %}
+                <li>{% include "core/partials/conj_link.html" %}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <a class="scroll-down"
+     href="#page-home-audiences-section"
+     data-scroll-head="#page-home-explore-section"
+     data-scroll-flat
+     aria-label="{% trans "Aller à la suite" %}">
+    {% include "core/icons/chevron-down-svg.html" %}
+  </a>
+</section>

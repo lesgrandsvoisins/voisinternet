@@ -1,0 +1,35 @@
+{% load i18n %}
+<section class="block" aria-label="{% trans 'Le blog' %}" id="page-home-blog-section">
+  <div class="wrap two two-even">
+    <div>
+      <h2>
+        <span class="form">{% trans "Blog" %}</span>
+      </h2>
+      <p class="intro">{% trans "Les nouvelles de l'association et de ses voisins, publiées régulièrement." %}</p>
+      <a class="more" href="{{ conj.grandzine.href }}">{% trans "Tous les articles" %}</a>
+    </div>
+    <div>
+      {% if posts %}
+        <ul class="posts">
+          {% for post in posts %}
+            <li {% if post.featured %}class="feat"{% endif %}>
+              <a href="{{ post.url }}">
+                <h3>{{ post.title }}</h3>
+                <time datetime="{{ post.date|date:'c' }}">{{ post.date|date:"j F Y" }}</time>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="intro">{% trans "Les derniers articles s'afficheront ici." %}</p>
+      {% endif %}
+    </div>
+  </div>
+  <a class="scroll-down"
+     href="#page-home-annuaire-section"
+     data-scroll-head="#page-home-blog-section"
+     data-scroll-flat
+     aria-label="{% trans "Aller à la suite" %}">
+    {% include "core/icons/chevron-down-svg.html" %}
+  </a>
+</section>

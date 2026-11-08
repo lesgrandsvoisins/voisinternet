@@ -1,0 +1,44 @@
+{% load i18n %}
+<section class="block" aria-labelledby="how-title" id="page-home-how-section">
+  <div class="wrap">
+    <div class="how-lead">
+      {% include "core/partials/sun_cloud.html" %}
+      <div>
+        <h2 id="how-title">{% trans "Le pôle Numérique, comment ça marche" %}</h2>
+        <p class="intro">
+          {% trans "Pas besoin d'être informaticien, ni d'un service technique. Il suffit d'un peu de curiosité et d'un voisin." %}
+        </p>
+      </div>
+    </div>
+    <ol class="steps">
+      <li>
+        <h3>{% trans "Choisissez vos services" %}</h3>
+        <p>{% trans "Ajoutez-les à votre compte, personnel ou associatif. Un numéro suffit : ni nom, ni courriel." %}</p>
+      </li>
+      <li>
+        <h3>{% trans "Installez chez vous, ou chez un voisin" %}</h3>
+        <p>
+          {% trans "Un petit serveur consomme à peu près comme une box internet. Pas de place ? Un voisin de confiance, ou les locaux de votre association, peuvent l'héberger." %}
+        </p>
+      </li>
+      <li>
+        {% include "core/partials/social_network.html" %}
+        <h3>{% trans "Ne restez pas seul devant l'écran" %}</h3>
+        <p>
+          {% trans "Des voisins bénévoles vous accompagnent, en atelier ou chez vous. Et un jour, peut-être, ce sera votre tour." %}
+        </p>
+        <div class="pair">
+          <a href="{% url 'core:agenda' %}">{% trans "Se faire accompagner" %}</a>
+          <a href="/{{ LANGUAGE_CODE }}/contributions/">{% trans "Devenir bénévole" %}</a>
+        </div>
+      </li>
+    </ol>
+  </div>
+  <a class="scroll-down"
+     href="#page-home-services-section"
+     data-scroll-head="#page-home-how-section"
+     data-scroll-flat
+     aria-label="{% trans "Aller à la suite" %}">
+    {% include "core/icons/chevron-down-svg.html" %}
+  </a>
+</section>

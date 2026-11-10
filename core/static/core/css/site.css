@@ -4435,3 +4435,6 @@ img.tool-icon {
   background-color: black;
   padding: 0.15rem;
 }
+
+/* Identifiant de la personne connectée, en tête du menu du compte. */
+.account-identite { margin: 0 0 .6rem; padding-inline-end: 2rem; overflow-wrap: anywhere; }

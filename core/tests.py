@@ -2410,3 +2410,18 @@ class DeconnexionChangementDeNomTests(TestCase):
             self.assertNotIn("id_token_hint", keycloak_logout_url(req))
             req.session = {"oidc_id_token": jeton("https://key.resdigita.org/realms/master")}
             self.assertIn("id_token_hint", keycloak_logout_url(req))
+
+
+class IdentifiantDansLeMenuTests(Base):
+    def test_identifiant_de_connexion_dans_le_menu_du_compte(self):
+        user = get_user_model().objects.create_user("sub-123")
+        Account.objects.create(user=user)
+        self.client.force_login(user)
+        session = self.client.session
+        session["voisinternet_login_identifier"] = "duponjean@gv.je"
+        session.save()
+        r = self.client.get("/fr/")
+        self.assertContains(r, "Connecté·e en tant que")
+        self.assertContains(r, "duponjean@gv.je")
+        self.client.logout()
+        self.assertNotContains(self.client.get("/fr/"), "Connecté·e en tant que")

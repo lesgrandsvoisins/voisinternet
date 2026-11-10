@@ -3944,3 +3944,6 @@ msgstr "Go to lesgrandsvoisins.com"
 
 msgid "Ou continuer avec un compte que vous avez déjà :"
 msgstr "Or continue with an account you already have:"
+
+msgid "Connecté·e en tant que"
+msgstr "Signed in as"

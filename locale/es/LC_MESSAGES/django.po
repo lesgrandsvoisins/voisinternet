@@ -3962,3 +3962,6 @@ msgstr "Ir a lesgrandsvoisins.com"
 
 msgid "Ou continuer avec un compte que vous avez déjà :"
 msgstr "O continuar con una cuenta que ya tienes:"
+
+msgid "Connecté·e en tant que"
+msgstr "Sesión iniciada como"

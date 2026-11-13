@@ -241,7 +241,7 @@ def search(request):
         # on récupère les instances spécifiques à part, en gardant l'ordre de pertinence.
         found = list(
             Page.objects.live().filter(locale_id=active_lang.id)
-            .descendant_of(current_site.root_page, inclusive=True)
+            .descendant_of(current_site.root_page.localized, inclusive=True)  # racine dans la langue active (l'arbre anglais n'est pas sous la racine française)
             .search(query)[:20]
         )
         specific_by_id = {p.pk: p for p in Page.objects.specific().filter(pk__in=[p.pk for p in found])}

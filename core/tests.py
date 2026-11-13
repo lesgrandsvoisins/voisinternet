@@ -2421,7 +2421,38 @@ class IdentifiantDansLeMenuTests(Base):
         session["voisinternet_login_identifier"] = "duponjean@gv.je"
         session.save()
         r = self.client.get("/fr/")
-        self.assertContains(r, "Connecté·e en tant que")
-        self.assertContains(r, "duponjean@gv.je")
+        self.assertContains(r, '<span class="account-nom">duponjean@gv.je</span>')  # à côté de l'icône
         self.client.logout()
-        self.assertNotContains(self.client.get("/fr/"), "Connecté·e en tant que")
+        self.assertNotContains(self.client.get("/fr/"), "account-nom")
+
+
+@override_settings(ALLOWED_HOSTS=["*"])
+class RechercheParLangueTests(Base):
+    """La recherche ne renvoie que ce qui existe dans la langue active (services, évènements, pages Wagtail)."""
+
+    def test_resultats_limites_a_la_langue_active(self):
+        from wagtail.models import Locale
+        from cms.models import HomePage, StandardPage
+
+        Event.objects.create(title="Fête du quartier", start=timezone.now(), public=True)
+        Service.objects.create(name="Zorglub", slug="zorg", summary="outil", active=True)
+        home = HomePage.objects.get(locale__language_code="fr")
+        fr_page = StandardPage(title="Réunion hebdomadaire", slug="reunion")
+        home.add_child(instance=fr_page)
+        fr_page.save_revision().publish()
+        en = Locale.objects.get_or_create(language_code="en")[0]
+        en_page = fr_page.copy_for_translation(en, copy_parents=True)
+        en_page.title = "Weekly meeting"
+        en_page.save_revision().publish()
+
+        def trouve(lang, q, texte):
+            return texte in self.client.get(f"/{lang}/recherche/?q={q}").content.decode()
+
+        self.assertTrue(trouve("fr", "quartier", "Fête du quartier"))
+        self.assertFalse(trouve("en", "quartier", "Fête du quartier"))   # évènement non traduit : absent en anglais
+        self.assertTrue(trouve("fr", "zorglub", "Zorglub"))
+        self.assertFalse(trouve("en", "zorglub", "Zorglub"))
+        self.assertTrue(trouve("en", "weekly", "Weekly meeting"))        # la page anglaise est trouvée en anglais…
+        self.assertFalse(trouve("fr", "weekly", "Weekly meeting"))       # … pas en français
+        self.assertFalse(trouve("en", "hebdomadaire", "Réunion hebdomadaire"))  # et la française pas en anglais
+        self.assertTrue(trouve("fr", "hebdomadaire", "Réunion hebdomadaire"))

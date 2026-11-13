@@ -12,6 +12,7 @@
           aria-controls="account-menu"
           aria-label="{% blocktrans %}Mon compte : {{ account_sub }}{% endblocktrans %}">
     {% include "core/icons/account-svg.html" %}
+    {% if user.is_authenticated and login_identifier %}<span class="account-nom">{{ login_identifier }}</span>{% endif %}
     {% comment %} <b>{% trans "mon Compte" %}</b> {% endcomment %}
     {% comment %} <small>{{ account_sub }}</small> {% endcomment %}
   </button>

@@ -1,9 +1,6 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 <div id="account-panel-body" {% if oob %}hx-swap-oob="true"{% endif %}>
-  {% if user.is_authenticated and login_identifier %}
-    <p class="account-identite">{% trans "Connecté·e en tant que" %} <strong>{{ login_identifier }}</strong></p>
-  {% endif %}
   {% if not account and not user.is_authenticated %}
     <div class="account-actions">
       {% if keycloak_register_url %}

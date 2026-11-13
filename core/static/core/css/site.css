@@ -4436,5 +4436,6 @@ img.tool-icon {
   padding: 0.15rem;
 }
 
-/* Identifiant de la personne connectée, en tête du menu du compte. */
-.account-identite { margin: 0 0 .6rem; padding-inline-end: 2rem; overflow-wrap: anywhere; }
+/* Identifiant de la personne connectée, à côté de l'icône du compte (tronqué si trop long). */
+.account-nom { max-width: 14rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .9rem; }
+@media screen and (max-width:600px) { .account-nom { max-width: 7rem; } }

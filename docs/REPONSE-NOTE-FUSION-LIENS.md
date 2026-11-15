@@ -26,3 +26,8 @@ Champ de la console de compte Keycloak (attribut `country` ← LDAP `c`, code IS
 
 ## Ce que `voisinternet` préparera (rien n'est appliqué) — dépend de la voie A ou B
 Page « Mes adresses et mes comptes », type de demande `reference` (voie A) et type `fusion`, textes en cinq langues avec `<bdi>`, tests. À commencer après la répétition de la migration des identifiants sur le clone.
+
+## Réponse de la session d'administration « main server » (15/11, rien n'engage Chris tant qu'il ne l'a pas confirmé)
+- **Exception « pas d'adresse extérieure »** : pas de nouvel attribut dans l'annuaire. L'adresse de contact est celle de la boîte, rangée dans `lgvExternalMail` (ex. `identifiant@gv.je`) ; « sans adresse extérieure » se lit : toutes les valeurs de `lgvExternalMail` sont d'un domaine géré. Côté demandes : un type dédié `sans_adresse_exterieure` (rien à confirmer), traduit en cette écriture par le travail de l'administration, plutôt qu'un faux type `reference`.
+- Le travail périodique pour `lgvExternalMail` (type `reference`, vue `v_adresses_a_lier`, retour `demande_marquer`) **n'existe pas encore** côté administration : à écrire après le feu vert de Chris ; aucune règle d'accès de plus n'est nécessaire.
+- Elle n'a pas entendu elle-même « voie A » ni « obligatoire sauf exception » : **à confirmer directement par Chris auprès d'elle**. Elle ne reprend pas les demandes n°17 et n°18 sur la foi d'un message d'une autre session : à signaler par Chris. « Connexion par adresse extérieure » : toujours non vérifiée.

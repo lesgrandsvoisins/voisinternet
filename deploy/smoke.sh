@@ -36,5 +36,9 @@ verif "numéro anonyme : pas de téléchargement sans compte" /fr/account/anonym
 absent "compte anonyme discret : aucun bouton à l'accueil" /fr/ "rester anonyme"
 absent "compte anonyme discret : aucun bouton dans « Mon compte »" /fr/account/ "Rester anonyme"
 verif "compte anonyme discret : rubrique « Autres options » repliée" /fr/account/ 200 'class="anon-discret"'
+# Information (pas un contrôle) : le Keycloak réellement utilisé par la connexion, quel que soit l'endroit où KEYCLOAK_REALM_URL est posé
+# (fichier d'environnement ou service du conteneur) — l'adresse de départ s'y lit.
+cle=$(curl -s -i -m 20 "${HOST_HDR[@]}" "$BASE/fr/account/connexion/" | tr -d '\r' | sed -n 's/^[Ll]ocation: https\?:\/\/\([^\/?]*\).*/\1/p' | head -1)
+[ -n "$cle" ] && echo "INFO Keycloak utilisé par la connexion : $cle"
 [ "$ko" -eq 0 ] && echo "Tout est OK." || echo "Au moins un KO."
 exit $ko

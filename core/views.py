@@ -1680,8 +1680,13 @@ def mes_demandes(request):
     from .auth import LOGIN_IDENTIFIER_KEY
 
     account = current_account(request, create=True)
-    identifiant = request.session.get(LOGIN_IDENTIFIER_KEY) or str(request.user)
+    # Seul l'identifiant de connexion renvoyé par Keycloak (preferred_username) vaut « demandeur » : à défaut, le nom interne est un
+    # identifiant illisible (sub), que l'administration ne saurait pas retrouver dans l'annuaire.
+    identifiant = request.session.get(LOGIN_IDENTIFIER_KEY, "")
     if request.method == "POST":
+        if not identifiant:
+            messages.error(request, _("Votre compte n'a pas d'identifiant de connexion : écrivez à l'administration, nous le corrigerons avant que vous puissiez faire une demande."))
+            return redirect("core:mes_demandes")
         if _throttled(request, "demandes", limit=30, window=15 * 60):
             messages.error(request, _("Trop de tentatives. Réessayez dans quelques minutes."))
             return redirect("core:mes_demandes")

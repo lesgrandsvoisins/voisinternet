@@ -2262,8 +2262,15 @@ class DemandesTests(Base):
         self.client.force_login(self.membre)
         self.assertEqual(self.client.get(reverse("core:moderation")).status_code, 404)  # pas modérateur
         self.assertEqual(self.client.get(reverse("core:mes_demandes")).status_code, 200)
+        # sans identifiant de connexion (pas de preferred_username) : aucune demande, jamais un « demandeur » illisible
+        self.client.post(reverse("core:mes_demandes"), {"type": "adresse", "local_part": "projet", "domaine": "resdigita.org"})
+        self.assertFalse(Demande.objects.exists())
+        session = self.client.session
+        session["voisinternet_login_identifier"] = "membre@gv.je"
+        session.save()
         self.client.post(reverse("core:mes_demandes"), {"type": "adresse", "local_part": "projet", "domaine": "resdigita.org"})
         d = Demande.objects.get()
+        self.assertEqual(d.demandeur, "membre@gv.je")
         self.client.force_login(self.modo)
         r = self.client.get(reverse("core:moderation"))
         self.assertContains(r, "projet@resdigita.org")

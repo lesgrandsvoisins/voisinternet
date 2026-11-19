@@ -705,6 +705,18 @@ def claim_entry_ownership(request, slug):
 
 
 def mes_fiches(request):
+    """Liste de mes fiches et de mes abonnements ; le formulaire de création est sur sa propre page (fiche_nouvelle)."""
+    if request.method == "POST":
+        return fiche_nouvelle(request)  # ancien formulaire de cette page : même contrat, créer une fiche
+    acc = current_account(request)  # consulter la page ne crée jamais de compte
+    return render(request, "core/mes_fiches.html", {
+        "entries": acc.directory_entries.order_by("name") if acc else [],
+        "subscriptions": acc.entrysubscription_set.select_related("entry").order_by("entry__name") if acc else [],
+    })
+
+
+def fiche_nouvelle(request):
+    """Page à part pour créer une fiche (la page « Mes fiches » mélangeait liste et formulaire)."""
     # Consulter la page ne crée jamais de compte (les robots en ouvraient un à chaque passage) ; créer une fiche, oui.
     acc = current_account(request, create=request.method == "POST")
     if request.method == "POST" and acc is None:
@@ -735,11 +747,7 @@ def mes_fiches(request):
             if acc.user.email:
                 initial["email"] = acc.user.email
         form = DirectoryEntryForm(initial=initial)
-    return render(request, "core/mes_fiches.html", {
-        "entries": acc.directory_entries.order_by("name") if acc else [],
-        "subscriptions": acc.entrysubscription_set.select_related("entry").order_by("entry__name") if acc else [],
-        "form": form,
-    })
+    return render(request, "core/fiche_nouvelle.html", {"form": form})
 
 
 def fiche_modifier(request, slug):

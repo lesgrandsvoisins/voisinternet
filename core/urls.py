@@ -80,6 +80,7 @@ urlpatterns = [
     path("annuaire/", views.annuaire, name="annuaire"),
     path("annuaire/secteur/<slug:secteur>/", views.annuaire, name="annuaire_pour"),
     path("annuaire/mes-fiches/", views.mes_fiches, name="mes_fiches"),
+    path("annuaire/mes-fiches/nouvelle/", views.fiche_nouvelle, name="fiche_nouvelle"),
     path("annuaire/mes-fiches/apercu/", views.markdown_preview, name="markdown_preview"),
     path("annuaire/mes-fiches/<slug:slug>/modifier/", views.fiche_modifier, name="fiche_modifier"),
     path("annuaire/mes-fiches/<slug:slug>/supprimer/", views.fiche_supprimer, name="fiche_supprimer"),

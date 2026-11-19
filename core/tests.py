@@ -2463,3 +2463,26 @@ class RechercheParLangueTests(Base):
         self.assertFalse(trouve("fr", "weekly", "Weekly meeting"))       # … pas en français
         self.assertFalse(trouve("en", "hebdomadaire", "Réunion hebdomadaire"))  # et la française pas en anglais
         self.assertTrue(trouve("fr", "hebdomadaire", "Réunion hebdomadaire"))
+
+
+class FicheNouvelleTests(Base):
+    """Le formulaire de création d'une fiche est sur sa propre page, pas sur « Mes fiches »."""
+
+    def test_formulaire_sur_une_page_a_part(self):
+        liste = self.client.get(reverse("core:mes_fiches"))
+        self.assertEqual(liste.status_code, 200)
+        self.assertContains(liste, reverse("core:fiche_nouvelle"))   # bouton « Créer une fiche »
+        self.assertNotContains(liste, 'class="entry-form"')            # plus de formulaire sur la liste
+        page = self.client.get(reverse("core:fiche_nouvelle"))
+        self.assertContains(page, 'class="entry-form"')
+        self.assertFalse(Account.objects.exists())                     # consulter ne crée jamais de compte
+
+    def test_creation_depuis_la_nouvelle_page(self):
+        user = get_user_model().objects.create_user("sub-f")
+        acc = Account.objects.create(user=user)
+        self.client.force_login(user)
+        r = self.client.post(reverse("core:fiche_nouvelle"), {
+            "name_fr": "Ma fiche", "kind": "individuel", "layout": "classique", "visibility": DirectoryEntry.VISIBILITY_DRAFT,
+        })
+        self.assertRedirects(r, reverse("core:mes_fiches"), fetch_redirect_response=False)
+        self.assertTrue(acc.directory_entries.filter(name="Ma fiche").exists())

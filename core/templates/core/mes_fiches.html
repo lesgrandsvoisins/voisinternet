@@ -6,8 +6,8 @@
   AUTHORS: Chris MANN
   PAGE: Mes fiches dans l'annuaire
   VIEW: core.views.mes_fiches
-  CONTEXT: entries, subscriptions, form, conj
-  NOTE: On GET the view pre-fills name/email from Keycloak for named accounts (no-op for anonymous). Only POST creates an account.
+  CONTEXT: entries, subscriptions, conj
+  NOTE: Liste seulement ; le formulaire de création est sur sa propre page (core/fiche_nouvelle.html, vue fiche_nouvelle).
 #}
 {% block title %}
   {% trans "Mes fiches dans l'annuaire — lesgrandsvoisins.com" %}
@@ -39,6 +39,7 @@
     <section aria-labelledby="fiches-title">
       <div class="split">
         <h2 id="fiches-title">{% trans "Mes fiches" %}</h2>
+        <a class="btn btn-sun" href="{% url 'core:fiche_nouvelle' %}">{% trans "Créer une fiche" %}</a>
       </div>
       {% include "core/partials/entry_list.html" %}
     </section>
@@ -48,17 +49,6 @@
         <h2 id="subs-title">{% trans "Fiches auxquelles je suis abonné·e" %}</h2>
       </div>
       {% include "core/partials/subscribed_entry_list.html" %}
-    </section>
-    <!-- CREATE ENTRY FORM -->
-    <section aria-labelledby="new-title">
-      <div class="split">
-        <h2 id="new-title">{% trans "Créer une fiche" %}</h2>
-      </div>
-      <form class="entry-form" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% include "core/partials/entry_form_fields.html" %}
-        <button class="btn btn-sun" type="submit">{% trans "Créer la fiche" %}</button>
-      </form>
     </section>
   </div>
 {% endblock content %}

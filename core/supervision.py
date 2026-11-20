@@ -6,7 +6,7 @@ Règles :
   - AU PLUS UNE requête par minute vers Prometheus, même si cent personnes ouvrent la page : cache partagé (fichier, entre les processus) et
     verrou d'une minute ; les autres visiteurs reçoivent la dernière valeur connue ;
   - délai court (2 s) ; en cas d'échec, la dernière valeur connue est gardée (marquée ancienne), jamais une erreur de page ;
-  - l'étiquette `instance` de la sonde est le NOM DU SITE sans schéma : on la rapproche du nom d'hôte de l'adresse du service du catalogue ;
+  - l'étiquette `instance` de la sonde est le NOM DU SITE sans schéma : on la rapproche du nom d'hôte de l'adresse du service du catalogue, ou du champ « nom de la sonde » du service quand les deux diffèrent (changement de nom de domaine) ;
   - seule la requête /api/v1/query avec probe_success est appelée ; l'adresse de base est réglable (VOISINTERNET_SUPERVISION_URL ; vide = désactivé).
 
 États : vert (répond), rouge (ne répond pas), jaune (mesure de plus de 2 minutes, ou lenteur), gris « inconnu » (pas de mesure, ou supervision
@@ -92,7 +92,7 @@ def annoter(services):
     recu = donnees["recu"] if donnees else None
     codes = []
     for service in services:
-        hote = (urlparse(service.url).hostname or "").lower() if service.url else ""
+        hote = (service.supervision_instance or (urlparse(service.url).hostname if service.url else "") or "").strip().lower()
         sonde = sondes.get(hote) if hote else None
         if sonde is None and hote:
             continue   # service non sondé par la supervision : pas de pastille

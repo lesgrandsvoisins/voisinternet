@@ -22,6 +22,12 @@ from core.models import MissionStep, Service
 
 ADRESSES = {"vikunja": "https://vikunja.gv.je/login"}
 ADMINISTRATION = ["keycloak", "listmonk", "sftpgo", "ghost"]
+# Nom de la sonde de supervision (Prometheus) quand il diffère de l'hôte de l'adresse du service (changements de nom de domaine) ;
+# à vérifier par Chris : c'est une équivalence supposée entre l'ancien et le nouveau nom du même service.
+SUPERVISION = {
+    "vikunja": "vikunja.resdigita.org", "keycloak": "key.resdigita.org", "immich": "immich.resdigita.org",
+    "vaultwarden": "vw.gv.je", "wiki-grands-voisins": "wiki.gv.je",
+}
 ETAPE_ANCIEN = "**Demandez-nous un accès** (écrivez à la personne qui vous a invité·e, ou via la page Contact), puis connectez-vous"
 ETAPE_NOUVEAU = ("**Ajoutez Vikunja à vos services** : un administrateur doit d'abord activer l'accès pour vous (vous verrez "
                  "« en attente de validation »), puis connectez-vous")
@@ -81,6 +87,15 @@ class Command(BaseCommand):
                 if appliquer:
                     ordre = (Service.objects.aggregate(m=Max("order"))["m"] or 0) + 1
                     Service.objects.create(order=ordre, active=True, **spec)
+        with translation.override("fr"):
+            for slug, sonde in SUPERVISION.items():
+                s = Service.objects.filter(slug=slug).first()
+                if s is not None and s.supervision_instance != sonde:
+                    self.stdout.write(f"  sonde de supervision de {s.name} : {sonde}")
+                    faits += 1
+                    if appliquer:
+                        s.supervision_instance = sonde
+                        s.save(update_fields=["supervision_instance"])
         if not faits:
             self.stdout.write("Catalogue déjà prêt : rien à faire.")
         elif appliquer:

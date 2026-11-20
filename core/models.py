@@ -79,6 +79,10 @@ class Service(models.Model):
         help_text=_("Ce qui reste anonyme, et ce que l'association doit conserver en tant qu'hébergeur."),
     )
     url = models.URLField(_("adresse du service"), blank=True)
+    supervision_instance = models.CharField(
+        _("nom de la sonde de supervision"), max_length=120, blank=True, default="",
+        help_text=_("Nom d'hôte tel que la supervision le connaît (ex. vikunja.resdigita.org), quand il diffère de celui de l'adresse du service. Laisser vide : nom d'hôte de l'adresse."),
+    )
     icon = models.ImageField(_("icône"), upload_to="services/icones/", blank=True)
     category = models.ForeignKey(
         ServiceCategory, null=True, blank=True, on_delete=models.SET_NULL,

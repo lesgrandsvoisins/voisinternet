@@ -2645,6 +2645,17 @@ class SupervisionTests(Base):
         self.assertFalse(hasattr(self.sondeless, "etat"))           # non sondé : pas de pastille
         self.assertEqual(global_, "rouge")                           # le pire des états
 
+    def test_nom_de_sonde_different_de_l_hote_de_l_adresse(self):
+        import time
+        from unittest import mock
+        from . import supervision
+
+        autre = Service.objects.create(name="Vikunja-s", slug="vikunja-s", summary="x", url="https://vikunja.gv.je/login",
+                                       supervision_instance="Vikunja.Resdigita.org")
+        with mock.patch.object(supervision, "_lire", return_value={"vikunja.resdigita.org": ("1", time.time())}):
+            supervision.annoter([autre])
+        self.assertEqual(autre.etat["code"], "vert")      # rapproché par le champ, pas par l'hôte de l'adresse
+
     def test_une_seule_requete_par_minute_et_derniere_valeur_gardee(self):
         import time
         from unittest import mock

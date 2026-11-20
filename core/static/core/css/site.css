@@ -4448,3 +4448,14 @@ img.tool-icon {
 .etat-inconnu { color: var(--zinc-dark); }
 .etat-global { position: fixed; left: 1rem; bottom: 1rem; z-index: 50; margin: 0; padding: .4rem .8rem; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); font-size: .9rem; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
 @media (max-width: 600px) { .etat-global { left: .5rem; bottom: .5rem; font-size: .8rem; } }
+
+/* État de la redirection de courrier : impossible à manquer. L'attente de confirmation est un panneau d'alerte (couleur, symbole ET texte en majuscules). */
+.statut { margin: 1rem 0; padding: 1rem 1.25rem; border-radius: 12px; border: 2px solid var(--line); background: var(--paper); }
+.statut-titre { margin: 0 0 .4rem; font-weight: 700; font-size: 1.15rem; }
+.statut-attente { border-color: var(--sun); background: var(--sun-soft); color: #1C2A35; }
+.statut-attente .statut-titre { font-size: 1.4rem; text-transform: uppercase; letter-spacing: .03em; }
+.statut-grand { font-size: 1.1rem; font-weight: 600; }
+.statut-actif { border-color: #1E7A4C; }
+.statut-actif .statut-titre { color: #1E7A4C; }
+.statut-aucun .statut-titre { color: var(--zinc-dark); }
+.statut-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: .5rem; }

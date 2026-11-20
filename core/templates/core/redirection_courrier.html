@@ -45,10 +45,39 @@
       <!-- STATE -->
       <section aria-labelledby="etat">
         <h2 id="etat">{% trans "État" %}</h2>
+        {% if pending %}
+          <div class="statut statut-attente" role="alert">
+            <p class="statut-titre"><span aria-hidden="true">⏳</span> {% trans "En attente de confirmation par courriel" %}</p>
+            <p class="statut-grand">
+              {% blocktrans with cible=pending_masked %}La redirection vers {{ cible }} n'est PAS en place. Tant que cette adresse n'a pas confirmé, rien n'est transféré : votre courrier continue d'arriver seulement dans votre boîte.{% endblocktrans %}
+            </p>
+            <p>
+              {% blocktrans with date=pending.expires|date:"j F, H:i" %}Un courriel de confirmation a été envoyé à cette adresse. Le lien est valable jusqu'au {{ date }}.{% endblocktrans %}
+            </p>
+            {% if active %}
+              <p>
+                {% blocktrans with cible=active_masked %}Votre redirection actuelle, vers {{ cible }}, reste en place jusqu'à cette confirmation.{% endblocktrans %}
+              </p>
+            {% endif %}
+            <div class="statut-actions">
+              <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="renvoyer">
+                <button class="btn btn-line" type="submit">{% trans "Renvoyer le courriel" %}</button>
+              </form>
+              <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="annuler">
+                <button class="btn btn-line" type="submit">{% trans "Annuler cette demande" %}</button>
+              </form>
+            </div>
+          </div>
+        {% endif %}
         {% if active %}
-          <p>
-            <strong>{% trans "Redirection active" %}</strong> : {% blocktrans with cible=active_masked %}votre courrier est transféré à {{ cible }}.{% endblocktrans %}
-          </p>
+          <div class="statut statut-actif" role="status">
+            <p class="statut-titre"><span aria-hidden="true">✔</span> {% trans "Redirection active" %}</p>
+            <p>{% blocktrans with cible=active_masked %}Votre courrier est transféré à {{ cible }}.{% endblocktrans %}</p>
+          </div>
           <form method="post">
             {% csrf_token %}
             <input type="hidden" name="action" value="copie">
@@ -65,13 +94,11 @@
             <input type="hidden" name="action" value="desactiver">
             <button class="btn btn-line" type="submit">{% trans "Désactiver la redirection" %}</button>
           </form>
-        {% else %}
-          <p>{% trans "Aucune redirection active." %}</p>
-        {% endif %}
-        {% if pending %}
-          <p class="chip">
-            {% blocktrans with cible=pending_masked %}En attente de confirmation par {{ cible }} (le lien est valable 24 heures).{% endblocktrans %}
-          </p>
+        {% elif not pending %}
+          <div class="statut statut-aucun" role="status">
+            <p class="statut-titre">{% trans "Aucune redirection" %}</p>
+            <p>{% trans "Votre courrier arrive seulement dans votre boîte Grands Voisins." %}</p>
+          </div>
         {% endif %}
       </section>
       <!-- CHANGE DESTINATION -->

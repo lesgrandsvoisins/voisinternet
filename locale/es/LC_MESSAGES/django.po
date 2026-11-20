@@ -2122,7 +2122,7 @@ msgstr "Rechazar"
 #: core/templates/core/administration.html:38
 #: core/templates/core/administration.html:61
 msgid "Aucune demande en attente."
-msgstr "No hay solicitudes pendientes."
+msgstr "Ninguna solicitud pendiente."
 
 #: core/templates/core/administration.html:44
 msgid "Demandes de gestion d'évènement"
@@ -3999,3 +3999,63 @@ msgstr "del %(debut)s al %(fin)s"
 
 msgid "La fin ne peut pas être avant le début."
 msgstr "El final no puede ser anterior al inicio."
+
+msgid "En attente de confirmation par courriel"
+msgstr "En espera de confirmación por correo"
+
+#, python-format
+msgid ""
+"La redirection vers %(cible)s n'est PAS en place. Tant que cette adresse n'a"
+" pas confirmé, rien n'est transféré : votre courrier continue d'arriver "
+"seulement dans votre boîte."
+msgstr ""
+"La redirección a %(cible)s NO está activa. Hasta que esta dirección "
+"confirme, no se reenvía nada: su correo sigue llegando solo a su buzón."
+
+#, python-format
+msgid ""
+"Un courriel de confirmation a été envoyé à cette adresse. Le lien est "
+"valable jusqu'au %(date)s."
+msgstr ""
+"Se envió un correo de confirmación a esta dirección. El enlace es válido "
+"hasta el %(date)s."
+
+#, python-format
+msgid ""
+"Votre redirection actuelle, vers %(cible)s, reste en place jusqu'à cette "
+"confirmation."
+msgstr ""
+"Su redirección actual, a %(cible)s, sigue activa hasta esta confirmación."
+
+msgid "Renvoyer le courriel"
+msgstr "Reenviar el correo"
+
+msgid "Annuler cette demande"
+msgstr "Cancelar esta solicitud"
+
+#, python-format
+msgid "Votre courrier est transféré à %(cible)s."
+msgstr "Su correo se reenvía a %(cible)s."
+
+msgid "Aucune redirection"
+msgstr "Ninguna redirección"
+
+msgid "Votre courrier arrive seulement dans votre boîte Grands Voisins."
+msgstr "Su correo llega solo a su buzón de Grands Voisins."
+
+msgid "Demande annulée : rien n'a changé, aucun courriel n'est transféré."
+msgstr "Solicitud cancelada: nada ha cambiado, no se reenvía ningún correo."
+
+msgid ""
+"Courriel de confirmation renvoyé. La redirection n'est toujours PAS en "
+"place."
+msgstr ""
+"Correo de confirmación reenviado. La redirección sigue SIN estar activa."
+
+msgid ""
+"Un courriel de confirmation vient d'être envoyé à cette adresse. La "
+"redirection n'est PAS en place : tant qu'elle n'est pas confirmée, rien "
+"n'est transféré."
+msgstr ""
+"Se acaba de enviar un correo de confirmación a esta dirección. La "
+"redirección NO está activa: hasta que se confirme, no se reenvía nada."

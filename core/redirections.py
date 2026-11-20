@@ -192,6 +192,16 @@ def pending_request(account):
             .order_by("-created").first())
 
 
+def cancel_pending(account):
+    """Annule les demandes en attente de confirmation (elles ne peuvent plus être confirmées) ; la redirection active reste en place."""
+    from .models import RedirectionRequest
+
+    n = RedirectionRequest.objects.filter(account=account, used__isnull=True, expires__gt=timezone.now()).update(used=timezone.now())
+    if n:
+        audit(account, "annulation")
+    return n
+
+
 def find_request(token):
     """Demande valable (non utilisée, non expirée) pour ce jeton, ou None."""
     from .models import RedirectionRequest

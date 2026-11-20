@@ -2114,7 +2114,7 @@ msgstr "Reject"
 #: core/templates/core/administration.html:38
 #: core/templates/core/administration.html:61
 msgid "Aucune demande en attente."
-msgstr "No pending requests."
+msgstr "No pending request."
 
 #: core/templates/core/administration.html:44
 msgid "Demandes de gestion d'évènement"
@@ -3981,3 +3981,63 @@ msgstr "from %(debut)s to %(fin)s"
 
 msgid "La fin ne peut pas être avant le début."
 msgstr "The end cannot be before the start."
+
+msgid "En attente de confirmation par courriel"
+msgstr "Waiting for email confirmation"
+
+#, python-format
+msgid ""
+"La redirection vers %(cible)s n'est PAS en place. Tant que cette adresse n'a"
+" pas confirmé, rien n'est transféré : votre courrier continue d'arriver "
+"seulement dans votre boîte."
+msgstr ""
+"The redirection to %(cible)s is NOT in place. Until this address confirms, "
+"nothing is forwarded: your mail keeps arriving only in your mailbox."
+
+#, python-format
+msgid ""
+"Un courriel de confirmation a été envoyé à cette adresse. Le lien est "
+"valable jusqu'au %(date)s."
+msgstr ""
+"A confirmation email was sent to this address. The link is valid until "
+"%(date)s."
+
+#, python-format
+msgid ""
+"Votre redirection actuelle, vers %(cible)s, reste en place jusqu'à cette "
+"confirmation."
+msgstr ""
+"Your current redirection, to %(cible)s, stays in place until this "
+"confirmation."
+
+msgid "Renvoyer le courriel"
+msgstr "Resend the email"
+
+msgid "Annuler cette demande"
+msgstr "Cancel this request"
+
+#, python-format
+msgid "Votre courrier est transféré à %(cible)s."
+msgstr "Your mail is forwarded to %(cible)s."
+
+msgid "Aucune redirection"
+msgstr "No redirection"
+
+msgid "Votre courrier arrive seulement dans votre boîte Grands Voisins."
+msgstr "Your mail arrives only in your Grands Voisins mailbox."
+
+msgid "Demande annulée : rien n'a changé, aucun courriel n'est transféré."
+msgstr "Request cancelled: nothing has changed, no mail is forwarded."
+
+msgid ""
+"Courriel de confirmation renvoyé. La redirection n'est toujours PAS en "
+"place."
+msgstr "Confirmation email sent again. The redirection is still NOT in place."
+
+msgid ""
+"Un courriel de confirmation vient d'être envoyé à cette adresse. La "
+"redirection n'est PAS en place : tant qu'elle n'est pas confirmée, rien "
+"n'est transféré."
+msgstr ""
+"A confirmation email has just been sent to this address. The redirection is "
+"NOT in place: until it is confirmed, nothing is forwarded."

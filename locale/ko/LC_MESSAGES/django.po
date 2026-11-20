@@ -3855,3 +3855,57 @@ msgstr "%(debut)s ~ %(fin)s"
 
 msgid "La fin ne peut pas être avant le début."
 msgstr "종료는 시작보다 앞설 수 없습니다."
+
+msgid "En attente de confirmation par courriel"
+msgstr "이메일 확인 대기 중"
+
+#, python-format
+msgid ""
+"La redirection vers %(cible)s n'est PAS en place. Tant que cette adresse n'a"
+" pas confirmé, rien n'est transféré : votre courrier continue d'arriver "
+"seulement dans votre boîte."
+msgstr ""
+"%(cible)s(으)로의 전달은 설정되지 않았습니다. 이 주소가 확인하기 전에는 아무것도 전달되지 않으며, 메일은 계속 사서함으로만 "
+"도착합니다."
+
+#, python-format
+msgid ""
+"Un courriel de confirmation a été envoyé à cette adresse. Le lien est "
+"valable jusqu'au %(date)s."
+msgstr "이 주소로 확인 이메일을 보냈습니다. 링크는 %(date)s까지 유효합니다."
+
+#, python-format
+msgid ""
+"Votre redirection actuelle, vers %(cible)s, reste en place jusqu'à cette "
+"confirmation."
+msgstr "현재 %(cible)s(으)로의 전달은 이 확인 전까지 유지됩니다."
+
+msgid "Renvoyer le courriel"
+msgstr "이메일 다시 보내기"
+
+msgid "Annuler cette demande"
+msgstr "이 요청 취소"
+
+#, python-format
+msgid "Votre courrier est transféré à %(cible)s."
+msgstr "메일이 %(cible)s(으)로 전달됩니다."
+
+msgid "Aucune redirection"
+msgstr "전달 없음"
+
+msgid "Votre courrier arrive seulement dans votre boîte Grands Voisins."
+msgstr "메일은 Grands Voisins 사서함으로만 도착합니다."
+
+msgid "Demande annulée : rien n'a changé, aucun courriel n'est transféré."
+msgstr "요청이 취소되었습니다. 변경된 것이 없으며 전달되는 메일도 없습니다."
+
+msgid ""
+"Courriel de confirmation renvoyé. La redirection n'est toujours PAS en "
+"place."
+msgstr "확인 이메일을 다시 보냈습니다. 전달은 여전히 설정되지 않았습니다."
+
+msgid ""
+"Un courriel de confirmation vient d'être envoyé à cette adresse. La "
+"redirection n'est PAS en place : tant qu'elle n'est pas confirmée, rien "
+"n'est transféré."
+msgstr "이 주소로 확인 이메일을 방금 보냈습니다. 전달은 설정되지 않았으며, 확인되기 전에는 아무것도 전달되지 않습니다."

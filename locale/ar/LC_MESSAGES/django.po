@@ -2090,7 +2090,7 @@ msgstr "رفض"
 #: core/templates/core/administration.html:38
 #: core/templates/core/administration.html:61
 msgid "Aucune demande en attente."
-msgstr "لا توجد طلبات قيد الانتظار."
+msgstr "لا يوجد طلب قيد الانتظار."
 
 #: core/templates/core/administration.html:44
 msgid "Demandes de gestion d'évènement"
@@ -3920,3 +3920,59 @@ msgstr "من %(debut)s إلى %(fin)s"
 
 msgid "La fin ne peut pas être avant le début."
 msgstr "لا يمكن أن تكون النهاية قبل البداية."
+
+msgid "En attente de confirmation par courriel"
+msgstr "في انتظار التأكيد عبر البريد الإلكتروني"
+
+#, python-format
+msgid ""
+"La redirection vers %(cible)s n'est PAS en place. Tant que cette adresse n'a"
+" pas confirmé, rien n'est transféré : votre courrier continue d'arriver "
+"seulement dans votre boîte."
+msgstr ""
+"إعادة التوجيه إلى %(cible)s غير مفعّلة. إلى أن يؤكد هذا العنوان، لن يُحوَّل "
+"أي شيء: يستمر بريدك في الوصول إلى صندوقك فقط."
+
+#, python-format
+msgid ""
+"Un courriel de confirmation a été envoyé à cette adresse. Le lien est "
+"valable jusqu'au %(date)s."
+msgstr "أُرسلت رسالة تأكيد إلى هذا العنوان. الرابط صالح حتى %(date)s."
+
+#, python-format
+msgid ""
+"Votre redirection actuelle, vers %(cible)s, reste en place jusqu'à cette "
+"confirmation."
+msgstr "تبقى إعادة التوجيه الحالية إلى %(cible)s قائمة حتى هذا التأكيد."
+
+msgid "Renvoyer le courriel"
+msgstr "إعادة إرسال الرسالة"
+
+msgid "Annuler cette demande"
+msgstr "إلغاء هذا الطلب"
+
+#, python-format
+msgid "Votre courrier est transféré à %(cible)s."
+msgstr "يُحوَّل بريدك إلى %(cible)s."
+
+msgid "Aucune redirection"
+msgstr "لا توجد إعادة توجيه"
+
+msgid "Votre courrier arrive seulement dans votre boîte Grands Voisins."
+msgstr "يصل بريدك إلى صندوقك في Grands Voisins فقط."
+
+msgid "Demande annulée : rien n'a changé, aucun courriel n'est transféré."
+msgstr "أُلغي الطلب: لم يتغير شيء ولا يُحوَّل أي بريد."
+
+msgid ""
+"Courriel de confirmation renvoyé. La redirection n'est toujours PAS en "
+"place."
+msgstr "أُعيد إرسال رسالة التأكيد. إعادة التوجيه ما زالت غير مفعّلة."
+
+msgid ""
+"Un courriel de confirmation vient d'être envoyé à cette adresse. La "
+"redirection n'est PAS en place : tant qu'elle n'est pas confirmée, rien "
+"n'est transféré."
+msgstr ""
+"أُرسلت للتو رسالة تأكيد إلى هذا العنوان. إعادة التوجيه غير مفعّلة: إلى أن "
+"يتم التأكيد لن يُحوَّل أي شيء."

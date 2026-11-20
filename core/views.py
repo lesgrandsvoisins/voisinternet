@@ -1639,7 +1639,20 @@ def redirection_courrier(request):
                     lambda token: redirections.confirm_url(request, token), identifiant,
                     stop_url=request.build_absolute_uri(reverse("core:redirection_courrier")),
                 )
-                messages.success(request, _("Un courriel de confirmation vient d'être envoyé à cette adresse. Tant qu'elle n'est pas confirmée, rien n'est transféré."))
+                messages.warning(request, _("Un courriel de confirmation vient d'être envoyé à cette adresse. La redirection n'est PAS en place : tant qu'elle n'est pas confirmée, rien n'est transféré."))
+            elif action == "annuler":
+                redirections.cancel_pending(account)
+                messages.success(request, _("Demande annulée : rien n'a changé, aucun courriel n'est transféré."))
+            elif action == "renvoyer":
+                en_attente = redirections.pending_request(account)
+                if en_attente is None:
+                    raise redirections.RedirectionError(_("Aucune demande en attente."))
+                redirections.request_redirection(
+                    account, adresses, en_attente.target, en_attente.keep_copy,
+                    lambda token: redirections.confirm_url(request, token), identifiant,
+                    stop_url=request.build_absolute_uri(reverse("core:redirection_courrier")),
+                )
+                messages.warning(request, _("Courriel de confirmation renvoyé. La redirection n'est toujours PAS en place."))
             elif action == "copie":
                 redirections.set_copy(account, adresses, bool(request.POST.get("copie")))
                 messages.success(request, _("Réglage enregistré."))

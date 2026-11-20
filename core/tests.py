@@ -1891,6 +1891,26 @@ class RedirectionCourrierTests(Base):
         self.assertEqual(self.attrs(), (["lucie@exemple.org"], ["duponlucie@gv.je"]))
         self.assertEqual(self.client.get(lien).status_code, 404)  # usage unique
 
+    def test_attente_de_confirmation_est_impossible_a_manquer(self):
+        self.demander()
+        page = self.client.get(self.url)
+        self.assertContains(page, "statut-attente")
+        self.assertContains(page, "En attente de confirmation par courriel")          # le statut, en grand (majuscules par le style)
+        self.assertContains(page, "n'est PAS en place")                                  # dit explicitement que ce n'est pas actif
+        self.assertContains(page, "continue d'arriver seulement dans votre boîte")
+        self.assertNotContains(page, "Redirection active")                               # pas de statut « active »
+        self.assertEqual(self.attrs(), ([], []))                                          # et rien dans l'annuaire
+        # renvoyer : un nouveau courriel, toujours pas active ; annuler : plus d'attente, rien n'a changé
+        nb = len(mail.outbox)
+        self.client.post(self.url, {"action": "renvoyer"})
+        self.assertEqual(len(mail.outbox), nb + 1)
+        self.client.post(self.url, {"action": "annuler"})
+        page = self.client.get(self.url)
+        self.assertNotContains(page, "statut-attente")
+        self.assertContains(page, "Aucune redirection")
+        self.assertEqual(self.client.get(self.lien()).status_code, 404)                  # l'ancien lien ne confirme plus rien
+        self.assertEqual(self.attrs(), ([], []))
+
     def test_sans_copie_un_simple_get_ne_confirme_rien(self):
         self.demander(copie=False)
         lien = self.lien()
@@ -1909,7 +1929,7 @@ class RedirectionCourrierTests(Base):
         self.assertEqual(self.attrs(), (["lucie@exemple.org"], ["duponlucie@gv.je"]))
         self.client.post(self.url, {"action": "desactiver"})
         self.assertEqual(self.attrs(), ([], []))
-        self.assertContains(self.client.get(self.url), "Aucune redirection active")
+        self.assertContains(self.client.get(self.url), "Aucune redirection")
 
     def test_displayed_target_is_masked(self):
         self.demander()

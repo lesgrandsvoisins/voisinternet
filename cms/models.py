@@ -110,6 +110,14 @@ class SitePage(Page):
     )
     en_tete_devise = models.CharField(_("devise sous le nom"), max_length=120, blank=True, default="")
     message = RichTextField(_("message"), blank=True, default="")
+    couleur_fond = models.CharField(
+        _("couleur de fond de l'en-tête"), max_length=7, blank=True, default="",
+        help_text=_("Au format #RRGGBB (ex. #E8F1E4), assez claire pour que le texte sombre y reste lisible. Laisser vide : couleur de lesgrandsvoisins.com. Mode clair seulement."),
+    )
+    couleur_accent = models.CharField(
+        _("couleur des boutons"), max_length=7, blank=True, default="",
+        help_text=_("Au format #RRGGBB (ex. #F2B705), assez claire pour que le texte sombre des boutons y reste lisible. Laisser vide : jaune de lesgrandsvoisins.com."),
+    )
 
     parent_page_types = ["wagtailcore.Page", "cms.SitePage"]
     subpage_types = ["cms.StandardPage", "cms.ContactPage", "cms.SitePage"]
@@ -118,10 +126,26 @@ class SitePage(Page):
         FieldPanel("en_tete_titre"),
         FieldPanel("en_tete_devise"),
         FieldPanel("message"),
+        FieldPanel("couleur_fond"),
+        FieldPanel("couleur_accent"),
     ]
 
     class Meta:
         verbose_name = _("accueil d'un site")
+
+    def clean(self):
+        super().clean()
+        from .couleurs import erreur_couleur
+
+        erreurs = {}
+        for champ in ("couleur_fond", "couleur_accent"):
+            message = erreur_couleur(getattr(self, champ))
+            if message:
+                erreurs[champ] = message
+        if erreurs:
+            from django.core.exceptions import ValidationError
+
+            raise ValidationError(erreurs)
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)

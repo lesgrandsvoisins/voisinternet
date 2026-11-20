@@ -1684,6 +1684,28 @@ def redirection_confirmer(request, token):
 
 
 
+def couleurs_site(request):
+    """Feuille de style des couleurs du site Wagtail de ce nom de domaine (SitePage : fond de l'en-tête et boutons), sans style en ligne
+    (la politique de sécurité du site n'autorise que des feuilles de style du même domaine). Vide si le site n'a pas choisi de couleurs."""
+    from cms.couleurs import assombrir, erreur_couleur
+    from cms.models import SitePage
+
+    css = ""
+    site_wagtail = Site.find_for_request(request)
+    page = site_wagtail.root_page.specific if site_wagtail and not site_wagtail.is_default_site else None
+    if isinstance(page, SitePage):
+        fond = page.couleur_fond if page.couleur_fond and not erreur_couleur(page.couleur_fond) else ""
+        accent = page.couleur_accent if page.couleur_accent and not erreur_couleur(page.couleur_accent) else ""
+        if fond:
+            variables = f"--sky:{fond};--hover:{assombrir(fond)};"
+            css += f":root:root[data-theme=\"light\"]{{{variables}}}\n@media (prefers-color-scheme: light){{:root:root:not([data-theme=\"dark\"]){{{variables}}}}}\n"
+        if accent:
+            css += f":root:root{{--sun:{accent};}}\n"
+    reponse = HttpResponse(css, content_type="text/css; charset=utf-8")
+    reponse["Cache-Control"] = "public, max-age=300"
+    return reponse
+
+
 # --- Demandes soumises à la modération (adresses de courrier, droit d'envoi) ------------------------------------------
 
 def mes_demandes(request):

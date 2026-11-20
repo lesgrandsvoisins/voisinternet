@@ -54,6 +54,7 @@ def _theme(request):
         page = page.localized
         return "individuel", settings.SITE_PRINCIPAL, {
             "nom": page.en_tete_titre or page.title, "devise": page.en_tete_devise, "domaine": request.get_host().split(":")[0],
+            "couleurs": bool(page.couleur_fond or page.couleur_accent),
         }
     return "", "", {}
 

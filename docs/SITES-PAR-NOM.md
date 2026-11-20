@@ -22,5 +22,9 @@ Avant : les noms doivent être autorisés (`DJANGO_ALLOWED_HOSTS`, `DJANGO_CSRF_
 - **VIP par chemin** : les autres sites sont des pages enfants de la racine de VIP (`vip.resdigita.org/fr/<nom>/`). La racine de VIP liste ses pages enfants.
 - **Sites individuels avec leur propre en-tête** : la page d'accueil d'un site est une `SitePage` (« accueil d'un site » dans Wagtail). Son en-tête affiche le **nom** et la **devise** choisis dans la page (champs « nom dans l'en-tête » et « devise sous le nom » ; à défaut, le titre de la page). Ni le menu, ni l'agenda, ni l'annuaire, ni le logo de lesgrandsvoisins.com ; une icône maison ramène à lesgrandsvoisins.com. Le pied de page porte le nom, la devise et le nom de domaine du site.
 
+- **Un groupe d'éditeurs par site** (créé avec `--editeurs`) ; l'administration y ajoute et en retire les personnes dans `/cms/` (Paramètres, Groupes, ou la fiche d'une personne). Un groupe ne voit que les pages de son site.
+- **VIP : page publique, mais le nom est à changer** (en attente d'un nouveau nom).
+- **Couleurs par site** : dans la page d'accueil du site (`/cms/`), deux champs facultatifs : « couleur de fond de l'en-tête » et « couleur des boutons », au format `#RRGGBB`. Le site refuse une couleur trop sombre (le texte sombre doit y rester lisible : contraste d'au moins 4,5). Le fond ne s'applique qu'en mode clair (le mode sombre garde ses couleurs) ; la couleur des boutons s'applique dans les deux modes. Les couleurs sont servies par une feuille de style (`/couleurs.css`), sans style en ligne.
+
 ## Pas encore décidé
-Qui est éditeur de quoi (les groupes sont vides au départ), si VIP doit être fermé au public, et l'identité visuelle au-delà de l'en-tête (couleurs, logo) : aujourd'hui les couleurs sont celles de lesgrandsvoisins.com.
+Un nouveau nom pour VIP, si VIP doit être fermé au public, et un logo par site.

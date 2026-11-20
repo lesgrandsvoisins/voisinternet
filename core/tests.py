@@ -2565,3 +2565,34 @@ class SiteWagtailParNomTests(Base):
         self.assertNotContains(r, "menu-annuaire")
         self.assertContains(r, "max.resdigita.org")  # pied de page : le nom de domaine du site                                   # sa propre page d'accueil
         self.assertNotContains(self.client.get("/fr/", HTTP_HOST="inconnu.example.org"), "<h1>Max</h1>")  # nom sans Site : accueil principal
+
+
+@override_settings(ALLOWED_HOSTS=["*"])
+class CouleursDeSiteTests(Base):
+    def _site(self):
+        from io import StringIO
+        from django.core.management import call_command
+        from wagtail.models import Site
+
+        call_command("creer_site_wagtail", "Max", "max.resdigita.org", "--appliquer", stdout=StringIO())
+        return Site.objects.get(hostname="max.resdigita.org").root_page.specific
+
+    def test_couleurs_validees_et_servies_en_feuille_de_style(self):
+        from django.core.exceptions import ValidationError
+        page = self._site()
+        self.assertNotContains(self.client.get("/fr/", HTTP_HOST="max.resdigita.org"), "couleurs.css")  # pas de couleurs : rien d'ajouté
+        page.couleur_fond, page.couleur_accent = "#E8F1E4", "#F2B705"
+        page.full_clean()          # valides
+        page.save()
+        accueil = self.client.get("/fr/", HTTP_HOST="max.resdigita.org")
+        self.assertContains(accueil, 'href="/couleurs.css"')
+        css = self.client.get("/couleurs.css", HTTP_HOST="max.resdigita.org")
+        self.assertEqual(css["Content-Type"], "text/css; charset=utf-8")
+        corps = css.content.decode()
+        self.assertIn("--sky:#E8F1E4", corps)
+        self.assertIn("--sun:#F2B705", corps)
+        self.assertEqual(self.client.get("/couleurs.css", HTTP_HOST="inconnu.example.org").content, b"")  # sans site : feuille vide
+        for mauvaise in ("rouge", "#12345", "#1C2A35", "#000000", "red;}</style>"):   # forme invalide ou texte illisible
+            page.couleur_fond = mauvaise
+            with self.assertRaises(ValidationError):
+                page.full_clean()

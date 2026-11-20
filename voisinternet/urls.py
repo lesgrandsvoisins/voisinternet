@@ -11,6 +11,7 @@ from core import views as core_views
 
 urlpatterns = [
     path("robots.txt", core_views.robots_txt, name="robots_txt"),
+    path("couleurs.css", core_views.couleurs_site, name="couleurs_site"),
     path("documents/", include(wagtaildocs_urls)),
     # Anciennes adresses du vieux site (old.lesgrandsvoisins.com), qui préfixait ses pages par /fr-fr/.
     path("fr-fr/", core_views.ancien_site, name="ancien_site_racine"),

@@ -9,8 +9,8 @@ Règles :
   - l'étiquette `instance` de la sonde est le NOM DU SITE sans schéma : on la rapproche du nom d'hôte de l'adresse du service du catalogue, ou du champ « nom de la sonde » du service quand les deux diffèrent (changement de nom de domaine) ;
   - seule la requête /api/v1/query avec probe_success est appelée ; l'adresse de base est réglable (VOISINTERNET_SUPERVISION_URL ; vide = désactivé).
 
-États : vert (répond), rouge (ne répond pas), jaune (mesure de plus de 2 minutes, ou lenteur), gris « inconnu » (pas de mesure, ou supervision
-injoignable depuis plus de 10 minutes).
+États calculés : vert (répond), rouge (ne répond pas), jaune (mesure de plus de 2 minutes), gris « inconnu » (pas de mesure, ou supervision
+injoignable depuis plus de 10 minutes). AFFICHÉ : seulement le rouge (décision de Chris, 20/11) : ni vert, ni jaune, ni gris.
 """
 import json
 import logging
@@ -83,31 +83,26 @@ def etat_de(sonde, recu, maintenant):
 
 
 def annoter(services):
-    """Pose `service.etat` ({"code", "symbole", "libelle"}) sur chaque service ; renvoie l'état global (code) ou "" si la supervision est désactivée."""
+    """Pose `service.etat` ({"code", "symbole", "libelle"}) sur les services HORS LIGNE seulement (décision de Chris, 20/11 : pas de pastille
+    verte, ni jaune, ni grise : on ne signale que ce qui est en panne). Renvoie l'état global ("rouge" si un service ne répond pas, sinon "" :
+    rien à afficher) ; "" aussi si la supervision est désactivée ou injoignable."""
     if not settings.SUPERVISION_URL:
         return ""
     maintenant = time.time()
     donnees = _donnees(maintenant)
-    sondes = donnees["sondes"] if donnees else {}
-    recu = donnees["recu"] if donnees else None
-    codes = []
+    if not donnees:
+        return ""
+    sondes, recu = donnees["sondes"], donnees["recu"]
+    en_panne = False
     for service in services:
         hote = (service.supervision_instance or (urlparse(service.url).hostname if service.url else "") or "").strip().lower()
-        sonde = sondes.get(hote) if hote else None
-        if sonde is None and hote:
-            continue   # service non sondé par la supervision : pas de pastille
-        if not hote:
-            continue
-        code = etat_de(sonde, recu, maintenant)
-        symbole, libelle = ETATS[code]
-        service.etat = {"code": code, "symbole": symbole, "libelle": libelle}
-        codes.append(code)
-    if not codes:
-        return "inconnu" if donnees is None else ""
-    for pire in ("rouge", "jaune", "inconnu"):
-        if pire in codes:
-            return pire
-    return "vert"
+        if not hote or hote not in sondes:
+            continue   # service non sondé par la supervision
+        if etat_de(sondes[hote], recu, maintenant) == "rouge":
+            symbole, libelle = ETATS["rouge"]
+            service.etat = {"code": "rouge", "symbole": symbole, "libelle": libelle}
+            en_panne = True
+    return "rouge" if en_panne else ""
 
 
 GLOBAL = {

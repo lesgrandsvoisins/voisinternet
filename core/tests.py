@@ -2631,7 +2631,7 @@ class SupervisionTests(Base):
     def _sondes(self, maintenant):
         return {"wiki.gv.je": ("1", maintenant), "gitea.roses.gv.je": ("0", maintenant), "vw.gv.je": ("1", maintenant - 600)}
 
-    def test_etats_par_outil_et_global(self):
+    def test_seul_le_rouge_est_affiche(self):
         import time
         from unittest import mock
         from . import supervision
@@ -2639,11 +2639,14 @@ class SupervisionTests(Base):
         with mock.patch.object(supervision, "_lire", return_value=self._sondes(time.time())):
             services = [self.vert, self.rouge, self.vieux, self.sondeless]
             global_ = supervision.annoter(services)
-        self.assertEqual(self.vert.etat["code"], "vert")
         self.assertEqual(self.rouge.etat["code"], "rouge")
-        self.assertEqual(self.vieux.etat["code"], "jaune")          # mesure de plus de 2 minutes
-        self.assertFalse(hasattr(self.sondeless, "etat"))           # non sondé : pas de pastille
-        self.assertEqual(global_, "rouge")                           # le pire des états
+        self.assertFalse(hasattr(self.vert, "etat"))           # pas de pastille verte
+        self.assertFalse(hasattr(self.vieux, "etat"))          # ni jaune (mesure ancienne)
+        self.assertFalse(hasattr(self.sondeless, "etat"))      # ni pour un service non sondé
+        self.assertEqual(global_, "rouge")
+        with mock.patch.object(supervision, "_lire", return_value={"wiki.gv.je": ("1", time.time())}):
+            cache.clear()
+            self.assertEqual(supervision.annoter([self.vert]), "")   # tout va bien : rien à afficher
 
     def test_nom_de_sonde_different_de_l_hote_de_l_adresse(self):
         import time
@@ -2654,7 +2657,10 @@ class SupervisionTests(Base):
                                        supervision_instance="Vikunja.Resdigita.org")
         with mock.patch.object(supervision, "_lire", return_value={"vikunja.resdigita.org": ("1", time.time())}):
             supervision.annoter([autre])
-        self.assertEqual(autre.etat["code"], "vert")      # rapproché par le champ, pas par l'hôte de l'adresse
+        with mock.patch.object(supervision, "_lire", return_value={"vikunja.resdigita.org": ("0", time.time())}):
+            cache.clear()
+            supervision.annoter([autre])
+        self.assertEqual(autre.etat["code"], "rouge")     # rapproché par le champ, pas par l'hôte de l'adresse
 
     def test_une_seule_requete_par_minute_et_derniere_valeur_gardee(self):
         import time
@@ -2665,11 +2671,11 @@ class SupervisionTests(Base):
 
         def lire():
             appels.append(1)
-            return {"wiki.gv.je": ("1", time.time())}
+            return {"gitea.roses.gv.je": ("0", time.time())}
 
         with mock.patch.object(supervision, "_lire", side_effect=lire):
             for _ in range(5):
-                supervision.annoter([self.vert])
+                supervision.annoter([self.rouge])
         self.assertEqual(len(appels), 1)                             # cache partagé : une requête pour cinq pages
         # supervision injoignable plus tard : on garde la dernière valeur, sans erreur
         cache.delete(supervision.CLE_VERROU)
@@ -2678,13 +2684,13 @@ class SupervisionTests(Base):
         cache.set(supervision.CLE, donnees, 3600)
         from urllib.error import URLError
         with mock.patch.object(supervision, "_lire", side_effect=URLError("injoignable")):
-            supervision.annoter([self.vert])
-        self.assertEqual(self.vert.etat["code"], "vert")
+            supervision.annoter([self.rouge])
+        self.assertEqual(self.rouge.etat["code"], "rouge")
 
     def test_page_outils_jamais_en_erreur_si_supervision_injoignable(self):
         r = self.client.get("/fr/outils/", HTTP_HOST="testserver")      # URL invalide : échec réel de la requête sortante
         self.assertEqual(r.status_code, 200)
-        self.assertContains(r, "État des services inconnu")
+        self.assertNotContains(r, "etat-global")     # injoignable : rien d'affiché, jamais d'erreur
 
     def test_page_affiche_pastilles_avec_texte_et_forme(self):
         import time
@@ -2693,7 +2699,7 @@ class SupervisionTests(Base):
 
         with mock.patch.object(supervision, "_lire", return_value=self._sondes(time.time())):
             page = self.client.get("/fr/outils/", HTTP_HOST="testserver").content.decode()
-        self.assertIn('aria-label="En ligne"', page)
+        self.assertNotIn('aria-label="En ligne"', page)               # pas de pastille verte
         self.assertIn('aria-label="Hors ligne"', page)
         self.assertIn("Un service ne répond pas", page)               # indicateur global
         self.assertIn("■", page)                                       # forme, pas seulement la couleur

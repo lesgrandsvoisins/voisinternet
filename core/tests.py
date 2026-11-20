@@ -2549,6 +2549,13 @@ class SiteWagtailParNomTests(Base):
         call_command("creer_site_wagtail", "Max", "max.resdigita.org", "--appliquer", stdout=out)  # idempotent
         self.assertEqual(Site.objects.filter(hostname="max.resdigita.org").count(), 1)
         self.assertEqual(Site.objects.get(hostname="max.resdigita.org").root_page_id, Site.objects.get(hostname="max.lesgrandsvoisins.com").root_page_id)
+        call_command("creer_site_wagtail", "Max", "max.resdigita.org", "--editeurs", "Éditeurs de Max", "--appliquer", stdout=out)
+        from django.contrib.auth.models import Group
+        from wagtail.models import GroupPagePermission
+        groupe = Group.objects.get(name="Éditeurs de Max")
+        racine = Site.objects.get(hostname="max.resdigita.org").root_page
+        self.assertEqual(set(GroupPagePermission.objects.filter(group=groupe).values_list("page_id", flat=True)), {racine.pk})  # seulement SON site
+        self.assertEqual(GroupPagePermission.objects.filter(group=groupe).count(), 3)
         r = self.client.get("/fr/", HTTP_HOST="max.resdigita.org")
         self.assertContains(r, "<h1>Max</h1>")                                   # sa propre page d'accueil
         self.assertNotContains(self.client.get("/fr/", HTTP_HOST="inconnu.example.org"), "<h1>Max</h1>")  # nom sans Site : accueil principal

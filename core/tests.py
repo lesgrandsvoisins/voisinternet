@@ -2708,3 +2708,55 @@ class SupervisionTests(Base):
     def test_desactivee_si_adresse_vide(self):
         page = self.client.get("/fr/outils/", HTTP_HOST="testserver").content.decode()
         self.assertNotIn("etat-global", page)
+
+
+@override_settings(ALLOWED_HOSTS=["*"])
+class EvenementsSurPlusieursJoursTests(Base):
+    def _evenement(self, debut, fin, titre="Rencontres"):
+        from datetime import timedelta
+        maintenant = timezone.now()
+        return Event.objects.create(title=titre, slug=slugify(titre) if False else titre.lower(), public=True,
+                                    start=maintenant + timedelta(**debut), end=maintenant + timedelta(**fin) if fin else None)
+
+    def test_un_evenement_en_cours_sur_plusieurs_jours_reste_a_venir(self):
+        en_cours = self._evenement({"days": -1}, {"days": 2}, "En cours")      # commencé hier, fini après-demain
+        fini = self._evenement({"days": -5}, {"days": -3}, "Fini")
+        sans_fin_passe = self._evenement({"days": -2}, None, "Sans fin passé")
+        r = self.client.get(reverse("core:agenda"))
+        a_venir = [e.title for e in r.context["upcoming_events"]]
+        passes = [e.title for e in r.context["past_events"]]
+        self.assertIn("En cours", a_venir)           # en cours : reste dans « Prochains évènements »
+        self.assertNotIn("Fini", a_venir)
+        self.assertNotIn("Sans fin passé", a_venir)
+        self.assertIn("Fini", passes)
+        self.assertNotIn("En cours", passes)
+
+    def test_dates_sur_plusieurs_jours(self):
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        from . import evenements
+        paris = ZoneInfo("Europe/Paris")
+        e = Event(title="Rencontres", start=datetime(2026, 11, 12, 10, 0, tzinfo=paris), end=datetime(2026, 11, 14, 18, 0, tzinfo=paris))
+        self.assertTrue(evenements.multi_jours(e))
+        self.assertEqual(evenements.plage_pastille(e)["jours"], "12–14")                 # même mois
+        self.assertEqual(evenements.plage_pastille(e)["heures"], "")                      # pas d'heures sur la pastille
+        e2 = Event(title="Autre", start=datetime(2026, 11, 30, 10, 0, tzinfo=paris), end=datetime(2026, 12, 2, 18, 0, tzinfo=paris))
+        self.assertIn(" – ", evenements.plage_pastille(e2)["jours"])                      # deux mois : « 30 nov. – 2 déc. »
+        e3 = Event(title="Un jour", start=datetime(2026, 11, 12, 10, 0, tzinfo=paris), end=datetime(2026, 11, 12, 12, 0, tzinfo=paris))
+        self.assertFalse(evenements.multi_jours(e3))
+        self.assertEqual(evenements.plage_pastille(e3)["heures"], "10:00 – 12:00")        # un seul jour : comme avant
+        texte = evenements.plage_texte(e)
+        self.assertIn("12", texte)
+        self.assertIn("14", texte)
+
+    def test_page_de_detail_donne_la_plage_complete(self):
+        e = self._evenement({"days": 1}, {"days": 4}, "Festival")
+        page = self.client.get(reverse("core:event_detail", args=[e.pk])).content.decode()
+        self.assertRegex(page, r"du .* au .*")
+        self.assertEqual(page.count("<time"), 1)       # une seule balise, pas de fin dupliquée
+
+    def test_le_formulaire_refuse_une_fin_avant_le_debut(self):
+        from .forms import EventForm
+        form = EventForm({"title_fr": "X", "start": "2026-11-14T10:00", "end": "2026-11-12T10:00"})
+        self.assertFalse(form.is_valid())
+        self.assertIn("end", form.errors)

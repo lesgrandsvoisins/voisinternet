@@ -28,6 +28,7 @@ from django.views.decorators.http import require_POST
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
 from .forms import ContactMessageForm, ContributionForm, DirectoryEntryForm, EventForm
 from . import demandes as demandes_module
+from . import evenements
 from . import supervision
 from . import redirections
 from .legacy import equivalent_ancien_site
@@ -185,8 +186,8 @@ def home(request):
         "poles": PolePage.objects.live().filter(locale_id=active_lang.id).order_by("path"),
         "recent_entries": recent_entries,
         "agenda_calendar": _month_calendar(request),
-        "next_event": Event.objects.filter(public=True, start__gte=timezone.now()).order_by("start").first(),
-        "next_events": Event.objects.filter(public=True, start__gte=timezone.now()).order_by("start")[:3],
+        "next_event": evenements.a_venir(Event.objects.filter(public=True)).order_by("start").first(),
+        "next_events": evenements.a_venir(Event.objects.filter(public=True)).order_by("start")[:3],
         "quicklink_entry_texts": [e.name for e in recent_entries],
         "quicklink_post_texts": [str(Truncator(p.title).chars(40)) for p in quicklink_posts],
         "quicklink_event_texts": [
@@ -297,7 +298,7 @@ def tag_detail(request, slug):
     tag = get_object_or_404(Tag, slug=slug)
     entries = tag.directory_entries.filter(visibility=DirectoryEntry.VISIBILITY_PUBLIC, approved=True)
     services = tag.services.filter(active=True, **({} if _is_administration(request.user) else {"administration_only": False}))
-    events = tag.events.filter(public=True, start__gte=timezone.now()).order_by("start")
+    events = evenements.a_venir(tag.events.filter(public=True)).order_by("start")
     from cms.models import BlogPostPage, PolePage, ProjectPage
 
     posts = BlogPostPage.objects.live().filter(tags=tag).filter(locale_id=active_lang.id).order_by("-date")
@@ -832,8 +833,8 @@ def toggle_publication(request, slug):
 def agenda(request):
     now = timezone.now()
     return render(request, "core/agenda.html", {
-        "upcoming_events": Event.objects.filter(public=True, start__gte=now),
-        "past_events": Event.objects.filter(public=True, start__lt=now).order_by("-start")[:5],
+        "upcoming_events": evenements.a_venir(Event.objects.filter(public=True), now),   # un évènement en cours sur plusieurs jours y reste
+        "past_events": evenements.passes(Event.objects.filter(public=True), now).order_by("-start")[:5],
     })
 
 

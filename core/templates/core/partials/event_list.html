@@ -1,4 +1,4 @@
-{% load i18n markdown_filters %}
+{% load i18n markdown_filters evenements %}
 <ul class="agenda-list">
   {% for event in events %}
     <li class="agenda-card{% if event.featured %} feat{% endif %}">
@@ -40,15 +40,13 @@
          href="{% url 'core:event_detail' event.pk %}"
          aria-hidden="true"
          tabindex="-1">
+        {% pastille_dates event as pastille %}
         <div>
-          <span class="agenda-date-year">{{ event.start|date:"Y" }}</span>
-          <span class="agenda-date-weekday">{{ event.start|date:"l" }}</span>
-          <span class="agenda-date-day">{{ event.start|date:"j" }}</span>
-          <span class="agenda-date-month">{{ event.start|date:"N" }}</span>
-          <span class="agenda-date-hours">
-            {{ event.start|date:"H:i" }}
-            {% if event.end %}- {{ event.end|date:"H:i" }}{% endif %}
-          </span>
+          <span class="agenda-date-year">{{ pastille.annee }}</span>
+          <span class="agenda-date-weekday">{{ pastille.semaine }}</span>
+          <span class="agenda-date-day">{{ pastille.jours }}</span>
+          {% if pastille.mois %}<span class="agenda-date-month">{{ pastille.mois }}</span>{% endif %}
+          {% if pastille.heures %}<span class="agenda-date-hours">{{ pastille.heures }}</span>{% endif %}
           {% if event.location or event.online_url %}
             <p class="agenda-where">
               {{ event.location }}

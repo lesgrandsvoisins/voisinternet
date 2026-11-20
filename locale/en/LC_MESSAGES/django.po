@@ -3974,3 +3974,10 @@ msgstr "A service is not responding"
 
 msgid "État des services inconnu"
 msgstr "Service status unknown"
+
+#, python-format
+msgid "du %(debut)s au %(fin)s"
+msgstr "from %(debut)s to %(fin)s"
+
+msgid "La fin ne peut pas être avant le début."
+msgstr "The end cannot be before the start."

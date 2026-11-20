@@ -3913,3 +3913,10 @@ msgstr "هناك خدمة لا تستجيب"
 
 msgid "État des services inconnu"
 msgstr "حالة الخدمات غير معروفة"
+
+#, python-format
+msgid "du %(debut)s au %(fin)s"
+msgstr "من %(debut)s إلى %(fin)s"
+
+msgid "La fin ne peut pas être avant le début."
+msgstr "لا يمكن أن تكون النهاية قبل البداية."

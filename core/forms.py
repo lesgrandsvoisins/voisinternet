@@ -108,6 +108,20 @@ class EventForm(forms.ModelForm):
             ),
         }
 
+    def clean(self):
+        donnees = super().clean()
+        debut, fin = donnees.get("start"), donnees.get("end")
+        if debut and fin and fin < debut:
+            self.add_error("end", _("La fin ne peut pas être avant le début."))
+        return donnees
+
+    def clean(self):
+        donnees = super().clean()
+        debut, fin = donnees.get("start"), donnees.get("end")
+        if debut and fin and fin < debut:
+            self.add_error("end", _("La fin ne peut pas être avant le début."))
+        return donnees
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         from django.utils.translation import get_language

@@ -483,8 +483,10 @@ class PolePage(Page):
             ).distinct().order_by("name")[:6]
             if pole_tag_ids else DirectoryEntry.objects.none()
         )
+        from core.evenements import a_venir
+
         context["pole_events"] = (
-            Event.objects.filter(tags__in=pole_tag_ids, public=True, start__gte=timezone.now())
+            a_venir(Event.objects.filter(tags__in=pole_tag_ids, public=True))
             .distinct().order_by("start")[:6]
             if pole_tag_ids else Event.objects.none()
         )

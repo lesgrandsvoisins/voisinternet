@@ -35,7 +35,10 @@ class DemandeError(Exception):
     """Erreur affichable à la personne (message déjà traduit, sans secret)."""
 
 
-def domaines():
+def domaines(kind=None):
+    """Domaines autorisés (liste fermée) : tous pour une adresse de réception, ceux du droit d'envoi pour « envoi »."""
+    if kind == "envoi":
+        return list(settings.DEMANDES_DOMAINES_ENVOI)
     return list(settings.DEMANDES_DOMAINES)
 
 
@@ -62,6 +65,8 @@ def valider(kind, local_part, domain):
         raise DemandeError(_("Type de demande inconnu."))
     if domain not in domaines():
         raise DemandeError(_("Ce domaine n'est pas proposé."))
+    if kind == Demande.ENVOI and domain not in domaines("envoi"):
+        raise DemandeError(_("On ne peut demander à envoyer que depuis une adresse en %(domaine)s.") % {"domaine": ", ".join(domaines("envoi"))})
     if not LOCAL_RE.match(local_part):
         raise DemandeError(_("La partie avant « @ » doit commencer par une lettre minuscule ou un chiffre, puis ne contenir que des lettres minuscules, chiffres, points, tirets ou tirets bas (64 caractères au plus)."))
     if local_part.split("+")[0] in RESERVES or Service.objects.filter(slug=local_part).exists():

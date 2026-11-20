@@ -2181,6 +2181,19 @@ class DemandesTests(Base):
         self.modo = get_user_model().objects.create_user("chris@gv.je", email="chris@gv.je")
         self.modo.groups.add(Group.objects.get(name="Modération"))
 
+    def test_lesgrandsvoisins_com_pour_la_reception_seulement(self):
+        from . import demandes
+        from .models import Demande
+
+        self.assertEqual(demandes.valider(Demande.ADRESSE, "projet", "lesgrandsvoisins.com"), ("projet", "lesgrandsvoisins.com"))  # réception : oui
+        with self.assertRaises(demandes.DemandeError):                       # envoi : resdigita.org seulement
+            demandes.valider(Demande.ENVOI, "membre", "lesgrandsvoisins.com")
+        self.assertEqual(demandes.valider(Demande.ENVOI, "membre", "resdigita.org"), ("membre", "resdigita.org"))
+        d = demandes.creer(self.account, "membre@gv.je", Demande.ADRESSE, "projet", "lesgrandsvoisins.com", "")
+        self.assertEqual(d.address, "projet@lesgrandsvoisins.com")
+        with self.assertRaises(demandes.DemandeError):                       # nom réservé aussi sur ce domaine
+            demandes.valider(Demande.ADRESSE, "postmaster", "lesgrandsvoisins.com")
+
     def test_validation(self):
         from . import demandes
         from .models import Demande

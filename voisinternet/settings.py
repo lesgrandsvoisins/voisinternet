@@ -305,7 +305,9 @@ WAGTAILIMAGES_EXTENSIONS = ["avif", "gif", "jpg", "jpeg", "png", "webp", "svg"]
 
 
 # Demandes soumises à la modération (adresses de courrier, droit d'envoi) : domaines autorisés (liste fermée) et plafond.
-DEMANDES_DOMAINES = env_list("VOISINTERNET_DEMANDES_DOMAINES", "resdigita.org")
+# Réception (nouvelle adresse) : resdigita.org et lesgrandsvoisins.com ; droit d'ENVOI : resdigita.org seulement (DKIM et SPF du domaine).
+DEMANDES_DOMAINES = env_list("VOISINTERNET_DEMANDES_DOMAINES", "resdigita.org,lesgrandsvoisins.com")
+DEMANDES_DOMAINES_ENVOI = env_list("VOISINTERNET_DEMANDES_DOMAINES_ENVOI", "resdigita.org")
 DEMANDES_PAR_JOUR = int(env("VOISINTERNET_DEMANDES_PAR_JOUR", "5"))
 
 # Adresse du site principal : les pages Wagtail de lesgrandsvoisins.com y sont renvoyées depuis un autre site Wagtail (resdigita.org).

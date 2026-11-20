@@ -1884,11 +1884,20 @@ class RedirectionCourrierTests(Base):
         token = lien.rstrip("/").rsplit("/", 1)[1]
         self.assertNotEqual(RedirectionRequest.objects.get().token_digest, token)  # seul le condensé est conservé
         self.client.logout()  # la personne qui confirme n'est pas connectée
+        # Avec copie gardée sur le serveur (la redirection s'ajoute) : ouvrir le lien suffit.
+        self.assertIn("ouvrez ce lien", mail.outbox[-1].body)
         self.assertEqual(self.client.get(lien).status_code, 200)
-        self.assertEqual(self.attrs(), ([], []))  # un simple GET (antivirus) ne confirme rien
-        self.assertEqual(self.client.post(lien).status_code, 200)
         self.assertEqual(self.attrs(), (["lucie@exemple.org"], ["duponlucie@gv.je"]))
         self.assertEqual(self.client.get(lien).status_code, 404)  # usage unique
+
+    def test_sans_copie_un_simple_get_ne_confirme_rien(self):
+        self.demander(copie=False)
+        lien = self.lien()
+        self.client.logout()
+        self.assertEqual(self.client.get(lien).status_code, 200)
+        self.assertEqual(self.attrs(), ([], []))  # sans copie : un simple GET (antivirus) ne confirme rien
+        self.assertEqual(self.client.post(lien).status_code, 200)
+        self.assertEqual(self.attrs(), (["lucie@exemple.org"], []))
 
     def test_without_copy_and_toggle_copy_and_disable(self):
         self.demander(copie=False)

@@ -142,7 +142,7 @@ def audit(account, action):
     logger.info("redirections: compte=%s action=%s", account.pk, action)
 
 
-def request_redirection(account, member_addresses, target, keep_copy, confirm_url_for, identifier):
+def request_redirection(account, member_addresses, target, keep_copy, confirm_url_for, identifier, stop_url=""):
     """Crée la demande et envoie le courriel de confirmation à la cible. `confirm_url_for(token)` donne l'adresse absolue."""
     from .models import RedirectionRequest
 
@@ -157,16 +157,29 @@ def request_redirection(account, member_addresses, target, keep_copy, confirm_ur
         account=account, target=target, keep_copy=keep_copy, member_addresses=list(member_addresses),
         token_digest=digest(token), expires=timezone.now() + TOKEN_VALIDITY,
     )
-    send_mail(
-        _("Confirmer la redirection de courrier vers cette adresse"),
-        _(
+    if keep_copy:
+        # Une copie reste dans la boîte : la redirection s'ajoute, ouvrir le lien suffit à confirmer.
+        corps = _(
             "Bonjour,\n\n"
-            "%(identifier)s, membre de Les Grands Voisins, demande à ce que son courrier soit transféré à cette adresse.\n"
+            "%(identifier)s, membre de Les Grands Voisins, demande à ce que son courrier soit transféré à cette adresse "
+            "(une copie de chaque message reste dans sa boîte).\n"
             "Pour accepter, ouvrez ce lien dans les 24 heures :\n\n%(url)s\n\n"
+            "Rien ne sera transféré tant que vous n'aurez pas ouvert ce lien. Si vous n'êtes pas concerné·e, ignorez ce message : "
+            "il expirera tout seul.\n"
+        ) % {"identifier": identifier, "url": confirm_url_for(token)}
+        if stop_url:
+            corps += _("\nLa personne peut arrêter la redirection à tout moment ici : %(stop)s\n") % {"stop": stop_url}
+    else:
+        corps = _(
+            "Bonjour,\n\n"
+            "%(identifier)s, membre de Les Grands Voisins, demande à ce que son courrier soit transféré à cette adresse "
+            "(sans copie dans sa boîte).\n"
+            "Pour accepter, ouvrez ce lien dans les 24 heures, puis confirmez sur la page :\n\n%(url)s\n\n"
             "Rien ne sera transféré tant que vous n'aurez pas confirmé. Si vous n'êtes pas concerné·e, ignorez ce message : "
             "il expirera tout seul.\n"
-        ) % {"identifier": identifier, "url": confirm_url_for(token)},
-        settings.DEFAULT_FROM_EMAIL, [target],
+        ) % {"identifier": identifier, "url": confirm_url_for(token)}
+    send_mail(
+        _("Confirmer la redirection de courrier vers cette adresse"), corps, settings.DEFAULT_FROM_EMAIL, [target],
     )
     audit(account, "demande")
     return demande

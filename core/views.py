@@ -1633,6 +1633,7 @@ def redirection_courrier(request):
                 redirections.request_redirection(
                     account, adresses, request.POST.get("cible", ""), bool(request.POST.get("copie")),
                     lambda token: redirections.confirm_url(request, token), identifiant,
+                    stop_url=request.build_absolute_uri(reverse("core:redirection_courrier")),
                 )
                 messages.success(request, _("Un courriel de confirmation vient d'être envoyé à cette adresse. Tant qu'elle n'est pas confirmée, rien n'est transféré."))
             elif action == "copie":
@@ -1667,7 +1668,9 @@ def redirection_confirmer(request, token):
     demande = redirections.find_request(token)
     if demande is None:
         return render(request, "core/redirection_confirmer.html", {"invalid": True}, status=404)
-    if request.method == "POST":
+    # Règle de Chris (21/11) : si la copie reste sur le serveur (la redirection s'AJOUTE, rien n'est perdu), ouvrir le lien suffit ;
+    # sans copie (le courrier ne reste pas sur le serveur), un bouton « J'accepte » protège contre un lien ouvert par un antivirus.
+    if request.method == "POST" or demande.keep_copy:
         try:
             redirections.confirm(demande)
         except redirections.RedirectionError as exc:

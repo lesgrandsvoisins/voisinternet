@@ -3821,3 +3821,9 @@ msgstr "또는 이미 가지고 있는 계정으로 계속하기:"
 
 msgid "Connecté·e en tant que"
 msgstr "로그인한 계정"
+
+msgid "Apps"
+msgstr "앱"
+
+msgid "Favs"
+msgstr "즐겨찾기"

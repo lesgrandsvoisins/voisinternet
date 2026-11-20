@@ -3947,3 +3947,9 @@ msgstr "Or continue with an account you already have:"
 
 msgid "Connecté·e en tant que"
 msgstr "Signed in as"
+
+msgid "Apps"
+msgstr "Apps"
+
+msgid "Favs"
+msgstr "Favs"

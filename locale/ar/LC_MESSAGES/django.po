@@ -3886,3 +3886,9 @@ msgstr "أو المتابعة بحساب لديك بالفعل:"
 
 msgid "Connecté·e en tant que"
 msgstr "تم تسجيل الدخول باسم"
+
+msgid "Apps"
+msgstr "التطبيقات"
+
+msgid "Favs"
+msgstr "المفضلة"

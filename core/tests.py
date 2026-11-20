@@ -2596,3 +2596,20 @@ class CouleursDeSiteTests(Base):
             page.couleur_fond = mauvaise
             with self.assertRaises(ValidationError):
                 page.full_clean()
+
+
+@override_settings(ALLOWED_HOSTS=["*"], SERVICES_URL="https://www.resdigita.org")
+class MenuCompteAppsFavsTests(Base):
+    def test_menu_du_compte_renvoie_vers_apps_et_favs(self):
+        self.addCleanup(translation.activate, "fr")  # la requête /en/ active l'anglais pour le fil
+        user = get_user_model().objects.create_user("sub-af")
+        acc = Account.objects.create(user=user)
+        self.client.force_login(user)
+        page = self.client.get("/fr/").content.decode()
+        self.assertIn('href="https://www.resdigita.org/fr/#outils-titre"', page)   # « Apps »
+        self.assertNotIn("#outils-mes", page)                                       # pas de favoris : pas de lien « Favs »
+        Shortcut.objects.create(account=acc, service=Service.objects.first())
+        page = self.client.get("/en/").content.decode()
+        self.assertIn('href="https://www.resdigita.org/en/#outils-mes"', page)      # « Favs », dans la langue courante
+        # l'ancien menu listait chaque service choisi (lien target="_new") : plus de liste dans le menu
+        self.assertNotIn('target="_new">' + Service.objects.first().name + "</a>", page)

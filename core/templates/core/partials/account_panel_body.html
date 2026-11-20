@@ -28,21 +28,15 @@
       {% comment %} <li><strong><a href="{% url 'core:raccourcis' %}">{% trans "Mes services" %}</strong></a></li> {% endcomment %}
       {% comment %} <li><strong><a href="{% url 'core:groupes' %}">{% trans "Mes groupes" %}</strong></a></li> {% endcomment %}
       {% comment %} <li><strong><a href="{% url 'core:mes_fiches' %}">{% trans "Mes fiches dans l'annuaire" %}</strong></a></li> {% endcomment %}
-      {% for shortcut in account_shortcuts %}
-        {% with service=shortcut.service %}
-          <li>
-            {% if service.url %}
-              <a href="{{ service.url }}" target="_new">{{ service.name }}</a>
-            {% else %}
-              <span>{{ service.name }}</span>
-            {% endif %}
-          </li>
-        {% endwith %}
-      {% endfor %}
+      <li>
+        <a href="{% if SERVICES_URL %}{{ SERVICES_URL }}/{{ LANGUAGE_CODE }}/#outils-titre{% else %}{% url 'core:outils' %}{% endif %}">{% trans "Apps" %}</a>
+      </li>
+      {% if account_shortcuts %}
+        <li>
+          <a href="{% if SERVICES_URL %}{{ SERVICES_URL }}/{{ LANGUAGE_CODE }}/#outils-mes{% else %}{% url 'core:raccourcis' %}{% endif %}">{% trans "Favs" %}</a>
+        </li>
+      {% endif %}
     </ul>
-    {% if not account_shortcuts and account and not user.is_authenticated %}
-      <p class="account-empty">{% trans "Aucun service ajouté pour l'instant." %}</p>
-    {% endif %}
   </div>
   {% if user.is_authenticated and OIDC_ENABLED %}
     <div class="account-footer">

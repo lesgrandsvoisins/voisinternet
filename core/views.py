@@ -28,6 +28,7 @@ from django.views.decorators.http import require_POST
 from .accounts import NEW_NUMBER_KEY, SESSION_KEY, current_account, pending_anonymous_account
 from .forms import ContactMessageForm, ContributionForm, DirectoryEntryForm, EventForm
 from . import demandes as demandes_module
+from . import supervision
 from . import redirections
 from .legacy import equivalent_ancien_site
 from .menu import ENTRIES, GROUPS, entry_href
@@ -1776,10 +1777,12 @@ def outils_context(request):
     services = _catalogue(request.user)
     acc = current_account(request)
     mes_ids = set(acc.shortcut_set.values_list("service_id", flat=True)) if acc else set()
+    code_global = supervision.annoter(services)  # pose service.etat (vert/jaune/rouge/inconnu) d'après la supervision de l'hôte, en cache
     return {
         "services": services,
         "mes_services": [s for s in services if s.pk in mes_ids],
         "mes_ids": mes_ids,
+        "etat_global": {"code": code_global, "symbole": supervision.ETATS[code_global][0], "libelle": supervision.GLOBAL[code_global]} if code_global else None,
     }
 
 

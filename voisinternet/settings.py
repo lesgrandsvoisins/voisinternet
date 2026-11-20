@@ -318,3 +318,6 @@ SERVICES_URL = env("VOISINTERNET_SERVICES_URL", "").rstrip("/")
 # Fournisseurs d'identité proposés sur la page « Mon compte » (alias Keycloak, ex. google,microsoft). Vide : aucun bouton.
 # Ne les activer qu'une fois le flux « first broker login » de Keycloak branché sur le générateur d'identifiant.
 FOURNISSEURS = env_list("VOISINTERNET_FOURNISSEURS", "")
+
+# Supervision existante de l'hôte (Prometheus + blackbox_exporter) pour l'état des outils : adresse de base ; vide = pas d'indicateur.
+SUPERVISION_URL = env("VOISINTERNET_SUPERVISION_URL", "http://127.0.0.1:9090").rstrip("/")

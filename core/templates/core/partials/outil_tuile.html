@@ -15,7 +15,7 @@
       {% else %}
         <span class="led" aria-hidden="true"></span>
       {% endif %}
-      <span class="outil-nom">{{ service.name }}</span>
+      <span class="outil-nom">{{ service.name }}{% if service.etat %} <span class="etat etat-{{ service.etat.code }}" role="img" aria-label="{{ service.etat.libelle }}" title="{{ service.etat.libelle }}">{{ service.etat.symbole }}</span>{% endif %}</span>
       <span class="outil-resume">{{ service.summary }}</span>
       {% if service.url %}
       </a>

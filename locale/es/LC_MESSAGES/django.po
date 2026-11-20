@@ -3971,3 +3971,24 @@ msgstr "Apps"
 
 msgid "Favs"
 msgstr "Favs"
+
+msgid "À vérifier"
+msgstr "A comprobar"
+
+msgid "Hors ligne"
+msgstr "Fuera de línea"
+
+msgid "Inconnu"
+msgstr "Desconocido"
+
+msgid "Tout fonctionne"
+msgstr "Todo funciona"
+
+msgid "Un service est lent ou son état est à vérifier"
+msgstr "Un servicio va lento o su estado debe comprobarse"
+
+msgid "Un service ne répond pas"
+msgstr "Un servicio no responde"
+
+msgid "État des services inconnu"
+msgstr "Estado de los servicios desconocido"

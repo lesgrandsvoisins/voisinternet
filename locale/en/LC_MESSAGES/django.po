@@ -3953,3 +3953,24 @@ msgstr "Apps"
 
 msgid "Favs"
 msgstr "Favs"
+
+msgid "À vérifier"
+msgstr "To check"
+
+msgid "Hors ligne"
+msgstr "Offline"
+
+msgid "Inconnu"
+msgstr "Unknown"
+
+msgid "Tout fonctionne"
+msgstr "Everything works"
+
+msgid "Un service est lent ou son état est à vérifier"
+msgstr "A service is slow or its status needs checking"
+
+msgid "Un service ne répond pas"
+msgstr "A service is not responding"
+
+msgid "État des services inconnu"
+msgstr "Service status unknown"

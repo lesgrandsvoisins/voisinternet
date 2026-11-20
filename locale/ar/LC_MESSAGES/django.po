@@ -3114,7 +3114,7 @@ msgstr "لا توجد فعاليات متابَعة حتى الآن."
 
 #: core/templates/core/partials/event_list.html:53
 msgid "En ligne"
-msgstr "عبر الإنترنت"
+msgstr "متصل"
 
 #: core/templates/core/partials/group_list.html:16
 msgid "Partenariat lesgrandsvoisins.com"
@@ -3892,3 +3892,24 @@ msgstr "التطبيقات"
 
 msgid "Favs"
 msgstr "المفضلة"
+
+msgid "À vérifier"
+msgstr "للتحقق"
+
+msgid "Hors ligne"
+msgstr "غير متصل"
+
+msgid "Inconnu"
+msgstr "غير معروف"
+
+msgid "Tout fonctionne"
+msgstr "كل شيء يعمل"
+
+msgid "Un service est lent ou son état est à vérifier"
+msgstr "خدمة بطيئة أو يجب التحقق من حالتها"
+
+msgid "Un service ne répond pas"
+msgstr "هناك خدمة لا تستجيب"
+
+msgid "État des services inconnu"
+msgstr "حالة الخدمات غير معروفة"

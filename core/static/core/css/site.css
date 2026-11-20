@@ -4439,3 +4439,12 @@ img.tool-icon {
 /* Identifiant de la personne connectée, à côté de l'icône du compte (tronqué si trop long). */
 .account-nom { max-width: 14rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .9rem; }
 @media screen and (max-width:600px) { .account-nom { max-width: 7rem; } }
+
+/* État des outils (supervision) : couleur ET forme (●, ▲, ■, ○) ET texte : la couleur seule ne suffit pas. */
+.etat { font-size: .8em; }
+.etat-vert { color: #1E7A4C; }
+.etat-jaune { color: #8A6A00; }
+.etat-rouge { color: var(--danger); }
+.etat-inconnu { color: var(--zinc-dark); }
+.etat-global { position: fixed; left: 1rem; bottom: 1rem; z-index: 50; margin: 0; padding: .4rem .8rem; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); font-size: .9rem; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
+@media (max-width: 600px) { .etat-global { left: .5rem; bottom: .5rem; font-size: .8rem; } }

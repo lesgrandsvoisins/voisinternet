@@ -29,7 +29,7 @@
           <li aria-current="page">{% trans "Créer une fiche" %}</li>
         </ol>
       </nav>
-      <h1>{% trans "Créer une fiche" %}</h1>
+      <h1 id="new-title">{% trans "Créer une fiche" %}</h1>
       <p class="lead">
         {% trans "Une personne ou une structure de l'annuaire. La fiche reste non publiée tant que vous n'avez pas choisi de la publier : c'est votre consentement explicite." %}
       </p>
@@ -38,12 +38,6 @@
   <!-- BODY CONTENT -->
   <div class="wrap page">
     <section aria-labelledby="new-title">
-      <div class="split">
-        <h2 id="new-title">{% trans "Ma nouvelle fiche" %}</h2>
-        <p class="muted">
-          <a href="{% url 'core:mes_fiches' %}">{% trans "← Mes fiches" %}</a>
-        </p>
-      </div>
       <form class="entry-form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% include "core/partials/entry_form_fields.html" %}

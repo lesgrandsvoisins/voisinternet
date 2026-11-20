@@ -2475,6 +2475,8 @@ class FicheNouvelleTests(Base):
         self.assertNotContains(liste, 'class="entry-form"')            # plus de formulaire sur la liste
         page = self.client.get(reverse("core:fiche_nouvelle"))
         self.assertContains(page, 'class="entry-form"')
+        self.assertNotContains(page, "<h2")             # comme la modification : pas de sous-titre
+        self.assertNotContains(page, "← Mes fiches")    # le fil d'Ariane suffit
         self.assertFalse(Account.objects.exists())                     # consulter ne crée jamais de compte
 
     def test_creation_depuis_la_nouvelle_page(self):

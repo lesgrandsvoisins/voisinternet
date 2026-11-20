@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+{% load i18n wagtailcore_tags %}
+
+{% block title %}{{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+  <section class="block">
+    <div class="wrap">
+      <h1>{{ page.title }}</h1>
+      {% if page.message %}<div class="site-message">{{ page.message|richtext }}</div>{% endif %}
+    </div>
+  </section>
+  {% if pages_enfants %}
+  <section class="block" aria-labelledby="site-pages-titre">
+    <div class="wrap page">
+      <h2 id="site-pages-titre">{% trans "Pages" %}</h2>
+      <ul class="list-plain">
+        {% for enfant in pages_enfants %}
+          <li><a href="{% pageurl enfant %}">{{ enfant.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+  {% endif %}
+{% endblock %}

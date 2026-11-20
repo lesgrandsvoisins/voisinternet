@@ -2557,5 +2557,11 @@ class SiteWagtailParNomTests(Base):
         self.assertEqual(set(GroupPagePermission.objects.filter(group=groupe).values_list("page_id", flat=True)), {racine.pk})  # seulement SON site
         self.assertEqual(GroupPagePermission.objects.filter(group=groupe).count(), 3)
         r = self.client.get("/fr/", HTTP_HOST="max.resdigita.org")
-        self.assertContains(r, "<h1>Max</h1>")                                   # sa propre page d'accueil
+        self.assertContains(r, "<h1>Max</h1>")
+        # sa propre identité d'en-tête : ni Resdigita, ni la navigation de lesgrandsvoisins.com
+        self.assertContains(r, '<span class="brand-nom">Max</span>')
+        self.assertContains(r, 'class="theme-individuel"')
+        self.assertNotContains(r, "Resdigita")
+        self.assertNotContains(r, "menu-annuaire")
+        self.assertContains(r, "max.resdigita.org")  # pied de page : le nom de domaine du site                                   # sa propre page d'accueil
         self.assertNotContains(self.client.get("/fr/", HTTP_HOST="inconnu.example.org"), "<h1>Max</h1>")  # nom sans Site : accueil principal

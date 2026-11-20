@@ -18,5 +18,9 @@ Avant : les noms doivent être autorisés (`DJANGO_ALLOWED_HOSTS`, `DJANGO_CSRF_
 1. **Par chemin (recommandée)** : VIP est un site ; chaque « autre site » est une **page enfant** de sa racine, donc `vip.resdigita.org/fr/<nom>/`. Aucun nom de domaine, aucun certificat, aucune déclaration Keycloak de plus ; les éditeurs de VIP les créent eux-mêmes. Un enfant peut avoir ses propres sous-pages.
 2. **Par sous-domaine** (`<nom>.vip.resdigita.org`) : demande un DNS joker, un certificat joker ou à la demande dans Caddy, `DJANGO_ALLOWED_HOSTS` avec `.vip.resdigita.org`, et **chaque sous-domaine déclaré dans Keycloak** (Keycloak n'accepte pas de joker sur le nom d'hôte, seulement en fin de chemin). Lourd ; à n'envisager que si un site doit vraiment avoir son propre nom.
 
+## Décidé le 21/11 (Chris)
+- **VIP par chemin** : les autres sites sont des pages enfants de la racine de VIP (`vip.resdigita.org/fr/<nom>/`). La racine de VIP liste ses pages enfants.
+- **Sites individuels avec leur propre en-tête** : la page d'accueil d'un site est une `SitePage` (« accueil d'un site » dans Wagtail). Son en-tête affiche le **nom** et la **devise** choisis dans la page (champs « nom dans l'en-tête » et « devise sous le nom » ; à défaut, le titre de la page). Ni le menu, ni l'agenda, ni l'annuaire, ni le logo de lesgrandsvoisins.com ; une icône maison ramène à lesgrandsvoisins.com. Le pied de page porte le nom, la devise et le nom de domaine du site.
+
 ## Pas encore décidé
-Identité visuelle de chaque site (aujourd'hui l'en-tête et le pied de page sont ceux de lesgrandsvoisins.com), qui est éditeur de quoi, et si VIP doit être fermé au public (la page d'accueil de VIP est publique comme les autres).
+Qui est éditeur de quoi (les groupes sont vides au départ), si VIP doit être fermé au public, et l'identité visuelle au-delà de l'en-tête (couleurs, logo) : aujourd'hui les couleurs sont celles de lesgrandsvoisins.com.

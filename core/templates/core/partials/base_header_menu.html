@@ -35,7 +35,7 @@
   </div>
   {% endcomment %}
 {% endif %}
-{% if SERVICES_URL %}
+{% if SERVICES_URL and SITE_THEME != "individuel" %}
   <div class="menu-autre-site">
     <a href="{{ SERVICES_URL }}/{{ LANGUAGE_CODE }}/#outils-titre"
         aria-label="{% trans "Resdigita, le numérique des Grands Voisins" %}"
@@ -48,12 +48,12 @@
 {% if SITE_THEME %}
   <a class="brand brand-texte"
      href="{% url 'core:home' %}"
-     aria-label="{% trans 'Resdigita, le numérique des Grands Voisins — accueil' %}">
-    <span class="brand-nom">Resdigita</span><span class="brand-devise">{% trans "le numérique des Grands Voisins" %}</span>
+     aria-label="{{ SITE_MARQUE.nom }}{% if SITE_MARQUE.devise %}, {{ SITE_MARQUE.devise }}{% endif %} — {% trans "accueil" %}">
+    <span class="brand-nom">{{ SITE_MARQUE.nom }}</span>{% if SITE_MARQUE.devise %}<span class="brand-devise">{{ SITE_MARQUE.devise }}</span>{% endif %}
   </a>
 {% endif %}
 
-{% if SITE_THEME %}
+{% if SITE_THEME == "numerique" %}
 <a href="/{{ LANGUAGE_CODE }}/agence/"
    aria-label="{% trans "Resdigita, l'agence numérique" %}"
    title="{% trans "Resdigita, l'agence numérique" %}">{% include "core/icons/agence-svg.html" %}</a>

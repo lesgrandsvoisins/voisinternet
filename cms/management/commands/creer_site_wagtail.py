@@ -1,5 +1,5 @@
 """
-Crée un site Wagtail pour un ou plusieurs noms de domaine : une page d'accueil (`HomePage`) à la racine de l'arbre et un `Site` par nom,
+Crée un site Wagtail pour un ou plusieurs noms de domaine : une page d'accueil (`SitePage`, avec sa propre identité d'en-tête) à la racine de l'arbre et un `Site` par nom,
 sans toucher à l'arbre de lesgrandsvoisins.com. Wagtail choisit le site d'après le nom de domaine de la requête (table Site) :
 tant qu'un nom n'a pas son Site, il retombe sur le site par défaut, donc sur l'accueil de lesgrandsvoisins.com.
 
@@ -17,7 +17,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.utils.text import slugify
 from wagtail.models import Collection, GroupCollectionPermission, GroupPagePermission, Locale, Page, Site
 
-from cms.models import HomePage
+from cms.models import SitePage
 
 
 class Command(BaseCommand):
@@ -35,7 +35,7 @@ class Command(BaseCommand):
             if "." not in h or "/" in h or " " in h:
                 raise CommandError(f"nom de domaine invalide : {h}")
         slug = slugify(titre) or "site"
-        page = HomePage.objects.filter(slug=slug, depth=2).first() or Page.objects.filter(slug=slug, depth=2).first()
+        page = Page.objects.filter(slug=slug, depth=2).first()
         self.stdout.write(f"  page d'accueil « {titre} » : {'existe' if page else 'à créer'}")
         existants = {h: Site.objects.filter(hostname=h).first() for h in hotes}
         for h, site in existants.items():
@@ -47,7 +47,7 @@ class Command(BaseCommand):
             return
         if page is None:
             racine = Page.get_first_root_node()
-            page = racine.add_child(instance=HomePage(
+            page = racine.add_child(instance=SitePage(
                 title=titre, slug=slug, locale=Locale.objects.get(language_code="fr"), live=True,
             ))
         for h, site in existants.items():

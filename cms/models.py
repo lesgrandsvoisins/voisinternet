@@ -98,6 +98,37 @@ class NumeriquePage(Page):
         return context
 
 
+class SitePage(Page):
+    """
+    Accueil d'un site Wagtail individuel (Max, Hovik, Maher…) ou d'une racine de sites enfants (VIP) : un nom de domaine, sa propre identité
+    d'en-tête (nom et devise), un message, et la liste de ses pages enfants. Ne reprend ni la navigation ni l'en-tête de lesgrandsvoisins.com.
+    """
+
+    en_tete_titre = models.CharField(
+        _("nom dans l'en-tête"), max_length=60, blank=True, default="",
+        help_text=_("Laisser vide pour reprendre le titre de la page."),
+    )
+    en_tete_devise = models.CharField(_("devise sous le nom"), max_length=120, blank=True, default="")
+    message = RichTextField(_("message"), blank=True, default="")
+
+    parent_page_types = ["wagtailcore.Page", "cms.SitePage"]
+    subpage_types = ["cms.StandardPage", "cms.ContactPage", "cms.SitePage"]
+
+    content_panels = Page.content_panels + [
+        FieldPanel("en_tete_titre"),
+        FieldPanel("en_tete_devise"),
+        FieldPanel("message"),
+    ]
+
+    class Meta:
+        verbose_name = _("accueil d'un site")
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["pages_enfants"] = self.get_children().live().specific()
+        return context
+
+
 class CardBlock(blocks.StructBlock):
     """Une carte éditoriale (titre + texte enrichi) : réutilisée par plusieurs types de page."""
 

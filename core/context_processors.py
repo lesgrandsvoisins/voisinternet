@@ -36,21 +36,32 @@ def _menu_context(language_code, current, base=""):
 
 
 def _theme(request):
-    """(thème, préfixe des liens vers les pages Wagtail du site principal). Un site Wagtail distinct (resdigita.org) a son
-    arbre de pages : les pages de lesgrandsvoisins.com n'y existent pas, on y renvoie par une adresse absolue."""
-    from cms.models import NumeriquePage
+    """(thème, préfixe des liens vers le site principal, identité d'en-tête). Un site Wagtail distinct a son arbre de pages : les pages de
+    lesgrandsvoisins.com n'y existent pas, on y renvoie par une adresse absolue. Thèmes : « numerique » (resdigita.org), « individuel »
+    (Max, Hovik, Maher, VIP… : cms.SitePage, identité choisie dans la page), « » (lesgrandsvoisins.com)."""
+    from cms.models import NumeriquePage, SitePage
     from wagtail.models import Site
 
     racine = Site.find_for_request(request)
-    if racine is not None and racine.root_page.specific_class is NumeriquePage:
-        return "numerique", settings.SITE_PRINCIPAL
-    return "", ""
+    if racine is None:
+        return "", "", {}
+    page = racine.root_page.specific
+    if isinstance(page, NumeriquePage):
+        return "numerique", settings.SITE_PRINCIPAL, {
+            "nom": "Resdigita", "devise": _t("le numérique des Grands Voisins"), "domaine": "resdigita.org",
+        }
+    if isinstance(page, SitePage) and not racine.is_default_site:
+        page = page.localized
+        return "individuel", settings.SITE_PRINCIPAL, {
+            "nom": page.en_tete_titre or page.title, "devise": page.en_tete_devise, "domaine": request.get_host().split(":")[0],
+        }
+    return "", "", {}
 
 
 def site(request):
     match = getattr(request, "resolver_match", None)
     current = match.view_name if match else None
-    theme, base = _theme(request)
+    theme, base, marque = _theme(request)
     entries, groups, header_groups = _menu_context(get_language(), current, base)
     account = current_account(request)
     account_shortcuts = []
@@ -87,7 +98,8 @@ def site(request):
         "GUIDE_URL": settings.GUIDE_URL,
         "CONTACT_EMAIL": settings.CONTACT_EMAIL,
         "CONTACT_FORMS_ENABLED": settings.CONTACT_FORMS_ENABLED,
-        "SITE_NAME": _t("Resdigita, le numérique des Grands Voisins") if theme else get_current_site(request).name,
+        "SITE_NAME": (marque["nom"] + (", " + marque["devise"] if marque["devise"] else "")) if theme else get_current_site(request).name,
+        "SITE_MARQUE": marque,
         "SITE_THEME": theme,
         "SITE_PRINCIPAL": settings.SITE_PRINCIPAL,
         "SERVICES_URL": settings.SERVICES_URL,

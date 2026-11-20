@@ -932,3 +932,16 @@ class EtiquettesGhostTests(TestCase):
         out = StringIO()
         call_command("rattacher_etiquettes_ghost", "--fichier", f.name, stdout=out)
         self.assertIn("0 étiquette(s)", out.getvalue())  # idempotent
+
+
+class EtiquettesDansWagtailTests(TestCase):
+    def test_creer_une_etiquette_depuis_l_editeur(self):
+        from django.contrib.auth import get_user_model
+        from core.models import Tag
+
+        self.client.force_login(get_user_model().objects.create_superuser("root", "r@example.org", "pw"))
+        self.assertEqual(self.client.get("/fr/cms/snippets/core/tag/").status_code, 200)
+        self.assertEqual(self.client.get("/fr/cms/snippets/core/tag/add/").status_code, 200)
+        r = self.client.post("/fr/cms/snippets/core/tag/add/", {"name_fr": "Nouvelle idée", "slug": "nouvelle-idee"})
+        self.assertEqual(r.status_code, 302)
+        self.assertTrue(Tag.objects.filter(slug="nouvelle-idee").exists())

@@ -506,3 +506,44 @@ def register_qmd_admin_urls():
         path("project-qmd/<int:pk>/export/", project_qmd_export_view, name="project_qmd_export"),
         path("project-qmd/<int:pk>/import/", project_qmd_import_view, name="project_qmd_import"),
     ]
+
+
+# --- Étiquettes : créer et modifier les étiquettes (core.Tag) depuis l'éditeur Wagtail --------------------------------
+# Les articles, projets et pôles les choisissent par cases à cocher ; sans cela, une nouvelle étiquette obligeait à passer par
+# /admin/. Elles apparaissent aussitôt dans la liste des cases (même table que l'annuaire, les services et les évènements).
+from wagtail.snippets.models import register_snippet
+from wagtail.snippets.views.snippets import SnippetViewSet
+
+from core.models import Tag
+
+
+from wagtail.admin.forms import WagtailAdminModelForm
+from wagtail.admin.panels import FieldPanel
+
+
+class TagForm(WagtailAdminModelForm):
+    """Le nom en français est obligatoire (les autres langues sont facultatives : repli sur le français)."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if "name_fr" in self.fields:
+            self.fields["name_fr"].required = True
+
+
+class TagViewSet(SnippetViewSet):
+    model = Tag
+    icon = "tag"
+    menu_label = _("Étiquettes")
+    menu_order = 300
+    add_to_admin_menu = True
+    list_display = ["name", "slug"]
+    search_fields = ["name", "slug"]
+    base_form_class = TagForm
+    # Le champ « nom » de base est rempli par django-modeltranslation à partir des champs par langue : on ne montre que ceux-ci.
+    panels = [
+        FieldPanel("name_fr"), FieldPanel("name_en"), FieldPanel("name_es"), FieldPanel("name_ar"), FieldPanel("name_ko"),
+        FieldPanel("slug"),
+    ]
+
+
+register_snippet(TagViewSet)

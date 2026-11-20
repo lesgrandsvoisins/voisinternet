@@ -3909,3 +3909,6 @@ msgid ""
 "redirection n'est PAS en place : tant qu'elle n'est pas confirmée, rien "
 "n'est transféré."
 msgstr "이 주소로 확인 이메일을 방금 보냈습니다. 전달은 설정되지 않았으며, 확인되기 전에는 아무것도 전달되지 않습니다."
+
+msgid "Mes fiches de l'annuaire"
+msgstr "내 디렉터리 페이지"

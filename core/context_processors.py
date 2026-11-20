@@ -77,6 +77,7 @@ def site(request):
         keycloak_login_url = f"{reverse('core:connexion')}?{query}"
         keycloak_register_url = f"{reverse('core:inscription')}?{query}"
         keycloak_account_url = f"{settings.KEYCLOAK_REALM_URL}/account/"
+    groupes = set(request.user.groups.values_list("name", flat=True)) if request.user.is_authenticated else set()
     pending_number = request.session.get(NEW_NUMBER_KEY)
     return {
         "anon_visible": settings.ANONYMOUS_ACCOUNTS == "ouvert",
@@ -102,6 +103,8 @@ def site(request):
         "SITE_NAME": (marque["nom"] + (", " + marque["devise"] if marque["devise"] else "")) if theme else get_current_site(request).name,
         "SITE_MARQUE": marque,
         "SITE_THEME": theme,
+        "is_administration": "Administration" in groupes,
+        "is_moderateur": "Modération" in groupes,
         "SITE_PRINCIPAL": settings.SITE_PRINCIPAL,
         "SERVICES_URL": settings.SERVICES_URL,
         "FOURNISSEURS": settings.FOURNISSEURS,

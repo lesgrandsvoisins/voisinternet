@@ -4059,3 +4059,6 @@ msgid ""
 msgstr ""
 "Se acaba de enviar un correo de confirmación a esta dirección. La "
 "redirección NO está activa: hasta que se confirme, no se reenvía nada."
+
+msgid "Mes fiches de l'annuaire"
+msgstr "Mis fichas del directorio"

@@ -2633,20 +2633,39 @@ class CouleursDeSiteTests(Base):
 
 
 @override_settings(ALLOWED_HOSTS=["*"], SERVICES_URL="https://www.resdigita.org")
-class MenuCompteAppsFavsTests(Base):
-    def test_menu_du_compte_renvoie_vers_apps_et_favs(self):
-        self.addCleanup(translation.activate, "fr")  # la requête /en/ active l'anglais pour le fil
-        user = get_user_model().objects.create_user("sub-af")
-        acc = Account.objects.create(user=user)
+class MenuCompteUniqueTests(Base):
+    """Une seule liste d'actions, avec le même déclencheur, dans le menu déroulant et sur la page « Mon compte »."""
+
+    def test_meme_liste_dans_le_menu_et_sur_la_page_compte(self):
+        from django.contrib.auth.models import Group
+        self.addCleanup(translation.activate, "fr")
+        user = get_user_model().objects.create_user("sub-mu")
+        Account.objects.create(user=user)
         self.client.force_login(user)
-        page = self.client.get("/fr/").content.decode()
-        self.assertIn('href="https://www.resdigita.org/fr/#outils-titre"', page)   # « Apps »
-        self.assertNotIn("#outils-mes", page)                                       # pas de favoris : pas de lien « Favs »
-        Shortcut.objects.create(account=acc, service=Service.objects.first())
-        page = self.client.get("/en/").content.decode()
-        self.assertIn('href="https://www.resdigita.org/en/#outils-mes"', page)      # « Favs », dans la langue courante
-        # l'ancien menu listait chaque service choisi (lien target="_new") : plus de liste dans le menu
-        self.assertNotIn('target="_new">' + Service.objects.first().name + "</a>", page)
+        attendu_commun = ["Services", "Modifier mon profil", "Mes demandes", "Mon profil", "Mes services", "Mes dons",
+                          "Mes fiches de l'annuaire", "Mes évènements", "Mes groupes"]
+        for chemin in ("/fr/", "/fr/account/"):
+            page = self.client.get(chemin).content.decode()
+            self.assertNotIn('class="activateur" href="/fr/administration/"', page)     # pas d'Administration pour tout le monde
+            self.assertIn('href="https://www.resdigita.org/fr/#outils-titre"', page)  # « Services » : vers resdigita.org
+            for libelle in attendu_commun[2:]:
+                self.assertIn(libelle, page, chemin)
+        # le groupe Administration et le groupe Modération voient leurs entrées, partout
+        user.groups.add(Group.objects.get_or_create(name="Administration")[0], Group.objects.get_or_create(name="Modération")[0])
+        for chemin in ("/fr/", "/fr/account/"):
+            page = self.client.get(chemin).content.decode()
+            self.assertIn('class="activateur" href="/fr/administration/"', page)
+            self.assertIn('class="activateur" href="/fr/moderation/"', page)
+
+    def test_une_seule_classe_d_activateur_lien_ou_bouton(self):
+        user = get_user_model().objects.create_user("sub-ac")
+        Account.objects.create(user=user)
+        self.client.force_login(user)
+        with override_settings(OIDC_ENABLED=True):
+            page = self.client.get("/fr/account/").content.decode()
+        self.assertIn('<button class="activateur" type="submit">Se déconnecter</button>', page)   # le bouton a le même déclencheur que les liens
+        self.assertNotIn("account-accordion", page)                                                 # plus d'accordéons (deuxième type d'activateur)
+
 
 
 @override_settings(ALLOWED_HOSTS=["*"], SUPERVISION_URL="http://supervision.invalide:9090")

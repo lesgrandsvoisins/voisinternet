@@ -1,0 +1,33 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% comment %}
+  Les actions du compte, en UNE liste dont tous les éléments ont le même déclencheur (classe « activateur »), qu'ils soient un lien ou un bouton :
+  utilisée par le menu déroulant du compte (variable `compact`) ET par la page « Mon compte ». Un seul endroit à modifier.
+  Variables : user, is_administration, is_moderateur (processeur de contexte), keycloak_account_url, REDIRECTIONS_ENABLED, OIDC_ENABLED, SERVICES_URL ;
+  facultatif : nb_* (page « Mon compte » : compteurs affichés dans les boutons).
+{% endcomment %}
+<ul class="activateurs{% if compact %} activateurs-compact{% endif %}">
+  {% if user.is_authenticated %}
+    {% if is_administration %}<li><a class="activateur" href="{% url 'core:administration' %}">{% trans "Administration" %}</a></li>{% endif %}
+    {% if is_moderateur %}<li><a class="activateur" href="{% url 'core:moderation' %}">{% trans "Modération" %}</a></li>{% endif %}
+    <li><a class="activateur" href="{% if SERVICES_URL %}{{ SERVICES_URL }}/{{ LANGUAGE_CODE }}/#outils-titre{% else %}{% url 'core:outils' %}{% endif %}">{% trans "Services" %}</a></li>
+    {% if keycloak_account_url %}<li><a class="activateur" href="{{ keycloak_account_url }}">{% trans "Modifier mon profil" %}</a></li>{% endif %}
+    <li><a class="activateur" href="{% url 'core:mes_demandes' %}">{% trans "Mes demandes" %}</a></li>
+    {% if REDIRECTIONS_ENABLED %}<li><a class="activateur" href="{% url 'core:redirection_courrier' %}">{% trans "Redirection de mes courriels" %}</a></li>{% endif %}
+    {% if OIDC_ENABLED %}
+      <li>
+        <form method="post" action="{% url 'oidc_logout' %}">
+          {% csrf_token %}
+          <button class="activateur" type="submit">{% trans "Se déconnecter" %}</button>
+        </form>
+      </li>
+    {% endif %}
+  {% endif %}
+  <li class="activateurs-separateur" role="presentation"></li>
+  <li><a class="activateur" href="{% url 'core:account' %}">{% trans "Mon profil" %}</a></li>
+  <li><a class="activateur" href="{% url 'core:raccourcis' %}">{% trans "Mes services" %}{% if nb_services %} <span class="activateur-nb">{{ nb_services }}</span>{% endif %}</a></li>
+  <li><a class="activateur" href="{% url 'core:mes_dons' %}">{% trans "Mes dons" %}</a></li>
+  <li><a class="activateur" href="{% url 'core:mes_fiches' %}">{% trans "Mes fiches de l'annuaire" %}{% if nb_fiches %} <span class="activateur-nb">{{ nb_fiches }}</span>{% endif %}</a></li>
+  <li><a class="activateur" href="{% url 'core:mes_evenements' %}">{% trans "Mes évènements" %}{% if nb_evenements %} <span class="activateur-nb">{{ nb_evenements }}</span>{% endif %}</a></li>
+  <li><a class="activateur" href="{% url 'core:groupes' %}">{% trans "Mes groupes" %}{% if nb_groupes %} <span class="activateur-nb">{{ nb_groupes }}</span>{% endif %}</a></li>
+</ul>

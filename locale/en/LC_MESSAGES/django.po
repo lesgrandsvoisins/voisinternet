@@ -4041,3 +4041,6 @@ msgid ""
 msgstr ""
 "A confirmation email has just been sent to this address. The redirection is "
 "NOT in place: until it is confirmed, nothing is forwarded."
+
+msgid "Mes fiches de l'annuaire"
+msgstr "My directory pages"

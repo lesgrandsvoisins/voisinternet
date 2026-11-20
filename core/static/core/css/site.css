@@ -4459,3 +4459,14 @@ img.tool-icon {
 .statut-actif .statut-titre { color: #1E7A4C; }
 .statut-aucun .statut-titre { color: var(--zinc-dark); }
 .statut-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: .5rem; }
+
+/* Un seul déclencheur pour toutes les actions du compte (lien ou bouton), dans le menu déroulant et sur la page « Mon compte ». */
+.activateurs { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); }
+.activateurs-compact { grid-template-columns: 1fr; gap: .25rem; }
+.activateurs form { margin: 0; }
+.activateur { display: flex; align-items: center; justify-content: space-between; gap: .5rem; width: 100%; padding: .55rem .85rem; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--paper); color: var(--ink); font: inherit; text-decoration: none; text-align: start; cursor: pointer; box-sizing: border-box; }
+.activateur:hover, .activateur:focus-visible { background: var(--hover); border-color: var(--ink); }
+.activateurs-compact .activateur { padding: .4rem .7rem; }
+.activateur-nb { min-width: 1.5em; padding: 0 .4em; border-radius: 999px; background: var(--sun-soft); color: #1C2A35; font-size: .85em; text-align: center; }
+.activateurs-separateur { grid-column: 1 / -1; height: 1px; background: var(--line); margin: .25rem 0; }

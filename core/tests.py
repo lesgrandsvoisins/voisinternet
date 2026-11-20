@@ -2509,3 +2509,25 @@ class FicheModifierSobreTests(Base):
         self.assertContains(page, "Modifier « Ada »")
         self.assertNotContains(page, "<h2")            # plus de sous-titre « Ma fiche »
         self.assertNotContains(page, "← Mes fiches")   # le fil d'Ariane suffit
+
+
+class FluxBlogTests(Base):
+    def test_flux_rss_dans_la_langue_du_prefixe(self):
+        from wagtail.models import Locale
+        from cms.models import BlogIndexPage, BlogPostPage, Author
+
+        fr = Locale.objects.get(language_code="fr")
+        blog = BlogIndexPage.objects.get(locale=fr)
+        auteur = Author.objects.create(name="Voisine", locale=fr)
+        page = BlogPostPage(title="Un article", slug="un-article", date=timezone.now(), author=auteur, excerpt="Le chapeau.", body="<p>x</p>")
+        blog.add_child(instance=page)
+        page.save_revision().publish()
+        r = self.client.get("/fr/blog/rss/")
+        self.assertEqual(r.status_code, 200)
+        self.assertIn("rss+xml", r["Content-Type"])
+        corps = r.content.decode()
+        self.assertIn("Un article", corps)
+        self.assertIn("Le chapeau.", corps)
+        self.assertIn("http://testserver/fr/blog/", corps)   # adresses bâties sur l'hôte de la requête
+        self.assertNotIn("Un article", self.client.get("/en/blog/rss/").content.decode())  # pas d'article anglais : flux vide
+        self.assertContains(self.client.get("/fr/"), 'type="application/rss+xml"')          # découverte automatique

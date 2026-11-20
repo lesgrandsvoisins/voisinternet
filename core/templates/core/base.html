@@ -9,6 +9,7 @@
     {% block robots %}
       {% if request.GET.mois %}<meta name="robots" content="noindex, nofollow">{% endif %}
     {% endblock robots %}
+    <link rel="alternate" type="application/rss+xml" title="{% trans "Le blog des Grands Voisins" %}" href="{% url 'core:blog_rss' %}">
     <meta name="htmx-config" content='{"includeIndicatorStyles":false}'>
     <title>
       {% block title %}

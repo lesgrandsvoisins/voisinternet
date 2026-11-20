@@ -1,6 +1,7 @@
 from django.urls import path
 
 from . import views
+from .feeds import FluxBlog
 
 app_name = "core"
 
@@ -14,6 +15,7 @@ urlpatterns = [
     # PUBLIC
     path("", views.home, name="home"),
     path("recherche/", views.search, name="search"),
+    path("blog/rss/", FluxBlog(), name="blog_rss"),
     path("etiquettes/", views.tag_list, name="tag_list"),
     path("etiquettes/<slug:slug>/", views.tag_detail, name="tag_detail"),
     path("auteur/<int:pk>/", views.author_detail, name="author_detail"),

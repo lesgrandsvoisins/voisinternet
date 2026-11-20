@@ -2486,3 +2486,15 @@ class FicheNouvelleTests(Base):
         })
         self.assertRedirects(r, reverse("core:mes_fiches"), fetch_redirect_response=False)
         self.assertTrue(acc.directory_entries.filter(name="Ma fiche").exists())
+
+
+class FicheModifierSobreTests(Base):
+    def test_pas_de_titre_ma_fiche_ni_lien_retour_dans_la_page_de_modification(self):
+        user = get_user_model().objects.create_user("sub-m")
+        acc = Account.objects.create(user=user)
+        DirectoryEntry.objects.create(name="Ada", slug="ada", owner=acc)
+        self.client.force_login(user)
+        page = self.client.get(reverse("core:fiche_modifier", args=["ada"]))
+        self.assertContains(page, "Modifier « Ada »")
+        self.assertNotContains(page, "<h2")            # plus de sous-titre « Ma fiche »
+        self.assertNotContains(page, "← Mes fiches")   # le fil d'Ariane suffit

@@ -30,19 +30,13 @@
           <li aria-current="page">{{ entry.name }}</li>
         </ol>
       </nav>
-      <h1>{% blocktrans with name=entry.name %}Modifier « {{ name }} »{% endblocktrans %}</h1>
+      <h1 id="edit-title">{% blocktrans with name=entry.name %}Modifier « {{ name }} »{% endblocktrans %}</h1>
     </div>
   </div>
   <!-- BODY CONTENT -->
   <div class="wrap page">
     <!-- EDIT FORM -->
     <section aria-labelledby="edit-title">
-      <div class="split">
-        <h2 id="edit-title">{% trans "Ma fiche" %}</h2>
-        <p class="muted">
-          <a href="{% url 'core:mes_fiches' %}">{% trans "← Mes fiches" %}</a>
-        </p>
-      </div>
       <form class="entry-form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% include "core/partials/entry_form_fields.html" %}

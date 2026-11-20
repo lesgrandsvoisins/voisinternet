@@ -153,7 +153,9 @@ def home(request):
     # Site Wagtail distinct (resdigita.org) : son accueil est sa propre page racine, pas l'accueil de lesgrandsvoisins.com.
     racine = Site.find_for_request(request)
     racine = racine.root_page.specific if racine else None
-    if isinstance(racine, NumeriquePage):
+    site_wagtail = Site.find_for_request(request)
+    if isinstance(racine, NumeriquePage) or (site_wagtail is not None and not site_wagtail.is_default_site):
+        # Site Wagtail propre à ce nom de domaine (resdigita.org, max.…, vip.…) : son accueil est sa page racine.
         racine = racine.localized  # la traduction Wagtail dans la langue active (/en/…), sinon la page française
         if racine.live:
             return racine.serve(request)

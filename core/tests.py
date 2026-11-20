@@ -2531,3 +2531,24 @@ class FluxBlogTests(Base):
         self.assertIn("http://testserver/fr/blog/", corps)   # adresses bâties sur l'hôte de la requête
         self.assertNotIn("Un article", self.client.get("/en/blog/rss/").content.decode())  # pas d'article anglais : flux vide
         self.assertContains(self.client.get("/fr/"), 'type="application/rss+xml"')          # découverte automatique
+
+
+@override_settings(ALLOWED_HOSTS=["*"])
+class SiteWagtailParNomTests(Base):
+    """Un nom de domaine qui a son Site Wagtail affiche sa propre page d'accueil ; les autres restent sur l'accueil principal."""
+
+    def test_site_wagtail_propre_a_un_nom(self):
+        from io import StringIO
+        from django.core.management import call_command
+        from wagtail.models import Site
+
+        out = StringIO()
+        call_command("creer_site_wagtail", "Max", "max.resdigita.org", "max.lesgrandsvoisins.com", stdout=out)  # simulation
+        self.assertFalse(Site.objects.filter(hostname="max.resdigita.org").exists())
+        call_command("creer_site_wagtail", "Max", "max.resdigita.org", "max.lesgrandsvoisins.com", "--appliquer", stdout=out)
+        call_command("creer_site_wagtail", "Max", "max.resdigita.org", "--appliquer", stdout=out)  # idempotent
+        self.assertEqual(Site.objects.filter(hostname="max.resdigita.org").count(), 1)
+        self.assertEqual(Site.objects.get(hostname="max.resdigita.org").root_page_id, Site.objects.get(hostname="max.lesgrandsvoisins.com").root_page_id)
+        r = self.client.get("/fr/", HTTP_HOST="max.resdigita.org")
+        self.assertContains(r, "<h1>Max</h1>")                                   # sa propre page d'accueil
+        self.assertNotContains(self.client.get("/fr/", HTTP_HOST="inconnu.example.org"), "<h1>Max</h1>")  # nom sans Site : accueil principal
